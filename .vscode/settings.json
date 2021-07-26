@@ -1,0 +1,10 @@
+{
+	"editor.formatOnSave": true,
+	"[typescript]": {
+		"editor.formatOnSave": true
+	},
+	"eslint.workingDirectories": [
+		{ "directory": "client", "changeProcessCWD": true },
+		{ "directory": "server", "changeProcessCWD": true }
+	]
+}
