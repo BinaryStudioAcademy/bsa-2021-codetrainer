@@ -33,7 +33,6 @@
 		"no-cond-assign": "error",
 		"no-fallthrough": "error",
 		"no-new-wrappers": "error",
-		"no-redeclare": "error",
 		"no-var": "error",
 		"radix": "error",
 		// warnings
@@ -53,6 +52,7 @@
 		"prefer-spread": "error",
 		"prefer-rest-params": "error",
 		// disabled and verified
+		"no-redeclare": "off",
 		"react/no-children-prop": "off",
 		"react/display-name": "off",
 		"react/prop-types": "off",
