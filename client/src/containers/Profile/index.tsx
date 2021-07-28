@@ -15,7 +15,7 @@ interface ProfileProps {
 }
 
 export const Profile: React.FC<ProfileProps> = (props) => {
-    const userName: string= props.match.params.name;
+    //const userName: string= props.match.params.name;
     const match = useRouteMatch();
     
     return (
@@ -26,7 +26,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
             {/* top block here */}
             </div>
             <div className="profile-info">
-                <ProfileRouter userName={userName}/>
+                <ProfileRouter/>
             </div>
         </div>
         <Switch>

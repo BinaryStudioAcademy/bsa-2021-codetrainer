@@ -2,11 +2,8 @@ import React from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import {Menu, MenuItem} from '@blueprintjs/core'
 import '../../styles/index.scss'
-interface ProfileRouterProps {
-    userName:string
-}
 
-const ProfileRouter: React.FC<ProfileRouterProps> = (props) => {
+const ProfileRouter: React.FC = () => {
     const match = useRouteMatch();
     
     return (
