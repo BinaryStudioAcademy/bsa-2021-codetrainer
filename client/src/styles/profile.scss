@@ -5,6 +5,33 @@
 	align-items: center;
 	max-width: 916px;
 	border-radius: 15px;
+	.profile-bio {
+		width: 916px;
+		height: 206px;
+		padding: 26px 24px;
+		margin: 42px;
+		.profile-header {
+			display: flex;
+			padding: 20px 0;
+			align-items: center;
+			.avatar {
+				width: 57px;
+				height: 57px;
+			}
+		}
+		.fields {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-gap: 2vw;
+			.field-name {
+				color: rgba(40, 40, 40, 0.5);
+			}
+			.field-value {
+
+			}
+		}
+
+	}
 	.profile-info {
 		margin-top: 20px;
 		display: flex;
@@ -38,3 +65,5 @@
 		}
 	}
 }
+
+
