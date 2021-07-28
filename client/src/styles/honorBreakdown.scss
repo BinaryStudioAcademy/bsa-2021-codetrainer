@@ -1,19 +1,36 @@
-.progress-bar-block {
-	.progress-bar-info {
-		display: flex;
-		justify-content: space-between;
-		.progress-name {
-		}
-		.progress-info-done {
-			#progress-done {
-				color: #ec4179;
+.progress-bars {
+	padding: 10px 20px;
+
+	.progress-bar-block {
+		.progress-bar-info {
+			display: flex;
+			justify-content: space-between;
+			.progress-name {
+				margin-bottom: 0;
+				line-height: 14px;
 			}
-			#progress-of-symbol {
-				color: rgba(40, 40, 40, 0.5);
-			}
-			#progress-left {
-				color: rgba(40, 40, 40, 0.5);
+			.progress-info-done {
+				#progress-done {
+					color: #ec4179;
+				}
+				#progress-of-symbol {
+					color: rgba(40, 40, 40, 0.5);
+				}
+				#progress-left {
+					color: rgba(40, 40, 40, 0.5);
+				}
 			}
 		}
 	}
+	.progressBar {
+		background-color: #f0f3f9;
+		margin: 3px 0;
+		.bp3-progress-meter {
+			background-color: #ec4179;
+		}
+	}
 }
+
+
+
+

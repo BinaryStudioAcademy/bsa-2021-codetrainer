@@ -10,19 +10,17 @@
 		font-size: 18px;
 		line-height: 22px;
 		padding-left: 10px;
-		padding-bottom: 10px;
 		color: #282828;
+		&.points-label {
+			padding-top: 4px;
+		}
 	}
 
 	.header {
 		padding-bottom: 10px;
+		display: flex;
+		align-items: center;
 	}
+
 }
 
-.progressBar {
-	background-color: #f0f3f9;
-	margin: 3px 0;
-	.bp3-progress-meter {
-		background-color: #ec4179;
-	}
-}

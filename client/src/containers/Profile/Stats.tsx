@@ -10,8 +10,8 @@ const Stats: React.FC<StatsProps> = (props) => {
     return (
         <div className='stats'>
             <Points/>
-            <HonorBreakdown/>
             <Languages />
+            <HonorBreakdown/>
             <Community />
             {/* <RankBreakdown/> */}
 
