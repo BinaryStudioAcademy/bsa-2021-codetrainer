@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 2vw;
-	padding: 20px 5px;
+	padding: 20px;
 
 	.iconLabel {
 		font-style: normal;
@@ -10,12 +10,13 @@
 		font-size: 18px;
 		line-height: 22px;
 		padding-left: 10px;
-		padding-bottom: 10px;
 		color: #282828;
 	}
 
 	.header {
-		padding-bottom: 10px;
+		padding-bottom: 20px;
+		display: flex;
+		align-items: center;
 	}
 }
 

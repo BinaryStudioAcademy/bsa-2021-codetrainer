@@ -21,6 +21,7 @@
 			.avatar {
 				width: 57px;
 				height: 57px;
+				cursor: pointer;
 			}
 		}
 		.fields {
@@ -35,13 +36,15 @@
 		}
 	}
 	.profile-info {
-		margin-top: 20px;
+		padding-top: 15px;
 		display: flex;
 		width: 100%;
 		background: #fafbff;
 		justify-content: flex-start;
 		flex-direction: column;
-		padding: 20px;
+		.navmenu:first-child {
+			padding-left: 15px;
+		}
 		.navmenu {
 			background: #fafbff;
 			padding-bottom: 20px;
