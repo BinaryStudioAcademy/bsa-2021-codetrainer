@@ -1,11 +1,56 @@
+@import '~normalize.css';
+@import '~@blueprintjs/core/lib/css/blueprint.css';
+@import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-		'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+		'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+a {
+	text-decoration: none;
+}
+
+.profile {
+	margin: 10px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 916px;
+	background: #fafbff;
+	border-radius: 15px;
+	.profile-info {
+		margin-top: 20px;
+		display: flex;
+		width: 100%;
+		justify-content: flex-start;
+		.navmenu {
+			padding: 20px;
+			display: flex;
+			gap: 30px;
+			width: 100%;
+			list-style-type: none;
+			border-bottom: 1.5px solid #eaecf1;
+			.navmenu-item {
+				font-style: normal;
+				font-weight: 600;
+				font-size: 16px;
+				line-height: 20px;
+				color: #282828;
+			}
+
+			.navmenu-item.active {
+				color: #705ff5;
+				text-decoration: underline;
+				text-decoration-color: #705ff5;
+			}
+		}
+	}
 }
