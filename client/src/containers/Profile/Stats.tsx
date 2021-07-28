@@ -7,7 +7,7 @@ interface StatsProps {
 
 const Stats: React.FC<StatsProps> = (props) => {
     return (
-        <div>
+        <div className='stats'>
             <Points/>
             <HonorBreakdown/>
             {/* <Community/>
