@@ -3,6 +3,7 @@ import styles from './example.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { RootState } from 'typings/rootState';
+import Spinner from '../../components/common/Spinner';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Example: React.FC = () => {
 				get second text
 			</button>
 			<p>{text}</p>
+			<Spinner isBig={false} />
 		</div>
 	);
 };
