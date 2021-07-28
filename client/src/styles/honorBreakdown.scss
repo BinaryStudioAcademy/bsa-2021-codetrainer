@@ -1,0 +1,19 @@
+.progress-bar-block {
+	.progress-bar-info {
+		display: flex;
+		justify-content: space-between;
+		.progress-name {
+		}
+		.progress-info-done {
+			#progress-done {
+				color: #ec4179;
+			}
+			#progress-of-symbol {
+				color: rgba(40, 40, 40, 0.5);
+			}
+			#progress-left {
+				color: rgba(40, 40, 40, 0.5);
+			}
+		}
+	}
+}
