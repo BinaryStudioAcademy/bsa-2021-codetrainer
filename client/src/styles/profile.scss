@@ -5,15 +5,18 @@
 	align-items: center;
 	max-width: 916px;
 	border-radius: 15px;
+	.field-name {
+		color: rgba(40, 40, 40, 0.5);
+	}
 	.profile-bio {
 		width: 916px;
 		height: 206px;
-		padding: 26px 24px;
+		padding: 20px;
 		margin: 42px;
 		background: #fafbff;
 		.profile-header {
 			display: flex;
-			padding: 20px 0;
+			padding-bottom: 20px;
 			align-items: center;
 			.avatar {
 				width: 57px;
@@ -38,9 +41,10 @@
 		background: #fafbff;
 		justify-content: flex-start;
 		flex-direction: column;
+		padding: 20px;
 		.navmenu {
 			background: #fafbff;
-			padding: 20px;
+			padding-bottom: 20px;
 			display: flex;
 			gap: 30px;
 			width: 100%;
