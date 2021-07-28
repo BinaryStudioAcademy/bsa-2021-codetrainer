@@ -7,7 +7,7 @@ const Points: React.FC = () => {
         <div>
             <div className='header'>
                 <img src={pointsIcon} id="pointsIcon"/>
-                <label htmlFor="pointsIcon" className="iconLabel">Points</label>
+                <label htmlFor="pointsIcon" className="iconLabel points-label">Points</label>
             </div>
             <p>
                 <span className="field-name">Rank: </span>
