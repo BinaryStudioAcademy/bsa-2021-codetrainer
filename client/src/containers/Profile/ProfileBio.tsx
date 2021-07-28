@@ -49,7 +49,7 @@ export const ProfileBio: React.FC<ProfileBioProps> = (props) => {
 					</p>
 					<p>
 						<span className='field-name'>Profile GitHub: </span>
-						<span className='field-value'>{gitHub}</span>
+						<span className='field-value'><a href='#' className='link'>{gitHub}</a></span>
 					</p>
 				</div>
 				<div>
