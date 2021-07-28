@@ -2,14 +2,18 @@
 	padding: 10px 20px;
 
 	.progress-bar-block {
+		margin-top: 17px;
 		.progress-bar-info {
 			display: flex;
+			align-items: flex-end;
 			justify-content: space-between;
+			height: 18px;
+
 			.progress-name {
 				margin-bottom: 0;
-				line-height: 14px;
 			}
 			.progress-info-done {
+				margin-bottom: 0;
 				#progress-done {
 					color: #ec4179;
 				}
@@ -22,6 +26,9 @@
 			}
 		}
 	}
+	.progress-bar-block:first-child {
+		margin-top: 0;
+	}
 	.progressBar {
 		background-color: #f0f3f9;
 		margin: 3px 0;
@@ -30,7 +37,3 @@
 		}
 	}
 }
-
-
-
-
