@@ -13,8 +13,7 @@ const Stats: React.FC<StatsProps> = (props) => {
             <HonorBreakdown/>
             <Languages />
             <Community />
-            <Languages/>
-            <RankBreakdown/> */}
+            {/* <RankBreakdown/> */}
 
         </div>
         )
