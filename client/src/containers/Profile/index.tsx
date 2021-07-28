@@ -39,16 +39,17 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                <ProfileBio {...mockProfileBioProps}/>
             </div>
             <div className="profile-info">
-                <ProfileRouter/>
-            </div>
+            <ProfileRouter/>
             <Switch>
-            <Route path={match.url+"/stats"} exact>
-                <Stats/>
-            </Route> 
-            <Route path={match.url} exact>
-                <Stats/>
-            </Route>
-        </Switch>
+                <Route path={match.url+"/stats"} exact>
+                    <Stats/>
+                </Route> 
+                <Route path={match.url} exact>
+                    <Stats/>
+                </Route>
+            </Switch>
+            </div>
+            
         </div>
         
 </>

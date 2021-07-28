@@ -10,6 +10,7 @@
 		height: 206px;
 		padding: 26px 24px;
 		margin: 42px;
+		background: #fafbff;
 		.profile-header {
 			display: flex;
 			padding: 20px 0;
@@ -27,10 +28,8 @@
 				color: rgba(40, 40, 40, 0.5);
 			}
 			.field-value {
-
 			}
 		}
-
 	}
 	.profile-info {
 		margin-top: 20px;
@@ -38,6 +37,7 @@
 		width: 100%;
 		background: #fafbff;
 		justify-content: flex-start;
+		flex-direction: column;
 		.navmenu {
 			background: #fafbff;
 			padding: 20px;
@@ -65,5 +65,3 @@
 		}
 	}
 }
-
-
