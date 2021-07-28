@@ -2,7 +2,8 @@ import React from 'react';
 import CoverLayout from 'components/CoverLayout';
 import FormInput from 'components/FormInput';
 import { Formik, Form } from 'formik';
-import styles from './SignUp.module.css'
+import styles from './SignUp.module.scss'
+import { Link } from 'react-router-dom';
 
 const SignUp: React.FC = () =>{
     return (
@@ -57,6 +58,7 @@ const SignUp: React.FC = () =>{
                 <button type="submit" className={styles.submitBtn}>Sign Up</button>
             </Form>
             </Formik>
+            <div className={styles.footer}>Already Signep up? <Link to="/login" className={styles.link}>Sign in</Link></div>
         </CoverLayout>
     );
 };
