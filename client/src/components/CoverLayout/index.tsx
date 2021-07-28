@@ -12,9 +12,9 @@ const CoverLayout: FC<PropsWithChildren<CoverProps>> = ({ children }) => {
 				<img className={styles.background} src={background} alt=""/>
 				<img className={styles.logo} src={logo} alt="codetrainer"/>
 			</div>
-			<div>
+			<main className={styles.main}>
 				{children}
-			</div>
+			</main>
 		</div>
 	);
 };
