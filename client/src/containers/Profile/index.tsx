@@ -28,8 +28,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
             <div className="profile-info">
                 <ProfileRouter/>
             </div>
-        </div>
-        <Switch>
+            <Switch>
             <Route path={match.url+"/stats"} exact>
                 <Stats/>
             </Route> 
@@ -37,6 +36,8 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                 <Stats/>
             </Route>
         </Switch>
+        </div>
+        
 </>
     )
 }
