@@ -1,0 +1,55 @@
+.main-sidebar {
+	padding: 38px 40px;
+	background: #705ff5;
+	width: 245px;
+	height: 100%;
+	min-height: 100vh;
+}
+
+.logotype {
+	&__image {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+.navigation {
+	margin-top: 168px;
+	display: flex;
+	flex-direction: column;
+
+	&__list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	&__icon {
+		transition: 0.3s;
+		vertical-align: middle;
+		font-size: 28px;
+		margin-right: 12px;
+	}
+
+	&__link {
+		line-height: 30px;
+		color: #fff;
+		border-radius: 12px;
+		padding: 18px 5px 18px 20px;
+		display: block;
+		font: 500 18px 'Montserrat';
+		position: relative;
+		text-decoration: none;
+
+		&--active {
+			background: rgba(255, 255, 255, 0.3);
+		}
+
+		&:hover {
+			.navigation__icon {
+				transform: scale(1.1);
+			}
+		}
+	}
+}
