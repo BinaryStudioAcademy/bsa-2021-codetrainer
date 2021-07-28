@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from 'components/Layout';
+import CoverLayout from 'components/CoverLayout';
 import FormInput from 'components/FormInput';
 import { Formik, Form } from 'formik';
 import styles from './SignUp.module.css'
 
 const SignUp: React.FC = () =>{
     return (
-        <Layout>
+        <CoverLayout>
             <h4>SignUp</h4>
             <Formik
             initialValues={{
@@ -57,7 +57,7 @@ const SignUp: React.FC = () =>{
                 <button type="submit" className={styles.submitBtn}>Sign Up</button>
             </Form>
             </Formik>
-        </Layout>
+        </CoverLayout>
     );
 };
 
