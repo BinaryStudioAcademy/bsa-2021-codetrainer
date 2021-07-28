@@ -1,5 +1,7 @@
 import React from 'react'
-import {  Link,useRouteMatch } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
+import {Menu, MenuItem} from '@blueprintjs/core'
+import '../../styles/index.scss'
 interface ProfileRouterProps {
     userName:string
 }
@@ -8,26 +10,13 @@ const ProfileRouter: React.FC<ProfileRouterProps> = (props) => {
     const match = useRouteMatch();
     
     return (
-        <>
-        <ul>
-            <Link to={`${match.url}/stats`}>
-                <li>Stats</li>
-            </Link>
-            <Link to={`${match.url}/stats`}>
-                <li>Challenge</li>
-            </Link>
-            <Link to={`${match.url}/stats`}>
-                <li>Solution</li>
-            </Link>
-            <Link to={`${match.url}/stats`}>
-                <li>Social</li>
-            </Link>
-            <Link to={`${match.url}/stats`}>
-                <li>Colections</li>
-            </Link>
-        </ul>
-        
-        </>
+        <Menu className="navmenu">
+            <MenuItem href={match.url+"/stats"} className="navmenu-item active" text="Stats"></MenuItem>
+            <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Challenge"></MenuItem>
+            <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Solution"></MenuItem>
+            <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Social"></MenuItem>
+            <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Colections"></MenuItem>
+        </Menu>
     )
 }
 export default  ProfileRouter

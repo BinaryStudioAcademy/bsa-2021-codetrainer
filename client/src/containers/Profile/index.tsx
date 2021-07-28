@@ -2,6 +2,7 @@ import React from 'react'
 import {Route , Switch, useRouteMatch} from 'react-router-dom'
 import ProfileRouter from './ProfileRouter'
 import Stats from './Stats'
+import '../../styles/index.scss'
 
 interface ProfileProps {
     match:{
@@ -19,11 +20,12 @@ export const Profile: React.FC<ProfileProps> = (props) => {
         <>
         <div className="profile">
             <div className="profile-bio">
+                sfdfds
             {/* top block here */}
             </div>
             <div className="profile-info">
-            <ProfileRouter userName={userName}/>
-            {/* <div>Hello!</div> */}
+                <ProfileRouter userName={userName}/>
+                {/* <div>Hello!</div> */}
             </div>
         </div>
         <Switch>
