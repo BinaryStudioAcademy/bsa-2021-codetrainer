@@ -12,7 +12,7 @@ const ProfileRouter: React.FC = () => {
             <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Challenge"></MenuItem>
             <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Solution"></MenuItem>
             <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Social"></MenuItem>
-            <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Colections"></MenuItem>
+            <MenuItem href={match.url+"/stats"} className="navmenu-item" text="Collections"></MenuItem>
         </Menu>
     )
 }

@@ -4,14 +4,15 @@
 	flex-direction: column;
 	align-items: center;
 	max-width: 916px;
-	background: #fafbff;
 	border-radius: 15px;
 	.profile-info {
 		margin-top: 20px;
 		display: flex;
 		width: 100%;
+		background: #fafbff;
 		justify-content: flex-start;
 		.navmenu {
+			background: #fafbff;
 			padding: 20px;
 			display: flex;
 			gap: 30px;
