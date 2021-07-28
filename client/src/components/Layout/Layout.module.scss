@@ -1,0 +1,10 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100vh;
+}
+
+.logoContainer {
+    grid-column: 1/ 3;
+    background: rgba(112, 95, 245, 0.8);
+}
