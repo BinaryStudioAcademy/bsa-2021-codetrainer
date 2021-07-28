@@ -26,7 +26,7 @@ export default RankBreakdown;
 
 const circularProgressBarStyles = {
     // strokeLinecap: 'butt',
-    textSize: '14px',
+    textSize: '5px',
     // pathTransitionDuration: 0.5,
     pathColor: `#ec4179`,
     // textColor: '#f88',
