@@ -1,8 +1,8 @@
+import { FieldProps, getIn } from 'formik';
 import React from 'react';
-import { Field } from 'formik';
 import styles from './FormInput.module.scss';
 
-type Props = {
+type Props = FieldProps & {
     id: string;
     name: string;
     label: string;
@@ -10,11 +10,30 @@ type Props = {
     placeholder: string;
 }
 
-const FormInput: React.FC<Props> = ({id, name, label, type, placeholder})=>{
+const FormInput: React.FC<Props> = ({
+        id,
+        label,
+        type,
+        placeholder,
+        field: { name, value, onChange},
+        form: {errors, touched}
+    })=>{
+        const error = getIn(errors, name);
+        const isTouched = getIn(touched, name);
+
     return(
-        <div>
-        <label htmlFor={id} className={styles.label} >{label}</label>
-        <Field id={id} name={name} type={type} placeholder={placeholder} className={styles.inputField}/>
+        <div className={styles.inputWrapper}>
+            <label htmlFor={id} className={styles.label}>{label}</label>
+            <input
+                id={id}
+                name={name}
+                onChange={onChange}
+                value={value}
+                type={type}
+                placeholder={placeholder}
+                className={styles.inputField}
+            />
+            {isTouched && error && <div className={styles.error}>{error}</div>}
         </div>
     );
 }
