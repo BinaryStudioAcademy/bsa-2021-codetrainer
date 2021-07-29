@@ -7,13 +7,7 @@ import passwordStyles from './password-input.module.scss';
 import hideIcon from 'assets/icons/hide.svg';
 import showIcon from 'assets/icons/show.svg';
 
-interface PasswordFieldProps extends FieldAttributes<any> {
-	name: string;
-	placeholder?: string;
-	label?: string;
-}
-
-const PasswordField: FC<PasswordFieldProps> = (props: PasswordFieldProps) => {
+const PasswordField: FC<FieldAttributes<any>> = props => {
 	const [isHiding, setHiding] = useState(true);
 	const inputRef = React.createRef<HTMLButtonElement>();
 
@@ -35,7 +29,6 @@ const PasswordField: FC<PasswordFieldProps> = (props: PasswordFieldProps) => {
 				type={isHiding ? 'password' : 'text'}
 				innerRef={inputRef}
 				name={props.name}
-				label={props.label}
 				placeholder={props.placeholder}
 				className={passwordStyles.input}
 			/>
@@ -56,11 +49,6 @@ const PasswordField: FC<PasswordFieldProps> = (props: PasswordFieldProps) => {
 			</button>
 		</div>
 	);
-}
-
-PasswordField.defaultProps = {
-	placeholder: '',
-	label: ''
 }
 
 export default PasswordField;
