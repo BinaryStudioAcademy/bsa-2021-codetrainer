@@ -1,4 +1,3 @@
-import {Entity} from 'typeorm';
 import { Auth, TAuth } from './auth';
 import { UserRepository } from '../data';
 
