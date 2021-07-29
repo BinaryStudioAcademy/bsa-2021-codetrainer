@@ -19,7 +19,7 @@ interface listItem {
 	id: string;
 }
 
-const menuItems = [{
+const listItems = [{
 		id: '1',
 		image: img.menuProfile,
 		text: 'View Profile',
@@ -43,17 +43,17 @@ const menuItems = [{
 
 const Header: React.FC<Prop> = (props) => {
 
-	const [visibleMenu, setVisibleMenu] = useState(false);
+	const [isListVisible, setListVisibility] = useState(false);
 
 	const changeVisible = () => {
-		setVisibleMenu(!visibleMenu);
+		setListVisibility(!isListVisible);
 	}	
 
 	const getListItem = (item: listItem) => {
 		return (
 			<li className={styles.navigation__item} key={item.id}>
 				<NavLink to={item.link} className={styles.navigation__link}>
-					<img src={item.image} alt="listItem" />
+					<img src={item.image} alt='listItem' />
 					<span>{item.text}</span>
 				</NavLink>
 			</li>
@@ -68,12 +68,10 @@ const Header: React.FC<Prop> = (props) => {
 		);
 	}
 
-
-
 	return (
 		<div className={styles.header}>
 			<div className={styles.bell}>
-				<img src={img.bell} alt="bell" />
+				<img src={img.bell} alt='bell' />
 				<div className={styles.bell__counter}>
 					<span>{props.notificationCounter}</span>
 				</div>
@@ -88,8 +86,8 @@ const Header: React.FC<Prop> = (props) => {
 					/>
 				</div>
 
-				{visibleMenu && <div className={styles.navigation}>
-					{renderList(menuItems)}
+				{isListVisible && <div className={styles.navigation}>
+					{renderList(listItems)}
 				</div>}
 
 			</div>
