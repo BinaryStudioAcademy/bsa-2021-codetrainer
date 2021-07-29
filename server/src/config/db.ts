@@ -26,5 +26,5 @@ export const dbConfig = {
 	logging: logging === 'true',
 	migrations: [migrations],
 	entities: [User],
-	ssl: ssl && { rejectUnauthorized: false },
+	ssl: ssl === 'true' ? { rejectUnauthorized: false } : false,
 } as ConnectionOptions;
