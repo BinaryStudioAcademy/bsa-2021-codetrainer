@@ -5,6 +5,7 @@ import { IUserFields } from '../../types';
 
 export class Auth {
 	protected userRepository: TUserRepository;
+
 	constructor({ user }: { user: TUserRepository }) {
 		this.userRepository = user;
 	}
