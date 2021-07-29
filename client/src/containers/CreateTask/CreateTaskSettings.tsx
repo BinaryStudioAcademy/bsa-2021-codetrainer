@@ -17,7 +17,8 @@ const CreateTaskSettings: React.FC<Props> = () => {
 	const TEXTS = ["Fundamentals", "Rank Up","Practice","Beta","Random"]
 	let i=0;
 	const ELEMENTS = [<Fundamentals key={i++}/>,<Rankup key={i++}/>,<Practice key={i++}/>,<Beta key={i++}/>,<Random key={i++}/>, ]
-	return (
+	const [switchCheck, setSwitchCheck] = useState(true)
+    return (
 	<div className="create-task-settings">
 		<H2 className="heading">Create a New Task</H2>
 		<form>
@@ -39,8 +40,18 @@ const CreateTaskSettings: React.FC<Props> = () => {
 				</div>
 				
 			
-
-			{/* Here must be a select block, copy it from another component. */}
+                    {/* 
+                        value interface: {
+                            title: string,
+                            icon: string
+                        }
+                        Select interface: {
+                            values: value[],
+                            activeValueL: value,
+                            onChange: React.Dispatch<React.SetStateAction<ISelectValue>>
+                        }
+                    */}
+                {/* <Select values={focusValues} activeValue={activeFocusValue} onChange={setActiveFocusValue} /> */}
 
 			<Label htmlFor="estimated-rank">
 				Estimated Rank
@@ -58,7 +69,8 @@ const CreateTaskSettings: React.FC<Props> = () => {
 				<Switch
 					id="allow-contributors"
 					inline
-					defaultChecked={false}
+                    checked={switchCheck}
+                    onChange={()=>{setSwitchCheck(!switchCheck)}}
 					labelElement={(
 						<span>
 							Allow contributors?

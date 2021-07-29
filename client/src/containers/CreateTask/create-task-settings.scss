@@ -83,7 +83,6 @@
 			border-radius: 7px;
 			padding: 10px;
 			height: auto;
-			line-height: auto;
 		}
 		.infoPopover {
 			margin-left: 20px;
@@ -93,7 +92,7 @@
 			.bp3-control-indicator {
 				width: 40px;
 				outline: none !important;
-				background: #f0f3f9 !important;
+				background: #f8b7cc !important;
 				&::before {
 					transform: scale(1.5);
 					background: #ec4179;
