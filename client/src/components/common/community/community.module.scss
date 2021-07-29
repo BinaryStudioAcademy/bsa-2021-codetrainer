@@ -1,0 +1,67 @@
+.community {
+	border-radius: 10px;
+	margin-bottom: 40px;
+	background-color: #f0f3f9;
+	padding: 40px;
+}
+
+.bp3-card {
+	background-color: #f0f3f9;
+	padding: 20px;
+}
+
+.bp3-tag {
+	border: 3px solid #ec4179;
+	border-radius: 8px;
+	padding: 5px;
+	color: #ec4179;
+}
+
+.communityTable {
+	display: flex;
+	justify-content: space-between;
+}
+
+.communityColumn {
+	width: 100%;
+}
+
+.userRow {
+	margin-bottom: 10px;
+}
+
+.userImage {
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	margin: 0 10px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.buttonsContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 90px;
+}
+
+.bp3-button {
+	display: block;
+	background-color: #fff;
+	color: #ec4179;
+	border: 3px solid #ec4179;
+	border-radius: 8px;
+	padding: 8px;
+	width: 220px;
+	cursor: pointer;
+}
+
+.bp3-button.primary {
+	background-color: #ec4179;
+	color: #fff;
+	margin-bottom: 10px;
+}
