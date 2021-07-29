@@ -1,6 +1,6 @@
 import React from 'react';
 import { H5 } from '@blueprintjs/core';
-import '../../styles/profile.scss';
+import './profile.scss';
 
 interface ProfileBioProps {
 	img: string,

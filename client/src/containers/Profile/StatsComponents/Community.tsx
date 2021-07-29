@@ -1,13 +1,13 @@
 import React from 'react'
 import communityIcon from '../../../assets/community.svg'
-import '../../../styles/stats.scss'
+import '../stats.scss'
 
 const Community: React.FC = () => {
 	return (
 		<div>
 			<div className='header'>
 				<img src={communityIcon} id="communityIcon"/>
-				<label htmlFor="communityIcon" className="iconLabel">Community</label>
+				<label htmlFor="communityIcon" className="icon-label">Community</label>
 			</div>
 			<p>
 				<span className="field-name">Comments: </span>

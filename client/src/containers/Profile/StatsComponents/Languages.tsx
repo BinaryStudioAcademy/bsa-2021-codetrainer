@@ -1,13 +1,13 @@
 import React from 'react'
 import languagesIcon from '../../../assets/languages.svg'
-import '../../../styles/stats.scss'
+import '../stats.scss'
 
 const Languages: React.FC = () => {
 	return (
 		<div>
 			<div className='header'>
 				<img src={languagesIcon} id="languagesIcon"/>
-				<label htmlFor="languagesIcon" className="iconLabel">Languages</label>
+				<label htmlFor="languagesIcon" className="icon-label">Languages</label>
 			</div>
 			<p>
 				<span className="field-name">Total Languages Trained: </span>

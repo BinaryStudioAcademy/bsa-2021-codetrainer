@@ -1,13 +1,13 @@
 import React from 'react'
 import pointsIcon from '../../../assets/points.svg'
-import '../../../styles/stats.scss'
+import '../stats.scss'
 
 const Points: React.FC = () => {
     return (
         <div>
             <div className='header'>
                 <img src={pointsIcon} id="pointsIcon"/>
-                <label htmlFor="pointsIcon" className="iconLabel points-label">Points</label>
+                <label htmlFor="pointsIcon" className="icon-label points-label">Points</label>
             </div>
             <p>
                 <span className="field-name">Rank: </span>

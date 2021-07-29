@@ -3,7 +3,7 @@ import {Route , Switch, useRouteMatch} from 'react-router-dom'
 import ProfileRouter from './ProfileRouter'
 import Stats from './Stats'
 import '../../styles/index.scss'
-import '../../styles/profile.scss'
+import './profile.scss'
 import { ProfileBio } from './ProfileBio';
 
 

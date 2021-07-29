@@ -1,16 +1,15 @@
 import React from 'react'
 import rankBreakdownIcon from '../../../assets/rankBreakdown.svg'
-import '../../../styles/rankBreakdown.scss'
+import './rank-breakdown.scss'
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 const RankBreakdown: React.FC = () => {
     const percentage = 25;
-
     return (
         <div className="rank-breakdown">
             <div className='header'>
                 <img src={rankBreakdownIcon} id="rankBreakdownIcon"/>
-                <label htmlFor="rankBreakdownIcon" className="iconLabel">Rank Breakdown</label>
+                <label htmlFor="rankBreakdownIcon" className="icon-label">Rank Breakdown</label>
             </div>
             <div style={{width: "150px"}}> 
             <CircularProgressbarWithChildren
@@ -20,7 +19,7 @@ const RankBreakdown: React.FC = () => {
                     styles={buildStyles(circularProgressBarStyles)}
                 >
 
-                <strong className="circularProgress" style={{fontSize: "16px",paddingBottom: "50px"}}>Next Rank</strong>
+                <strong className="circular-progress" style={{fontSize: "16px",paddingBottom: "50px"}}>Next Rank</strong>
                 </CircularProgressbarWithChildren>
             </div>
             <div className="progress-circle-info">
