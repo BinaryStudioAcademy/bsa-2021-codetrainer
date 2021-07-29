@@ -31,7 +31,8 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"prepare": "cd .. && husky install client/.husky"
+		"prepare": "cd .. && husky install client/.husky",
+		"lint-fix": "eslint src/ --ext .tsx,.ts --fix && prettier src/ --write"
 	},
 	"eslintConfig": {
 		"extends": [
