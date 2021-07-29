@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes, FC } from 'react';
 import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './button.module.scss';
 
-const Button: FC<ButtonHTMLAttributes<any>> = (props) => (
+const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
 	<button
 		{...props}
 		className={combineClasses(styles.button, props.className)}

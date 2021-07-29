@@ -38,8 +38,8 @@ const SignIn: React.FC = () => {
 					<Form className={styles.form}>
 						<h4>Sign in</h4>
 						<Button
+							type="button"
 							className={ButtonClasses.red}
-							onClick={() => console.info("here")}
 						>
 							Sing in with GitHub
 						</Button>
@@ -51,7 +51,6 @@ const SignIn: React.FC = () => {
 							<FormField
 								id="email"
 								name="email"
-								label="Email"
 								placeholder="Email"
 								validate={validateEmail}
 							/>
@@ -65,7 +64,6 @@ const SignIn: React.FC = () => {
 							<PasswordField
 								id="password"
 								name="password"
-								label="Password"
 								placeholder="Password"
 								validate={validatePassword}
 							/>

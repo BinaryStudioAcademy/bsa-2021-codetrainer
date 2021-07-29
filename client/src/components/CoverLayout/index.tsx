@@ -1,9 +1,9 @@
-import React, { PropsWithChildren, FC } from 'react';
+import React, { PropsWithChildren, FC, HTMLAttributes } from 'react';
 import background from 'assets/cover-background.svg';
 import logo from 'assets/logo.svg';
 import styles from './cover.module.scss';
 
-const CoverLayout: FC<PropsWithChildren<any>> = (props) => {
+const CoverLayout: FC<PropsWithChildren<HTMLAttributes<HTMLDivElement>>> = (props) => {
 	return (
 		<div className={styles.cover}>
 			<div className={styles.image}>

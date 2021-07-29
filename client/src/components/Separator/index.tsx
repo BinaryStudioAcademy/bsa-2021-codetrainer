@@ -1,15 +1,15 @@
-import React, { PropsWithChildren, FC } from 'react';
+import React, { PropsWithChildren, FC, HTMLAttributes } from 'react';
 import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './separator.module.scss';
 
-const Separator: FC<PropsWithChildren<any>> = props => (
-	<div 
-		{...props}
-		className={combineClasses(props.className, styles.separator)}
+const Separator: FC<PropsWithChildren<HTMLAttributes<HTMLDivElement>>> = ({ children, className, ...remaining }) => (
+	<div
+		{...remaining}
+		className={combineClasses(className, styles.separator)}
 	>
 		<hr />
 		<span className={styles.content}>
-			{props.children}
+			{children}
 		</span>
 		<hr />
 	</div>
