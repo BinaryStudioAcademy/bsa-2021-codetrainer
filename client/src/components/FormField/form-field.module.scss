@@ -1,24 +1,24 @@
 .field {
-    all: unset;
-    box-sizing: border-box;
-    background: #f0f3f9;
-    color: #282828;
-    border-radius: 7px;
-    border: 1px solid transparent;
-    transition: border-color 0.25s ease-in-out;
-    flex-basis: 100%;
-    font-family: "Montserrat", sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 14px;
-    padding: 15px 20px;
-    ::placeholder {
-        color: rgba(40, 40, 40, 0.5);
-    }
+	all: unset;
+	box-sizing: border-box;
+	background: #f0f3f9;
+	color: #282828;
+	border-radius: 7px;
+	border: 1px solid transparent;
+	transition: border-color 0.25s ease-in-out;
+	flex-basis: 100%;
+	font-family: "Montserrat", sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 14px;
+	padding: 15px 20px;
+	::placeholder {
+		color: rgba(40, 40, 40, 0.5);
+	}
 }
 
 .field:focus-within,
 .field .hide:focus {
-    border-color: #282828;
+	border-color: #282828;
 }

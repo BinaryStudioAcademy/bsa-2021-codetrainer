@@ -1,21 +1,21 @@
 .button {
-    --color: #333;
-    color: var(--color);
-    background: white;
-    border-radius: 7px;
-    border: 1px solid var(--color);
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: center;
+	--color: #333;
+	color: var(--color);
+	background: white;
+	border-radius: 7px;
+	border: 1px solid var(--color);
+	font-family: Montserrat;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: center;
 }
 
 .button.blue { --color: #705FF5; }
 .button.red { --color: #EC4179; }
 .button.filled {
-    color: white;
-    background: var(--color);
+	color: white;
+	background: var(--color);
 }
