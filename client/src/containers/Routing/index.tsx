@@ -1,14 +1,13 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-// import Example from 'containers/Example';
-import Loader from 'containers/Loader';
+import Example from 'containers/Example';
 import PublicRoute from 'components/PublicRoute';
 
 interface Props {}
 
 const Routing: React.FC<Props> = () => (
 	<Switch>
-		<PublicRoute exact restricted={false} path="/" component={Loader} />
+		<PublicRoute exact restricted={false} path="/" component={Example} />
 	</Switch>
 );
 
