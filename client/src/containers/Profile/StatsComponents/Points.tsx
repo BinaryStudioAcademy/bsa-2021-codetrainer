@@ -2,7 +2,16 @@ import React from 'react'
 import pointsIcon from '../../../assets/points.svg'
 import '../stats.scss'
 
-const Points: React.FC = () => {
+interface PointsProps {
+    rank: number,
+    honor: number,
+    completedChallenge: number
+}
+
+const Points: React.FC<PointsProps> = (props) => {
+
+    const {rank, honor, completedChallenge} = props;
+
     return (
         <div>
             <div className='header'>
@@ -11,15 +20,15 @@ const Points: React.FC = () => {
             </div>
             <p>
                 <span className="field-name">Rank: </span>
-                <span className="field-value">4</span>
+                <span className="field-value">{rank}</span>
             </p>
             <p>
                 <span className="field-name">Honor: </span>
-                <span className="field-value">455</span>
+                <span className="field-value">{honor}</span>
             </p>
             <p>
                 <span className="field-name">Total Completed Challenge: </span>
-                <span className="field-value">17</span>
+                <span className="field-value">{completedChallenge}</span>
             </p>
         </div>
     );

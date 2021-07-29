@@ -29,7 +29,7 @@ const mockProfileBioProps = {
 }
 
 export const Profile: React.FC<ProfileProps> = (props) => {
-    //const userName: string= props.match.params.name;
+
     const match = useRouteMatch();
     
     return (

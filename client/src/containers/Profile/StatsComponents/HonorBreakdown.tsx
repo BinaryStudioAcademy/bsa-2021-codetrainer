@@ -4,7 +4,25 @@ import '../stats.scss'
 import './honor-breakdown.scss'
 import ProgressBarBlock from './ProgressBarBlock'
 
-const HonorBreakdown: React.FC = () => {
+interface HonorBreakdownProps {
+    completedChallengeDone: number | null,
+    completedChallengeLeft: number,
+    authoredChallengeDone: number | null,
+    authoredChallengeLeft: number,
+    commentsDone: number | null,
+    commentsLeft: number,
+    referralsDone: number | null,
+    referralsLeft: number,
+    achievementsDone: number | null,
+    achievementsLeft: number
+}
+
+const HonorBreakdown: React.FC<HonorBreakdownProps> = (props) => {
+
+    const {completedChallengeDone, completedChallengeLeft, authoredChallengeDone,
+        authoredChallengeLeft, commentsDone, commentsLeft, referralsDone, referralsLeft,
+        achievementsDone, achievementsLeft} = props;
+
     return (
         <div className='honor-breakdown'>
             <div className="header">
@@ -12,11 +30,11 @@ const HonorBreakdown: React.FC = () => {
                 <label htmlFor="honorBreakdownIcon" className="icon-label">Honor Breakdown</label>
             </div>
             <div className='progress-bars'>
-                <ProgressBarBlock name="Completed Challenge" done={5} left={10}/>
-                <ProgressBarBlock name="Authored Challenge & Translation" done={null} left={0}/>
-                <ProgressBarBlock name="Comments" done={null} left={0}/>
-                <ProgressBarBlock name="Referrals" done={null} left={0}/>
-                <ProgressBarBlock name="Achievements" done={8} left={9}/>
+                <ProgressBarBlock name="Completed Challenge" done={completedChallengeDone} left={completedChallengeLeft}/>
+                <ProgressBarBlock name="Authored Challenge & Translation" done={authoredChallengeDone} left={authoredChallengeLeft}/>
+                <ProgressBarBlock name="Comments" done={commentsDone} left={commentsLeft}/>
+                <ProgressBarBlock name="Referrals" done={referralsDone} left={referralsLeft}/>
+                <ProgressBarBlock name="Achievements" done={achievementsDone} left={achievementsLeft}/>
             </div>
         </div>
         )

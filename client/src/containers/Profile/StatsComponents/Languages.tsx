@@ -2,7 +2,16 @@ import React from 'react'
 import languagesIcon from '../../../assets/languages.svg'
 import '../stats.scss'
 
-const Languages: React.FC = () => {
+interface LanguagesProps {
+	languagesTrained: number,
+	highestTrained: string,
+	mostRecent: string
+}
+
+const Languages: React.FC<LanguagesProps> = (props) => {
+
+	const {languagesTrained, highestTrained, mostRecent} = props;
+
 	return (
 		<div>
 			<div className='header'>
@@ -11,15 +20,15 @@ const Languages: React.FC = () => {
 			</div>
 			<p>
 				<span className="field-name">Total Languages Trained: </span>
-				<span className="field-value">0</span>
+				<span className="field-value">{languagesTrained}</span>
 			</p>
 			<p>
 				<span className="field-name">Highest Trained: </span>
-				<span className="field-value">455</span>
+				<span className="field-value">{highestTrained}</span>
 			</p>
 			<p>
 				<span className="field-name">Most Recent: </span>
-				<span className="field-value">JS</span>
+				<span className="field-value">{mostRecent}</span>
 			</p>
 		</div>
 	);
