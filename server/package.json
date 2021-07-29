@@ -12,7 +12,7 @@
 		"prepare": "cd .. && husky install server/.husky",
 		"lint-fix": "eslint src/ --ext .tsx,.ts --fix && prettier src/ --write",
 		"build": "tsc",
-		"start:prod": "cd dist && npx cross-env NODE_ENV=\"production\" node index.js"
+		"start:prod": "cd dist && node index.js"
 	},
 	"keywords": [],
 	"author": "",
