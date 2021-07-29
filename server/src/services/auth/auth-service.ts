@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import { TUserRepository, UserRepository } from '../../data';
+import { TUserRepository } from '../../data';
 import { encrypt, createToken } from '../../helpers';
 import { IUserFields } from '../../types';
 
