@@ -3,7 +3,8 @@
 .inputWrapper {
     position: relative;
 
-    .inputField {
+    .inputField,
+    .passwordField {
         width: 320px;
         background: #f0f3f9;
         border-radius: 7px;
@@ -17,9 +18,20 @@
         color: #282828;
         padding: 15px 20px;
     }
-    .inputField::placeholder {
+    .passwordField {
+        width: 290px;
+        padding-right: 50px;
+    }
+
+    .inputField::placeholder,
+    .passwordField::placeholder {
         color: rgba(40, 40, 40, 0.5);
         opacity: 0.4;
+    }
+
+    .visibilityBtn {
+        margin-left: -50px;
+        cursor: pointer;
     }
 
     .label {
