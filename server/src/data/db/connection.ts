@@ -6,7 +6,9 @@ createConnection(dbConfig)
 		await connection.runMigrations();
 		console.info('Db connecting');
 	})
-	.catch(() => {
+	.catch((error) => {
+		console.log(error);
+		console.log(dbConfig);
 		console.error('No db connection');
 		process.exit(1);
 	});
