@@ -54,7 +54,7 @@ const SignIn: React.FC = () => {
 								placeholder="Email"
 								validate={validateEmail}
 							/>
-							{ touched.email && errors.email ? <div className={styles.error}>{errors.email}</div> : null }
+							<div className={styles.error}>{ touched.email && errors.email }</div>
 						</div>
 						<div>
 							<div className={styles.labelWrapper}>
@@ -67,7 +67,7 @@ const SignIn: React.FC = () => {
 								placeholder="Password"
 								validate={validatePassword}
 							/>
-							{ touched.password && errors.password ? <div className={styles.error}>{errors.password}</div> : null }
+							<div className={styles.error}>{ touched.password && errors.password }</div>
 						</div>
 						<Button
 							type="submit"
