@@ -1,8 +1,12 @@
 .tag {
-	border-width: 3px;
-	border-style: solid;
-	border-radius: 8px;
+	box-sizing: border-box;
 	padding: 5px;
+
+	font-size: 12px;
+	font-weight: 400;
+
+	border: 1px solid #f09712;
+	border-radius: 8px;
 }
 
 .blue {

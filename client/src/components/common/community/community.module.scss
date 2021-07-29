@@ -1,8 +1,8 @@
 .community {
 	border-radius: 10px;
 	margin-bottom: 40px;
-	background-color: #f0f3f9;
-	padding: 40px;
+	background-color: #fafbff;
+	padding: 24px;
 }
 
 .bp3-card {
@@ -17,13 +17,45 @@
 	color: #ec4179;
 }
 
+.communityHeader {
+	margin: 0 0 10px;
+
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.communityDescription {
+	margin: 0 0 14px;
+
+	font-size: 14px;
+	font-weight: 400;
+}
+
 .communityTable {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 25px;
 }
 
 .communityColumn {
 	width: 100%;
+}
+
+.communityColumn h5 {
+	margin: 0 0 12px;
+
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.columnText {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	height: 27px;
+
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .userRow {
@@ -45,8 +77,16 @@
 .buttonsContainer {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	height: 90px;
+	width: 207px;
+}
+
+.addButton,
+.createButton {
+	height: 44px;
+}
+
+.addButton {
+	margin-bottom: 15px;
 }
 
 .bp3-button {

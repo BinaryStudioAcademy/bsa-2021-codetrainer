@@ -2,65 +2,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 .pageWrapper {
-  display: flex;
+	display: flex;
 }
 
 // will be removed after adding sidebar
 .pageWrapper > .plug {
-  width: 245px;
-  
-  background-color: #705FF5;
+	width: 245px;
+
+	background-color: #705ff5;
 }
 
 .mainWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 // will be removed after adding header
 .mainWrapper > .plug {
-  height: 91px;
+	height: 91px;
 
-  background-color: #F0F3F9;
+	background-color: #f0f3f9;
 }
 
 .contentWrapper {
-  flex-grow: 1;
+	flex-grow: 1;
 }
 
 .container {
-  width: 916px;
-  margin: 0 auto;
+	width: 916px;
+	margin: 0 auto;
 
-  font-family: "Montserrat", Arial, sans-serif;
-  color: #282828;
+	font-family: 'Montserrat', Arial, sans-serif;
+	color: #282828;
 }
 
 .userGreeting {
-  margin: 40px 0 25px;
+	margin: 40px 0 25px;
 
-  font-weight: 500;
-  font-size: 36px;
+	font-weight: 500;
+	font-size: 36px;
 }
 
 .nextTaskWrapper,
 .communityWrapper,
 .feedWrapper {
-  margin-bottom: 41px;
-}
-
-// plug at the time of absence
-.communityWrapper {
-  height: 404px;
-
-  background: #FAFBFF;
-  border-radius: 15px;
-}
-
-.feedWrapper {
-  height: 749px;
-
-  background: #FAFBFF;
-  border-radius: 15px;
+	margin-bottom: 41px;
 }

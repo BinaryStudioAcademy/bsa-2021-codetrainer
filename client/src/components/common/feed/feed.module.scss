@@ -1,20 +1,49 @@
+.feed {
+	padding: 24px;
+
+	background: #fafbff;
+	border-radius: 15px;
+}
+
+.feedHeader {
+	margin-bottom: 31px;
+}
+
+.feed .title {
+	margin-right: 24px;
+
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.separator {
+	margin-right: 24px;
+
+	border: 1px solid #e5e5e5;
+}
+
 .feed h4 {
 	display: inline-block;
+	margin: 0;
 }
 
-.feed h4 {
-	padding: 0 10px;
-}
+.feed .feedCategory {
+	margin-right: 24px;
 
-.feed h4:first-of-type {
-	padding-left: 0;
-}
+	font-size: 16px;
+	font-weight: 600;
 
-.feedCategory {
 	cursor: pointer;
 }
 
 .feedCategory.active {
 	color: #705ff5;
-	border-bottom: 3px solid #705ff5;
+
+	border-bottom: 1.5px solid #705ff5;
+}
+
+.loadMoreButton {
+	width: 156px;
+	height: 44px;
+	margin: 5px 0 10px;
 }

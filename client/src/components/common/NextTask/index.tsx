@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import styles from './nextTask.module.scss';
-import Button from 'components/Button';
-import Select from 'components/Select';
-import Rank from 'components/Rank';
+import Select from 'components/common/Select';
 
 import fundamentalsIcon from './assets/fundamentalsIcon.svg';
 import rankUpIcon from './assets/rankUpIcon.svg';
@@ -12,21 +10,23 @@ import betaIcon from './assets/betaIcon.svg';
 import randomIcon from './assets/randomIcon.svg';
 
 import { FocusKeys } from 'constants/FocusKeys';
-import { ISelectValue } from '../../components/Select/interface';
+import { ISelectValue } from '../Select/interface';
 import { ITask } from './interface';
-import Tag from '../../components/Tag/index';
+import Tag from '../Tag/index';
+import Button from '../Button/index';
+import Rank from '../Rank/index';
 
 // Stub for implementation until api is implemented
 const task = {
 	title: 'Stop gninnipS My sdroW!',
 	description:
 		'Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed.',
-  conditionList: [
-    'Strings passed in will consist of only letters and spaces.',
-    'Spaces will be included only when more than one word is present.'
-  ],
-  rank: 6,
-  tags: ['Algorithms', 'Strings', 'Data Types', 'Formatting', 'Logic']
+	conditionList: [
+		'Strings passed in will consist of only letters and spaces.',
+		'Spaces will be included only when more than one word is present.',
+	],
+	rank: 6,
+	tags: ['Algorithms', 'Strings', 'Data Types', 'Formatting', 'Logic', 'Data Types', 'Formatting', 'Logic'],
 };
 
 const icons = {
@@ -40,7 +40,7 @@ const icons = {
 const NextTask: React.FC = () => {
 	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ title: '', icon: '' });
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
-  const [currentTask, setCurrentTask] = useState<ITask>(task);
+	const [currentTask, setCurrentTask] = useState<ITask>(task);
 
 	useEffect(() => {
 		const focisValues = Object.values(FocusKeys);
@@ -50,10 +50,10 @@ const NextTask: React.FC = () => {
 		setFocusValues(selectFocusValues);
 	}, []);
 
-  useEffect(() => {
-    // api request
-    setCurrentTask(task);
-  }, []);
+	useEffect(() => {
+		// api request
+		setCurrentTask(task);
+	}, []);
 
 	const handleTrainClick = () => {
 		console.log('train click');
@@ -81,24 +81,36 @@ const NextTask: React.FC = () => {
 
 			<div className={styles.taskContainer}>
 				<span className={styles.taskTitleWrapper}>
-					<Rank rankNumber={currentTask.rank} />
-					<h6 className={styles.taskTitle}>
-            {currentTask.title}
-          </h6>
+					<Rank rank={6} />
+					<h6 className={styles.taskTitle}>{currentTask.title}</h6>
 				</span>
 
-				<p className={styles.taskDescription}>
-					{currentTask.description}
-				</p>
+				<div className={styles.taskDescription}>
+					<p>{currentTask.description}</p>
 
-				<ul className={styles.taskConditionsList}>
-					{currentTask.conditionList.map((condition, index) => <li key={index}>{condition}</li>)}
-				</ul>
+					<ul>
+						{currentTask.conditionList.map((condition, index) => (
+							<li key={index}>{condition}</li>
+						))}
+					</ul>
 
-				<h6 className={styles.tagTitle}>Examples:</h6>
-				<div>
-          {currentTask.tags.map((tag, index) => <Tag key={index} text={tag} />)}
-        </div>
+					<h6 className={styles.tagTitle}>Examples:</h6>
+
+					<div className={styles.codeWrapper}>
+						<code>
+							spinWords(&quot;Hey fellow warriors&quot;) =&gt; &quot;Hey wollef sroirraw&quot;
+							<br />
+							spinWords(&quot;This is a test&quot;) =&gt; &quot;This is a test&quot; <br />
+							spinWords(&quot;This is another test&quot;) =&gt; &quot;This is rehtona test&quot;
+							<br />
+						</code>
+					</div>
+				</div>
+				<div className={styles.tagWrappers}>
+					{currentTask.tags.map((tag, index) => (
+						<Tag key={index} text={tag} />
+					))}
+				</div>
 			</div>
 		</article>
 	);
