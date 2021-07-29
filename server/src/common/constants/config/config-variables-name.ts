@@ -7,4 +7,5 @@ export const ConfigVariablesName = [
 	'TYPEORM_USERNAME',
 	'TYPEORM_PASSWORD',
 	'TYPEORM_DATABASE',
+	'TYPEORM_SSL',
 ];
