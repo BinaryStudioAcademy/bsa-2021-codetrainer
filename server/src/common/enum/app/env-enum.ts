@@ -5,7 +5,7 @@ config();
 const ConfigVariables = process.env;
 
 const {
-	APP_PORT,
+	PORT,
 	SECRET_KEY,
 	TYPEORM_CONNECTION,
 	TYPEORM_HOST,
@@ -20,7 +20,7 @@ const {
 
 const ENV = {
 	APP: {
-		PORT: APP_PORT,
+		PORT,
 		API_PATH: '/api',
 	},
 	JWT: {
