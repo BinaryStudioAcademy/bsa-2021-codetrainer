@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Avatar from './Avatar/index';
-import Label from './Label/index';
+import Avatar from '../Avatar/index';
+import Label from '../Label/index';
 import styles from './header.module.scss';
 import * as img from './imageHelper';
 
