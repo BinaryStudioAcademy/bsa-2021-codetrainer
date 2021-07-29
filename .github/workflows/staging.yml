@@ -30,12 +30,17 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.3.0
 
-      - name: Change dir
-        run: cd server
-
       # Runs a set of commands using the runners shell
       - name: build server
         working-directory: server
         run: |
           npm install
-          npm build
+          npm run build
+      
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          appdir: server
