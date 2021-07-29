@@ -7,15 +7,16 @@ interface Prop {
 }
 
 const Label: React.FC<Prop> = (props) => {
-
 	const changebleStyles = {
 		color: props.color,
-		borderColor: props.color
-	}
+		borderColor: props.color,
+	};
 
 	return (
-		<div className={styles.label} style={changebleStyles}>{props.label}</div>
+		<div className={styles.label} style={changebleStyles}>
+			{props.label}
+		</div>
 	);
-}
+};
 
 export default Label;
