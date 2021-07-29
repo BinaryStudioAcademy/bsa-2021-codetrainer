@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Example from 'containers/Example';
 import PublicRoute from 'components/PublicRoute';
-import CreateTask from '../CreateTask/CreateTask'
+import CreateTask from '../CreateTask/CreateTask';
 interface Props {}
 
 const Routing: React.FC<Props> = () => (

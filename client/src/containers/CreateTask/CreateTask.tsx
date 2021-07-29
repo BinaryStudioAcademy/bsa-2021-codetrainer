@@ -1,17 +1,17 @@
 import React from 'react';
-import CreateTaskSettings from './CreateTaskSettings'
+import CreateTaskSettings from './CreateTaskSettings';
 interface Props {}
 
 const CreateTask: React.FC<Props> = () => (
-    <div>
-        {/* <Header/>
+	<div>
+		{/* <Header/>
         <Sidebar/> */}
-        <CreateTaskSettings/>
-        {/* Solition block here
+		<CreateTaskSettings />
+		{/* Solition block here
         Description block here
         Tests block here
         Buttons block here */}
-    </div>
+	</div>
 );
 
 export default CreateTask;
