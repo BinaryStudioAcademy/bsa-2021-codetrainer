@@ -1,5 +1,5 @@
 export const ConfigVariablesName = [
-	'APP_PORT',
+	'PORT',
 	'SECRET_KEY',
 	'TYPEORM_CONNECTION',
 	'TYPEORM_HOST',
