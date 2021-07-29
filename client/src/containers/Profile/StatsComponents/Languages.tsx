@@ -1,22 +1,23 @@
-import React from 'react'
-import languagesIcon from '../../../assets/languages.svg'
-import '../stats.scss'
+import React from 'react';
+import languagesIcon from '../../../assets/languages.svg';
+import '../stats.scss';
 
 interface LanguagesProps {
-	languagesTrained: number,
-	highestTrained: string,
-	mostRecent: string
+	languagesTrained: number;
+	highestTrained: string;
+	mostRecent: string;
 }
 
 const Languages: React.FC<LanguagesProps> = (props) => {
-
-	const {languagesTrained, highestTrained, mostRecent} = props;
+	const { languagesTrained, highestTrained, mostRecent } = props;
 
 	return (
 		<div>
-			<div className='header'>
-				<img src={languagesIcon} id="languagesIcon"/>
-				<label htmlFor="languagesIcon" className="icon-label">Languages</label>
+			<div className="header">
+				<img src={languagesIcon} id="languagesIcon" />
+				<label htmlFor="languagesIcon" className="icon-label">
+					Languages
+				</label>
 			</div>
 			<p>
 				<span className="field-name">Total Languages Trained: </span>
@@ -32,6 +33,6 @@ const Languages: React.FC<LanguagesProps> = (props) => {
 			</p>
 		</div>
 	);
-}
+};
 
 export default Languages;
