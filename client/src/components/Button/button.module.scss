@@ -1,0 +1,40 @@
+.button {
+  box-sizing: border-box;
+
+  min-width: 105px;
+  padding: 7px 10px;
+
+  color: #EC4179;
+  font-size: 16px;
+  font-weight: 600;
+
+  background: none;
+  border: 1px solid #EC4179;
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  color: #fff;
+
+  background: #EC4179;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.taskButton {
+  color: #705FF5;
+
+  border: 1px solid #705FF5;
+}
+
+.taskButton:hover {
+  color: #fff;
+
+  background: #705FF5;
+
+  transition: all 0.2s ease-in-out;
+}
