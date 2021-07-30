@@ -12,11 +12,11 @@ function mapRankToClass(rank: number): string | undefined {
 	}
 }
 
-interface RankProps {
+interface IRankProps {
 	rank: number;
 }
 
-const Rank: FC<RankProps> = (props) => (
+const Rank: FC<IRankProps> = (props) => (
 	<span className={combineClasses(styles.rank, mapRankToClass(props.rank))}>{props.rank} rank</span>
 );
 
