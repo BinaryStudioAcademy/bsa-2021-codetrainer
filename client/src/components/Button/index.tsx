@@ -8,17 +8,18 @@ interface ButtonProps extends BlueprintButtonProps {
 	color?: 'blue' | 'red';
 }
 
-const Button: FC<ButtonProps> = (props) => (
+const Button: FC<ButtonProps> = ({ color, children, className, ...remains }) => (
 	<BlueprintButton
+		{...remains}
 		className={combineClasses(
 			styles.button,
-			styles[props.color as string],
-			props.fill ? styles.filled : null,
-			props.disabled ? styles.disabled : null,
-			props.className,
+			styles[color as string],
+			remains.fill ? styles.filled : null,
+			remains.disabled ? styles.disabled : null,
+			className,
 		)}
 	>
-		{props.children}
+		{children}
 	</BlueprintButton>
 );
 
