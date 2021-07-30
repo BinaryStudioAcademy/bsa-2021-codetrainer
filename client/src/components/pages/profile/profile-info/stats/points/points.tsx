@@ -1,6 +1,6 @@
 import React from 'react';
 import pointsIcon from '../../../../../../assets/icons/points.svg';
-import '../stats.scss';
+import styles from '../stats.module.scss';
 import { List } from '../../../list';
 
 interface PointsProps {
@@ -19,9 +19,9 @@ const Points: React.FC<PointsProps> = (props) => {
 
 	return (
 		<div>
-			<div className="header">
+			<div className={styles.header}>
 				<img src={pointsIcon} id="pointsIcon" />
-				<label htmlFor="pointsIcon" className="icon-label points-label">
+				<label htmlFor="pointsIcon" className={styles.iconLabel + ' ' + styles.pointsLabel}>
 					Points
 				</label>
 			</div>

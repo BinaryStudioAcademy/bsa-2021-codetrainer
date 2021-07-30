@@ -1,7 +1,7 @@
 import React from 'react';
 import honorBreakdownIcon from '../../../../../../assets/icons/honor-breakdown.svg';
-import '../stats.scss';
-import './honor-breakdown.scss';
+import styles from '../stats.module.scss';
+import honorStyles from './honor-breakdown.module.scss';
 import Index from './progress-bar-block';
 
 interface HonorBreakdownProps {
@@ -33,13 +33,13 @@ const HonorBreakdown: React.FC<HonorBreakdownProps> = (props) => {
 
 	return (
 		<div className="honor-breakdown">
-			<div className="header">
+			<div className={styles.header}>
 				<img src={honorBreakdownIcon} id="honorBreakdownIcon" />
-				<label htmlFor="honorBreakdownIcon" className="icon-label">
+				<label htmlFor="honorBreakdownIcon" className={styles.iconLabel}>
 					Honor Breakdown
 				</label>
 			</div>
-			<div className="progress-bars">
+			<div className={honorStyles.progressBars}>
 				<Index name="Completed Challenge" done={completedChallengeDone} left={completedChallengeLeft} />
 				<Index
 					name="Authored Challenge & Translation"

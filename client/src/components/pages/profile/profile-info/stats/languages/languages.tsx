@@ -1,6 +1,6 @@
 import React from 'react';
 import languagesIcon from '../../../../../../assets/icons/languages.svg';
-import '../stats.scss';
+import styles from '../stats.module.scss';
 import { List } from '../../../list';
 
 interface LanguagesProps {
@@ -19,9 +19,9 @@ const Languages: React.FC<LanguagesProps> = (props) => {
 
 	return (
 		<div>
-			<div className="header">
+			<div className={styles.header}>
 				<img src={languagesIcon} id="languagesIcon" />
-				<label htmlFor="languagesIcon" className="icon-label">
+				<label htmlFor="languagesIcon" className={styles.iconLabel}>
 					Languages
 				</label>
 			</div>

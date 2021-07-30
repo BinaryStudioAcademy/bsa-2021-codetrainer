@@ -4,12 +4,12 @@ import HonorBreakdown from './honor-breakdown';
 import Languages from './languages/languages';
 import Community from './community';
 import RankBreakdown from './rank-breakdown/rank-breakdown';
-
+import styles from './stats.module.scss';
 interface StatsProps {}
 
 const Stats: React.FC<StatsProps> = (props) => {
 	return (
-		<div className="stats">
+		<div className={styles.stats}>
 			<Points {...mockPointsProps} />
 			<Languages {...mockLanguagesProps} />
 			<HonorBreakdown {...mockHonorBreakdownProps} />

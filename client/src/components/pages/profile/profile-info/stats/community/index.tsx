@@ -1,6 +1,6 @@
 import React from 'react';
 import communityIcon from '../../../../../../assets/icons/community.svg';
-import '../stats.scss';
+import styles from '../stats.module.scss';
 import { List } from '../../../list';
 
 interface CommunityProps {
@@ -19,9 +19,9 @@ const Community: React.FC<CommunityProps> = (props) => {
 
 	return (
 		<div>
-			<div className="header">
+			<div className={styles.header}>
 				<img src={communityIcon} id="communityIcon" />
-				<label htmlFor="communityIcon" className="icon-label">
+				<label htmlFor="communityIcon" className={styles.iconLabel}>
 					Community
 				</label>
 			</div>
