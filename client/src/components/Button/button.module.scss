@@ -1,0 +1,50 @@
+@mixin button-color($color, $active) {
+	border-color: $color;
+	&:not(.filled) {
+		color: $color;
+		background-color: transparent;
+	}
+	&.filled {
+		color: white;
+		background-color: $color;
+	}
+	&:not(.disabled):hover,
+	&:not(.disabled):focus {
+		border-color: $active;
+		text-decoration: solid 2px underline;
+		&:not(.filled) {
+			color: $active;
+		}
+		&.filled {
+			background-color: $active;
+		}
+	}
+}
+
+.button {
+	border: 1px solid;
+	border-radius: 7px;
+	outline: none;
+	padding: 0 20px;
+	height: 40px;
+	font-family: Montserrat, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: center;
+	transition: 0.25s ease-in-out;
+	transition-property: color, background-color, border-color, opacity;
+	cursor: pointer;
+
+	&.blue {
+		@include button-color(#705ff5, #2e19c7);
+	}
+	&.red {
+		@include button-color(#ec4179, #c2154f);
+	}
+	&.disabled {
+		filter: grayscale(0.4);
+	}
+}
