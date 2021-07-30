@@ -1,11 +1,15 @@
-import callWebApi from '../helpers/callApi.helper';
+import callWebApi from '../helpers/call-api.helper';
 
-export const fetchExample = async (exampleName: string): Promise<WebApi.Entities.Example> => {
+export const fetchExample = async (exampleName: string): Promise<WebApi.Entities.IExample> => {
 	const res = await callWebApi({
-		method: 'GET',
-		endpoint: `example/text/${exampleName}`,
+		method: 'POST',
+		endpoint: `auth/login`,
+		body: {
+			email: 'test@test.com',
+			password: '123',
+		},
 	});
-	const exampleData = await res.json();
+	const { user } = await res.json();
 
-	return exampleData as WebApi.Entities.Example;
+	return user as WebApi.Entities.IExample;
 };
