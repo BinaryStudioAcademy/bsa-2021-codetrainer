@@ -9,8 +9,8 @@
 		all: unset;
 		display: inline-block;
 		position: relative;
-		width: 15px;
-		height: 15px;
+		width: 16px;
+		height: 16px;
 		cursor: pointer;
 
 		&::before,
@@ -35,7 +35,7 @@
 			border-color: #282828;
 		}
 		&:checked,
-		&:not(:disabled):indeterminate {
+		&:indeterminate {
 			&::before {
 				background-color: #EC4179;
 				border-color: #EC4179;
@@ -63,7 +63,8 @@
 			&::before {
 				background-color: #ddd;
 			}
-			& ~ .label {
+			&:checked::before,
+			&:indeterminate::before {
 				filter: grayscale(0.5);
 			}
 		}
