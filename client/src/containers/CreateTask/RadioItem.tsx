@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './create-task-settings.module.scss';
 
 interface Props {
 	component: React.ReactElement;
@@ -11,7 +12,9 @@ interface Props {
 const RadioItem: React.FC<Props> = (props) => {
 	return (
 		<div
-			className={props.checkedState === props.classNameComp ? 'radio-item active' : 'radio-item'}
+			className={
+				props.checkedState === props.classNameComp ? styles.radioItem + ' ' + styles.active : styles.radioItem
+			}
 			onClick={() => {
 				props.setChecked(props.classNameComp);
 			}}

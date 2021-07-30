@@ -7,39 +7,57 @@ import { ReactComponent as Beta } from '../../assets/beta-icon.svg';
 import { ReactComponent as Random } from '../../assets/shuffle-icon.svg';
 import RadioItem from './RadioItem';
 import InfoPopover from 'components/InfoPopover';
-import './create-task-settings.scss';
-
+import '../../styles/index.scss';
+import styles from './create-task-settings.module.scss';
 interface Props {}
 
 const CreateTaskSettings: React.FC<Props> = () => {
 	const [checkedState, setChecked] = useState('fundamentals');
-	const CLASSES = ['fundamentals', 'rankup', 'practice', 'beta', 'random'];
-	const TEXTS = ['Fundamentals', 'Rank Up', 'Practice', 'Beta', 'Random'];
 	let i = 0;
-	const ELEMENTS = [
-		<Fundamentals key={i++} />,
-		<Rankup key={i++} />,
-		<Practice key={i++} />,
-		<Beta key={i++} />,
-		<Random key={i++} />,
-	];
 	const [switchCheck, setSwitchCheck] = useState(true);
+	const RADIO_ITEMS = [
+		{
+			element: <Fundamentals key={i++} />,
+			elementClass: 'fundamentals',
+			text: 'Fundamentals',
+		},
+		{
+			element: <Rankup key={i++} />,
+			elementClass: 'rankup',
+			text: 'Rank Up',
+		},
+		{
+			element: <Practice key={i++} />,
+			elementClass: 'practice',
+			text: 'Practice',
+		},
+		{
+			element: <Beta key={i++} />,
+			elementClass: 'beta',
+			text: 'Beta',
+		},
+		{
+			element: <Random key={i++} />,
+			elementClass: 'random',
+			text: 'Random',
+		},
+	];
 	return (
-		<div className="create-task-settings">
+		<div className={styles.createTaskSettings}>
 			<H2 className="heading">Create a New Task</H2>
 			<form>
 				<Label htmlFor="task-name">Name</Label>
 				<input className={Classes.INPUT} id="task-name" placeholder="Enter Task Name" />
-				<H4 className="disciplines-heading">Disciplines</H4>
-				<div className="radio-list">
-					{CLASSES.map((item, index) => {
+				<H4 className={styles.disciplinesHeading}>Disciplines</H4>
+				<div className={styles.radioList}>
+					{RADIO_ITEMS.map((item, index) => {
 						return (
 							<RadioItem
-								component={ELEMENTS[index]}
+								component={item.element}
 								checkedState={checkedState}
 								setChecked={setChecked}
-								classNameComp={item}
-								text={TEXTS[index]}
+								classNameComp={item.elementClass}
+								text={item.text}
 								key={index}
 							/>
 						);

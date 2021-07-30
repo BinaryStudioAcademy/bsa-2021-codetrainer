@@ -1,4 +1,4 @@
-.create-task-settings {
+:local(.createTaskSettings) {
 	padding: 20px;
 	font-weight: 600;
 	font-size: 18px;
@@ -6,7 +6,7 @@
 
 	color: #282828;
 	form {
-		.disciplines-heading {
+		.disciplinesHeading {
 			padding-top: 20px;
 		}
 		label {
@@ -15,16 +15,13 @@
 			line-height: 15px;
 			margin-bottom: 10px;
 			margin-top: 15px;
-			.bp3-radio .bp3-control-indicator {
-				visibility: hidden;
-			}
 		}
-		.radio-list {
+		.radioList {
 			margin-top: 20px;
 			display: flex;
 			justify-content: flex-start;
 			gap: 20px;
-			.radio-item {
+			.radioItem {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -61,7 +58,7 @@
 					}
 				}
 			}
-			.radio-item.active {
+			.radioItem.active {
 				svg {
 					g {
 						path {
@@ -87,17 +84,6 @@
 		.infoPopover {
 			margin-left: 20px;
 			vertical-align: middle;
-		}
-		.bp3-switch {
-			.bp3-control-indicator {
-				width: 40px;
-				outline: none !important;
-				background: #f8b7cc !important;
-				&::before {
-					transform: scale(1.5);
-					background: #ec4179;
-				}
-			}
 		}
 	}
 }
