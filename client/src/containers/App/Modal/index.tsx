@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { H3, Icon } from '@blueprintjs/core';
 import ReactModal from 'react-modal';
-import './modal.scss';
+import styles from './modal.module.scss';
 
 interface ModalProps {
 	isOpen: boolean;
@@ -19,14 +19,14 @@ const Modal: React.FC<ModalProps> = (props) => {
 	ReactModal.setAppElement('#root');
 
 	return (
-		<ReactModal shouldFocusAfterRender={true} isOpen={isOpen} style={styles}>
-			<div className="modal-content">
-				<div className="modal-header">
-					<H3 className="title">{title}</H3>
-					<Icon icon="cross" className="close-icon" size={25} onClick={() => setIsOpen(false)} />
+		<ReactModal shouldFocusAfterRender={true} isOpen={isOpen} style={modalStyles}>
+			<div className={styles.modalContent}>
+				<div className={styles.header}>
+					<H3 className={styles.title}>{title}</H3>
+					<Icon icon="cross" className={styles.closeIcon} size={25} onClick={() => setIsOpen(false)} />
 				</div>
-				<div className="modal-body">{body}</div>
-				{footer ? <div className="modal-footer">{footer}</div> : null}
+				<div className={styles.body}>{body}</div>
+				{footer ? <div className={styles.footer}>{footer}</div> : null}
 			</div>
 		</ReactModal>
 	);
@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = (props) => {
 
 export default Modal;
 
-const styles = {
+const modalStyles = {
 	content: {
 		maxWidth: '30%',
 		maxHeight: '50%',

@@ -1,5 +1,5 @@
-.modal-content {
-  .modal-header {
+.modalContent {
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,18 +11,18 @@
       color: #282828;
       font-size: 24px;
     }
-    .close-icon {
+    .closeIcon {
       size: 50px;
       color: #282828;
       opacity: 50%;
       cursor: pointer;
     }
   }
-  .modal-body {
+  .body {
     padding: 20px;
     word-wrap: break-word;
   }
-  .modal-footer {
+  .footer {
     padding: 0 20px 20px;
   }
 }
