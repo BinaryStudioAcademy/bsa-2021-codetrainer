@@ -1,6 +1,7 @@
 import React from 'react';
-import languagesIcon from '../../../assets/languages.svg';
+import languagesIcon from '../../../../../../assets/icons/languages.svg';
 import '../stats.scss';
+import { List } from '../../../list';
 
 interface LanguagesProps {
 	languagesTrained: number;
@@ -10,6 +11,11 @@ interface LanguagesProps {
 
 const Languages: React.FC<LanguagesProps> = (props) => {
 	const { languagesTrained, highestTrained, mostRecent } = props;
+	const items = [
+		{ name: 'Total Languages Trained', value: languagesTrained },
+		{ name: 'Highest Trained', value: highestTrained },
+		{ name: 'Most Recent', value: mostRecent },
+	];
 
 	return (
 		<div>
@@ -19,18 +25,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
 					Languages
 				</label>
 			</div>
-			<p>
-				<span className="field-name">Total Languages Trained: </span>
-				<span className="field-value">{languagesTrained}</span>
-			</p>
-			<p>
-				<span className="field-name">Highest Trained: </span>
-				<span className="field-value">{highestTrained}</span>
-			</p>
-			<p>
-				<span className="field-name">Most Recent: </span>
-				<span className="field-value">{mostRecent}</span>
-			</p>
+			<List items={items} />
 		</div>
 	);
 };

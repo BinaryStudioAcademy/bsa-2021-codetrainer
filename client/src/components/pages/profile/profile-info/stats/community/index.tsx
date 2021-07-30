@@ -1,6 +1,7 @@
 import React from 'react';
-import communityIcon from '../../../assets/community.svg';
+import communityIcon from '../../../../../../assets/icons/community.svg';
 import '../stats.scss';
+import { List } from '../../../list';
 
 interface CommunityProps {
 	comments: number;
@@ -10,6 +11,11 @@ interface CommunityProps {
 
 const Community: React.FC<CommunityProps> = (props) => {
 	const { comments, collections, transactions } = props;
+	const items = [
+		{ name: 'Comments', value: comments },
+		{ name: 'Collections', value: collections },
+		{ name: 'Transactions', value: transactions },
+	];
 
 	return (
 		<div>
@@ -19,18 +25,7 @@ const Community: React.FC<CommunityProps> = (props) => {
 					Community
 				</label>
 			</div>
-			<p>
-				<span className="field-name">Comments: </span>
-				<span className="field-value">{comments}</span>
-			</p>
-			<p>
-				<span className="field-name">Collections: </span>
-				<span className="field-value">{collections}</span>
-			</p>
-			<p>
-				<span className="field-name">Transactions: </span>
-				<span className="field-value">{transactions}</span>
-			</p>
+			<List items={items} />
 		</div>
 	);
 };
