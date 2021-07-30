@@ -44,6 +44,7 @@ const FormInput: React.FC<Props> = ({
 				className={isPasswordField ? styles.passwordField : styles.inputField}
 			/>
 			{isPasswordField && (
+				//@ts-ignore
 				<Icon onClick={togglePasswordVisibility} icon="eye-off" className={styles.visibilityBtn} />
 			)}
 			{isTouched && error && <div className={styles.error}>{error}</div>}
