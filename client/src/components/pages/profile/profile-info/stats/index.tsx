@@ -1,13 +1,15 @@
 import React from 'react';
-import Points from './points/points';
+import Points from './points';
 import HonorBreakdown from './honor-breakdown';
-import Languages from './languages/languages';
+import Languages from './languages';
 import Community from './community';
-import RankBreakdown from './rank-breakdown/rank-breakdown';
 import styles from './stats.module.scss';
-interface StatsProps {}
 
-const Stats: React.FC<StatsProps> = (props) => {
+import RankBreakdown from './rank-breakdown';
+
+interface IStatsProps {}
+
+const Stats: React.FC<IStatsProps> = (props) => {
 	return (
 		<div className={styles.stats}>
 			<Points {...mockPointsProps} />

@@ -1,28 +1,22 @@
 import React from 'react';
 import rankBreakdownIcon from '../../../../../../assets/icons/rank-breakdown.svg';
-import './rank-breakdown.scss';
-import styles from '../stats.module.scss';
+import styles from './rank-breakdown.module.scss';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import { StatsBlock } from '../stats-block';
 
-interface RankBreakdownProps {
+interface IRankBreakdownProps {
 	rankProgress: number;
 	rank: number;
 }
 
-const RankBreakdown: React.FC<RankBreakdownProps> = (props) => {
+const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 	const { rankProgress, rank } = props;
 
 	return (
-		<div className="rank-breakdown">
-			<div className={styles.header}>
-				<img src={rankBreakdownIcon} id="rankBreakdownIcon" />
-				<label htmlFor="rankBreakdownIcon" className={styles.iconLabel}>
-					Rank Breakdown
-				</label>
-			</div>
+		<StatsBlock icon={rankBreakdownIcon} title="Rank" elementClass={styles.rankBreakdown}>
 			<div style={{ width: '150px' }}>
 				<CircularProgressbarWithChildren
-					className="circular-progressbar"
+					className={styles.circularProgressbar}
 					value={rankProgress}
 					strokeWidth={5}
 					styles={buildStyles(circularProgressBarStyles)}
@@ -32,11 +26,11 @@ const RankBreakdown: React.FC<RankBreakdownProps> = (props) => {
 					</strong>
 				</CircularProgressbarWithChildren>
 			</div>
-			<div className="progress-circle-info">
+			<div className={styles.progressCircleInfo}>
 				<strong>Overall: </strong>
 				<span>{rank}</span>ran/<span>{rankProgress}</span>%
 			</div>
-		</div>
+		</StatsBlock>
 	);
 };
 

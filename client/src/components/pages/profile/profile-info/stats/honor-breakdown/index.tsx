@@ -1,10 +1,9 @@
 import React from 'react';
 import honorBreakdownIcon from '../../../../../../assets/icons/honor-breakdown.svg';
-import styles from '../stats.module.scss';
-import honorStyles from './honor-breakdown.module.scss';
-import Index from './progress-bar-block';
-
-interface HonorBreakdownProps {
+import ProgressBarBlock from './progress-bar-block';
+import { StatsBlock } from '../stats-block';
+import styles from './honor-breakdown.module.scss';
+interface IHonorBreakdownProps {
 	completedChallengeDone: number | null;
 	completedChallengeLeft: number;
 	authoredChallengeDone: number | null;
@@ -17,7 +16,7 @@ interface HonorBreakdownProps {
 	achievementsLeft: number;
 }
 
-const HonorBreakdown: React.FC<HonorBreakdownProps> = (props) => {
+const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 	const {
 		completedChallengeDone,
 		completedChallengeLeft,
@@ -32,25 +31,23 @@ const HonorBreakdown: React.FC<HonorBreakdownProps> = (props) => {
 	} = props;
 
 	return (
-		<div className="honor-breakdown">
-			<div className={styles.header}>
-				<img src={honorBreakdownIcon} id="honorBreakdownIcon" />
-				<label htmlFor="honorBreakdownIcon" className={styles.iconLabel}>
-					Honor Breakdown
-				</label>
-			</div>
-			<div className={honorStyles.progressBars}>
-				<Index name="Completed Challenge" done={completedChallengeDone} left={completedChallengeLeft} />
-				<Index
+		<StatsBlock icon={honorBreakdownIcon} title="Honor Breakdown" elementClass={styles.HonorBreakdown}>
+			<div className={styles.progressBars}>
+				<ProgressBarBlock
+					name="Completed Challenge"
+					done={completedChallengeDone}
+					left={completedChallengeLeft}
+				/>
+				<ProgressBarBlock
 					name="Authored Challenge & Translation"
 					done={authoredChallengeDone}
 					left={authoredChallengeLeft}
 				/>
-				<Index name="Comments" done={commentsDone} left={commentsLeft} />
-				<Index name="Referrals" done={referralsDone} left={referralsLeft} />
-				<Index name="Achievements" done={achievementsDone} left={achievementsLeft} />
+				<ProgressBarBlock name="Comments" done={commentsDone} left={commentsLeft} />
+				<ProgressBarBlock name="Referrals" done={referralsDone} left={referralsLeft} />
+				<ProgressBarBlock name="Achievements" done={achievementsDone} left={achievementsLeft} />
 			</div>
-		</div>
+		</StatsBlock>
 	);
 };
 export default HonorBreakdown;

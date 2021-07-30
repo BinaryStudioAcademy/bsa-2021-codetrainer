@@ -1,11 +1,11 @@
-.rank-breakdown {
+.rankBreakdown {
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	.circular-progressbar {
+	.circularProgressbar {
 		font-size: 14px;
 	}
-	.progress-circle-info {
+	.progressCircleInfo {
 		position: absolute;
 		top: 90px;
 		font-size: 16px;

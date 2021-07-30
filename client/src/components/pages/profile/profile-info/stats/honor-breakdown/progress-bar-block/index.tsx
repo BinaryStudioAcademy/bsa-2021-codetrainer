@@ -1,6 +1,5 @@
 import React from 'react';
 import { ProgressBar } from '@blueprintjs/core';
-// import '../honor-breakdown.scss';
 import styles from './progress-bar-block.module.scss';
 import './progress-bar.scss';
 interface IProgressBarBlock {
@@ -9,7 +8,7 @@ interface IProgressBarBlock {
 	left: number;
 }
 
-const Index: React.FC<IProgressBarBlock> = (props) => {
+const ProgressBarBlock: React.FC<IProgressBarBlock> = (props) => {
 	const { name, done, left } = props;
 
 	return (
@@ -32,4 +31,4 @@ const Index: React.FC<IProgressBarBlock> = (props) => {
 	);
 };
 
-export default Index;
+export default ProgressBarBlock;

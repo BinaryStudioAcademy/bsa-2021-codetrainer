@@ -1,15 +1,15 @@
 import React from 'react';
 import languagesIcon from '../../../../../../assets/icons/languages.svg';
-import styles from '../stats.module.scss';
 import { List } from '../../../list';
+import { StatsBlock } from '../stats-block';
 
-interface LanguagesProps {
+interface ILanguagesProps {
 	languagesTrained: number;
 	highestTrained: string;
 	mostRecent: string;
 }
 
-const Languages: React.FC<LanguagesProps> = (props) => {
+const Languages: React.FC<ILanguagesProps> = (props) => {
 	const { languagesTrained, highestTrained, mostRecent } = props;
 	const items = [
 		{ name: 'Total Languages Trained', value: languagesTrained },
@@ -18,15 +18,9 @@ const Languages: React.FC<LanguagesProps> = (props) => {
 	];
 
 	return (
-		<div>
-			<div className={styles.header}>
-				<img src={languagesIcon} id="languagesIcon" />
-				<label htmlFor="languagesIcon" className={styles.iconLabel}>
-					Languages
-				</label>
-			</div>
+		<StatsBlock icon={languagesIcon} title="Languages">
 			<List items={items} />
-		</div>
+		</StatsBlock>
 	);
 };
 

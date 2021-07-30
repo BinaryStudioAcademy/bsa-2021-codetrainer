@@ -1,15 +1,15 @@
 import React from 'react';
 import pointsIcon from '../../../../../../assets/icons/points.svg';
-import styles from '../stats.module.scss';
 import { List } from '../../../list';
+import { StatsBlock } from '../stats-block';
 
-interface PointsProps {
+interface IPointsProps {
 	rank: number;
 	honor: number;
 	completedChallenge: number;
 }
 
-const Points: React.FC<PointsProps> = (props) => {
+const Points: React.FC<IPointsProps> = (props) => {
 	const { rank, honor, completedChallenge } = props;
 	const items = [
 		{ name: 'Rank', value: rank },
@@ -18,15 +18,9 @@ const Points: React.FC<PointsProps> = (props) => {
 	];
 
 	return (
-		<div>
-			<div className={styles.header}>
-				<img src={pointsIcon} id="pointsIcon" />
-				<label htmlFor="pointsIcon" className={styles.iconLabel + ' ' + styles.pointsLabel}>
-					Points
-				</label>
-			</div>
+		<StatsBlock icon={pointsIcon} title="Points">
 			<List items={items} />
-		</div>
+		</StatsBlock>
 	);
 };
 export default Points;

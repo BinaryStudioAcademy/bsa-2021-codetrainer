@@ -1,15 +1,15 @@
 import React from 'react';
 import communityIcon from '../../../../../../assets/icons/community.svg';
-import styles from '../stats.module.scss';
 import { List } from '../../../list';
+import { StatsBlock } from '../stats-block';
 
-interface CommunityProps {
+interface ICommunityProps {
 	comments: number;
 	collections: number;
 	transactions: number;
 }
 
-const Community: React.FC<CommunityProps> = (props) => {
+const Community: React.FC<ICommunityProps> = (props) => {
 	const { comments, collections, transactions } = props;
 	const items = [
 		{ name: 'Comments', value: comments },
@@ -18,15 +18,9 @@ const Community: React.FC<CommunityProps> = (props) => {
 	];
 
 	return (
-		<div>
-			<div className={styles.header}>
-				<img src={communityIcon} id="communityIcon" />
-				<label htmlFor="communityIcon" className={styles.iconLabel}>
-					Community
-				</label>
-			</div>
+		<StatsBlock icon={communityIcon} title="Community">
 			<List items={items} />
-		</div>
+		</StatsBlock>
 	);
 };
 
