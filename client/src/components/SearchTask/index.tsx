@@ -33,7 +33,7 @@ const statusOptions = [
 const progressOptions = [
 	{
 		value: 'ALL',
-		label: 'all',
+		label: 'All',
 	},
 	{
 		value: 'IN_PROGRESS',
@@ -47,7 +47,7 @@ const progressOptions = [
 
 const SearchTask: React.FC = () => {
 	return (
-		<>
+		<div className={styles.wrapper}>
 			<h4>Search Task</h4>
 			<Formik
 				initialValues={{
@@ -81,7 +81,7 @@ const SearchTask: React.FC = () => {
 					</button>
 				</Form>
 			</Formik>
-		</>
+		</div>
 	);
 };
 

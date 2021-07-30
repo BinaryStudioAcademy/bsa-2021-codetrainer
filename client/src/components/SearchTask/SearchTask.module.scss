@@ -1,15 +1,18 @@
-.submitBtn {
-	background: #ec4179;
-	border-radius: 7px;
-	border: 0;
-	font-family: 'Montserrat', sans-serif;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 20px;
-	text-align: center;
-	color: #ffffff;
-	cursor: pointer;
-	padding: 12px 20px;
-	margin-top: 20px;
+.wrapper {
+    padding: 40px;
+    .submitBtn {
+        background: #ec4179;
+        border-radius: 7px;
+        border: 0;
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 12px 20px;
+        margin-top: 20px;
+    }
 }

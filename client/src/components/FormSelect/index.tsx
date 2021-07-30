@@ -34,7 +34,22 @@ const FormSelect: React.FC<Props> = ({
 					{label}
 				</label>
 			)}
-			<Select name={name} value={selected} onChange={onChange} placeholder={placeholder} options={options} />
+			<Select
+				name={name}
+				value={selected}
+				onChange={onChange}
+				placeholder={placeholder}
+				options={options}
+				styles={{
+					menu: () => ({
+						backgroundColor: '#f0f3f9',
+					}),
+					input: () => ({
+						backgroundColor: '#f0f3f9',
+					}),
+				}}
+				menuPortalTarget={document.body}
+			/>
 		</div>
 	);
 };
