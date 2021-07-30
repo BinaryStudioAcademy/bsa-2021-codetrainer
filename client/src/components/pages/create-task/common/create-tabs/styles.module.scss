@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import '~normalize.css';
+@import '~@blueprintjs/core/lib/css/blueprint.css';
+@import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
+
+:local(.root) {
+	display: flex;
+	flex-flow: column nowrap;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	& > *:last-child {
+		flex-grow: 1;
+	}
+}
+
+:local(.edit) {
+	position: relative;
+	height: 100%;
+}
+
+:local(.edit__fullscreen) {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1001;
+}
+
+:local(.panel) {
+	display: grid;
+	grid-template-columns: 35px 1fr;
+	& > *:first-child {
+		background-color: #f0f3f9;
+	}
+	& > *:last-child {
+		position: relative;
+		background-color: #ffffff;
+	}
+}
+
+:local(.icon) {
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	cursor: pointer;
+}

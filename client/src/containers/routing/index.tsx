@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 import Example from 'containers/example';
 import { PublicRoute } from 'components';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
