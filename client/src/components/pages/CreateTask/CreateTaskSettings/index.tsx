@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Classes, H2, H4, Label, Switch } from '@blueprintjs/core';
-import { ReactComponent as Fundamentals } from '../../assets/books-icon.svg';
-import { ReactComponent as Rankup } from '../../assets/rank-up-icon.svg';
-import { ReactComponent as Practice } from '../../assets/practice-icon.svg';
-import { ReactComponent as Beta } from '../../assets/beta-icon.svg';
-import { ReactComponent as Random } from '../../assets/shuffle-icon.svg';
+import { ReactComponent as Fundamentals } from '../../../../assets/icons/books-icon.svg';
+import { ReactComponent as Rankup } from '../../../../assets/icons/rank-up-icon.svg';
+import { ReactComponent as Practice } from '../../../../assets/icons/practice-icon.svg';
+import { ReactComponent as Beta } from '../../../../assets/icons/beta-icon.svg';
+import { ReactComponent as Random } from '../../../../assets/icons/shuffle-icon.svg';
 import RadioItem from './RadioItem';
 import InfoPopover from 'components/InfoPopover';
-import '../../styles/index.scss';
+import './switch.scss';
 import styles from './create-task-settings.module.scss';
 interface ICreateTaskSettingsProps {}
 interface IRadioItem {

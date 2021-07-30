@@ -22,6 +22,7 @@
 			justify-content: flex-start;
 			gap: 20px;
 			.radioItem {
+				cursor: pointer;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -40,7 +41,6 @@
 					position: absolute;
 					width: 65px;
 					height: 65px;
-					// visibility: hidden;
 				}
 				&:hover {
 					svg {

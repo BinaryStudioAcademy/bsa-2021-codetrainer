@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover2 } from '@blueprintjs/popover2';
 import { FC, PropsWithChildren } from 'react';
-import infoIcon from 'assets/info-popover.svg';
+import infoIcon from '../../assets/icons/info-popover.svg';
 import styles from './info-popover.module.scss';
 
 const InfoPopover: FC<PropsWithChildren<any>> = ({ children }) => (
