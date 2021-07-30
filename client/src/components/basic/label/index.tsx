@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './label.module.scss';
 
-interface Prop {
+interface ILabelProps {
 	label: string | number;
 	color: string;
 }
 
-const Label: React.FC<Prop> = (props) => {
+const Label: React.FC<ILabelProps> = (props) => {
 	const changebleStyles = {
 		color: props.color,
 		borderColor: props.color,

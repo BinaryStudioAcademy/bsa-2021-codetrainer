@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './avatar.module.scss';
 
-interface Prop {
+interface IAvatarProps {
 	avatar: string;
 	size: number;
 	color: string;
 }
 
-const Avatar: React.FC<Prop> = (props) => {
+const Avatar: React.FC<IAvatarProps> = (props) => {
 	const changebleStyle = {
 		width: props.size,
 		height: props.size,
