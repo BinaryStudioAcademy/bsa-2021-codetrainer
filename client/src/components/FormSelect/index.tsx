@@ -44,8 +44,15 @@ const FormSelect: React.FC<Props> = ({
 					menu: () => ({
 						backgroundColor: '#f0f3f9',
 					}),
-					input: () => ({
+					indicatorSeparator: () => ({
+						display: 'none',
+					}),
+					control: (styles) => ({
+						...styles,
 						backgroundColor: '#f0f3f9',
+						border: '0px',
+						padding: '4px 8px',
+						borderRadius: '7px',
 					}),
 				}}
 				menuPortalTarget={document.body}
