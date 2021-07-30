@@ -1,0 +1,35 @@
+.progressBarBlock {
+  margin-top: 17px;
+  .progressBarInfo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 18px;
+
+    .progressName {
+      margin-bottom: 0;
+    }
+    .progressInfoDone {
+      margin-bottom: 0;
+      .progressDone {
+        color: #ec4179;
+      }
+      .progressOfSymbol {
+        color: rgba(40, 40, 40, 0.5);
+      }
+      .progressLeft {
+        color: rgba(40, 40, 40, 0.5);
+      }
+    }
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+}
+.progress-bar {
+  background-color: #f0f3f9;
+  margin: 3px 0;
+  .bp3-progress-meter {
+    background-color: #ec4179;
+  }
+}

@@ -1,0 +1,26 @@
+.profileBio {
+  width: 916px;
+  height: 206px;
+  padding: 20px;
+  margin: 42px;
+  background: #fafbff;
+  .profileHeader {
+    display: flex;
+    padding-bottom: 20px;
+    align-items: center;
+    .avatar {
+      width: 57px;
+      height: 57px;
+      cursor: pointer;
+    }
+  }
+  .link {
+    color: #705ff5;
+    text-decoration: underline;
+  }
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2vw;
+  }
+}

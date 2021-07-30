@@ -1,7 +1,8 @@
 import React from 'react';
-import ProfileRouter from './profile-router/profile-router';
+import ProfileRouter from './profile-router';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Stats from './stats/stats';
+import styles from './profile-info.module.scss';
 
 interface IProfileInfoProps {
 }
@@ -10,7 +11,7 @@ export const ProfileInfo: React.FC<IProfileInfoProps> = (props) => {
 	const match = useRouteMatch();
 
 	return (
-		<>
+		<div className={styles.profileInfo}>
 			<ProfileRouter />
 			<Switch>
 				<Route path={match.url + '/stats'} exact>
@@ -20,6 +21,6 @@ export const ProfileInfo: React.FC<IProfileInfoProps> = (props) => {
 					<Stats />
 				</Route>
 			</Switch>
-		</>
+		</div>
 	);
 }

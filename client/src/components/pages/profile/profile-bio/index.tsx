@@ -1,6 +1,6 @@
 import React from 'react';
 import { H5 } from '@blueprintjs/core';
-import '../profile.scss';
+import styles from './profile-bio.module.scss';
 import { List } from '../list';
 
 interface IProfileBioProps {
@@ -20,7 +20,7 @@ export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
 	const { img, name, nickname, clan, memberSince, lastSeen, gitHub, following, followers, community } = props;
 
 	const gitHubLink = gitHub ?
-		<a href="#" className="link">{gitHub}</a> :
+		<a href="#" className={styles.link}>{gitHub}</a> :
 		gitHub;
 
 	const listItems1 = [{name: 'Name', value: nickname}, {name: 'Clan', value: clan}];
@@ -28,16 +28,16 @@ export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
 	const listItems3 = [{name: 'Following', value: following}, {name: 'Followers', value: followers}, {name: 'Community', value: community}];
 
 	return (
-		<>
-			<div className="profile-header">
-				<img src={img} className="avatar" />
+		<div className={styles.profileBio}>
+			<div className={styles.profileHeader}>
+				<img src={img} className={styles.avatar} />
 				<H5>{name}</H5>
 			</div>
-			<div className="fields">
+			<div className={styles.fields}>
 				<List items={listItems1}/>
 				<List items={listItems2}/>
 				<List items={listItems3}/>
 			</div>
-		</>
+		</div>
 	);
 };

@@ -1,0 +1,28 @@
+.navmenu {
+  background: #fafbff;
+  padding-bottom: 20px;
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  list-style-type: none;
+  border-bottom: 1.5px solid #eaecf1;
+  .navmenuItem {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #282828;
+  }
+  .navmenuItem:hover {
+    background: inherit;
+  }
+  .navmenuItem.active {
+    color: #705ff5;
+    text-decoration: underline;
+    text-decoration-color: #705ff5;
+    text-underline-offset: 1px;
+  }
+  &:first-child {
+    padding-left: 15px;
+  }
+}

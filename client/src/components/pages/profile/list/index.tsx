@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import styles from './list.module.scss';
 
 interface IListProps {
 	items: Array<IItemProps>
@@ -11,8 +12,8 @@ interface IItemProps {
 
 export const List: React.FC<IListProps> = (props) => {
 
-	const list = props.items.map(({ name, value}) => {
-		return <Item name={name} value={value} key={name}/>;
+	const list = props.items.map(({ name, value}, index) => {
+		return <Item name={name} value={value} key={index}/>;
 	})
 
 	return (
@@ -29,8 +30,8 @@ export const Item: React.FC<IItemProps> = (props) => {
 
 	return (
 		<p>
-			<span className="field-name">{name}: </span>
-			<span className="field-value">{value}</span>
+			<span className={styles.fieldName}>{name}: </span>
+			<span>{value}</span>
 		</p>
 	)
 }
