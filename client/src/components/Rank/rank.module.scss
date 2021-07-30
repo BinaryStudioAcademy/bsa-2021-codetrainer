@@ -1,0 +1,35 @@
+$easy: #ec4179;
+$medium: #f09712;
+$hard: #419aec;
+
+.rank {
+	display: inline-block;
+	width: 50px;
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 5px 0;
+	font-family: Montserrat, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 15px;
+	letter-spacing: 0em;
+	text-align: center;
+	user-select: none;
+	&.easy {
+		border-color: $easy;
+		color: $easy;
+	}
+	&.medium {
+		border-color: $medium;
+		color: $medium;
+	}
+	&.hard {
+		border-color: $hard;
+		color: $hard;
+	}
+}
+
+label:checked .rank {
+	display: none;
+}
