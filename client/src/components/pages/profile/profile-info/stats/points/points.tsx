@@ -1,6 +1,7 @@
 import React from 'react';
 import pointsIcon from '../../../../../../assets/points.svg';
 import '../stats.scss';
+import { List } from '../../../list';
 
 interface PointsProps {
 	rank: number;
@@ -10,6 +11,8 @@ interface PointsProps {
 
 const Points: React.FC<PointsProps> = (props) => {
 	const { rank, honor, completedChallenge } = props;
+	const items = [{name: 'Rank', value: rank}, {name: 'Honor', value: honor}, {name: 'Total Completed Challenge', value: completedChallenge}]
+
 
 	return (
 		<div>
@@ -19,18 +22,7 @@ const Points: React.FC<PointsProps> = (props) => {
 					Points
 				</label>
 			</div>
-			<p>
-				<span className="field-name">Rank: </span>
-				<span className="field-value">{rank}</span>
-			</p>
-			<p>
-				<span className="field-name">Honor: </span>
-				<span className="field-value">{honor}</span>
-			</p>
-			<p>
-				<span className="field-name">Total Completed Challenge: </span>
-				<span className="field-value">{completedChallenge}</span>
-			</p>
+			<List items={items} />
 		</div>
 	);
 };

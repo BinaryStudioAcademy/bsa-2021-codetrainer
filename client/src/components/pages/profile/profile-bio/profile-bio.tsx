@@ -1,8 +1,9 @@
 import React from 'react';
 import { H5 } from '@blueprintjs/core';
 import '../profile.scss';
+import { List } from '../list';
 
-interface ProfileBioProps {
+interface IProfileBioProps {
 	img: string;
 	name: string;
 	nickname: string;
@@ -15,8 +16,16 @@ interface ProfileBioProps {
 	community: number;
 }
 
-export const ProfileBio: React.FC<ProfileBioProps> = (props) => {
+export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
 	const { img, name, nickname, clan, memberSince, lastSeen, gitHub, following, followers, community } = props;
+
+	const gitHubLink = gitHub ?
+		<a href="#" className="link">{gitHub}</a> :
+		gitHub;
+
+	const listItems1 = [{name: 'Name', value: nickname}, {name: 'Clan', value: clan}];
+	const listItems2 = [{name: 'Member since', value: memberSince}, {name: 'Last seen', value: lastSeen}, {name: 'Profile GitHub', value: gitHubLink}];
+	const listItems3 = [{name: 'Following', value: following}, {name: 'Followers', value: followers}, {name: 'Community', value: community}];
 
 	return (
 		<>
@@ -25,48 +34,9 @@ export const ProfileBio: React.FC<ProfileBioProps> = (props) => {
 				<H5>{name}</H5>
 			</div>
 			<div className="fields">
-				<div>
-					<p>
-						<span className="field-name">Name: </span>
-						<span className="field-value">{nickname}</span>
-					</p>
-					<p>
-						<span className="field-name">Clan: </span>
-						<span className="field-value">{clan}</span>
-					</p>
-				</div>
-				<div>
-					<p>
-						<span className="field-name">Member since: </span>
-						<span className="field-value">{memberSince}</span>
-					</p>
-					<p>
-						<span className="field-name">Last seen: </span>
-						<span className="field-value">{lastSeen}</span>
-					</p>
-					<p>
-						<span className="field-name">Profile GitHub: </span>
-						<span className="field-value">
-							<a href="#" className="link">
-								{gitHub}
-							</a>
-						</span>
-					</p>
-				</div>
-				<div>
-					<p>
-						<span className="field-name">Following: </span>
-						<span className="field-value">{following}</span>
-					</p>
-					<p>
-						<span className="field-name">Followers: </span>
-						<span className="field-value">{followers}</span>
-					</p>
-					<p>
-						<span className="field-name">Community: </span>
-						<span className="field-value">{community}</span>
-					</p>
-				</div>
+				<List items={listItems1}/>
+				<List items={listItems2}/>
+				<List items={listItems3}/>
 			</div>
 		</>
 	);
