@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './create-task-settings.module.scss';
 
-interface Props {
+interface IRadioItemProps {
 	component: React.ReactElement;
 	checkedState: string;
 	setChecked: (value: string) => void;
@@ -9,7 +9,7 @@ interface Props {
 	text: string;
 }
 
-const RadioItem: React.FC<Props> = (props) => {
+const RadioItem: React.FC<IRadioItemProps> = (props) => {
 	return (
 		<div
 			className={

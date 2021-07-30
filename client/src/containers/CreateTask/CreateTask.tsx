@@ -1,8 +1,8 @@
 import React from 'react';
 import CreateTaskSettings from './CreateTaskSettings';
-interface Props {}
+interface ICreateTaskProps {}
 
-const CreateTask: React.FC<Props> = () => (
+const CreateTask: React.FC<ICreateTaskProps> = () => (
 	<div>
 		{/* <Header/>
         <Sidebar/> */}

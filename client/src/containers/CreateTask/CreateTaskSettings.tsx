@@ -9,13 +9,17 @@ import RadioItem from './RadioItem';
 import InfoPopover from 'components/InfoPopover';
 import '../../styles/index.scss';
 import styles from './create-task-settings.module.scss';
-interface Props {}
-
-const CreateTaskSettings: React.FC<Props> = () => {
+interface ICreateTaskSettingsProps {}
+interface IRadioItem {
+	element: React.ReactElement;
+	text: string;
+	elementClass: string;
+}
+const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = () => {
 	const [checkedState, setChecked] = useState('fundamentals');
 	let i = 0;
 	const [switchCheck, setSwitchCheck] = useState(true);
-	const RADIO_ITEMS = [
+	const RADIO_ITEMS: IRadioItem[] = [
 		{
 			element: <Fundamentals key={i++} />,
 			elementClass: 'fundamentals',
