@@ -1,8 +1,8 @@
 import { exampleReducer } from 'containers/example/logic/reducer';
 import { combineReducers, Reducer } from 'redux';
-import { RootState } from 'typings/root-state';
+import { IRootState } from 'typings/root-state';
 
-const rootReducer: Reducer<RootState> = combineReducers({
+const rootReducer: Reducer<IRootState> = combineReducers({
 	example: exampleReducer,
 });
 

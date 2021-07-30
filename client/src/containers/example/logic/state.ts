@@ -1,7 +1,7 @@
-export interface ExampleState {
+export interface IExampleState {
 	text: string;
 }
 
-export const initialState: ExampleState = {
+export const initialState: IExampleState = {
 	text: '',
 };

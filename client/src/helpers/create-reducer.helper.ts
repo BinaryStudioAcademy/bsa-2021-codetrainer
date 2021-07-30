@@ -1,10 +1,10 @@
 import { Reducer, AnyAction } from 'redux';
 
-type IHandlers<TState> = {
+type THandlers<TState> = {
 	[key: string]: (state: TState, action: any) => TState;
 };
 
-export function createReducer<TState>(initialState: TState, handlers: IHandlers<TState>): Reducer<TState> {
+export function createReducer<TState>(initialState: TState, handlers: THandlers<TState>): Reducer<TState> {
 	return function reducer(state = initialState, action: AnyAction) {
 		if (handlers.hasOwnProperty(action.type)) {
 			return handlers[action.type](state, action);

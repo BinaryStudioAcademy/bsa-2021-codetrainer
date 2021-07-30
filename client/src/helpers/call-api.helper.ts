@@ -1,7 +1,7 @@
 import qs from 'qs';
 import { LocalStorageKeys } from 'constants/local-storage-keys';
 
-interface RequestArgs {
+interface IRequestArgs {
 	endpoint: string;
 	method: 'GET' | 'POST' | 'PUT' | 'DELETE';
 	skipAuthorization?: boolean;
@@ -9,7 +9,7 @@ interface RequestArgs {
 	body?: any;
 }
 
-type Body =
+type TBody =
 	| string
 	| Blob
 	| ArrayBufferView
@@ -20,7 +20,7 @@ type Body =
 	| null
 	| undefined;
 
-export default async function callWebApi(args: RequestArgs): Promise<Response> {
+export default async function callWebApi(args: IRequestArgs): Promise<Response> {
 	try {
 		const res: Response = await fetch(getUrl(args), getArgs(args));
 		return res;
@@ -31,13 +31,13 @@ export default async function callWebApi(args: RequestArgs): Promise<Response> {
 
 const API = '/api/';
 
-const getUrl = (args: RequestArgs): RequestInfo =>
+const getUrl = (args: IRequestArgs): RequestInfo =>
 	API + args.endpoint + (args.query ? `?${qs.stringify(args.query)}` : '');
 
-const getArgs = (args: RequestArgs): RequestInit => {
+const getArgs = (args: IRequestArgs): RequestInit => {
 	const headers: Headers | string[][] | Record<string, string> | undefined = {};
 	const token = sessionStorage.getItem(LocalStorageKeys.SESSION_TOKEN);
-	let body: Body;
+	let body: TBody;
 
 	if (token && !args.skipAuthorization) {
 		headers.Authorization = `Bearer ${token}`;

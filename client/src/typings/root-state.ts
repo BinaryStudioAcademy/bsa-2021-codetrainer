@@ -1,5 +1,5 @@
-import { ExampleState } from 'containers/example/logic/state';
+import { IExampleState } from 'containers/example/logic/state';
 
-export interface RootState {
-	example: ExampleState;
+export interface IRootState {
+	example: IExampleState;
 }

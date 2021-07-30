@@ -1,9 +1,9 @@
 import * as actionTypes from './action-types';
-import { ExampleState, initialState } from './state';
+import { IExampleState, initialState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
 
-export const exampleReducer = createReducer<ExampleState>(initialState, {
-	[actionTypes.UPDATE](state, action: actionTypes.UpdateExampleArgs) {
+export const exampleReducer = createReducer<IExampleState>(initialState, {
+	[actionTypes.UPDATE](state, action: actionTypes.TUpdateExampleArgs) {
 		return {
 			...state,
 			...action.partialState,
