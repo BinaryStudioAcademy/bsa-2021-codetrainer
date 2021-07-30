@@ -4,9 +4,10 @@ import { dbConfig } from '../../config/db';
 createConnection(dbConfig)
 	.then(async (connection) => {
 		await connection.runMigrations();
-		console.info('Db connecting');
+		console.info('DB connected');
 	})
-	.catch(() => {
-		console.error('No db connection');
+	.catch((error) => {
+		console.error('DB connection failed');
+		console.log(error);
 		process.exit(1);
 	});
