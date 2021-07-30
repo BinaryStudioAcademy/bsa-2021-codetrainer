@@ -1,7 +1,7 @@
 export interface IExampleState {
-	text: string;
+	name: string;
 }
 
 export const initialState: IExampleState = {
-	text: '',
+	name: '',
 };
