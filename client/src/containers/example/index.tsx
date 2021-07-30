@@ -6,7 +6,7 @@ import { IRootState } from 'typings/root-state';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
-	const text = useSelector((rootState: IRootState) => rootState.example.text);
+	const text = useSelector((rootState: IRootState) => rootState.example.name);
 	const getExampleText = (exampleName: string) => {
 		dispatch(actions.getExampleText({ exampleName }));
 	};

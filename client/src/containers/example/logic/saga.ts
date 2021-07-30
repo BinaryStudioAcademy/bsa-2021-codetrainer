@@ -5,8 +5,8 @@ import * as actions from './actions';
 
 export function* fetchExampleText(action: ReturnType<typeof actions.getExampleText>) {
 	const { exampleName } = action;
-	const { text } = yield call(fetchExample, exampleName);
-	yield put(actions.updateExample({ partialState: { text } }));
+	const { name } = yield call(fetchExample, exampleName);
+	yield put(actions.updateExample({ partialState: { name } }));
 }
 
 export function* watchUpdateExampleText() {
