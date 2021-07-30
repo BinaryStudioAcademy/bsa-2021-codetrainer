@@ -1,0 +1,29 @@
+.container {
+	display: grid;
+	grid-template-columns: 245px 2fr 4fr;
+	grid-template-rows: 80px calc(100vh - 80px);
+	grid-template-areas:
+		'. . .'
+		'. searchPanel challengesList';
+}
+
+.searchPanel {
+	grid-area: searchPanel;
+	padding: 40px;
+
+	.submitButton {
+		background: #ec4179;
+		border-radius: 7px;
+		border: 0;
+		font: 600 16px 'Montserrat', sans-serif;
+		text-align: center;
+		color: #ffffff;
+		cursor: pointer;
+		padding: 12px 20px;
+		margin-top: 20px;
+	}
+}
+
+.challengesList {
+	grid-area: challengesList;
+}

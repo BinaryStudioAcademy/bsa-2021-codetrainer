@@ -1,31 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@blueprintjs/core';
-import styles from './index.module.scss';
-import { IChallengeStats } from '../types';
+import styles from './challenge-stats.module.scss';
+import { IChallengeStatsProps } from '../types';
 
-const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
+const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
 	stats: { favouriteSaves, positiveFeedback, author },
 }) => {
 	return (
-		<div className={styles['challenge-stats']}>
-			<div className={styles['challenge-stats-item']}>
-				<p className={styles['challenge-stats-item__text']}>
-					<Icon icon="star-empty" className={styles['challenge-stats-item__icon']} />
+		<div className={styles.challengeStats}>
+			<div className={styles.challengeStatsItem}>
+				<p className={styles.challengeStatsItemText}>
+					<Icon icon="star-empty" className={styles.challengeStatsItemIcon} />
 					{favouriteSaves} saved to favorites
 				</p>
 			</div>
-			<div className={styles['challenge-stats-item']}>
-				<p className={styles['challenge-stats-item__text']}>
-					<Icon icon="vertical-bar-chart-asc" className={styles['challenge-stats-item__icon']} />
+			<div className={styles.challengeStatsItem}>
+				<p className={styles.challengeStatsItemText}>
+					<Icon icon="vertical-bar-chart-asc" className={styles.challengeStatsItemIcon} />
 					{positiveFeedback} positive feedback
 				</p>
 			</div>
-			<div className={styles['challenge-stats-item']}>
-				<p className={styles['challenge-stats-item__text']}>
-					<Icon icon="user" className={styles['challenge-stats-item__icon']} />
+			<div className={styles.challengeStatsItem}>
+				<p className={styles.challengeStatsItemText}>
+					<Icon icon="user" className={styles.challengeStatsItemIcon} />
 					created{' '}
-					<Link to={author.link} className={styles['challenge-stats-item__link']}>
+					<Link to={author.link} className={styles.challengeStatsItemLink}>
 						{author.firstName} {author.lastName}
 					</Link>
 				</p>

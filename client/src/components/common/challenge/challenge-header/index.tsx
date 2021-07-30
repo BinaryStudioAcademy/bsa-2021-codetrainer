@@ -1,13 +1,13 @@
 import React from 'react';
-import RankTag from 'components/common/rank-tag';
-import { IChallengeHeader } from '../types';
-import styles from './index.module.scss';
+import RankTag from '../../../basic/rank-tag';
+import { IChallengeHeaderProps } from '../types';
+import styles from './challenge-header.module.scss';
 
-const ChallengeHeader: React.FC<{ header: IChallengeHeader }> = ({ header: { title, rank } }) => {
+const ChallengeHeader: React.FC<{ header: IChallengeHeaderProps }> = ({ header: { title, rank } }) => {
 	return (
-		<div className={styles['challenge-header']}>
+		<div className={styles.challengeHeader}>
 			<RankTag rank={rank} />
-			<span className={styles['challenge-header__title']}>{title}</span>
+			<span className={styles.challengeHeaderTitle}>{title}</span>
 		</div>
 	);
 };
