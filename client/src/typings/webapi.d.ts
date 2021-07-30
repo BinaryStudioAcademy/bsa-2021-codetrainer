@@ -1,5 +1,5 @@
 namespace WebApi.Entities {
-	interface Example {
+	interface IExample {
 		id: string;
 		name?: string;
 		text?: string;
