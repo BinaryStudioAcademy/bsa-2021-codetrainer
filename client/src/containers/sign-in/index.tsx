@@ -1,19 +1,14 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import CoverLayout from 'components/CoverLayout';
-import PasswordField from 'components/PasswordField';
-import FormField from 'components/FormField';
-import Separator from 'components/Separator';
-import Button, { ButtonClasses } from 'components/Button';
+import { CoverLayout, PasswordField, FormField, Separator, Button, ButtonClasses } from 'components/pages/sign';
 import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './sign-in.module.scss';
 
 function validateEmail(email: string): string | undefined {
 	if (!email) {
 		return 'Enter email';
-	}
-	else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(email)) {
+	} else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(email)) {
 		return 'Invalid email';
 	}
 }
@@ -29,18 +24,15 @@ const SignIn: React.FC = () => {
 		<CoverLayout className={styles.signIn}>
 			<Formik
 				initialValues={{
-					email: "",
-					password: ""
+					email: '',
+					password: '',
 				}}
-				onSubmit={e => console.info(e)}
+				onSubmit={(e) => console.info(e)}
 			>
 				{({ errors, touched, isValidating }) => (
 					<Form className={styles.form}>
 						<h4>Sign in</h4>
-						<Button
-							type="button"
-							className={ButtonClasses.red}
-						>
+						<Button type="button" className={ButtonClasses.red}>
 							Sing in with GitHub
 						</Button>
 						<Separator className={styles.light}>or</Separator>
@@ -48,18 +40,15 @@ const SignIn: React.FC = () => {
 							<div className={styles.labelWrapper}>
 								<label htmlFor="email">Email</label>
 							</div>
-							<FormField
-								id="email"
-								name="email"
-								placeholder="Email"
-								validate={validateEmail}
-							/>
-							<div className={styles.error}>{ touched.email && errors.email }</div>
+							<FormField id="email" name="email" placeholder="Email" validate={validateEmail} />
+							<div className={styles.error}>{touched.email && errors.email}</div>
 						</div>
 						<div>
 							<div className={styles.labelWrapper}>
 								<label htmlFor="password">Password</label>
-								<Link to="reset-password" className={styles.right}>Forgot password?</Link>
+								<Link to="reset-password" className={styles.right}>
+									Forgot password?
+								</Link>
 							</div>
 							<PasswordField
 								id="password"
@@ -67,12 +56,9 @@ const SignIn: React.FC = () => {
 								placeholder="Password"
 								validate={validatePassword}
 							/>
-							<div className={styles.error}>{ touched.password && errors.password }</div>
+							<div className={styles.error}>{touched.password && errors.password}</div>
 						</div>
-						<Button
-							type="submit"
-							className={combineClasses(ButtonClasses.red, ButtonClasses.filled)}
-						>
+						<Button type="submit" className={combineClasses(ButtonClasses.red, ButtonClasses.filled)}>
 							Sign in
 						</Button>
 					</Form>

@@ -3,14 +3,9 @@ import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './separator.module.scss';
 
 const Separator: FC<PropsWithChildren<HTMLAttributes<HTMLDivElement>>> = ({ children, className, ...remaining }) => (
-	<div
-		{...remaining}
-		className={combineClasses(className, styles.separator)}
-	>
+	<div {...remaining} className={combineClasses(className, styles.separator)}>
 		<hr />
-		<span className={styles.content}>
-			{children}
-		</span>
+		<span className={styles.content}>{children}</span>
 		<hr />
 	</div>
 );

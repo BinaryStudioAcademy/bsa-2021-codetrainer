@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Example from 'containers/Example';
+import Example from 'containers/example';
 import { PublicRoute } from 'components/basic';
-import SignIn from 'containers/SignIn';
+import SignIn from 'containers/sign-in';
 
 interface IRoutingProps {}
 
