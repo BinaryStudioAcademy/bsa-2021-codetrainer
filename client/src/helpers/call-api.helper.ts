@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { LocalStorageKeys } from 'constants/LocalStorageKeys';
+import { LocalStorageKeys } from 'constants/local-storage-keys';
 
 interface RequestArgs {
 	endpoint: string;

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './example.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
-import { RootState } from 'typings/rootState';
+import { RootState } from 'typings/root-state';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();

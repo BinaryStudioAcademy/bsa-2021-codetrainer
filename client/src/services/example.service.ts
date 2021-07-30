@@ -1,4 +1,4 @@
-import callWebApi from '../helpers/callApi.helper';
+import callWebApi from '../helpers/call-api.helper';
 
 export const fetchExample = async (exampleName: string): Promise<WebApi.Entities.Example> => {
 	const res = await callWebApi({

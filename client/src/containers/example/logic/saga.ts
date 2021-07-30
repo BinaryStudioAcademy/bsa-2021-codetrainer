@@ -1,6 +1,6 @@
 import { fetchExample } from 'services/example.service';
 import { all, put, takeEvery, call } from 'redux-saga/effects';
-import * as actionTypes from './actionTypes';
+import * as actionTypes from './action-types';
 import * as actions from './actions';
 
 export function* fetchExampleText(action: ReturnType<typeof actions.getExampleText>) {
