@@ -4,13 +4,13 @@ import '../stats.scss';
 import { List } from '../../../list';
 import { StatsBlock } from '../stats-block';
 
-interface CommunityProps {
+interface ICommunityProps {
 	comments: number;
 	collections: number;
 	transactions: number;
 }
 
-const Community: React.FC<CommunityProps> = (props) => {
+const Community: React.FC<ICommunityProps> = (props) => {
 	const { comments, collections, transactions } = props;
 	const items = [{name: 'Comments', value: comments}, {name: 'Collections', value: collections}, {name: 'Transactions', value: transactions}]
 

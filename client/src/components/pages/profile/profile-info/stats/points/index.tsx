@@ -4,13 +4,13 @@ import '../stats.scss';
 import { List } from '../../../list';
 import { StatsBlock } from '../stats-block';
 
-interface PointsProps {
+interface IPointsProps {
 	rank: number;
 	honor: number;
 	completedChallenge: number;
 }
 
-const Points: React.FC<PointsProps> = (props) => {
+const Points: React.FC<IPointsProps> = (props) => {
 	const { rank, honor, completedChallenge } = props;
 	const items = [{name: 'Rank', value: rank}, {name: 'Honor', value: honor}, {name: 'Total Completed Challenge', value: completedChallenge}]
 

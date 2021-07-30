@@ -4,12 +4,12 @@ import './rank-breakdown.scss';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import { StatsBlock } from '../stats-block';
 
-interface RankBreakdownProps {
+interface IRankBreakdownProps {
 	rankProgress: number;
 	rank: number;
 }
 
-const RankBreakdown: React.FC<RankBreakdownProps> = (props) => {
+const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 	const { rankProgress, rank } = props;
 
 	return (

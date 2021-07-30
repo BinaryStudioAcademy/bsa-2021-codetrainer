@@ -5,7 +5,7 @@ import './honor-breakdown.scss';
 import ProgressBarBlock from './progress-bar-block';
 import { StatsBlock } from '../stats-block';
 
-interface HonorBreakdownProps {
+interface IHonorBreakdownProps {
 	completedChallengeDone: number | null;
 	completedChallengeLeft: number;
 	authoredChallengeDone: number | null;
@@ -18,7 +18,7 @@ interface HonorBreakdownProps {
 	achievementsLeft: number;
 }
 
-const HonorBreakdown: React.FC<HonorBreakdownProps> = (props) => {
+const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 	const {
 		completedChallengeDone,
 		completedChallengeLeft,
