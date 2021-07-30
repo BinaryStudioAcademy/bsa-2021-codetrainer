@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Text } from '@blueprintjs/core';
 
-import CommunityUser from '../CommunityUser';
+import CommunityUser from '../community-user';
 
 import styles from './community.module.scss';
-import Button from '../Button/index';
+import Button from '../../../../common/button/index';
 
 interface User {
 	id: string;

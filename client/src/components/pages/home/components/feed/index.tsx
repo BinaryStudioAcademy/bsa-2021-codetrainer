@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Text } from '@blueprintjs/core';
-import FeedMessage from '../FeedMessage';
+import FeedMessage from '../feed-message';
 
 import styles from './feed.module.scss';
-import Button from '../Button';
+import Button from '../../../../common/button';
 
 interface Message {
 	id: string;

@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './homePage.module.scss';
 
-import NextTask from '../../components/common/NextTask/index';
-import Community from '../../components/common/Community/index';
-import Feed from '../../components/common/Feed/index';
+import NextTask from './components/next-task/index';
+import Community from './components/community/index';
+import Feed from './components/feed/index';
 
 const testUsers = [
 	{
@@ -60,7 +60,7 @@ const testMessages = [
 	},
 ];
 
-const HomePage: React.FC = () => {
+const Home: React.FC = () => {
 	return (
 		<div className={styles.pageWrapper}>
 			<div className={styles.plug}>Sidebar plug</div>
@@ -90,4 +90,4 @@ const HomePage: React.FC = () => {
 	);
 };
 
-export default HomePage;
+export default Home;

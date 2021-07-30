@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import styles from './nextTask.module.scss';
-import Select from 'components/common/Select';
+import Select from 'components/common/select';
 
 import fundamentalsIcon from './assets/fundamentalsIcon.svg';
 import rankUpIcon from './assets/rankUpIcon.svg';
@@ -10,11 +10,11 @@ import betaIcon from './assets/betaIcon.svg';
 import randomIcon from './assets/randomIcon.svg';
 
 import { FocusKeys } from 'constants/FocusKeys';
-import { ISelectValue } from '../Select/interface';
+import { ISelectValue } from '../../../../common/select/interface';
 import { ITask } from './interface';
-import Tag from '../Tag/index';
-import Button from '../Button/index';
-import Rank from '../Rank/index';
+import Tag from '../../../../common/tag/index';
+import Button from '../../../../common/button/index';
+import Rank from '../../../../common/rank/index';
 
 // Stub for implementation until api is implemented
 const task = {

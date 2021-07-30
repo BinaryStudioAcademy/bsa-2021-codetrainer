@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import styles from './select.module.scss';
-import Option from 'components/common/Option';
+import Option from 'components/common/option';
 
 import { ISelect, ISelectValue } from './interface';
 
-const Select: React.FC<ISelect> = ({ values, activeValue, onChange }) => {
+const Select: React.FC<ISelect> = ({ values, activeValue, onChangse }) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
 
 	const handleChange = (value: ISelectValue) => {

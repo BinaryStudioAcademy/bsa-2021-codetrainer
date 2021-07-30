@@ -5,7 +5,7 @@ import styles from './community-user.module.scss';
 
 import defaultUserPhoto from './assets/user.svg';
 
-import Rank from '../Rank';
+import Rank from '../../../../common/rank';
 
 interface Props {
 	rank: number;

@@ -1,4 +1,4 @@
-import { ISelectValue } from 'components/common/Select/interface';
+import { ISelectValue } from 'components/common/select/interface';
 
 export interface IOption {
 	value: ISelectValue;
