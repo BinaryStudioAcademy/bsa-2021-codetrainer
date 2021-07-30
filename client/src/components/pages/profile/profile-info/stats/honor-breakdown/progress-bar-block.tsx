@@ -2,6 +2,7 @@ import React from 'react';
 import { ProgressBar } from '@blueprintjs/core';
 import '../stats.scss';
 import './honor-breakdown.scss';
+
 interface IProgressBarBlock {
 	name: string;
 	done: number | null;

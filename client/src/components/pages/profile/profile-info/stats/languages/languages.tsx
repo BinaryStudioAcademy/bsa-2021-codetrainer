@@ -1,5 +1,5 @@
 import React from 'react';
-import languagesIcon from '../../../assets/languages.svg';
+import languagesIcon from '../../../../../../assets/languages.svg';
 import '../stats.scss';
 
 interface LanguagesProps {

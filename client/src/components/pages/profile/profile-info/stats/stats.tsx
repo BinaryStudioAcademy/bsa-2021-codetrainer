@@ -1,9 +1,9 @@
 import React from 'react';
-import Points from './StatsComponents/Points';
-import HonorBreakdown from './StatsComponents/HonorBreakdown';
-import Languages from './StatsComponents/Languages';
-import Community from './StatsComponents/Community';
-import RankBreakdown from './StatsComponents/RankBreakdown';
+import Points from './points/points';
+import HonorBreakdown from './honor-breakdown/honor-breakdown';
+import Languages from './languages/languages';
+import Community from './community/community';
+import RankBreakdown from './rank-breakdown/rank-breakdown';
 
 interface StatsProps {}
 

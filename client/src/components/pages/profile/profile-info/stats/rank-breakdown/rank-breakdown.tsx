@@ -1,5 +1,5 @@
 import React from 'react';
-import rankBreakdownIcon from '../../../assets/rankBreakdown.svg';
+import rankBreakdownIcon from '../../../../../../assets/rankBreakdown.svg';
 import './rank-breakdown.scss';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 

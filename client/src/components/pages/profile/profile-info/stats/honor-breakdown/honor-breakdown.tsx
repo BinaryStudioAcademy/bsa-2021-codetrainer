@@ -1,8 +1,8 @@
 import React from 'react';
-import honorBreakdownIcon from '../../../assets/honorbreakdown.svg';
+import honorBreakdownIcon from '../../../../../../assets/honorbreakdown.svg';
 import '../stats.scss';
 import './honor-breakdown.scss';
-import ProgressBarBlock from './ProgressBarBlock';
+import ProgressBarBlock from './progress-bar-block';
 
 interface HonorBreakdownProps {
 	completedChallengeDone: number | null;

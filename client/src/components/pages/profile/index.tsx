@@ -1,10 +1,11 @@
 import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import ProfileRouter from './ProfileRouter';
-import Stats from './Stats';
-import '../../styles/index.scss';
+// import { Route, Switch, useRouteMatch } from 'react-router-dom';
+// import ProfileRouter from './ProfileRouter';
+// import Stats from './stats/stats';
+import '../../../styles/index.scss';
 import './profile.scss';
-import { ProfileBio } from './ProfileBio';
+import { ProfileBio } from './profile-bio/profile-bio';
+import { ProfileInfo } from './profile-info';
 
 interface ProfileProps {
 	match: {
@@ -28,7 +29,7 @@ const mockProfileBioProps = {
 };
 
 export const Profile: React.FC<ProfileProps> = (props) => {
-	const match = useRouteMatch();
+	// const match = useRouteMatch();
 
 	return (
 		<>
@@ -37,15 +38,16 @@ export const Profile: React.FC<ProfileProps> = (props) => {
 					<ProfileBio {...mockProfileBioProps} />
 				</div>
 				<div className="profile-info">
-					<ProfileRouter />
-					<Switch>
-						<Route path={match.url + '/stats'} exact>
-							<Stats />
-						</Route>
-						<Route path={match.url} exact>
-							<Stats />
-						</Route>
-					</Switch>
+					<ProfileInfo />
+					{/*<ProfileRouter />*/}
+					{/*<Switch>*/}
+					{/*	<Route path={match.url + '/stats'} exact>*/}
+					{/*		<Stats />*/}
+					{/*	</Route>*/}
+					{/*	<Route path={match.url} exact>*/}
+					{/*		<Stats />*/}
+					{/*	</Route>*/}
+					{/*</Switch>*/}
 				</div>
 			</div>
 		</>

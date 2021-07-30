@@ -1,5 +1,5 @@
 import React from 'react';
-import communityIcon from '../../../assets/community.svg';
+import communityIcon from '../../../../../../assets/community.svg';
 import '../stats.scss';
 
 interface CommunityProps {
