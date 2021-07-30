@@ -94,7 +94,7 @@ const NextTask: React.FC = () => {
 						))}
 					</ul>
 
-					<h6 className={styles.tagTitle}>Examples:</h6>
+					<h6>Examples:</h6>
 
 					<div className={styles.codeWrapper}>
 						<code>
