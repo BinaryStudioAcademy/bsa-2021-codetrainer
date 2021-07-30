@@ -3,22 +3,4 @@
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 2vw;
 	padding: 20px;
-
-	.icon-label {
-		font-style: normal;
-		font-weight: 600;
-		font-size: 18px;
-		line-height: 22px;
-		padding-left: 10px;
-		color: #282828;
-		&.points-label {
-			padding-top: 4px;
-		}
-	}
-
-	.header {
-		padding-bottom: 20px;
-		display: flex;
-		align-items: center;
-	}
 }

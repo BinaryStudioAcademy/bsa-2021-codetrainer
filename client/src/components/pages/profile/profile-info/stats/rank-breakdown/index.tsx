@@ -2,6 +2,7 @@ import React from 'react';
 import rankBreakdownIcon from '../../../../../../assets/icons/rank-breakdown.svg';
 import './rank-breakdown.scss';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import { StatsBlock } from '../stats-block';
 
 interface RankBreakdownProps {
 	rankProgress: number;
@@ -12,13 +13,7 @@ const RankBreakdown: React.FC<RankBreakdownProps> = (props) => {
 	const { rankProgress, rank } = props;
 
 	return (
-		<div className="rank-breakdown">
-			<div className="header">
-				<img src={rankBreakdownIcon} id="rankBreakdownIcon" />
-				<label htmlFor="rankBreakdownIcon" className="icon-label">
-					Rank Breakdown
-				</label>
-			</div>
+		<StatsBlock icon={rankBreakdownIcon} title='Rank'>
 			<div style={{ width: '150px' }}>
 				<CircularProgressbarWithChildren
 					className="circular-progressbar"
@@ -35,7 +30,7 @@ const RankBreakdown: React.FC<RankBreakdownProps> = (props) => {
 				<strong>Overall: </strong>
 				<span>{rank}</span>ran/<span>{rankProgress}</span>%
 			</div>
-		</div>
+		</StatsBlock>
 	);
 };
 

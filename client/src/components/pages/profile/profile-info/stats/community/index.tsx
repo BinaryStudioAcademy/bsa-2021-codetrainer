@@ -2,6 +2,7 @@ import React from 'react';
 import communityIcon from '../../../../../../assets/icons/community.svg';
 import '../stats.scss';
 import { List } from '../../../list';
+import { StatsBlock } from '../stats-block';
 
 interface CommunityProps {
 	comments: number;
@@ -14,15 +15,9 @@ const Community: React.FC<CommunityProps> = (props) => {
 	const items = [{name: 'Comments', value: comments}, {name: 'Collections', value: collections}, {name: 'Transactions', value: transactions}]
 
 	return (
-		<div>
-			<div className="header">
-				<img src={communityIcon} id="communityIcon" />
-				<label htmlFor="communityIcon" className="icon-label">
-					Community
-				</label>
-			</div>
+		<StatsBlock icon={communityIcon} title='Community'>
 			<List items={items} />
-		</div>
+		</StatsBlock>
 	);
 };
 

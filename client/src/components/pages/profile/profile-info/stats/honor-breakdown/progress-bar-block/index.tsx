@@ -10,7 +10,7 @@ interface IProgressBarBlock {
 	left: number;
 }
 
-const Index: React.FC<IProgressBarBlock> = (props) => {
+const ProgressBarBlock: React.FC<IProgressBarBlock> = (props) => {
 	const { name, done, left } = props;
 
 	return (
@@ -28,4 +28,4 @@ const Index: React.FC<IProgressBarBlock> = (props) => {
 	);
 };
 
-export default Index;
+export default ProgressBarBlock;

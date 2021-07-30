@@ -2,6 +2,7 @@ import React from 'react';
 import pointsIcon from '../../../../../../assets/icons/points.svg';
 import '../stats.scss';
 import { List } from '../../../list';
+import { StatsBlock } from '../stats-block';
 
 interface PointsProps {
 	rank: number;
@@ -15,15 +16,9 @@ const Points: React.FC<PointsProps> = (props) => {
 
 
 	return (
-		<div>
-			<div className="header">
-				<img src={pointsIcon} id="pointsIcon" />
-				<label htmlFor="pointsIcon" className="icon-label points-label">
-					Points
-				</label>
-			</div>
+		<StatsBlock icon={pointsIcon} title='Points'>
 			<List items={items} />
-		</div>
+		</StatsBlock>
 	);
 };
 export default Points;

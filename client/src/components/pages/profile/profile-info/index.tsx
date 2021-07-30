@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfileRouter from './profile-router';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import Stats from './stats/stats';
+import Stats from './stats';
 import styles from './profile-info.module.scss';
 
 interface IProfileInfoProps {

@@ -2,7 +2,8 @@ import React from 'react';
 import honorBreakdownIcon from '../../../../../../assets/icons/honor-breakdown.svg';
 import '../stats.scss';
 import './honor-breakdown.scss';
-import Index from './progress-bar-block';
+import ProgressBarBlock from './progress-bar-block';
+import { StatsBlock } from '../stats-block';
 
 interface HonorBreakdownProps {
 	completedChallengeDone: number | null;
@@ -32,29 +33,23 @@ const HonorBreakdown: React.FC<HonorBreakdownProps> = (props) => {
 	} = props;
 
 	return (
-		<div className="honor-breakdown">
-			<div className="header">
-				<img src={honorBreakdownIcon} id="honorBreakdownIcon" />
-				<label htmlFor="honorBreakdownIcon" className="icon-label">
-					Honor Breakdown
-				</label>
-			</div>
+		<StatsBlock icon={honorBreakdownIcon} title='Honor Breakdown'>
 			<div className="progress-bars">
-				<Index
+				<ProgressBarBlock
 					name="Completed Challenge"
 					done={completedChallengeDone}
 					left={completedChallengeLeft}
 				/>
-				<Index
+				<ProgressBarBlock
 					name="Authored Challenge & Translation"
 					done={authoredChallengeDone}
 					left={authoredChallengeLeft}
 				/>
-				<Index name="Comments" done={commentsDone} left={commentsLeft} />
-				<Index name="Referrals" done={referralsDone} left={referralsLeft} />
-				<Index name="Achievements" done={achievementsDone} left={achievementsLeft} />
+				<ProgressBarBlock name="Comments" done={commentsDone} left={commentsLeft} />
+				<ProgressBarBlock name="Referrals" done={referralsDone} left={referralsLeft} />
+				<ProgressBarBlock name="Achievements" done={achievementsDone} left={achievementsLeft} />
 			</div>
-		</div>
+		</StatsBlock>
 	);
 };
 export default HonorBreakdown;

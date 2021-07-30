@@ -3,7 +3,7 @@ import Points from './points/points';
 import HonorBreakdown from './honor-breakdown';
 import Languages from './languages/languages';
 import Community from './community';
-import RankBreakdown from './rank-breakdown/rank-breakdown';
+import RankBreakdown from './rank-breakdown';
 
 interface StatsProps {}
 

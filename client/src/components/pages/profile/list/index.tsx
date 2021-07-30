@@ -5,7 +5,7 @@ interface IListProps {
 	items: Array<IItemProps>
 }
 
-interface IItemProps {
+export interface IItemProps {
 	name: string,
 	value: ReactElement | string | number | undefined;
 }
