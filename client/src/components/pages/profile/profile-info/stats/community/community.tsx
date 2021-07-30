@@ -1,5 +1,5 @@
 import React from 'react';
-import communityIcon from '../../../../../../assets/community.svg';
+import communityIcon from '../../../../../../assets/icons/community.svg';
 import '../stats.scss';
 import { List } from '../../../list';
 

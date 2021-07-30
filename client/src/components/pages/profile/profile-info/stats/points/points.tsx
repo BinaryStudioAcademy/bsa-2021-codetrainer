@@ -1,5 +1,5 @@
 import React from 'react';
-import pointsIcon from '../../../../../../assets/points.svg';
+import pointsIcon from '../../../../../../assets/icons/points.svg';
 import '../stats.scss';
 import { List } from '../../../list';
 

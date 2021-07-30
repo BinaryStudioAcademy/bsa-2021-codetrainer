@@ -1,5 +1,5 @@
 import React from 'react';
-import honorBreakdownIcon from '../../../../../../assets/honorbreakdown.svg';
+import honorBreakdownIcon from '../../../../../../assets/icons/honor-breakdown.svg';
 import '../stats.scss';
 import './honor-breakdown.scss';
 import ProgressBarBlock from './progress-bar-block';
