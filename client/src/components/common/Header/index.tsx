@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Avatar from '../Avatar/index';
-import Label from '../Label/index';
+import Avatar from '../../basic/avatar/index';
+import Label from '../../basic/label/index';
 import styles from './header.module.scss';
-import * as img from './imageHelper';
+import * as img from './image-helper';
 
 interface Prop {
 	name: string;
