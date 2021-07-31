@@ -50,19 +50,19 @@ export const CreateCode: React.FC<ITabProps> = ({ onChange, text, editable }) =>
 			name={CreateCodeData.NAME}
 			onChange={handleChange}
 			fontSize={CreateCodeData.FONT_SIZE}
-			showPrintMargin={true}
-			showGutter={true}
-			highlightActiveLine={true}
+			showPrintMargin={CreateCodeData.SHOW_PRINT_MARGIN}
+			showGutter={CreateCodeData.SHOW_GUTTER}
+			highlightActiveLine={CreateCodeData.HIGHLIGH_ACTIVE_LINE}
 			value={value}
-			wrapEnabled={true}
+			wrapEnabled={CreateCodeData.WRAP_ENABLED}
 			setOptions={{
-				highlightGutterLine: true,
-				enableBasicAutocompletion: true,
-				enableLiveAutocompletion: true,
-				enableSnippets: true,
-				showLineNumbers: true,
-				useWorker: false,
-				tabSize: 2,
+				highlightGutterLine: CreateCodeData.HIGHLIGH_GUTTER_LINE,
+				enableBasicAutocompletion: CreateCodeData.ENABLE_BASIC_AUTOCOMPLETION,
+				enableLiveAutocompletion: CreateCodeData.ENABLE_LIVE_AUTOCOMPLETION,
+				enableSnippets: CreateCodeData.ENABLE_SNIPPETS,
+				showLineNumbers: CreateCodeData.SHOW_LINE_NUMBER,
+				useWorker: CreateCodeData.USE_WORKER,
+				tabSize: CreateCodeData.TAB_SIZE,
 			}}
 		/>
 	);

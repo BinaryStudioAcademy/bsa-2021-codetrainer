@@ -17,25 +17,26 @@ export const Header: React.FC<IProps> = ({ tabs, onChange }) => {
 		onChange(index);
 		setActive(index);
 	};
+	const timestamp = Date.now();
 	return (
 		<div className={styles.tabs}>
 			{tabs.map(({ header }, i) => (
 				<span
 					key={i + 1}
 					onClick={() => handleChange(i)}
-					className={`${styles['tab']} ${i === active && tabs.length !== 1 ? styles['tab__active'] : ''}`}
+					className={`${styles.tab} ${i === active && tabs.length !== 1 ? styles.tab__active : ''}`}
 				>
 					<span>{header.title}</span>
 					{header.icon ? (
 						<>
 							<Icon
 								icon={header.icon.name}
-								data-for={`id-for-tooltip-${i}`}
+								data-for={`id-for-tooltip-${i}-${timestamp}`}
 								className={styles.icon}
 								color={header.icon.color || IconTaskPageTab.COLOR}
 								data-tip
 							/>
-							<ReactTooltip id={`id-for-tooltip-${i}`}>{header.toolTipTitle}</ReactTooltip>
+							<ReactTooltip id={`id-for-tooltip-${i}-${timestamp}`}>{header.toolTipTitle}</ReactTooltip>
 						</>
 					) : null}
 				</span>
