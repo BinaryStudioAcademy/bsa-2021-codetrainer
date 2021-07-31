@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Example from 'containers/Example';
-import PublicRoute from 'components/PublicRoute';
+import Example from 'containers/example';
+import { PublicRoute } from 'components';
 
-interface Props {}
+interface IRoutingProps {}
 
-const Routing: React.FC<Props> = () => (
+const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
 		<PublicRoute exact restricted={false} path="/" component={Example} />
 	</Switch>

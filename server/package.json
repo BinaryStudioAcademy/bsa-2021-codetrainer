@@ -10,7 +10,9 @@
 		"typeorm:dropDB": "npm run typeorm schema:drop",
 		"lint": "eslint . --ext .ts",
 		"prepare": "cd .. && husky install server/.husky",
-		"lint-fix": "eslint src/ --ext .tsx,.ts --fix && prettier src/ --write"
+		"lint-fix": "eslint src/ --ext .tsx,.ts --fix && prettier src/ --write",
+		"build": "tsc",
+		"start:prod": "cd dist && node index.js"
 	},
 	"keywords": [],
 	"author": "",

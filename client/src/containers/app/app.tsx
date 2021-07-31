@@ -3,8 +3,7 @@ import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import history from 'helpers/history.helper';
 import store from 'redux/store';
-import Routing from 'containers/Routing';
-import '../../styles/index.scss';
+import Routing from 'containers/routing';
 
 const App: React.FC = () => {
 	return (

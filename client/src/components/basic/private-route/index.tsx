@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
 
-interface Props extends RouteProps {
+interface IPrivateRouteProps extends RouteProps {
 	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
 }
 
-const PrivateRoute = (props: Props) => {
+const PrivateRoute = (props: IPrivateRouteProps) => {
 	const { component: Component, ...rest } = props;
 	const isAuthorized = false;
 
