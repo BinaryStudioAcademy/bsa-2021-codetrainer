@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import styles from './select.module.scss';
-import Option from 'components/common/option';
+import { Option } from '..';
 
 import { ISelectProps, ISelectValue } from './interface';
 
