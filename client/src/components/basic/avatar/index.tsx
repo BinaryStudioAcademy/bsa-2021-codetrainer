@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './avatar.module.scss';
+import defaultAvatar from 'assets/images/header/default-avatar.png';
 
 interface IAvatarProps {
-	avatar: string;
-	size: number;
-	color: string;
+	avatar?: string;
+	size?: number;
+	color?: string;
 }
 
 const Avatar: React.FC<IAvatarProps> = (props) => {
@@ -16,7 +17,7 @@ const Avatar: React.FC<IAvatarProps> = (props) => {
 
 	return (
 		<div className={styles.avatar} style={changebleStyle}>
-			<img src={props.avatar} alt="userAvatar" />
+			<img src={props.avatar || defaultAvatar} alt="userAvatar" />
 		</div>
 	);
 };
