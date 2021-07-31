@@ -8,11 +8,11 @@ const ProfileRouter: React.FC = () => {
 
 	return (
 		<Menu className={styles.navmenu}>
-			<MenuItem href={match.url + '/stats'} className={`${styles.navmenuItem} ${styles.active}`} text="Index" />
-			<MenuItem href={match.url + '/stats'} className={styles.navmenuItem} text="Challenge" />
-			<MenuItem href={match.url + '/stats'} className={styles.navmenuItem} text="Solution" />
-			<MenuItem href={match.url + '/stats'} className={styles.navmenuItem} text="Social" />
-			<MenuItem href={match.url + '/stats'} className={styles.navmenuItem} text="Collections" />
+			<MenuItem href={match.url + '/stats'} className={`${styles.navmenuItem} ${styles.active}`} text="Stats" />
+			<MenuItem href={match.url + '/challenge'} className={styles.navmenuItem} text="Challenge" />
+			<MenuItem href={match.url + '/solution'} className={styles.navmenuItem} text="Solution" />
+			<MenuItem href={match.url + '/social'} className={styles.navmenuItem} text="Social" />
+			<MenuItem href={match.url + '/collections'} className={styles.navmenuItem} text="Collections" />
 		</Menu>
 	);
 };
