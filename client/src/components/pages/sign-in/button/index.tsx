@@ -1,3 +1,5 @@
+// TODO: remove it and use common Button component
+
 import React, { ButtonHTMLAttributes, FC } from 'react';
 import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './button.module.scss';

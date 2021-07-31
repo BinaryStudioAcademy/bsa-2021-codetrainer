@@ -1,3 +1,5 @@
+// TODO: remove it and use common PasswordField component
+
 import React, { useCallback, useState, FC } from 'react';
 import { FieldAttributes } from 'formik';
 import { combineClasses } from 'helpers/combineClasses.helper';

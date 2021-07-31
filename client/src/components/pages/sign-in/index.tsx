@@ -1,7 +1,11 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import { CoverLayout, PasswordField, FormField, Separator, Button, ButtonClasses } from 'components/pages/sign';
+import CoverLayout from './cover-layout';
+import PasswordField from './password-field';
+import FormField from './form-field';
+import Separator from './separator';
+import Button, { ButtonClasses } from './button';
 import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './sign-in.module.scss';
 
@@ -19,7 +23,7 @@ function validatePassword(password: string): string | undefined {
 	}
 }
 
-const SignIn: React.FC = () => {
+const SignInPage: React.FC = () => {
 	return (
 		<CoverLayout className={styles.signIn}>
 			<Formik
@@ -71,4 +75,4 @@ const SignIn: React.FC = () => {
 	);
 };
 
-export default SignIn;
+export default SignInPage;

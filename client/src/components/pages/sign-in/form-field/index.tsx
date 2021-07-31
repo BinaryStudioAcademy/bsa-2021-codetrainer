@@ -1,3 +1,5 @@
+// TODO: remove it and use common FormField component
+
 import React, { FC } from 'react';
 import { Field, FieldAttributes } from 'formik';
 import { combineClasses } from 'helpers/combineClasses.helper';
