@@ -12,6 +12,7 @@ const {
 	SYNCHRONIZE: synchronize,
 	LOGGING: logging,
 	MIGRATIONS: migrations,
+	SSL: ssl,
 } = ENV.DB;
 
 export const dbConfig = {
@@ -25,4 +26,5 @@ export const dbConfig = {
 	logging: logging === 'true',
 	migrations: [migrations],
 	entities: [User],
+	ssl: ssl === 'true' ? { rejectUnauthorized: false } : false,
 } as ConnectionOptions;
