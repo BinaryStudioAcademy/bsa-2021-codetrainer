@@ -11,8 +11,11 @@ const InfoPopover: FC<PropsWithChildren<any>> = ({ children }) => (
 		minimal={false}
 		interactionKind="hover"
 		popoverClassName={styles.infoPopover}
-		placement="auto"
+		placement="bottom"
 		content={children}
+		modifiers={{
+			arrow: { enabled: false },
+		}}
 	>
 		<img className={styles.icon} src={infoIcon} width={15} height={15} alt="info" />
 	</Popover2>

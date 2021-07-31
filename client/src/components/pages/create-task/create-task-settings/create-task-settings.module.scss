@@ -1,4 +1,4 @@
-:local(.createTaskSettings) {
+.createTaskSettings {
 	padding: 20px;
 	font-weight: 600;
 	font-size: 18px;
@@ -28,10 +28,6 @@
 			border-radius: 7px;
 			padding: 10px;
 			height: auto;
-		}
-		.infoPopover {
-			margin-left: 20px;
-			vertical-align: middle;
 		}
 	}
 }
