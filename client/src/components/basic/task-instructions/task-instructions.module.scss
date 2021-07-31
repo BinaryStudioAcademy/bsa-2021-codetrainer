@@ -1,0 +1,39 @@
+a {
+	cursor: pointer;
+}
+
+:local(.taskContainer) {
+	padding: 40px;
+}
+
+:local(.task) {
+	border-radius: 15px;
+	background: #fafbff;
+	padding: 30px 20px;
+}
+
+:local(.divider) {
+	margin: 25px -20px;
+	border: 1px solid #eaecf1;
+}
+
+:local(.switch) {
+	display: flex;
+}
+
+:local(.switch a) {
+	display: flex;
+	margin: 0 20px 0 0;
+	font-weight: 600;
+	padding: 3px;
+}
+
+:local(.switch .active) {
+	color: #705ff5;
+	border-bottom: #705ff5 2px solid;
+}
+
+:local(.infoContainer) {
+	display: flex;
+	margin-top: 10px;
+}
