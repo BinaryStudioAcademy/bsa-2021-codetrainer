@@ -1,0 +1,25 @@
+.rankBreakdown {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	.circularProgressbar {
+		font-size: 14px;
+	}
+	.progressCircleInfo {
+		position: absolute;
+		top: 90px;
+		font-size: 16px;
+		right: 135px;
+	}
+	.nextRankLabel {
+		padding-bottom: 50px;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16px;
+	}
+	.overallLabel {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+	}
+}
