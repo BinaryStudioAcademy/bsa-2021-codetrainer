@@ -1,2 +1,1 @@
-import CreateTask from './CreateTask';
-export { CreateTask };
+export { default as CreateTaskPage } from './create-task';
