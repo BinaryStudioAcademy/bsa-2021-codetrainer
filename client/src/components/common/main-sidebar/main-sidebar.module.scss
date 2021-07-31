@@ -1,4 +1,4 @@
-.main-sidebar {
+.mainSidebar {
 	padding: 38px 40px;
 	background: #705ff5;
 	width: 245px;
@@ -7,7 +7,7 @@
 }
 
 .logotype {
-	&__image {
+	&Image {
 		height: 100%;
 		width: 100%;
 		object-fit: cover;
@@ -19,20 +19,20 @@
 	display: flex;
 	flex-direction: column;
 
-	&__list {
+	&List {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 	}
 
-	&__icon {
+	&Icon {
 		transition: 0.3s;
 		vertical-align: middle;
 		font-size: 28px;
 		margin-right: 12px;
 	}
 
-	&__link {
+	&Link {
 		line-height: 30px;
 		color: #fff;
 		border-radius: 12px;
@@ -42,12 +42,12 @@
 		position: relative;
 		text-decoration: none;
 
-		&--active {
+		&Active {
 			background: rgba(255, 255, 255, 0.3);
 		}
 
 		&:hover {
-			.navigation__icon {
+			.navigationIcon {
 				transform: scale(1.1);
 			}
 		}

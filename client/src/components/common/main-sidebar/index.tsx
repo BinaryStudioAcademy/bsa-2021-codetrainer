@@ -7,33 +7,33 @@ import styles from './main-sidebar.module.scss';
 
 const MainSidebar: React.FC = () => {
 	return (
-		<aside className={styles['main-sidebar']}>
+		<aside className={styles.mainSidebar}>
 			<div className={styles.logotype}>
-				<img src={logo} alt="" className={styles.logotype__image} />
+				<img src={logo} alt="" className={styles.logotypeImage} />
 			</div>
 			<nav className={styles.navigation}>
-				<ul className={styles.navigation__list}>
-					<li className={styles.navigation__item}>
-						<NavLink to="/" className={styles.navigation__link}>
-							<FontAwesomeIcon icon={faHome} className={styles.navigation__icon} />
+				<ul className={styles.navigationList}>
+					<li className={styles.navigationItem}>
+						<NavLink to="/" className={styles.navigationLink}>
+							<FontAwesomeIcon icon={faHome} className={styles.navigationIcon} />
 							Home
 						</NavLink>
 					</li>
-					<li className={styles.navigation__item}>
-						<NavLink to="/" className={styles.navigation__link}>
-							<FontAwesomeIcon icon={faSearch} className={styles.navigation__icon} />
+					<li className={styles.navigationItem}>
+						<NavLink to="/" className={styles.navigationLink}>
+							<FontAwesomeIcon icon={faSearch} className={styles.navigationIcon} />
 							Search
 						</NavLink>
 					</li>
-					<li className={styles.navigation__item}>
-						<NavLink to="/" className={styles.navigation__link}>
-							<FontAwesomeIcon icon={faExchangeAlt} className={styles.navigation__icon} />
+					<li className={styles.navigationItem}>
+						<NavLink to="/" className={styles.navigationLink}>
+							<FontAwesomeIcon icon={faExchangeAlt} className={styles.navigationIcon} />
 							Challenge
 						</NavLink>
 					</li>
-					<li className={styles.navigation__item}>
-						<NavLink to="/" className={styles.navigation__link}>
-							<FontAwesomeIcon icon={faStar} className={styles.navigation__icon} />
+					<li className={styles.navigationItem}>
+						<NavLink to="/" className={styles.navigationLink}>
+							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
 							Blog
 						</NavLink>
 					</li>
