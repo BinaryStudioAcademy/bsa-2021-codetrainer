@@ -1,6 +1,6 @@
 import React from 'react';
-import languagesIcon from '../../../../../../assets/icons/languages.svg';
-import { List } from '../../../list';
+import languagesIcon from '../../../../../../../assets/icons/languages.svg';
+import { List } from '../../../../../../basic/list';
 import { StatsBlock } from '../stats-block';
 
 interface ILanguagesProps {

@@ -1,12 +1,12 @@
 import React from 'react';
-import communityIcon from '../../../../../../assets/icons/community.svg';
-import { List } from '../../../list';
+import communityIcon from '../../../../../../../assets/icons/community.svg';
+import { List } from '../../../../../../basic/list';
 import { StatsBlock } from '../stats-block';
 
 interface ICommunityProps {
-	comments: number;
-	collections: number;
-	transactions: number;
+	comments: number | string;
+	collections: number | string;
+	transactions: number | string;
 }
 
 const Community: React.FC<ICommunityProps> = (props) => {

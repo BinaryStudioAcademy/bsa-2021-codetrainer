@@ -1,16 +1,16 @@
 import React from 'react';
 import { H5 } from '@blueprintjs/core';
 import styles from './profile-bio.module.scss';
-import { List } from '../list';
+import { List } from '../../../basic';
 
-interface IProfileBioProps {
+export interface IProfileBioProps {
 	img: string;
 	name: string;
 	nickname: string;
-	clan: string | undefined;
+	clan?: string;
 	memberSince: string;
 	lastSeen: string;
-	gitHub: string | undefined;
+	gitHub?: string;
 	following: number;
 	followers: number;
 	community: number;
