@@ -21,58 +21,6 @@
 			display: flex;
 			justify-content: flex-start;
 			gap: 20px;
-			.radioItem {
-				cursor: pointer;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				padding-left: 20px;
-				svg {
-					g {
-						path {
-							fill: #282828;
-						}
-					}
-					path {
-						fill: #282828;
-					}
-				}
-				input {
-					position: absolute;
-					width: 65px;
-					height: 65px;
-				}
-				&:hover {
-					svg {
-						g {
-							path {
-								fill: #705ff5;
-							}
-						}
-						path {
-							fill: #705ff5;
-						}
-					}
-					label {
-						color: #705ff5;
-					}
-				}
-			}
-			.radioItem.active {
-				svg {
-					g {
-						path {
-							fill: #705ff5;
-						}
-					}
-					path {
-						fill: #705ff5;
-					}
-				}
-				label {
-					color: #705ff5;
-				}
-			}
 		}
 		input {
 			width: 100%;
