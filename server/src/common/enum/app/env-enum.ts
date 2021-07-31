@@ -5,7 +5,7 @@ config();
 const ConfigVariables = process.env;
 
 const {
-	APP_PORT,
+	PORT,
 	SECRET_KEY,
 	TYPEORM_CONNECTION,
 	TYPEORM_HOST,
@@ -16,11 +16,12 @@ const {
 	TYPEORM_SYNCHRONIZE,
 	TYPEORM_LOGGING,
 	TYPEORM_MIGRATIONS,
+	TYPEORM_SSL,
 } = ConfigVariables;
 
 const ENV = {
 	APP: {
-		PORT: APP_PORT,
+		PORT,
 		API_PATH: '/api',
 	},
 	JWT: {
@@ -37,6 +38,7 @@ const ENV = {
 		SYNCHRONIZE: TYPEORM_SYNCHRONIZE,
 		LOGGING: TYPEORM_LOGGING,
 		MIGRATIONS: TYPEORM_MIGRATIONS,
+		SSL: TYPEORM_SSL,
 	},
 };
 
