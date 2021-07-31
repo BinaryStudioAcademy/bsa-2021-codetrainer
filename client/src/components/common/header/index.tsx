@@ -1,78 +1,51 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Avatar from '../../basic/avatar/index';
-import Label from '../../basic/label/index';
+import { Avatar, Label } from 'components' ; 
 import styles from './header.module.scss';
-import * as img from './image-helper';
+import bellImg from 'assets/icons/header/bell.svg';
 
-interface Prop {
+
+interface IHeaderProps {
 	name: string;
 	rank: number;
 	notificationCounter: number;
 	mark: number;
 	avatar: string;
+	listItems: Array<IListItem>;
 }
-interface listItem {
+
+interface IListItem {
 	image: string;
 	text: string;
-	link: string;
 	id: string;
 }
 
-const listItems = [
-	{
-		id: '1',
-		image: img.menuProfile,
-		text: 'View Profile',
-		link: '/',
-	},
-	{
-		id: '2',
-		image: img.menuSettings,
-		text: 'Account Settings',
-		link: '/',
-	},
-	{
-		id: '3',
-		image: img.menuChallenge,
-		text: 'New Challenge',
-		link: '/',
-	},
-	{
-		id: '4',
-		image: img.menuSignout,
-		text: 'Sign out',
-		link: '/',
-	},
-];
-
-const Header: React.FC<Prop> = (props) => {
+const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
 
 	const changeVisible = () => {
 		setListVisibility(!isListVisible);
 	};
 
-	const getListItem = (item: listItem) => {
+	const getListItem = (item: IListItem) => {
 		return (
-			<li className={styles.navigation__item} key={item.id}>
-				<NavLink to={item.link} className={styles.navigation__link}>
+			<li className={styles.navigationItem} key={item.id}>
+				<div className={styles.navigationLink}>
 					<img src={item.image} alt="listItem" />
 					<span>{item.text}</span>
-				</NavLink>
+				</div>
 			</li>
 		);
 	};
 
-	const renderList = (items: listItem[]) => {
-		return <ul className={styles.navigation__list}>{items.map((item: listItem) => getListItem(item))}</ul>;
+	const renderList = (items: IListItem[]) => {
+		return <ul className={styles.navigationList}>{items.map((item: IListItem) => getListItem(item))}</ul>;
 	};
 
 	return (
 		<div className={styles.header}>
 			<div className={styles.bell}>
-				<img src={img.bell} alt="bell" />
-				<div className={styles.bell__counter}>
+				<img src={bellImg} alt="bell" />
+				<div className={styles.bellCounter}>
 					<span>{props.notificationCounter}</span>
 				</div>
 			</div>
@@ -82,7 +55,7 @@ const Header: React.FC<Prop> = (props) => {
 					<Avatar avatar={props.avatar} size={61} color="#EC4179" />
 				</div>
 
-				{isListVisible && <div className={styles.navigation}>{renderList(listItems)}</div>}
+				{isListVisible && <div className={styles.navigation}>{renderList(props.listItems)}</div>}
 			</div>
 			<Label label={props.rank + ' rank'} color="#EC4179" />
 			<Label label={props.mark} color="#EC4179" />

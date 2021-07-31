@@ -5,18 +5,17 @@
 	left: 0;
 	background: #f0f3f9;
 	height: 91px;
-	padding-right: 42px;
 	margin: 0;
-	display: flex;
+	display: grid;
+	grid-auto-flow: column;
+	grid-gap: 10px;
 	align-items: center;
+	justify-items: center;
 	justify-content: flex-end;
+	padding-right: 42px;
 
-	> * {
-		margin-left: 10px;
-	}
-
-	.name {
-		margin-left: 20px;
+	.bell {
+		margin-right: 20px;
 	}
 }
 
@@ -37,7 +36,7 @@
 	height: 28px;
 	cursor: pointer;
 
-	&__counter {
+	&Counter {
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -76,7 +75,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 
-		&__list {
+		&List {
 			list-style: none;
 			display: grid;
 			height: 214px;
@@ -85,7 +84,7 @@
 			padding: 0;
 		}
 
-		&__item {
+		&Item {
 			padding: 0 19px;
 			cursor: pointer;
 			display: flex;
@@ -94,7 +93,6 @@
 
 			&:hover {
 				position: relative;
-				height: 60px;
 
 				:before {
 					content: '';
@@ -116,13 +114,13 @@
 					border-bottom: 1px solid #e5e5e5;
 				}
 
-				.navigation__link span {
+				.navigationLink span {
 					color: #705ff5;
 				}
 			}
 		}
 
-		&__link {
+		&Link {
 			text-decoration: none;
 			font-family: Montserrat;
 			font-style: normal;
