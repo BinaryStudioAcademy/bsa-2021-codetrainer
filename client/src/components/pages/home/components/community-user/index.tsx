@@ -5,15 +5,15 @@ import styles from './community-user.module.scss';
 
 import defaultUserPhoto from './assets/user.svg';
 
-import Rank from '../../../../common/rank';
+import { Rank } from 'components/basic';
 
-interface Props {
+interface ICommunityUserProps {
 	rank: number;
 	imageSource: string;
 	name: string;
 }
 
-const CommunityUser: React.FC<Props> = ({ imageSource, name, rank }) => {
+const CommunityUser: React.FC<ICommunityUserProps> = ({ imageSource, name, rank }) => {
 	return (
 		<div className={styles.userRow}>
 			<Rank rank={rank} classList={styles.rank} />

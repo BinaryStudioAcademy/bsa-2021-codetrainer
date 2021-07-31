@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import styles from './option.module.scss';
 
-import { IOption } from './interface';
+import { IOptionProps } from './interface';
 
-const Option: React.FC<IOption> = ({ value, isActive, onChange }) => {
+const Option: React.FC<IOptionProps> = ({ value, isActive, onChange }) => {
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	return (

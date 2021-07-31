@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './button.module.scss';
 
-import { IButton } from './interface';
+import { IButtonProps } from './interface';
 
-const Button: React.FC<IButton> = ({ text, classList = '', taskButton = false, onClick = () => null }) => {
+const Button: React.FC<IButtonProps> = ({ text, classList = '', taskButton = false, onClick = () => null }) => {
 	return (
 		<button
 			type="button"

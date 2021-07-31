@@ -1,4 +1,4 @@
-export interface IButton {
+export interface IButtonProps {
 	text: string;
 	taskButton?: boolean;
 	classList?: string;

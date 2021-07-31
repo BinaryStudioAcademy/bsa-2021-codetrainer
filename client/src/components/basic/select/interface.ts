@@ -3,7 +3,7 @@ export interface ISelectValue {
 	icon: string;
 }
 
-export interface ISelect {
+export interface ISelectProps {
 	values: ISelectValue[];
 	activeValue: ISelectValue;
 	onChange: React.Dispatch<React.SetStateAction<ISelectValue>>;

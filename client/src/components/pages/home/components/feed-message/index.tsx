@@ -5,7 +5,7 @@ import styles from './feed-message.module.scss';
 
 import defaultUserIcon from './assets/user.svg';
 
-interface Props {
+interface IFeedMessageProps {
 	userImageSource: string;
 	userName: string;
 	clan: string;
@@ -13,7 +13,7 @@ interface Props {
 	text: string;
 }
 
-const FeedMessage: React.FC<Props> = ({ userImageSource, userName, clan, date, text }) => {
+const FeedMessage: React.FC<IFeedMessageProps> = ({ userImageSource, userName, clan, date, text }) => {
 	return (
 		<div className={styles.messageUser}>
 			<img className={styles.messageUserImage} src={userImageSource || defaultUserIcon} alt="user" />

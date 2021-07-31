@@ -4,9 +4,9 @@ import { Card, Text } from '@blueprintjs/core';
 import CommunityUser from '../community-user';
 
 import styles from './community.module.scss';
-import Button from '../../../../common/button/index';
+import { Button } from 'components/basic';
 
-interface User {
+interface IUser {
 	id: string;
 	rank: number;
 	imageSource: string;
@@ -15,11 +15,11 @@ interface User {
 	honor: number;
 }
 
-interface Props {
-	users: User[];
+interface ICommunityProps {
+	users: IUser[];
 }
 
-const Community: React.FC<Props> = ({ users }) => {
+const Community: React.FC<ICommunityProps> = ({ users }) => {
 	return (
 		<div className={styles.community}>
 			<Card>

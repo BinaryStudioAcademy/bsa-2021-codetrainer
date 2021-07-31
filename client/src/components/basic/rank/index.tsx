@@ -3,12 +3,12 @@ import { Tag } from '@blueprintjs/core';
 
 import styles from './rank.module.scss';
 
-interface Props {
+interface IRankProps {
 	rank: number;
 	classList?: string;
 }
 
-const Rank: React.FC<Props> = ({ rank, classList = '' }) => {
+const Rank: React.FC<IRankProps> = ({ rank, classList = '' }) => {
 	const colorList = ['blue', 'yellow', 'red'];
 	const color = colorList[Math.floor((rank - 1) / 3)];
 

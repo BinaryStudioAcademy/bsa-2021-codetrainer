@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import styles from './select.module.scss';
 import Option from 'components/common/option';
 
-import { ISelect, ISelectValue } from './interface';
+import { ISelectProps, ISelectValue } from './interface';
 
-const Select: React.FC<ISelect> = ({ values, activeValue, onChangse }) => {
+const Select: React.FC<ISelectProps> = ({ values, activeValue, onChange }) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
 
 	const handleChange = (value: ISelectValue) => {

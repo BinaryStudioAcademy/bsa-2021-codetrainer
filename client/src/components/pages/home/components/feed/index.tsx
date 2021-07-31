@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, Text } from '@blueprintjs/core';
-import FeedMessage from '../feed-message';
 
 import styles from './feed.module.scss';
-import Button from '../../../../common/button';
 
-interface Message {
+import FeedMessage from '../feed-message';
+import { Button } from 'components/basic';
+
+interface IMessage {
 	id: string;
 	userImageSource: string;
 	userName: string;
@@ -14,11 +15,11 @@ interface Message {
 	text: string;
 }
 
-interface Props {
-	messages: Message[];
+interface IFeedProps {
+	messages: IMessage[];
 }
 
-const Feed: React.FC<Props> = ({ messages }) => {
+const Feed: React.FC<IFeedProps> = ({ messages }) => {
 	return (
 		<Card className={styles.feed}>
 			<div>
