@@ -15,22 +15,24 @@ const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 
 	return (
 		<StatsBlock icon={rankBreakdownIcon} title="Rank Breakdown" elementClass={styles.rankBreakdown}>
-			<div style={{ width: '150px' }}>
-				<CircularProgressbarWithChildren
-					className={styles.circularProgressbar}
-					value={rankProgress}
-					strokeWidth={5}
-					styles={buildStyles(circularProgressBarStyles)}
-				>
-					<span className={styles.nextRankLabel}>Next Rank</span>
-				</CircularProgressbarWithChildren>
-			</div>
-			<div className={styles.progressCircleInfo}>
-				<span className={styles.overallLabel}>Overall: </span>
-				<span>
-					{rank} rank/ {rankProgress}
-				</span>
-				%
+			<div className={styles.rankBreakdownBody}>
+				<div style={{ width: '150px' }}>
+					<CircularProgressbarWithChildren
+						className={styles.circularProgressbar}
+						value={rankProgress}
+						strokeWidth={5}
+						styles={buildStyles(circularProgressBarStyles)}
+					>
+						<span className={styles.nextRankLabel}>Next Rank</span>
+					</CircularProgressbarWithChildren>
+				</div>
+				<div className={styles.progressCircleInfo}>
+					<span className={styles.overallLabel}>Overall: </span>
+					<span>
+						{rank} rank/ {rankProgress}
+					</span>
+					%
+				</div>
 			</div>
 		</StatsBlock>
 	);
