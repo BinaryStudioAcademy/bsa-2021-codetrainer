@@ -10,7 +10,7 @@ const mockProfileBioProps = {
 	clan: 'clan',
 	memberSince: '14 jul',
 	lastSeen: '13 sep',
-	gitHub: 'github link',
+	gitHubUrl: 'github link',
 	followingQuantity: 0,
 	followersQuantity: 0,
 	communityQuantity: 3,
