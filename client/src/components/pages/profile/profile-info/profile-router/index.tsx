@@ -18,7 +18,7 @@ const ProfileRouter: React.FC = () => {
 				className={activeTab === 'stats' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`}
 				text="Stats"
 				onClick={(e) => {
-					window.history.replaceState({}, document.title, match.url + '/social');
+					window.history.replaceState({}, document.title, match.url + '/stats');
 					setTabToActive('stats');
 				}}
 			/>
@@ -28,7 +28,7 @@ const ProfileRouter: React.FC = () => {
 				}
 				text="Challenge"
 				onClick={(e) => {
-					window.history.replaceState({}, document.title, match.url + '/social');
+					window.history.replaceState({}, document.title, match.url + '/challenge');
 					setTabToActive('challenge');
 				}}
 			/>
@@ -38,7 +38,7 @@ const ProfileRouter: React.FC = () => {
 				}
 				text="Solution"
 				onClick={(e) => {
-					window.history.replaceState({}, document.title, match.url + '/social');
+					window.history.replaceState({}, document.title, match.url + '/solution');
 					setTabToActive('solution');
 				}}
 			/>
@@ -51,13 +51,12 @@ const ProfileRouter: React.FC = () => {
 				}}
 			/>
 			<MenuItem
-				href={match.url + '/collections'}
 				className={
 					activeTab === 'collections' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`
 				}
 				text="Collections"
 				onClick={(e) => {
-					e.preventDefault();
+					window.history.replaceState({}, document.title, match.url + '/collections');
 					setTabToActive('collections');
 				}}
 			/>

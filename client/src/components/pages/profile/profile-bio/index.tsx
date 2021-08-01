@@ -11,16 +11,27 @@ export interface IProfileBioProps {
 	memberSince: string;
 	lastSeen: string;
 	gitHub?: string;
-	following: number;
-	followers: number;
-	community: number;
+	followingQuantity: number;
+	followersQuantity: number;
+	communityQuantity: number;
 }
 
 export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
-	const { img, name, nickname, clan, memberSince, lastSeen, gitHub, following, followers, community } = props;
+	const {
+		img,
+		name,
+		nickname,
+		clan,
+		memberSince,
+		lastSeen,
+		gitHub,
+		followingQuantity,
+		followersQuantity,
+		communityQuantity,
+	} = props;
 
 	const gitHubLink = gitHub ? (
-		<a href="#" className={styles.link}>
+		<a href={'https://github.com/' + name} className={styles.link}>
 			{gitHub}
 		</a>
 	) : (
@@ -37,9 +48,9 @@ export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
 		{ name: 'Profile GitHub', value: gitHubLink },
 	];
 	const listItems3 = [
-		{ name: 'Following', value: following },
-		{ name: 'Followers', value: followers },
-		{ name: 'Community', value: community },
+		{ name: 'Following', value: followingQuantity },
+		{ name: 'Followers', value: followersQuantity },
+		{ name: 'Community', value: communityQuantity },
 	];
 
 	return (

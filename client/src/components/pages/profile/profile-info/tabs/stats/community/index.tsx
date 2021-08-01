@@ -3,10 +3,12 @@ import communityIcon from '../../../../../../../assets/icons/community.svg';
 import { List } from '../../../../../../basic';
 import { StatsBlock } from '../stats-block';
 
+type NumberOrString = number | string;
+
 interface ICommunityProps {
-	comments: number | string;
-	collections: number | string;
-	transactions: number | string;
+	comments: NumberOrString;
+	collections: NumberOrString;
+	transactions: NumberOrString;
 }
 
 const Community: React.FC<ICommunityProps> = (props) => {

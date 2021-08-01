@@ -38,7 +38,7 @@ const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 export default RankBreakdown;
 
 const circularProgressBarStyles = {
-	strokeLinecap: 'butt',
+	strokeLinecap: 'round',
 	textSize: '14px',
 	pathColor: `#ec4179`,
 	trailColor: '#F0F3F9',
