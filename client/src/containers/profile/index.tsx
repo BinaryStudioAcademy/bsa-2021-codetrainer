@@ -10,5 +10,3 @@ export const Profile: React.FC = () => {
 	const tabContent = activeTab === 'stats' ? <Stats {...statsProps} /> : null;
 	return <ProfilePage userInfo={mockProfileBioProps} activeTab={activeTab} tabContent={tabContent} />;
 };
-
-export {};
