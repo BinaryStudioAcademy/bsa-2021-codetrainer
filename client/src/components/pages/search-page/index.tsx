@@ -1,5 +1,5 @@
 import React from 'react';
-import Challenge from 'components/common/challenge';
+import { Challenge } from 'components';
 import SearchTask from './search-task';
 import styles from './search-page.module.scss';
 

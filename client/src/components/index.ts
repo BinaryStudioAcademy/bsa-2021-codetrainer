@@ -1,3 +1,5 @@
-export { PrivateRoute, PublicRoute } from './basic';
+export { PrivateRoute, PublicRoute, RankTag } from './basic';
 
-export { Example } from './common';
+export { SearchPage } from './pages';
+
+export { Example, FormInput, FormSelect, Challenge } from './common';

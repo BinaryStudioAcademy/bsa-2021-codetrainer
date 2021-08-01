@@ -1,9 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import FormInput from 'components/common/form-input';
-import FormSelect from 'components/common/form-select';
+import { FormInput, FormSelect, RankTag } from 'components';
 import styles from './search-task.module.scss';
-import RankTag from 'components/basic/rank-tag';
 
 const sortByOptions = [
 	{

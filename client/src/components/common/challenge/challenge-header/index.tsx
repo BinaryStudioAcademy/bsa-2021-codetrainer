@@ -1,5 +1,5 @@
 import React from 'react';
-import RankTag from '../../../basic/rank-tag';
+import { RankTag } from 'components';
 import { IChallengeHeaderProps } from '../types';
 import styles from './challenge-header.module.scss';
 
