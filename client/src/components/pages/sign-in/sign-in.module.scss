@@ -53,15 +53,19 @@ a {
 		.light {
 			color: #E5E5E5;
 		}
-		.error,
+		.errorLabel,
 		.right {
 			text-align: right;
 		}
-		.error {
+		.errorLabel {
 			margin-top: 5px;
 			height: 16px;
 			font-size: 16px;
-			color: #EC4179;
+			color: #ec4179;
+		}
+		.error {
+			color: #ec4179;
+			border-color: #ec4179;
 		}
 		.labelWrapper {
 			margin-bottom: 5px;

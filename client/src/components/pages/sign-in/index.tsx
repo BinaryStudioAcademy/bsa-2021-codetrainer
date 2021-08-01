@@ -2,26 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import clsx from 'clsx';
+import { SIGN_IN_SCHEMA } from './config';
 import CoverLayout from './cover-layout';
 import PasswordField from './password-field';
 import FormField from './form-field';
 import Separator from './separator';
 import Button, { ButtonClasses } from './button';
 import styles from './sign-in.module.scss';
-
-function validateEmail(email: string): string | undefined {
-	if (!email) {
-		return 'Enter email';
-	} else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(email)) {
-		return 'Invalid email';
-	}
-}
-
-function validatePassword(password: string): string | undefined {
-	if (!password) {
-		return 'Enter password';
-	}
-}
 
 const SignInPage: React.FC = () => {
 	return (
@@ -31,6 +18,7 @@ const SignInPage: React.FC = () => {
 					email: '',
 					password: '',
 				}}
+				validationSchema={SIGN_IN_SCHEMA}
 				onSubmit={(e) => console.info(e)}
 			>
 				{({ errors, touched, isValidating }) => (
@@ -44,8 +32,13 @@ const SignInPage: React.FC = () => {
 							<div className={styles.labelWrapper}>
 								<label htmlFor="email">Email</label>
 							</div>
-							<FormField id="email" name="email" placeholder="Email" validate={validateEmail} />
-							<div className={styles.error}>{touched.email && errors.email}</div>
+							<FormField
+								id="email"
+								name="email"
+								placeholder="Email"
+								className={clsx({ [styles.error]: errors.email })}
+							/>
+							<div className={styles.errorLabel}>{touched.email && errors.email}</div>
 						</div>
 						<div>
 							<div className={styles.labelWrapper}>
@@ -58,9 +51,9 @@ const SignInPage: React.FC = () => {
 								id="password"
 								name="password"
 								placeholder="Password"
-								validate={validatePassword}
+								className={clsx({ [styles.error]: errors.password })}
 							/>
-							<div className={styles.error}>{touched.password && errors.password}</div>
+							<div className={styles.errorLabel}>{touched.password && errors.password}</div>
 						</div>
 						<Button type="submit" className={clsx(ButtonClasses.red, ButtonClasses.filled)}>
 							Sign in
