@@ -1,6 +1,6 @@
 import React from 'react';
 import honorBreakdownIcon from 'assets/icons/honor-breakdown.svg';
-import ProgressBarBlock from './progress-bar-block';
+import ProgressBarBlock from '../../../../../../basic/progress-bar-block';
 import { StatsBlock } from '../stats-block';
 import styles from './honor-breakdown.module.scss';
 
