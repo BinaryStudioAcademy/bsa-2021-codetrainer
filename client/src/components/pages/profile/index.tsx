@@ -2,8 +2,13 @@ import React from 'react';
 import styles from './profile.module.scss';
 import { IProfileBioProps, ProfileBio } from './profile-bio';
 import { ProfileInfo } from './profile-info';
-// import { IStatsProps } from './profile-info/tabs/stats';
-//
+
+interface IProfileProps {
+	userInfo: IProfileBioProps;
+	activeTab: string;
+	tabContent: React.FC;
+}
+
 // const mockProfileBioProps = {
 // 	img: 'https://hyperhost.ua/info/storage/avatars/user-ava.png',
 // 	name: 'name',
@@ -11,17 +16,11 @@ import { ProfileInfo } from './profile-info';
 // 	clan: 'clan',
 // 	memberSince: '14 jul',
 // 	lastSeen: '13 sep',
-// 	gitHub: 'github link',
+// 	gitHubUrl: 'github link',
 // 	followingQuantity: 0,
 // 	followersQuantity: 0,
 // 	communityQuantity: 3,
 // };
-
-interface IProfileProps {
-	userInfo: IProfileBioProps;
-	activeTab: string;
-	tabContent: React.FC;
-}
 
 export const Profile: React.FC<IProfileProps> = (props) => {
 	return (

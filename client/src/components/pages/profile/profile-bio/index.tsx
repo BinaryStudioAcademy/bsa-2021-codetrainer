@@ -10,7 +10,7 @@ export interface IProfileBioProps {
 	clan?: string;
 	memberSince: string;
 	lastSeen: string;
-	gitHub?: string;
+	gitHubUrl?: string;
 	followingQuantity: number;
 	followersQuantity: number;
 	communityQuantity: number;
@@ -24,18 +24,18 @@ export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
 		clan,
 		memberSince,
 		lastSeen,
-		gitHub,
+		gitHubUrl,
 		followingQuantity,
 		followersQuantity,
 		communityQuantity,
 	} = props;
 
-	const gitHubLink = gitHub ? (
+	const gitHubLink = gitHubUrl ? (
 		<a href={'https://github.com/' + name} className={styles.link}>
-			{gitHub}
+			{gitHubUrl}
 		</a>
 	) : (
-		gitHub
+		gitHubUrl
 	);
 
 	const listItems1 = [

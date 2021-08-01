@@ -1,7 +1,9 @@
 import React from 'react';
 import { ProgressBar } from '@blueprintjs/core';
 import styles from './progress-bar-block.module.scss';
+import honorStyles from 'components/pages/profile/profile-info/tabs/stats/honor-breakdown/honor-breakdown.module.scss';
 import './progress-bar.scss';
+import clsx from 'clsx';
 
 interface IProgressBarBlockProps {
 	name: string;
@@ -13,7 +15,7 @@ const ProgressBarBlock: React.FC<IProgressBarBlockProps> = (props) => {
 	const { name, done, left } = props;
 
 	return (
-		<div className={styles.progressBarBlock}>
+		<div className={clsx(honorStyles.progressBarBlock, styles.progressBarBlock)}>
 			<div className={styles.progressBarInfo}>
 				<p className={styles.progressName}>{name}</p>
 				<p className={styles.progressInfoDone}>
