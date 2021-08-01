@@ -9,19 +9,6 @@ const TaskDescriptionIframeStyles = `
     overflow-y: auto;
   }
   
-  body::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: rgba(236, 65, 121, 0.3);
-    border-radius: 10px;
-  }
-  
-  body:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(236, 65, 121, 0.6);
-  }
-  
   body p {
     margin: 15px 0 0;
   

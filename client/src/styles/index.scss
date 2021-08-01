@@ -9,3 +9,16 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgba(236, 65, 121, 0.3);
+	border-radius: 10px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+	background-color: rgba(236, 65, 121, 0.6);
+}
