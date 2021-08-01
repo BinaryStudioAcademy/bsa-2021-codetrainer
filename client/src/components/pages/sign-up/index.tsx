@@ -1,10 +1,9 @@
 import React from 'react';
-import CoverLayout from 'components/CoverLayout';
 import { Formik, Form, Field } from 'formik';
-import styles from './sign-up.module.scss';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import FormInput from 'components/form-input';
+import { FormInput, CoverLayout } from 'components';
+import styles from './sign-up.module.scss';
 
 const SignupSchema = Yup.object().shape({
 	firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
