@@ -14,6 +14,7 @@ const mockProfileBioProps = {
 	followersQuantity: 0,
 	communityQuantity: 3,
 };
+
 export const Profile: React.FC = () => {
 	const userInfoData = mockProfileBioProps;
 	const activeTab = 'stats';
@@ -23,12 +24,10 @@ export const Profile: React.FC = () => {
 			userInfo={userInfoData}
 			activeTab={activeTab}
 			tabContent={
-				Stats
+				() => <Stats />
 				// Here you need to return Container, not component.
 				// In this container you should have Routing for different tabs
 			}
 		/>
 	);
 };
-
-export {};

@@ -23,10 +23,11 @@ interface IProfileProps {
 // };
 
 export const Profile: React.FC<IProfileProps> = (props) => {
+	const { userInfo, ...profileInfo } = props;
 	return (
 		<div className={styles.profile}>
-			<ProfileBio {...props.userInfo} />
-			<ProfileInfo />
+			<ProfileBio {...userInfo} />
+			<ProfileInfo {...profileInfo} />
 		</div>
 	);
 };
