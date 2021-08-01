@@ -1,25 +1,14 @@
 import React from 'react';
 import { Card, Text } from '@blueprintjs/core';
-
 import styles from './feed.module.scss';
-
 import FeedMessage from '../feed-message';
 import { Button } from 'components/basic';
-
-interface IMessage {
-	id: string;
-	userImageSource: string;
-	userName: string;
-	clan: string;
-	date: string;
-	text: string;
-}
-
-interface IFeedProps {
-	messages: IMessage[];
-}
+import { IFeedProps } from './interface';
+import clsx from 'clsx';
 
 const Feed: React.FC<IFeedProps> = ({ messages }) => {
+	const tabStyle = clsx(styles.feedCategory, styles.active);
+
 	return (
 		<Card className={styles.feed}>
 			<div>
@@ -28,7 +17,7 @@ const Feed: React.FC<IFeedProps> = ({ messages }) => {
 						Feed
 					</Text>
 					<span className={styles.separator}></span>
-					<Text tagName="h4" className={`${styles.feedCategory} ${styles.active}`}>
+					<Text tagName="h4" className={tabStyle}>
 						All
 					</Text>
 					<Text tagName="h4" className={styles.feedCategory}>

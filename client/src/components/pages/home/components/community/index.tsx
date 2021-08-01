@@ -1,23 +1,9 @@
 import React from 'react';
 import { Card, Text } from '@blueprintjs/core';
-
 import CommunityUser from '../community-user';
-
 import styles from './community.module.scss';
 import { Button } from 'components/basic';
-
-interface IUser {
-	id: string;
-	rank: number;
-	imageSource: string;
-	name: string;
-	clan: string;
-	honor: number;
-}
-
-interface ICommunityProps {
-	users: IUser[];
-}
+import { ICommunityProps } from './interfce';
 
 const Community: React.FC<ICommunityProps> = ({ users }) => {
 	return (

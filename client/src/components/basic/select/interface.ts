@@ -1,4 +1,5 @@
 export interface ISelectValue {
+	id: number;
 	title: string;
 	icon: string;
 }

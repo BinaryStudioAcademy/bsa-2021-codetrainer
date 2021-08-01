@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-
 import styles from './select.module.scss';
 import { Option } from '..';
-
 import { ISelectProps, ISelectValue } from './interface';
+import clsx from 'clsx';
 
 const Select: React.FC<ISelectProps> = ({ values, activeValue, onChange }) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
+	const listStyles = clsx(styles.optionsList, { [styles.optionsActive]: optionsListActive });
 
 	const handleChange = (value: ISelectValue) => {
 		setOptionsListActive(false);
@@ -19,14 +19,9 @@ const Select: React.FC<ISelectProps> = ({ values, activeValue, onChange }) => {
 				<img src={activeValue.icon} alt={`${activeValue.title} icon`} />
 				{activeValue.title}
 			</h5>
-			<ul className={[styles.optionsList, optionsListActive ? styles.optionsActive : ''].join(' ')}>
+			<ul className={listStyles}>
 				{values.map((value, index) => (
-					<Option
-						key={index}
-						value={value}
-						isActive={value.title === activeValue.title}
-						onChange={handleChange}
-					/>
+					<Option key={index} value={value} isActive={value.id === activeValue.id} onChange={handleChange} />
 				))}
 			</ul>
 		</div>

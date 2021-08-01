@@ -1,34 +1,6 @@
 // will be removed after connecting local fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
-.pageWrapper {
-	display: flex;
-}
-
-// will be removed after adding sidebar
-.pageWrapper > .plug {
-	width: 245px;
-
-	background-color: #705ff5;
-}
-
-.mainWrapper {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
-// will be removed after adding header
-.mainWrapper > .plug {
-	height: 91px;
-
-	background-color: #f0f3f9;
-}
-
-.contentWrapper {
-	flex-grow: 1;
-}
-
 .container {
 	width: 916px;
 	margin: 0 auto;

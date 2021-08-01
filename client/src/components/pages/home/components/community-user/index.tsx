@@ -1,10 +1,7 @@
 import React from 'react';
 import { Text } from '@blueprintjs/core';
-
 import styles from './community-user.module.scss';
-
 import defaultUserPhoto from './assets/user.svg';
-
 import { Rank } from 'components/basic';
 
 interface ICommunityUserProps {

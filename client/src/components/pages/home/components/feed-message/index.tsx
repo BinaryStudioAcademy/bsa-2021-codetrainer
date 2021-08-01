@@ -1,8 +1,6 @@
 import React from 'react';
 import { Text } from '@blueprintjs/core';
-
 import styles from './feed-message.module.scss';
-
 import defaultUserIcon from './assets/user.svg';
 
 interface IFeedMessageProps {
