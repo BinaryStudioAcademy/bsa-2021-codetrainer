@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FieldProps, getIn } from 'formik';
-import styles from './FormInput.module.scss';
+import styles from './form-input.module.scss';
 import { Icon } from '@blueprintjs/core';
 
 type Props = FieldProps & {

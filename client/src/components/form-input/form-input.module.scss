@@ -1,26 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .inputWrapper {
 	position: relative;
 
 	.inputField,
 	.passwordField {
-		width: 320px;
+		box-sizing: border-box;
+		width: 100%;
 		background: #f0f3f9;
 		border-radius: 7px;
 		border: 0;
 		margin-bottom: 15px;
-		font-family: 'Montserrat', sans-serif;
+		font-family: "Montserrat", sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 14px;
 		line-height: 17px;
 		color: #282828;
 		padding: 15px 20px;
-	}
-	.passwordField {
-		width: 300px;
-		padding-right: 40px;
 	}
 
 	.inputField::placeholder,
@@ -36,7 +33,7 @@
 
 	.label {
 		display: block;
-		font-family: 'Montserrat', sans-serif;
+		font-family: "Montserrat", sans-serif;
 		font-style: normal;
 		font-weight: 500;
 		font-size: 12px;
