@@ -17,17 +17,26 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					become allies with other warriors by following each other or inviting new warriors to join.
 				</Text>
 
-				<div className={styles.communityTable}>
+				<div className={styles.communityTableHeader}>
+					<Text tagName="h5" className={styles.communityColumnTitle}>
+						User
+					</Text>
+					<Text tagName="h5" className={styles.communityColumnTitle}>
+						Clan
+					</Text>
+					<Text tagName="h5" className={styles.communityColumnTitle}>
+						Honor
+					</Text>
+				</div>
+
+				<div className={styles.communityTableBody}>
 					<div className={styles.communityColumn}>
-						<Text tagName="h5">User</Text>
 						{users.map((user) => (
 							<CommunityUser key={user.id} {...user} />
 						))}
 					</div>
 
 					<div className={styles.communityColumn}>
-						<Text tagName="h5">Clan</Text>
-
 						{users.map((user) => (
 							<Text key={user.id} className={styles.columnText}>
 								{user.clan}
@@ -36,8 +45,6 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					</div>
 
 					<div className={styles.communityColumn}>
-						<Text tagName="h5">Honor</Text>
-
 						{users.map((user) => (
 							<Text key={user.id} className={styles.columnText}>
 								{user.honor}

@@ -31,10 +31,23 @@
 	font-weight: 400;
 }
 
-.communityTable {
+.communityTableHeader {
+	display: flex;
+	justify-content: space-between;
+}
+
+.communityColumnTitle {
+	display: block;
+	width: 100%;
+}
+
+.communityTableBody {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 25px;
+	max-height: 150px;
+	overflow-y: auto;
+	padding-bottom: 10px;
 }
 
 .communityColumn {
