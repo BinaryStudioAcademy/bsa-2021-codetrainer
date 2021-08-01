@@ -1,25 +1,21 @@
 import React from 'react';
 import ProfileRouter from './profile-router';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Stats from './tabs/stats';
 import styles from './profile-info.module.scss';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../../../typings/root-state';
 
 interface IProfileInfoProps {}
 
 export const ProfileInfo: React.FC<IProfileInfoProps> = (props) => {
-	const match = useRouteMatch();
-
+	const activeTab = useSelector((state: IRootState) => state.profile.activeTab);
 	return (
 		<div className={styles.profileInfo}>
 			<ProfileRouter />
-			<Switch>
-				<Route path={match.url + '/stats'} exact>
-					<Stats />
-				</Route>
-				<Route path={match.url} exact>
-					<Stats />
-				</Route>
-			</Switch>
+			{activeTab === 'stats' ? (
+				<Stats />
+			) : activeTab === 'challenge' ? null : activeTab === 'solution' ? null : activeTab ===
+			  'social' ? null : activeTab === 'collections' ? null : null}
 		</div>
 	);
 };
