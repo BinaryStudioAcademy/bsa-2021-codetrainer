@@ -1,30 +1,28 @@
 import React from 'react';
 import { FC } from 'react';
-import { combineClasses } from 'helpers/combineClasses.helper';
 import { Button as BlueprintButton, ButtonProps } from '@blueprintjs/core';
 import styles from './button.module.scss';
+import clsx from 'clsx';
 
 interface IButtonProps extends ButtonProps {
 	color?: 'blue' | 'red';
 }
 
-const Button: FC<IButtonProps> = ({ color, children, className, ...remains }) => (
+const Button: FC<IButtonProps> = ({ color = 'blue', children, className, ...remains }) => (
 	<BlueprintButton
 		{...remains}
-		className={combineClasses(
+		className={clsx(
 			styles.button,
-			styles[color as string],
-			remains.fill ? styles.filled : null,
-			remains.disabled ? styles.disabled : null,
+			styles[color],
+			{
+				[styles.filled]: remains.fill,
+				[styles.disabled]: remains.disabled,
+			},
 			className,
 		)}
 	>
 		{children}
 	</BlueprintButton>
 );
-
-Button.defaultProps = {
-	color: 'blue',
-};
 
 export default Button;
