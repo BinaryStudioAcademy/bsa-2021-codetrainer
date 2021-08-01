@@ -3,7 +3,7 @@ import ProfileRouter from './profile-router';
 import Stats from './tabs/stats';
 import styles from './profile-info.module.scss';
 import { useSelector } from 'react-redux';
-import { IRootState } from '../../../../typings/root-state';
+import { IRootState } from 'typings/root-state';
 
 interface IProfileInfoProps {}
 

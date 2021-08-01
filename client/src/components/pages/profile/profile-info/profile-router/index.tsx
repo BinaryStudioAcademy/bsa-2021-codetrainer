@@ -4,7 +4,7 @@ import { Menu, MenuItem } from '@blueprintjs/core';
 import styles from './profile-router.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
-import * as actions from '../../../../../containers/profile/logic/actions';
+import * as actions from 'containers/profile/logic/actions';
 const ProfileRouter: React.FC = () => {
 	const match = useRouteMatch();
 	const activeTab = useSelector((state: IRootState) => state.profile.activeTab);

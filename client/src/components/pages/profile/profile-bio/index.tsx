@@ -1,7 +1,7 @@
 import React from 'react';
 import { H5 } from '@blueprintjs/core';
 import styles from './profile-bio.module.scss';
-import { List } from '../../../basic';
+import { List } from 'components/basic';
 
 export interface IProfileBioProps {
 	img: string;

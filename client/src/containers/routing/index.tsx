@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Example from 'containers/example';
 import { PublicRoute } from 'components';
-import { Profile } from '../../components/pages/profile';
+import { Profile } from 'components/pages/profile';
 
 interface IRoutingProps {}
 
