@@ -2,4 +2,4 @@ export { PrivateRoute, PublicRoute } from './basic';
 
 export { Example } from './common';
 
-export { ProfilePage } from './pages';
+export { ProfilePage, StatsTab } from './pages';

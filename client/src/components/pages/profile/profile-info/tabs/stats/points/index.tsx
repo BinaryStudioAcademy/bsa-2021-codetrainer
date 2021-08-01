@@ -3,7 +3,7 @@ import pointsIcon from '../../../../../../../assets/icons/points.svg';
 import { List } from '../../../../../../basic';
 import { StatsBlock } from '../stats-block';
 
-interface IPointsProps {
+export interface IPointsProps {
 	rank: number;
 	honor: number;
 	completedChallenge: number;

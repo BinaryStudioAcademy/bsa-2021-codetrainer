@@ -3,7 +3,7 @@ import languagesIcon from '../../../../../../../assets/icons/languages.svg';
 import { List } from '../../../../../../basic';
 import { StatsBlock } from '../stats-block';
 
-interface ILanguagesProps {
+export interface ILanguagesProps {
 	languagesTrained: number;
 	highestTrained: string;
 	mostRecent: string;

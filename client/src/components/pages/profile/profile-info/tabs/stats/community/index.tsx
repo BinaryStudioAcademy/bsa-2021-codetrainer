@@ -5,7 +5,7 @@ import { StatsBlock } from '../stats-block';
 
 type NumberOrString = number | string;
 
-interface ICommunityProps {
+export interface ICommunityProps {
 	comments: NumberOrString;
 	collections: NumberOrString;
 	transactions: NumberOrString;

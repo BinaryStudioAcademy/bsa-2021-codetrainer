@@ -4,7 +4,7 @@ import ProgressBarBlock from './progress-bar-block';
 import { StatsBlock } from '../stats-block';
 import styles from './honor-breakdown.module.scss';
 
-interface IHonorBreakdownProps {
+export interface IHonorBreakdownProps {
 	completedChallengeDone: number | null;
 	completedChallengeLeft: number;
 	authoredChallengeDone: number | null;

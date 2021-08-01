@@ -4,7 +4,7 @@ import styles from './rank-breakdown.module.scss';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import { StatsBlock } from '../stats-block';
 
-interface IRankBreakdownProps {
+export interface IRankBreakdownProps {
 	rankProgress: number;
 	rank: number;
 }
