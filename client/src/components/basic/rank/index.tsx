@@ -1,23 +1,14 @@
-import { combineClasses } from 'helpers/combineClasses.helper';
 import React, { FC } from 'react';
+import clsx from 'clsx';
 import styles from './rank.module.scss';
+import { mapRankToStyle } from './helpers';
 
-function mapRankToClass(rank: number): string | undefined {
-	if ([1, 2, 3].includes(rank)) {
-		return styles.hard;
-	} else if ([4, 5, 6].includes(rank)) {
-		return styles.medium;
-	} else if ([7, 8, 9].includes(rank)) {
-		return styles.easy;
-	}
-}
+type TRankProps = { rank: number; honor?: never } | { rank?: never; honor: number };
 
-interface IRankProps {
-	rank: number;
-}
-
-const Rank: FC<IRankProps> = (props) => (
-	<span className={combineClasses(styles.rank, mapRankToClass(props.rank))}>{props.rank} rank</span>
+const Rank: FC<TRankProps> = (props) => (
+	<span className={clsx(styles.rank, mapRankToStyle(props.rank))}>
+		{props.rank !== undefined ? `${props.rank} rank` : props.honor}
+	</span>
 );
 
 export default Rank;
