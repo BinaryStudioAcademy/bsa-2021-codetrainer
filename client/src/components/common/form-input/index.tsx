@@ -3,15 +3,15 @@ import { FieldProps, getIn } from 'formik';
 import styles from './form-input.module.scss';
 import { Icon } from '@blueprintjs/core';
 
-type Props = FieldProps & {
+interface IFormInputProps extends FieldProps {
 	id: string;
 	name: string;
 	label: string;
 	type: string;
 	placeholder: string;
-};
+}
 
-const FormInput: React.FC<Props> = ({
+const FormInput: React.FC<IFormInputProps> = ({
 	id,
 	label,
 	type: initialType,

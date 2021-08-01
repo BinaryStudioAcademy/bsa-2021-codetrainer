@@ -1,11 +1,11 @@
-import React, { PropsWithChildren, FC } from 'react';
+import React from 'react';
 import background from 'assets/cover-background.svg';
 import logo from 'assets/logo.svg';
 import styles from './cover.module.scss';
 
-interface CoverProps {}
+interface ICoverLayoutProps {}
 
-const CoverLayout: FC<PropsWithChildren<CoverProps>> = ({ children }) => {
+const CoverLayout: React.FC<ICoverLayoutProps> = ({ children }) => {
 	return (
 		<div className={styles.cover}>
 			<div className={styles.image}>
