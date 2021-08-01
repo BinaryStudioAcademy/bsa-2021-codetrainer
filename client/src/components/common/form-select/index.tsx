@@ -3,14 +3,14 @@ import { FieldProps } from 'formik';
 import styles from './form-select.module.scss';
 import Select from 'react-select';
 
-type Props = FieldProps & {
+interface IFormSelectProps extends FieldProps {
 	id: string;
 	label?: string;
 	placeholder: string;
 	options: { value: string; name: string }[];
-};
+}
 
-const FormSelect: React.FC<Props> = ({
+const FormSelect: React.FC<IFormSelectProps> = ({
 	id,
 	label,
 	placeholder,

@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './rank-tag.module.scss';
 
-const RankTag: React.FC<{ rank: number }> = ({ rank }) => {
+interface IRankTagProps {
+	rank: number;
+}
+
+const RankTag: React.FC<IRankTagProps> = ({ rank }) => {
 	return (
 		<div className={styles.rankTag}>
 			<span className={styles.rankTagText}>{rank} Rank</span>
