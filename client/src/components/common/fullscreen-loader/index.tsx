@@ -32,7 +32,7 @@ const FullscreenLoader: React.FC = () => {
 			<div className={styles.loader}>
 				{logo}
 				<div className={styles.loaderContainer}>
-					<div className={styles.loaderBar}></div>
+					<div className={styles.loaderBar} />
 				</div>
 			</div>
 		</div>

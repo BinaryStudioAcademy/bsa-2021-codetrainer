@@ -10,7 +10,7 @@ const Spinner: React.FC<ISpinnerProps> = ({ size = '50px' }) => {
 		return { height: value, width: value };
 	};
 
-	return <div className={styles.spinner} style={spinnerSize(size)}></div>;
+	return <div className={styles.spinner} style={spinnerSize(size)} />;
 };
 
 export default Spinner;
