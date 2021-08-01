@@ -8,7 +8,7 @@ interface IProfileRouterProps {
 	activeTab: string;
 }
 
-const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
+export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 	const match = useRouteMatch();
 	const activeTab = props.activeTab;
 	console.log(activeTab);
@@ -52,4 +52,3 @@ const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 		</Menu>
 	);
 };
-export default ProfileRouter;

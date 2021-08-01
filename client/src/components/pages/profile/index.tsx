@@ -6,14 +6,16 @@ import { ProfileInfo } from './profile-info';
 interface IProfileProps {
 	userInfo: IProfileBioProps;
 	activeTab: string;
-	tabContent: React.ReactElement | null;
+	tabContent: any;
 }
 
 export const Profile: React.FC<IProfileProps> = (props) => {
+	const { userInfo, ...profileInfo } = props;
+
 	return (
 		<div className={styles.profile}>
-			<ProfileBio {...props.userInfo} />
-			<ProfileInfo activeTab={props.activeTab} tabContent={props.tabContent} />
+			<ProfileBio {...userInfo} />
+			<ProfileInfo {...profileInfo} />
 		</div>
 	);
 };
