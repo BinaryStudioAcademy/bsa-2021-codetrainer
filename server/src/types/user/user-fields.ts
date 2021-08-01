@@ -14,4 +14,11 @@ export interface IUserFields {
 	surname?: string;
 	profileClan?: IProfileClan;
 	clan: IClanFields;
+	nickname?: string;
+	avatar?: string;
+	createdAt: string;
+	lastVisit?: string;
+	skills?: string[];
+	devLevel?: string;
+	social?: string[];
 }

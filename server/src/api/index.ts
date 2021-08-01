@@ -2,7 +2,8 @@ import { Router } from 'express';
 import { initAuth } from './auth';
 import { initClan } from './clan';
 import { ApiPath } from '../common';
-import { auth, clan } from '../services';
+import { auth, users, clan } from '../services';
+import { initUsers } from './users/users-api';
 
 export const initApi = (appRouter: typeof Router) => {
 	const apiRouter = appRouter();
@@ -20,6 +21,13 @@ export const initApi = (appRouter: typeof Router) => {
 			clan,
 		}),
 	);
+
+	apiRouter.use(
+		ApiPath.USERS,
+		initUsers(Router, {
+			users,
+		}),
+	)
 
 	return apiRouter;
 };
