@@ -2,11 +2,11 @@
 
 import React, { FC } from 'react';
 import { Field, FieldAttributes } from 'formik';
-import { combineClasses } from 'helpers/combineClasses.helper';
+import clsx from 'clsx';
 import styles from './form-field.module.scss';
 
 const FormField: FC<FieldAttributes<any>> = (props: FieldAttributes<any>) => (
-	<Field {...props} className={combineClasses(styles.field, props.className)} />
+	<Field {...props} className={clsx(styles.field, props.className)} />
 );
 
 export default FormField;

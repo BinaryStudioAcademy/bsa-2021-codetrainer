@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
+import { Form, Formik } from 'formik';
+import clsx from 'clsx';
 import CoverLayout from './cover-layout';
 import PasswordField from './password-field';
 import FormField from './form-field';
 import Separator from './separator';
 import Button, { ButtonClasses } from './button';
-import { combineClasses } from 'helpers/combineClasses.helper';
 import styles from './sign-in.module.scss';
 
 function validateEmail(email: string): string | undefined {
@@ -62,7 +62,7 @@ const SignInPage: React.FC = () => {
 							/>
 							<div className={styles.error}>{touched.password && errors.password}</div>
 						</div>
-						<Button type="submit" className={combineClasses(ButtonClasses.red, ButtonClasses.filled)}>
+						<Button type="submit" className={clsx(ButtonClasses.red, ButtonClasses.filled)}>
 							Sign in
 						</Button>
 					</Form>

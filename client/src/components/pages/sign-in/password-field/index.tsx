@@ -1,16 +1,15 @@
 // TODO: remove it and use common PasswordField component
-
-import React, { useCallback, useState, FC } from 'react';
+import React, { useCallback, useState, useRef, FC } from 'react';
 import { FieldAttributes } from 'formik';
-import { combineClasses } from 'helpers/combineClasses.helper';
 import FormField, { FORM_FIELD_CLASS } from '../form-field';
 import styles from './password-input.module.scss';
 import hideIcon from 'assets/icons/hide.svg';
 import showIcon from 'assets/icons/show.svg';
+import clsx from 'clsx';
 
 const PasswordField: FC<FieldAttributes<any>> = (props) => {
 	const [isHiding, setHiding] = useState(true);
-	const inputRef = React.createRef<HTMLButtonElement>();
+	const inputRef = useRef<HTMLButtonElement>();
 
 	const toggleHiding = useCallback(() => {
 		setHiding(!isHiding);
@@ -21,7 +20,7 @@ const PasswordField: FC<FieldAttributes<any>> = (props) => {
 	}, [inputRef]);
 
 	return (
-		<div className={combineClasses(FORM_FIELD_CLASS, styles.password)} onClick={focus}>
+		<div className={clsx(FORM_FIELD_CLASS, styles.password)} onClick={focus}>
 			<FormField
 				{...props}
 				type={isHiding ? 'password' : 'text'}

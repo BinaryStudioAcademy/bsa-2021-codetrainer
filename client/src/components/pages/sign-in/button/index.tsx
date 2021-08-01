@@ -1,11 +1,10 @@
 // TODO: remove it and use common Button component
-
 import React, { ButtonHTMLAttributes, FC } from 'react';
-import { combineClasses } from 'helpers/combineClasses.helper';
+import clsx from 'clsx';
 import styles from './button.module.scss';
 
 const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
-	<button {...props} className={combineClasses(styles.button, props.className)}>
+	<button {...props} className={clsx(styles.button, props.className)}>
 		{props.children}
 	</button>
 );
