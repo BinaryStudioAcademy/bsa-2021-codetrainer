@@ -4,4 +4,7 @@
 	.progressBarBlock {
 		margin-top: 17px;
 	}
+	&:first-child {
+		margin-top: 0 !important;
+	}
 }
