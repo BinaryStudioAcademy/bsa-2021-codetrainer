@@ -6,29 +6,29 @@ import styles from './honor-breakdown.module.scss';
 
 interface IHonorBreakdownProps {
 	completedChallengeDone: number | null;
-	completedChallengeLeft: number;
+	completedChallengeTotal: number;
 	authoredChallengeDone: number | null;
-	authoredChallengeLeft: number;
+	authoredChallengeTotal: number;
 	commentsDone: number | null;
-	commentsLeft: number;
+	commentsTotal: number;
 	referralsDone: number | null;
-	referralsLeft: number;
+	referralsTotal: number;
 	achievementsDone: number | null;
-	achievementsLeft: number;
+	achievementsTotal: number;
 }
 
 const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 	const {
 		completedChallengeDone,
-		completedChallengeLeft,
+		completedChallengeTotal,
 		authoredChallengeDone,
-		authoredChallengeLeft,
+		authoredChallengeTotal,
 		commentsDone,
-		commentsLeft,
+		commentsTotal,
 		referralsDone,
-		referralsLeft,
+		referralsTotal,
 		achievementsDone,
-		achievementsLeft,
+		achievementsTotal,
 	} = props;
 
 	return (
@@ -37,16 +37,16 @@ const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 				<ProgressBarBlock
 					name="Completed Challenge"
 					done={completedChallengeDone}
-					left={completedChallengeLeft}
+					left={completedChallengeTotal}
 				/>
 				<ProgressBarBlock
 					name="Authored Challenge & Translation"
 					done={authoredChallengeDone}
-					left={authoredChallengeLeft}
+					left={authoredChallengeTotal}
 				/>
-				<ProgressBarBlock name="Comments" done={commentsDone} left={commentsLeft} />
-				<ProgressBarBlock name="Referrals" done={referralsDone} left={referralsLeft} />
-				<ProgressBarBlock name="Achievements" done={achievementsDone} left={achievementsLeft} />
+				<ProgressBarBlock name="Comments" done={commentsDone} left={commentsTotal} />
+				<ProgressBarBlock name="Referrals" done={referralsDone} left={referralsTotal} />
+				<ProgressBarBlock name="Achievements" done={achievementsDone} left={achievementsTotal} />
 			</div>
 		</StatsBlock>
 	);

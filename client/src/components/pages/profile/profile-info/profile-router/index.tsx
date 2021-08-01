@@ -5,6 +5,8 @@ import styles from './profile-router.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from 'containers/profile/logic/actions';
+import clsx from 'clsx';
+
 const ProfileRouter: React.FC = () => {
 	const match = useRouteMatch();
 	const activeTab = useSelector((state: IRootState) => state.profile.activeTab);
@@ -15,7 +17,7 @@ const ProfileRouter: React.FC = () => {
 	return (
 		<Menu className={styles.navmenu}>
 			<MenuItem
-				className={activeTab === 'stats' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`}
+				className={clsx(`${styles.navmenuItem}`, activeTab === 'stats' && `${styles.active}`)}
 				text="Stats"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/stats');
@@ -23,9 +25,7 @@ const ProfileRouter: React.FC = () => {
 				}}
 			/>
 			<MenuItem
-				className={
-					activeTab === 'challenge' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`
-				}
+				className={clsx(`${styles.navmenuItem}`, activeTab === 'challenge' && `${styles.active}`)}
 				text="Challenge"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/challenge');
@@ -33,9 +33,7 @@ const ProfileRouter: React.FC = () => {
 				}}
 			/>
 			<MenuItem
-				className={
-					activeTab === 'solution' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`
-				}
+				className={clsx(`${styles.navmenuItem}`, activeTab === 'solution' && `${styles.active}`)}
 				text="Solution"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/solution');
@@ -43,7 +41,7 @@ const ProfileRouter: React.FC = () => {
 				}}
 			/>
 			<MenuItem
-				className={activeTab === 'social' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`}
+				className={clsx(`${styles.navmenuItem}`, activeTab === 'social' && `${styles.active}`)}
 				text="Social"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/social');
@@ -51,9 +49,7 @@ const ProfileRouter: React.FC = () => {
 				}}
 			/>
 			<MenuItem
-				className={
-					activeTab === 'collections' ? `${styles.navmenuItem} ${styles.active}` : `${styles.navmenuItem}`
-				}
+				className={clsx(`${styles.navmenuItem}`, activeTab === 'collections' && `${styles.active}`)}
 				text="Collections"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/collections');

@@ -18,7 +18,7 @@ const ProgressBarBlock: React.FC<IProgressBarBlockProps> = (props) => {
 				<p className={styles.progressName}>{name}</p>
 				<p className={styles.progressInfoDone}>
 					<span className={styles.progressDone}>{done}</span>
-					{left === 0 ? null : <span className={styles.progressOfSymbol}>/</span>}
+					{left !== 0 && <span className={styles.progressOfSymbol}>/</span>}
 					<span className={styles.progressLeft}>{left}</span>
 				</p>
 			</div>
