@@ -6,27 +6,14 @@ import { ProfileInfo } from './profile-info';
 interface IProfileProps {
 	userInfo: IProfileBioProps;
 	activeTab: string;
-	tabContent: React.FC;
+	tabContent: React.ReactElement | null;
 }
-
-// const mockProfileBioProps = {
-// 	img: 'https://hyperhost.ua/info/storage/avatars/user-ava.png',
-// 	name: 'name',
-// 	nickname: 'nickname',
-// 	clan: 'clan',
-// 	memberSince: '14 jul',
-// 	lastSeen: '13 sep',
-// 	gitHubUrl: 'github link',
-// 	followingQuantity: 0,
-// 	followersQuantity: 0,
-// 	communityQuantity: 3,
-// };
 
 export const Profile: React.FC<IProfileProps> = (props) => {
 	return (
 		<div className={styles.profile}>
 			<ProfileBio {...props.userInfo} />
-			<ProfileInfo />
+			<ProfileInfo activeTab={props.activeTab} tabContent={props.tabContent} />
 		</div>
 	);
 };
