@@ -43,6 +43,7 @@ export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 				text="Social"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/social');
+					setActiveTab('social');
 				}}
 			/>
 			<MenuItem
@@ -50,6 +51,7 @@ export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 				text="Collections"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/collections');
+					setActiveTab('collections');
 				}}
 			/>
 		</Menu>
