@@ -2,18 +2,16 @@ import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { Menu, MenuItem } from '@blueprintjs/core';
 import styles from './profile-router.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from 'typings/root-state';
-import * as actions from 'containers/profile/logic/actions';
 import clsx from 'clsx';
 
-const ProfileRouter: React.FC = () => {
+interface IProfileRouterProps {
+	activeTab: string;
+}
+
+export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 	const match = useRouteMatch();
-	const activeTab = useSelector((state: IRootState) => state.profile.activeTab);
-	const dispatch = useDispatch();
-	const setTabToActive = (tab: string) => {
-		dispatch(actions.setActiveTab({ activeTab: tab }));
-	};
+	const activeTab = props.activeTab;
+	console.log(activeTab);
 	return (
 		<Menu className={styles.navmenu}>
 			<MenuItem
@@ -21,7 +19,6 @@ const ProfileRouter: React.FC = () => {
 				text="Stats"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/stats');
-					setTabToActive('stats');
 				}}
 			/>
 			<MenuItem
@@ -29,7 +26,6 @@ const ProfileRouter: React.FC = () => {
 				text="Challenge"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/challenge');
-					setTabToActive('challenge');
 				}}
 			/>
 			<MenuItem
@@ -37,7 +33,6 @@ const ProfileRouter: React.FC = () => {
 				text="Solution"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/solution');
-					setTabToActive('solution');
 				}}
 			/>
 			<MenuItem
@@ -45,7 +40,6 @@ const ProfileRouter: React.FC = () => {
 				text="Social"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/social');
-					setTabToActive('social');
 				}}
 			/>
 			<MenuItem
@@ -53,10 +47,8 @@ const ProfileRouter: React.FC = () => {
 				text="Collections"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/collections');
-					setTabToActive('collections');
 				}}
 			/>
 		</Menu>
 	);
 };
-export default ProfileRouter;
