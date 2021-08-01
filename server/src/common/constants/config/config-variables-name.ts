@@ -1,5 +1,5 @@
 export const ConfigVariablesName = [
-	'APP_PORT',
+	'PORT',
 	'SECRET_KEY',
 	'TYPEORM_CONNECTION',
 	'TYPEORM_HOST',
@@ -7,4 +7,5 @@ export const ConfigVariablesName = [
 	'TYPEORM_USERNAME',
 	'TYPEORM_PASSWORD',
 	'TYPEORM_DATABASE',
+	'TYPEORM_SSL',
 ];

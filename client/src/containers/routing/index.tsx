@@ -1,15 +1,13 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Example from 'containers/Example';
+import Example from 'containers/example';
 import PublicRoute from '../../components/basic/public-route';
-import SearchTask from '../../components/basic/private-route';
 
-interface Props {}
+interface IRoutingProps {}
 
-const Routing: React.FC<Props> = () => (
+const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
 		<PublicRoute exact restricted={false} path="/" component={Example} />
-		<PublicRoute exact restricted={false} path="/search" component={SearchTask} />
 	</Switch>
 );
 
