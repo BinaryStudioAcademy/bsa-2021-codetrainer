@@ -19,15 +19,15 @@ const mockLanguagesProps = {
 
 const mockHonorBreakdownProps = {
 	completedChallengeDone: 5,
-	completedChallengeLeft: 10,
+	completedChallengeTotal: 10,
 	authoredChallengeDone: null,
-	authoredChallengeLeft: 0,
+	authoredChallengeTotal: 0,
 	commentsDone: null,
-	commentsLeft: 0,
+	commentsTotal: 0,
 	referralsDone: null,
-	referralsLeft: 0,
+	referralsTotal: 0,
 	achievementsDone: 8,
-	achievementsLeft: 9,
+	achievementsTotal: 9,
 };
 
 const mockRankBreakDownProps = {

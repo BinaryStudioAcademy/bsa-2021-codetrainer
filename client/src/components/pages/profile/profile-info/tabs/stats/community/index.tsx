@@ -1,6 +1,6 @@
 import React from 'react';
-import communityIcon from '../../../../../../../assets/icons/community.svg';
-import { List } from '../../../../../../basic';
+import communityIcon from 'assets/icons/community.svg';
+import { List } from 'components/basic/list';
 import { StatsBlock } from '../stats-block';
 
 type NumberOrString = number | string;

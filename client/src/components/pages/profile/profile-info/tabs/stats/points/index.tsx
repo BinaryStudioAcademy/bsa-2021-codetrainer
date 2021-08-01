@@ -1,6 +1,6 @@
 import React from 'react';
-import pointsIcon from '../../../../../../../assets/icons/points.svg';
-import { List } from '../../../../../../basic';
+import pointsIcon from 'assets/icons/points.svg';
+import { List } from 'components/basic';
 import { StatsBlock } from '../stats-block';
 
 export interface IPointsProps {

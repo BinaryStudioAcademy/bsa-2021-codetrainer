@@ -1,8 +1,9 @@
 import React from 'react';
-import rankBreakdownIcon from '../../../../../../../assets/icons/rank-breakdown.svg';
+import rankBreakdownIcon from 'assets/icons/rank-breakdown.svg';
 import styles from './rank-breakdown.module.scss';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import { StatsBlock } from '../stats-block';
+import { circularProgressBarStyles } from './config';
 
 export interface IRankBreakdownProps {
 	rankProgress: number;
@@ -27,7 +28,7 @@ const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 			<div className={styles.progressCircleInfo}>
 				<span className={styles.overallLabel}>Overall: </span>
 				<span>
-					{rank} ran/ {rankProgress}
+					{rank} rank/ {rankProgress}
 				</span>
 				%
 			</div>
@@ -36,11 +37,3 @@ const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 };
 
 export default RankBreakdown;
-
-const circularProgressBarStyles = {
-	strokeLinecap: 'round',
-	textSize: '14px',
-	pathColor: `#ec4179`,
-	trailColor: '#F0F3F9',
-	backgroundColor: '#F0F3F9',
-};

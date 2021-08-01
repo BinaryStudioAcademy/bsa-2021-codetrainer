@@ -1,15 +1,15 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import Example from 'containers/example';
-import { PublicRoute } from 'components';
-import { Profile } from '../profile';
+import { PrivateRoute, PublicRoute } from 'components';
+import { Profile } from 'containers/profile';
 
 interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
 		<PublicRoute exact restricted={false} path="/" component={Example} />
-		<PublicRoute restricted={false} path="/users/:name" component={Profile} />
+		<PrivateRoute path="/users/:name" component={Profile} />
 	</Switch>
 );
 

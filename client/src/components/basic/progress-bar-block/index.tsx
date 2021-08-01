@@ -3,13 +3,13 @@ import { ProgressBar } from '@blueprintjs/core';
 import styles from './progress-bar-block.module.scss';
 import './progress-bar.scss';
 
-interface IProgressBarBlock {
+interface IProgressBarBlockProps {
 	name: string;
 	done: number | null;
 	left: number;
 }
 
-const ProgressBarBlock: React.FC<IProgressBarBlock> = (props) => {
+const ProgressBarBlock: React.FC<IProgressBarBlockProps> = (props) => {
 	const { name, done, left } = props;
 
 	return (
@@ -18,7 +18,7 @@ const ProgressBarBlock: React.FC<IProgressBarBlock> = (props) => {
 				<p className={styles.progressName}>{name}</p>
 				<p className={styles.progressInfoDone}>
 					<span className={styles.progressDone}>{done}</span>
-					{left === 0 ? null : <span className={styles.progressOfSymbol}>/</span>}
+					{left !== 0 && <span className={styles.progressOfSymbol}>/</span>}
 					<span className={styles.progressLeft}>{left}</span>
 				</p>
 			</div>
