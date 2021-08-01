@@ -8,13 +8,14 @@ interface IModalProps {
 	setIsOpen: (isOpen: boolean) => void;
 	elements: {
 		title: string;
+		showCloseButton?: boolean;
 		body: string | React.ReactNode;
 		footer?: React.ReactNode;
 	};
 }
 
 export const Modal: React.FC<IModalProps> = (props) => {
-	const { title, body, footer } = props.elements;
+	const { title, body, footer, showCloseButton } = props.elements;
 
 	ReactModal.setAppElement('#root');
 
@@ -23,7 +24,14 @@ export const Modal: React.FC<IModalProps> = (props) => {
 			<div className={styles.modalContent}>
 				<div className={styles.header}>
 					<H3 className={styles.title}>{title}</H3>
-					<Icon icon="cross" className={styles.closeIcon} size={25} onClick={() => props.setIsOpen(false)} />
+					{showCloseButton && (
+						<Icon
+							icon="cross"
+							className={styles.closeIcon}
+							size={25}
+							onClick={() => props.setIsOpen(false)}
+						/>
+					)}
 				</div>
 				<div className={styles.body}>{body}</div>
 				{footer ? <div className={styles.footer}>{footer}</div> : null}
