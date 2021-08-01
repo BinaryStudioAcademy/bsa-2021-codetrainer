@@ -11,18 +11,21 @@ const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
 		<div className={styles.challengeStats}>
 			<div className={styles.challengeStatsItem}>
 				<p className={styles.challengeStatsItemText}>
+					{/* @ts-ignore */}
 					<Icon icon="star-empty" className={styles.challengeStatsItemIcon} />
 					{favouriteSaves} saved to favorites
 				</p>
 			</div>
 			<div className={styles.challengeStatsItem}>
 				<p className={styles.challengeStatsItemText}>
+					{/* @ts-ignore */}
 					<Icon icon="vertical-bar-chart-asc" className={styles.challengeStatsItemIcon} />
 					{positiveFeedback} positive feedback
 				</p>
 			</div>
 			<div className={styles.challengeStatsItem}>
 				<p className={styles.challengeStatsItemText}>
+					{/* @ts-ignore */}
 					<Icon icon="user" className={styles.challengeStatsItemIcon} />
 					created{' '}
 					<Link to={author.link} className={styles.challengeStatsItemLink}>
