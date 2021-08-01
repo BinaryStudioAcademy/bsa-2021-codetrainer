@@ -9,4 +9,6 @@ export interface IMessage {
 
 export interface IFeedProps {
 	messages: IMessage[];
+	selectedFeedCategory: string;
+	onSelectFeedCategory: (category: string) => void;
 }

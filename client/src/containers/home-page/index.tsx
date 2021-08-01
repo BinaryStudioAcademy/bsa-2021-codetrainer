@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { HomePage } from 'components/pages';
-import React from 'react';
 
 const testActiveUser = {
 	id: '13',
@@ -81,7 +81,21 @@ const testMessages = [
 ];
 
 const HomePageContainer: React.FC = () => {
-	return <HomePage activeUser={testActiveUser} users={testUsers} messages={testMessages} />;
+	const [selectedFeedCategory, setSelectedFeedCategory] = useState('All');
+
+	const handleSelectFeedCategory = (category: string) => {
+		setSelectedFeedCategory(category);
+	};
+
+	return (
+		<HomePage
+			activeUser={testActiveUser}
+			users={testUsers}
+			messages={testMessages}
+			selectedFeedCategory={selectedFeedCategory}
+			onSelectFeedCategory={handleSelectFeedCategory}
+		/>
+	);
 };
 
 export default HomePageContainer;

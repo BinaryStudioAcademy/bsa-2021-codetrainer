@@ -6,8 +6,32 @@ import { Button } from 'components/basic';
 import { IFeedProps } from './interface';
 import clsx from 'clsx';
 
-const Feed: React.FC<IFeedProps> = ({ messages }) => {
-	const tabStyle = clsx(styles.feedCategory, styles.active);
+const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFeedCategory }) => {
+	const feedCategories = ['All', 'Questions'];
+
+	const feedCategoriesJSX = feedCategories.map((category) => {
+		const className = clsx({ [styles.feedCategory]: true }, { [styles.active]: category === selectedFeedCategory });
+
+		const handleSelectFeedCategory = () => {
+			onSelectFeedCategory(category);
+		};
+
+		return (
+			<Text key={category} tagName="h4" className={className} onClick={handleSelectFeedCategory}>
+				{category}
+			</Text>
+		);
+	});
+
+	let feedContentJSX = null;
+	switch (selectedFeedCategory) {
+		case 'All':
+			feedContentJSX = messages.map((message) => <FeedMessage key={message.id} {...message} />);
+			break;
+		case 'Questions':
+			feedContentJSX = 'questions';
+			break;
+	}
 
 	return (
 		<Card className={styles.feed}>
@@ -17,16 +41,9 @@ const Feed: React.FC<IFeedProps> = ({ messages }) => {
 						Feed
 					</Text>
 					<span className={styles.separator}></span>
-					<Text tagName="h4" className={tabStyle}>
-						All
-					</Text>
-					<Text tagName="h4" className={styles.feedCategory}>
-						Questions
-					</Text>
+					{feedCategoriesJSX}
 				</div>
-				{messages.map((message) => (
-					<FeedMessage key={message.id} {...message} />
-				))}
+				{feedContentJSX}
 			</div>
 			<Button text="Load more" classList={styles.loadMoreButton} />
 		</Card>

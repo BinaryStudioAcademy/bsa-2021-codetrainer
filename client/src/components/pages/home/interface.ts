@@ -5,4 +5,6 @@ export interface IHomeProps {
 	activeUser: IUser;
 	users: IUser[];
 	messages: IMessage[];
+	selectedFeedCategory: string;
+	onSelectFeedCategory: (category: string) => void;
 }

@@ -5,7 +5,7 @@ import Feed from './components/feed/index';
 import { IHomeProps } from './interface';
 import NextTaskConatiner from 'containers/next-task';
 
-const Home: React.FC<IHomeProps> = ({ activeUser, users, messages }) => {
+const Home: React.FC<IHomeProps> = ({ activeUser, users, messages, selectedFeedCategory, onSelectFeedCategory }) => {
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.userGreeting}>Hi, {activeUser.name}!</h3>
@@ -19,7 +19,11 @@ const Home: React.FC<IHomeProps> = ({ activeUser, users, messages }) => {
 			</div>
 
 			<div className={styles.feedWrapper}>
-				<Feed messages={messages} />
+				<Feed
+					messages={messages}
+					selectedFeedCategory={selectedFeedCategory}
+					onSelectFeedCategory={onSelectFeedCategory}
+				/>
 			</div>
 		</div>
 	);
