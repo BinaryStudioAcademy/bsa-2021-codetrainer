@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import clsx from 'clsx';
+import { ISignInForm } from 'typings/sign-in-form';
 import { SIGN_IN_SCHEMA } from './config';
 import CoverLayout from './cover-layout';
 import PasswordField from './password-field';
@@ -10,7 +11,12 @@ import Separator from './separator';
 import Button, { ButtonClasses } from './button';
 import styles from './sign-in.module.scss';
 
-const SignInPage: React.FC = () => {
+interface ISignInPageProps {
+	onFormSubmit?: (form: ISignInForm) => void;
+	onGithubSignIn?: () => void;
+}
+
+const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit = () => {}, onGithubSignIn = () => {} }) => {
 	return (
 		<CoverLayout className={styles.signIn}>
 			<Formik
@@ -19,12 +25,12 @@ const SignInPage: React.FC = () => {
 					password: '',
 				}}
 				validationSchema={SIGN_IN_SCHEMA}
-				onSubmit={(e) => console.info(e)}
+				onSubmit={onFormSubmit}
 			>
 				{({ errors, touched, isValidating }) => (
 					<Form className={styles.form}>
 						<h4>Sign in</h4>
-						<Button type="button" className={ButtonClasses.red}>
+						<Button type="button" className={ButtonClasses.red} onClick={onGithubSignIn}>
 							Sing in with GitHub
 						</Button>
 						<Separator className={styles.light}>or</Separator>
