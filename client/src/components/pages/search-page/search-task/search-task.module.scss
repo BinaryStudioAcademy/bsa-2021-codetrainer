@@ -1,11 +1,17 @@
 .submitButton {
-    background: #ec4179;
-    border-radius: 7px;
-    border: 0;
-    font: 600 16px "Montserrat", sans-serif;
-    text-align: center;
-    color: #ffffff;
-    cursor: pointer;
-    padding: 12px 20px;
-    margin-top: 20px;
+	background: #ec4179;
+	border-radius: 7px;
+	border: 0;
+	font: 600 16px 'Montserrat', sans-serif;
+	text-align: center;
+	color: #ffffff;
+	cursor: pointer;
+	padding: 12px 20px;
+	margin-top: 20px;
+}
+
+.rankContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }

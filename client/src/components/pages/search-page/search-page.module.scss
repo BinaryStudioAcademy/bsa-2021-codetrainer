@@ -3,8 +3,8 @@
 	grid-template-columns: 245px 2fr 4fr;
 	grid-template-rows: 80px calc(100vh - 80px);
 	grid-template-areas:
-		". . ."
-		". searchPanel challengesList";
+		'. . .'
+		'. searchPanel challengesList';
 }
 
 .searchPanel {

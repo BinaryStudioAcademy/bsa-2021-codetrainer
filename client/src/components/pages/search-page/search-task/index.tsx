@@ -46,6 +46,16 @@ const progressOptions = [
 	},
 ];
 
+const tags = [
+	'Fundamentals(350)',
+	'Rank Up(45)',
+	'Practice and Repeat(13)',
+	'Beta(108)',
+	'Random(65)',
+	'Math(45)',
+	'Algorithms(15)',
+];
+
 const SearchTask = () => {
 	return (
 		<>
@@ -74,11 +84,27 @@ const SearchTask = () => {
 					/>
 
 					<h6>Difficulty</h6>
-					<div>
+					<div className={styles.rankContainer}>
+						<RankTag rank={1} />
+						<RankTag rank={2} />
+						<RankTag rank={3} />
 						<RankTag rank={4} />
+						<RankTag rank={5} />
+						<RankTag rank={6} />
 					</div>
-					<h6>Tags</h6>
-					<div>Add Tags buttons here when available</div>
+					<div id="checkbox-group">
+						<h6>Tags</h6>
+					</div>
+					<div role="group" aria-labelledby="checkbox-group">
+						{tags.map((tag, id) => (
+							<div key={id}>
+								<label>
+									<Field type="checkbox" name="tags" value={tag} />
+									{tag}
+								</label>
+							</div>
+						))}
+					</div>
 					<button type="submit" className={styles.submitButton}>
 						Sign Up
 					</button>
