@@ -1,10 +1,9 @@
 .progressBars {
-	padding: 10px 0;
 	width: 316px;
 	.progressBarBlock {
 		margin-top: 17px;
 	}
-	&:first-child {
-		margin-top: 0 !important;
+	.progressBarBlock:first-child {
+		margin-top: 0;
 	}
 }
