@@ -6,7 +6,8 @@ import { ProfileInfo } from './profile-info';
 interface IProfileProps {
 	userInfo: IProfileBioProps;
 	activeTab: string;
-	tabContent: any;
+	tabContent: () => JSX.Element | null;
+	setActiveTab: (tab: string) => void;
 }
 
 export const Profile: React.FC<IProfileProps> = (props) => {

@@ -6,12 +6,12 @@ import clsx from 'clsx';
 
 interface IProfileRouterProps {
 	activeTab: string;
+	setActiveTab: (tab: string) => void;
 }
 
 export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 	const match = useRouteMatch();
-	const activeTab = props.activeTab;
-	console.log(activeTab);
+	const { activeTab, setActiveTab } = props;
 	return (
 		<Menu className={styles.navmenu}>
 			<MenuItem
@@ -19,6 +19,7 @@ export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 				text="Stats"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/stats');
+					setActiveTab('stats');
 				}}
 			/>
 			<MenuItem
@@ -26,6 +27,7 @@ export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 				text="Challenge"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/challenge');
+					setActiveTab('challenge');
 				}}
 			/>
 			<MenuItem
@@ -33,6 +35,7 @@ export const ProfileRouter: React.FC<IProfileRouterProps> = (props) => {
 				text="Solution"
 				onClick={(e) => {
 					window.history.replaceState({}, document.title, match.url + '/solution');
+					setActiveTab('solution');
 				}}
 			/>
 			<MenuItem

@@ -2,18 +2,23 @@ import { ProfilePage } from '../../components';
 import React from 'react';
 import { Stats } from './tabs/stats';
 import { mockProfileBioProps, statsProps } from './mocks';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from 'typings/root-state';
+import * as actions from './logic/actions';
 
 export const Profile: React.FC = () => {
 	const activeTab = useSelector((state: IRootState) => state.profile.activeTab);
-	const tabContent = activeTab === 'stats' ? () => <Stats {...statsProps} /> : null;
-
+	const tabContent = activeTab === 'stats' ? () => <Stats {...statsProps} /> : () => null;
+	const dispatch = useDispatch();
+	const setActiveTab = (tab: string) => {
+		dispatch(actions.setActiveTab({ activeTab: tab }));
+	};
 	return (
-		<ProfilePage // this profile page is component
+		<ProfilePage
 			userInfo={mockProfileBioProps}
 			activeTab={activeTab}
 			tabContent={tabContent}
-			// Here you need to return Container, not component.
-			// In this container you should have Routing for different tabs
+			setActiveTab={setActiveTab}
 		/>
 	);
 };
