@@ -1,0 +1,39 @@
+.cover {
+	display: grid;
+	grid-template-columns: 63% 37%;
+	grid-auto-flow: column;
+	align-items: stretch;
+	height: 100vh;
+
+	.image {
+		position: relative;
+
+		img {
+			position: absolute;
+			user-select: none;
+			object-fit: cover;
+		}
+
+		.background {
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.logo {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			max-width: 80%;
+		}
+	}
+}
+
+.main {
+	display: flex;
+	justify-content: center;
+	justify-self: center;
+	flex-flow: column;
+	padding: 20px;
+	position: relative;
+}

@@ -68,7 +68,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit = () => {}, onGit
 				)}
 			</Formik>
 			<footer>
-				No account? <Link to="/sign-up">Sign up</Link>
+				No account? <Link to="/register">Sign up</Link>
 			</footer>
 		</CoverLayout>
 	);
