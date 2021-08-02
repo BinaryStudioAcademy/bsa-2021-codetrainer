@@ -2,6 +2,7 @@ import React from 'react';
 import { H3, Icon } from '@blueprintjs/core';
 import ReactModal from 'react-modal';
 import styles from './modal.module.scss';
+import { modalStyles } from './config';
 
 interface IModalProps {
 	isOpen: boolean;
@@ -12,6 +13,7 @@ interface IModalProps {
 		body: string | React.ReactNode;
 		footer?: React.ReactNode;
 	};
+	modalProps?: Partial<ReactModal.Props>;
 }
 
 export const Modal: React.FC<IModalProps> = (props) => {
@@ -20,7 +22,7 @@ export const Modal: React.FC<IModalProps> = (props) => {
 	ReactModal.setAppElement('#root');
 
 	return (
-		<ReactModal shouldFocusAfterRender={true} isOpen={props.isOpen} style={modalStyles}>
+		<ReactModal shouldFocusAfterRender={true} isOpen={props.isOpen} style={modalStyles} {...props.modalProps}>
 			<div className={styles.modalContent}>
 				<div className={styles.header}>
 					<H3 className={styles.title}>{title}</H3>
@@ -34,23 +36,8 @@ export const Modal: React.FC<IModalProps> = (props) => {
 					)}
 				</div>
 				<div className={styles.body}>{body}</div>
-				{footer ? <div className={styles.footer}>{footer}</div> : null}
+				{footer && <div className={styles.footer}>{footer}</div>}
 			</div>
 		</ReactModal>
 	);
-};
-
-const modalStyles = {
-	content: {
-		maxWidth: '30%',
-		maxHeight: '50%',
-		top: '50%',
-		left: '50%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)',
-		padding: '0',
-		contentBoxSize: true,
-	},
 };
