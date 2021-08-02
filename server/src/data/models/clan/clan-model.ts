@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	OneToMany,
+	BaseEntity,
+	CreateDateColumn,
+	UpdateDateColumn,
+} from 'typeorm';
 import { User } from '../user';
 
 @Entity()
@@ -17,6 +25,12 @@ export class Clan extends BaseEntity {
 
 	@Column({ type: 'int' })
 	numberOfMembers!: number;
+
+	@CreateDateColumn()
+	createdAt!: Date;
+
+	@UpdateDateColumn()
+	updatedAt!: Date;
 
 	@OneToMany(() => User, (user) => user.clan)
 	members!: User[];
