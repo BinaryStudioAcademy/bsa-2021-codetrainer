@@ -1,8 +1,3 @@
-export {
-  PrivateRoute,
-  PublicRoute,
-} from './basic';
+export { PrivateRoute, PublicRoute, Notification } from './basic';
 
-export {
-  Example,
-} from './common';
+export { Example } from './common';
