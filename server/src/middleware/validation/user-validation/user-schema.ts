@@ -30,6 +30,11 @@ const checkUserSchema = checkSchema({
 		errorMessage: 'Wrong email format',
 		trim: true,
 		isEmail: true,
+		isLength: {
+			options: {
+				max: 100,
+			},
+		},
 	},
 	password: {
 		in: 'body',
@@ -42,6 +47,11 @@ const checkUserSchema = checkSchema({
 				minLowercase: 1,
 				minUppercase: 1,
 				minNumbers: 1,
+			},
+		},
+		isLength: {
+			options: {
+				max: 100,
 			},
 		},
 	},
