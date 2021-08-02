@@ -1,12 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Clan {
 	@PrimaryGeneratedColumn('uuid')
 	id!: string;
 }
-
-// clan?: IClanFields | string;
-// skills?: string[];
-// devLevel?: string,
-// social?: string[],

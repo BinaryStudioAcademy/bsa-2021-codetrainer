@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -38,5 +38,3 @@ export class User {
 	@Column({ type: 'varchar', length: 100 })
 	password!: string;
 }
-
-// clan?: IClanFields | string;
