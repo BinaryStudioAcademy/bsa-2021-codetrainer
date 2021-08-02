@@ -1,5 +1,6 @@
 import React from 'react';
 import Statistics from './components/Statistics';
+import Rank from './components/Rank';
 import styles from './task-instructions.module.scss';
 import './task-details.scss';
 
@@ -14,7 +15,10 @@ interface ITaskInstructionProps {
 const TaskInstructions: React.FC<ITaskInstructionProps> = (props: ITaskInstructionProps) => {
 	return (
 		<div className={styles.taskContainer}>
-			<h2 className={styles.title}>{props.title}</h2>
+			<div className={styles.header}>
+				<Rank difficulty={6} />
+				<h2 className={styles.title}>{props.title}</h2>
+			</div>
 			<div className={styles.task}>
 				<div className={styles.switch}>
 					<a className={styles.active}>Instructions</a>

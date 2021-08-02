@@ -6,10 +6,20 @@ a {
 	padding: 40px;
 }
 
+:local(.header) {
+	display: flex;
+	padding: 20px;
+}
+
+:local(.title) {
+	margin: 0;
+	font-size: 18px;
+}
+
 :local(.task) {
 	border-radius: 15px;
 	background: #fafbff;
-	padding: 30px 20px;
+	padding: 20px 20px;
 }
 
 :local(.divider) {
