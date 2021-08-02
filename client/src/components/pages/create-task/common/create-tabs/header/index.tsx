@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Icon } from '@blueprintjs/core';
+import clsx from 'clsx';
 import ReactTooltip from 'react-tooltip';
 import { IconTaskPageTab } from 'common';
 import { TCreateTabs } from '../types';
 
 import styles from './styles.module.scss';
 
-interface IProps {
+interface IHeaderProps {
 	tabs: TCreateTabs;
 	onChange: (tab: number) => void;
 }
 
-export const Header: React.FC<IProps> = ({ tabs, onChange }) => {
+export const Header: React.FC<IHeaderProps> = ({ tabs, onChange }) => {
 	const [active, setActive] = useState<number>(0);
 	const handleChange = (index: number) => {
 		onChange(index);
@@ -24,7 +25,7 @@ export const Header: React.FC<IProps> = ({ tabs, onChange }) => {
 				<span
 					key={i + 1}
 					onClick={() => handleChange(i)}
-					className={`${styles.tab} ${i === active && tabs.length !== 1 ? styles.tab__active : ''}`}
+					className={clsx(styles.tab, i === active && tabs.length !== 1 && styles.tab__active)}
 				>
 					<span>{header.title}</span>
 					{header.icon ? (

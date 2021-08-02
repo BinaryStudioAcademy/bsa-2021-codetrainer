@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ITabProps } from '../types';
 
 import styles from './styles.module.scss';
 
-export const CreateText: React.FC<ITabProps> = ({ text, onChange, editable }) => {
-	const [value, setValue] = useState<string>(text);
+export const CreateText: React.FC<ITabProps> = ({ value, onChange, editable }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const newValue = event.target.value;
-		setValue(newValue);
 		onChange(newValue);
 	};
 	return (
