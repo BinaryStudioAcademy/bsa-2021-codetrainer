@@ -22,7 +22,7 @@ const ForgotPassword: React.FC = () => {
 					console.log(values);
 				}}
 			>
-				<Form>
+				<Form className={styles.form}>
 					<Field
 						id="email"
 						name="email"

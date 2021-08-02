@@ -29,7 +29,7 @@ const ChangePassword: React.FC = () => {
 					console.log(values);
 				}}
 			>
-				<Form>
+				<Form className={styles.form}>
 					<Field
 						id="password"
 						name="password"
