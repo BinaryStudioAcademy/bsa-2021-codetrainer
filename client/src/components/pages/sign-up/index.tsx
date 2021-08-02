@@ -83,7 +83,7 @@ const SignUp: React.FC = () => {
 			</Formik>
 			<div className={styles.footer}>
 				Already Signep up?{' '}
-				<Link to="/login" className={styles.link}>
+				<Link to="/sign-in" className={styles.link}>
 					Sign in
 				</Link>
 			</div>
