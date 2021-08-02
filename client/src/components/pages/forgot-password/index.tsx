@@ -3,20 +3,13 @@ import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
-import styles from './reset-password.module.scss';
+import styles from './forgot-password.module.scss';
 
-const ResetPasswordSchema = Yup.object().shape({
+const ForgotPasswordSchema = Yup.object().shape({
 	email: Yup.string().email('Invalid email').required('Required'),
-	// password: Yup.string().min(8, 'Too short').required('Required'),
-	// confirmPassword: Yup.string()
-	// 	.min(8, 'Too short')
-	// 	.required('Required')
-	// 	.test('passwords-match', 'Passwords must match', function (value) {
-	// 		return this.parent.password === value;
-	// 	}),
 });
 
-const ResetPassword: React.FC = () => {
+const ForgotPassword: React.FC = () => {
 	return (
 		<CoverLayout>
 			<h4>Forgot Password</h4>
@@ -24,7 +17,7 @@ const ResetPassword: React.FC = () => {
 				initialValues={{
 					email: '',
 				}}
-				validationSchema={ResetPasswordSchema}
+				validationSchema={ForgotPasswordSchema}
 				onSubmit={(values) => {
 					console.log(values);
 				}}
@@ -53,4 +46,4 @@ const ResetPassword: React.FC = () => {
 	);
 };
 
-export default ResetPassword;
+export default ForgotPassword;
