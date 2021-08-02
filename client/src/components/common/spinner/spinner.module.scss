@@ -1,0 +1,13 @@
+:local(.spinner) {
+	border: 5px solid rgba($color: #000, $alpha: 0.2);
+	margin: auto;
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
