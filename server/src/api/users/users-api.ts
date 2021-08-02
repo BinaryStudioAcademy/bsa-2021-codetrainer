@@ -21,8 +21,16 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsers })
 				.catch(next),
 		)
 		.put(UsersApiPath.UPDATE, updateUserMiddleware, (req, res, next) =>
+			// TODO: add user id validation
 			usersService
-				.update(req.body)
+				.update(req.params.id, req.body)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.delete(UsersApiPath.DELETE, (req, res, next) =>
+			// TODO: add user id validation
+			usersService
+				.delete(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		);

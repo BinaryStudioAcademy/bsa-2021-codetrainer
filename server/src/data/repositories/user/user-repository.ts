@@ -1,24 +1,25 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { User } from '../../models';
+import { IUserFields } from '../../../types/user/user-fields';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+	userFields = [
+		'user.id',
+		'user.name',
+		'user.surname',
+		'user.nickname',
+		'user.avatar',
+		'user.createdAt',
+		'user.lastVisit',
+		'user.skills',
+		'user.devLevel',
+		'user.social',
+		'user.email',
+	];
+
 	getAll() {
-		return this.createQueryBuilder('user')
-			.select([
-				'user.id',
-				'user.name',
-				'user.surname',
-				'user.nickname',
-				'user.avatar',
-				'user.createdAt',
-				'user.lastVisit',
-				'user.skills',
-				'user.devLevel',
-				'user.social',
-				'user.email',
-			])
-			.getMany();
+		return this.createQueryBuilder('user').select(this.userFields).getMany();
 	}
 
 	getByEmail(email: string) {
@@ -26,9 +27,18 @@ export class UserRepository extends Repository<User> {
 	}
 
 	getById(id: string) {
-		return this.createQueryBuilder('user')
-			.select(['user.id', 'user.name', 'user.surname', 'user.email'])
-			.where('user.id = :id', { id })
-			.getOne();
+		return this.createQueryBuilder('user').select(this.userFields).where('user.id = :id', { id }).getOne();
+	}
+
+	updateById(id: string, body: IUserFields) {
+		this.update(id, {
+			...body,
+		});
+
+		return this.getById(id);
+	}
+
+	removeById(id: string) {
+		return this.delete({ id });
 	}
 }

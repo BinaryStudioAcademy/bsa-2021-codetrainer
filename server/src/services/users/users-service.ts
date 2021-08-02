@@ -21,29 +21,26 @@ export class User {
 	async getOne(id: string) {
 		const repository = getCustomRepository(this.userRepository);
 
-		return repository.getById(id);
+		return {
+			user: await repository.getById(id),
+		};
 	}
 
 	async update(id: string, body: IUserFields) {
-		console.log(body);
+		const repository = getCustomRepository(this.userRepository);
+
+		return {
+			user: await repository.updateById(id, body),
+		};
 	}
-	// async login({ id }: { id: string }) {
-	// 	const repository = getCustomRepository(this.userRepository);
-	// 	return {
-	// 		token: createToken({ id }),
-	// 		user: await repository.getById(id),
-	// 	};
-	// }
 
-	// async register({ password, ...userData }: Omit<IUserFields, 'id'>) {
-	// 	const repository = getCustomRepository(this.userRepository);
-	// 	const newUser = await repository.save({
-	// 		...userData,
-	// 		password: await encrypt(password),
-	// 	});
+	async delete(id: string) {
+		const repository = getCustomRepository(this.userRepository);
 
-	// 	return this.login(newUser);
-	// }
+		return {
+			delete: await repository.removeById(id).then((data) => (data.affected ? true : 'User not found')),
+		};
+	}
 }
 
 export type TUsers = InstanceType<typeof User>;
