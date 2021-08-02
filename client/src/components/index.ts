@@ -1,6 +1,6 @@
 export { PrivateRoute, PublicRoute } from './basic';
 
-export { Example } from './common';
+export { Example, FullscreenLoader, Spinner } from './common';
 
 export { SignInPage } from './pages';
 
