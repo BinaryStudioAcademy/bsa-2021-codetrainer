@@ -30,7 +30,7 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsers })
 		.delete(UsersApiPath.DELETE, (req, res, next) =>
 			// TODO: add user id validation
 			usersService
-				.delete(req.params.id)
+				.delete(req.params.id, res)
 				.then((data) => res.send(data))
 				.catch(next),
 		);
