@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { useState } from 'react';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
