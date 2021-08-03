@@ -9,7 +9,6 @@ const ENV = {
 	},
 	JWT: {
 		SECRET: getEnv('SECRET_KEY'),
-		ISSUER: getEnv('ISSUER'),
 		EXPIRES_IN: '24h',
 	},
 	DB: {
