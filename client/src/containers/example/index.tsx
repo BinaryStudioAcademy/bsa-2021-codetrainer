@@ -38,7 +38,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<img src="api/images/0b5f991b-67cd-4991-b2bc-a704d5ea0d56" />
+			<img src="https://codetrainer-images.s3.eu-north-1.amazonaws.com/7c79b29f-8b8e-4940-9402-8639f477825d.png" />
 		</div>
 	);
 };
