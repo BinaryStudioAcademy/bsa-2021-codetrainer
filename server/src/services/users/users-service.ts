@@ -1,6 +1,6 @@
+import Express from 'express';
 import { getCustomRepository } from 'typeorm';
 import { TUserRepository } from '../../data';
-import { encrypt, createToken } from '../../helpers';
 import { IUserFields } from '../../types/user/user-fields';
 
 export class User {
@@ -34,12 +34,17 @@ export class User {
 		};
 	}
 
-	async delete(id: string) {
+	async delete(id: string, res: Express.Response) {
 		const repository = getCustomRepository(this.userRepository);
+		const isDeleted = await repository.removeById(id).then((data) => !!data.affected);
 
-		return {
-			delete: await repository.removeById(id).then((data) => (data.affected ? true : 'User not found')),
-		};
+		if (!isDeleted) {
+			res.status(404);
+
+			return { message: 'User not found' };
+		}
+
+		return { delete: isDeleted };
 	}
 }
 
