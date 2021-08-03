@@ -1,5 +1,7 @@
 export * from './registration';
 export * from './authentication';
 export * from './error-handler';
-export { jwtMiddleware } from './jwt.middleware';
+export * from './check_clan';
+export * from './authorization';
+export * from './data-validation/data-validation';
 export { imageMiddleware } from './image.middleware';

@@ -1,9 +1,9 @@
 import express, { Router } from 'express';
 import cors from 'cors';
 import passport from 'passport';
-import { ENV } from './common';
+import { ENV, WHITE_ROUTES } from './common';
 import { initApi } from './api';
-import { errorHandlerMiddleware } from './middleware';
+import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 
 import 'reflect-metadata';
 import './data/db/connection';
@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
+app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
 app.use(ENV.APP.API_PATH, initApi());
 app.use(errorHandlerMiddleware);
 

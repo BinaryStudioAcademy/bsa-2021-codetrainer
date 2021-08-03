@@ -1,0 +1,27 @@
+// TODO: replace font and colors to variables
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.field {
+	all: unset;
+	box-sizing: border-box;
+	background: #f0f3f9;
+	color: #282828;
+	border-radius: 7px;
+	border: 1px solid transparent;
+	transition: border-color 0.25s ease-in-out;
+	flex-basis: 100%;
+	font-family: "Montserrat", sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 14px;
+	padding: 15px 20px;
+	::placeholder {
+		color: rgba(40, 40, 40, 0.5);
+	}
+}
+
+.field:focus-within,
+.field .hide:focus {
+	border-color: #282828;
+}

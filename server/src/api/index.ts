@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { initAuth } from './auth';
+import { initClan } from './clan';
 import { imagesController } from './images.controller';
 import { ApiPath } from '../common';
-import { auth, imagesService } from '../services';
+import { auth, clan, imagesService } from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -11,6 +12,13 @@ export function initApi(): Router {
 		ApiPath.AUTH,
 		initAuth(Router, {
 			auth,
+		}),
+	);
+
+	apiRouter.use(
+		ApiPath.CLAN,
+		initClan(Router, {
+			clan,
 		}),
 	);
 

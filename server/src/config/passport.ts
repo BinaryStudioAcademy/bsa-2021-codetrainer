@@ -1,8 +1,15 @@
 import passport from 'passport';
 import { getCustomRepository } from 'typeorm';
 import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import { ENV } from '../common';
 import { UserRepository } from '../data';
 import { cryptCompare } from '../helpers';
+
+const options = {
+	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+	secretOrKey: ENV.JWT.SECRET,
+};
 
 passport.use(
 	'login',
@@ -39,4 +46,16 @@ passport.use(
 			}
 		},
 	),
+);
+
+passport.use(
+	new JwtStrategy(options, async ({ id }, done) => {
+		const repository = getCustomRepository(UserRepository);
+		try {
+			const user = await repository.getById(id);
+			return user ? done(null, user) : done({ status: 401, message: 'Token is invalid.' }, null);
+		} catch (err) {
+			return done(err);
+		}
+	}),
 );
