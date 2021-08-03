@@ -9,7 +9,7 @@ import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
 import { useRouteMatch } from 'react-router-dom';
 
-export const Profile: React.FC = () => {
+export const Profile = () => {
 	const match = useRouteMatch();
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
 	const getTabContent = useCallback((): React.ReactNode => {

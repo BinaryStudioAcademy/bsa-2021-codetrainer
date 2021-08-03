@@ -14,11 +14,11 @@ export interface IMenuItemConfig {
 	onClick: () => void;
 }
 
-export const ProfileRouter: React.FC<IProfileRouterProps> = ({ tabItems, activeTabId }) => {
+export const ProfileRouter = ({ tabItems, activeTabId }: IProfileRouterProps) => {
 	return (
-		<Menu className={styles.navmenu}>
+		<Menu className={styles.navMenu}>
 			{tabItems.map((tabItem: IMenuItemConfig) => {
-				const className = clsx(styles.navmenuItem, {
+				const className = clsx(styles.navMenuItem, {
 					[styles.active]: tabItem.tabId === activeTabId,
 				});
 				return (

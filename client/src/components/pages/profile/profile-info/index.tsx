@@ -7,7 +7,7 @@ export interface IProfileInfoProps {
 	profileRouteProps: IProfileRouterProps;
 }
 
-export const ProfileInfo: React.FC<IProfileInfoProps> = ({ getTabContent, profileRouteProps }) => {
+export const ProfileInfo = ({ getTabContent, profileRouteProps }: IProfileInfoProps) => {
 	return (
 		<div className={styles.profileInfo}>
 			<ProfileRouter {...profileRouteProps} />
