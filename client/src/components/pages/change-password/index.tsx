@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
 import styles from './change-password.module.scss';
+import { ROUTES } from 'constants/routes';
 
 const ChangePasswordSchema = Yup.object().shape({
 	password: Yup.string().min(8, 'Too short').required('Required'),
@@ -53,7 +54,7 @@ const ChangePassword: React.FC = () => {
 			</Formik>
 			<div className={styles.footer}>
 				Back to{' '}
-				<Link to="/sign-in" className={styles.link}>
+				<Link to={ROUTES.Login} className={styles.link}>
 					Sign in
 				</Link>
 			</div>

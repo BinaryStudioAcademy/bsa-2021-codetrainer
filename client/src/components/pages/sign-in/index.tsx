@@ -10,6 +10,7 @@ import FormField from './form-field';
 import Separator from './separator';
 import Button, { ButtonClasses } from './button';
 import styles from './sign-in.module.scss';
+import { ROUTES } from 'constants/routes';
 
 interface ISignInPageProps {
 	onFormSubmit?: (form: ISignInForm) => void;
@@ -68,7 +69,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit = () => {}, onGit
 				)}
 			</Formik>
 			<footer>
-				No account? <Link to="/register">Sign up</Link>
+				No account? <Link to={ROUTES.Register}>Sign up</Link>
 			</footer>
 		</CoverLayout>
 	);

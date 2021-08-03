@@ -3,7 +3,9 @@ import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
+import { ISignUpForm } from 'typings/sign-up-form';
 import styles from './sign-up.module.scss';
+import { ROUTES } from 'constants/routes';
 
 const SignupSchema = Yup.object().shape({
 	firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -18,7 +20,11 @@ const SignupSchema = Yup.object().shape({
 		}),
 });
 
-const SignUp: React.FC = () => {
+interface ISignUnPageProps {
+	onFormSubmit: (form: ISignUpForm) => void;
+}
+
+const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit }) => {
 	return (
 		<CoverLayout>
 			<h4>SignUp</h4>
@@ -32,7 +38,7 @@ const SignUp: React.FC = () => {
 				}}
 				validationSchema={SignupSchema}
 				onSubmit={(values) => {
-					console.log(values);
+					onFormSubmit(values);
 				}}
 			>
 				<Form>
@@ -83,7 +89,7 @@ const SignUp: React.FC = () => {
 			</Formik>
 			<div className={styles.footer}>
 				Already Signep up?{' '}
-				<Link to="/sign-in" className={styles.link}>
+				<Link to={ROUTES.Login} className={styles.link}>
 					Sign in
 				</Link>
 			</div>
@@ -91,4 +97,4 @@ const SignUp: React.FC = () => {
 	);
 };
 
-export default SignUp;
+export default SignUpPage;
