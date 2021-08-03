@@ -7,4 +7,5 @@ export interface IHomeProps {
 	messages: IMessage[];
 	selectedFeedCategory: string;
 	onSelectFeedCategory: (category: string) => void;
+	isLastPage: boolean;
 }

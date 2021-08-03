@@ -6,7 +6,7 @@ import { Button } from 'components/basic';
 import { IFeedProps } from './interface';
 import clsx from 'clsx';
 
-const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFeedCategory }) => {
+const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFeedCategory, isLastPage }) => {
 	const feedCategories = ['All', 'Questions'];
 
 	const feedCategoriesJSX = feedCategories.map((category) => {
@@ -33,6 +33,8 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 			break;
 	}
 
+	const loadMoreButton = <Button text="Load more" classList={styles.loadMoreButton} />;
+
 	return (
 		<Card className={styles.feed}>
 			<div>
@@ -45,7 +47,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 				</div>
 				{feedContentJSX}
 			</div>
-			<Button text="Load more" classList={styles.loadMoreButton} />
+			{!isLastPage ? loadMoreButton : null}
 		</Card>
 	);
 };
