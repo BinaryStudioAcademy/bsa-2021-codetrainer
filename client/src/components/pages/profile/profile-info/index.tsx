@@ -1,18 +1,17 @@
 import React from 'react';
-import { ProfileRouter } from './profile-router';
+import { IProfileRouterProps, ProfileRouter } from './profile-router';
 import styles from './profile-info.module.scss';
 
-interface IProfileInfoProps {
-	tabContent: any;
-	activeTab: string;
-	setActiveTab: (tab: string) => void;
+export interface IProfileInfoProps {
+	getTabContent: () => React.ReactNode;
+	profileRouteProps: IProfileRouterProps;
 }
 
-export const ProfileInfo: React.FC<IProfileInfoProps> = (props) => {
+export const ProfileInfo: React.FC<IProfileInfoProps> = ({ getTabContent, profileRouteProps }) => {
 	return (
 		<div className={styles.profileInfo}>
-			<ProfileRouter activeTab={props.activeTab} setActiveTab={props.setActiveTab} />
-			{props.tabContent()}
+			<ProfileRouter {...profileRouteProps} />
+			{getTabContent()}
 		</div>
 	);
 };

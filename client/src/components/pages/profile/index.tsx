@@ -1,22 +1,18 @@
 import React from 'react';
 import styles from './profile.module.scss';
 import { IProfileBioProps, ProfileBio } from './profile-bio';
-import { ProfileInfo } from './profile-info';
+import { IProfileInfoProps, ProfileInfo } from './profile-info';
 
 interface IProfileProps {
 	userInfo: IProfileBioProps;
-	activeTab: string;
-	tabContent: () => JSX.Element | null;
-	setActiveTab: (tab: string) => void;
+	profileInfoProps: IProfileInfoProps;
 }
 
-export const Profile: React.FC<IProfileProps> = (props) => {
-	const { userInfo, ...profileInfo } = props;
-
+export const Profile: React.FC<IProfileProps> = ({ userInfo, profileInfoProps }) => {
 	return (
 		<div className={styles.profile}>
 			<ProfileBio {...userInfo} />
-			<ProfileInfo {...profileInfo} />
+			<ProfileInfo {...profileInfoProps} />
 		</div>
 	);
 };

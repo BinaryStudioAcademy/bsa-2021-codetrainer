@@ -1,5 +1,5 @@
 .navmenu {
-	background: #fafbff !important;
+	background-color: #fafbff !important;
 	padding-bottom: 20px;
 	display: flex;
 	gap: 30px;
@@ -10,17 +10,17 @@
 		font-style: normal;
 		font-weight: 600;
 		font-size: 16px;
-		line-height: 20px;
 		color: #282828;
 	}
 	.navmenuItem:hover {
-		background: inherit;
+		background-color: inherit;
 		color: #705ff5;
 		text-decoration: underline;
 		text-decoration-color: #705ff5;
 		text-underline-offset: 1px;
 	}
 	.navmenuItem.active {
+		cursor: default;
 		color: #705ff5;
 		text-decoration: underline;
 		text-decoration-color: #705ff5;
