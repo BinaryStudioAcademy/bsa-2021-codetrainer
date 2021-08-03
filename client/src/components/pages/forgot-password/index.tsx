@@ -37,7 +37,7 @@ const ForgotPassword: React.FC = () => {
 				</Form>
 			</Formik>
 			<div className={styles.footer}>
-				Back to ?{' '}
+				Back to{' '}
 				<Link to="/sign-in" className={styles.link}>
 					Sign in
 				</Link>
