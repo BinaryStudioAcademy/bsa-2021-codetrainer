@@ -1,6 +1,7 @@
+import path from 'path';
 import { randomUUID } from 'crypto';
-import internal from 'stream';
 import { ImagesRepository } from '../data';
+import { TFile } from '../types';
 
 export class ImagesService {
 	private readonly repository: ImagesRepository;
@@ -9,14 +10,10 @@ export class ImagesService {
 		this.repository = repository;
 	}
 
-	getImageStream(key: string): internal.Readable {
-		return this.repository.getImageStreamByKey(key);
-	}
-
-	async putImage(imageBuffer: Buffer): Promise<string> {
+	async putImage(image: TFile): Promise<string> {
 		const key = randomUUID();
-		await this.repository.putImage(key, imageBuffer);
-		return key;
+		const ext = path.extname(image.name);
+		return this.repository.putImage(key + ext, image.buffer, image.mimetype);
 	}
 
 	async deleteImage(key: string): Promise<void> {

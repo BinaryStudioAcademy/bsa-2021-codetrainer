@@ -1,12 +1,11 @@
-import S3, { DeleteObjectRequest, GetObjectRequest, PutObjectRequest } from 'aws-sdk/clients/s3';
-import internal from 'stream';
+import S3, { DeleteObjectRequest, PutObjectRequest } from 'aws-sdk/clients/s3';
 import { ENV } from '../../common';
 
 export class ImagesRepository {
-	private s3: S3;
+	private s3Client: S3;
 
 	constructor() {
-		this.s3 = new S3({
+		this.s3Client = new S3({
 			region: ENV.AWS.IMAGES.REGION,
 			credentials: {
 				accessKeyId: ENV.AWS.IMAGES.ACCESS_KEY,
@@ -15,21 +14,15 @@ export class ImagesRepository {
 		});
 	}
 
-	getImageStreamByKey(key: string): internal.Readable {
-		const getRequest: GetObjectRequest = {
-			Bucket: ENV.AWS.IMAGES.BUCKET,
-			Key: key
-		};
-		return this.s3.getObject(getRequest).createReadStream();
-	}
-
-	async putImage(key: string, imageBuffer: Buffer): Promise<void> {
+	async putImage(key: string, buffer: Buffer, mimeType: string): Promise<string> {
 		const putRequest: PutObjectRequest = {
 			Bucket: ENV.AWS.IMAGES.BUCKET,
 			Key: key,
-			Body: imageBuffer
+			Body: buffer,
+			ContentType: mimeType
 		};
-		await this.s3.putObject(putRequest).promise();
+		const result = await this.s3Client.putObject(putRequest).promise();
+		return `https://${ENV.AWS.IMAGES.BUCKET}.s3.amazonaws.com/${key}`;
 	}
 
 	async deleteImage(key: string): Promise<void> {
@@ -37,6 +30,6 @@ export class ImagesRepository {
 			Bucket: ENV.AWS.IMAGES.BUCKET,
 			Key: key
 		};
-		await this.s3.deleteObject(deleteRequest).promise();
+		await this.s3Client.deleteObject(deleteRequest).promise();
 	}
 }
