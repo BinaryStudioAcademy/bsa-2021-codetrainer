@@ -3,6 +3,7 @@ import { TClanRepository, TProfileClanRepository, TUserRepository } from '../../
 import { IUserFields } from '../../types';
 import { ValidationError } from '../../helpers';
 import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../common';
+import { CODE_ERRORS } from '../../common/constants/helpers';
 
 export class Clan {
 	protected clanRepository: TClanRepository;
@@ -27,13 +28,13 @@ export class Clan {
 
 	async create(user: IUserFields, { name, isPublic = CLAN_IS_PUBLIC }: { name: string; isPublic: boolean }) {
 		if (user.profileClan) {
-			throw new ValidationError({ message: 'You is already in clan', status: 401 });
+			throw new ValidationError(CODE_ERRORS.IN_CLAN);
 		}
 
 		const repository = getCustomRepository(this.clanRepository);
 		const clan = await repository.getByName(name);
 		if (clan) {
-			throw new ValidationError({ message: `Clan name: ${name} is already taken.`, status: 401 });
+			throw new ValidationError(CODE_ERRORS.CLAN_NAME_IS_TAKEN(name));
 		}
 
 		const userRepository = getCustomRepository(this.userRepository);
@@ -60,7 +61,7 @@ export class Clan {
 		const repository = getCustomRepository(this.clanRepository);
 		const clan = await repository.getById(user.clan.id);
 		if (!clan) {
-			throw new ValidationError({ message: 'You have no clan', status: 401 });
+			throw new ValidationError(CODE_ERRORS.NO_CLAN);
 		}
 
 		const userRepository = getCustomRepository(this.userRepository);
@@ -78,6 +79,10 @@ export class Clan {
 
 	async update(user: IUserFields, { isPublic, name }: { isPublic: boolean; name: string }) {
 		const repository = getCustomRepository(this.clanRepository);
+		const clan = await repository.getByName(name);
+		if (clan) {
+			throw new ValidationError(CODE_ERRORS.CLAN_NAME_IS_TAKEN(name));
+		}
 
 		await repository.updateById(user.clan.id, { name, isPublic });
 		const newClan = await repository.getById(user.clan.id);
