@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../typings/root-state';
 import { Notification } from '../../components';
@@ -6,18 +6,28 @@ import * as actions from './logic/actions';
 
 export const NotificationContainer = () => {
 	const dispatch = useDispatch();
-	const { showNotification, notificationType, message, title } = useSelector(
-		(rootState: IRootState) => rootState.notification,
-	);
-	const setIsOpen = (isOpen: boolean) => dispatch(actions.showNotification({ showNotification: isOpen }));
+	const notification = useSelector((rootState: IRootState) => rootState.notification.notification);
+
+	const [isOpen, setIsOpen] = useState(!!notification);
+
+	useEffect(() => {
+		setIsOpen(!!notification);
+	}, [notification]);
+
+	const handleClose = (transitionDuration: number) => {
+		setIsOpen(false);
+		setTimeout(() => {
+			dispatch(actions.showNotification({ notification: null }));
+		}, transitionDuration);
+	};
 
 	return (
 		<Notification
-			isOpen={showNotification}
-			setIsOpen={setIsOpen}
-			severity={notificationType}
-			text={message}
-			title={title}
+			isOpen={isOpen}
+			handleClose={handleClose}
+			severity={notification?.notificationType}
+			text={notification?.message}
+			title={notification?.title}
 		/>
 	);
 };

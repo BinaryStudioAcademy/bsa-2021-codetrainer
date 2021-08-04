@@ -6,10 +6,7 @@ export const notificationReducer = createReducer<INotificationState>(initialStat
 	[actionTypes.SHOW_NOTIFICATION](state, action: actionTypes.TShowNotificationArgs) {
 		return {
 			...state,
-			showNotification: action.showNotification,
-			message: action.message,
-			notificationType: action.notificationType,
-			title: action.title,
+			...action,
 		};
 	},
 });
