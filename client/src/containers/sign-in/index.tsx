@@ -1,14 +1,16 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { ISignInForm } from 'typings/sign-in-form';
 import { SignInPage, Spinner } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
+import { useHistory } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
 const SignIn: React.FC = () => {
+	const history = useHistory();
 	const dispatch = useDispatch();
-	const { error, isLoading } = useSelector((rootState: IRootState) => rootState.signIn);
+	const { error, isLoading, isSuccess } = useSelector((rootState: IRootState) => rootState.signIn);
 
 	const onFormSubmit = useCallback((userData: ISignInForm) => {
 		dispatch(actions.signInUser({ userData }));
@@ -17,6 +19,12 @@ const SignIn: React.FC = () => {
 	const onGithubSignIn = useCallback(() => {
 		// TODO: implement
 	}, []);
+
+	useEffect(() => {
+		if (isSuccess) {
+			history.push(ROUTES.Home);
+		}
+	}, [isSuccess]);
 
 	return isLoading ? (
 		<Spinner />
