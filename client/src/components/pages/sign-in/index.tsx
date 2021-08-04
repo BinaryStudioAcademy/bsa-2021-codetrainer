@@ -8,7 +8,7 @@ import CoverLayout from './cover-layout';
 import PasswordField from './password-field';
 import FormField from './form-field';
 import Separator from './separator';
-import Button, { ButtonClasses } from './button';
+import Button, { ButtonClasses } from 'components/basic/button';
 import styles from './sign-in.module.scss';
 
 interface ISignInPageProps {
