@@ -1,32 +1,32 @@
+import { ENV } from "../../common";
+
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport(
 	{
-		host: 'smtp.ethereal.email',
+		host: 'smtp.gmail.com',
 		port: 587,
 		secure: false,
 		auth: {
-			user: 'jerrod.kihn@ethereal.email',
-			pass: 'wVmgeFA2kWjuaGv9gf',
+			user: ENV.MAILER.ADDRESS,
+			pass: ENV.MAILER.PASSWORD,
 		},
 	},
 	{
-		from: 'Codetrainer, BSA <jerrod.kihn@ethereal.email>',
+		from: `Codetrainer, BSA <${ENV.MAILER.ADDRESS}>`,
 	},
 );
 
 export interface IMessageMailer {
 	to: string;
 	subject: string;
-	text: string;
+	html: string;
 }
 
 export const mailer = (message: IMessageMailer) => {
 	transporter.sendMail(message, (err: any, info: any) => {
 		if (err) {
-			console.log(err);
-		} else {
-			console.log(info);
+			throw new Error(`Something went wrong with sending email message to ${message.to}`)
 		}
 	});
 };
