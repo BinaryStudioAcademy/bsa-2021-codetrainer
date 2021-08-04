@@ -41,7 +41,7 @@ const icons = {
 	Random: randomIcon,
 };
 
-const NextTaskConatiner = () => {
+const NextTaskContainer = () => {
 	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ id: 0, title: '', icon: '' });
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
 	const [currentTask, setCurrentTask] = useState<ITask>(task);
@@ -79,4 +79,4 @@ const NextTaskConatiner = () => {
 	);
 };
 
-export default NextTaskConatiner;
+export default NextTaskContainer;

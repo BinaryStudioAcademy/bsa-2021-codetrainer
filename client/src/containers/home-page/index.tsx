@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HomePage } from 'components/pages';
+import NextTaskContainer from 'containers/next-task';
 
 const testActiveUser = {
 	id: '13',
@@ -98,6 +99,7 @@ const HomePageContainer: React.FC = () => {
 			selectedFeedCategory={selectedFeedCategory}
 			onSelectFeedCategory={handleSelectFeedCategory}
 			isLastPage={testMessages.isLastPage}
+			nextTaskContent={<NextTaskContainer />}
 		/>
 	);
 };

@@ -3,7 +3,6 @@ import styles from './home-page.module.scss';
 import Community from './components/community/index';
 import Feed from './components/feed/index';
 import { IHomeProps } from './interface';
-import NextTaskConatiner from 'containers/next-task';
 
 const Home: React.FC<IHomeProps> = ({
 	activeUser,
@@ -12,14 +11,13 @@ const Home: React.FC<IHomeProps> = ({
 	selectedFeedCategory,
 	onSelectFeedCategory,
 	isLastPage,
+	nextTaskContent,
 }) => {
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.userGreeting}>Hi, {activeUser.name}!</h3>
 
-			<div className={styles.nextTaskWrapper}>
-				<NextTaskConatiner />
-			</div>
+			<div className={styles.nextTaskWrapper}>{nextTaskContent}</div>
 
 			<div className={styles.communityWrapper}>
 				<Community users={users} />
