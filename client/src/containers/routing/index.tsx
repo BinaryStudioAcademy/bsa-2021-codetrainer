@@ -1,47 +1,18 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { TaskInstructions } from 'components';
+import Example from 'containers/example';
+import { PublicRoute, ForgotPassword, ChangePassword, SignUp } from 'components';
+import SignIn from 'containers/sign-in';
 
 interface IRoutingProps {}
 
-const html = (
-	<>
-		<p>
-			Write a function that takes in a string of one or more words, and returns the same string, but with all five
-			or more letter words reversed.
-		</p>
-		<ul>
-			<li>Strings passed in will consist of only letters and spaces.</li>
-			<li>Spaces will be included only when more than one word is present.</li>
-		</ul>
-		<h3>Examples:</h3>
-		<div className="example">
-			<p>{`spinWords("Hey fellow warriors") => "Hey wollef sroirraw"`}</p>
-			<p>{`spinWords("This is a test") => "This is a test"`}</p>
-			<p>{`spinWords("This is another test") => "This is rehtona test"`}</p>
-		</div>
-		<div className="tags">
-			<a>Algorithms</a>
-			<a>Strings</a>
-			<a>Data Types</a>
-			<a>Formatting</a>
-			<a>Logic</a>
-		</div>
-	</>
-);
-
-const mockData = {
-	title: 'Stop gninnipS My sdroW!',
-	html: html,
-	favorites: 500,
-	rating: 88,
-	createdBy: 'Emerson Saris',
-};
-
 const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
-		{/* <PublicRoute exact restricted={false} path="/" component={} /> */}
-		<TaskInstructions data={mockData} />
+		<PublicRoute exact restricted={false} path="/" component={Example} />
+		<PublicRoute exact restricted={false} path="/register" component={SignUp} />
+		<PublicRoute exact restricted={false} path="/sign-in" component={SignIn} />
+		<PublicRoute exact restricted={false} path="/forgot-password" component={ForgotPassword} />
+		<PublicRoute exact restricted={false} path="/change-password" component={ChangePassword} />
 	</Switch>
 );
 

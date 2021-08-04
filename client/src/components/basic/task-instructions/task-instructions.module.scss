@@ -1,5 +1,10 @@
+body {
+	background-color: darkseagreen;
+}
+
 a {
 	cursor: pointer;
+	text-decoration: none;
 }
 
 :local(.taskContainer) {

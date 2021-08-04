@@ -1,24 +1,15 @@
 import React from 'react';
 import Statistics from './components/Statistics';
-import Rank from './components/Rank';
+import { mockData as data } from './mockData';
+import { Rank } from '../index';
 import styles from './task-instructions.module.scss';
 import './task-details.scss';
 
-interface ITaskInstructionProps {
-	data: {
-		title: string;
-		html: JSX.Element;
-		favorites: number;
-		rating: number;
-		createdBy: string;
-	};
-}
-
-const TaskInstructions: React.FC<ITaskInstructionProps> = ({ data }) => {
+const TaskInstructions: React.FC = (props) => {
 	return (
 		<div className={styles.taskContainer}>
 			<div className={styles.header}>
-				<Rank difficulty={6} />
+				<Rank rank={6} />
 				<h2 className={styles.title}>{data.title}</h2>
 			</div>
 			<div className={styles.task}>
@@ -40,7 +31,7 @@ const TaskInstructions: React.FC<ITaskInstructionProps> = ({ data }) => {
 					icon="person"
 					content={
 						<p>
-							created by <a>Emerson Saris</a>
+							created by <a>{data.createdBy}</a>
 						</p>
 					}
 				/>
