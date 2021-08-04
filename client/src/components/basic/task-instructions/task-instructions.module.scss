@@ -1,14 +1,14 @@
-body {
-	background-color: darkseagreen;
-}
-
-a {
-	cursor: pointer;
-	text-decoration: none;
-}
-
 :local(.taskContainer) {
 	padding: 40px;
+}
+
+:local(.taskContainer a) {
+	cursor: pointer;
+}
+
+:local(.switch a) {
+	font-size: 16px;
+	text-decoration: none;
 }
 
 :local(.header) {
@@ -16,8 +16,8 @@ a {
 	padding: 20px 0;
 }
 
-:local(.title) {
-	margin: 0;
+:local(.taskContainer h2) {
+	margin: 0 0 0 10px;
 	font-size: 18px;
 }
 
@@ -27,8 +27,8 @@ a {
 	padding: 20px 20px;
 }
 
-:local(.divider) {
-	margin: 25px -20px;
+:local(.taskContainer hr) {
+	margin: 20px -20px;
 	border: 1px solid #eaecf1;
 }
 
