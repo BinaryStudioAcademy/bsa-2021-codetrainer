@@ -1,0 +1,14 @@
+:local(.container) {
+	display: flex;
+	flex-direction: column;
+}
+
+:local(.container img) {
+	width: 200px;
+}
+
+:local(.container label) {
+	display: flex;
+	flex-direction: column;
+	width: 210px;
+}

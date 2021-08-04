@@ -4,5 +4,4 @@ export { Example, CoverLayout, FormInput, FullscreenLoader, Spinner } from './co
 
 export { SignInPage, SignUp, ChangePassword, ForgotPassword } from './pages';
 
-export { Modal } from './modals';
-
+export { Modal, ClanModal } from './modals';
