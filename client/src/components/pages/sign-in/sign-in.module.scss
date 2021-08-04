@@ -1,0 +1,88 @@
+// TODO: replace font and colors to variables
+
+label {
+	font-family: Montserrat;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 15px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #282828;
+}
+
+h4 {
+	margin: 0;
+	font-family: Montserrat;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 29px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #282828;
+}
+
+a {
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 15px;
+	text-decoration-line: underline;
+	color: #705FF5;
+}
+
+.signIn {
+	position: relative;
+
+	.form {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 300px;
+		max-width: 80%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		& > button {
+			height: 50px;
+		}
+		.light {
+			color: #E5E5E5;
+		}
+		.errorLabel,
+		.right {
+			text-align: right;
+		}
+		.errorLabel {
+			margin-top: 5px;
+			height: 16px;
+			font-size: 16px;
+			color: #ec4179;
+		}
+		.error {
+			color: #ec4179;
+			border-color: #ec4179;
+		}
+		.labelWrapper {
+			margin-bottom: 5px;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+		}
+		input {
+			width: 100%;
+		}
+	}
+
+	footer {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translate(-50%);
+		font-size: 14px;
+	}
+}

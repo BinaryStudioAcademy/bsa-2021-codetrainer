@@ -1,5 +1,7 @@
-export { PrivateRoute, PublicRoute, RankTag } from './basic';
+export { Avatar, Label, PrivateRoute, PublicRoute } from './basic';
 
-export { SearchPage } from './pages';
+export { Example, CoverLayout, FormInput, FullscreenLoader, Spinner, Header } from './common';
 
-export { Example, FormInput, FormSelect, Challenge } from './common';
+export { SignInPage, SignUp, ChangePassword, ForgotPassword, SearchPage } from './pages';
+
+export { Modal } from './modals';
