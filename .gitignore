@@ -118,6 +118,3 @@ dist
 .pnp.*
 
 client/build
-
-.idea/
-

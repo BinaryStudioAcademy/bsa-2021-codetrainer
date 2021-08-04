@@ -28,3 +28,5 @@ export class Auth {
 		return this.login(newUser);
 	}
 }
+
+export type TAuth = InstanceType<typeof Auth>;

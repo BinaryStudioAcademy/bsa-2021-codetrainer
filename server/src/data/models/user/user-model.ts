@@ -1,6 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
-import { ProfileClan } from './profile-clan-model';
-import { Clan } from '../clan';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class User {
@@ -18,11 +16,4 @@ export class User {
 
 	@Column({ type: 'varchar', length: 100 })
 	password!: string;
-
-	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
-	@JoinColumn()
-	profileClan?: ProfileClan;
-
-	@ManyToOne(() => Clan, (clan) => clan.members)
-	clan?: Clan;
 }
