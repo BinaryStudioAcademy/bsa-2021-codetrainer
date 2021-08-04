@@ -8,7 +8,7 @@ interface IProfileProps {
 	profileInfoProps: IProfileInfoProps;
 }
 
-export const Profile: React.FC<IProfileProps> = ({ userInfo, profileInfoProps }) => {
+export const Profile = ({ userInfo, profileInfoProps }: IProfileProps) => {
 	return (
 		<div className={styles.profile}>
 			<ProfileBio {...userInfo} />

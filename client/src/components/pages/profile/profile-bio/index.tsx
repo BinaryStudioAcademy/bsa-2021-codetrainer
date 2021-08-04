@@ -16,7 +16,7 @@ export interface IProfileBioProps {
 	communityQuantity: number;
 }
 
-export const ProfileBio: React.FC<IProfileBioProps> = (props) => {
+export const ProfileBio = (props: IProfileBioProps) => {
 	const {
 		img,
 		name,
