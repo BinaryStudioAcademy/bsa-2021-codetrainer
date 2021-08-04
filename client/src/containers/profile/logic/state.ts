@@ -1,7 +1,9 @@
+import { ActiveTabId } from './models';
+
 export interface IProfileState {
-	activeTab: string;
+	activeTab: ActiveTabId;
 }
 
 export const initialState: IProfileState = {
-	activeTab: 'stats',
+	activeTab: ActiveTabId.Stats,
 };
