@@ -1,11 +1,14 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
-import { ISignUpForm } from 'typings/sign-up-form';
+import { Button } from 'components/basic';
+import { ButtonClasses } from 'components/basic/button';
 import styles from './sign-up.module.scss';
 import { ROUTES } from 'constants/routes';
+import { ISignUpForm } from 'typings/sign-up-form';
 
 const SignupSchema = Yup.object().shape({
 	name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -84,14 +87,12 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 						type="password"
 						component={FormInput}
 					/>
-					<button type="submit" className={styles.submitBtn}>
-						Sign Up
-					</button>
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.submitBtn)}>Sign Up</Button>
 				</Form>
 			</Formik>
 			<div className={styles.footer}>
 				Already Signep up?{' '}
-				<Link to={ROUTES.Login} className={styles.link}>
+				<Link to={ROUTES.SignIn} className={styles.link}>
 					Sign in
 				</Link>
 			</div>

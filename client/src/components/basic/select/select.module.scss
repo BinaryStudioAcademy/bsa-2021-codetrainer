@@ -1,0 +1,62 @@
+.selectWrapper {
+	position: relative;
+}
+
+.select {
+	box-sizing: border-box;
+
+	display: flex;
+	align-items: center;
+	height: 45px;
+	margin: 0;
+	padding: 14px 20px;
+
+	font-size: 14px;
+	font-weight: 500;
+
+	border: none;
+	border-radius: 10px;
+
+	background: #f0f3f9;
+	background-image: url('./assets/arrow.svg');
+	background-repeat: no-repeat;
+	background-position: calc(100% - 20px) 50%;
+
+	cursor: pointer;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.select img {
+	margin-right: 15px;
+}
+
+.select::selection,
+.select img::selection {
+	background: none;
+}
+
+.optionsList {
+	position: absolute;
+	z-index: 1;
+	top: 52px;
+
+	box-sizing: border-box;
+
+	display: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+
+	border-radius: 5px;
+
+	background: #fff;
+	box-shadow: 0px 4px 6px rgba(189, 189, 189, 0.25);
+
+	list-style-type: none;
+}
+
+.optionsList.optionsActive {
+	display: block;
+}

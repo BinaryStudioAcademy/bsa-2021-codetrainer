@@ -54,7 +54,7 @@ const ChangePassword: React.FC = () => {
 			</Formik>
 			<div className={styles.footer}>
 				Back to{' '}
-				<Link to={ROUTES.Login} className={styles.link}>
+				<Link to={ROUTES.SignIn} className={styles.link}>
 					Sign in
 				</Link>
 			</div>

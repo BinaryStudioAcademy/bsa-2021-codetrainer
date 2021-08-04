@@ -8,7 +8,7 @@ import CoverLayout from './cover-layout';
 import PasswordField from './password-field';
 import FormField from './form-field';
 import Separator from './separator';
-import Button, { ButtonClasses } from './button';
+import Button, { ButtonClasses } from 'components/basic/button';
 import styles from './sign-in.module.scss';
 import { ROUTES } from 'constants/routes';
 
@@ -71,7 +71,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn =
 				)}
 			</Formik>
 			<footer>
-				No account? <Link to={ROUTES.Register}>Sign up</Link>
+				No account? <Link to={ROUTES.SignUp}>Sign up</Link>
 			</footer>
 		</CoverLayout>
 	);

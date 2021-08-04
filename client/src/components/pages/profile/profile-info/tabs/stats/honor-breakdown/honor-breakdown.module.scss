@@ -1,0 +1,9 @@
+.progressBars {
+	width: 316px;
+	.progressBarBlock {
+		margin-top: 17px;
+	}
+	.progressBarBlock:first-child {
+		margin-top: 0;
+	}
+}
