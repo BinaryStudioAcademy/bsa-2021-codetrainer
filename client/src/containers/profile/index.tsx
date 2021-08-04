@@ -1,6 +1,6 @@
 import { ProfilePage } from '../../components';
 import React, { useMemo, useCallback } from 'react';
-// import { Stats } from './tabs/stats';
+import { Stats } from './tabs/stats';
 import { mockProfileBioProps, statsProps } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
@@ -8,7 +8,6 @@ import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
 import { RouteComponentProps } from 'react-router-dom';
-import { Stats } from './tabs/stats';
 
 export const Profile = (props: RouteComponentProps) => {
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
