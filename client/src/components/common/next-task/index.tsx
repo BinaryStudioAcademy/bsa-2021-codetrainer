@@ -24,7 +24,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 
 				<div>
 					<Button text="Train" onClick={handleTrainClick} />
-					<Button text="Skip" onClick={handleSkipClick} classList={styles.skipButton} />
+					<Button text="Skip" onClick={handleSkipClick} className={styles.skipButton} />
 				</div>
 			</div>
 

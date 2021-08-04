@@ -33,7 +33,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 			break;
 	}
 
-	const loadMoreButton = <Button text="Load more" classList={styles.loadMoreButton} />;
+	const loadMoreButton = <Button text="Load more" className={styles.loadMoreButton} />;
 
 	return (
 		<Card className={styles.feed}>

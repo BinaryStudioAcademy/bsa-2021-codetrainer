@@ -53,8 +53,8 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					</div>
 				</div>
 				<div className={styles.buttonsContainer}>
-					<Button text="Add New Friend" classList={styles.addButton} />
-					<Button text="Create New Clan" classList={styles.createButton} />
+					<Button text="Add New Friend" className={styles.addButton} />
+					<Button text="Create New Clan" className={styles.createButton} />
 				</div>
 			</Card>
 		</div>

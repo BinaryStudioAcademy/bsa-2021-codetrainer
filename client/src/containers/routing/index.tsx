@@ -10,7 +10,7 @@ interface IRoutingProps {}
 const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
 		<PublicRoute exact restricted={false} path="/" component={Example} />
-		<PrivateRoute path="/home-page" component={HomePage} />
+		<PrivateRoute path="/home" component={HomePage} />
 		<PublicRoute exact restricted={false} path="/register" component={SignUp} />
 		<PublicRoute exact restricted={false} path="/sign-in" component={SignIn} />
 		<PublicRoute exact restricted={false} path="/forgot-password" component={ForgotPassword} />

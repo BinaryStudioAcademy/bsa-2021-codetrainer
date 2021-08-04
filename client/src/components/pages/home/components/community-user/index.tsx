@@ -13,7 +13,7 @@ interface ICommunityUserProps {
 const CommunityUser: React.FC<ICommunityUserProps> = ({ imageSource, name, rank }) => {
 	return (
 		<div className={styles.userRow}>
-			<Rank rank={rank} classList={styles.rank} />
+			<Rank rank={rank} />
 			<img className={styles.userImage} src={imageSource || defaultUserPhoto} alt={name} />
 			<Text className={styles.name}>{name}</Text>
 		</div>
