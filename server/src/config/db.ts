@@ -1,6 +1,6 @@
 import { ConnectionOptions } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { ENV } from '../common';
-import { User } from '../data/models';
 
 const {
 	DATABASE: database,
@@ -12,10 +12,14 @@ const {
 	SYNCHRONIZE: synchronize,
 	LOGGING: logging,
 	MIGRATIONS: migrations,
+	ENTITIES: entities,
+	MIGRATIONS_DIR: migrationsDir,
+	ENTITIES_DIR: entitiesDir,
 	SSL: ssl,
 } = ENV.DB;
 
 export const dbConfig = {
+	namingStrategy: new SnakeNamingStrategy(),
 	database,
 	username,
 	password,
@@ -25,6 +29,10 @@ export const dbConfig = {
 	synchronize: synchronize === 'true',
 	logging: logging === 'true',
 	migrations: [migrations],
-	entities: [User],
+	entities: [entities],
 	ssl: ssl === 'true' ? { rejectUnauthorized: false } : false,
+	cli: {
+		entitiesDir,
+		migrationsDir,
+	},
 } as ConnectionOptions;
