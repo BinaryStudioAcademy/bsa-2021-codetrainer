@@ -58,11 +58,9 @@ const SearchTask: React.FC<ISearchTask> = ({ tags, ranks }) => {
 					<div id="checkbox-group">
 						<h6>Tags</h6>
 					</div>
-					<div role="group" aria-labelledby="checkbox-group">
+					<div role="group" aria-labelledby="checkbox-group" className={styles.checkboxContainer}>
 						{tags.map((tag, id) => (
-							<div key={id}>
-								<Checkbox>{tag}</Checkbox>
-							</div>
+							<Checkbox key={id} label={tag} name={tag} />
 						))}
 					</div>
 					<button type="submit" className={styles.submitButton}>
