@@ -24,7 +24,13 @@ export const initAuth = (appRouter: typeof Router, services: { auth: TAuth }) =>
 		.post(AuthApiPath.REGISTER, registrationMiddleware, (req, res, next) =>
 			authService
 				.register(req.user as Omit<IUserFields, 'id'>)
-				.then((data) => res.send(data))
+				.then(({ refreshToken, ...data }) => {
+					req.session = {
+						...(req.session || {}),
+						refreshToken,
+					};
+					res.send(data);
+				})
 				.catch(next),
 		)
 		.post(AuthApiPath.TOKEN_REFRESH, (req, res, next) =>
