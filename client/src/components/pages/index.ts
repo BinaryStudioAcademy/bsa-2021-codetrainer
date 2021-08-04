@@ -6,4 +6,5 @@ export { default as ForgotPassword } from './forgot-password';
 export { default as SearchPage } from './search-page';
 export { default as SignUp } from './sign-up';
 export { default as SignInPage } from './sign-in';
+export { default as HomePage } from './home';
 export type { ICreateTabsProps } from './create-task';
