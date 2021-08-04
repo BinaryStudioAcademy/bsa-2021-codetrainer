@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
 			case ActiveTabId.Stats:
 				return <Stats statsInfo={statsProps} />;
 			default:
-				return <div>Page is not finished yet</div>;
+				return <Stats statsInfo={statsProps} />;
 		}
 	}, [activeTabId, newTab]);
 
