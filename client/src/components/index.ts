@@ -1,6 +1,6 @@
-export { Avatar, Label, PrivateRoute, PublicRoute } from './basic';
+export { Avatar, Label, Rank, PrivateRoute, PublicRoute } from './basic';
 
-export { Example, CoverLayout, FormInput, FullscreenLoader, Spinner, Header } from './common';
+export { Example, Challenge, CoverLayout, FormInput, FormSelect, FullscreenLoader, Spinner, Header } from './common';
 
 export { SignInPage, SignUp, ChangePassword, ForgotPassword, SearchPage } from './pages';
 

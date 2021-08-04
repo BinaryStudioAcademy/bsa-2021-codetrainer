@@ -1,60 +1,16 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { FormInput, FormSelect, RankTag } from 'components';
+import { FormInput, FormSelect, Rank } from 'components';
 import styles from './search-task.module.scss';
+import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task';
+import { Checkbox } from 'components/basic';
 
-const sortByOptions = [
-	{
-		value: 'NEWEST',
-		label: 'Newest',
-	},
-	{
-		value: 'OLDEST',
-		label: 'Oldest',
-	},
-];
+interface ISearchTask {
+	tags: string[];
+	ranks: number[];
+}
 
-const statusOptions = [
-	{
-		value: 'APPROVED',
-		label: 'Approved',
-	},
-	{
-		value: 'SUBMITTED',
-		label: 'Submitted',
-	},
-	{
-		value: 'NOT_APPROVED',
-		label: 'Not Approved',
-	},
-];
-
-const progressOptions = [
-	{
-		value: 'ALL',
-		label: 'All',
-	},
-	{
-		value: 'IN_PROGRESS',
-		label: 'In Progress',
-	},
-	{
-		value: 'NOT_STARTED',
-		label: 'Not Started',
-	},
-];
-
-const tags = [
-	'Fundamentals(350)',
-	'Rank Up(45)',
-	'Practice and Repeat(13)',
-	'Beta(108)',
-	'Random(65)',
-	'Math(45)',
-	'Algorithms(15)',
-];
-
-const SearchTask = () => {
+const SearchTask: React.FC<ISearchTask> = ({ tags, ranks }) => {
 	return (
 		<>
 			<h4>Search Task</h4>
@@ -71,24 +27,33 @@ const SearchTask = () => {
 			>
 				<Form>
 					<Field id="query" name="query" placeholder="Search..." type="text" component={FormInput} />
-					<Field id="sortBy" name="sortBy" label="Sort By" options={sortByOptions} component={FormSelect} />
-					<Field id="status" name="status" label="Status" options={statusOptions} component={FormSelect} />
+					<Field
+						id="sortBy"
+						name="sortBy"
+						label="Sort By"
+						options={TASK_SORT_BY_OPTIONS}
+						component={FormSelect}
+					/>
+					<Field
+						id="status"
+						name="status"
+						label="Status"
+						options={TASK_STATUS_OPTIONS}
+						component={FormSelect}
+					/>
 					<Field
 						id="progress"
 						name="progress"
 						label="Progress"
-						options={progressOptions}
+						options={TASK_PROGRESS_OPTIONS}
 						component={FormSelect}
 					/>
 
 					<h6>Difficulty</h6>
 					<div className={styles.rankContainer}>
-						<RankTag rank={1} />
-						<RankTag rank={2} />
-						<RankTag rank={3} />
-						<RankTag rank={4} />
-						<RankTag rank={5} />
-						<RankTag rank={6} />
+						{ranks.map((rank) => (
+							<Rank key={rank} rank={rank} />
+						))}
 					</div>
 					<div id="checkbox-group">
 						<h6>Tags</h6>
@@ -96,10 +61,7 @@ const SearchTask = () => {
 					<div role="group" aria-labelledby="checkbox-group">
 						{tags.map((tag, id) => (
 							<div key={id}>
-								<label>
-									<Field type="checkbox" name="tags" value={tag} />
-									{tag}
-								</label>
+								<Checkbox>{tag}</Checkbox>
 							</div>
 						))}
 					</div>
