@@ -31,8 +31,8 @@ const SignUp: React.FC = () => {
 					confirmPassword: '',
 				}}
 				validationSchema={SignupSchema}
-				onSubmit={(values) => {
-					console.log(values);
+				onSubmit={(newUser) => {
+					console.log(newUser);
 				}}
 			>
 				<Form>
@@ -82,7 +82,7 @@ const SignUp: React.FC = () => {
 				</Form>
 			</Formik>
 			<div className={styles.footer}>
-				Already Signep up?{' '}
+				Already Signed Up?{' '}
 				<Link to="/sign-in" className={styles.link}>
 					Sign in
 				</Link>
