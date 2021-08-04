@@ -8,8 +8,8 @@ import { IRootState } from 'typings/root-state';
 
 const SignUp: React.FC = () => {
 	const dispatch = useDispatch();
-	const onFormSubmit = useCallback((user: ISignUpForm) => {
-		dispatch(actions.signUpUser({ user }));
+	const onFormSubmit = useCallback((userData: ISignUpForm) => {
+		dispatch(actions.signUpUser({ userData }));
 	}, []);
 
 	const { error, isLoading } = useSelector((rootState: IRootState) => rootState.signUp);

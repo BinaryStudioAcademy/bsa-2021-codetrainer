@@ -1,7 +1,7 @@
-import { ISignInForm } from 'typings/sign-in-form';
+import { IUser } from 'typings/sign-in-form';
 
 export interface ISignInState {
-	user: ISignInForm | null;
+	user: IUser | null;
 	isLoading: boolean;
 	isSuccess: boolean;
 	error: string;

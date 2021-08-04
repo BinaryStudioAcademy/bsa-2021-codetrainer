@@ -10,8 +10,8 @@ const SignIn: React.FC = () => {
 	const dispatch = useDispatch();
 	const { error, isLoading } = useSelector((rootState: IRootState) => rootState.signIn);
 
-	const onFormSubmit = useCallback((user: ISignInForm) => {
-		dispatch(actions.signInUser({ user }));
+	const onFormSubmit = useCallback((userData: ISignInForm) => {
+		dispatch(actions.signInUser({ userData }));
 	}, []);
 
 	const onGithubSignIn = useCallback(() => {
