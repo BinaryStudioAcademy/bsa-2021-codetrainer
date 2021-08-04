@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactMarkdown, { TransformOptions } from 'react-markdown';
+import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { MarkdownHighlighterSettings } from 'common';
 
 import styles from './styles.module.scss';
@@ -10,18 +10,17 @@ interface IProps {
 	text: string;
 }
 
-const Components: TransformOptions['components'] = {
-	code({ node, inline, className, children, ...props }) {
+const Components: ReactMarkdownOptions['components'] = {
+	code({ inline, className, children, ...props }) {
 		const match = /language-(\w+)/.exec(className || '');
 		return !inline && match ? (
 			<SyntaxHighlighter
-				style={prism}
+				style={vs}
 				language={match[1]}
 				PreTag="div"
 				children={String(children).replace(/\n$/, '')}
 				showLineNumbers={MarkdownHighlighterSettings.SHOW_LINE_NUMBER}
 				wrapLongLines={MarkdownHighlighterSettings.WRAP_LONG_LINES}
-				{...props}
 			/>
 		) : (
 			<code className={className} {...props}>
