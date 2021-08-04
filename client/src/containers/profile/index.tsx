@@ -7,19 +7,13 @@ import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
-import { useRouteMatch } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
 export const Profile: React.FC = () => {
-	const match = useRouteMatch();
+	const history = useHistory();
+	const getRouteTab = (): ActiveTabId =>
+		history.location.pathname.substr(history.location.pathname.lastIndexOf('/') + 1) as ActiveTabId;
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
-	const getTabContent = useCallback((): React.ReactNode => {
-		switch (activeTabId) {
-			case ActiveTabId.Stats:
-				return <Stats statsInfo={statsProps} />;
-			default:
-				return <div>Page is not finished yet</div>;
-		}
-	}, [activeTabId]);
+	const isRouteCorrectToActiveTab = history.location.pathname.indexOf(activeTabId) >= 0;
 	const dispatch = useDispatch();
 	const setActiveTab = useCallback(
 		(tabId: ActiveTabId) => {
@@ -28,14 +22,29 @@ export const Profile: React.FC = () => {
 		[dispatch],
 	);
 
+	const newTab: ActiveTabId = getRouteTab();
+	const getTabContent = useCallback((): React.ReactNode => {
+		if (!isRouteCorrectToActiveTab) {
+			setActiveTab(newTab);
+		}
+		switch (activeTabId) {
+			case ActiveTabId.Stats:
+				return <Stats statsInfo={statsProps} />;
+			case ActiveTabId.Collections:
+				return <div>Collection</div>;
+			default:
+				return <div>Page is not finished yet</div>;
+		}
+	}, [activeTabId, newTab]);
+
 	const tabItems = useMemo(() => {
 		return profilePageTabs.map((item) => {
-			const newRoute = match.url + '/' + item.id;
+			const newRoute = '/users/' + item.id;
 			return {
 				tabId: item.id,
 				tabNameText: item.name,
 				onClick: () => {
-					window.history.replaceState({}, document.title, newRoute);
+					history.push(newRoute);
 					setActiveTab(item.id);
 				},
 			};
