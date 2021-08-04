@@ -4,11 +4,11 @@ import passport from 'passport';
 import { checkConfig } from './helpers';
 import { ENV, WHITE_ROUTES } from './common';
 import { initApi } from './api';
-import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 
 import 'reflect-metadata';
 import './data/db/connection';
 import './config/passport';
+import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 
 checkConfig();
 const app = express();

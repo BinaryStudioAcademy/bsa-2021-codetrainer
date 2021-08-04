@@ -9,7 +9,6 @@ type TAuthService = InstanceType<typeof Auth>;
 const users = new User({ user: UserRepository });
 type TUsersService = InstanceType<typeof User>;
 
-
 const clan = new Clan({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
 type TClanService = InstanceType<typeof Clan>;
 

@@ -27,7 +27,7 @@ export const initApi = (appRouter: typeof Router) => {
 		initUsers(Router, {
 			users,
 		}),
-	)
+	);
 
 	return apiRouter;
 };

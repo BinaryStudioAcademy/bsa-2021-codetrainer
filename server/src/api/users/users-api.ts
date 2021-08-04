@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { UsersApiPath } from '../../common';
+import { REQ_TYPE, UsersApiPath } from '../../common';
+import { userValidationMiddleware, SchemasUserDataValidation } from '../../middleware';
 import { TUsersService } from '../../services';
-import { updateUserMiddleware } from '../../middleware';
 
 export const initUsers = (appRouter: typeof Router, services: { users: TUsersService }) => {
 	const { users: usersService } = services;
@@ -20,12 +20,15 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsersSer
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.put(UsersApiPath.UPDATE, updateUserMiddleware, (req, res, next) =>
-			// TODO: add user id validation
-			usersService
-				.update(req.params.id, req.body)
-				.then((data) => res.send(data))
-				.catch(next),
+		.put(
+			UsersApiPath.UPDATE,
+			userValidationMiddleware(SchemasUserDataValidation.userFieldsSchema, REQ_TYPE.BODY),
+			(req, res, next) =>
+				// TODO: add user id validation
+				usersService
+					.update(req.params.id, req.body)
+					.then((data) => res.send(data))
+					.catch(next),
 		)
 		.delete(UsersApiPath.DELETE, (req, res, next) =>
 			// TODO: add user id validation
