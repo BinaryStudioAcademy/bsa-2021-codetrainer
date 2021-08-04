@@ -1,19 +1,14 @@
-import React from 'react';
-import { Tag } from '@blueprintjs/core';
-import styles from './rank.module.scss';
+import React, { FC } from 'react';
 import clsx from 'clsx';
+import styles from './rank.module.scss';
+import { mapRankToStyle } from './helpers';
 
-interface IRankProps {
-	rank: number;
-	classList?: string;
-}
+type TRankProps = { rank: number; honor?: never } | { rank?: never; honor: number };
 
-const Rank: React.FC<IRankProps> = ({ rank, classList = '' }) => {
-	const colorList = ['blue', 'yellow', 'red'];
-	const color = colorList[Math.floor((rank - 1) / 3)];
-	const tagStyles = clsx(styles.tag, styles[color], classList);
-
-	return <Tag className={tagStyles}>{rank} rank</Tag>;
-};
+const Rank: FC<TRankProps> = (props) => (
+	<span className={clsx(styles.rank, mapRankToStyle(props.rank))}>
+		{props.rank !== undefined ? `${props.rank} rank` : props.honor}
+	</span>
+);
 
 export default Rank;
