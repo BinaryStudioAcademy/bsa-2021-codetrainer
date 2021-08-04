@@ -1,7 +1,15 @@
+import { ISignUpForm } from 'typings/sign-up-form';
+
 export interface ISignUpState {
-	errors: [];
+	isLoading: boolean;
+	isSuccess: boolean;
+	error: string;
+	user: ISignUpForm | null;
 }
 
 export const initialState: ISignUpState = {
-	errors: [],
+	isLoading: false,
+	isSuccess: false,
+	error: '',
+	user: null,
 };

@@ -4,27 +4,29 @@ import { createReducer } from 'helpers/create-reducer.helper';
 import { ISignUpForm } from 'typings/sign-up-form';
 
 export const signUpReducer = createReducer<ISignUpState>(initialState, {
-	[actionTypes.SIGN_UP_USER](state, action: ISignUpForm) {
-		debugger;
+	[actionTypes.SIGN_UP_USER](state) {
 		return {
 			...state,
-			...action,
+			isLoading: true,
 		};
 	},
 
-	[actionTypes.SIGN_UP_USER_SUCCESS](state) {
-		debugger;
+	[actionTypes.SIGN_UP_USER_SUCCESS](state, action: { user: ISignUpForm }) {
 		return {
 			...state,
+			isLoading: false,
 			isSuccess: true,
+			user: action.user,
+			error: '',
 		};
 	},
 
 	[actionTypes.SIGN_UP_USER_ERROR](state, action: { error: string }) {
-		debugger;
 		return {
 			...state,
-			action,
+			isLoading: false,
+			isSuccess: false,
+			error: action.error,
 		};
 	},
 });

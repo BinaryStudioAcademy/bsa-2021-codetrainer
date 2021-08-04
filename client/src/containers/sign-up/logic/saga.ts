@@ -7,11 +7,10 @@ import * as actions from './actions';
 export function* signUpUser(action: ReturnType<typeof actions.signUpUser>) {
 	try {
 		const { user } = action;
-		//@ts-ignore
 		yield call(signUp, user);
-		yield put({ type: actionTypes.SIGN_UP_USER_SUCCESS });
+		yield put(actions.signUpUserSuccess({ user }));
 	} catch (error) {
-		yield put({ type: actionTypes.SIGN_UP_USER_ERROR });
+		yield put(actions.signUpUserError({ error }));
 	}
 }
 

@@ -1,7 +1,7 @@
 import { IExampleState } from 'containers/example/logic/state';
-import { ISignUpForm } from './sign-up-form';
+import { ISignUpState } from 'containers/sign-up/logic/state';
 
 export interface IRootState {
 	example: IExampleState;
-	auth: ISignUpForm;
+	signUp: ISignUpState;
 }

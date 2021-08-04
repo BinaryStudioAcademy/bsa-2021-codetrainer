@@ -22,12 +22,14 @@ const SignupSchema = Yup.object().shape({
 
 interface ISignUnPageProps {
 	onFormSubmit: (form: ISignUpForm) => void;
+	error?: string;
 }
 
-const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit }) => {
+const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 	return (
 		<CoverLayout>
 			<h4>SignUp</h4>
+			{!!error && <div className={styles.error}>{error}</div>}
 			<Formik
 				initialValues={{
 					name: '',
