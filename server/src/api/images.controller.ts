@@ -1,6 +1,5 @@
 import { Request, Response, Router } from 'express';
 import { HttpCodes } from '../common/enum/http-codes';
-import { mapMulterFileToFile } from '../helpers';
 import { imageMiddleware } from '../middleware';
 import { ImagesService } from '../services';
 
@@ -13,7 +12,7 @@ export function imagesController(service: ImagesService): Router {
 		async (req: Request, res: Response) => {
 			const image = req.file;
 			if (image) {
-				const href = await service.putImage(mapMulterFileToFile(image));
+				const href = await service.putImage(image);
 				res.status(HttpCodes.OK).json({ href });
 			}
 			else {
