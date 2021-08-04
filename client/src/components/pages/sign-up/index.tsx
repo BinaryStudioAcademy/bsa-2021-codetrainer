@@ -1,8 +1,11 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
+import { Button } from 'components/basic';
+import { ButtonClasses } from 'components/basic/button';
 import styles from './sign-up.module.scss';
 
 const SignupSchema = Yup.object().shape({
@@ -76,9 +79,7 @@ const SignUp: React.FC = () => {
 						type="password"
 						component={FormInput}
 					/>
-					<button type="submit" className={styles.submitBtn}>
-						Sign Up
-					</button>
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.submitBtn)}>Sign Up</Button>
 				</Form>
 			</Formik>
 			<div className={styles.footer}>
