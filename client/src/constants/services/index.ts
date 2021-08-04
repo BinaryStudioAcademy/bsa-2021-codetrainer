@@ -1,1 +1,1 @@
-export * from './httpMethods';
+export * from './http-methods';
