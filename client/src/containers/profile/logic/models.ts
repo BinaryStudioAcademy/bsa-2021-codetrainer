@@ -1,6 +1,6 @@
 export enum ActiveTabId {
 	Stats = 'stats',
-	Challenge = 'challenge',
+	Tasks = 'tasks',
 	Solution = 'solution',
 	Social = 'social',
 	Collections = 'collections',

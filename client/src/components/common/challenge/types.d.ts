@@ -1,5 +1,5 @@
 export interface IChallengeStatsProps {
-	favouriteSaves: number;
+	favoriteSaves: number;
 	positiveFeedback: number;
 	author: {
 		firstName: string;
@@ -24,7 +24,7 @@ export interface IChallengeProps {
 	title: string;
 	rank: number;
 	stats: {
-		favouriteSaves: number;
+		favoriteSaves: number;
 		positiveFeedback: number;
 	};
 	tags: TChallengeTagsProps;

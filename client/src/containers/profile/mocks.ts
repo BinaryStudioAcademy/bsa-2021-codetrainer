@@ -53,3 +53,72 @@ export const statsProps = {
 	rankBreakdown: mockRankBreakDownProps,
 	community: mockCommunityProps,
 };
+
+export const profileTasks = [
+	{
+		title: 'Completed',
+		tasks: [
+			{
+				author: {
+					firstName: 'A',
+					lastName: 'B',
+					link: '/',
+				},
+				stats: {
+					favoriteSaves: 12,
+					positiveFeedback: 12,
+				},
+				title: 'Title',
+				rank: 2,
+				tags: ['Tag 1', 'Tag 2'],
+			},
+			{
+				author: {
+					firstName: 'A',
+					lastName: 'B',
+					link: '/',
+				},
+				stats: {
+					favoriteSaves: 12,
+					positiveFeedback: 12,
+				},
+				title: 'Title',
+				rank: 2,
+				tags: ['Tag 1', 'Tag 2'],
+			},
+		],
+	},
+	{
+		title: 'Authored',
+		tasks: [
+			{
+				author: {
+					firstName: 'A',
+					lastName: 'B',
+					link: '/',
+				},
+				stats: {
+					favoriteSaves: 12,
+					positiveFeedback: 12,
+				},
+				title: 'Auth',
+				rank: 2,
+				tags: ['Tag 1', 'Tag 2'],
+			},
+			{
+				author: {
+					firstName: 'A',
+					lastName: 'B',
+					link: '/',
+				},
+				stats: {
+					favoriteSaves: 12,
+					positiveFeedback: 12,
+				},
+				title: 'Auth',
+				rank: 2,
+				tags: ['Tag 1', 'Tag 2'],
+			},
+		],
+	},
+];

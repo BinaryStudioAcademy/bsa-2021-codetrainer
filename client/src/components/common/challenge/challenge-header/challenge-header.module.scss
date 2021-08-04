@@ -1,4 +1,6 @@
 .challengeHeader {
+	display: flex;
+	align-items: center;
 	&Title {
 		margin-left: 10px;
 		font: 600 18px 'Montserrat';

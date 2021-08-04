@@ -29,7 +29,7 @@ const SearchPage: React.FC = () => {
 							link: '/',
 						},
 						stats: {
-							favouriteSaves: 12,
+							favoriteSaves: 12,
 							positiveFeedback: 12,
 						},
 						title: 'Title',
