@@ -30,16 +30,18 @@ const html = (
 	</>
 );
 
+const mockData = {
+	title: 'Stop gninnipS My sdroW!',
+	html: html,
+	favorites: 500,
+	rating: 88,
+	createdBy: 'Emerson Saris',
+};
+
 const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
 		{/* <PublicRoute exact restricted={false} path="/" component={} /> */}
-		<TaskInstructions
-			title="Stop gninnipS My sdroW!"
-			html={html}
-			favorites={500}
-			rating={88}
-			createdBy="Emerson Saris"
-		/>
+		<TaskInstructions data={mockData} />
 	</Switch>
 );
 
