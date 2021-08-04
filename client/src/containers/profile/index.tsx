@@ -13,7 +13,6 @@ export const Profile: React.FC = () => {
 	const getRouteTab = (): ActiveTabId =>
 		history.location.pathname.substr(history.location.pathname.lastIndexOf('/') + 1) as ActiveTabId;
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
-	const isRouteCorrectToActiveTab = history.location.pathname.indexOf(activeTabId) >= 0;
 	const dispatch = useDispatch();
 	const setActiveTab = useCallback(
 		(tabId: ActiveTabId) => {
@@ -24,14 +23,9 @@ export const Profile: React.FC = () => {
 
 	const newTab: ActiveTabId = getRouteTab();
 	const getTabContent = useCallback((): React.ReactNode => {
-		if (!isRouteCorrectToActiveTab) {
-			setActiveTab(newTab);
-		}
 		switch (activeTabId) {
 			case ActiveTabId.Stats:
 				return <Stats statsInfo={statsProps} />;
-			case ActiveTabId.Collections:
-				return <div>Collection</div>;
 			default:
 				return <div>Page is not finished yet</div>;
 		}
