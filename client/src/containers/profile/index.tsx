@@ -1,7 +1,7 @@
 import { ProfilePage } from '../../components';
 import React, { useMemo, useCallback } from 'react';
-import { Stats } from './tabs/stats';
-import { mockProfileBioProps, statsProps } from './mocks';
+// import { Stats } from './tabs/stats';
+import { mockProfileBioProps } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
@@ -21,8 +21,6 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
-			case ActiveTabId.Stats:
-				return <Stats statsInfo={statsProps} />;
 			default:
 				return <div />;
 		}
