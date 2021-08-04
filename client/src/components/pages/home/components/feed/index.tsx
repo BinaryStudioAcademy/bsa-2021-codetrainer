@@ -5,6 +5,7 @@ import FeedMessage from '../feed-message';
 import { Button } from 'components/basic';
 import { IFeedProps } from './interface';
 import clsx from 'clsx';
+import { ButtonClasses } from 'components/basic/button';
 
 const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFeedCategory, isLastPage }) => {
 	const feedCategories = ['All', 'Questions'];
@@ -33,7 +34,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 			break;
 	}
 
-	const loadMoreButton = <Button text="Load more" className={styles.loadMoreButton} />;
+	const loadMoreButton = <Button className={clsx(ButtonClasses.red, styles.loadMoreButton)}>Load more</Button>;
 
 	return (
 		<Card className={styles.feed}>

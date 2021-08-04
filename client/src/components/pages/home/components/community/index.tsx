@@ -1,8 +1,10 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Card, Text } from '@blueprintjs/core';
 import CommunityUser from '../community-user';
 import styles from './community.module.scss';
 import { Button } from 'components/basic';
+import { ButtonClasses } from 'components/basic/button';
 import { ICommunityProps } from './interfce';
 
 const Community: React.FC<ICommunityProps> = ({ users }) => {
@@ -53,8 +55,10 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					</div>
 				</div>
 				<div className={styles.buttonsContainer}>
-					<Button text="Add New Friend" className={styles.addButton} />
-					<Button text="Create New Clan" className={styles.createButton} />
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.addButton)}>
+						Add New Friend
+					</Button>
+					<Button className={clsx(ButtonClasses.red, styles.createButton)}>Create New Clan</Button>
 				</div>
 			</Card>
 		</div>

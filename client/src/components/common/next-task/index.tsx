@@ -1,8 +1,11 @@
 import React from 'react';
-import styles from './nextTask.module.scss';
+import clsx from 'clsx';
 import { Select, Button } from 'components/basic';
+import { ButtonClasses } from 'components/basic/button';
 import { TaskDescription } from 'components/common';
 import { INextTaskProps } from './interface';
+
+import styles from './nextTask.module.scss';
 
 const NextTask: React.FC<INextTaskProps> = ({
 	task,
@@ -23,8 +26,8 @@ const NextTask: React.FC<INextTaskProps> = ({
 				</div>
 
 				<div>
-					<Button text="Train" onClick={handleTrainClick} />
-					<Button text="Skip" onClick={handleSkipClick} className={styles.skipButton} />
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Train</Button>
+					<Button className={clsx(ButtonClasses.red, styles.skipButton)}>Skip</Button>
 				</div>
 			</div>
 
