@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../typings/root-state';
 import { Notification } from '../../components';
@@ -8,26 +8,17 @@ export const NotificationContainer = () => {
 	const dispatch = useDispatch();
 	const notification = useSelector((rootState: IRootState) => rootState.notification.notification);
 
-	const [isOpen, setIsOpen] = useState(!!notification);
-
-	useEffect(() => {
-		setIsOpen(!!notification);
-	}, [notification]);
-
-	const handleClose = (transitionDuration: number) => {
-		setIsOpen(false);
-		setTimeout(() => {
-			dispatch(actions.showNotification({ notification: null }));
-		}, transitionDuration);
+	const handleClose = () => {
+		dispatch(actions.showNotification({ notification: null }));
 	};
 
 	return (
 		<Notification
-			isOpen={isOpen}
 			handleClose={handleClose}
 			severity={notification?.notificationType}
 			text={notification?.message}
 			title={notification?.title}
+			id={notification?.id}
 		/>
 	);
 };

@@ -5,6 +5,7 @@ export interface INotificationState {
 		notificationType: NotificationType;
 		message: string;
 		title?: string;
+		id?: number;
 	};
 }
 
