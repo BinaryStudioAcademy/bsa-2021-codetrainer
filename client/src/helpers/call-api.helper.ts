@@ -1,12 +1,7 @@
 import qs from 'qs';
-import { LocalStorageKeys } from 'constants/local-storage-keys';
 
-interface IRequestArgs {
-	endpoint: string;
-	method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-	skipAuthorization?: boolean;
-	query?: Record<string, any>;
-	body?: any;
+interface IRequestArgs extends Helpers.IRequestArgs {
+	bearer?: string;
 }
 
 type TBody =
@@ -37,11 +32,10 @@ const getUrl = (args: IRequestArgs): RequestInfo =>
 
 const getArgs = (args: IRequestArgs): RequestInit => {
 	const headers: Headers | string[][] | Record<string, string> | undefined = {};
-	const token = sessionStorage.getItem(LocalStorageKeys.SESSION_TOKEN);
 	let body: TBody;
 
-	if (token && !args.skipAuthorization) {
-		headers.Authorization = `Bearer ${token}`;
+	if (args.bearer && !args.skipAuthorization) {
+		headers.Authorization = args.bearer;
 	}
 
 	if (args.body) {

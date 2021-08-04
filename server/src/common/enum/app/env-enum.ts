@@ -17,6 +17,8 @@ const {
 	TYPEORM_LOGGING,
 	TYPEORM_MIGRATIONS,
 	TYPEORM_SSL,
+	COOKIE_NAME,
+	COOKIE_SECRET,
 } = ConfigVariables;
 
 const ENV = {
@@ -26,7 +28,14 @@ const ENV = {
 	},
 	JWT: {
 		SECRET: SECRET_KEY,
-		EXPIRES_IN: '24h',
+		EXPIRES_IN: '30m',
+		REFRESH_EXPIRES_IN: '30d',
+	},
+	COOKIE: {
+		NAME: COOKIE_NAME,
+		SECRET: COOKIE_SECRET,
+		MAX_AGE: '30d',
+		HTTP_ONLY: true,
 	},
 	DB: {
 		DATABASE: TYPEORM_DATABASE,

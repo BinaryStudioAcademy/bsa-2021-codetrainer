@@ -5,4 +5,3 @@ export { Example, CoverLayout, FormInput, FullscreenLoader, Spinner } from './co
 export { SignInPage, SignUp } from './pages';
 
 export { Modal } from './modals';
-
