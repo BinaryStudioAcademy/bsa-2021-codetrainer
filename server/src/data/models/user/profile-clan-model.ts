@@ -1,0 +1,18 @@
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../../common';
+import { User } from './user-model';
+
+@Entity()
+export class ProfileClan {
+	@PrimaryGeneratedColumn('uuid')
+	id!: string;
+
+	@Column({ type: 'enum', enum: CLAN_MEMBER_ROLE, default: CLAN_MEMBER_ROLE.MEMBER })
+	role!: CLAN_MEMBER_ROLE;
+
+	@Column({ type: 'enum', enum: CLAN_MEMBER_STATUS, default: CLAN_MEMBER_STATUS.APPROVED })
+	status!: CLAN_MEMBER_STATUS;
+
+	@OneToOne(() => User, (user) => user.profileClan, { onDelete: 'CASCADE' })
+	user!: User;
+}
