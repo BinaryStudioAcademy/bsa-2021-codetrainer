@@ -1,9 +1,6 @@
-export {
-	Avatar,
-	Label,
-  PrivateRoute,
-  PublicRoute,
-} from './basic';
+export { ProfilePage, StatsTab } from './pages';
+
+export { Avatar, Label, PrivateRoute, PublicRoute } from './basic';
 
 export { Example, CoverLayout, FormInput, FullscreenLoader, Spinner, Header } from './common';
 export type { ICreateTabsProps } from './pages';

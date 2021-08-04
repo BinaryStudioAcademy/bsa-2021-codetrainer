@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Avatar, Label } from 'components' ; 
+import { Avatar, Label } from 'components';
 import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
-
 
 interface IHeaderProps {
 	name: string;
