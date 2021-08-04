@@ -7,11 +7,9 @@ import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
-import { useHistory } from 'react-router-dom';
-export const Profile: React.FC = () => {
-	const history = useHistory();
-	const getRouteTab = (): ActiveTabId =>
-		history.location.pathname.substr(history.location.pathname.lastIndexOf('/') + 1) as ActiveTabId;
+import { RouteComponentProps } from 'react-router-dom';
+
+export const Profile = (props: RouteComponentProps) => {
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
 	const dispatch = useDispatch();
 	const setActiveTab = useCallback(
@@ -21,24 +19,21 @@ export const Profile: React.FC = () => {
 		[dispatch],
 	);
 
-	const newTab: ActiveTabId = getRouteTab();
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
 			case ActiveTabId.Stats:
 				return <Stats statsInfo={statsProps} />;
 			default:
-				return <Stats statsInfo={statsProps} />;
+				return <div />;
 		}
-	}, [activeTabId, newTab]);
+	}, [activeTabId]);
 
 	const tabItems = useMemo(() => {
 		return profilePageTabs.map((item) => {
-			const newRoute = '/users/' + item.id;
 			return {
 				tabId: item.id,
 				tabNameText: item.name,
 				onClick: () => {
-					history.push(newRoute);
 					setActiveTab(item.id);
 				},
 			};
