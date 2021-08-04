@@ -1,18 +1,28 @@
 import React from 'react';
 import { useCallback } from 'react';
 import { ISignInForm } from 'typings/sign-in-form';
-import { SignInPage } from 'components';
+import { SignInPage, Spinner } from 'components';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from 'typings/root-state';
+import * as actions from './logic/actions';
 
 const SignIn: React.FC = () => {
-	const onFormSubmit = useCallback((form: ISignInForm) => {
-		// TODO: implement
-		console.info(form);
+	const dispatch = useDispatch();
+	const { error, isLoading } = useSelector((rootState: IRootState) => rootState.signIn);
+
+	const onFormSubmit = useCallback((user: ISignInForm) => {
+		dispatch(actions.signInUser({ user }));
 	}, []);
+
 	const onGithubSignIn = useCallback(() => {
 		// TODO: implement
 	}, []);
 
-	return <SignInPage onFormSubmit={onFormSubmit} onGithubSignIn={onGithubSignIn} />;
+	return isLoading ? (
+		<Spinner />
+	) : (
+		<SignInPage onFormSubmit={onFormSubmit} onGithubSignIn={onGithubSignIn} error={error} />
+	);
 };
 
 export default SignIn;

@@ -1,5 +1,3 @@
-// import { ISignUpState } from './state';
-
 import { ISignUpForm } from 'typings/sign-up-form';
 
 export const SIGN_UP_USER = 'SIGN_UP_USER';

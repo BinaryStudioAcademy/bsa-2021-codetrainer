@@ -1,5 +1,5 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import { signUp } from 'services/signup.service';
+import { signUp } from 'services/sign-up.service';
 
 import * as actionTypes from './action-types';
 import * as actions from './actions';

@@ -13,11 +13,12 @@ import styles from './sign-in.module.scss';
 import { ROUTES } from 'constants/routes';
 
 interface ISignInPageProps {
-	onFormSubmit?: (form: ISignInForm) => void;
+	onFormSubmit: (form: ISignInForm) => void;
 	onGithubSignIn?: () => void;
+	error?: string;
 }
 
-const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit = () => {}, onGithubSignIn = () => {} }) => {
+const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn = () => {}, error }) => {
 	return (
 		<CoverLayout className={styles.signIn}>
 			<Formik
@@ -31,6 +32,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit = () => {}, onGit
 				{({ errors, touched, isValidating }) => (
 					<Form className={styles.form}>
 						<h4>Sign in</h4>
+						{!!error && <div className={styles.error}>{error}</div>}
 						<Button type="button" className={ButtonClasses.red} onClick={onGithubSignIn}>
 							Sing in with GitHub
 						</Button>
