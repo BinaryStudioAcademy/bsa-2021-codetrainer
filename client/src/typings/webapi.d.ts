@@ -4,4 +4,7 @@ namespace WebApi.Entities {
 		name?: string;
 		email?: string;
 	}
+	interface ISignUp {
+		id: string;
+	}
 }

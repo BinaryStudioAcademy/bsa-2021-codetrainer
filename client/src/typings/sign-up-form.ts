@@ -1,6 +1,6 @@
 export interface ISignUpForm {
-	firstName: string;
-	lastName: string;
+	name: string;
+	surname: string;
 	email: string;
 	password: string;
 }
