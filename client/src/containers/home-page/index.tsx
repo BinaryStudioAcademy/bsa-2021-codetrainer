@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { HomePage } from 'components/pages';
 import NextTaskContainer from 'containers/next-task';
-
+import Header from 'components/common/header';
+import { headerProps } from '../header/mock';
 const testActiveUser = {
 	id: '13',
 	rank: 5,
@@ -92,15 +93,18 @@ const HomePageContainer: React.FC = () => {
 	};
 
 	return (
-		<HomePage
-			activeUser={testActiveUser}
-			users={testUsers}
-			messages={testMessages.messages}
-			selectedFeedCategory={selectedFeedCategory}
-			onSelectFeedCategory={handleSelectFeedCategory}
-			isLastPage={testMessages.isLastPage}
-			nextTaskContent={<NextTaskContainer />}
-		/>
+		<>
+			<Header {...headerProps} />
+			<HomePage
+				activeUser={testActiveUser}
+				users={testUsers}
+				messages={testMessages.messages}
+				selectedFeedCategory={selectedFeedCategory}
+				onSelectFeedCategory={handleSelectFeedCategory}
+				isLastPage={testMessages.isLastPage}
+				nextTaskContent={<NextTaskContainer />}
+			/>
+		</>
 	);
 };
 
