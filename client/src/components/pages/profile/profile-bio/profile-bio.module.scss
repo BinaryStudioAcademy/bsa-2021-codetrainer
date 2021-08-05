@@ -1,9 +1,11 @@
+@use 'styles/variables.scss' as var;
+
 .profileBio {
 	width: 916px;
 	height: 206px;
 	padding: 20px;
 	margin: 42px;
-	background: #fafbff;
+	background: var.$zircon;
 	.profileHeader {
 		display: flex;
 		gap: 10px;
@@ -20,7 +22,7 @@
 		}
 	}
 	.link {
-		color: #705ff5;
+		color: var.$cornflower-blue;
 		text-decoration: underline;
 		font-size: 14px;
 	}

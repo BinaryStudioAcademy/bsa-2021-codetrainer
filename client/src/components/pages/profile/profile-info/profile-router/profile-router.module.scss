@@ -1,5 +1,7 @@
+@use "styles/variables.scss" as var;
+
 .navMenu {
-	background-color: #fafbff !important;
+	background-color: var.$zircon !important;
 	padding-bottom: 20px;
 	display: flex;
 	gap: 30px;
@@ -10,20 +12,20 @@
 		font-style: normal;
 		font-weight: 600;
 		font-size: 16px;
-		color: #282828;
+		color: var.$mine-shaft;
 	}
 	.navMenuItem:hover {
 		background-color: inherit;
-		color: #705ff5;
+		color: var.$cornflower-blue;
 		text-decoration: underline;
-		text-decoration-color: #705ff5;
+		text-decoration-color: var.$cornflower-blue;
 		text-underline-offset: 1px;
 	}
 	.navMenuItem.active {
 		cursor: default;
-		color: #705ff5;
+		color: var.$cornflower-blue;
 		text-decoration: underline;
-		text-decoration-color: #705ff5;
+		text-decoration-color: var.$cornflower-blue;
 		text-underline-offset: 1px;
 	}
 	&:first-child {
