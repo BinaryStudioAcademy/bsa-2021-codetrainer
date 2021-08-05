@@ -10,6 +10,7 @@ import { mockProfileBioProps, statsProps } from './mocks';
 import { profileTasks } from './tabs/tasks/mocks';
 import Header from 'components/common/header';
 import { headerProps } from '../header/mock';
+import MainSidebar from 'components/common/main-sidebar';
 
 export const Profile: React.FC = () => {
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
@@ -47,16 +48,19 @@ export const Profile: React.FC = () => {
 	return (
 		<>
 			<Header {...headerProps} />
-			<ProfilePage
-				userInfo={mockProfileBioProps}
-				profileInfoProps={{
-					getTabContent,
-					profileRouteProps: {
-						tabItems,
-						activeTabId,
-					},
-				}}
-			/>
+			<div className="content_container">
+				<MainSidebar />
+				<ProfilePage
+					userInfo={mockProfileBioProps}
+					profileInfoProps={{
+						getTabContent,
+						profileRouteProps: {
+							tabItems,
+							activeTabId,
+						},
+					}}
+				/>
+			</div>
 		</>
 	);
 };
