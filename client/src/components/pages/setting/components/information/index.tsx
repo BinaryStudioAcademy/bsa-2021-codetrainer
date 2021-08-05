@@ -65,10 +65,10 @@ const Information: React.FC<IInformationProps> = (props) => {
 	};
 
 	return (
-		<>
+		<div>
 			<h4 className={styles.header}>Information</h4>
 			{renderFormFields(props.formItems)}
-		</>
+		</div>
 	);
 };
 
