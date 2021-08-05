@@ -1,1 +1,1 @@
-export { default as CreateTaskPage } from './create-task';
+export { CreateTaskPage } from './create-task';

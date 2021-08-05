@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Example from 'containers/example';
 import { PublicRoute } from 'components';
-import { CreateTaskPage } from 'components/pages';
+import { CreateTaskPage } from 'containers/create-new-task';
 
 interface IRoutingProps {}
 
