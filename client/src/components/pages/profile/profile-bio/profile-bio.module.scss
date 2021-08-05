@@ -19,10 +19,12 @@
 	.link {
 		color: var.$cornflower-blue;
 		text-decoration: underline;
+		font-size: 14px;
 	}
 	.fields {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-gap: 2vw;
+		font-size: 14px;
 	}
 }
