@@ -11,6 +11,8 @@ export interface INotificationProps {
 	severity?: TAlertTypes;
 	text?: string | React.ReactNode;
 	title?: string;
+	// content: string | React.ReactNode;
+	// type: TAlertTypes;
 }
 
 export const Notification: React.FC<INotificationProps> = (props) => {

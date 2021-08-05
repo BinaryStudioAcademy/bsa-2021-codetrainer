@@ -1,33 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../typings/root-state';
-import { Notification } from '../../components';
+import { useToasts } from 'react-toast-notifications';
+import { NotificationType } from './logic/models';
 import * as actions from './logic/actions';
 
 export const NotificationContainer = () => {
 	const dispatch = useDispatch();
-	const notification = useSelector((rootState: IRootState) => rootState.notification.notification);
-
-	const [isOpen, setIsOpen] = useState(!!notification);
+	const notifications = useSelector((rootState: IRootState) => rootState.notification.notifications);
+	const { addToast, toastStack } = useToasts();
+	const notification = notifications[notifications.length - 1];
+	const [length, setLength] = useState(0);
 
 	useEffect(() => {
-		setIsOpen(!!notification);
-	}, [notification]);
+		if (notifications.length > length && notification) {
+			addToast(notification.message, {
+				appearance: notification.notificationType,
+				autoDismiss: true,
+				onDismiss: (id) => {
+					// dispatch(actions.removeNotification({notifications: notifications
+					// 		.filter((item) => item.id !== id)}));
+					dispatch(
+						actions.removeNotification({
+							notifications: toastStack.map((toast) => {
+								return {
+									notificationType: toast.appearance as NotificationType,
+									message: toast.content,
+								};
+							}),
+						}),
+					);
+				},
+			});
+		}
+		setLength(notifications.length);
+	}, [notifications]);
 
-	const handleClose = (transitionDuration: number) => {
-		setIsOpen(false);
-		setTimeout(() => {
-			dispatch(actions.showNotification({ notification: null }));
-		}, transitionDuration);
-	};
+	// const [isOpen, setIsOpen] = useState(!!notification);
+	//
+	// useEffect(() => {
+	// 	setIsOpen(!!notification);
+	// }, [notification]);
+	//
+	// const handleClose = (transitionDuration: number) => {
+	// 	setIsOpen(false);
+	// 	setTimeout(() => {
+	// 		dispatch(actions.showNotification({ notification: null }));
+	// 	}, transitionDuration);
+	// };
 
-	return (
-		<Notification
-			isOpen={isOpen}
-			handleClose={handleClose}
-			severity={notification?.notificationType}
-			text={notification?.message}
-			title={notification?.title}
-		/>
-	);
+	return null;
 };
