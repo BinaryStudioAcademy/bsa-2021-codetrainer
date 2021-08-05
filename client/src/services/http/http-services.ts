@@ -7,9 +7,9 @@ import { AccessToken } from '../auth';
 export class Http {
 	async callWebApi(requestArgs: Helpers.IRequestArgs) {
 		const { skipAuthorization } = requestArgs;
-		const checkRefreshToken =
+		const checkAccessToken =
 			!skipAuthorization && AccessToken.isTimeAccessTokenExpired() && AccessToken.hasRefreshToken();
-		if (checkRefreshToken) {
+		if (checkAccessToken) {
 			const response = await serverFetch({
 				endpoint: AuthApiPath.REFRESH_TOKEN,
 				method: HttpMethods.POST,
