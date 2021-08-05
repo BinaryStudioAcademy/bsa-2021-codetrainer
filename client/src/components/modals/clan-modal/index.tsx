@@ -1,10 +1,11 @@
 import React from 'react';
 import Modal from 'react-modal';
 import ImageUpload from './components/image-upload';
-
 import styles from './clan-modal.module.scss';
 
-interface IClanModalProps {}
+interface IClanModalProps {
+	token: string;
+}
 
 Modal.setAppElement('#root');
 
@@ -18,8 +19,7 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 		const header = {
 			method: 'POST',
 			headers: {
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjNzQ4YmQwLWQyNGQtNDY2Yi1iMWMxLTVkOTQ1MDczN2VhYSIsImlhdCI6MTYyODA5MTIwNywiZXhwIjoxNjI4MTc3NjA3fQ.5ChvB4gmO-R9EXfmakMcjtUZhKhnVDHFav_6-76xCHo',
+				Authorization: `Bearer ${props.token}`,
 				'Content-Type': 'application/json',
 			},
 			withCredentials: true,

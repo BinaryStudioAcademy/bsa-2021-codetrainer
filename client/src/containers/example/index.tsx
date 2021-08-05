@@ -13,6 +13,9 @@ const Example: React.FC = () => {
 		dispatch(actions.getExampleText({ exampleName }));
 	};
 
+	const token =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjNzQ4YmQwLWQyNGQtNDY2Yi1iMWMxLTVkOTQ1MDczN2VhYSIsImlhdCI6MTYyODA5MTIwNywiZXhwIjoxNjI4MTc3NjA3fQ.5ChvB4gmO-R9EXfmakMcjtUZhKhnVDHFav_6-76xCHo';
+
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
@@ -23,7 +26,7 @@ const Example: React.FC = () => {
 				get second text
 			</button>
 			<p>{text}</p>
-			<ClanModal />
+			<ClanModal token={token} />
 		</div>
 	);
 };

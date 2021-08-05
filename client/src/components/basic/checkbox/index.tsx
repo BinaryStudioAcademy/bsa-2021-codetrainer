@@ -1,12 +1,18 @@
-import React, { FC } from 'react';
-import { Checkbox as BlueprintCheckbox, CheckboxProps } from '@blueprintjs/core';
-import clsx from 'clsx';
-import styles from './checkbox.module.scss';
+import React from 'react';
+import { Checkbox as MaterialCheckbox, FormControlLabel, withStyles } from '@material-ui/core';
 
-const Checkbox: FC<CheckboxProps> = ({ children, className, ...remains }) => (
-	<BlueprintCheckbox {...remains} className={clsx(styles.checkbox, className)}>
-		<span className={styles.label}>{children}</span>
-	</BlueprintCheckbox>
-);
+interface ICheckboxProps {
+	label: string;
+	name: string;
+}
+
+const Checkbox = withStyles({
+	root: {
+		color: '#EC4179',
+		'&$checked': {
+			color: '#EC4179',
+		},
+	},
+})(({ label, name }: ICheckboxProps) => <FormControlLabel control={<MaterialCheckbox name={name} />} label={label} />);
 
 export default Checkbox;
