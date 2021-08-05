@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport(
 		},
 	},
 	{
-		from: `Codetrainer, BSA <${ENV.MAILER.ADDRESS}>`,
+		from: `Codetrainer <${ENV.MAILER.ADDRESS}>`,
 	},
 );
 
