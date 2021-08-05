@@ -12,5 +12,6 @@ export {
 	SearchPage,
 	ProfilePage,
 	StatsTab,
+	ClansPage,
 } from './pages';
 export { Modal } from './modals';
