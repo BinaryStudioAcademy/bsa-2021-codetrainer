@@ -6,7 +6,6 @@ import { alertStyles, notificationConfig } from './config';
 export type TAlertTypes = 'error' | 'info' | 'success' | 'warning';
 
 export interface INotificationProps {
-	// isOpen: boolean;
 	handleClose: () => void;
 	severity?: TAlertTypes;
 	text?: string | React.ReactNode;
