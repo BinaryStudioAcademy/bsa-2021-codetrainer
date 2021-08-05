@@ -48,8 +48,12 @@ const getArgs = (args: IRequestArgs): RequestInit => {
 		if (args.method === 'GET') {
 			throw new Error('GET request does not support request body.');
 		}
-		body = JSON.stringify(args.body);
-		headers['Content-Type'] = 'application/json';
+		if (args.body instanceof FormData) {
+			body = args.body;
+		} else {
+			body = JSON.stringify(args.body);
+			headers['Content-Type'] = 'application/json';
+		}
 		headers.Accept = 'application/json';
 	}
 

@@ -1,4 +1,6 @@
 # Logs
+.idea/
+
 logs
 *.log
 npm-debug.log*
@@ -116,3 +118,6 @@ dist
 .pnp.*
 
 client/build
+
+.idea/
+

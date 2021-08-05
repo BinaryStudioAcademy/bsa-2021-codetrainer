@@ -1,0 +1,23 @@
+// will be removed after connecting local fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+.container {
+	width: 916px;
+	margin: 0 auto;
+
+	font-family: 'Montserrat', Arial, sans-serif;
+	color: #282828;
+}
+
+.userGreeting {
+	margin: 40px 0 25px;
+
+	font-weight: 500;
+	font-size: 36px;
+}
+
+.nextTaskWrapper,
+.communityWrapper,
+.feedWrapper {
+	margin-bottom: 41px;
+}

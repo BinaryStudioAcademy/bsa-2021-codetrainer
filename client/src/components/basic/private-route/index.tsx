@@ -7,9 +7,11 @@ interface IPrivateRouteProps extends RouteProps {
 
 const PrivateRoute = (props: IPrivateRouteProps) => {
 	const { component: Component, ...rest } = props;
-	const isAuthorized = false;
+	const isAuthorized = true;
 
-	return <Route {...rest} render={(props) => (isAuthorized ? <Component {...props} /> : <Redirect to="/login" />)} />;
+	return (
+		<Route {...rest} render={(props) => (isAuthorized ? <Component {...props} /> : <Redirect to="/sign-in" />)} />
+	);
 };
 
 export default PrivateRoute;
