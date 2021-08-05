@@ -8,7 +8,7 @@ import CoverLayout from './cover-layout';
 import PasswordField from './password-field';
 import FormField from './form-field';
 import Separator from './separator';
-import Button, { ButtonClasses } from './button';
+import Button, { ButtonClasses } from 'components/basic/button';
 import styles from './sign-in.module.scss';
 
 interface ISignInPageProps {
@@ -49,7 +49,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit = () => {}, onGit
 						<div>
 							<div className={styles.labelWrapper}>
 								<label htmlFor="password">Password</label>
-								<Link to="reset-password" className={styles.right}>
+								<Link to="forgot-password" className={styles.right}>
 									Forgot password?
 								</Link>
 							</div>

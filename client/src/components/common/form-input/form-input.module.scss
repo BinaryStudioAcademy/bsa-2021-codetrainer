@@ -20,6 +20,11 @@
 		padding: 15px 20px;
 	}
 
+	.passwordField {
+		width: 300px;
+		padding-right: 40px;
+	}
+
 	.inputField::placeholder,
 	.passwordField::placeholder {
 		color: rgba(40, 40, 40, 0.5);

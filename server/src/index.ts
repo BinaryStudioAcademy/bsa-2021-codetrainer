@@ -4,9 +4,9 @@ import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
 import { checkConfig } from './helpers';
-import { ENV } from './common';
+import { ENV, WHITE_ROUTES } from './common';
 import { initApi } from './api';
-import { errorHandlerMiddleware } from './middleware';
+import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 import { cookieConfig } from './config';
 
 import 'reflect-metadata';
@@ -24,6 +24,7 @@ app.use(cors());
 
 app.use(passport.initialize());
 
+app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
 app.use(ENV.APP.API_PATH, initApi(Router));
 
 app.use(errorHandlerMiddleware);

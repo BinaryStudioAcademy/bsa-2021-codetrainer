@@ -15,7 +15,7 @@ const PublicRoute = (props: IPublicRouteProps) => {
 	return (
 		<Route
 			{...rest}
-			render={(props) => (isAuthorized && restricted ? <Redirect to="/private" /> : <Component {...props} />)}
+			render={(props) => (isAuthorized && restricted ? <Redirect to="/home" /> : <Component {...props} />)}
 		/>
 	);
 };

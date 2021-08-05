@@ -6,7 +6,7 @@ import { Icon } from '@blueprintjs/core';
 interface IFormInputProps extends FieldProps {
 	id: string;
 	name: string;
-	label: string;
+	label?: string;
 	type: string;
 	placeholder: string;
 }
@@ -31,9 +31,11 @@ const FormInput: React.FC<IFormInputProps> = ({
 
 	return (
 		<div className={styles.inputWrapper}>
-			<label htmlFor={id} className={styles.label}>
-				{label}
-			</label>
+			{label && (
+				<label htmlFor={id} className={styles.label}>
+					{label}
+				</label>
+			)}
 			<input
 				id={id}
 				name={name}
@@ -44,6 +46,7 @@ const FormInput: React.FC<IFormInputProps> = ({
 				className={isPasswordField ? styles.passwordField : styles.inputField}
 			/>
 			{isPasswordField && (
+				//@ts-ignore
 				<Icon onClick={togglePasswordVisibility} icon="eye-off" className={styles.visibilityBtn} />
 			)}
 			{isTouched && error && <div className={styles.error}>{error}</div>}

@@ -42,7 +42,7 @@ export class Auth {
 	}
 
 	async logout() {
-		await this.load({ endpoint: AuthApiPath.LOGOUT });
+		await this.load({ endpoint: AuthApiPath.LOGOUT, skipAuthorization: false });
 		AccessToken.resetToken();
 	}
 }

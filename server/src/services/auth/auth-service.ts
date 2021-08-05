@@ -54,5 +54,3 @@ export class Auth {
 		}
 	}
 }
-
-export type TAuth = InstanceType<typeof Auth>;
