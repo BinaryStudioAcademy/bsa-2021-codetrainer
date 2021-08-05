@@ -1,0 +1,12 @@
+.clansSortPanel {
+	padding: 20px;
+
+	&Button {
+		display: block;
+		margin: 0 auto;
+	}
+
+	&Button:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+}
