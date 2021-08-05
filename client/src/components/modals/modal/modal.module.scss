@@ -1,28 +1,28 @@
 .modalContent {
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 24px;
-    border-bottom: 1px solid #ccc;
-    padding: 20px 20px 10px;
-    .title {
-      margin: 0;
-      color: #282828;
-      font-size: 24px;
-    }
-    .closeIcon {
-      size: 50px;
-      color: #282828;
-      opacity: 50%;
-      cursor: pointer;
-    }
-  }
-  .body {
-    padding: 20px;
-    word-wrap: break-word;
-  }
-  .footer {
-    padding: 0 20px 20px;
-  }
+	.header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 24px;
+		border-bottom: 1px solid #ccc;
+		padding: 20px 20px 10px;
+		.title {
+			margin: 0;
+			color: #282828;
+			font-size: 24px;
+		}
+		.closeIcon {
+			size: 50px;
+			color: #282828;
+			opacity: 50%;
+			cursor: pointer;
+		}
+	}
+	.body {
+		padding: 20px;
+		word-wrap: break-word;
+	}
+	.footer {
+		padding: 0 20px 20px;
+	}
 }
