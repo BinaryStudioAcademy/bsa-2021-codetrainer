@@ -23,6 +23,7 @@ const SearchPage: React.FC = () => {
 			<div className={styles.challengesList}>
 				<Challenge
 					challenge={{
+						link: '/',
 						author: {
 							firstName: 'A',
 							lastName: 'B',

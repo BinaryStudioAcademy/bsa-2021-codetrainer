@@ -11,6 +11,7 @@ export interface IChallengeStatsProps {
 export interface IChallengeHeaderProps {
 	title: string;
 	rank: number;
+	link: string;
 }
 
 export type TChallengeTagsProps = Array<string>;
@@ -21,6 +22,7 @@ export interface IChallengeProps {
 		lastName: string;
 		link: string;
 	};
+	link: string;
 	title: string;
 	rank: number;
 	stats: {

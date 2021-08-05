@@ -6,4 +6,10 @@
 		font: 600 18px 'Montserrat';
 		color: #282828;
 	}
+	&Title:hover {
+		color: #705ff5;
+		text-decoration: underline;
+		text-decoration-color: #705ff5;
+		text-underline-offset: 1px;
+	}
 }

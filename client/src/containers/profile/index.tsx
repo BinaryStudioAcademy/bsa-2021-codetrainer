@@ -1,12 +1,14 @@
 import React, { useMemo, useCallback } from 'react';
-import { ProfilePage, ProfileTasks } from '../../components';
-import { Stats } from './tabs/stats';
-import { mockProfileBioProps, statsProps, profileTasks } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
+import { ProfilePage } from '../../components';
+import { Stats, ProfileTasks } from './tabs';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
+
+import { mockProfileBioProps, statsProps } from './mocks';
+import { profileTasks } from './tabs/tasks/mocks';
 
 export const Profile: React.FC = () => {
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
@@ -22,7 +24,7 @@ export const Profile: React.FC = () => {
 		switch (activeTabId) {
 			case ActiveTabId.Stats:
 				return <Stats statsInfo={statsProps} />;
-			case ActiveTabId.Tasks:
+			case ActiveTabId.Challenges:
 				return <ProfileTasks profileTasks={profileTasks} />;
 			default:
 				return <div />;
