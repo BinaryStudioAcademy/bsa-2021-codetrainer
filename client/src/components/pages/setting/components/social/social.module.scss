@@ -1,0 +1,31 @@
+
+.socialContainer {
+	.header {
+		margin: 0 0 10px;
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	ul {
+		padding: 0;
+	}
+
+	.socialItem {
+		color: #686868;
+		background-color: #EAEDF2;
+		border-radius: 7px;
+		margin-bottom: 10px;
+		padding: 5px 10px;
+		min-width: 400px;
+		list-style: none;
+		cursor: pointer;
+		
+		&:hover {
+			background-color:rgb(200, 200, 200);
+		}
+	}
+
+	.socialIcon {
+		margin-right: 5px;
+	}
+}
