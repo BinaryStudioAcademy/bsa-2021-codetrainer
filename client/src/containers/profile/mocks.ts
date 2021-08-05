@@ -9,7 +9,10 @@ export const mockProfileBioProps = {
 	followingQuantity: 0,
 	followersQuantity: 0,
 	communityQuantity: 3,
+	rank: 423,
+	score: 222,
 };
+
 export const mockPointsProps = {
 	rank: 7,
 	honor: 455,

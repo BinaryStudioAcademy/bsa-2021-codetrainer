@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './avatar.module.scss';
 import defaultAvatar from 'assets/images/header/default-avatar.png';
 
-interface IAvatarProps {
+export interface IAvatarProps {
 	avatar?: string;
 	size?: number;
 	color?: string;
