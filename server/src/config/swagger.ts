@@ -5,7 +5,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = {
 	openapi: '3.0.0',
 	info: {
-		title: 'Express API for JSONPlaceholder',
+		title: 'Codetrainer API',
 		version: '1.0.0',
 		description: '',
 		license: {
