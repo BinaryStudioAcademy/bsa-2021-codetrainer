@@ -1,13 +1,14 @@
 import { NotificationType } from './models';
 
 export interface INotificationState {
-	notification: null | {
+	state: null | {
 		notificationType: NotificationType;
 		message: string;
 		title?: string;
+		id?: string;
 	};
 }
 
 export const initialState: INotificationState = {
-	notification: null,
+	state: null,
 };

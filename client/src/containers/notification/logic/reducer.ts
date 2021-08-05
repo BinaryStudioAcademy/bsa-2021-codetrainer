@@ -3,10 +3,10 @@ import { INotificationState, initialState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
 
 export const notificationReducer = createReducer<INotificationState>(initialState, {
-	[actionTypes.SHOW_NOTIFICATION](state, action: actionTypes.TShowNotificationArgs) {
+	[actionTypes.SET_NOTIFICATION_STATE](state, action: actionTypes.TSetNotificationArgs) {
 		return {
 			...state,
-			...action,
+			state: action ? { ...action, id: String(new Date()) } : null,
 		};
 	},
 });

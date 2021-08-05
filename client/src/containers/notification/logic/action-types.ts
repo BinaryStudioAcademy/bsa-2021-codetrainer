@@ -1,11 +1,9 @@
 import { NotificationType } from './models';
 
-export const SHOW_NOTIFICATION = 'NOTIFICATION:SHOW_NOTIFICATION';
+export const SET_NOTIFICATION_STATE = 'NOTIFICATION:SET_NOTIFICATION_STATE';
 
-export type TShowNotificationArgs = {
-	notification: null | {
-		notificationType: NotificationType;
-		message: string;
-		title?: string;
-	};
+export type TSetNotificationArgs = null | {
+	notificationType: NotificationType;
+	message: string;
+	title?: string;
 };
