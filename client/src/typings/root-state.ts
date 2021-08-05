@@ -1,11 +1,9 @@
 import { IProfileState } from './../containers/profile/logic/state';
 import { IExampleState } from 'containers/example/logic/state';
-import { ISignInState } from 'containers/sign-in/logic/state';
-import { ISignUpState } from 'containers/sign-up/logic/state';
+import { IAuthState } from './auth';
 
 export interface IRootState {
+	auth: IAuthState;
 	example: IExampleState;
-	signIn: ISignInState;
-	signUp: ISignUpState;
 	profile: IProfileState;
 }

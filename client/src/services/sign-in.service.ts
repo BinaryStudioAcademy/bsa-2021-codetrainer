@@ -8,6 +8,7 @@ export const signIn = async (userData: ISignInForm): Promise<WebApi.Entities.IUs
 			endpoint: `auth/login`,
 			body: userData,
 		});
+
 		// WHAT IS A BETTER WAY TO HANDLE ERRORS HERE ???
 		if (!response.ok) {
 			const error = await response.json();

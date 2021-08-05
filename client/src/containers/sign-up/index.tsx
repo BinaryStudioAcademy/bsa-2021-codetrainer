@@ -14,7 +14,7 @@ const SignUp: React.FC = () => {
 		dispatch(actions.signUpUser({ userData }));
 	}, []);
 
-	const { error, isLoading, isSuccess } = useSelector((rootState: IRootState) => rootState.signUp);
+	const { error, isLoading, isSuccess } = useSelector((rootState: IRootState) => rootState.auth.signUp);
 
 	useEffect(() => {
 		if (isSuccess) {

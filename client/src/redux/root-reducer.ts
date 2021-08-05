@@ -1,14 +1,12 @@
 import { exampleReducer } from 'containers/example/logic/reducer';
-import { signUpReducer } from 'containers/sign-up/logic/reducer';
-import { signInReducer } from 'containers/sign-in/logic/reducer';
 import { profileReducer } from 'containers/profile/logic/reducer';
 import { combineReducers, Reducer } from 'redux';
 import { IRootState } from 'typings/root-state';
+import authReducer from 'containers/auth/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
+	auth: authReducer,
 	example: exampleReducer,
-	signUp: signUpReducer,
-	signIn: signInReducer,
 	profile: profileReducer,
 });
 
