@@ -1,11 +1,13 @@
 import React from 'react';
-import { CreateTaskPage } from 'components';
+import { CreateSettings } from './create-task-settings';
+
 export interface ICreateTaskProps {}
 
 export const CreateTask = (props: ICreateTaskProps) => {
 	return (
 		<>
-			<CreateTaskPage />
+			{/* Header sidebar etc */}
+			<CreateSettings />
 		</>
 	);
 };

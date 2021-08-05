@@ -1,4 +1,3 @@
-export { CreateTaskPage } from './create-task';
 export { Profile as ProfilePage } from './profile';
 export { Stats as StatsTab } from './profile/profile-info/tabs/stats';
 export { ProfileTasks } from './profile/profile-tasks';
@@ -9,4 +8,5 @@ export { default as SearchPage } from './search-page';
 export { default as SignUp } from './sign-up';
 export { default as SignInPage } from './sign-in';
 export { default as HomePage } from './home';
+export { CreateTaskSettings } from './create-task';
 export type { ICreateTabsProps } from './create-task';

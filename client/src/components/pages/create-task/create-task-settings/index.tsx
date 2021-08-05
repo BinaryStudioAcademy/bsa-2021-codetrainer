@@ -1,57 +1,27 @@
-import React, { FC, SVGProps, useState } from 'react';
+import React from 'react';
 import { Classes, H2, H4, Label, RadioGroup } from '@blueprintjs/core';
 import RadioItem from '../radio-item';
-import { Disciplines } from 'constants/disciplines';
 import { InfoPopover, Switch } from 'components/basic';
 import styles from './create-task-settings.module.scss';
-import { ReactComponent as FundamentalsIcon } from 'assets/icons/books-icon.svg';
-import { ReactComponent as RankUpIcon } from 'assets/icons/rank-up-icon.svg';
-import { ReactComponent as PracticeIcon } from 'assets/icons/practice-icon.svg';
-import { ReactComponent as BetaIcon } from 'assets/icons/beta-icon.svg';
-import { ReactComponent as RandomIcon } from 'assets/icons/shuffle-icon.svg';
+import { Discipline, IDisciplineItem } from 'containers/create-new-task/logic/models';
 
-type TSvgFC = FC<SVGProps<SVGSVGElement>>;
-
-interface IDisciplineItem {
-	value: Disciplines;
-	iconFC: TSvgFC;
-	label: string;
+interface ICreateTaskSettingsProps {
+	disciplineItems: IDisciplineItem[];
+	onChangeDiscipline: (discipline: Discipline) => void;
+	chosenDiscipline: Discipline;
+	onSwitchClick: (newValue: boolean) => void;
+	isSelectedSwitch: boolean;
+	selectValues: number[];
 }
 
-const DISCIPLINE_ITEMS: IDisciplineItem[] = [
-	{
-		value: Disciplines.FUNDAMENTALS,
-		iconFC: FundamentalsIcon,
-		label: 'Fundamentals',
-	},
-	{
-		value: Disciplines.RANK_UP,
-		iconFC: RankUpIcon,
-		label: 'Rank Up',
-	},
-	{
-		value: Disciplines.PRACTICE,
-		iconFC: PracticeIcon,
-		label: 'Practice',
-	},
-	{
-		value: Disciplines.BETA,
-		iconFC: BetaIcon,
-		label: 'Beta',
-	},
-	{
-		value: Disciplines.RANDOM,
-		iconFC: RandomIcon,
-		label: 'Random',
-	},
-];
-
-interface ICreateTaskSettingsProps {}
-
-const CreateTaskSettings: FC<ICreateTaskSettingsProps> = () => {
-	const [discipline, setDiscipline] = useState<Disciplines>(Disciplines.FUNDAMENTALS);
-	const [allowContributors, setAllowContributors] = useState(true);
-
+export const CreateTaskSettings = ({
+	disciplineItems,
+	onChangeDiscipline,
+	chosenDiscipline,
+	onSwitchClick,
+	isSelectedSwitch,
+	selectValues,
+}: ICreateTaskSettingsProps) => {
 	return (
 		<div className={styles.createTaskSettings}>
 			<H2 className="heading">Create a New Task</H2>
@@ -62,11 +32,11 @@ const CreateTaskSettings: FC<ICreateTaskSettingsProps> = () => {
 				<H4 className={styles.disciplinesHeading}>Disciplines</H4>
 				<RadioGroup
 					name="discipline"
-					onChange={(event) => setDiscipline(event.currentTarget.value as Disciplines)}
+					onChange={(event) => onChangeDiscipline(event.currentTarget.value as Discipline)}
 					className={styles.radioList}
-					selectedValue={discipline}
+					selectedValue={chosenDiscipline}
 				>
-					{DISCIPLINE_ITEMS.map((item, index) => {
+					{disciplineItems.map((item, index) => {
 						return (
 							<RadioItem
 								value={item.value}
@@ -77,20 +47,7 @@ const CreateTaskSettings: FC<ICreateTaskSettingsProps> = () => {
 						);
 					})}
 				</RadioGroup>
-
-				{/* 
-					value interface: {
-						title: string,
-						icon: string
-					}
-					Select interface: {
-						values: value[],
-						activeValueL: value,
-						onChange: React.Dispatch<React.SetStateAction<ISelectValue>>
-					}
-					<Select values={focusValues} activeValue={activeFocusValue} onChange={setActiveFocusValue} /> 
-				*/}
-
+				{/* <Select/> */}
 				<Label htmlFor="estimated-rank">
 					Estimated Rank
 					<InfoPopover>Choose the rank you are expecting this task to be ranked as.</InfoPopover>
@@ -103,8 +60,8 @@ const CreateTaskSettings: FC<ICreateTaskSettingsProps> = () => {
 				<Switch
 					inline
 					id="allow-contributors"
-					checked={allowContributors}
-					onChange={() => setAllowContributors(!allowContributors)}
+					checked={isSelectedSwitch}
+					onChange={() => onSwitchClick(!isSelectedSwitch)}
 					labelElement={
 						<span>
 							Allow contributors?
@@ -119,5 +76,3 @@ const CreateTaskSettings: FC<ICreateTaskSettingsProps> = () => {
 		</div>
 	);
 };
-
-export default CreateTaskSettings;

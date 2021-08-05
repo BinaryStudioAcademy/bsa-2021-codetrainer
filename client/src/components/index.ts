@@ -13,6 +13,6 @@ export {
 	ProfilePage,
 	StatsTab,
 	ProfileTasks,
-	CreateTaskPage,
+	CreateTaskSettings,
 } from './pages';
 export { Modal } from './modals';
