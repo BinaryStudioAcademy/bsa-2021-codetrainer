@@ -30,7 +30,27 @@ export const CreateSettings = () => {
 				onChangeDiscipline={onChangeDiscipline}
 				isSelectedSwitch={isSelectedSwitch}
 				onSwitchClick={onSwitchClick}
-				selectValues={[]}
+				//work here
+				selectProps={{
+					values: [
+						{
+							id: 1,
+							icon: '',
+							title: 'Hello',
+						},
+						{
+							id: 2,
+							icon: '',
+							title: 'bye',
+						},
+					],
+					activeValue: {
+						id: 1,
+						icon: '',
+						title: 'Hello',
+					},
+					onChange: () => {},
+				}}
 			/>
 		</div>
 	);

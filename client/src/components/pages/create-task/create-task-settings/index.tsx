@@ -1,9 +1,10 @@
 import React from 'react';
 import { Classes, H2, H4, Label, RadioGroup } from '@blueprintjs/core';
 import RadioItem from '../radio-item';
-import { InfoPopover, Switch } from 'components/basic';
+import { InfoPopover, Select, Switch } from 'components/basic';
 import styles from './create-task-settings.module.scss';
 import { Discipline, IDisciplineItem } from 'containers/create-new-task/logic/models';
+import { ISelectProps } from 'components/basic/select/interface';
 
 interface ICreateTaskSettingsProps {
 	disciplineItems: IDisciplineItem[];
@@ -11,7 +12,7 @@ interface ICreateTaskSettingsProps {
 	chosenDiscipline: Discipline;
 	onSwitchClick: (newValue: boolean) => void;
 	isSelectedSwitch: boolean;
-	selectValues: number[];
+	selectProps: ISelectProps;
 }
 
 export const CreateTaskSettings = ({
@@ -20,7 +21,7 @@ export const CreateTaskSettings = ({
 	chosenDiscipline,
 	onSwitchClick,
 	isSelectedSwitch,
-	selectValues,
+	selectProps,
 }: ICreateTaskSettingsProps) => {
 	return (
 		<div className={styles.createTaskSettings}>
@@ -47,7 +48,11 @@ export const CreateTaskSettings = ({
 						);
 					})}
 				</RadioGroup>
-				{/* <Select/> */}
+				<Select
+					values={selectProps.values}
+					activeValue={selectProps.activeValue}
+					onChange={selectProps.onChange}
+				/>
 				<Label htmlFor="estimated-rank">
 					Estimated Rank
 					<InfoPopover>Choose the rank you are expecting this task to be ranked as.</InfoPopover>
