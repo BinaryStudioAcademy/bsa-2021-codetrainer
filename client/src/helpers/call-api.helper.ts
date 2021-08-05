@@ -18,7 +18,7 @@ type TBody =
 const BASE_URL = process.env.REACT_APP_API_BASE_URL ?? '/';
 const API = 'api/';
 
-export default async function callWebApi(args: IRequestArgs): Promise<Response> {
+export default async function serverFetch(args: IRequestArgs): Promise<Response> {
 	try {
 		const res: Response = await fetch(getUrl(args), getArgs(args));
 		return res;

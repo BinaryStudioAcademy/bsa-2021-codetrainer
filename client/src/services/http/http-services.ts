@@ -1,26 +1,26 @@
 import { AuthApiPath } from 'enum';
 import { HttpMethods } from 'constants/services';
-import callWebApi from 'helpers/call-api.helper';
+import serverFetch from 'helpers/call-api.helper';
 import { UnauthorizedError } from 'helpers/error';
-import { RefreshToken } from '../auth';
+import { AccessToken } from '../auth';
 
 export class Http {
-	async fetch(requestArgs: Helpers.IRequestArgs) {
+	async callWebApi(requestArgs: Helpers.IRequestArgs) {
 		const { skipAuthorization } = requestArgs;
 		const checkRefreshToken =
-			!skipAuthorization && RefreshToken.isTimeAccessTokenExpired() && RefreshToken.hasRefreshToken();
+			!skipAuthorization && AccessToken.isTimeAccessTokenExpired() && AccessToken.hasRefreshToken();
 		if (checkRefreshToken) {
-			const response = await callWebApi({
+			const response = await serverFetch({
 				endpoint: AuthApiPath.REFRESH_TOKEN,
 				method: HttpMethods.POST,
 				bearer: '',
 			});
 			const { token } = await response.json();
 			if (token) {
-				RefreshToken.setToken(token);
+				AccessToken.setToken(token);
 			}
 		}
-		return callWebApi({ ...requestArgs, bearer: RefreshToken.getBearer() })
+		return serverFetch({ ...requestArgs, bearer: AccessToken.getBearer() })
 			.then(this.checkStatus)
 			.then(this.getJson)
 			.catch(this.error);
