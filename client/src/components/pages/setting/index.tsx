@@ -1,5 +1,9 @@
 import React from 'react';
 import Information from './components/information';
+import Social from './components/social';
+import ProfilePicture from './components/profile-picture';
+import ChangePassword from './components/change-password';
+import DeleteAccount from './components/delete-account';
 import styles from './setting-page.module.scss';
 
 const radioListItems = [
@@ -74,6 +78,12 @@ const Setting: React.FC = () => {
 	return (
 		<div className={styles.container}>
 			<Information list={list} formItems={formItems} />
+			<div className={styles.gridContainer}>
+				<Social />
+				<ProfilePicture />
+			</div>
+			<ChangePassword />
+			<DeleteAccount />
 		</div>
 	);
 };

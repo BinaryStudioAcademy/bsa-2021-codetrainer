@@ -6,6 +6,9 @@
 
 	font-family: 'Montserrat', Arial, sans-serif;
 	color: #282828;
+	display: grid;
+	grid-auto-flow: row;
+	grid-gap: 50px;
 }
 
 .submitBtn {
@@ -29,5 +32,12 @@
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(2, 70px);
+	grid-gap: 20px;
+}
+
+.gridContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content:space-between;
 	grid-gap: 20px;
 }
