@@ -4,7 +4,7 @@ import styles from './profile-bio.module.scss';
 import { Avatar, Label, List } from 'components/basic';
 
 export interface IProfileBioProps {
-	img: string;
+	img?: string;
 	name: string;
 	nickname: string;
 	clan?: string;
@@ -20,7 +20,7 @@ export interface IProfileBioProps {
 
 export const ProfileBio = (props: IProfileBioProps) => {
 	const {
-		// img,
+		img,
 		name,
 		nickname,
 		clan,
@@ -60,7 +60,7 @@ export const ProfileBio = (props: IProfileBioProps) => {
 	return (
 		<div className={styles.profileBio}>
 			<div className={styles.profileHeader}>
-				<Avatar size={57} />
+				{img ? <Avatar avatar={img} size={57} /> : <Avatar size={57} />}
 				<H5 className={styles.name}>{name}</H5>
 				<Label label={rank + ' rank'} color="#EC4179" />
 				<Label label={score} color="#EC4179" />
