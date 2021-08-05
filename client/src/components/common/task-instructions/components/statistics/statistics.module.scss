@@ -1,6 +1,7 @@
 :local(.info) {
 	display: flex;
 	width: 130px;
+	font-size: 12px;
 }
 
 :local(.infoDescription) {
@@ -21,4 +22,8 @@
 	border-right: rgba(40, 40, 40, 0.5) 1px solid;
 	padding: 0 10px;
 	margin: 0 10px;
+}
+
+:local(.infoDescription a:hover) {
+	color: rgba(#705ff5, 0.5);
 }

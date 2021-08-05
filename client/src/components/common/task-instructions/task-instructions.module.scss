@@ -1,14 +1,11 @@
 :local(.taskContainer) {
 	padding: 40px;
+	font-family: 'Montserrat';
+	font-size: 16px;
 }
 
 :local(.taskContainer a) {
 	cursor: pointer;
-}
-
-:local(.switch a) {
-	font-size: 16px;
-	text-decoration: none;
 }
 
 :local(.header) {
@@ -36,11 +33,15 @@
 	display: flex;
 }
 
-:local(.switch a) {
-	display: flex;
-	margin: 0 20px 0 0;
+:local(.switch button) {
+	margin-right: 20px;
 	font-weight: 600;
+	font-size: 16px;
 	padding: 3px;
+	border: none;
+	outline: none;
+	background: #fafbff;
+	cursor: pointer;
 }
 
 :local(.switch .active) {
