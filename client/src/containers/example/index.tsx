@@ -19,7 +19,7 @@ const Example: React.FC = () => {
 
 	return (
 		<div className={styles.root}>
-			<h2>Notifications</h2>
+			<h2>Example Component</h2>
 			{Object.values(NotificationType).map((type) => {
 				return (
 					<button
