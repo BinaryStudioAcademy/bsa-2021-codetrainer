@@ -48,6 +48,10 @@ export const CreateTaskSettings = ({
 						);
 					})}
 				</RadioGroup>
+				<Label>
+					Language version
+					<InfoPopover>Choose the language version the task will work for.</InfoPopover>
+				</Label>
 				<Select
 					values={selectProps.values}
 					activeValue={selectProps.activeValue}

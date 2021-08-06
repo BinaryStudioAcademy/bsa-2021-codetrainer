@@ -15,4 +15,10 @@ export const createTaskReducer = createReducer<ICreateTaskState>(initialState, {
 			isSelectedSwitch: action.isSelectedSwitch,
 		};
 	},
+	[actionTypes.SET_LANGUAGE_VERSION](state, action: actionTypes.TSetLanguageVersionArgs) {
+		return {
+			...state,
+			languageVersion: action.languageVersion,
+		};
+	},
 });

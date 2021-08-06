@@ -6,6 +6,6 @@ export interface ISelectValue {
 
 export interface ISelectProps {
 	values: ISelectValue[];
-	activeValue: ISelectValue;
-	onChange: React.Dispatch<React.SetStateAction<ISelectValue>>;
+	activeValue?: ISelectValue;
+	onChange?: (value: ISelectValue) => void;
 }

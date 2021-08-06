@@ -53,9 +53,4 @@ export const SELECT_PROPS: ISelectProps = {
 			title: '5.9',
 		},
 	],
-	activeValue: {
-		id: 1,
-		title: '7.3',
-	},
-	onChange: () => console.log('hello'),
 };

@@ -6,6 +6,7 @@ import { Discipline } from '../logic/models';
 import { IRootState } from 'typings/root-state';
 import * as actions from '../logic/actions';
 import { useCallback } from 'react';
+import { ISelectValue } from 'components/basic/select/interface';
 
 export const CreateSettings = () => {
 	const dispatch = useDispatch();
@@ -31,7 +32,12 @@ export const CreateSettings = () => {
 				isSelectedSwitch={isSelectedSwitch}
 				onSwitchClick={onSwitchClick}
 				//work here
-				selectProps={SELECT_PROPS}
+				selectProps={{
+					...SELECT_PROPS,
+					onChange: (value: ISelectValue) => {
+						dispatch(actions.setLanguageVersion({ languageVersion: value }));
+					},
+				}}
 			/>
 		</div>
 	);
