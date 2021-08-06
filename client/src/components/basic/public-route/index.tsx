@@ -1,3 +1,4 @@
+import { useAppSelector } from 'hooks/useAppSelector';
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
 
@@ -8,12 +9,13 @@ interface IPublicRouteProps extends RouteProps {
 
 const PublicRoute = (props: IPublicRouteProps) => {
 	const { restricted, component: Component, ...rest } = props;
-	const isAuthorized = false;
+	const { user } = useAppSelector((state) => state.auth);
+	const isAuthorized = Boolean(user);
 
 	return (
 		<Route
 			{...rest}
-			render={(props) => (isAuthorized && restricted ? <Redirect to="/" /> : <Component {...props} />)}
+			render={(props) => (isAuthorized && restricted ? <Redirect to="/home" /> : <Component {...props} />)}
 		/>
 	);
 };
