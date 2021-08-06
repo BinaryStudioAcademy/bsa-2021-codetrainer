@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { ClanApiPath, REQ_TYPE } from '../../common';
 import { clanPermissionMiddleware, dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
-import { TClanService } from '../../services';
+import { ClanService } from '../../services';
 import { IUserFields } from '../../types';
 
-export const initClan = (appRouter: typeof Router, services: { clan: TClanService }) => {
+export const initClan = (appRouter: typeof Router, services: { clan: ClanService }) => {
 	const { clan: clansService } = services;
 	const router = appRouter();
 

@@ -5,7 +5,7 @@ import { ValidationError } from '../../helpers';
 import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../common';
 import { CODE_ERRORS } from '../../common/constants/helpers';
 
-export class Clan {
+export class ClanService {
 	protected clanRepository: TClanRepository;
 
 	protected userRepository: TUserRepository;

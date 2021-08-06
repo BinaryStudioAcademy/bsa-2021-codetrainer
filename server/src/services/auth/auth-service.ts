@@ -3,7 +3,7 @@ import { TUserRepository } from '../../data';
 import { encrypt, createToken } from '../../helpers';
 import { IUserFields } from '../../types';
 
-export class Auth {
+export class AuthService {
 	protected userRepository: TUserRepository;
 
 	constructor({ user }: { user: TUserRepository }) {

@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
+import { Task } from '../task';
 
 @Entity()
 export class User {
@@ -25,4 +26,7 @@ export class User {
 
 	@ManyToOne(() => Clan, (clan) => clan.members)
 	clan?: Clan;
+
+	@OneToMany(() => Task, (task) => task.user)
+	tasks!: Task[];
 }

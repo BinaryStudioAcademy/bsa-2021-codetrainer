@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { AuthApiPath } from '../../common';
 import { authenticationMiddleware, registrationMiddleware } from '../../middleware';
-import { TAuthService } from '../../services';
+import { AuthService } from '../../services';
 import { IUserFields } from '../../types';
 
-export const initAuth = (appRouter: typeof Router, services: { auth: TAuthService }) => {
+export const initAuth = (appRouter: typeof Router, services: { auth: AuthService }) => {
 	const { auth: authService } = services;
 	const router = appRouter();
 

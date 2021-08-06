@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from 'express';
-import { HttpCodes } from "../../common";
+import { HttpCodes } from '../../common';
 
 export const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, next) => {
 	if (res.headersSent) {
