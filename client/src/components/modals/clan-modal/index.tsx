@@ -5,6 +5,7 @@ import ImageUpload from './components/image-upload';
 import { FormInput } from 'components';
 import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
+import { token } from './mockData';
 
 interface IClanModalProps {
 	token: string;
@@ -19,7 +20,7 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 		const header = {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${props.token}`,
+				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
 			withCredentials: true,
@@ -76,7 +77,7 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 					</div>
 					<div>
 						<Formik initialValues={{ createClan: '' }} onSubmit={(values) => createClan(values.createClan)}>
-							{({ errors, touched, validateField, validateForm }) => (
+							{({ validateField }) => (
 								<Form className={styles.form}>
 									<Field
 										id="createClan"

@@ -1,20 +1,17 @@
-import React from 'react';
-import styles from './example.module.scss';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
-
-import { ClanModal } from 'components';
+import { uploadImage } from 'services/images.service';
+import styles from './example.module.scss';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
 	const text = useSelector((rootState: IRootState) => rootState.example.name);
+	const [file, setFile] = useState<Blob | null>(null);
 	const getExampleText = (exampleName: string) => {
 		dispatch(actions.getExampleText({ exampleName }));
 	};
-
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjNzQ4YmQwLWQyNGQtNDY2Yi1iMWMxLTVkOTQ1MDczN2VhYSIsImlhdCI6MTYyODA5MTIwNywiZXhwIjoxNjI4MTc3NjA3fQ.5ChvB4gmO-R9EXfmakMcjtUZhKhnVDHFav_6-76xCHo';
 
 	return (
 		<div className={styles.root}>
@@ -26,7 +23,23 @@ const Example: React.FC = () => {
 				get second text
 			</button>
 			<p>{text}</p>
-			<ClanModal token={token} />
+			<form
+				method="POST"
+				onSubmit={async (event) => {
+					event.preventDefault();
+					await uploadImage(file as Blob);
+				}}
+			>
+				<input
+					type="file"
+					required
+					onChange={(event) => {
+						setFile(event.target.files && event.target.files[0]);
+					}}
+				/>
+				<input type="submit" />
+			</form>
+			<img src="https://codetrainer-images.s3.eu-north-1.amazonaws.com/7c79b29f-8b8e-4940-9402-8639f477825d.png" />
 		</div>
 	);
 };
