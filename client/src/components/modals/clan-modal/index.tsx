@@ -33,6 +33,14 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 		call();
 	}, []);
 
+	const validateClanName = (value: string) => {
+		let error;
+		if (value.length === 0) {
+			error = 'Clan name should be larger than 0 letters';
+		}
+		return error;
+	};
+
 	const openModal = () => {
 		setIsOpen(true);
 	};
@@ -68,20 +76,25 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 					</div>
 					<div>
 						<Formik initialValues={{ createClan: '' }} onSubmit={(values) => createClan(values.createClan)}>
-							<Form className={styles.form}>
-								<Field
-									id="createClan"
-									name="createClan"
-									label={
-										<label>
-											<span>*</span> Create clan
-										</label>
-									}
-									type="text"
-									component={FormInput}
-								/>
-								<Button type="submit">Create Clan</Button>
-							</Form>
+							{({ errors, touched, validateField, validateForm }) => (
+								<Form className={styles.form}>
+									<Field
+										id="createClan"
+										name="createClan"
+										label={
+											<label>
+												<span>*</span> Create clan
+											</label>
+										}
+										type="text"
+										component={FormInput}
+										validate={validateClanName}
+									/>
+									<Button onClick={() => validateField('createClan')} type="submit">
+										Create Clan
+									</Button>
+								</Form>
+							)}
 						</Formik>
 					</div>
 				</div>
