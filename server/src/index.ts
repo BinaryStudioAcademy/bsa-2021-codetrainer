@@ -3,7 +3,6 @@ import cors from 'cors';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
-import { checkConfig } from './helpers';
 import { ENV, WHITE_ROUTES } from './common';
 import { initApi } from './api';
 import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
@@ -13,7 +12,6 @@ import 'reflect-metadata';
 import './data/db/connection';
 import './config/passport';
 
-checkConfig();
 const app = express();
 
 app.use(express.json());
@@ -23,10 +21,8 @@ app.use(cookieSession(cookieConfig));
 app.use(cors());
 
 app.use(passport.initialize());
-
 app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
-app.use(ENV.APP.API_PATH, initApi(Router));
-
+app.use(ENV.APP.API_PATH, initApi());
 app.use(errorHandlerMiddleware);
 
 app.listen(ENV.APP.PORT, () => {
