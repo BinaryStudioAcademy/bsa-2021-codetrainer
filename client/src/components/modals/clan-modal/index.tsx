@@ -1,6 +1,9 @@
 import React from 'react';
+import { Formik, Form, Field } from 'formik';
 import Modal from 'react-modal';
 import ImageUpload from './components/image-upload';
+import { FormInput } from 'components';
+import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 
 interface IClanModalProps {
@@ -11,11 +14,8 @@ Modal.setAppElement('#root');
 
 export const ClanModal: React.FC<IClanModalProps> = (props) => {
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const [input, setInput] = React.useState('');
 
-	const createClan = React.useCallback((e: any, name: string) => {
-		e.preventDefault();
-
+	const createClan = React.useCallback((name: string) => {
 		const header = {
 			method: 'POST',
 			headers: {
@@ -41,10 +41,10 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 		setIsOpen(false);
 	};
 
-	const style = {
+	const modalStyle = {
 		content: {
 			width: '50vw',
-			height: '50vh',
+			height: '60vh',
 			margin: 'auto',
 			background: '#FAFBFF',
 			border: 'none',
@@ -54,7 +54,7 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 	return (
 		<div>
 			<button onClick={openModal}>Open Modal</button>
-			<Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={style} contentLabel="Clan Modal">
+			<Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={modalStyle} contentLabel="Clan Modal">
 				<div className={styles.container}>
 					<div className={styles.flex}>
 						<h2 className={styles.title}>NEW CLAN</h2>
@@ -62,18 +62,27 @@ export const ClanModal: React.FC<IClanModalProps> = (props) => {
 							x
 						</a>
 					</div>
-					<div className={`${styles.flex} ${styles.pictures}`}>
+					<div className={styles.pictures}>
 						<ImageUpload label="Set clan cover" />
 						<ImageUpload label="Set clan icon" />
 					</div>
-					<div className={styles.form}>
-						<label>
-							<span>*</span> Clan name
-						</label>
-						<form onSubmit={(e) => createClan(e, input)}>
-							<input value={input} onChange={(e) => setInput(e.target.value)} type="text" />
-							<button type="submit">Create Clan</button>
-						</form>
+					<div>
+						<Formik initialValues={{ createClan: '' }} onSubmit={(values) => createClan(values.createClan)}>
+							<Form className={styles.form}>
+								<Field
+									id="createClan"
+									name="createClan"
+									label={
+										<label>
+											<span>*</span> Create clan
+										</label>
+									}
+									type="text"
+									component={FormInput}
+								/>
+								<Button type="submit">Create Clan</Button>
+							</Form>
+						</Formik>
 					</div>
 				</div>
 			</Modal>
