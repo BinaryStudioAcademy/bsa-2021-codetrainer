@@ -22,10 +22,7 @@ export function initApi(): Router {
 		}),
 	);
 
-	apiRouter.use(
-		ApiPath.IMAGES,
-		imagesController(imagesService)
-	);
+	apiRouter.use(ApiPath.IMAGES, imagesController(imagesService));
 
 	return apiRouter;
-};
+}
