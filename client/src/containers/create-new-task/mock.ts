@@ -4,6 +4,7 @@ import { ReactComponent as PracticeIcon } from 'assets/icons/practice-icon.svg';
 import { ReactComponent as BetaIcon } from 'assets/icons/beta-icon.svg';
 import { ReactComponent as RandomIcon } from 'assets/icons/shuffle-icon.svg';
 import { Discipline, IDisciplineItem } from './logic/models';
+import { ISelectProps } from 'components/basic/select/interface';
 
 export const DISCIPLINE_ITEMS: IDisciplineItem[] = [
 	{
@@ -32,3 +33,29 @@ export const DISCIPLINE_ITEMS: IDisciplineItem[] = [
 		label: 'Random',
 	},
 ];
+
+export const SELECT_PROPS: ISelectProps = {
+	values: [
+		{
+			id: 1,
+			title: '7.3',
+		},
+		{
+			id: 2,
+			title: '7.0',
+		},
+		{
+			id: 3,
+			title: '6.2',
+		},
+		{
+			id: 4,
+			title: '5.9',
+		},
+	],
+	activeValue: {
+		id: 1,
+		title: '7.3',
+	},
+	onChange: () => console.log('hello'),
+};

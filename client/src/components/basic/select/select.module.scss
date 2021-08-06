@@ -56,7 +56,8 @@
 
 	list-style-type: none;
 }
-
-.optionsList.optionsActive {
+.optionsActive {
 	display: block;
+	z-index: 5;
+	margin-bottom: 50px;
 }

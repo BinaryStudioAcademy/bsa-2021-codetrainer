@@ -1,6 +1,6 @@
 import React from 'react';
 import { CreateTaskSettings } from 'components/pages';
-import { DISCIPLINE_ITEMS } from '../mock';
+import { DISCIPLINE_ITEMS, SELECT_PROPS } from '../mock';
 import { useDispatch, useSelector } from 'react-redux';
 import { Discipline } from '../logic/models';
 import { IRootState } from 'typings/root-state';
@@ -31,26 +31,7 @@ export const CreateSettings = () => {
 				isSelectedSwitch={isSelectedSwitch}
 				onSwitchClick={onSwitchClick}
 				//work here
-				selectProps={{
-					values: [
-						{
-							id: 1,
-							icon: '',
-							title: 'Hello',
-						},
-						{
-							id: 2,
-							icon: '',
-							title: 'bye',
-						},
-					],
-					activeValue: {
-						id: 1,
-						icon: '',
-						title: 'Hello',
-					},
-					onChange: () => {},
-				}}
+				selectProps={SELECT_PROPS}
 			/>
 		</div>
 	);
