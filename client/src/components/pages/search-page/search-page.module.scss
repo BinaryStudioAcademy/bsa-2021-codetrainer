@@ -1,7 +1,7 @@
 .container {
 	display: grid;
-	grid-template-columns: 245px 2fr 4fr;
-	grid-template-rows: 80px calc(100vh - 80px);
+	grid-template-columns: 270px 2fr 4fr;
+	grid-template-rows: 100px calc(100vh - 100px);
 	grid-template-areas:
 		'. . .'
 		'. searchPanel challengesList';
