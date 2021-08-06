@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const detailsData = {
+export const detailsData: React.ReactNode = {
 	instructions: (
 		<div className="task-instructions">
 			<p>
