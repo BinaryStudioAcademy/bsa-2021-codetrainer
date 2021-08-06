@@ -4,4 +4,4 @@ import { Http } from './http';
 const http = new Http();
 const authServices = new Auth({ http });
 
-export { authServices };
+export { authServices, http };
