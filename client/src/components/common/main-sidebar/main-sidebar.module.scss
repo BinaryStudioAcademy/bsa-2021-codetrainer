@@ -3,6 +3,9 @@
 	background: #705ff5;
 	width: 245px;
 	min-height: 100vh;
+	height: 100%;
+	position: fixed;
+	z-index: 10;
 }
 
 .logotype {

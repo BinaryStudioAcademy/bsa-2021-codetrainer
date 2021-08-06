@@ -47,7 +47,6 @@ export const Profile: React.FC = () => {
 
 	return (
 		<>
-			<Header {...headerProps} />
 			<div className="content_container">
 				<MainSidebar />
 				<ProfilePage
@@ -61,6 +60,7 @@ export const Profile: React.FC = () => {
 					}}
 				/>
 			</div>
+			<Header {...headerProps} />
 		</>
 	);
 };
