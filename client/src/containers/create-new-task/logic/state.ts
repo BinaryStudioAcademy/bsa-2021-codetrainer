@@ -1,5 +1,6 @@
 import { ISelectValue } from 'components/basic/select/interface';
 import { Discipline } from './models';
+import { ReactComponent as RankUpIcon } from 'assets/icons/rank-up-icon.svg';
 
 export interface ICreateTaskState {
 	discipline: Discipline;
@@ -13,5 +14,6 @@ export const initialState: ICreateTaskState = {
 	languageVersion: {
 		id: 1,
 		title: '7.3',
+		iconFC: RankUpIcon,
 	},
 };

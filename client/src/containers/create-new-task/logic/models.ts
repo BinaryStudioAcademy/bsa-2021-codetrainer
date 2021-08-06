@@ -13,4 +13,4 @@ export enum Discipline {
 	BETA = 'beta',
 	RANDOM = 'random',
 }
-type TSvgFC = FC<SVGProps<SVGSVGElement>>;
+export type TSvgFC = FC<SVGProps<SVGSVGElement>>;

@@ -39,18 +39,22 @@ export const SELECT_PROPS: ISelectProps = {
 		{
 			id: 1,
 			title: '7.3',
+			iconFC: RankUpIcon,
 		},
 		{
 			id: 2,
 			title: '7.0',
+			iconFC: RankUpIcon,
 		},
 		{
 			id: 3,
 			title: '6.2',
+			iconFC: RankUpIcon,
 		},
 		{
 			id: 4,
 			title: '5.9',
+			iconFC: RankUpIcon,
 		},
 	],
 };
