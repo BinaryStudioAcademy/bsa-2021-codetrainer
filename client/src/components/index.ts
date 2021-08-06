@@ -1,14 +1,20 @@
+export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification } from './basic';
+
+export { Example, Challenge, CoverLayout, FormInput, FormSelect, FullscreenLoader, Spinner, Header } from './common';
+
+export type { ICreateTabsProps } from './pages';
+
 export {
-	Avatar,
-	Label,
-  	PrivateRoute,
-  	PublicRoute,
-	Notification
-} from './basic';
-
-export { Example, CoverLayout, FormInput, FullscreenLoader, Spinner, Header } from './common';
-
-export { SignInPage, SignUp, ChangePassword, ForgotPassword } from './pages';
+	SignInPage,
+	SignUp,
+	ChangePassword,
+	ForgotPassword,
+	CreateTabs,
+	SearchPage,
+	ProfilePage,
+	StatsTab,
+	ProfileTasks,
+} from './pages';
 
 export { Modal } from './modals';
 

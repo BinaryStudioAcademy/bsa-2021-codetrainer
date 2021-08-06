@@ -1,4 +1,6 @@
-@import './normalize.scss';
+@import '~normalize.css';
+@import '~@blueprintjs/core/lib/css/blueprint.css';
+@import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
 
 body {
 	margin: 0;
@@ -10,4 +12,21 @@ body {
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgba(236, 65, 121, 0.3);
+	border-radius: 10px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+	background-color: rgba(236, 65, 121, 0.6);
+}
+
+a {
+	text-decoration: none;
 }

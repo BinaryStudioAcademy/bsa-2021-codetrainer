@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import { initAuth } from './auth';
 import { initClan } from './clan';
+import { imagesController } from './images.controller';
 import { ApiPath } from '../common';
-import { auth, clan } from '../services';
+import { auth, clan, imagesService } from '../services';
 
-export const initApi = (appRouter: typeof Router) => {
-	const apiRouter = appRouter();
+export function initApi(): Router {
+	const apiRouter = Router();
 
 	apiRouter.use(
 		ApiPath.AUTH,
@@ -21,5 +22,7 @@ export const initApi = (appRouter: typeof Router) => {
 		}),
 	);
 
+	apiRouter.use(ApiPath.IMAGES, imagesController(imagesService));
+
 	return apiRouter;
-};
+}
