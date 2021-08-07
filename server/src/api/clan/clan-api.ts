@@ -1,6 +1,11 @@
 import { Router } from 'express';
 import { ClanApiPath, REQ_TYPE } from '../../common';
-import { clanPermissionMiddleware, dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
+import {
+	clanAdminPermissionMiddleware,
+	clanMemberPermissionMiddleware,
+	dataValidationMiddleware,
+	SchemasDataValidation,
+} from '../../middleware';
 import { TClanService } from '../../services';
 import { IUserFields } from '../../types';
 
@@ -15,7 +20,7 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.get(`${ClanApiPath.ROOT}:id`, (req, res, next) =>
+		.get(`${ClanApiPath.ROOT}:id`, clanMemberPermissionMiddleware, (req, res, next) =>
 			clansService
 				.getClan(req.params.id)
 				.then((data) => res.send(data))
@@ -32,7 +37,7 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 		)
 		.put(
 			ClanApiPath.ROOT,
-			clanPermissionMiddleware,
+			clanAdminPermissionMiddleware,
 			dataValidationMiddleware(SchemasDataValidation.clanFieldsSchema, REQ_TYPE.BODY),
 			(req, res, next) =>
 				clansService
@@ -46,7 +51,7 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.delete(ClanApiPath.ROOT, clanPermissionMiddleware, (req, res, next) =>
+		.delete(ClanApiPath.ROOT, clanAdminPermissionMiddleware, (req, res, next) =>
 			clansService
 				.delete({ user: req.user as IUserFields })
 				.then((data) => res.send(data))
