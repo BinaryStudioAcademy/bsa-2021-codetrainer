@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
+import { authServices } from 'services';
 import { NotificationType } from '../notification/logic/models';
 import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
@@ -14,6 +15,9 @@ const Example: React.FC = () => {
 	const [file, setFile] = useState<Blob | null>(null);
 	const getExampleText = (exampleName: string) => {
 		dispatch(actions.getExampleText({ exampleName }));
+	};
+	const handleLogin = async () => {
+		await authServices.login({ email: 'test@test.com', password: '123' });
 	};
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
@@ -43,6 +47,9 @@ const Example: React.FC = () => {
 			</button>
 			<button className={styles.btn} onClick={() => getExampleText('second')}>
 				get second text
+			</button>
+			<button className={styles.btn} onClick={() => handleLogin()}>
+				login
 			</button>
 			<p>{text}</p>
 			<form
