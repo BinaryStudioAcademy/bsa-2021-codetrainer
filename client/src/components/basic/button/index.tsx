@@ -5,7 +5,7 @@ import styles from './button.module.scss';
 import clsx from 'clsx';
 
 interface IButtonProps extends ButtonProps {
-	color?: 'blue' | 'red';
+	color?: 'blue' | 'red' | 'grey';
 }
 
 const Button: FC<IButtonProps> = ({ color = 'blue', children, className, ...remains }) => (
