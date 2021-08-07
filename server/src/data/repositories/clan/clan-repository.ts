@@ -11,7 +11,7 @@ export class ClanRepository extends Repository<Clan> {
 	getById(id: string) {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
-			.select(['clan', 'member.name', 'member.id'])
+			.select(['clan', 'member.name', 'member.id', 'member.honour', 'member.rank'])
 			.where('clan.id = :id', { id })
 			.getOne();
 	}
@@ -32,6 +32,10 @@ export class ClanRepository extends Repository<Clan> {
 
 	deleteMember(id: string, memberId: string) {
 		return this.createQueryBuilder('clan').relation('members').of(id).remove(memberId);
+	}
+
+	addMember(id: string, memberId: string) {
+		return this.createQueryBuilder('clan').relation('members').of(id).add(memberId);
 	}
 
 	deleteById(id: string) {
