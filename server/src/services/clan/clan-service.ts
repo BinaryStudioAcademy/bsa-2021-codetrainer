@@ -94,6 +94,10 @@ export class Clan {
 		return +(members.reduce((sum, member) => sum + member.honour, 0) / members.length).toFixed();
 	}
 
+	getRank({ members }: ClanType) {
+		return +(members.reduce((sum, member) => sum + member.rank, 0) / members.length).toFixed();
+	}
+
 	async getClans({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.clanRepository);
 		const clans = (await repository.getAll(skip, take)).map((clan) => ({
@@ -104,6 +108,7 @@ export class Clan {
 			numberOfMembers: clan.numberOfMembers,
 			createdAt: clan.createdAt,
 			honour: this.getHonour(clan),
+			rank: this.getRank(clan),
 		}));
 
 		return clans;
@@ -120,6 +125,7 @@ export class Clan {
 		return {
 			...clan,
 			honour: this.getHonour(clan),
+			rank: this.getRank(clan),
 		};
 	}
 

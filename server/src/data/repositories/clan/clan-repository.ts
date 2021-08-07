@@ -34,6 +34,7 @@ export class ClanRepository extends Repository<Clan> {
 				'clan',
 				'member.name',
 				'member.surname',
+				'member.rank',
 				'member.id',
 				'member.honour',
 				'profileClan.role',
