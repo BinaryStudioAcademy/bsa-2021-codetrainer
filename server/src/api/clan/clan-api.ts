@@ -15,6 +15,12 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 				.then((data) => res.send(data))
 				.catch(next),
 		)
+		.get(`${ClanApiPath.ROOT}:id`, (req, res, next) =>
+			clansService
+				.getClan(req.params.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.post(
 			ClanApiPath.ROOT,
 			dataValidationMiddleware(SchemasDataValidation.clanFieldsSchema, REQ_TYPE.BODY),
@@ -33,6 +39,12 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 					.update(req.user as IUserFields, req.body)
 					.then((data) => res.send(data))
 					.catch(next),
+		)
+		.patch(`${ClanApiPath.ROOT}:id`, async (req, res, next) =>
+			clansService
+				.toggleMember(req.user as IUserFields, req.params.id)
+				.then((data) => res.send(data))
+				.catch(next),
 		)
 		.delete(ClanApiPath.ROOT, clanPermissionMiddleware, (req, res, next) =>
 			clansService
