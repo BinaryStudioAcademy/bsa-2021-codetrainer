@@ -1,4 +1,4 @@
-export { Avatar, Label, Rank, PrivateRoute, PublicRoute } from './basic';
+export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Button } from './basic';
 
 export { Example, Challenge, CoverLayout, FormInput, FormSelect, FullscreenLoader, Spinner, Header } from './common';
 
@@ -13,5 +13,6 @@ export {
 	ProfilePage,
 	StatsTab,
 	ClansPage,
+	ClanPage,
 } from './pages';
 export { Modal } from './modals';

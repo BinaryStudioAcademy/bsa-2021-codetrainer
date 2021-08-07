@@ -1,4 +1,4 @@
-import { TClans } from 'containers/clans/logic/state';
+import { TClans, IClan } from 'containers/clans/clans/logic/state';
 
 type TSortCallback = () => void;
 
@@ -7,4 +7,10 @@ export interface IClansProps {
 	sortByRank: TSortCallback;
 	sortByTime: TSortCallback;
 	sortBySize: TSortCallback;
+}
+
+export interface IClanProps {
+	clan: IClan;
+	sortByRank: TSortCallback;
+	sortByTime: TSortCallback;
 }
