@@ -19,6 +19,12 @@ export class User {
 	@Column({ type: 'varchar', length: 100 })
 	password!: string;
 
+	@Column({ type: 'int', default: 0 })
+	rank!: number;
+
+	@Column({ type: 'int', default: 0 })
+	honour!: number;
+
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()
 	profileClan?: ProfileClan;
