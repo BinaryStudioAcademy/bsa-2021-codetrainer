@@ -8,8 +8,8 @@ import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-d
 interface IPublicRouteProps extends RouteProps {
 	restricted: boolean;
 	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-	needHeader: boolean;
-	needSideBar: boolean;
+	needHeader?: boolean;
+	needSideBar?: boolean;
 }
 
 const PublicRoute = (props: IPublicRouteProps) => {

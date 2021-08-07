@@ -7,8 +7,8 @@ import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-d
 
 interface IPrivateRouteProps extends RouteProps {
 	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-	needHeader: boolean;
-	needSideBar: boolean;
+	needHeader?: boolean;
+	needSideBar?: boolean;
 }
 
 const PrivateRoute = (props: IPrivateRouteProps) => {
