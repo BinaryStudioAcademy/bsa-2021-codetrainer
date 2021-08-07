@@ -94,4 +94,74 @@ export class Clan {
 		const clans = await repository.getAll(skip, take);
 		return clans;
 	}
+
+	async getClan(id: string) {
+		const repository = getCustomRepository(this.clanRepository);
+		const clan = await repository.getById(id);
+
+		if (!clan) {
+			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+		}
+
+		return clan;
+	}
+
+	async joinClan(user: IUserFields, id: string) {
+		const repository = getCustomRepository(this.clanRepository);
+		const clan = await this.getClan(id);
+
+		if (!clan) {
+			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+		}
+
+		if (user.clan.id === id) {
+			throw new ValidationError(CODE_ERRORS.IN_CLAN);
+		}
+
+		await repository.addMember(id, user.id);
+		const updatedClan = await this.getClan(id);
+
+		return updatedClan;
+	}
+
+	async leaveClan(user: IUserFields, id: string) {
+		const repository = getCustomRepository(this.clanRepository);
+		const clan = await this.getClan(id);
+
+		if (!clan) {
+			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+		}
+
+		if (user.clan.id !== id) {
+			throw new ValidationError(CODE_ERRORS.NOT_IN_CLAN);
+		}
+
+		if (user.profileClan?.role === CLAN_MEMBER_ROLE.ADMIN) {
+			throw new ValidationError(CODE_ERRORS.ADMIN_LEAVE);
+		}
+
+		await repository.deleteMember(id, user.id);
+		const updatedClan = await this.getClan(id);
+
+		return updatedClan;
+	}
+
+	async toggleMember(user: IUserFields, id: string) {
+		const clan = await this.getClan(id);
+
+		if (!clan) {
+			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+		}
+
+		const existingMember = clan.members.find((member) => member.id === user.id);
+
+		let updatedClan;
+		if (existingMember) {
+			updatedClan = await this.leaveClan(user, id);
+		} else {
+			updatedClan = await this.joinClan(user, id);
+		}
+
+		return updatedClan;
+	}
 }
