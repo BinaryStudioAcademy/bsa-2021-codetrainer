@@ -1,4 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	OneToOne,
+	ManyToOne,
+	JoinColumn,
+	CreateDateColumn,
+	UpdateDateColumn,
+} from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 
@@ -31,4 +40,10 @@ export class User {
 
 	@ManyToOne(() => Clan, (clan) => clan.members)
 	clan?: Clan;
+
+	@CreateDateColumn()
+	createdAt!: Date;
+
+	@UpdateDateColumn()
+	updatedAt!: Date;
 }

@@ -15,6 +15,7 @@ export class ClanRepository extends Repository<Clan> {
 			.select([
 				'clan',
 				'member.name',
+				'member.createdAt',
 				'member.surname',
 				'member.id',
 				'member.honour',
@@ -30,16 +31,7 @@ export class ClanRepository extends Repository<Clan> {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
 			.leftJoinAndSelect('member.profileClan', 'profileClan')
-			.select([
-				'clan',
-				'member.name',
-				'member.surname',
-				'member.rank',
-				'member.id',
-				'member.honour',
-				'profileClan.role',
-				'profileClan.status',
-			])
+			.select(['clan', 'member.rank', 'member.honour', 'profileClan.role', 'profileClan.status'])
 			.skip(skip)
 			.take(take)
 			.getMany();
