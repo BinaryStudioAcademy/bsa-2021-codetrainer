@@ -15,25 +15,25 @@ export class Task extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 	id!: string;
 
-	@Column({ type: 'varchar', length: 250 })
+	@Column({ type: 'varchar', length: 250, default: '' })
 	name!: string;
 
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	difficulty?: number;
 
-	@Column({ type: 'text', nullable: true })
+	@Column({ type: 'text', default: '' })
 	description?: string;
 
-	@Column({ type: 'text', nullable: true })
+	@Column({ type: 'text', default: '' })
 	testCase?: string;
 
-	@Column({ type: 'text', nullable: true })
+	@Column({ type: 'text', default: '' })
 	testCaseSample?: string;
 
-	@Column({ type: 'text', nullable: true })
+	@Column({ type: 'text', default: '' })
 	initialSolution?: string;
 
-	@Column({ type: 'text', nullable: true })
+	@Column({ type: 'text', default: '' })
 	completeSolution?: string;
 
 	@Column({ type: 'enum', enum: TASK_STATUS })
@@ -48,6 +48,6 @@ export class Task extends BaseEntity {
 	@UpdateDateColumn()
 	updatedAt!: Date;
 
-	@ManyToOne(() => User, (user) => user.tasks)
+	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
 }

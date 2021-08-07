@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { User } from '../../models';
-import { IUserFields } from '../../../types';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -18,7 +17,7 @@ export class UserRepository extends Repository<User> {
 			.getOne();
 	}
 
-	updateById(id: string, data: Partial<IUserFields>) {
-		return this.save({ id, ...data });
+	updateById(id: string, data: Partial<User>) {
+		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
 }

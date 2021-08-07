@@ -1,9 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import { ITaskFields, IUserFields } from '../../types';
-import { TTaskRepository, TUserRepository } from '../../data';
+import { Task, User, TTaskRepository, TUserRepository } from '../../data';
 import { TASK_STATUS } from '../../common';
-import { ValidationError } from '../../helpers';
-import { CODE_ERRORS } from '../../common/constants/helpers';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -15,7 +12,7 @@ export class TaskService {
 		this.userRepository = user;
 	}
 
-	async create(user: IUserFields, task: ITaskFields) {
+	async create(user: User, task: Task) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
 		const newTask = await repository.save({
@@ -24,38 +21,32 @@ export class TaskService {
 			isPublished: false,
 			status: TASK_STATUS.EDITABLE,
 		});
-		await userRepository.updateById(user.id, { tasks: [...user.tasks, newTask] });
-		return newTask;
+		await userRepository.save({ id: user.id, tasks: [...user.tasks, newTask] });
+		const savedTask = await repository.getById(newTask.id);
+		return savedTask;
 	}
 
-	async delete(user: IUserFields, id: string) {
+	async delete(user: User, id: string) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
 		const tasks = user.tasks.filter((task) => task.id !== id);
-		await userRepository.updateById(user.id, { tasks });
+		await userRepository.save({ id: user.id, tasks });
 		await repository.deleteById(id);
 		return {
 			delete: 'success',
 		};
 	}
 
-	async update(user: IUserFields, task: ITaskFields) {
+	async update(newTask: Task, taskId: string) {
 		const repository = getCustomRepository(this.taskRepository);
-		const newTask = await repository.updateById(task.id, task);
+		await repository.updateById(taskId, newTask);
+		const updatedTask = await repository.getById(newTask.id);
+		return updatedTask;
 	}
 
 	async getTasks({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.taskRepository);
 		const clans = await repository.getAll(skip, take);
 		return clans;
-	}
-
-	async getTaskById(id: string) {
-		const repository = getCustomRepository(this.taskRepository);
-		const task = await repository.getById(id);
-		if (!task) {
-			throw new ValidationError(CODE_ERRORS.NO_RECORD);
-		}
-		return task;
 	}
 }

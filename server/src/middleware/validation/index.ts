@@ -11,7 +11,7 @@ export const validationMiddleware =
 		if (!errors.isEmpty()) {
 			res.status(HttpCodes.BAD_REQUEST).send({ errors: errors.array() });
 		} else {
-			req.body = matchedData(req, { includeOptionals: true });
+			req.body = matchedData(req);
 			next();
 		}
 	};

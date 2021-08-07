@@ -1,10 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	OneToOne,
+	ManyToOne,
+	JoinColumn,
+	OneToMany,
+	BaseEntity,
+} from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 import { Task } from '../task';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 	id!: string;
 
@@ -28,5 +37,6 @@ export class User {
 	clan?: Clan;
 
 	@OneToMany(() => Task, (task) => task.user)
+	@JoinColumn()
 	tasks!: Task[];
 }

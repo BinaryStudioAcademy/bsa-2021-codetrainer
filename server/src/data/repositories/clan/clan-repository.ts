@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Clan } from '../../models';
-import { IClanFields } from '../../../types';
 import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Clan)
@@ -27,7 +26,7 @@ export class ClanRepository extends AbstractRepository<Clan> {
 			.getMany();
 	}
 
-	updateById(id: string, data: Partial<IClanFields>) {
+	updateById(id: string, data: Partial<Clan>) {
 		return this.update({ id }, data);
 	}
 

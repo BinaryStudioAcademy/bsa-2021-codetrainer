@@ -1,7 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import { TUserRepository } from '../../data';
+import { TUserRepository, User } from '../../data';
 import { encrypt, createToken } from '../../helpers';
-import { IUserFields } from '../../types';
 
 export class AuthService {
 	protected userRepository: TUserRepository;
@@ -18,7 +17,7 @@ export class AuthService {
 		};
 	}
 
-	async register({ password, ...userData }: Omit<IUserFields, 'id'>) {
+	async register({ password, ...userData }: Omit<User, 'id'>) {
 		const repository = getCustomRepository(this.userRepository);
 		const newUser = await repository.save({
 			...userData,

@@ -1,6 +1,5 @@
 import { EntityRepository } from 'typeorm';
 import { AbstractRepository } from '../abstract';
-import { ITaskFields } from '../../../types';
 import { Task } from '../../models';
 
 @EntityRepository(Task)
@@ -14,11 +13,11 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.getMany();
 	}
 
-	getById(id: string) {
-		return this.createQueryBuilder('task').where('task.id = :id', { id }).getOne();
+	updateById(id: string, data: Partial<Task>) {
+		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
 
-	updateById(id: string, data: Partial<ITaskFields>) {
-		return this.save({ id, ...data });
+	getById(id: string) {
+		return this.createQueryBuilder('task').where('task.id = :id', { id }).getOne();
 	}
 }
