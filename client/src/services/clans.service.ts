@@ -1,5 +1,6 @@
-import { TClans } from 'containers/clans/logic/state';
-// import callWebApi from '../helpers/call-api.helper';
+import { IMember, TClans } from 'containers/clans/types';
+import { IClan } from 'containers/clans/types';
+import callWebApi from '../helpers/call-api.helper';
 
 export interface TFetchClansArgs {
 	take: number;
@@ -7,43 +8,41 @@ export interface TFetchClansArgs {
 }
 
 export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<TClans> => {
-	// const res = await callWebApi({
-	// 	method: 'GET',
-	// 	endpoint: 'clan',
-	// 	body: {
-	// 		take,
-	// 		skip,
-	// 	},
-	// });
-	// const { clans } = await res.json();
+	const res = await callWebApi({
+		method: 'GET',
+		endpoint: 'clan',
+		query: {
+			take,
+			skip,
+		},
+	});
 
-	// return clans;
-	return [
-		{
-			id: '1',
-			name: 'Name 1',
-			rank: 1,
-			avatar: '/',
-			honour: 20,
-			isPublic: true,
-			maxMembers: 20,
-			numberOfMembers: 1,
-			createdAt: new Date(),
-		},
-		{
-			id: '2',
-			name: 'Name 2',
-			rank: 2,
-			avatar: '/',
-			honour: 10,
-			isPublic: false,
-			maxMembers: 10,
-			numberOfMembers: 10,
-			createdAt: new Date('1970-02-02'),
-		},
-	];
+	const clans = (await res.json()).map((clan: IClan) => ({
+		...clan,
+		createdAt: new Date(clan.createdAt),
+	}));
+
+	return clans;
 };
 
-export const joinClan = async (id: string, token: string): Promise<void> => {};
+export const fetchClan = async (id: string): Promise<IClan> => {
+	const res = await callWebApi({
+		method: 'GET',
+		endpoint: `clan/${id}`,
+	});
 
-export const leaveClan = async (id: string, token: string): Promise<void> => {};
+	const clan = await res.json().then((clan) => ({
+		...clan,
+		members: clan.members.map((member: IMember) => ({
+			...member,
+			createdAt: new Date(member.createdAt),
+		})),
+		createdAt: new Date(clan.createdAt),
+	}));
+
+	return clan;
+};
+
+export const joinClan = async (id: string): Promise<void> => {};
+
+export const leaveClan = async (id: string): Promise<void> => {};
