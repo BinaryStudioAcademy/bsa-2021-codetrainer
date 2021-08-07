@@ -15,11 +15,10 @@ export function* fetchClanWatcher() {
 }
 
 export function* leaveClanWorker(action: ReturnType<typeof actions.leaveClan>): any {
-	const token = ''; //yield select((state: IRootState) => state.user.token);
 	const clanId = yield select((state: IRootState) => state.clan.item.id);
 
 	try {
-		yield call(leaveClan, clanId, token);
+		yield call(leaveClan, clanId);
 		yield put(actions.leaveClan());
 	} catch (error) {}
 }

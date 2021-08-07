@@ -15,11 +15,10 @@ export function* fetchClansWatcher() {
 }
 
 export function* joinClanWorker(action: ReturnType<typeof actions.joinClan>): any {
-	const token = ''; //yield select((state: IRootState) => state.user.token);
 	const { clanId } = action;
 
 	try {
-		const updatedClan = yield call(joinClan, clanId, token);
+		const updatedClan = yield call(joinClan, clanId);
 		yield put(
 			actions.updateClan({
 				clan: updatedClan,
@@ -33,11 +32,10 @@ export function* joinClanWatcher() {
 }
 
 export function* leaveClanWorker(action: ReturnType<typeof actions.joinClan>): any {
-	const token = ''; //yield select((state: IRootState) => state.user.token);
 	const { clanId } = action;
 
 	try {
-		const updatedClan = yield call(leaveClan, clanId, token);
+		const updatedClan = yield call(leaveClan, clanId);
 		yield put(
 			actions.updateClan({
 				clan: updatedClan,

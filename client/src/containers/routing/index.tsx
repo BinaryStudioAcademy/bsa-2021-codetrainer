@@ -4,7 +4,7 @@ import Example from 'containers/example';
 import { Profile } from 'containers/profile';
 import { PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SignUp, SearchPage } from 'components';
 import SignIn from 'containers/sign-in';
-import Clans from 'containers/clans';
+import { Clans, Clan } from 'containers/clans';
 
 interface IRoutingProps {}
 
@@ -18,6 +18,7 @@ const Routing: React.FC<IRoutingProps> = () => (
 		<PublicRoute exact restricted={false} path="/change-password" component={ChangePassword} />
 		<PublicRoute exact restricted={false} path="/search" component={SearchPage} />
 		<PublicRoute exact restricted={false} path="/clans" component={Clans} />
+		<PublicRoute exact restricted={false} path="/clan" component={Clan} />
 	</Switch>
 );
 
