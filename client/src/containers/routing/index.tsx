@@ -11,14 +11,42 @@ interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => (
 	<Switch>
-		<PublicRoute exact restricted={false} path="/" component={Example} />
-		<PrivateRoute path="/home" component={HomePage} />
-		<PrivateRoute path="/users/:name" component={Profile} />
-		<PrivateRoute exact path="/search" component={SearchPage} />
-		<PublicRoute exact restricted={false} path="/register" component={SignUp} />
-		<PublicRoute exact restricted={false} path="/sign-in" component={SignIn} />
-		<PublicRoute exact restricted={false} path="/forgot-password" component={ForgotPassword} />
-		<PublicRoute exact restricted={false} path="/change-password" component={ChangePassword} />
+		<PublicRoute exact restricted={false} path="/" component={Example} needHeader={false} needSideBar={false} />
+		<PrivateRoute path="/home" component={HomePage} needHeader={true} needSideBar={true} />
+		<PrivateRoute path="/users/:name" component={Profile} needHeader={true} needSideBar={true} />
+		<PrivateRoute exact path="/search" component={SearchPage} needHeader={true} needSideBar={true} />
+		<PublicRoute
+			exact
+			restricted={false}
+			path="/register"
+			component={SignUp}
+			needHeader={false}
+			needSideBar={false}
+		/>
+		<PublicRoute
+			exact
+			restricted={false}
+			path="/sign-in"
+			component={SignIn}
+			needHeader={false}
+			needSideBar={false}
+		/>
+		<PublicRoute
+			exact
+			restricted={false}
+			path="/forgot-password"
+			component={ForgotPassword}
+			needHeader={false}
+			needSideBar={false}
+		/>
+		<PublicRoute
+			exact
+			restricted={false}
+			path="/change-password"
+			component={ChangePassword}
+			needHeader={false}
+			needSideBar={false}
+		/>
 	</Switch>
 );
 

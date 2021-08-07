@@ -1,14 +1,10 @@
 import React from 'react';
-import { Header, SearchPage as SearchPageComponent } from 'components';
+import { SearchPage as SearchPageComponent } from 'components';
 import { ISearchPageProps } from 'components/pages/search-page';
-import { headerProps } from 'containers/header/mock';
-import MainSidebar from 'components/common/main-sidebar';
 
 export const SearchPage = () => {
 	return (
 		<>
-			<Header {...headerProps} />
-			<MainSidebar />
 			<SearchPageComponent {...searchPageProps} />
 		</>
 	);
