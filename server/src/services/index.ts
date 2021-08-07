@@ -1,10 +1,5 @@
 import { Auth } from './auth';
-import {
-	UserRepository,
-	ClanRepository,
-	ProfileClanRepository,
-	imagesRepository
-} from '../data';
+import { UserRepository, ClanRepository, ProfileClanRepository, imagesRepository } from '../data';
 import { Clan } from './clan';
 import { ImagesService } from './images.service';
 

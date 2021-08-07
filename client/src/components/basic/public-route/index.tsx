@@ -1,6 +1,7 @@
 import { Header } from 'components';
 import MainSidebar from 'components/common/main-sidebar';
 import { headerProps } from 'containers/header/mock';
+import { useAppSelector } from 'hooks/useAppSelector';
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
 
@@ -13,7 +14,8 @@ interface IPublicRouteProps extends RouteProps {
 
 const PublicRoute = (props: IPublicRouteProps) => {
 	const { restricted, component: Component, ...rest } = props;
-	const isAuthorized = false;
+	const { user } = useAppSelector((state) => state.auth);
+	const isAuthorized = Boolean(user);
 
 	return (
 		<>

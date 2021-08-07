@@ -1,5 +1,5 @@
 export type TFile = {
-	buffer: Buffer,
-	name: string,
-	mimetype: string
+	buffer: Buffer;
+	name: string;
+	mimetype: string;
 };
