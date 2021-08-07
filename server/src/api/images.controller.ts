@@ -6,20 +6,15 @@ import { ImagesService } from '../services';
 export function imagesController(service: ImagesService): Router {
 	const route = Router();
 
-	route.post(
-		'/upload',
-		imageMiddleware,
-		async (req: Request, res: Response) => {
-			const image = req.file;
-			if (image) {
-				const href = await service.putImage(image);
-				res.status(HttpCodes.OK).json({ href });
-			}
-			else {
-				res.status(HttpCodes.BAD_REQUEST).json({ message: 'No image' });
-			}
+	route.post('/upload', imageMiddleware, async (req: Request, res: Response) => {
+		const image = req.file;
+		if (image) {
+			const href = await service.putImage(image);
+			res.status(HttpCodes.OK).json({ href });
+		} else {
+			res.status(HttpCodes.BAD_REQUEST).json({ message: 'No image' });
 		}
-	);
+	});
 
 	return route;
-};
+}
