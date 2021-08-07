@@ -4,6 +4,7 @@ import { IUserFields } from '../../types';
 import { ValidationError } from '../../helpers';
 import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../common';
 import { CODE_ERRORS } from '../../common/constants/helpers';
+import { Clan as ClanType } from '../../data/models';
 
 export class Clan {
 	protected clanRepository: TClanRepository;
@@ -89,9 +90,22 @@ export class Clan {
 		return newClan;
 	}
 
+	getHonour({ members }: ClanType) {
+		return +(members.reduce((sum, member) => sum + member.honour, 0) / members.length).toFixed();
+	}
+
 	async getClans({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.clanRepository);
-		const clans = await repository.getAll(skip, take);
+		const clans = (await repository.getAll(skip, take)).map((clan) => ({
+			id: clan.id,
+			name: clan.name,
+			isPublic: clan.isPublic,
+			maxMembers: clan.maxMembers,
+			numberOfMembers: clan.numberOfMembers,
+			createdAt: clan.createdAt,
+			honour: this.getHonour(clan),
+		}));
+
 		return clans;
 	}
 
@@ -103,7 +117,10 @@ export class Clan {
 			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
 		}
 
-		return clan;
+		return {
+			...clan,
+			honour: this.getHonour(clan),
+		};
 	}
 
 	async joinClan(user: IUserFields, id: string) {
@@ -119,9 +136,6 @@ export class Clan {
 		}
 
 		await repository.addMember(id, user.id);
-		const updatedClan = await this.getClan(id);
-
-		return updatedClan;
 	}
 
 	async leaveClan(user: IUserFields, id: string) {
@@ -141,9 +155,6 @@ export class Clan {
 		}
 
 		await repository.deleteMember(id, user.id);
-		const updatedClan = await this.getClan(id);
-
-		return updatedClan;
 	}
 
 	async toggleMember(user: IUserFields, id: string) {
@@ -155,12 +166,13 @@ export class Clan {
 
 		const existingMember = clan.members.find((member) => member.id === user.id);
 
-		let updatedClan;
 		if (existingMember) {
-			updatedClan = await this.leaveClan(user, id);
+			await this.leaveClan(user, id);
 		} else {
-			updatedClan = await this.joinClan(user, id);
+			await this.joinClan(user, id);
 		}
+
+		const updatedClan = this.getClan(id);
 
 		return updatedClan;
 	}
