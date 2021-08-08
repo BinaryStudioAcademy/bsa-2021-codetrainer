@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cookieSession(cookieConfig));
+app.use(cors());
 
 app.use(passport.initialize());
 app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
