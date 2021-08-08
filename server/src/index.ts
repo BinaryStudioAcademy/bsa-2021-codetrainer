@@ -3,7 +3,7 @@ import cors from 'cors';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
-import { CORS_CREDENTIALS, CORS_METHODS, CORS_ORIGIN_URLS, ENV, STAGING_URL, WHITE_ROUTES } from './common';
+import { ENV, WHITE_ROUTES } from './common';
 import { initApi } from './api';
 import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 import { cookieConfig, corsConfig } from './config';
