@@ -5,7 +5,7 @@ const ConfigVariables = process.env;
 const ENV = {
 	APP: {
 		PORT: getEnv('PORT'),
-		API_PATH: '/api'
+		API_PATH: '/api',
 	},
 	JWT: {
 		SECRET: getEnv('SECRET_KEY'),
@@ -31,9 +31,14 @@ const ENV = {
 			BUCKET: getEnv('AWS_IMAGES_BUCKET_NAME'),
 			REGION: getEnv('AWS_IMAGES_BUCKET_REGION'),
 			ACCESS_KEY: getEnv('AWS_IMAGES_ACCESS_KEY'),
-			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY')
-		}
-	}
+			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY'),
+		},
+	},
+	GITHUB: {
+		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
+		SECRET: getEnv('GITHUB_SECRET'),
+		CALLBACK: 'http://localhost:5000/api/auth/github/callback',
+	},
 };
 
 export { ENV, ConfigVariables };
