@@ -17,6 +17,10 @@ export class UserRepository extends Repository<User> {
 			.getOne();
 	}
 
+	getByGithubId(githubId: string): Promise<User | undefined> {
+		return this.findOne({ githubId });
+	}
+
 	updateById(id: string, data: Partial<IUserFields>) {
 		return this.update({ id }, data);
 	}
