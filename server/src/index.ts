@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cookieSession(cookieConfig));
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: '*', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentials: true }));
 app.options('*', cors() as any);
 
 app.use(passport.initialize());
