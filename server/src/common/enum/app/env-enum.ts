@@ -14,7 +14,6 @@ const ENV = {
 	},
 	COOKIE: {
 		SECRET: getEnv('COOKIE_SECRET'),
-		MAX_AGE: '30d',
 	},
 	DB: {
 		DATABASE: getEnv('TYPEORM_DATABASE'),
