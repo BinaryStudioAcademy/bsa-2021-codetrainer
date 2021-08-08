@@ -9,7 +9,11 @@ const ENV = {
 	},
 	JWT: {
 		SECRET: getEnv('SECRET_KEY'),
-		EXPIRES_IN: '24h',
+		EXPIRES_IN: '30m',
+		REFRESH_EXPIRES_IN: '30d',
+	},
+	COOKIE: {
+		SECRET: getEnv('COOKIE_SECRET'),
 	},
 	DB: {
 		DATABASE: getEnv('TYPEORM_DATABASE'),

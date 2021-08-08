@@ -9,8 +9,8 @@ export class ImagesRepository {
 			region: ENV.AWS.IMAGES.REGION,
 			credentials: {
 				accessKeyId: ENV.AWS.IMAGES.ACCESS_KEY,
-				secretAccessKey: ENV.AWS.IMAGES.SECRET_KEY
-			}
+				secretAccessKey: ENV.AWS.IMAGES.SECRET_KEY,
+			},
 		});
 	}
 
@@ -19,7 +19,7 @@ export class ImagesRepository {
 			Bucket: ENV.AWS.IMAGES.BUCKET,
 			Key: key,
 			Body: buffer,
-			ContentType: mimeType
+			ContentType: mimeType,
 		};
 		const result = await this.s3Client.putObject(putRequest).promise();
 		return `https://${ENV.AWS.IMAGES.BUCKET}.s3.amazonaws.com/${key}`;
@@ -28,7 +28,7 @@ export class ImagesRepository {
 	async deleteImage(key: string): Promise<void> {
 		const deleteRequest: DeleteObjectRequest = {
 			Bucket: ENV.AWS.IMAGES.BUCKET,
-			Key: key
+			Key: key,
 		};
 		await this.s3Client.deleteObject(deleteRequest).promise();
 	}
