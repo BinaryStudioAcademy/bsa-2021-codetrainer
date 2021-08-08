@@ -1,3 +1,5 @@
+@use 'styles/variables.scss' as var;
+
 .profileBio {
 	width: 916px;
 	height: 206px;
@@ -23,4 +25,11 @@
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-gap: 2vw;
 	}
+}
+h5 {
+	font: var.$button-font;
+	font-size: 18px;
+}
+span {
+	font: var.$base-font;
 }
