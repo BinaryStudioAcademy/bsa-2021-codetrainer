@@ -37,9 +37,9 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PrivateRoute path="/users/:name" component={Profile} />
 			<PublicRoute exact restricted={true} path="/register" component={SignUp} />
 			<PublicRoute exact restricted={true} path="/sign-in" component={SignIn} />
-			<PublicRoute exact restricted={false} path="/forgot-password" component={ForgotPassword} />
-			<PublicRoute exact restricted={false} path="/change-password" component={ChangePassword} />
-			<PublicRoute exact restricted={false} path="/search" component={SearchPage} />
+			<PublicRoute exact restricted={true} path="/forgot-password" component={ForgotPassword} />
+			<PublicRoute exact restricted={true} path="/change-password" component={ChangePassword} />
+			<PublicRoute exact restricted={true} path="/search" component={SearchPage} />
 			<PrivateRoute path="/private" component={TestPrivate} />
 		</Switch>
 	);
