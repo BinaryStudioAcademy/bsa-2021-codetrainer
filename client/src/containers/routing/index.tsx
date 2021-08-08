@@ -18,6 +18,7 @@ import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
 import { AuthAccessToken } from './logic/state';
 import TestPrivate from './test-private';
+import { LandingPage } from 'containers/landing-page';
 
 interface IRoutingProps {}
 
@@ -41,6 +42,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute exact restricted={false} path="/change-password" component={ChangePassword} />
 			<PublicRoute exact restricted={false} path="/search" component={SearchPage} />
 			<PrivateRoute path="/private" component={TestPrivate} />
+			<PublicRoute exact restricted={true} path="/landing" component={LandingPage} />
 		</Switch>
 	);
 };

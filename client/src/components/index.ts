@@ -14,6 +14,7 @@ export {
 	ProfilePage,
 	StatsTab,
 	ProfileTasks,
+	LandingPageComponent,
 } from './pages';
 
 export { Modal } from './modals';
