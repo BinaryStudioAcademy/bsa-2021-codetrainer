@@ -137,7 +137,7 @@ export class Clan {
 			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
 		}
 
-		if (user.clan.id === id) {
+		if (user.clan) {
 			throw new ValidationError(CODE_ERRORS.IN_CLAN);
 		}
 
