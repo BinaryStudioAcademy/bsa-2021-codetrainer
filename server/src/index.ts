@@ -3,7 +3,7 @@ import cors from 'cors';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
-import { ENV, WHITE_ROUTES } from './common';
+import { CORS_CREDENTIALS, CORS_METHODS, CORS_ORIGIN_URLS, ENV, STAGING_URL, WHITE_ROUTES } from './common';
 import { initApi } from './api';
 import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 import { cookieConfig } from './config';
@@ -18,16 +18,18 @@ app.set('trust proxy', 1);
 app.use(
 	cors({
 		origin: (origin, callback) => {
-			if (['http://localhost', 'https://staging.codetrain.xyz'].includes(origin as string)) {
+			if (CORS_ORIGIN_URLS.includes(origin as string)) {
+				cookieConfig.secure = origin === STAGING_URL;
 				callback(null, true);
 			} else {
 				callback(new Error('Not allowed by CORS'));
 			}
 		},
-		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-		credentials: true,
+		methods: CORS_METHODS,
+		credentials: CORS_CREDENTIALS,
 	}),
 );
+
 app.options('*', cors() as any);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
