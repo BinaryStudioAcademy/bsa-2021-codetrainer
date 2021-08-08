@@ -14,12 +14,13 @@ import './config/passport';
 
 const app = express();
 
+app.set('trust proxy', 1);
+app.use(cors({ origin: '*', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentials: true }));
+app.options('*', cors() as any);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cookieSession(cookieConfig));
-app.use(cors({ origin: '*', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentials: true }));
-app.options('*', cors() as any);
 
 app.use(passport.initialize());
 app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
