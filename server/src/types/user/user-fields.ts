@@ -13,5 +13,7 @@ export interface IUserFields {
 	name?: string;
 	surname?: string;
 	profileClan?: IProfileClan;
-	clan: IClanFields;
+	clan?: IClanFields;
+	profileUrl?: string;
+	githubId?: string;
 }

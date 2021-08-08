@@ -23,6 +23,12 @@ export class User {
 	@JoinColumn()
 	profileClan?: ProfileClan;
 
-	@ManyToOne(() => Clan, (clan) => clan.members)
+	@ManyToOne(() => Clan, (clan) => clan.members, { nullable: true })
 	clan?: Clan;
+
+	@Column({ nullable: true })
+	profileUrl?: string;
+
+	@Column({ unique: true, nullable: true })
+	githubId?: string;
 }
