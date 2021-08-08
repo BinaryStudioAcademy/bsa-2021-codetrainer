@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express from 'express';
 import cors from 'cors';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
@@ -14,11 +14,11 @@ import './config/passport';
 
 const app = express();
 
+app.options('*', cors() as any);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cookieSession(cookieConfig));
-app.use(cors());
 
 app.use(passport.initialize());
 app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
