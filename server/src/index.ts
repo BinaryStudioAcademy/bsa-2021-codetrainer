@@ -15,7 +15,19 @@ import './config/passport';
 const app = express();
 
 app.set('trust proxy', 1);
-app.use(cors({ origin: '*', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentials: true }));
+app.use(
+	cors({
+		origin: (origin, callback) => {
+			if (['http://localhost', 'https://staging.codetrain.xyz'].includes(origin as string)) {
+				callback(null, true);
+			} else {
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+		credentials: true,
+	}),
+);
 app.options('*', cors() as any);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
