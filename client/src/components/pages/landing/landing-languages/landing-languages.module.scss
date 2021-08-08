@@ -1,0 +1,10 @@
+@use 'styles/variables.scss' as var;
+
+.languages {
+	background-color: var.$white-lilac;
+	display: flex;
+	min-height: 410px;
+	justify-content: space-around;
+	align-items: center;
+	gap: 80px;
+}
