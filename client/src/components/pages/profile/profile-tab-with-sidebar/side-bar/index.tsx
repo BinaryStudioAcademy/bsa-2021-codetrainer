@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import styles from './styles.module.scss';
 
-export interface ITasksSideBar {
+export interface ISideBar {
 	sideBar: {
 		id: string;
 		title: string;
@@ -13,7 +13,7 @@ export interface ITasksSideBar {
 	onClick: (key: string) => void;
 }
 
-export const ProfileTasksSideBar: React.FC<ITasksSideBar> = ({ sideBar, onClick, activeId }) => (
+export const SideBar: React.FC<ISideBar> = ({ sideBar, onClick, activeId }) => (
 	<div className={styles.profile__tasks__root}>
 		{sideBar.map(({ id, title, count }) => (
 			<div
