@@ -38,6 +38,10 @@ const ENV = {
 			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY'),
 		},
 	},
+	MAILER: {
+		ADDRESS: getEnv('EMAIL_ADDRESS'),
+		PASSWORD: getEnv('EMAIL_PASSWORD'),
+	},
 };
 
 export { ENV, ConfigVariables };

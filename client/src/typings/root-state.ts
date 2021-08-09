@@ -1,3 +1,4 @@
+import { ICreateTaskState } from 'containers/create-new-task/logic/state';
 import { IExampleState } from 'containers/example/logic/state';
 import { IClansState } from 'containers/clans/clans/logic/state';
 import { IClanState } from 'containers/clans/clan/logic/state';
@@ -11,6 +12,7 @@ export interface IRootState {
 	profile: IProfileState;
 	clans: IClansState;
 	clan: IClanState;
+	createTask: ICreateTaskState;
 	example: IExampleState;
 	auth: IAuthState;
 	routing: IRoutingState;

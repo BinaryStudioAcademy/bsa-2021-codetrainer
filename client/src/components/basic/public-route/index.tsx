@@ -20,22 +20,16 @@ const PublicRoute = (props: IPublicRouteProps) => {
 	return (
 		<>
 			{rest.needSideBar ? (
-				<Route
-					{...rest}
-					render={(props) =>
-						isAuthorized && restricted ? (
-							<Redirect to="/" />
-						) : (
-							<>
-								{rest.needHeader ? <Header {...headerProps} /> : null}
-
-								<div className="content_container">
-									<MainSidebar /> <Component {...props} />
-								</div>
-							</>
-						)
-					}
-				/>
+				<div className="content_container">
+					{rest.needHeader ? <Header {...headerProps} /> : null}
+					<MainSidebar />
+					<Route
+						{...rest}
+						render={(props) =>
+							isAuthorized && restricted ? <Redirect to="/" /> : <Component {...props} />
+						}
+					/>
+				</div>
 			) : (
 				<Route
 					{...rest}

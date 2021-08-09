@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-import { IUserFields } from '../../types';
 import { CLAN_MEMBER_ROLE } from '../../common';
 import { ValidationError } from '../../helpers';
 

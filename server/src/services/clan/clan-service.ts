@@ -1,12 +1,10 @@
 import { getCustomRepository } from 'typeorm';
-import { TClanRepository, TProfileClanRepository, TUserRepository } from '../../data';
-import { IUserFields } from '../../types';
+import { Clan, TClanRepository, TProfileClanRepository, TUserRepository, User } from '../../data';
 import { ValidationError } from '../../helpers';
-import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../common';
-import { CODE_ERRORS } from '../../common/constants/helpers';
 import { Clan as ClanType } from '../../data/models';
+import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
 
-export class Clan {
+export class ClanService {
 	protected clanRepository: TClanRepository;
 
 	protected userRepository: TUserRepository;
@@ -27,7 +25,7 @@ export class Clan {
 		this.profileClanRepository = profileClan;
 	}
 
-	async create(user: IUserFields, { name, isPublic = CLAN_IS_PUBLIC }: { name: string; isPublic: boolean }) {
+	async create(user: User, { name, isPublic = CLAN_IS_PUBLIC }: { name: string; isPublic: boolean }) {
 		if (user.profileClan) {
 			throw new ValidationError(CODE_ERRORS.IN_CLAN);
 		}
@@ -58,13 +56,8 @@ export class Clan {
 		return newClan;
 	}
 
-	async delete({ user }: { user: IUserFields }) {
+	async delete(clan: Clan) {
 		const repository = getCustomRepository(this.clanRepository);
-		const clan = await repository.getById(user.clan.id);
-		if (!clan) {
-			throw new ValidationError(CODE_ERRORS.NO_CLAN);
-		}
-
 		const userRepository = getCustomRepository(this.userRepository);
 
 		await Promise.all(
@@ -78,15 +71,10 @@ export class Clan {
 		};
 	}
 
-	async update(user: IUserFields, { isPublic, name }: { isPublic: boolean; name: string }) {
+	async update(clan: Clan, data: Clan) {
 		const repository = getCustomRepository(this.clanRepository);
-		const clan = await repository.getByName(name);
-		if (clan) {
-			throw new ValidationError(CODE_ERRORS.CLAN_NAME_IS_TAKEN(name));
-		}
-
-		await repository.updateById(user.clan.id, { name, isPublic });
-		const newClan = await repository.getById(user.clan.id);
+		await repository.updateById(clan.id, data);
+		const newClan = await repository.getById(clan.id);
 		return newClan;
 	}
 

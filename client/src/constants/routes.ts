@@ -14,4 +14,7 @@ export const ROUTES = {
 
 	Clans: '/clans',
 	Clan: '/clan',
+
+	createTask: '/task/new',
+	TaskInstructions: '/task/:id',
 };

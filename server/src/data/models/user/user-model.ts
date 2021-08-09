@@ -5,14 +5,15 @@ import {
 	OneToOne,
 	ManyToOne,
 	JoinColumn,
-	CreateDateColumn,
-	UpdateDateColumn,
+	OneToMany,
+	BaseEntity,
 } from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
+import { Task } from '../task';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 	id!: string;
 
@@ -46,4 +47,8 @@ export class User {
 
 	@UpdateDateColumn()
 	updatedAt!: Date;
+
+	@OneToMany(() => Task, (task) => task.user)
+	@JoinColumn()
+	tasks!: Task[];
 }
