@@ -6,7 +6,7 @@ import { CreateTaskPage } from 'containers/create-new-task';
 import HomePage from 'containers/home-page';
 import SettingPage from 'containers/setting-page';
 import { Profile } from 'containers/profile';
-import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
+import { FullscreenLoader, PublicRoute, ForgotPassword, ChangePassword } from 'components';
 import TaskPage from '../task-page';
 import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
@@ -15,8 +15,10 @@ import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import TestPrivate from './test-private';
 import { UserAccessToken } from 'containers/user/logic/state';
+import { SearchPage } from 'containers/search-page';
+import PrivateRoute from 'containers/private-route';
 
-interface IRoutingProps {}
+interface IRoutingProps { }
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
