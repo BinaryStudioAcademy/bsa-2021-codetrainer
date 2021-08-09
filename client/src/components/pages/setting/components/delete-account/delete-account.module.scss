@@ -1,0 +1,15 @@
+.header {
+	margin: 0 0 10px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.buttonWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	.submitBtn {
+		border: 2px solid #EC4179;
+	}
+}
+

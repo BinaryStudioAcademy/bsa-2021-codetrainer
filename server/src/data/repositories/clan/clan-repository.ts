@@ -1,9 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Clan } from '../../models';
-import { IClanFields } from '../../../types';
+import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Clan)
-export class ClanRepository extends Repository<Clan> {
+export class ClanRepository extends AbstractRepository<Clan> {
 	getByName(name: string) {
 		return this.findOne({ name });
 	}
@@ -26,15 +26,11 @@ export class ClanRepository extends Repository<Clan> {
 			.getMany();
 	}
 
-	updateById(id: string, data: Partial<IClanFields>) {
+	updateById(id: string, data: Partial<Clan>) {
 		return this.update({ id }, data);
 	}
 
 	deleteMember(id: string, memberId: string) {
 		return this.createQueryBuilder('clan').relation('members').of(id).remove(memberId);
-	}
-
-	deleteById(id: string) {
-		return this.createQueryBuilder().delete().where('id = :id', { id }).execute();
 	}
 }
