@@ -41,7 +41,7 @@ const ENV = {
 	GITHUB: {
 		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
 		SECRET: getEnv('GITHUB_SECRET'),
-		CALLBACK: 'http://localhost:5000/api/auth/github/callback',
+		CALLBACK: getEnv('GITHUB_CALLBACK'),
 	},
 };
 
