@@ -6,7 +6,6 @@ import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
-
 import { mockProfileBioProps, statsProps } from './mocks';
 import { profileTasks } from './tabs/tasks/mocks';
 
