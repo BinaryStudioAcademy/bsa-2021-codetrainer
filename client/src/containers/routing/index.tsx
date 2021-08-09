@@ -6,6 +6,7 @@ import HomePage from 'containers/home-page';
 import SettingPage from 'containers/setting-page';
 import { Profile } from 'containers/profile';
 import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
+import TaskPage from '../task-page';
 import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
 import { ROUTES } from 'constants/routes';
@@ -35,6 +36,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
+			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Main} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />

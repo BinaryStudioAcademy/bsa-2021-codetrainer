@@ -11,4 +11,6 @@ export const ROUTES = {
 
 	Search: '/search',
 	UserProfile: '/users/:name',
+
+	TaskInstructions: '/task/:id',
 };
