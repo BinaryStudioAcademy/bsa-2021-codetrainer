@@ -16,9 +16,7 @@ const Avatar: React.FC<IAvatarProps> = (props) => {
 	};
 
 	return (
-		<div className={styles.avatar} style={changebleStyle}>
-			<img src={props.avatar || defaultAvatar} alt="userAvatar" />
-		</div>
+		<img src={props.avatar || defaultAvatar} className={styles.avatar} style={changebleStyle} alt="userAvatar" />
 	);
 };
 

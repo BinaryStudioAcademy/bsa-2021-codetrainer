@@ -5,9 +5,10 @@ import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import SettingPage from 'containers/setting-page';
 import { Profile } from 'containers/profile';
-import { SearchPage } from 'containers/search-page';
-import { PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SignUp, FullscreenLoader } from 'components';
+import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
 import SignIn from 'containers/sign-in';
+import SignUp from 'containers/sign-up';
+import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
 import { AuthAccessToken } from './logic/state';
@@ -16,7 +17,7 @@ import TestPrivate from './test-private';
 interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
-	const { accessToken } = useAppSelector((state) => state.auth);
+	const { accessToken } = useAppSelector((state) => state.routing);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.checkRefreshToken());
@@ -26,15 +27,22 @@ const Routing: React.FC<IRoutingProps> = () => {
 	}
 	return (
 		<Switch>
-			<PublicRoute exact restricted={false} path="/" component={Example} needHeader={false} needSideBar={false} />
-			<PrivateRoute path="/home" component={HomePage} needHeader={true} needSideBar={true} />
-			<PrivateRoute path="/setting" component={SettingPage} needHeader={true} needSideBar={true} />
-			<PrivateRoute path="/users/:name" component={Profile} needHeader={true} needSideBar={true} />
-			<PrivateRoute exact path="/search" component={SearchPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
 				exact
 				restricted={false}
-				path="/register"
+				path={ROUTES.Main}
+				component={Example}
+				needHeader={false}
+				needSideBar={false}
+			/>
+			<PrivateRoute path={ROUTES.Main} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
+			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
+			<PrivateRoute path="/setting" component={SettingPage} needHeader={true} needSideBar={true} />
+			<PublicRoute
+				exact
+				restricted={false}
+				path={ROUTES.SignUp}
 				component={SignUp}
 				needHeader={false}
 				needSideBar={false}
@@ -42,7 +50,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute
 				exact
 				restricted={false}
-				path="/sign-in"
+				path={ROUTES.SignIn}
 				component={SignIn}
 				needHeader={false}
 				needSideBar={false}
@@ -50,7 +58,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute
 				exact
 				restricted={false}
-				path="/forgot-password"
+				path={ROUTES.ForgotPassword}
 				component={ForgotPassword}
 				needHeader={false}
 				needSideBar={false}
@@ -58,7 +66,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute
 				exact
 				restricted={false}
-				path="/change-password"
+				path={ROUTES.ChangePassword}
 				component={ChangePassword}
 				needHeader={false}
 				needSideBar={false}
