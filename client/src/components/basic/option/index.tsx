@@ -9,7 +9,7 @@ const Option: React.FC<IOptionProps> = ({ value, isActive, onChange }) => {
 
 	return (
 		<li className={optionStyles} onClick={() => onChange(value)}>
-			{value.icon ? <img src={value.icon} alt={`${value.title} icon`} onLoad={() => setIsLoaded(true)} /> : null}
+			{value.iconFC ? <value.iconFC onLoad={() => setIsLoaded(true)} width={15} height={15} /> : null}
 			<span>{value.title}</span>
 		</li>
 	);
