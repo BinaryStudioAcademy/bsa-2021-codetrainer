@@ -1,7 +1,6 @@
 import * as actionTypes from './action-types';
 import { ISignInState, initialState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
-import { IUser } from 'typings/sign-in-form';
 
 export const signInReducer = createReducer<ISignInState>(initialState, {
 	[actionTypes.SIGN_IN_USER](state) {
@@ -11,9 +10,9 @@ export const signInReducer = createReducer<ISignInState>(initialState, {
 		};
 	},
 
-	[actionTypes.SIGN_IN_USER_SUCCESS](_, action: { user: IUser }) {
+	[actionTypes.SIGN_IN_USER_SUCCESS](state) {
 		return {
-			user: action.user,
+			...state,
 			isLoading: false,
 			isSuccess: true,
 			error: '',
@@ -22,7 +21,6 @@ export const signInReducer = createReducer<ISignInState>(initialState, {
 
 	[actionTypes.SIGN_IN_USER_ERROR](_, action: { error: string }) {
 		return {
-			user: null,
 			isLoading: false,
 			isSuccess: false,
 			error: action.error,

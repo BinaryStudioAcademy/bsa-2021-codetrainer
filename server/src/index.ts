@@ -3,7 +3,10 @@ import cors from 'cors';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
-import { ENV, WHITE_ROUTES } from './common';
+import swaggerUI from 'swagger-ui-express';
+import swaggerJsDoc from 'swagger-jsdoc';
+import { swaggerSpec } from './config/swagger';
+import { ENV, WHITE_ROUTES, ApiPath } from './common';
 import { initApi } from './api';
 import { authorizationMiddleware, errorHandlerMiddleware } from './middleware';
 import { cookieConfig, corsConfig } from './config';
@@ -26,6 +29,8 @@ app.use(cookieSession(cookieConfig));
 app.use(passport.initialize());
 app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
 app.use(ENV.APP.API_PATH, initApi());
+app.use(ApiPath.API_DOCS, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+
 app.use(errorHandlerMiddleware);
 
 app.listen(ENV.APP.PORT, () => {

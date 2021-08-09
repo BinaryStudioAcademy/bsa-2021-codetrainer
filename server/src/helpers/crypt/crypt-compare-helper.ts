@@ -1,3 +1,4 @@
 import { compare } from 'bcrypt';
 
-export const cryptCompare = (data: string, encrypted: string) => compare(data, encrypted);
+export const cryptCompare = async (data: string, encrypted?: string) =>
+	Boolean(encrypted) && compare(data, encrypted as string);

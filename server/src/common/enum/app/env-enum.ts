@@ -42,6 +42,11 @@ const ENV = {
 		ADDRESS: getEnv('EMAIL_ADDRESS'),
 		PASSWORD: getEnv('EMAIL_PASSWORD'),
 	},
+	GITHUB: {
+		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
+		SECRET: getEnv('GITHUB_SECRET'),
+		CALLBACK: getEnv('GITHUB_CALLBACK'),
+	},
 };
 
 export { ENV, ConfigVariables };
