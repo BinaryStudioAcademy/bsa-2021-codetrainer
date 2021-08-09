@@ -1,4 +1,4 @@
-import { ENV } from "../../common";
+import { ENV } from '../../common';
 
 const nodemailer = require('nodemailer');
 
@@ -26,7 +26,7 @@ export interface IMessageMailer {
 export const mailer = (message: IMessageMailer) => {
 	transporter.sendMail(message, (err: any, info: any) => {
 		if (err) {
-			throw new Error(`Something went wrong with sending email message to ${message.to}`)
+			throw new Error(`Something went wrong with sending email message to ${message.to}`);
 		}
 	});
 };

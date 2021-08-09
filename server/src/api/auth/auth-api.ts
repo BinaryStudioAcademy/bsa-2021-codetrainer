@@ -35,10 +35,10 @@ export const initAuth = (appRouter: typeof Router, services: { auth: AuthService
 							mailer(message);
 						}
 					}
-					setResponseSession(req, res, data)
+					setResponseSession(req, res, data);
 				})
-				.catch(next)}
-			)
+				.catch(next);
+		})
 		.post(AuthApiPath.TOKEN_REFRESH, (req, res, next) =>
 			authService
 				.refreshToken(req.session?.refreshToken)

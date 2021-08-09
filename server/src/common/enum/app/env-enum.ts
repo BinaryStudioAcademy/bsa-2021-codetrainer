@@ -38,9 +38,9 @@ const ENV = {
 			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY'),
 		},
 	},
-	MAILER:{
+	MAILER: {
 		ADDRESS: getEnv('EMAIL_ADDRESS'),
-		PASSWORD:getEnv('EMAIL_PASSWORD')
+		PASSWORD: getEnv('EMAIL_PASSWORD'),
 	},
 	GITHUB: {
 		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
