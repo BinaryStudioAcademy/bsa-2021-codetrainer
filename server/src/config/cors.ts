@@ -4,7 +4,7 @@ import { cookieConfig } from './cookie-session/cookie-config';
 
 export const corsConfig: CorsOptions = {
 	origin: (origin, callback) => {
-		if (CORS_ORIGIN_URLS.includes(origin as string) || !origin) {
+		if (CORS_ORIGIN_URLS.includes(origin as string)) {
 			// if (origin !== STAGING_URL) {
 			// 	delete cookieConfig.sameSite;
 			// 	delete cookieConfig.secure;
