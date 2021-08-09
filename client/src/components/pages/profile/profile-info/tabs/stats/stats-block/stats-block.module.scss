@@ -1,0 +1,15 @@
+@use 'styles/variables.scss' as var;
+
+.header {
+	padding-bottom: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.iconLabel {
+	font: var.$button-font;
+	font-size: 18px;
+	line-height: 22px;
+	padding-left: 10px;
+	color: #282828;
+}

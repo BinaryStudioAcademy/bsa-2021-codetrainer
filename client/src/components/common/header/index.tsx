@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Avatar, Label } from 'components' ; 
+import { Avatar, Label } from 'components';
 import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
 
-
-interface IHeaderProps {
+export interface IHeaderProps {
 	name: string;
 	rank: number;
 	notificationCounter: number;
 	mark: number;
-	avatar: string;
+	avatar?: string;
 	listItems: Array<IListItem>;
 }
 

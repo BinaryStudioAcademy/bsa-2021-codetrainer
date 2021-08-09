@@ -1,0 +1,49 @@
+.wrapper {
+	box-sizing: border-box;
+
+	display: flex;
+
+	padding: 24px;
+	height: 333px;
+
+	background-color: #fafbff;
+	border-radius: 15px;
+}
+
+.selectingContainer {
+	box-sizing: border-box;
+
+	padding-right: 24px;
+	min-width: 355px;
+	width: 355px;
+
+	border-right: 1px solid #e5e5e5;
+}
+
+.title {
+	margin: 0;
+
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.focusWrapper {
+	display: flex;
+	flex-direction: column;
+	margin: 28px 0;
+}
+
+.focusTitle {
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.skipButton {
+	margin-left: 20px;
+}
+
+.taskContainer {
+	width: 59%;
+	margin-top: 24px;
+	padding-left: 24px;
+}

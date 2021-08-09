@@ -1,5 +1,7 @@
 export const ApiPath = {
+	API_DOCS: '/api-docs',
 	AUTH: '/auth',
 	CLAN: '/clan',
-	API_DOCS: '/api-docs',
+	IMAGES: '/images',
+	TASK: '/task',
 };

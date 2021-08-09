@@ -1,25 +1,31 @@
 import { Router } from 'express';
 import { initAuth } from './auth';
 import { initClan } from './clan';
+import { imagesController } from './images.controller';
+import { initTask } from './task/task-api';
 import { ApiPath } from '../common';
-import { auth, clan } from '../services';
+import { authService, clanService, imagesService, taskService } from '../services';
 
-export const initApi = (appRouter: typeof Router) => {
-	const apiRouter = appRouter();
+export function initApi(): Router {
+	const apiRouter = Router();
 
 	apiRouter.use(
 		ApiPath.AUTH,
 		initAuth(Router, {
-			auth,
+			auth: authService,
 		}),
 	);
 
 	apiRouter.use(
 		ApiPath.CLAN,
 		initClan(Router, {
-			clan,
+			clan: clanService,
 		}),
 	);
 
+	apiRouter.use(ApiPath.IMAGES, imagesController(imagesService));
+
+	apiRouter.use(ApiPath.TASK, initTask(Router, { task: taskService }));
+
 	return apiRouter;
-};
+}
