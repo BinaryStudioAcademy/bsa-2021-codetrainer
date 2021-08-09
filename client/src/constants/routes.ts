@@ -13,4 +13,5 @@ export const ROUTES = {
 	UserProfile: '/users/:name',
 
 	createTask: '/task/new',
+	TaskInstructions: '/task/:id',
 };
