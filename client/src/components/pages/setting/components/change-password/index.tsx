@@ -40,7 +40,6 @@ const ChangePassword: React.FC = () => {
 						placeholder="********"
 						type="password"
 						component={FormInput}
-						className={styles.field}
 					/>
 					<Field
 						id="confirmNewPassword"
