@@ -1,3 +1,6 @@
+import { Header } from 'components';
+import MainSidebar from 'components/common/main-sidebar';
+import { headerProps } from 'containers/header/mock';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
@@ -5,6 +8,8 @@ import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-d
 interface IPublicRouteProps extends RouteProps {
 	restricted: boolean;
 	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+	needHeader?: boolean;
+	needSideBar?: boolean;
 }
 
 const PublicRoute = (props: IPublicRouteProps) => {
@@ -13,10 +18,25 @@ const PublicRoute = (props: IPublicRouteProps) => {
 	const isAuthorized = Boolean(user);
 
 	return (
-		<Route
-			{...rest}
-			render={(props) => (isAuthorized && restricted ? <Redirect to="/home" /> : <Component {...props} />)}
-		/>
+		<>
+			{rest.needHeader ? <Header {...headerProps} /> : null}
+			{rest.needSideBar ? (
+				<div className="content_container">
+					<MainSidebar />
+					<Route
+						{...rest}
+						render={(props) =>
+							isAuthorized && restricted ? <Redirect to="/" /> : <Component {...props} />
+						}
+					/>
+				</div>
+			) : (
+				<Route
+					{...rest}
+					render={(props) => (isAuthorized && restricted ? <Redirect to="/" /> : <Component {...props} />)}
+				/>
+			)}
+		</>
 	);
 };
 

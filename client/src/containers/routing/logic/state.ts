@@ -1,10 +1,12 @@
+import { IUser } from 'typings/sign-in-form';
+
 export enum AuthAccessToken {
 	LOADING = 'loading',
 	LOADED = 'loaded',
 }
 
 export interface IAuthState {
-	user: Record<string, string> | null;
+	user: IUser | null;
 	accessToken: AuthAccessToken;
 }
 

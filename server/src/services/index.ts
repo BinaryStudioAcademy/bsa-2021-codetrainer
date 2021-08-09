@@ -1,18 +1,21 @@
-import { GithubService } from './github.service';
-import { Auth } from './auth';
-import { UserRepository, ClanRepository, ProfileClanRepository, imagesRepository } from '../data';
-import { Clan } from './clan';
+import { UserRepository, ClanRepository, ProfileClanRepository, imagesRepository, TaskRepository } from '../data';
+import { AuthService } from './auth';
+import { ClanService } from './clan';
+import { TaskService } from './task/task-service';
 import { ImagesService } from './images.service';
+import { GithubService } from './github.service';
 
-const auth = new Auth({ user: UserRepository });
-type TAuthService = InstanceType<typeof Auth>;
+const authService = new AuthService({ user: UserRepository });
 
-const clan = new Clan({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
-type TClanService = InstanceType<typeof Clan>;
+const clanService = new ClanService({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
 
 const imagesService = new ImagesService(imagesRepository);
 const githubService = new GithubService({ authService: auth, userRepository: UserRepository });
 
-export { auth, TAuthService, clan, TClanService };
+const taskService = new TaskService({ task: TaskRepository, user: UserRepository });
+
+export { authService, AuthService };
+export { clanService, ClanService };
 export { imagesService, ImagesService };
+export { taskService, TaskService };
 export { githubService, GithubService };
