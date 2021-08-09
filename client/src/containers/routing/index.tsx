@@ -9,19 +9,19 @@ import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
 import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
-import * as actions from './logic/actions';
-import { AuthAccessToken } from './logic/state';
+import * as actions from 'containers/user/logic/actions';
 import TestPrivate from './test-private';
+import { UserAccessToken } from 'containers/user/logic/state';
 
 interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
-	const { accessToken } = useAppSelector((state) => state.routing);
+	const { accessToken } = useAppSelector((state) => state.auth.userData);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.checkRefreshToken());
 	}, [dispatch]);
-	if (accessToken === AuthAccessToken.LOADING) {
+	if (accessToken === UserAccessToken.LOADING) {
 		return <FullscreenLoader />;
 	}
 	return (
@@ -34,7 +34,8 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PrivateRoute path={ROUTES.Main} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
+			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
@@ -47,7 +48,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.SignIn}
 				component={SignIn}
 				needHeader={false}
@@ -69,7 +70,6 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 		</Switch>
 	);
 };

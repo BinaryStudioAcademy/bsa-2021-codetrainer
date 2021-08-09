@@ -13,7 +13,7 @@ interface IPrivateRouteProps extends RouteProps {
 
 const PrivateRoute = (props: IPrivateRouteProps) => {
 	const { component: Component, ...rest } = props;
-	const { user } = useAppSelector((state) => state.auth);
+	const { user } = useAppSelector((state) => state.auth.userData);
 	const isAuthorized = Boolean(user);
 
 	return (
