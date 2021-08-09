@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { HomePage } from 'components/pages';
 import NextTaskContainer from 'containers/next-task';
-
 const testActiveUser = {
 	id: '13',
 	rank: 5,
@@ -21,7 +20,7 @@ const testUsers = [
 		honor: 455,
 	},
 	{
-		id: '3',
+		id: '2',
 		rank: 2,
 		imageSource: '',
 		name: 'Dulce Workman',
@@ -37,7 +36,7 @@ const testUsers = [
 		honor: 555,
 	},
 	{
-		id: '3',
+		id: '4',
 		rank: 2,
 		imageSource: '',
 		name: 'Dulce Workman',
@@ -45,7 +44,7 @@ const testUsers = [
 		honor: 555,
 	},
 	{
-		id: '3',
+		id: '5',
 		rank: 2,
 		imageSource: '',
 		name: 'Dulce Workman',
@@ -92,15 +91,17 @@ const HomePageContainer: React.FC = () => {
 	};
 
 	return (
-		<HomePage
-			activeUser={testActiveUser}
-			users={testUsers}
-			messages={testMessages.messages}
-			selectedFeedCategory={selectedFeedCategory}
-			onSelectFeedCategory={handleSelectFeedCategory}
-			isLastPage={testMessages.isLastPage}
-			nextTaskContent={<NextTaskContainer />}
-		/>
+		<>
+			<HomePage
+				activeUser={testActiveUser}
+				users={testUsers}
+				messages={testMessages.messages}
+				selectedFeedCategory={selectedFeedCategory}
+				onSelectFeedCategory={handleSelectFeedCategory}
+				isLastPage={testMessages.isLastPage}
+				nextTaskContent={<NextTaskContainer />}
+			/>
+		</>
 	);
 };
 

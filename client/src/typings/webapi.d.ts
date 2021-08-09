@@ -4,4 +4,12 @@ namespace WebApi.Entities {
 		name?: string;
 		email?: string;
 	}
+	interface IUser {
+		id: string;
+		name: string;
+		lastname: string;
+		email: string;
+		clan?: string;
+		profileClan?: string;
+	}
 }
