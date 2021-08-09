@@ -37,7 +37,7 @@ const Header = () => {
                 id: '2',
                 image: menuSettings,
                 text: 'Account Settings',
-                onClick: () => { }
+                onClick: () => history.push(ROUTES.Setting),
             },
             {
                 id: '3',
