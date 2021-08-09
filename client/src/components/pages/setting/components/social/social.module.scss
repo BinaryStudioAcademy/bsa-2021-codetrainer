@@ -1,0 +1,83 @@
+
+.socialContainer {
+	.header {
+		margin: 0 0 10px;
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	ul {
+		padding: 0;
+	}
+
+	.socialItem {
+		color: #686868;
+		background-color: #EAEDF2;
+		border-radius: 7px;
+		margin-bottom: 10px;
+		padding: 5px 10px;
+		min-width: 400px;
+		list-style: none;
+		position: relative;
+		cursor: pointer;
+		
+		&:hover {
+			background-color:rgb(228, 228, 228);
+			.inputField {
+				background-color:rgb(228, 228, 228);
+				cursor: pointer;
+			}
+		}
+
+		.inputField {
+			outline: none;
+			border: none;
+			background-color: #EAEDF2;
+			color: #686868;
+			width: calc(100% - 32px);
+			height: 28px;
+			position: absolute;
+			top: 0;
+			border-radius: 4px;
+		}
+	}
+
+	.socialButton {
+		list-style: none;
+		margin-bottom: 10px;
+		
+		button {
+			min-width: 300px;
+			padding: 5px 10px;
+			outline: none;
+			border: none;
+			border-radius: 7px;
+			cursor: pointer;
+			background-color:rgb(255, 255, 255);
+
+			&:hover {
+				background-color:rgb(228, 228, 228);
+			}
+		}
+	}
+	.socialIcon {
+		margin-right: 7px;
+	}
+
+	.submitBtn {
+		width: 100%;
+		background: #ec4179;
+		border-radius: 7px;
+		border: 0;
+		font-family: 'Montserrat', sans-serif;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+		color: #ffffff;
+		cursor: pointer;
+		padding: 12px 20px;
+		margin-top: 10px;
+	}
+}

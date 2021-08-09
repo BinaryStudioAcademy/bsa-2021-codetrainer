@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text } from '@blueprintjs/core';
+import { Text } from '@blueprintjs/core';
 import styles from './feed.module.scss';
 import FeedMessage from '../feed-message';
 import { Button } from 'components/basic';
@@ -37,7 +37,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 	const loadMoreButton = <Button className={clsx(ButtonClasses.red, styles.loadMoreButton)}>Load more</Button>;
 
 	return (
-		<Card className={styles.feed}>
+		<div className={styles.feed}>
 			<div>
 				<div className={styles.feedHeader}>
 					<Text tagName="h4" className={styles.title}>
@@ -49,7 +49,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 				{feedContentJSX}
 			</div>
 			{!isLastPage ? loadMoreButton : null}
-		</Card>
+		</div>
 	);
 };
 

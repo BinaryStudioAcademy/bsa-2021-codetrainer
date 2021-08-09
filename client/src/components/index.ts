@@ -6,7 +6,7 @@ export type { ICreateTabsProps } from './pages';
 
 export {
 	SignInPage,
-	SignUp,
+	SignUpPage,
 	ChangePassword,
 	ForgotPassword,
 	CreateTabs,
@@ -14,6 +14,7 @@ export {
 	ProfilePage,
 	StatsTab,
 	ProfileTasks,
+	SettingPage,
 } from './pages';
 
 export { Modal } from './modals';
