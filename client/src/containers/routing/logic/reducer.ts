@@ -2,7 +2,7 @@ import * as actionTypes from './action-types';
 import { IAuthState, initialState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
 
-export const authReducer = createReducer<IAuthState>(initialState, {
+export const routingReducer = createReducer<IAuthState>(initialState, {
 	[actionTypes.AUTH_USER](state, action: actionTypes.TAuthUser) {
 		return {
 			...state,
@@ -16,3 +16,5 @@ export const authReducer = createReducer<IAuthState>(initialState, {
 		};
 	},
 });
+
+export default routingReducer;

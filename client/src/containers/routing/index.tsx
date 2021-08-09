@@ -4,16 +4,10 @@ import { Switch } from 'react-router-dom';
 import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
-import {
-	PrivateRoute,
-	PublicRoute,
-	ForgotPassword,
-	ChangePassword,
-	SignUp,
-	SearchPage,
-	FullscreenLoader,
-} from 'components';
+import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
 import SignIn from 'containers/sign-in';
+import SignUp from 'containers/sign-up';
+import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
 import { AuthAccessToken } from './logic/state';
@@ -22,7 +16,7 @@ import TestPrivate from './test-private';
 interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
-	const { accessToken } = useAppSelector((state) => state.auth);
+	const { accessToken } = useAppSelector((state) => state.routing);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.checkRefreshToken());
@@ -32,15 +26,50 @@ const Routing: React.FC<IRoutingProps> = () => {
 	}
 	return (
 		<Switch>
-			<PublicRoute exact restricted={true} path="/" component={Example} />
-			<PrivateRoute path="/home" component={HomePage} />
-			<PrivateRoute path="/users/:name" component={Profile} />
-			<PublicRoute exact restricted={true} path="/register" component={SignUp} />
-			<PublicRoute exact restricted={true} path="/sign-in" component={SignIn} />
-			<PublicRoute exact restricted={false} path="/forgot-password" component={ForgotPassword} />
-			<PublicRoute exact restricted={false} path="/change-password" component={ChangePassword} />
-			<PublicRoute exact restricted={false} path="/search" component={SearchPage} />
-			<PrivateRoute path="/private" component={TestPrivate} />
+			<PublicRoute
+				exact
+				restricted={false}
+				path={ROUTES.Main}
+				component={Example}
+				needHeader={false}
+				needSideBar={false}
+			/>
+			<PrivateRoute path={ROUTES.Main} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
+			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
+			<PublicRoute
+				exact
+				restricted={false}
+				path={ROUTES.SignUp}
+				component={SignUp}
+				needHeader={false}
+				needSideBar={false}
+			/>
+			<PublicRoute
+				exact
+				restricted={false}
+				path={ROUTES.SignIn}
+				component={SignIn}
+				needHeader={false}
+				needSideBar={false}
+			/>
+			<PublicRoute
+				exact
+				restricted={false}
+				path={ROUTES.ForgotPassword}
+				component={ForgotPassword}
+				needHeader={false}
+				needSideBar={false}
+			/>
+			<PublicRoute
+				exact
+				restricted={false}
+				path={ROUTES.ChangePassword}
+				component={ChangePassword}
+				needHeader={false}
+				needSideBar={false}
+			/>
+			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 		</Switch>
 	);
 };

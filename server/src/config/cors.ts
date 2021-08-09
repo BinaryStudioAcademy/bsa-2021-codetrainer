@@ -5,7 +5,10 @@ import { cookieConfig } from './cookie-session/cookie-config';
 export const corsConfig: CorsOptions = {
 	origin: (origin, callback) => {
 		if (CORS_ORIGIN_URLS.includes(origin as string)) {
-			cookieConfig.secure = origin === STAGING_URL;
+			if (origin !== STAGING_URL) {
+				delete cookieConfig.sameSite;
+				delete cookieConfig.secure;
+			}
 			callback(null, true);
 		} else {
 			callback(new Error('Not allowed by CORS'));
