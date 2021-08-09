@@ -9,6 +9,7 @@ export {
 	FullscreenLoader,
 	Spinner,
 	Header,
+	Social,
 	TaskInstructions,
 } from './common';
 
@@ -25,6 +26,7 @@ export {
 	StatsTab,
 	ClansPage,
 	ClanPage,
+	ProfileTabWithSidebar,
 	ProfileTasks,
 	CreateTaskSettings,
 	SettingPage,
