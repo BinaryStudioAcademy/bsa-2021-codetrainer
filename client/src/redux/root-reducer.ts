@@ -1,5 +1,6 @@
 import { exampleReducer } from 'containers/example/logic/reducer';
 import { profileReducer } from 'containers/profile/logic/reducer';
+import { createTaskReducer } from 'containers/create-new-task/logic/reducer';
 import { authReducer } from 'containers/auth/logic/reducer';
 import { routingReducer } from 'containers/routing/logic/reducer';
 import { combineReducers, Reducer } from 'redux';
@@ -11,6 +12,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	example: exampleReducer,
 	routing: routingReducer,
 	auth: authReducer,
+	createTask: createTaskReducer,
 	notification: notificationReducer,
 });
 

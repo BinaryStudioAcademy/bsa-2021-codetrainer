@@ -24,6 +24,7 @@ export {
 	ProfilePage,
 	StatsTab,
 	ProfileTasks,
+	CreateTaskSettings,
 	SettingPage,
 } from './pages';
 

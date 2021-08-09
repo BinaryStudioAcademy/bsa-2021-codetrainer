@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import Example from 'containers/example';
+import { CreateTaskPage } from 'containers/create-new-task';
 import HomePage from 'containers/home-page';
 import SettingPage from 'containers/setting-page';
 import { Profile } from 'containers/profile';
@@ -73,6 +74,15 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
+			<PublicRoute
+				exact
+				restricted={false}
+				path="/task/new"
+				component={CreateTaskPage}
+				needHeader={false}
+				needSideBar={false}
+			/>
+
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 		</Switch>
 	);
