@@ -1,5 +1,6 @@
 import { Router, Request } from 'express';
 import passport from 'passport';
+import { setResponseSession } from '../helpers/cookie-session';
 import { IGithubProfile } from '../helpers/github.helper';
 import { IUserFields } from '../types/user/user-fields';
 import { TAuthService, GithubService } from '../services';
@@ -19,11 +20,11 @@ export function githubRouter({
 }): Router {
 	const github = Router();
 
-	github.post(GithubApiPath.LOGIN, passport.authenticate('github-login'));
+	github.get(GithubApiPath.LOGIN, passport.authenticate('github-login'));
 
-	github.post(GithubApiPath.REGISTER, passport.authenticate('github-register'));
+	github.get(GithubApiPath.REGISTER, passport.authenticate('github-register'));
 
-	github.post(GithubApiPath.LINK, passport.authenticate('github-link'));
+	github.get(GithubApiPath.LINK, passport.authenticate('github-link'));
 
 	github.post(GithubApiPath.UNLINK, async (req, res) => {
 		const { id } = req.user as IUserFields;
@@ -36,7 +37,8 @@ export function githubRouter({
 		passport.authenticate('github-login', { session: false }),
 		async (req, res) => {
 			const user = req.user as IUserFields;
-			res.status(HttpCodes.OK).json(await authService.login(user));
+			const token = await authService.login(user);
+			setResponseSession(req, res, token);
 		},
 	);
 
@@ -45,7 +47,8 @@ export function githubRouter({
 		passport.authenticate('github-register', { session: false }),
 		async (req, res) => {
 			const profile = req.user as IGithubProfile;
-			res.status(HttpCodes.OK).json(await githubService.registerUserFromGithubProfile(profile));
+			const token = await githubService.registerUserFromGithubProfile(profile);
+			setResponseSession(req, res, token);
 		},
 	);
 
