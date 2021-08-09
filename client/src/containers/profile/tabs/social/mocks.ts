@@ -9,7 +9,7 @@ export const social = [
 				imageSource: '',
 				name: 'Vasya',
 				clan: 'clan a',
-				honor: 900
+				honor: 900,
 			},
 			{
 				id: '91',
@@ -17,7 +17,7 @@ export const social = [
 				imageSource: '',
 				name: 'Vasya',
 				clan: 'clan a',
-				honor: 900
+				honor: 900,
 			},
 			{
 				id: '92',
@@ -25,7 +25,7 @@ export const social = [
 				imageSource: '',
 				name: 'Vasya',
 				clan: 'clan a',
-				honor: 900
+				honor: 900,
 			},
 			{
 				id: '93',
@@ -33,7 +33,7 @@ export const social = [
 				imageSource: '',
 				name: 'Vasya',
 				clan: 'clan a',
-				honor: 900
+				honor: 900,
 			},
 		],
 	},
@@ -47,7 +47,7 @@ export const social = [
 				imageSource: '',
 				name: 'John',
 				clan: 'clan b',
-				honor: 900
+				honor: 900,
 			},
 			{
 				id: '96',
@@ -55,7 +55,7 @@ export const social = [
 				imageSource: '',
 				name: 'Petro',
 				clan: 'clan b',
-				honor: 900
+				honor: 900,
 			},
 			{
 				id: '97',
@@ -63,7 +63,7 @@ export const social = [
 				imageSource: '',
 				name: 'Chris',
 				clan: 'clan a',
-				honor: 900
+				honor: 900,
 			},
 		],
 	},
@@ -77,7 +77,7 @@ export const social = [
 				imageSource: '',
 				name: 'George',
 				clan: 'clan f',
-				honor: 900
+				honor: 900,
 			},
 			{
 				id: '99',
@@ -85,7 +85,7 @@ export const social = [
 				imageSource: '',
 				name: 'James',
 				clan: 'clan b',
-				honor: 800
+				honor: 800,
 			},
 			{
 				id: '100',
@@ -93,7 +93,7 @@ export const social = [
 				imageSource: '',
 				name: 'Chris',
 				clan: 'clan a',
-				honor: 900
+				honor: 900,
 			},
 		],
 	},

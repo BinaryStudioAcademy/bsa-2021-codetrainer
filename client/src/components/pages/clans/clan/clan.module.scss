@@ -1,0 +1,12 @@
+@import 'styles/variables';
+
+.container {
+	width: 70%;
+	margin: 0 auto;
+}
+
+.membersSection {
+	display: grid;
+	grid-template-columns: 2fr 5fr;
+	gap: 20px;
+}

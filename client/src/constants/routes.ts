@@ -12,6 +12,9 @@ export const ROUTES = {
 	Search: '/search',
 	UserProfile: '/users/:name',
 
+	Clans: '/clans',
+	Clan: '/clan',
+
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
 };

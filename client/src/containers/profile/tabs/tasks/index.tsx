@@ -26,7 +26,9 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 				onClick: (id: string) => setActiveId(id),
 			}}
 		>
-			{items.map((item, index) => <Challenge key={index.toString()} {...item} />)}
+			{items.map((item, index) => (
+				<Challenge key={index.toString()} {...item} />
+			))}
 		</ProfileTabWithSidebar>
 	);
 };

@@ -3,7 +3,7 @@ import { SideBar, ISideBar } from './side-bar';
 
 import styles from './styles.module.scss';
 
-interface IProfileTabWithSidebar{
+interface IProfileTabWithSidebar {
 	sideBar: ISideBar;
 	children: React.ReactNode;
 }

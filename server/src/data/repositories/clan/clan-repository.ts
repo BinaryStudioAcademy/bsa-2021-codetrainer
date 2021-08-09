@@ -11,7 +11,18 @@ export class ClanRepository extends AbstractRepository<Clan> {
 	getById(id: string) {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
-			.select(['clan', 'member.name', 'member.id'])
+			.leftJoinAndSelect('member.profileClan', 'profileClan')
+			.select([
+				'clan',
+				'member.name',
+				'member.createdAt',
+				'member.surname',
+				'member.id',
+				'member.honour',
+				'member.rank',
+				'profileClan.role',
+				'profileClan.status',
+			])
 			.where('clan.id = :id', { id })
 			.getOne();
 	}
@@ -20,7 +31,7 @@ export class ClanRepository extends AbstractRepository<Clan> {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
 			.leftJoinAndSelect('member.profileClan', 'profileClan')
-			.select(['clan', 'member.name', 'member.id', 'profileClan'])
+			.select(['clan', 'member.rank', 'member.honour', 'profileClan.role', 'profileClan.status'])
 			.skip(skip)
 			.take(take)
 			.getMany();
@@ -32,5 +43,13 @@ export class ClanRepository extends AbstractRepository<Clan> {
 
 	deleteMember(id: string, memberId: string) {
 		return this.createQueryBuilder('clan').relation('members').of(id).remove(memberId);
+	}
+
+	addMember(id: string, memberId: string) {
+		return this.createQueryBuilder('clan').relation('members').of(id).add(memberId);
+	}
+
+	deleteById(id: string) {
+		return this.createQueryBuilder().delete().where('id = :id', { id }).execute();
 	}
 }

@@ -1,16 +1,16 @@
-export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification } from './basic';
+export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification, Button } from './basic';
 
-export { 
-	Example, 
-	Challenge, 
-	CoverLayout, 
-	FormInput, 
-	FormSelect, 
-	FullscreenLoader, 
-	Spinner, 
-	Header, 
+export {
+	Example,
+	Challenge,
+	CoverLayout,
+	FormInput,
+	FormSelect,
+	FullscreenLoader,
+	Spinner,
+	Header,
 	Social,
-	TaskInstructions
+	TaskInstructions,
 } from './common';
 
 export type { ICreateTabsProps } from './pages';
@@ -24,6 +24,8 @@ export {
 	SearchPage,
 	ProfilePage,
 	StatsTab,
+	ClansPage,
+	ClanPage,
 	ProfileTabWithSidebar,
 	ProfileTasks,
 	CreateTaskSettings,

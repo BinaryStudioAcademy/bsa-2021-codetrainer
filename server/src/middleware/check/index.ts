@@ -1,1 +1,1 @@
-export { clanPermissionMiddleware } from './clan';
+export { checkClanIdMiddleware } from './clan';
