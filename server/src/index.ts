@@ -16,8 +16,6 @@ import './config/passport';
 checkConfig();
 const app = express();
 
-app.use(ApiPath.API_DOCS, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +23,7 @@ app.use(passport.initialize());
 
 app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
 app.use(ENV.APP.API_PATH, initApi(Router));
+app.use(ApiPath.API_DOCS, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(errorHandlerMiddleware);
 

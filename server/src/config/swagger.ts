@@ -18,6 +18,10 @@ const swaggerDefinition = {
 			url: `http://localhost:${ENV.APP.PORT}`,
 			description: 'Development server',
 		},
+		{
+			url: `https://staging-api.codetrain.xyz/`,
+			description: 'Staging server',
+		},
 	],
 };
 
