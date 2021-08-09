@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { HttpCodes } from '../common/enum/http-codes';
+import { HttpCodes } from '../common';
 import { imageMiddleware } from '../middleware';
 import { ImagesService } from '../services';
 

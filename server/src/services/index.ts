@@ -10,7 +10,7 @@ const authService = new AuthService({ user: UserRepository });
 const clanService = new ClanService({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
 
 const imagesService = new ImagesService(imagesRepository);
-const githubService = new GithubService({ authService: auth, userRepository: UserRepository });
+const githubService = new GithubService({ authService, userRepository: UserRepository });
 
 const taskService = new TaskService({ task: TaskRepository, user: UserRepository });
 

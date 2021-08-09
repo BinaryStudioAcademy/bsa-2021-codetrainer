@@ -1,8 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import { User } from '../data/models';
-import { UserRepository } from '../data';
-import { Auth as AuthService } from './auth';
-import { IUserFields } from '../types';
+import { User, UserRepository } from '../data';
+import { AuthService } from './auth';
 import { IGithubProfile, mapGithubProfileToUserFields } from '../helpers';
 
 export class GithubService {
@@ -24,7 +22,7 @@ export class GithubService {
 	}
 
 	async registerUserFromGithubProfile(profile: IGithubProfile) {
-		const newUser: Omit<IUserFields, 'id'> = {
+		const newUser: Omit<User, 'id'> = {
 			...mapGithubProfileToUserFields(profile),
 		};
 		return this.authService.register(newUser);

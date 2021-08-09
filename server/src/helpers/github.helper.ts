@@ -1,5 +1,5 @@
 /* eslint-disable camelcase, no-underscore-dangle */
-import { IUserFields } from '../types';
+import { User } from '../data';
 
 export interface IGithubProfile {
 	id: string;
@@ -14,12 +14,12 @@ export interface IGithubProfile {
 	];
 }
 
-export function mapGithubProfileToUserFields(profile: IGithubProfile): Omit<IUserFields, 'id' | 'password'> {
+export function mapGithubProfileToUserFields(profile: IGithubProfile): Omit<User, 'id' | 'password'> {
 	return {
 		email: profile.emails[0].value,
 		name: profile.username,
 		surname: '',
 		githubId: profile.id,
 		profileUrl: profile._json.avatar_url,
-	};
+	} as User;
 }

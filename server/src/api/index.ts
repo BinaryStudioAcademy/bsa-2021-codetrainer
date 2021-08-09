@@ -5,7 +5,7 @@ import { imagesRouter } from './images.router';
 import { githubRouter } from './github.router';
 import { initTask } from './task/task-api';
 import { ApiPath } from '../common';
-import { authService, clanService, imagesService, taskService } from '../services';
+import { authService, clanService, imagesService, taskService, githubService } from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
