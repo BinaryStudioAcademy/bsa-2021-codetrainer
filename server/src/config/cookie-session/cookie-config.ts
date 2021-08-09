@@ -7,5 +7,5 @@ export const cookieConfig: CookieSessionInterfaces.CookieSessionOptions = {
 	maxAge: ms('30d'),
 	httpOnly: true,
 	sameSite: 'none',
-	secure: false,
+	secure: true,
 };
