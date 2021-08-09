@@ -30,8 +30,11 @@
 		}
 		@include radio-item-color(#282828);
 	}
-	& input[type="radio"]:checked ~ .radioLabel,
+	& input[type='radio']:checked ~ .radioLabel,
 	.radioLabel:hover {
 		@include radio-item-color(#705ff5);
+	}
+	& input[type='radio']:checked ~ .radioLabel {
+		cursor: default;
 	}
 }

@@ -38,7 +38,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={false}
 			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
-			<PrivateRoute path={ROUTES.Main} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path="/setting" component={SettingPage} needHeader={true} needSideBar={true} />
@@ -74,13 +74,12 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PublicRoute
+			<PrivateRoute
 				exact
-				restricted={false}
-				path="/task/new"
+				path={ROUTES.createTask}
 				component={CreateTaskPage}
-				needHeader={false}
-				needSideBar={false}
+				needHeader={true}
+				needSideBar={true}
 			/>
 
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />

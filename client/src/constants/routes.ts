@@ -12,5 +12,6 @@ export const ROUTES = {
 	Search: '/search',
 	UserProfile: '/users/:name',
 
+	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
 };

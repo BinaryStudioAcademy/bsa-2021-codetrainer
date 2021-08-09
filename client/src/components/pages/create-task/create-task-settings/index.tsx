@@ -26,7 +26,7 @@ export const CreateTaskSettings = ({
 	return (
 		<div className={styles.createTaskSettings}>
 			<H2 className="heading">Create a New Task</H2>
-			<form>
+			<form className={styles.settingsTask}>
 				<Label htmlFor="task-name">Name</Label>
 				<input className={Classes.INPUT} id="task-name" placeholder="Enter Task Name" />
 
