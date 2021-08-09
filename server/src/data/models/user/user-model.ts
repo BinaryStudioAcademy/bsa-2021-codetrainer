@@ -7,6 +7,8 @@ import {
 	JoinColumn,
 	OneToMany,
 	BaseEntity,
+	CreateDateColumn,
+	UpdateDateColumn,
 } from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
@@ -29,12 +31,24 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 100, nullable: true })
 	password?: string;
 
+	@Column({ type: 'int', default: 0 })
+	rank!: number;
+
+	@Column({ type: 'int', default: 0 })
+	honour!: number;
+
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()
 	profileClan?: ProfileClan;
 
 	@ManyToOne(() => Clan, (clan) => clan.members, { nullable: true })
 	clan?: Clan;
+
+	@CreateDateColumn()
+	createdAt!: Date;
+
+	@UpdateDateColumn()
+	updatedAt!: Date;
 
 	@OneToMany(() => Task, (task) => task.user)
 	@JoinColumn()

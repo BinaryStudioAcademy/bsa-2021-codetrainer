@@ -1,4 +1,4 @@
-export { Avatar, Label, Rank, PublicRoute, Notification } from './basic';
+export { Avatar, Label, Rank, PublicRoute, Notification, Button } from './basic';
 
 export {
 	Example,
@@ -9,6 +9,7 @@ export {
 	FullscreenLoader,
 	Spinner,
 	Header,
+	Social,
 	TaskInstructions,
 } from './common';
 
@@ -23,6 +24,9 @@ export {
 	SearchPage,
 	ProfilePage,
 	StatsTab,
+	ClansPage,
+	ClanPage,
+	ProfileTabWithSidebar,
 	ProfileTasks,
 	CreateTaskSettings,
 	SettingPage,
