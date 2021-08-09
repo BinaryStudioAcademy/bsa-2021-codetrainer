@@ -14,9 +14,13 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
+		
+		label {
+			cursor: pointer;
+		}
 
 		.listItem {
-			margin: 0 5px;	
+			margin: 0 5px;
 		}
 	}
 }
