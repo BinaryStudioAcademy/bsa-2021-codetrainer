@@ -3,11 +3,9 @@ import { getCustomRepository } from 'typeorm';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { Strategy as GithubStrategy } from 'passport-github2';
-import { Request } from 'express';
 import { ENV } from '../common';
 import { UserRepository } from '../data';
 import { cryptCompare } from '../helpers';
-import { IUserFields } from '../types/user/user-fields';
 import { GithubApiPath } from '../common/enum/api/github-api-path';
 import { ValidationError } from '../helpers/errors/validation-error';
 import { HttpCodes } from '../common/enum/http-codes';
@@ -126,30 +124,20 @@ passport.use(
 			clientID: ENV.GITHUB.CLIEND_ID,
 			clientSecret: ENV.GITHUB.SECRET,
 			callbackURL: ENV.GITHUB.CALLBACK + GithubApiPath.LINK,
-			passReqToCallback: true,
 		},
-		async (req: Request, _access: string, _refresh: string, profile: any, done: any) => {
+		async (_access: string, _refresh: string, profile: any, done: any) => {
 			const repository: UserRepository = getCustomRepository(UserRepository);
 			const { id: githubId }: { id: string } = profile;
-			if (!(req.user as IUserFields).githubId) {
+			const user = await repository.getByGithubId(githubId);
+			if (!user) {
+				done(null, { githubId });
+			} else {
 				done(
 					new ValidationError({
 						status: HttpCodes.BAD_REQUEST,
-						message: 'User already linked to github account',
+						message: 'User with this github account already exists',
 					}),
 				);
-			} else {
-				const user = await repository.getByGithubId(githubId);
-				if (!user) {
-					done(null, { githubId });
-				} else {
-					done(
-						new ValidationError({
-							status: HttpCodes.BAD_REQUEST,
-							message: 'User with this github account already exists',
-						}),
-					);
-				}
 			}
 		},
 	),
