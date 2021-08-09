@@ -1,5 +1,5 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import { signUp } from 'services/sign-up.service';
+import { authServices } from 'services';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import * as userActions from 'containers/user/logic/actions';
@@ -8,11 +8,11 @@ import { IUser } from 'typings/sign-in-form';
 export function* signUpUser(action: ReturnType<typeof actions.signUpUser>) {
 	try {
 		const { userData } = action;
-		const user: IUser = yield call(signUp, userData);
+		const user: IUser = yield call({ context: authServices, fn: authServices.register }, userData);
 		yield put(actions.signUpUserSuccess());
 		yield put(userActions.setUser({ user }));
 	} catch (error) {
-		yield put(actions.signUpUserError({ error }));
+		yield put(actions.signUpUserError({ error: error?.message ?? 'unknown error' }));
 	}
 }
 

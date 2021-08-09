@@ -1,16 +1,20 @@
 import * as actionTypes from './action-types';
-import { IUserState, initialState } from './state';
+import { initialState, IUserDataState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
-import { IUser } from 'typings/sign-in-form';
 
-export const userReducer = createReducer<IUserState>(initialState, {
-	[actionTypes.SET_USER](_, action: { user: IUser }) {
+const routingReducer = createReducer<IUserDataState>(initialState, {
+	[actionTypes.SET_USER](state, action: actionTypes.TSetUser) {
 		return {
+			...state,
 			user: action.user,
 		};
 	},
-
-	[actionTypes.CLEAR_USER]() {
-		return initialState;
+	[actionTypes.USER_ACCESS_TOKEN_LOADING](state, action: actionTypes.TUserAccessTokenLoading) {
+		return {
+			...state,
+			accessToken: action.accessToken,
+		};
 	},
 });
+
+export default routingReducer;
