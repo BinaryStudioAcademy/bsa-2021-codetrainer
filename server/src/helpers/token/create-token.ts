@@ -1,7 +1,12 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import { ENV } from '../../common';
 
-export const createToken = (data: Record<string, string>) =>
+export enum TokenTypes {
+	ACCESS = 'access',
+	REFRESH = 'refresh',
+}
+
+export const createToken = (data: Record<string, string>, type: TokenTypes) =>
 	jwt.sign(data, ENV.JWT.SECRET as Secret, {
-		expiresIn: ENV.JWT.EXPIRES_IN
+		expiresIn: ENV.JWT[type === TokenTypes.ACCESS ? 'EXPIRES_IN' : 'REFRESH_EXPIRES_IN'],
 	});

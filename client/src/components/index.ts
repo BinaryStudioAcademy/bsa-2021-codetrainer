@@ -1,8 +1,9 @@
-export { Avatar, Label, Rank, PrivateRoute, PublicRoute } from './basic';
+export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification } from './basic';
 
 export { Example, Challenge, CoverLayout, FormInput, FormSelect, FullscreenLoader, Spinner, Header } from './common';
 
 export type { ICreateTabsProps } from './pages';
+
 export {
 	SignInPage,
 	SignUp,
@@ -14,4 +15,5 @@ export {
 	StatsTab,
 	ProfileTasks,
 } from './pages';
-export { Modal, ClanModal } from './modals';
+
+export { Modal } from './modals';

@@ -1,3 +1,5 @@
+@use 'styles/variables.scss' as var;
+
 .navMenu {
 	background-color: #fafbff !important;
 	padding-bottom: 20px;
@@ -7,9 +9,7 @@
 	list-style-type: none;
 	border-bottom: 1.5px solid #eaecf1;
 	.navMenuItem {
-		font-style: normal;
-		font-weight: 600;
-		font-size: 16px;
+		font: var.$tub-font;
 		color: #282828;
 	}
 	.navMenuItem:hover {
