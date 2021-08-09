@@ -8,19 +8,14 @@ interface ISocialProps {
 	user: IUser;
 }
 
-const Social: React.FC<ISocialProps> = ({ user: {
-    rank,
-    imageSource,
-    name,
-    clan,
-    honor
-} }) => {
+const Social: React.FC<ISocialProps> = ({ user: { rank, imageSource, name, clan, honor } }) => {
 	return (
 		<div className={styles.userRow}>
 			<Rank rank={rank} />
 			<img className={styles.userImage} src={imageSource || defaultUserPhoto} alt={name} />
-			<span >{clan}</span>
-            <span>{honor}</span>
+			<span>{name}</span>
+			<span>{clan}</span>
+			<span>{honor}</span>
 		</div>
 	);
 };
