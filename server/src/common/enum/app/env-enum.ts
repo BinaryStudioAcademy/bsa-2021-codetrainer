@@ -5,11 +5,15 @@ const ConfigVariables = process.env;
 const ENV = {
 	APP: {
 		PORT: getEnv('PORT'),
-		API_PATH: '/api'
+		API_PATH: '/api',
 	},
 	JWT: {
 		SECRET: getEnv('SECRET_KEY'),
-		EXPIRES_IN: '24h',
+		EXPIRES_IN: '30m',
+		REFRESH_EXPIRES_IN: '30d',
+	},
+	COOKIE: {
+		SECRET: getEnv('COOKIE_SECRET'),
 	},
 	DB: {
 		DATABASE: getEnv('TYPEORM_DATABASE'),
@@ -31,8 +35,12 @@ const ENV = {
 			BUCKET: getEnv('AWS_IMAGES_BUCKET_NAME'),
 			REGION: getEnv('AWS_IMAGES_BUCKET_REGION'),
 			ACCESS_KEY: getEnv('AWS_IMAGES_ACCESS_KEY'),
-			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY')
-		}
+			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY'),
+		},
+	},
+	MAILER:{
+		ADDRESS: getEnv('EMAIL_ADDRESS'),
+		PASSWORD:getEnv('EMAIL_PASSWORD')
 	}
 };
 
