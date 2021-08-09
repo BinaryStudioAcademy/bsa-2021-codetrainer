@@ -12,5 +12,6 @@ export {
 	SearchPage,
 	ProfilePage,
 	StatsTab,
+	SettingPage,
 } from './pages';
 export { Modal } from './modals';
