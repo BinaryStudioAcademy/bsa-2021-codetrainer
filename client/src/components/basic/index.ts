@@ -1,5 +1,6 @@
 export { default as PrivateRoute } from './private-route';
 export { default as PublicRoute } from './public-route';
+export { Notification } from './notification';
 export { List } from './list';
 export { default as Avatar } from './avatar';
 export { default as Label } from './label';
