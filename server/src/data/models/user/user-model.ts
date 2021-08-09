@@ -26,17 +26,23 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 100, unique: true })
 	email!: string;
 
-	@Column({ type: 'varchar', length: 100 })
-	password!: string;
+	@Column({ type: 'varchar', length: 100, nullable: true })
+	password?: string;
 
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()
 	profileClan?: ProfileClan;
 
-	@ManyToOne(() => Clan, (clan) => clan.members)
+	@ManyToOne(() => Clan, (clan) => clan.members, { nullable: true })
 	clan?: Clan;
 
 	@OneToMany(() => Task, (task) => task.user)
 	@JoinColumn()
 	tasks!: Task[];
+
+	@Column({ nullable: true })
+	profileUrl?: string;
+
+	@Column({ unique: true, nullable: true })
+	githubId?: string;
 }

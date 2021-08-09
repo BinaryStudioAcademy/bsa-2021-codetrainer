@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
-import { HttpCodes } from '../common/enum/http-codes';
+import { HttpCodes } from '../common';
 import { imageMiddleware } from '../middleware';
 import { ImagesService } from '../services';
 
-export function imagesController(service: ImagesService): Router {
+export function imagesRouter(service: ImagesService): Router {
 	const route = Router();
 
 	route.post('/upload', imageMiddleware, async (req: Request, res: Response) => {
