@@ -1,28 +1,17 @@
-import React from 'react';
-import { FC } from 'react';
-import { Button as BlueprintButton, ButtonProps } from '@blueprintjs/core';
-import styles from './button.module.scss';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 import clsx from 'clsx';
+import styles from './button.module.scss';
 
-interface IButtonProps extends ButtonProps {
-	color?: 'blue' | 'red' | 'grey';
-}
-
-const Button: FC<IButtonProps> = ({ color = 'blue', children, className, ...remains }) => (
-	<BlueprintButton
-		{...remains}
-		className={clsx(
-			styles.button,
-			styles[color],
-			{
-				[styles.filled]: remains.fill,
-				[styles.disabled]: remains.disabled,
-			},
-			className,
-		)}
-	>
-		{children}
-	</BlueprintButton>
+const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
+	<button {...props} className={clsx(styles.button, props.className)}>
+		{props.children}
+	</button>
 );
 
 export default Button;
+
+export const ButtonClasses = Object.freeze({
+	red: styles.red,
+	blue: styles.blue,
+	filled: styles.filled,
+});

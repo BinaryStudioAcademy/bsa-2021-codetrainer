@@ -1,6 +1,7 @@
 @import '~normalize.css';
 @import '~@blueprintjs/core/lib/css/blueprint.css';
 @import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 body {
 	margin: 0;
@@ -14,6 +15,22 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgba(236, 65, 121, 0.3);
+	border-radius: 10px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+	background-color: rgba(236, 65, 121, 0.6);
+}
+
 a {
 	text-decoration: none;
+}
+.content_container{
+	display: flex;
 }
