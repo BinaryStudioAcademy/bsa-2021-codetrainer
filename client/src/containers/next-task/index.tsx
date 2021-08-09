@@ -6,7 +6,7 @@ import rankUpIcon from './assets/rankUpIcon.svg';
 import practiceAndRepeatIcon from './assets/practiceAndRepeatIcon.svg';
 import betaIcon from './assets/betaIcon.svg';
 import randomIcon from './assets/randomIcon.svg';
-import { FocusKeys } from 'constants/FocusKeys';
+import { FocusKeys } from 'constants/focus-keys';
 import { ITask } from 'components/common/next-task/interface';
 
 // Stub for implementation until api is implemented
