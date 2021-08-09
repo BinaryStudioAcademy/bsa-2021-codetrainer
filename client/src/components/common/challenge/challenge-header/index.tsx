@@ -4,11 +4,11 @@ import { Rank } from 'components';
 import { IChallengeHeaderProps } from '../types';
 import styles from './challenge-header.module.scss';
 
-const ChallengeHeader: React.FC<{ header: IChallengeHeaderProps }> = ({ header: { link, title, rank } }) => {
+const ChallengeHeader = ({ rank, title, linkToAuthor }: IChallengeHeaderProps) => {
 	return (
 		<div className={styles.challengeHeader}>
 			<Rank rank={rank} />
-			<Link to={link} className={styles.challengeHeaderTitle}>
+			<Link to={linkToAuthor} className={styles.challengeHeaderTitle}>
 				<span>{title}</span>
 			</Link>
 		</div>

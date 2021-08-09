@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import * as actions from './logic/actions';
+import * as actions from '../user/logic/actions';
 
 const TestPrivate: React.FC = () => {
 	const dispatch = useDispatch();

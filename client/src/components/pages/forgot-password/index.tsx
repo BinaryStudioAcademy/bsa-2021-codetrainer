@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
 import styles from './forgot-password.module.scss';
+import { ROUTES } from 'constants/routes';
 
 const ForgotPasswordSchema = Yup.object().shape({
 	email: Yup.string().email('Invalid email').required('Required'),
@@ -38,7 +39,7 @@ const ForgotPassword: React.FC = () => {
 			</Formik>
 			<div className={styles.footer}>
 				Back to{' '}
-				<Link to="/sign-in" className={styles.link}>
+				<Link to={ROUTES.SignIn} className={styles.link}>
 					Sign in
 				</Link>
 			</div>

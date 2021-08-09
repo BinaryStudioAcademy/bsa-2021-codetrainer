@@ -9,14 +9,15 @@ export {
 	FullscreenLoader, 
 	Spinner, 
 	Header, 
-	Social 
+	Social,
+	TaskInstructions
 } from './common';
 
 export type { ICreateTabsProps } from './pages';
 
 export {
 	SignInPage,
-	SignUp,
+	SignUpPage,
 	ChangePassword,
 	ForgotPassword,
 	CreateTabs,
@@ -24,6 +25,9 @@ export {
 	ProfilePage,
 	StatsTab,
 	ProfileTabWithSidebar,
+	ProfileTasks,
+	CreateTaskSettings,
+	SettingPage,
 } from './pages';
 
 export { Modal } from './modals';

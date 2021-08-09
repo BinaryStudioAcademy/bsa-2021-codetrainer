@@ -1,10 +1,130 @@
 import { Router } from 'express';
 import { ClanApiPath, REQ_TYPE } from '../../common';
 import { clanPermissionMiddleware, dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
-import { TClanService } from '../../services';
-import { IUserFields } from '../../types';
+import { checkClanIdMiddleware } from '../../middleware/check/clan';
+import { ClanService } from '../../services';
 
-export const initClan = (appRouter: typeof Router, services: { clan: TClanService }) => {
+/**
+ * @swagger
+ * tags:
+     - name: Clans
+ * components:
+ *   schemas:
+ *     Clan:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The clan's ID.
+ *           example: 0
+ *         name:
+ *           type: string
+ *           description: The clan's name.
+ *           example: Leanne Graham
+ *         isPublic:
+ *           type: boolean
+ *           example: true
+ *     ClanInput:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The clan's name.
+ *           example: Leanne Graham
+ *         isPublic:
+ *           type: boolean
+ *           example: true
+ */
+
+/**
+ * @swagger
+ * /api/clans:
+ *   get:
+ *     tags:
+ *       - Clans
+ *     summary: Retrieve a list of clans
+ *     responses:
+ *       200:
+ *         description: A list of clans
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Clan'
+ */
+
+/**
+ * @swagger
+ * /api/clans:
+ *   post:
+ *     tags:
+ *       - Clans
+ *     summary: Create a clan
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ClanInput'
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clan'
+ */
+
+/**
+ * @swagger
+ * /api/clans/{id}:
+ *   put:
+ *     tags:
+ *       - Clans
+ *     summary: Update a clan
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the clan to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ClanInput'
+ *     responses:
+ *       200:
+ *         description: Updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clan'
+ */
+
+/**
+ * @swagger
+ * /api/clans/{id}:
+ *   delete:
+ *     tags:
+ *       - Clans
+ *     summary: Delete a clan
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the clan to delete
+ *     responses:
+ *       204:
+ *         description: Deleted
+ */
+
+export const initClan = (appRouter: typeof Router, services: { clan: ClanService }) => {
 	const { clan: clansService } = services;
 	const router = appRouter();
 
@@ -20,7 +140,7 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 			dataValidationMiddleware(SchemasDataValidation.clanFieldsSchema, REQ_TYPE.BODY),
 			(req, res, next) =>
 				clansService
-					.create(req.user as IUserFields, req.body)
+					.create(req.user, req.body)
 					.then((data) => res.send(data))
 					.catch(next),
 		)
@@ -28,15 +148,16 @@ export const initClan = (appRouter: typeof Router, services: { clan: TClanServic
 			ClanApiPath.ROOT,
 			clanPermissionMiddleware,
 			dataValidationMiddleware(SchemasDataValidation.clanFieldsSchema, REQ_TYPE.BODY),
+			checkClanIdMiddleware,
 			(req, res, next) =>
 				clansService
-					.update(req.user as IUserFields, req.body)
+					.update(req.clan, req.body)
 					.then((data) => res.send(data))
 					.catch(next),
 		)
-		.delete(ClanApiPath.ROOT, clanPermissionMiddleware, (req, res, next) =>
+		.delete(ClanApiPath.ROOT, clanPermissionMiddleware, checkClanIdMiddleware, (req, res, next) =>
 			clansService
-				.delete({ user: req.user as IUserFields })
+				.delete(req.clan)
 				.then((data) => res.send(data))
 				.catch(next),
 		);

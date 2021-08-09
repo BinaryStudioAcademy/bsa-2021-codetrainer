@@ -1,3 +1,5 @@
+@use 'styles/variables.scss' as var;
+
 .header {
 	padding-bottom: 20px;
 	display: flex;
@@ -5,8 +7,7 @@
 }
 
 .iconLabel {
-	font-style: normal;
-	font-weight: 600;
+	font: var.$button-font;
 	font-size: 18px;
 	line-height: 22px;
 	padding-left: 10px;

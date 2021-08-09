@@ -1,11 +1,11 @@
 import ms from 'ms';
 import { ENV } from '../../common';
 
-export const cookieConfig = {
-	name: ENV.COOKIE.NAME,
+export const cookieConfig: CookieSessionInterfaces.CookieSessionOptions = {
+	name: 'session',
 	keys: [ENV.COOKIE.SECRET] as Array<string>,
-	cookie: {
-		maxAge: ms(ENV.COOKIE.MAX_AGE),
-		httpOnly: ENV.COOKIE.HTTP_ONLY,
-	},
+	maxAge: ms('30d'),
+	httpOnly: true,
+	sameSite: 'none',
+	secure: false,
 };

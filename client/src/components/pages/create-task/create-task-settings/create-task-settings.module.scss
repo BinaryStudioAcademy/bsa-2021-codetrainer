@@ -1,0 +1,38 @@
+.createTaskSettings {
+	padding: 20px;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 22px;
+
+	color: #282828;
+	form {
+		.disciplinesHeading {
+			padding-top: 20px;
+		}
+		label {
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 15px;
+			margin-bottom: 10px;
+			margin-top: 15px;
+		}
+		.radioList {
+			margin-top: 20px;
+			display: flex;
+			justify-content: flex-start;
+			gap: 20px;
+		}
+		input {
+			width: 100%;
+			background: #f0f3f9;
+			border-radius: 7px;
+			padding: 10px;
+			height: auto;
+		}
+	}
+}
+
+.settingsTask {
+	margin-left: 280px;
+	margin-top: 50px;
+}
