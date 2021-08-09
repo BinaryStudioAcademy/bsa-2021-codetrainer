@@ -1,5 +1,3 @@
-@use 'styles/variables.scss' as var;
-
 .rankBreakdown {
 	display: flex;
 	flex-direction: column;
@@ -11,14 +9,16 @@
 	}
 	.progressCircleInfo {
 		padding-left: 10px;
-		font: var.$base-font;
 	}
 	.nextRankLabel {
 		padding-bottom: 50px;
-		font: var.$sixth-title-font;
+		font-style: normal;
 		font-weight: 500;
+		font-size: 16px;
 	}
 	.overallLabel {
+		font-style: normal;
 		font-weight: 500;
+		font-size: 14px;
 	}
 }
