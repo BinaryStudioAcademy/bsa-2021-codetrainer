@@ -63,12 +63,14 @@
 		"@typescript-eslint/no-var-requires": "off",
 		"@typescript-eslint/no-use-before-define": "off",
 		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-shadow": "error", // fix eslint bug with no-shadow and exporting enums
 		"@typescript-eslint/no-unused-vars": "off",
 		"@typescript-eslint/indent": "off",
 		"@typescript-eslint/member-delimiter-style": "off",
 		"@typescript-eslint/semi": "off",
 		"prettier/prettier": "off",
 		"no-unused-expressions": "off", //disabled in favour of @typescript-eslint/no-unused-expressions
+		"no-shadow": "off",
 		"comma-dangle": "off" // handled by prettier
 	},
 	"settings": {

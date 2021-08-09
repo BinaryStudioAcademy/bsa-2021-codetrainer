@@ -1,9 +1,13 @@
-import { IProfileState } from './../containers/profile/logic/state';
 import { IExampleState } from 'containers/example/logic/state';
 import { IAuthState } from './auth';
+import { IAuthState as IRoutingState } from 'containers/routing/logic/state';
+import { IProfileState } from 'containers/profile/logic/state';
+import { INotificationState } from '../containers/notification/logic/state';
 
 export interface IRootState {
-	auth: IAuthState;
-	example: IExampleState;
+	notification: INotificationState;
 	profile: IProfileState;
+	example: IExampleState;
+	auth: IAuthState;
+	routing: IRoutingState;
 }

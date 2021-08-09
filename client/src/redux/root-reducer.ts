@@ -1,13 +1,17 @@
 import { exampleReducer } from 'containers/example/logic/reducer';
 import { profileReducer } from 'containers/profile/logic/reducer';
+import { authReducer } from 'containers/auth/logic/reducer';
+import { routingReducer } from 'containers/routing/logic/reducer';
 import { combineReducers, Reducer } from 'redux';
 import { IRootState } from 'typings/root-state';
-import authReducer from 'containers/auth/logic/reducer';
+import { notificationReducer } from '../containers/notification/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
-	auth: authReducer,
-	example: exampleReducer,
 	profile: profileReducer,
+	example: exampleReducer,
+	routing: routingReducer,
+	auth: authReducer,
+	notification: notificationReducer,
 });
 
 export default rootReducer;

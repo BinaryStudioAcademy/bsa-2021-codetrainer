@@ -4,10 +4,8 @@ import { userReducer } from 'containers/user/logic/reducer';
 import { combineReducers, Reducer } from 'redux';
 import { IAuthState } from 'typings/auth';
 
-const authReducer: Reducer<IAuthState> = combineReducers({
+export const authReducer: Reducer<IAuthState> = combineReducers({
 	signUp: signUpReducer,
 	signIn: signInReducer,
 	user: userReducer,
 });
-
-export default authReducer;
