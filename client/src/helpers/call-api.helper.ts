@@ -53,6 +53,7 @@ const getArgs = (args: IRequestArgs): RequestInit => {
 
 	return {
 		method: args.method,
+		credentials: 'include',
 		headers,
 		...(args.method === 'GET' ? {} : { body }),
 	};

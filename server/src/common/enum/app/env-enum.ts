@@ -13,10 +13,7 @@ const ENV = {
 		REFRESH_EXPIRES_IN: '30d',
 	},
 	COOKIE: {
-		NAME: getEnv('COOKIE_NAME'),
 		SECRET: getEnv('COOKIE_SECRET'),
-		MAX_AGE: '30d',
-		HTTP_ONLY: true,
 	},
 	DB: {
 		DATABASE: getEnv('TYPEORM_DATABASE'),

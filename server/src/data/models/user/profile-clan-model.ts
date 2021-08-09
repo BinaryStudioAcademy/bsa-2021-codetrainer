@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BaseEntity } from 'typeorm';
 import { CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../../common';
 import { User } from './user-model';
 
 @Entity()
-export class ProfileClan {
+export class ProfileClan extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 	id!: string;
 

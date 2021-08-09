@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { HomePage } from 'components/pages';
 import NextTaskContainer from 'containers/next-task';
-
 const testActiveUser = {
 	id: '13',
 	rank: 5,
@@ -92,15 +91,17 @@ const HomePageContainer: React.FC = () => {
 	};
 
 	return (
-		<HomePage
-			activeUser={testActiveUser}
-			users={testUsers}
-			messages={testMessages.messages}
-			selectedFeedCategory={selectedFeedCategory}
-			onSelectFeedCategory={handleSelectFeedCategory}
-			isLastPage={testMessages.isLastPage}
-			nextTaskContent={<NextTaskContainer />}
-		/>
+		<>
+			<HomePage
+				activeUser={testActiveUser}
+				users={testUsers}
+				messages={testMessages.messages}
+				selectedFeedCategory={selectedFeedCategory}
+				onSelectFeedCategory={handleSelectFeedCategory}
+				isLastPage={testMessages.isLastPage}
+				nextTaskContent={<NextTaskContainer />}
+			/>
+		</>
 	);
 };
 

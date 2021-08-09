@@ -6,7 +6,7 @@ export type { ICreateTabsProps } from './pages';
 
 export {
 	SignInPage,
-	SignUp,
+	SignUpPage,
 	ChangePassword,
 	ForgotPassword,
 	CreateTabs,

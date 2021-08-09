@@ -11,7 +11,7 @@ interface IProfileTasks {
 export const Tasks: React.FC<IProfileTasks> = ({ tasks }) => (
 	<div className={styles.root}>
 		{tasks.map((task, index) => (
-			<Challenge challenge={task} key={index.toString()} />
+			<Challenge {...task} key={index.toString()} />
 		))}
 	</div>
 );
