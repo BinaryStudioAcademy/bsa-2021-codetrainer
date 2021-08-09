@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
+import { Switch } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { Switch } from 'react-router-dom';
-import Example from 'containers/example';
+import { Clans, Clan } from 'containers/clans';
 import { CreateTaskPage } from 'containers/create-new-task';
-import HomePage from 'containers/home-page';
 import SettingPage from 'containers/setting-page';
-import { Profile } from 'containers/profile';
 import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
 import TaskPage from '../task-page';
 import SignIn from 'containers/sign-in';
@@ -14,6 +12,9 @@ import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import TestPrivate from './test-private';
+import Example from 'containers/example';
+import HomePage from 'containers/home-page';
+import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 
 interface IRoutingProps {}
@@ -74,6 +75,23 @@ const Routing: React.FC<IRoutingProps> = () => {
 				component={ChangePassword}
 				needHeader={false}
 				needSideBar={false}
+			/>
+			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
+			<PublicRoute
+				exact
+				restricted={false}
+				needHeader={true}
+				needSideBar={true}
+				path={ROUTES.Clans}
+				component={Clans}
+			/>
+			<PublicRoute
+				exact
+				restricted={false}
+				needHeader={true}
+				needSideBar={true}
+				path={ROUTES.Clan}
+				component={Clan}
 			/>
 			<PrivateRoute
 				exact

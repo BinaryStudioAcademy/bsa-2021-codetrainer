@@ -6,6 +6,7 @@ export { default as ChangePassword } from './change-password';
 export { default as ForgotPassword } from './forgot-password';
 export { default as SearchPage } from './search-page';
 export { default as SignInPage } from './sign-in';
+export { ClansPage, ClanPage } from './clans';
 export { default as SignUpPage } from './sign-up';
 export { default as HomePage } from './home';
 export { CreateTaskSettings } from './create-task';

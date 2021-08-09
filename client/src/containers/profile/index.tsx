@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
 			case ActiveTabId.Challenges:
 				return <ProfileTasks profileTasks={profileTasks} />;
 			case ActiveTabId.Social:
-				return <ProfileSocial social={social} /> 
+				return <ProfileSocial social={social} />;
 			default:
 				return <div />;
 		}
