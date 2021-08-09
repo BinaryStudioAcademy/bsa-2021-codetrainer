@@ -30,6 +30,20 @@
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(2, 70px);
 	grid-gap: 20px;
+
+	.inputField label {
+		pointer-events: none;
+	}
+
+	input {
+		cursor: pointer;
+		outline: none;
+		background: #fff;
+
+		&:hover {
+			background-color:rgb(228, 228, 228);
+		}
+	}
 }
 
 .header {

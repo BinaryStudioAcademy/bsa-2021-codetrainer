@@ -20,15 +20,18 @@ const SignupSchema = Yup.object().shape({
 const Information: React.FC<IInformationProps> = (props) => {
 	const getFieldItem = (item: Omit<IFormItem, 'initialText'>) => {
 		return (
-			<Field
-				id={item.id}
-				name={item.name}
-				label={item.label}
-				placeholder={item.placeholder}
-				type={item.type}
-				component={FormInput}
-				key={item.id}
-			/>
+			<div className={styles.inputField}>
+				<Field
+					id={item.id}
+					name={item.name}
+					label={item.label}
+					placeholder={item.placeholder}
+					type={item.type}
+					component={FormInput}
+					key={item.id}
+					className={styles.input}
+				/>
+			</div>
 		);
 	};
 
@@ -51,7 +54,6 @@ const Information: React.FC<IInformationProps> = (props) => {
 			>
 				<Form className={styles.form}>
 					{items.map((item: IFormItem) => getFieldItem(item))}
-
 					<div className={styles.experience}>
 						<List header="Development experience" name="experience" items={props.list.items} />
 					</div>
