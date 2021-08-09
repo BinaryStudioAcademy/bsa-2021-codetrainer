@@ -1,0 +1,55 @@
+:local(.taskContainer) {
+	padding: 90px 0 0 300px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+}
+
+:local(.taskContainer a) {
+	cursor: pointer;
+}
+
+:local(.header) {
+	display: flex;
+	padding: 20px 0;
+}
+
+:local(.taskContainer h2) {
+	margin: 0 0 0 10px;
+	font-size: 18px;
+}
+
+:local(.task) {
+	border-radius: 15px;
+	background: #fafbff;
+	padding: 20px 20px;
+}
+
+:local(.taskContainer hr) {
+	margin: 20px -20px;
+	border: 1px solid #eaecf1;
+}
+
+:local(.switch) {
+	display: flex;
+}
+
+:local(.switch button) {
+	margin-right: 20px;
+	font-weight: 600;
+	font-size: 16px;
+	padding: 3px;
+	border: none;
+	outline: none;
+	background: #fafbff;
+	cursor: pointer;
+}
+
+:local(.switch .active) {
+	color: #705ff5;
+	border-bottom: #705ff5 2px solid;
+}
+
+:local(.infoContainer) {
+	display: flex;
+	margin-top: 10px;
+}
