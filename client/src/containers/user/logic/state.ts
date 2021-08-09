@@ -1,9 +1,16 @@
 import { IUser } from 'typings/sign-in-form';
 
-export interface IUserState {
-	user: IUser | null;
+export enum UserAccessToken {
+	LOADING = 'loading',
+	LOADED = 'loaded',
 }
 
-export const initialState: IUserState = {
+export interface IUserDataState {
+	user: IUser | null;
+	accessToken: UserAccessToken;
+}
+
+export const initialState: IUserDataState = {
 	user: null,
+	accessToken: UserAccessToken.LOADING,
 };

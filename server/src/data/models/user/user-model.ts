@@ -26,8 +26,8 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 100, unique: true })
 	email!: string;
 
-	@Column({ type: 'varchar', length: 100 })
-	password!: string;
+	@Column({ type: 'varchar', length: 100, nullable: true })
+	password?: string;
 
 	@Column({ type: 'int', default: 0 })
 	rank!: number;
@@ -39,7 +39,7 @@ export class User extends BaseEntity {
 	@JoinColumn()
 	profileClan?: ProfileClan;
 
-	@ManyToOne(() => Clan, (clan) => clan.members)
+	@ManyToOne(() => Clan, (clan) => clan.members, { nullable: true })
 	clan?: Clan;
 
 	@CreateDateColumn()
@@ -51,4 +51,10 @@ export class User extends BaseEntity {
 	@OneToMany(() => Task, (task) => task.user)
 	@JoinColumn()
 	tasks!: Task[];
+
+	@Column({ nullable: true })
+	profileUrl?: string;
+
+	@Column({ unique: true, nullable: true })
+	githubId?: string;
 }

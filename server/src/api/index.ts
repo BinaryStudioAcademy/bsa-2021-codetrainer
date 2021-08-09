@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { initAuth } from './auth';
 import { initClan } from './clan';
-import { imagesController } from './images.controller';
+import { imagesRouter } from './images.router';
+import { githubRouter } from './github.router';
 import { initTask } from './task/task-api';
 import { ApiPath } from '../common';
-import { authService, clanService, imagesService, taskService } from '../services';
+import { authService, clanService, imagesService, taskService, githubService } from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -23,7 +24,15 @@ export function initApi(): Router {
 		}),
 	);
 
-	apiRouter.use(ApiPath.IMAGES, imagesController(imagesService));
+	apiRouter.use(ApiPath.IMAGES, imagesRouter(imagesService));
+
+	apiRouter.use(
+		ApiPath.AUTH + ApiPath.GITHUB,
+		githubRouter({
+			authService,
+			githubService,
+		}),
+	);
 
 	apiRouter.use(ApiPath.TASK, initTask(Router, { task: taskService }));
 
