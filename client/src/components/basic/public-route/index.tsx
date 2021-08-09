@@ -19,9 +19,9 @@ const PublicRoute = (props: IPublicRouteProps) => {
 
 	return (
 		<>
-			{rest.needHeader ? <Header {...headerProps} /> : null}
 			{rest.needSideBar ? (
 				<div className="content_container">
+					{rest.needHeader ? <Header {...headerProps} /> : null}
 					<MainSidebar />
 					<Route
 						{...rest}
