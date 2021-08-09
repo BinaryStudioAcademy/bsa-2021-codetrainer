@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Statistics from './components/statistics';
 import Details from './components/details';
-import { Rank } from '../index';
+import { Rank } from '../../basic';
 import styles from './task-instructions.module.scss';
 import { TaskTabType } from './config';
 

@@ -36,7 +36,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PrivateRoute path="/task/:id" component={TaskPage} />
+			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Main} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
