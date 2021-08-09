@@ -7,6 +7,8 @@ import {
 	JoinColumn,
 	OneToMany,
 	BaseEntity,
+	CreateDateColumn,
+	UpdateDateColumn,
 } from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
