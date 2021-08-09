@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import { Clans, Clan } from 'containers/clans';
 import { CreateTaskPage } from 'containers/create-new-task';
 import SettingPage from 'containers/setting-page';
-import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
+import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword } from 'components';
 import TaskPage from '../task-page';
+import { SearchPage } from 'containers/search-page';
 import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
 import { ROUTES } from 'constants/routes';
@@ -17,7 +18,7 @@ import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 
-interface IRoutingProps {}
+interface IRoutingProps { }
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);

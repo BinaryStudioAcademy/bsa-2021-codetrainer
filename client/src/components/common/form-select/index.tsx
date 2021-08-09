@@ -43,6 +43,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 				styles={{
 					menu: () => ({
 						backgroundColor: '#f0f3f9',
+						fontFamily: 'Montserrat'
+
 					}),
 					indicatorSeparator: () => ({
 						display: 'none',
@@ -53,6 +55,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 						border: '0px',
 						padding: '4px 8px',
 						borderRadius: '7px',
+						fontFamily: 'Montserrat'
 					}),
 				}}
 				menuPortalTarget={document.body}
