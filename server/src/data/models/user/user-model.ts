@@ -16,8 +16,8 @@ export class User {
 	@Column({ type: 'varchar', length: 100, unique: true })
 	email!: string;
 
-	@Column({ type: 'varchar', length: 100 })
-	password!: string;
+	@Column({ type: 'varchar', length: 100, nullable: true })
+	password?: string;
 
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()
