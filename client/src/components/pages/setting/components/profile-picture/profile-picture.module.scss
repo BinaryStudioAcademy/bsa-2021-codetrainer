@@ -1,0 +1,20 @@
+.header {
+	margin: 0 0 10px;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.avatarContainer {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.link {
+	margin-top: 10px;
+	font-size: 16px;
+	color: #705ff5;
+}

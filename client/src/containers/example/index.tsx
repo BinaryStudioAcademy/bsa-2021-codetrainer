@@ -17,7 +17,7 @@ const Example: React.FC = () => {
 		dispatch(actions.getExampleText({ exampleName }));
 	};
 	const handleLogin = async () => {
-		await authServices.login({ email: 'test1@test.com', password: '123' });
+		await authServices.login({ email: 'test123@test.com', password: '123qwe' });
 	};
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
