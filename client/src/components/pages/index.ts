@@ -10,4 +10,5 @@ export { default as SignUpPage } from './sign-up';
 export { default as HomePage } from './home';
 export { CreateTaskSettings } from './create-task';
 export { default as SettingPage } from './setting';
+export { Tasks as ProfileTasks } from './profile/profile-tasks/tasks';
 export type { ICreateTabsProps } from './create-task';
