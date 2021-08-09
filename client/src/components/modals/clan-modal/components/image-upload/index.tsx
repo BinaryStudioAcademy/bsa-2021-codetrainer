@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './image-upload.module.scss';
+import placeholderImage from '../../../../../assets/images/placeholder-image.png';
 
 interface IImageUploadProps {
 	label: string;
@@ -8,7 +9,7 @@ interface IImageUploadProps {
 const ImageUpload: React.FC<IImageUploadProps> = (props) => {
 	return (
 		<div className={styles.container}>
-			<img src="https://dess.gov.ua/wp-content/uploads/2020/05/placeholder-1.png" />
+			<img src={placeholderImage} />
 			<form action="">
 				<label>
 					{props.label}

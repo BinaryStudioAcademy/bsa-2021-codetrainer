@@ -1,6 +1,11 @@
+:local(.container) {
+	width: 700px;
+}
+
 :local(.container a) {
 	cursor: pointer;
 }
+
 :local(.flex) {
 	display: flex;
 }
@@ -20,9 +25,14 @@
 :local(.close) {
 	margin-left: auto;
 	text-decoration: none;
-	color: red;
+	color: #ec4179;
 	font-weight: 600;
 	font-size: 20px;
+}
+
+:local(.close:hover) {
+	text-decoration: none;
+	color: #ec4179;
 }
 
 :local(.form) {
@@ -30,11 +40,12 @@
 }
 
 :local(.form button) {
+	margin-top: 5px;
 	border: #705ff5 2px solid;
 	background: #fafbff;
 	color: #705ff5;
 }
 
 :local(.form span) {
-	color: red;
+	color: #ec4179;
 }
