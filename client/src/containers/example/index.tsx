@@ -7,7 +7,7 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { ClanModal } from 'components/modals';
+import { CreateTaskPage } from 'containers/create-new-task';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<ClanModal />
+			<CreateTaskPage />
 		</div>
 	);
 };

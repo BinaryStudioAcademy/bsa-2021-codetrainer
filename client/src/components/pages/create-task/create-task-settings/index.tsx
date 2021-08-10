@@ -48,22 +48,25 @@ export const CreateTaskSettings = ({
 						);
 					})}
 				</RadioGroup>
-				<Label>
+
+				<label>
 					Language version
 					<InfoPopover>Choose the language version the task will work for.</InfoPopover>
-				</Label>
+				</label>
 				<Select
 					values={selectProps.values}
 					activeValue={selectProps.activeValue}
 					onChange={selectProps.onChange}
 				/>
-				<Label htmlFor="estimated-rank">
+				<label htmlFor="estimated-rank">
 					Estimated Rank
 					<InfoPopover>Choose the rank you are expecting this task to be ranked as.</InfoPopover>
-				</Label>
+				</label>
 				<input className={Classes.INPUT} id="estimated-rank" placeholder="Enter Estimated Rank" />
 
-				<Label htmlFor="tags">Tags</Label>
+				<label htmlFor="tags">
+					Tags <InfoPopover>Choose tags you consider fit for this task.</InfoPopover>
+				</label>
 				<input className={Classes.INPUT} id="tags" placeholder="Enter Tags (separated by comma)" />
 
 				<Switch
@@ -72,13 +75,13 @@ export const CreateTaskSettings = ({
 					checked={isSelectedSwitch}
 					onChange={() => onSwitchClick(!isSelectedSwitch)}
 					labelElement={
-						<span>
+						<label>
 							Allow contributors?
 							<InfoPopover>
 								Check to allow contributors to make changes to this task while it&apos;s in beta. You
 								will be notified of any edits made by other users.
 							</InfoPopover>
-						</span>
+						</label>
 					}
 				/>
 			</form>
