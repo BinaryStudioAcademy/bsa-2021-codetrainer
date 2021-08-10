@@ -7,6 +7,7 @@ import SharpenYourSkills from 'assets/images/landing/sharpenSkills.png'
 import TrainKata from 'assets/images/landing/trainKata.png'
 import EarnRanks from 'assets/images/landing/earnRanks.png'
 import CreateKata from 'assets/images/landing/createkata.png'
+import { Footer } from './footer';
 
 interface ILandingPageProps {}
 export const LandingPage = (props: ILandingPageProps) => {
@@ -20,7 +21,7 @@ export const LandingPage = (props: ILandingPageProps) => {
 			<InfoBlock color='cornflowerBlue' header='Gain collaborative wisdom' text={TEXTS.Wisdom} picture={TrainKata}/>
 			<InfoBlock color='whiteLilac' header='Create your own kata' text={TEXTS.CreateKata} picture={CreateKata}/>
 			{/* community love block */}
-			{/* footer */}
+			<Footer />
 		</>
 	);
 };
