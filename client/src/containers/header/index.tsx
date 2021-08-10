@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import { Header as HeaderComponent } from 'components';
 import * as actions from '../user/logic/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'hooks/useAppSelector';
 import { IHeaderProps } from 'components/common/header/index';
 import menuProfile from 'assets/icons/header/menu/avatar.svg';
 import menuSettings from 'assets/icons/header/menu/settings.svg';
@@ -9,7 +10,6 @@ import menuChallenge from 'assets/icons/header/menu/goal.svg';
 import menuSignout from 'assets/icons/header/menu/logout.svg';
 import { ROUTES } from 'constants/routes';
 import { useHistory } from 'react-router-dom';
-import { IRootState } from 'typings/root-state';
 
 
 
@@ -19,7 +19,7 @@ const Header = () => {
     const handleLogout = async () => {
         dispatch(actions.logoutUser());
     };
-    const user = useSelector((state: IRootState) => state.auth.userData.user);
+    const { user } = useAppSelector((state) => state.auth.userData);
 
     const headerProps: IHeaderProps = useMemo(() => ({
         name: `${user?.name} ${user?.surname}`,
