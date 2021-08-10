@@ -10,7 +10,7 @@ export { default as Label } from './label';
 export { default as Button } from './button';
 export { default as Rank } from './rank';
 export { default as Checkbox } from './checkbox';
-export { default as Option } from './select/option';
+export { default as Option } from './select/components/option';
 export { default as Select } from './select';
 export { default as Tag } from './tag';
 export { default as TagsList } from './tags-list';

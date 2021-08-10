@@ -1,4 +1,4 @@
-import { ISelectValue } from '../types';
+import { ISelectValue } from '../../types';
 
 export interface IOptionProps {
 	value: ISelectValue;

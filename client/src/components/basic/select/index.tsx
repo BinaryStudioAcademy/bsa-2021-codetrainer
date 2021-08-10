@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import Option from './option';
+import Option from './components/option';
 import { ISelectProps, ISelectValue } from './types';
 import arrowIcon from './assets/arrow.svg';
 import styles from './select.module.scss';
