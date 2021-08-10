@@ -1,19 +1,17 @@
 import { UserRepository, ProfileClanRepository } from './user';
 import { ClanRepository } from './clan';
-import { FollowerRepository } from './follower/follower-repository';
+import { FollowerRepository } from './follower';
+import { ImagesRepository } from './images.repository';
 
 type TUserRepository = typeof UserRepository;
 type TClanRepository = typeof ClanRepository;
 type TProfileClanRepository = typeof ProfileClanRepository;
 type TFollowerRepository = typeof FollowerRepository;
 
-export {
-	UserRepository,
-	TUserRepository,
-	ClanRepository,
-	TClanRepository,
-	ProfileClanRepository,
-	TProfileClanRepository,
-	FollowerRepository,
-	TFollowerRepository,
-};
+const imagesRepository = new ImagesRepository();
+
+export { UserRepository, TUserRepository };
+export { ClanRepository, TClanRepository };
+export { ProfileClanRepository, TProfileClanRepository };
+export { FollowerRepository, TFollowerRepository };
+export { imagesRepository, ImagesRepository };

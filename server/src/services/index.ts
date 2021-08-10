@@ -1,7 +1,8 @@
 import { Auth } from './auth';
-import { UserRepository, ClanRepository, ProfileClanRepository, FollowerRepository } from '../data';
+import { UserRepository, ClanRepository, ProfileClanRepository, FollowerRepository, imagesRepository } from '../data';
 import { Clan } from './clan';
 import { Follower } from './follower';
+import { ImagesService } from './images.service';
 
 const auth = new Auth({ user: UserRepository });
 type TAuthService = InstanceType<typeof Auth>;
@@ -12,4 +13,6 @@ type TClanService = InstanceType<typeof Clan>;
 const follower = new Follower({ follower: FollowerRepository });
 type TFollowerService = InstanceType<typeof Follower>;
 
-export { auth, TAuthService, clan, TClanService, follower, TFollowerService };
+const imagesService = new ImagesService(imagesRepository);
+
+export { auth, TAuthService, clan, TClanService, follower, TFollowerService, imagesService, ImagesService };
