@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from 'assets/images/logo.svg';
 import styles from './landing-header.module.scss';
-import { LandingNav as Nav } from './landing-nav/landing-nav';
+import { LandingNav } from './landing-nav/landing-nav';
 
 interface ILandingHeaderProps {}
 export const LandingHeader = (props: ILandingHeaderProps) => {
@@ -10,7 +10,7 @@ export const LandingHeader = (props: ILandingHeaderProps) => {
 			<div className={styles.logotype}>
 				<img src={logo} alt="" className={styles.logotypeImage} />
 			</div>
-			<Nav />
+			<LandingNav />
 		</div>
 	);
 };

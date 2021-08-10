@@ -11,6 +11,15 @@
 		opacity: 1;
 		width: 475px;
 	}
+	&:nth-child(even) {
+		flex-direction: row-reverse;
+		background-color: var.$white-lilac;
+		color: var.$cornflower-blue;
+	}
+	&:nth-child(odd) {
+		background-color: var.$cornflower-blue;
+		color: var.$white-lilac;
+	}
 }
 .textBlock {
 	max-width: 400px;
@@ -25,14 +34,4 @@
 		font-weight: 500;
 		line-height: 26px;
 	}
-}
-
-.cornflowerBlue {
-	background-color: var.$cornflower-blue;
-	color: var.$white-lilac;
-}
-
-.whiteLilac {
-	background-color: var.$white-lilac;
-	color: var.$cornflower-blue;
 }

@@ -20,7 +20,7 @@ import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -33,7 +33,6 @@ const Routing: React.FC<IRoutingProps> = () => {
 	}
 	return (
 		<Switch>
-
 			<PublicRoute
 				exact
 				restricted={false}
@@ -42,7 +41,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PublicRoute exact restricted={true} path="/landing" component={LandingPage} />
+			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPage} />
 
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
