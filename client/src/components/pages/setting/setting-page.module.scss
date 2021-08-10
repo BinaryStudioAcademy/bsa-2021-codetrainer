@@ -2,7 +2,6 @@
 
 .container {
 	width: 916px;
-	margin: 112px auto 20px;
 
 	font-family: 'Montserrat', Arial, sans-serif;
 	color: #282828;
@@ -44,6 +43,6 @@
 .gridContainer {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	justify-content:space-between;
+	justify-content: space-between;
 	grid-gap: 20px;
 }
