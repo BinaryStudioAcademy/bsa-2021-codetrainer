@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Challenge, ProfileTabWithSidebar } from 'components';
+import { ProfileTasks as Tasks, ProfileTabWithSidebar } from 'components';
 import IChallengeProps from 'components/common/challenge/types';
 
 interface IProfileTasks {
@@ -16,7 +16,7 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 		() => profileTasks.map(({ title, id, tasks }) => ({ id, title, count: tasks.length })),
 		[profileTasks],
 	);
-	const items = profileTasks.find(({ id }) => id === activeId)?.tasks || [];
+	const tasks = profileTasks.find(({ id }) => id === activeId)?.tasks || [];
 
 	return (
 		<ProfileTabWithSidebar
@@ -26,9 +26,7 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 				onClick: (id: string) => setActiveId(id),
 			}}
 		>
-			{items.map((item, index) => (
-				<Challenge key={index.toString()} {...item} />
-			))}
+			<Tasks tasks={tasks} />
 		</ProfileTabWithSidebar>
 	);
 };

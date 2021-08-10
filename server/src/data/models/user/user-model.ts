@@ -37,6 +37,9 @@ export class User extends BaseEntity {
 	@Column({ type: 'int', default: 0 })
 	honour!: number;
 
+	@Column({ type: 'varchar', length: 250, nullable: true })
+	resetToken?: string;
+
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()
 	profileClan?: ProfileClan;

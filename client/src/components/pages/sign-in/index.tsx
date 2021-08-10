@@ -52,7 +52,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn =
 						<div>
 							<div className={styles.labelWrapper}>
 								<label htmlFor="password">Password</label>
-								<Link to="forgot-password" className={styles.right}>
+								<Link to={ROUTES.ForgotPassword} className={styles.right}>
 									Forgot password?
 								</Link>
 							</div>

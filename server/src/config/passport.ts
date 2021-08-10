@@ -20,7 +20,6 @@ passport.use(
 	new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
 		const repository = getCustomRepository(UserRepository);
 		try {
-			console.log('user => ', email);
 			const user = await repository.getByEmail(email);
 			if (!user) {
 				return done({ status: 401, message: 'Incorrect email.' }, null);
