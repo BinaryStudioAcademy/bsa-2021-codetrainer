@@ -35,9 +35,10 @@ export class Follower {
 
 	async delete(data: IFollowerFields) {
 		const repository = getCustomRepository(this.followerRepository);
+		const res = await repository.removeById(data);
 
 		return {
-			delete: await repository.removeById(data),
+			deleted: !!res.affected,
 		};
 	}
 }

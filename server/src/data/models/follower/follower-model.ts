@@ -1,15 +1,4 @@
-import {
-	Entity,
-	PrimaryGeneratedColumn,
-	Column,
-	OneToMany,
-	BaseEntity,
-	CreateDateColumn,
-	UpdateDateColumn,
-	ManyToMany,
-	OneToOne,
-} from 'typeorm';
-import { User } from '../user';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Follower extends BaseEntity {
@@ -22,19 +11,9 @@ export class Follower extends BaseEntity {
 	@UpdateDateColumn()
 	updatedAt!: Date;
 
-	// @ManyToMany(() => User, (user) => user.followings)
-	// followings!: User[]; // user
-	// // @OneToOne(() => User, (user) => user.followers, )
-	// // follower!: User;
-	//
-	// @ManyToMany(() => User, (user) => user.followers)
-	// followers!: User[]; // follower
-
 	@Column()
 	user!: string;
-	// user!: User;
 
 	@Column()
 	follower!: string;
-	// follower!: User;
 }
