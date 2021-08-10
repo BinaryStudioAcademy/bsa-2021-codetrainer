@@ -1,0 +1,1 @@
+export { checkClanIdMiddleware } from './clan';

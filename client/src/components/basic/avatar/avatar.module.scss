@@ -1,17 +1,7 @@
 .avatar {
-	width: 61px;
-	height: 61px;
+	width: calc(100% - 3px);
+	height: calc(100% - 3px);
+	border: 3px solid #ec4179;
 	border-radius: 50%;
-	background-color: #ec4179;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-
-	img {
-		width: calc(100% - 3px);
-		height: calc(100% - 3px);
-		border-radius: 50%;
-		object-fit: cover
-	}
+	object-fit: cover
 }

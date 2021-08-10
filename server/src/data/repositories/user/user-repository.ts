@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { User } from '../../models';
-import { IUserFields } from '../../../types';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -30,20 +29,21 @@ export class UserRepository extends Repository<User> {
 		return this.createQueryBuilder('user')
 			.leftJoinAndSelect('user.profileClan', 'profileClan')
 			.leftJoinAndSelect('user.clan', 'clan')
-			.select(this.userFields)
+			.leftJoinAndSelect('user.tasks', 'task')
+			.select(['user.id', 'user.name', 'user.surname', 'user.email', 'clan', 'profileClan', 'task.id'])
 			.where('user.id = :id', { id })
 			.getOne();
 	}
 
-	updateById(id: string, body: IUserFields) {
-		this.update(id, {
-			...body,
-		});
-
-		return this.getById(id);
-	}
-
 	removeById(id: string) {
 		return this.delete({ id });
+	}
+
+	getByGithubId(githubId: string): Promise<User | undefined> {
+		return this.findOne({ githubId });
+	}
+
+	updateById(id: string, data: Partial<User>) {
+		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
 }

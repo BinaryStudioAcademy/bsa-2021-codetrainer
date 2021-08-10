@@ -1,24 +1,20 @@
-.submitButton {
-	background: #ec4179;
-	border-radius: 7px;
-	border: 0;
-	font: 600 16px 'Montserrat', sans-serif;
-	text-align: center;
-	color: #ffffff;
-	cursor: pointer;
-	padding: 12px 20px;
-	margin-top: 20px;
-}
+@import "styles/variables";
 
 .rankContainer {
 	display: flex;
 	grid-gap: 15px;
-    gap: 15px;
-    flex-wrap: wrap;
+	gap: 15px;
+	flex-wrap: wrap;
 	flex-direction: row;
 }
 
-.checkboxContainer{
+.checkboxContainer {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+h6 {
+	margin: 20px 0px 10px;
+	font: $tub-font;
 }

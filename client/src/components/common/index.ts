@@ -8,3 +8,5 @@ export { default as FormSelect } from './form-select';
 export { default as CoverLayout } from './cover-layout';
 export { default as FullscreenLoader } from './fullscreen-loader';
 export { default as Spinner } from './spinner';
+export { default as Social } from './social';
+export { default as TaskInstructions } from './task-instructions';

@@ -2,18 +2,13 @@ import React from 'react';
 import ChallengeHeader from './challenge-header';
 import ChallengeTagsList from './challenge-tags-list';
 import ChallengeStats from './challenge-stats';
-import IChallengeProps from './types';
 import styles from './challenge.module.scss';
+import { IChallenge } from './types';
 
-const Challenge: React.FC<{ challenge: IChallengeProps }> = ({ challenge: { title, rank, stats, tags, author } }) => {
+const Challenge = ({ linkToAuthor, author, stats, title, rank, tags }: IChallenge) => {
 	return (
 		<div className={styles.challenge}>
-			<ChallengeHeader
-				header={{
-					title,
-					rank,
-				}}
-			/>
+			<ChallengeHeader title={title} rank={rank} linkToAuthor={linkToAuthor} />
 			<ChallengeStats stats={{ ...stats, author }} />
 			<ChallengeTagsList tags={tags} />
 		</div>

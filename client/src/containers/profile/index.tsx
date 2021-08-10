@@ -1,14 +1,17 @@
 import { ProfilePage } from '../../components';
 import React, { useMemo, useCallback } from 'react';
-import { Stats } from './tabs/stats';
+import { Stats, ProfileTasks, ProfileSocial } from './tabs';
 import { mockProfileBioProps, statsProps } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
+import { RouteComponentProps } from 'react-router-dom';
+import { profileTasks } from './tabs/tasks/mocks';
+import { social } from './tabs/social/mocks';
 
-export const Profile: React.FC = () => {
+export const Profile = (props: RouteComponentProps) => {
 	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
 	const dispatch = useDispatch();
 	const setActiveTab = useCallback(
@@ -22,6 +25,10 @@ export const Profile: React.FC = () => {
 		switch (activeTabId) {
 			case ActiveTabId.Stats:
 				return <Stats statsInfo={statsProps} />;
+			case ActiveTabId.Challenge:
+				return <ProfileTasks profileTasks={profileTasks} />;
+			case ActiveTabId.Social:
+				return <ProfileSocial social={social} />;
 			default:
 				return <div />;
 		}
@@ -33,7 +40,7 @@ export const Profile: React.FC = () => {
 				tabId: item.id,
 				tabNameText: item.name,
 				onClick: () => {
-					setActiveTab(item.id);
+					setActiveTab(item.id as ActiveTabId);
 				},
 			};
 		});

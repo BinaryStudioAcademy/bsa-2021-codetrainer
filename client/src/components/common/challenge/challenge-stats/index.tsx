@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@blueprintjs/core';
 import styles from './challenge-stats.module.scss';
-import { IChallengeStatsProps } from '../types';
+import { IChallengeStats } from '../types';
 
-const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
-	stats: { favouriteSaves, positiveFeedback, author },
+const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
+	stats: { favoriteSaves, positiveFeedback, author },
 }) => {
 	return (
 		<div className={styles.challengeStats}>
@@ -13,7 +13,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
 				<p className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<Icon icon="star-empty" className={styles.challengeStatsItemIcon} />
-					{favouriteSaves} saved to favorites
+					{favoriteSaves} saved to favorites
 				</p>
 			</div>
 			<div className={styles.challengeStatsItem}>
