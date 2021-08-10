@@ -1,1 +1,1 @@
-export * from './createLinkResetPassword';
+export { createLinkResetPassword } from './createLinkResetPassword';
