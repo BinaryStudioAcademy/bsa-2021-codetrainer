@@ -21,9 +21,14 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 		return error;
 	};
 
-	const onSubmit = async (value: string) => {
-		await createClan(value);
-		setIsOpen(false);
+	const onSubmit = async (value: string, setFieldError: any) => {
+		try {
+			await createClan(value);
+			setIsOpen(false);
+		} catch (e) {
+			console.log(e);
+			setFieldError('createClan', 'Something went wrong');
+		}
 	};
 
 	const element = (
@@ -33,7 +38,10 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 				<ImageUpload label="Set clan icon" />
 			</div>
 			<div>
-				<Formik initialValues={{ createClan: '' }} onSubmit={(values) => onSubmit(values.createClan)}>
+				<Formik
+					initialValues={{ createClan: '' }}
+					onSubmit={(values, { setFieldError }) => onSubmit(values.createClan, setFieldError)}
+				>
 					{({ validateField }) => (
 						<Form className={styles.form}>
 							<Field
