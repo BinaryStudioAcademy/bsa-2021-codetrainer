@@ -42,8 +42,10 @@ export const mockRankBreakDownProps = {
 
 export const mockCommunityProps = {
 	comments: 3,
+	replies: 2,
 	collections: 2,
-	transactions: 12,
+	translations: 12,
+	approved: 3,
 };
 
 export const statsProps = {
