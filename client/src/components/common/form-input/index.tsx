@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import { FieldProps, getIn } from 'formik';
+import { getIn } from 'formik';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import { IFormInputProps, EType } from './types.d';
 import styles from './form-input.module.scss';
-import { Icon } from '@blueprintjs/core';
-
-interface IFormInputProps extends FieldProps {
-	id: string;
-	name: string;
-	label?: string;
-	type: string;
-	placeholder: string;
-}
 
 const FormInput: React.FC<IFormInputProps> = ({
 	id,
@@ -22,10 +16,10 @@ const FormInput: React.FC<IFormInputProps> = ({
 	const error = getIn(errors, name);
 	const isTouched = getIn(touched, name);
 	const [type, setType] = useState(initialType);
-	const isPasswordField = initialType === 'password';
+	const isPasswordField = initialType === EType.PASSWORD;
 
 	const togglePasswordVisibility = () => {
-		const newType = type === 'password' ? 'text' : 'password';
+		const newType = type === EType.PASSWORD ? EType.TEXT : EType.PASSWORD;
 		setType(newType);
 	};
 
@@ -45,10 +39,14 @@ const FormInput: React.FC<IFormInputProps> = ({
 				placeholder={placeholder}
 				className={isPasswordField ? styles.passwordField : styles.inputField}
 			/>
-			{isPasswordField && (
-				//@ts-ignore
-				<Icon onClick={togglePasswordVisibility} icon="eye-off" className={styles.visibilityBtn} />
-			)}
+			{isPasswordField ? (
+				type === EType.TEXT ? (
+					// @ts-ignore
+					<VisibilityOffIcon onClick={togglePasswordVisibility} className={styles.visibilityButton} />
+				) : (
+					<VisibilityIcon onClick={togglePasswordVisibility} className={styles.visibilityButton} />
+				)
+			) : null}
 			{isTouched && error && <div className={styles.error}>{error}</div>}
 		</div>
 	);

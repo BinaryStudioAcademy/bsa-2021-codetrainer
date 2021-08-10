@@ -1,4 +1,3 @@
-export { default as Example } from './example';
 export { default as TaskDescription } from './task-description';
 export { default as NextTask } from './next-task';
 export { default as Header } from './header';
@@ -10,3 +9,4 @@ export { default as FullscreenLoader } from './fullscreen-loader';
 export { default as Spinner } from './spinner';
 export { default as Social } from './social';
 export { default as TaskInstructions } from './task-instructions';
+export { default as MainSidebar } from './main-sidebar';

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './challenge-tag.module.scss';
+import styles from './tag.module.scss';
 
 const ChallengeTag: React.FC<{ text: string }> = ({ text }) => {
 	return (

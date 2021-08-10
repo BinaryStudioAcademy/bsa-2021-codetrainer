@@ -1,29 +1,35 @@
-:local(.info) {
+@import 'styles/variables';
+
+.info {
 	display: flex;
 	width: 130px;
 	font-size: 12px;
-}
 
-:local(.infoDescription) {
-	color: rgba(40, 40, 40, 0.5);
-}
+	&Icon {
+		color: rgba($mine-shaft, 0.5);
+	}
 
-:local(.infoDescription p) {
-	margin: 0 0 0 5px;
-}
+	&Description {
+		color: $mine-shaft;
 
-:local(.infoDescription a) {
-	color: rgba(#ec4179, 0.5);
-	text-decoration: underline;
-}
+		p {
+			margin: 0 0 0 5px;
+		}
 
-:local(.infoDivider) {
-	border-left: rgba(40, 40, 40, 0.5) 1px solid;
-	border-right: rgba(40, 40, 40, 0.5) 1px solid;
-	padding: 0 10px;
-	margin: 0 10px;
-}
+		a {
+			color: rgba($french-rose, 0.5);
+			text-decoration: underline;
 
-:local(.infoDescription a:hover) {
-	color: rgba(#705ff5, 0.5);
+			&:hover {
+				color: rgba($cornflower-blue, 0.5);
+			}
+		}
+	}
+
+	&Divider {
+		border-left: rgba($mine-shaft, 0.5) 1px solid;
+		border-right: rgba($mine-shaft, 0.8) 1px solid;
+		padding: 0 10px;
+		margin: 0 10px;
+	}
 }

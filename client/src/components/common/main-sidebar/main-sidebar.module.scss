@@ -1,6 +1,8 @@
+@import 'styles/variables';
+
 .mainSidebar {
 	padding: 38px 40px;
-	background: #705ff5;
+	background: $cornflower-blue;
 	width: 245px;
 	min-height: 100vh;
 	height: 100%;
@@ -28,8 +30,9 @@
 	}
 
 	&Icon {
-		transition: 0.3s;
+		transition: $base-animation-time;
 		vertical-align: middle;
+		display: inline-block;
 		font-size: 28px;
 		margin-right: 12px;
 	}
@@ -40,15 +43,13 @@
 		border-radius: 12px;
 		padding: 18px 5px 18px 20px;
 		display: block;
-		font: 500 18px 'Montserrat';
+		font: $menu-font;
 		position: relative;
 		text-decoration: none;
 
-		&Active {
-			background: rgba(255, 255, 255, 0.3);
-		}
-
 		&:hover {
+			background: rgba($color: #fff, $alpha: 0.3);
+
 			.navigationIcon {
 				transform: scale(1.1);
 			}

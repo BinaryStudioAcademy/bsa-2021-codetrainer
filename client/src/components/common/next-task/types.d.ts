@@ -1,4 +1,4 @@
-import { ISelectValue } from '../../basic/select/interface';
+import { ISelectValue } from '../../basic/select/types';
 
 export interface ITask {
 	title: string;
@@ -12,6 +12,6 @@ export interface INextTaskProps {
 	focusValues: ISelectValue[];
 	activeFocusValue: ISelectValue;
 	setActiveFocusValue: React.Dispatch<React.SetStateAction<ISelectValue>>;
-	handleTrainClick: () => void;
-	handleSkipClick: () => void;
+	onTrainClick: () => void;
+	onSkipClick: () => void;
 }

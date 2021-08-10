@@ -4,21 +4,9 @@ import Statistics from './components/statistics';
 import Details from './components/details';
 import { Rank } from '../../basic';
 import styles from './task-instructions.module.scss';
-import { TaskTabType } from './config';
+import { TaskTabType, ITaskInstructionsProps } from './types';
 
-interface ITaskInstructions {
-	data: {
-		title: string;
-		favorites: number;
-		rating: number;
-		createdBy: { name: string; href: string };
-		rank: number;
-	};
-	activeTab: string;
-	onClick: (tab: string) => void;
-}
-
-const TaskInstructions: React.FC<ITaskInstructions> = ({ data, activeTab, onClick }) => {
+const TaskInstructions: React.FC<ITaskInstructionsProps> = ({ data, activeTab, onClick }) => {
 	return (
 		<div className={styles.taskContainer}>
 			<div className={styles.header}>
@@ -29,13 +17,13 @@ const TaskInstructions: React.FC<ITaskInstructions> = ({ data, activeTab, onClic
 				<div className={styles.switch}>
 					<button
 						onClick={() => onClick('instructions')}
-						className={clsx({ [styles.active]: activeTab === TaskTabType.instructions })}
+						className={clsx({ [styles.active]: activeTab === TaskTabType.INSTRUCTIONS })}
 					>
 						Instructions
 					</button>
 					<button
 						onClick={() => onClick('output')}
-						className={clsx({ [styles.active]: activeTab === TaskTabType.output })}
+						className={clsx({ [styles.active]: activeTab === TaskTabType.OUTPUT })}
 					>
 						Output
 					</button>
@@ -44,10 +32,10 @@ const TaskInstructions: React.FC<ITaskInstructions> = ({ data, activeTab, onClic
 				<Details tabType={activeTab} />
 			</div>
 			<div className={styles.infoContainer}>
-				<Statistics icon="star-empty" content={<p>{data.favorites} saved to favorite</p>} />
-				<Statistics icon="timeline-bar-chart" content={<p>{data.rating}% positive feedback</p>} divider />
+				<Statistics icon="far fa-star" content={<p>{data.favorites} saved to favorite</p>} />
+				<Statistics icon="far fa-chart-bar" content={<p>{data.rating}% positive feedback</p>} divider />
 				<Statistics
-					icon="person"
+					icon="fas fa-user"
 					content={
 						<p>
 							created by <a href={data.createdBy.href}>{data.createdBy.name}</a>

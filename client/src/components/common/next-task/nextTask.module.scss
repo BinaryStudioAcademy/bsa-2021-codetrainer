@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 .wrapper {
 	box-sizing: border-box;
 
@@ -6,7 +8,7 @@
 	padding: 24px;
 	height: 333px;
 
-	background-color: #fafbff;
+	background: $zircon;
 	border-radius: 15px;
 }
 
@@ -17,7 +19,7 @@
 	min-width: 355px;
 	width: 355px;
 
-	border-right: 1px solid #e5e5e5;
+	border-right: 1px solid $mercury;
 }
 
 .title {
@@ -27,15 +29,16 @@
 	font-weight: 600;
 }
 
-.focusWrapper {
-	display: flex;
-	flex-direction: column;
-	margin: 28px 0;
-}
+.focus {
+	&Wrapper {
+		display: flex;
+		flex-direction: column;
+		margin: 28px 0;
+	}
 
-.focusTitle {
-	font-size: 12px;
-	font-weight: 500;
+	&Title {
+		font: 500 12px;
+	}
 }
 
 .skipButton {

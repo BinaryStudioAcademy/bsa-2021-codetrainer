@@ -1,63 +1,47 @@
 import React, { useState } from 'react';
 import { Avatar, Label } from 'components';
+import bellIcon from 'assets/icons/header/bell.svg';
+import { IHeaderProps, IListItem } from './types';
 import styles from './header.module.scss';
-import bellImg from 'assets/icons/header/bell.svg';
 
-export interface IHeaderProps {
-	name: string;
-	rank: number;
-	notificationCounter: number;
-	mark: number;
-	avatar?: string;
-	listItems: Array<IListItem>;
-}
-
-interface IListItem {
-	image: string;
-	text: string;
-	id: string;
-}
-
-const Header: React.FC<IHeaderProps> = (props) => {
+const Header: React.FC<IHeaderProps> = ({ notificationCounter, name, avatar, rank, mark, listItems }) => {
 	const [isListVisible, setListVisibility] = useState(false);
 
 	const changeVisible = () => {
 		setListVisibility(!isListVisible);
 	};
 
-	const getListItem = (item: IListItem) => {
-		return (
-			<li className={styles.navigationItem} key={item.id}>
-				<div className={styles.navigationLink}>
-					<img src={item.image} alt="listItem" />
-					<span>{item.text}</span>
-				</div>
-			</li>
-		);
-	};
+	const getListItem = (item: IListItem) => (
+		<li className={styles.navigationItem} key={item.id}>
+			<div className={styles.navigationLink}>
+				<img src={item.image} alt="Icon" />
+				<span>{item.text}</span>
+			</div>
+		</li>
+	);
 
-	const renderList = (items: IListItem[]) => {
-		return <ul className={styles.navigationList}>{items.map((item: IListItem) => getListItem(item))}</ul>;
-	};
+	const renderList = (items: IListItem[]) => (
+		<ul className={styles.navigationList}>{items.map((item: IListItem) => getListItem(item))}</ul>
+	);
 
 	return (
 		<div className={styles.header}>
 			<div className={styles.bell}>
-				<img src={bellImg} alt="bell" />
+				<img src={bellIcon} alt="Icon" />
 				<div className={styles.bellCounter}>
-					<span>{props.notificationCounter}</span>
+					<span>{notificationCounter}</span>
 				</div>
 			</div>
-			<span className={styles.name}>{props.name}</span>
+			<span className={styles.name}>{name}</span>
 			<div className={styles.avatarCover}>
 				<div onClick={changeVisible}>
-					<Avatar avatar={props.avatar} size={61} color="#EC4179" />
+					<Avatar avatar={avatar} size={61} color="#EC4179" />
 				</div>
 
-				{isListVisible && <div className={styles.navigation}>{renderList(props.listItems)}</div>}
+				{isListVisible && <div className={styles.navigation}>{renderList(listItems)}</div>}
 			</div>
-			<Label label={props.rank + ' rank'} color="#EC4179" />
-			<Label label={props.mark} color="#EC4179" />
+			<Label label={rank + ' rank'} color="#EC4179" />
+			<Label label={mark} color="#EC4179" />
 		</div>
 	);
 };

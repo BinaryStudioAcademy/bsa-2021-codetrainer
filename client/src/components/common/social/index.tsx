@@ -1,12 +1,8 @@
 import React from 'react';
-import styles from './social.module.scss';
 import defaultUserPhoto from 'assets/icons/user.svg';
 import { Rank } from 'components/basic';
-import { IUser } from 'components/pages/home/components/community/interfce';
-
-interface ISocialProps {
-	user: IUser;
-}
+import { ISocialProps } from './types';
+import styles from './social.module.scss';
 
 const Social: React.FC<ISocialProps> = ({ user: { rank, imageSource, name, clan, honor } }) => {
 	return (

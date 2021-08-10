@@ -1,0 +1,13 @@
+@import 'styles/variables';
+
+.challengeTag {
+	display: inline-block;
+	border-radius: 4px;
+	background: $white-lilac;
+	padding: 4px 10px;
+
+	&Text {
+		font: $base-font;
+		color: $oslo-grey;
+	}
+}

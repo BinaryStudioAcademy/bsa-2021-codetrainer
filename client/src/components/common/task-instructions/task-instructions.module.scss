@@ -1,55 +1,57 @@
-:local(.taskContainer) {
-	padding: 90px 0 0 300px;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 16px;
+@import 'styles/variables';
+
+.task {
+	border-radius: 15px;
+	background: $zircon;
+	padding: 20px 20px;
+
+	&Container {
+		padding: 90px 0 0 300px;
+		font-family: $base-font-family;
+		font-size: 16px;
+
+		a {
+			cursor: pointer;
+		}
+
+		h2 {
+			margin: 0 0 0 10px;
+			font-size: 18px;
+		}
+
+		hr {
+			margin: 20px -20px;
+			border: 1px solid #eaecf1;
+		}
+	}
 }
 
-:local(.taskContainer a) {
-	cursor: pointer;
-}
-
-:local(.header) {
+.header {
 	display: flex;
 	padding: 20px 0;
 }
 
-:local(.taskContainer h2) {
-	margin: 0 0 0 10px;
-	font-size: 18px;
-}
-
-:local(.task) {
-	border-radius: 15px;
-	background: #fafbff;
-	padding: 20px 20px;
-}
-
-:local(.taskContainer hr) {
-	margin: 20px -20px;
-	border: 1px solid #eaecf1;
-}
-
-:local(.switch) {
+.switch {
 	display: flex;
+
+	button {
+		margin-right: 20px;
+		font-weight: 600;
+		font-size: 16px;
+		padding: 3px;
+		border: none;
+		outline: none;
+		background: #fafbff;
+		cursor: pointer;
+	}
+
+	.active {
+		color: $cornflower-blue;
+		border-bottom: $cornflower-blue 2px solid;
+	}
 }
 
-:local(.switch button) {
-	margin-right: 20px;
-	font-weight: 600;
-	font-size: 16px;
-	padding: 3px;
-	border: none;
-	outline: none;
-	background: #fafbff;
-	cursor: pointer;
-}
-
-:local(.switch .active) {
-	color: #705ff5;
-	border-bottom: #705ff5 2px solid;
-}
-
-:local(.infoContainer) {
+.infoContainer {
 	display: flex;
 	margin-top: 10px;
 }

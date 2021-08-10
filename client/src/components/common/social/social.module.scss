@@ -1,18 +1,22 @@
-.userRow {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px;
-	border-bottom: 3px solid #f0f1f6;
-	width: 100%;
-	margin-left: 10px;
-}
+@import 'styles/variables';
 
-.userImage {
-	margin: 0 10px;
-	height: 25px;
-	width: 25px;
+.user {
+	&Row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px;
+		border-bottom: 3px solid $white-lilac;
+		width: 100%;
+		margin-left: 10px;
+	}
 
-	border-radius: 50%;
-	border: 1px solid #ec4179;
+	&Image {
+		margin: 0 10px;
+		height: 25px;
+		width: 25px;
+
+		border-radius: 50%;
+		border: 1px solid $french-rose;
+	}
 }

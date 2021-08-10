@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faExchangeAlt, faStar } from '@fortawesome/free-solid-svg-icons';
+import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
+import SyncAltIcon from '@material-ui/icons/SyncAlt';
+import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 import logo from '../../../assets/images/logo.svg';
 import styles from './main-sidebar.module.scss';
 
@@ -15,25 +17,25 @@ const MainSidebar: React.FC = () => {
 				<ul className={styles.navigationList}>
 					<li className={styles.navigationItem}>
 						<NavLink to="/" className={styles.navigationLink}>
-							<FontAwesomeIcon icon={faHome} className={styles.navigationIcon} />
+							<HomeIcon className={styles.navigationIcon} />
 							Home
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
 						<NavLink to="/" className={styles.navigationLink}>
-							<FontAwesomeIcon icon={faSearch} className={styles.navigationIcon} />
+							<SearchIcon className={styles.navigationIcon} />
 							Search
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
 						<NavLink to="/" className={styles.navigationLink}>
-							<FontAwesomeIcon icon={faExchangeAlt} className={styles.navigationIcon} />
+							<SyncAltIcon className={styles.navigationIcon} />
 							Challenge
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
 						<NavLink to="/" className={styles.navigationLink}>
-							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
+							<StarBorderOutlinedIcon className={styles.navigationIcon} />
 							Blog
 						</NavLink>
 					</li>

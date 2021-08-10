@@ -1,14 +1,14 @@
 import React from 'react';
-import background from 'assets/icons/cover-background.svg';
 import logo from 'assets/icons/logo.svg';
+import background from 'assets/icons/cover-background.svg';
 import styles from './cover.module.scss';
 
 const CoverLayout: React.FC = ({ children }) => {
 	return (
 		<div className={styles.cover}>
-			<div className={styles.image}>
-				<img className={styles.background} src={background} alt="" />
-				<img className={styles.logo} src={logo} alt="codetrainer" />
+			<div className={styles.coverImage}>
+				<img className={styles.coverBackground} src={background} alt="Working proccess" />
+				<img className={styles.coverLogo} src={logo} alt="Codetrainer" />
 			</div>
 			<main className={styles.main}>{children}</main>
 		</div>

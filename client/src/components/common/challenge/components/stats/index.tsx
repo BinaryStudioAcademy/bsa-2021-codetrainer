@@ -1,32 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon } from '@blueprintjs/core';
-import styles from './challenge-stats.module.scss';
-import { IChallengeStatsProps } from '../types';
+import PersonIcon from '@material-ui/icons/Person';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import styles from './stats.module.scss';
+import { IStatsProps } from '../../types';
 
-const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
-	stats: { favoriteSaves, positiveFeedback, author },
-}) => {
+const Stats: React.FC<IStatsProps> = ({ stats: { favoriteSaves, positiveFeedback, author } }) => {
 	return (
 		<div className={styles.challengeStats}>
 			<div className={styles.challengeStatsItem}>
 				<p className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
-					<Icon icon="star-empty" className={styles.challengeStatsItemIcon} />
+					<StarBorderIcon className={styles.challengeStatsItemIcon} />
 					{favoriteSaves} saved to favorites
 				</p>
 			</div>
 			<div className={styles.challengeStatsItem}>
 				<p className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
-					<Icon icon="vertical-bar-chart-asc" className={styles.challengeStatsItemIcon} />
+					<EqualizerIcon className={styles.challengeStatsItemIcon} />
 					{positiveFeedback} positive feedback
 				</p>
 			</div>
 			<div className={styles.challengeStatsItem}>
 				<p className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
-					<Icon icon="user" className={styles.challengeStatsItemIcon} />
+					<PersonIcon className={styles.challengeStatsItemIcon} />
 					created{' '}
 					<Link to={author.link} className={styles.challengeStatsItemLink}>
 						{author.firstName} {author.lastName}
@@ -37,4 +37,4 @@ const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
 	);
 };
 
-export default ChallengeStats;
+export default Stats;

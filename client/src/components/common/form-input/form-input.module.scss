@@ -31,7 +31,9 @@
 		opacity: 0.4;
 	}
 
-	.visibilityBtn {
+	.visibilityButton {
+		display: inline-block;
+		vertical-align: middle;
 		margin-left: -40px;
 		cursor: pointer;
 	}

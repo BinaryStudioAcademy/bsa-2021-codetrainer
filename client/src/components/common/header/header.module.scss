@@ -1,9 +1,11 @@
+@import 'styles/variables';
+
 .header {
 	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
-	background: #f0f3f9;
+	background: $white-lilac;
 	height: 91px;
 	margin: 0;
 	display: grid;
@@ -21,9 +23,7 @@
 }
 
 .name {
-	font-family: Montserrat;
-	font-weight: 500;
-	font-size: 18px;
+	font: $menu-font;
 }
 
 .bell {
@@ -42,7 +42,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: #ec4179;
+		background-color: $french-rose;
 		width: 15px;
 		height: 15px;
 		border-radius: 50%;
@@ -50,7 +50,7 @@
 		span {
 			font-family: Inter;
 			font-size: 10px;
-			color: white;
+			color: #fff;
 		}
 	}
 }
@@ -62,10 +62,10 @@
 		position: absolute;
 		width: 250px;
 		min-height: 214px;
-		background: #ffffff;
+		background: #fff;
 		border: 0.5px solid #efefef;
 		box-sizing: border-box;
-		box-shadow: 0px 4px 6px rgba(189, 189, 189, 0.25);
+		box-shadow: 0px 4px 6px #bdbdbd40;
 		border-radius: 5px;
 		top: 83px;
 		left: 50%;
@@ -85,7 +85,7 @@
 			cursor: pointer;
 			display: flex;
 			align-items: center;
-			color: #282828;
+			color: $mine-shaft;
 
 			&:hover {
 				position: relative;
@@ -111,19 +111,17 @@
 				}
 
 				.navigationLink span {
-					color: #705ff5;
+					color: $cornflower-blue;
 				}
 			}
 		}
 
 		&Link {
 			text-decoration: none;
-			font-family: Montserrat;
-			font-weight: 500;
-			font-size: 14px;
+			font: 500 14px $base-font-family;
 			display: flex;
 			align-items: center;
-			color: #282828;
+			color: $mine-shaft;
 
 			img {
 				margin-right: 15px;

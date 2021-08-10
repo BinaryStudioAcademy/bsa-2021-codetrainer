@@ -1,20 +1,15 @@
 import React from 'react';
 import { detailsData } from '../../mockData';
-import './task-details.scss';
-import { TaskTabType } from '../../config';
+import { IDetailsProps } from './types';
+import { TaskTabType } from '../../types';
+import styles from './details.module.scss';
 
-interface IDetailsProps {
-	tabType: string;
-}
-
-const style = 'task-instructions-details-mockup';
-
-const Details: React.FC<IDetailsProps> = (props) => {
-	switch (props.tabType) {
-		case TaskTabType.instructions:
-			return <div className={style}>{detailsData.instructions}</div>;
-		case TaskTabType.output:
-			return <div className={style}>{detailsData.output}</div>;
+const Details: React.FC<IDetailsProps> = ({ tabType }) => {
+	switch (tabType) {
+		case TaskTabType.INSTRUCTIONS:
+			return <div className={styles.taskInstructionsDetailsMockup}>{detailsData.instructions}</div>;
+		case TaskTabType.OUTPUT:
+			return <div className={styles.taskInstructionsDetailsMockup}>{detailsData.output}</div>;
 		default:
 			return <div />;
 	}

@@ -1,0 +1,19 @@
+@import 'styles/variables';
+
+.challengeHeader {
+	display: flex;
+	align-items: center;
+
+	&Title {
+		margin-left: 10px;
+		font: 600 18px $base-font-family;
+		color: $mine-shaft;
+
+		&:hover {
+			color: $cornflower-blue;
+			text-decoration: underline;
+			text-decoration-color: $cornflower-blue;
+			text-underline-offset: 1px;
+		}
+	}
+}

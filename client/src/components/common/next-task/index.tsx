@@ -3,8 +3,7 @@ import clsx from 'clsx';
 import { Select, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import { TaskDescription } from 'components/common';
-import { INextTaskProps } from './interface';
-
+import { INextTaskProps } from './types';
 import styles from './nextTask.module.scss';
 
 const NextTask: React.FC<INextTaskProps> = ({
@@ -12,8 +11,8 @@ const NextTask: React.FC<INextTaskProps> = ({
 	focusValues,
 	activeFocusValue,
 	setActiveFocusValue,
-	handleTrainClick,
-	handleSkipClick,
+	onTrainClick,
+	onSkipClick,
 }) => {
 	return (
 		<article className={styles.wrapper}>

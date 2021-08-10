@@ -1,14 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
-import { FieldProps } from 'formik';
-import styles from './form-select.module.scss';
 import Select from 'react-select';
-
-interface IFormSelectProps extends FieldProps {
-	id: string;
-	label?: string;
-	placeholder: string;
-	options: { value: string; name: string }[];
-}
+import { IFormSelectProps } from './types';
+import styles from './form-select.module.scss';
 
 const FormSelect: React.FC<IFormSelectProps> = ({
 	id,
