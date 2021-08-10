@@ -3,6 +3,7 @@ import { Clan, TClanRepository, TProfileClanRepository, TUserRepository, User } 
 import { ValidationError } from '../../helpers';
 import { Clan as ClanType } from '../../data/models';
 import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
+import { IUserFields } from '../../types';
 
 export class ClanService {
 	protected clanRepository: TClanRepository;

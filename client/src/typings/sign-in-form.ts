@@ -6,7 +6,7 @@ export interface ISignInForm {
 export interface IUser {
 	id: string;
 	name: string;
-	lastname: string;
+	surname: string;
 	email: string;
 	clan?: string;
 	profileClan?: string;
