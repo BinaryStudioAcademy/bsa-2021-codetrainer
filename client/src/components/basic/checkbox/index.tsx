@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-	Checkbox as MaterialCheckbox, FormControlLabel,
+	Checkbox as MaterialCheckbox,
+	FormControlLabel,
 	Typography
 } from '@material-ui/core';
 import styles from './checkbox.module.scss';
