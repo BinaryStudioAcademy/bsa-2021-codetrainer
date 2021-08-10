@@ -2,7 +2,7 @@ import { ActiveTabId } from './logic/models';
 
 export const tabName: Record<ActiveTabId, string> = {
 	[ActiveTabId.Stats]: 'Stats',
-	[ActiveTabId.Challenges]: 'Challenges',
+	[ActiveTabId.Challenge]: 'Challenge',
 	[ActiveTabId.Solution]: 'Solution',
 	[ActiveTabId.Social]: 'Social',
 	[ActiveTabId.Collections]: 'Collections',

@@ -1,9 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	OneToOne,
+	ManyToOne,
+	JoinColumn,
+	OneToMany,
+	BaseEntity,
+	CreateDateColumn,
+	UpdateDateColumn,
+} from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
+import { Task } from '../task';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
 	id!: string;
 
@@ -16,13 +28,35 @@ export class User {
 	@Column({ type: 'varchar', length: 100, unique: true })
 	email!: string;
 
-	@Column({ type: 'varchar', length: 100 })
-	password!: string;
+	@Column({ type: 'varchar', length: 100, nullable: true })
+	password?: string;
+
+	@Column({ type: 'int', default: 0 })
+	rank!: number;
+
+	@Column({ type: 'int', default: 0 })
+	honour!: number;
 
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()
 	profileClan?: ProfileClan;
 
-	@ManyToOne(() => Clan, (clan) => clan.members)
+	@ManyToOne(() => Clan, (clan) => clan.members, { nullable: true })
 	clan?: Clan;
+
+	@CreateDateColumn()
+	createdAt!: Date;
+
+	@UpdateDateColumn()
+	updatedAt!: Date;
+
+	@OneToMany(() => Task, (task) => task.user)
+	@JoinColumn()
+	tasks!: Task[];
+
+	@Column({ nullable: true })
+	profileUrl?: string;
+
+	@Column({ unique: true, nullable: true })
+	githubId?: string;
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Rank } from 'components';
-import { IChallengeHeaderProps } from '../types';
+import { IChallengeHeader } from '../types';
 import styles from './challenge-header.module.scss';
 
-const ChallengeHeader: React.FC<{ header: IChallengeHeaderProps }> = ({ header: { link, title, rank } }) => {
+const ChallengeHeader = ({ rank, title, linkToAuthor }: IChallengeHeader) => {
 	return (
 		<div className={styles.challengeHeader}>
 			<Rank rank={rank} />
-			<Link to={link} className={styles.challengeHeaderTitle}>
+			<Link to={linkToAuthor} className={styles.challengeHeaderTitle}>
 				<span>{title}</span>
 			</Link>
 		</div>

@@ -1,20 +1,36 @@
-export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification } from './basic';
+export { Avatar, Label, Rank, PublicRoute, Notification, Button } from './basic';
 
-export { Example, Challenge, CoverLayout, FormInput, FormSelect, FullscreenLoader, Spinner, Header } from './common';
+export {
+	Example,
+	Challenge,
+	CoverLayout,
+	FormInput,
+	FormSelect,
+	FullscreenLoader,
+	Spinner,
+	Header,
+	Social,
+	TaskInstructions,
+} from './common';
 
 export type { ICreateTabsProps } from './pages';
 
 export {
 	SignInPage,
-	SignUp,
+	SignUpPage,
 	ChangePassword,
 	ForgotPassword,
 	CreateTabs,
 	SearchPage,
 	ProfilePage,
 	StatsTab,
+	ClansPage,
+	ClanPage,
+	ProfileTabWithSidebar,
 	ProfileTasks,
 	LandingPageComponent,
+	CreateTaskSettings,
+	SettingPage,
 } from './pages';
 
 export { Modal } from './modals';

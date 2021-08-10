@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
-import { authServices } from 'services';
 import { NotificationType } from '../notification/logic/models';
 import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
+import { ClanModal } from 'components/modals';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -15,9 +15,6 @@ const Example: React.FC = () => {
 	const [file, setFile] = useState<Blob | null>(null);
 	const getExampleText = (exampleName: string) => {
 		dispatch(actions.getExampleText({ exampleName }));
-	};
-	const handleLogin = async () => {
-		await authServices.login({ email: 'test@test.com', password: '123' });
 	};
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
@@ -48,9 +45,6 @@ const Example: React.FC = () => {
 			<button className={styles.btn} onClick={() => getExampleText('second')}>
 				get second text
 			</button>
-			<button className={styles.btn} onClick={() => handleLogin()}>
-				login
-			</button>
 			<p>{text}</p>
 			<form
 				method="POST"
@@ -68,7 +62,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<img src="https://codetrainer-images.s3.eu-north-1.amazonaws.com/7c79b29f-8b8e-4940-9402-8639f477825d.png" />
+			<ClanModal />
 		</div>
 	);
 };

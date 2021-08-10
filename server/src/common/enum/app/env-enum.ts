@@ -13,10 +13,7 @@ const ENV = {
 		REFRESH_EXPIRES_IN: '30d',
 	},
 	COOKIE: {
-		NAME: getEnv('COOKIE_NAME'),
 		SECRET: getEnv('COOKIE_SECRET'),
-		MAX_AGE: '30d',
-		HTTP_ONLY: true,
 	},
 	DB: {
 		DATABASE: getEnv('TYPEORM_DATABASE'),
@@ -40,6 +37,15 @@ const ENV = {
 			ACCESS_KEY: getEnv('AWS_IMAGES_ACCESS_KEY'),
 			SECRET_KEY: getEnv('AWS_IMAGES_SECRET_KEY'),
 		},
+	},
+	MAILER: {
+		ADDRESS: getEnv('EMAIL_ADDRESS'),
+		PASSWORD: getEnv('EMAIL_PASSWORD'),
+	},
+	GITHUB: {
+		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
+		SECRET: getEnv('GITHUB_SECRET'),
+		CALLBACK: getEnv('GITHUB_CALLBACK'),
 	},
 };
 

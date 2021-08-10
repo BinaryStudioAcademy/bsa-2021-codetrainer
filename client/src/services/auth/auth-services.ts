@@ -1,5 +1,7 @@
 import { HttpMethods } from 'constants/services';
 import { AuthApiPath } from 'enum';
+import { ISignInForm } from 'typings/sign-in-form';
+import { ISignUpForm } from 'typings/sign-up-form';
 import { THttp } from '../http';
 import { AccessToken } from './access-token';
 
@@ -18,13 +20,13 @@ export class Auth {
 		});
 	}
 
-	async login(body: Record<string, string>) {
+	async login(body: ISignInForm) {
 		const { user, token } = await this.load({ endpoint: AuthApiPath.LOGIN, body });
 		AccessToken.setToken(token);
 		return user;
 	}
 
-	async register(body: Record<string, string>) {
+	async register(body: ISignUpForm) {
 		const { user, token } = await this.load({ endpoint: AuthApiPath.REGISTER, body });
 		AccessToken.setToken(token);
 		return user;

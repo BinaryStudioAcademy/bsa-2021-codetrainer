@@ -4,7 +4,8 @@ export const profileTasks = [
 		id: 'completed',
 		tasks: [
 			{
-				link: '/',
+				id: '1',
+				linkToAuthor: '/',
 				author: {
 					firstName: 'A',
 					lastName: 'B',
@@ -19,7 +20,8 @@ export const profileTasks = [
 				tags: ['Tag 1', 'Tag 2'],
 			},
 			{
-				link: '/',
+				id: '2',
+				linkToAuthor: '/',
 				author: {
 					firstName: 'A',
 					lastName: 'B',
@@ -40,7 +42,8 @@ export const profileTasks = [
 		id: 'authored',
 		tasks: [
 			{
-				link: '/',
+				id: '3',
+				linkToAuthor: '/',
 				author: {
 					firstName: 'A',
 					lastName: 'B',
@@ -55,7 +58,8 @@ export const profileTasks = [
 				tags: ['Tag 1', 'Tag 2'],
 			},
 			{
-				link: '/',
+				id: '4',
+				linkToAuthor: '/',
 				author: {
 					firstName: 'A',
 					lastName: 'B',

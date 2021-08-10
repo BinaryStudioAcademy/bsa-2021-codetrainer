@@ -1,9 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Clan } from '../../models';
-import { IClanFields } from '../../../types';
+import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Clan)
-export class ClanRepository extends Repository<Clan> {
+export class ClanRepository extends AbstractRepository<Clan> {
 	getByName(name: string) {
 		return this.findOne({ name });
 	}
@@ -11,7 +11,18 @@ export class ClanRepository extends Repository<Clan> {
 	getById(id: string) {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
-			.select(['clan', 'member.name', 'member.id'])
+			.leftJoinAndSelect('member.profileClan', 'profileClan')
+			.select([
+				'clan',
+				'member.name',
+				'member.createdAt',
+				'member.surname',
+				'member.id',
+				'member.honour',
+				'member.rank',
+				'profileClan.role',
+				'profileClan.status',
+			])
 			.where('clan.id = :id', { id })
 			.getOne();
 	}
@@ -20,18 +31,22 @@ export class ClanRepository extends Repository<Clan> {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
 			.leftJoinAndSelect('member.profileClan', 'profileClan')
-			.select(['clan', 'member.name', 'member.id', 'profileClan'])
+			.select(['clan', 'member.rank', 'member.honour', 'profileClan.role', 'profileClan.status'])
 			.skip(skip)
 			.take(take)
 			.getMany();
 	}
 
-	updateById(id: string, data: Partial<IClanFields>) {
+	updateById(id: string, data: Partial<Clan>) {
 		return this.update({ id }, data);
 	}
 
 	deleteMember(id: string, memberId: string) {
 		return this.createQueryBuilder('clan').relation('members').of(id).remove(memberId);
+	}
+
+	addMember(id: string, memberId: string) {
+		return this.createQueryBuilder('clan').relation('members').of(id).add(memberId);
 	}
 
 	deleteById(id: string) {

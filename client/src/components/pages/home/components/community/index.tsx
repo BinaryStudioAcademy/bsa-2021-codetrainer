@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Card, Text } from '@blueprintjs/core';
+import { Text } from '@blueprintjs/core';
 import CommunityUser from '../community-user';
 import styles from './community.module.scss';
 import { Button } from 'components/basic';
@@ -10,7 +10,7 @@ import { ICommunityProps } from './interfce';
 const Community: React.FC<ICommunityProps> = ({ users }) => {
 	return (
 		<div className={styles.community}>
-			<Card>
+			<div>
 				<Text tagName="h4" className={styles.communityHeader}>
 					Community
 				</Text>
@@ -60,7 +60,7 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					</Button>
 					<Button className={clsx(ButtonClasses.red, styles.createButton)}>Create New Clan</Button>
 				</div>
-			</Card>
+			</div>
 		</div>
 	);
 };
