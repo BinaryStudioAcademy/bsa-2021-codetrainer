@@ -5,40 +5,25 @@ import { FormInput } from 'components';
 import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 import { Modal } from '../';
+import { createClan } from 'services/create-clan.service';
 
-export const ClanModal: React.FC = () => {
-	const [isOpen, setIsOpen] = React.useState(false);
+interface IClanModalProps {
+	isOpen: boolean;
+	setIsOpen: (isOpen: boolean) => void;
+}
 
-	// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjNzQ4YmQwLWQyNGQtNDY2Yi1iMWMxLTVkOTQ1MDczN2VhYSIsImlhdCI6MTYyODA5MTIwNywiZXhwIjoxNjI4MTc3NjA3fQ.5ChvB4gmO-R9EXfmakMcjtUZhKhnVDHFav_6-76xCHo'
-
-	// const createClan = React.useCallback((name: string) => {
-	// 	const header = {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			Authorization: `Bearer ${token}`,
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		withCredentials: true,
-	// 		body: JSON.stringify({ name: name, isPublic: true }),
-	// 	};
-	// 	const call = async () => {
-	// 		const response = await fetch('http://localhost:5000/api/clan', header);
-	// 		const data = await response.json();
-	// 		console.log(data);
-	// 	};
-	// 	call();
-	// }, []);
-
+export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 	const validateClanName = (value: string) => {
 		let error;
-		if (value.length < 4) {
-			error = 'Clan name should be minimum four letters';
+		if (value.length === 0) {
+			error = "Input field can't be empty";
 		}
 		return error;
 	};
 
-	const openModal = () => {
-		setIsOpen(true);
+	const onSubmit = async (value: string) => {
+		await createClan(value);
+		setIsOpen(false);
 	};
 
 	const element = (
@@ -48,7 +33,7 @@ export const ClanModal: React.FC = () => {
 				<ImageUpload label="Set clan icon" />
 			</div>
 			<div>
-				<Formik initialValues={{ createClan: '' }} onSubmit={() => console.log('submited')}>
+				<Formik initialValues={{ createClan: '' }} onSubmit={(values) => onSubmit(values.createClan)}>
 					{({ validateField }) => (
 						<Form className={styles.form}>
 							<Field
@@ -75,7 +60,6 @@ export const ClanModal: React.FC = () => {
 
 	return (
 		<div>
-			<button onClick={openModal}>Open Modal</button>
 			<Modal
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}

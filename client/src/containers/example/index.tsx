@@ -7,7 +7,6 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { ClanModal } from 'components/modals';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -62,7 +61,6 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<ClanModal />
 		</div>
 	);
 };
