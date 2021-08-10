@@ -7,6 +7,7 @@ export const notificationConfig = {
 };
 
 export const alertStyles = {
+	minWidth: '200px',
 	maxWidth: '400px',
 	display: 'flex',
 	alignItems: 'center',
