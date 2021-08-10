@@ -5,8 +5,8 @@ interface ILandingNavProps {}
 export const LandingNav = (props: ILandingNavProps) => {
 	return (
 		<div className={styles.navBar}>
-			<a href="#">Sign Up</a>
-			<a href="#">Log In</a>
+			<a href="/rigester">Sign Up</a>
+			<a href="/sign-in">Log In</a>
 			<a href="#">For Educators</a>
 			<a href="#">For Companies</a>
 		</div>
