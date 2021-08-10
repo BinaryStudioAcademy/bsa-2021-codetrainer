@@ -28,6 +28,7 @@ export {
 	ClanPage,
 	ProfileTabWithSidebar,
 	ProfileTasks,
+	LandingPage,
 	CreateTaskSettings,
 	SettingPage,
 } from './pages';
