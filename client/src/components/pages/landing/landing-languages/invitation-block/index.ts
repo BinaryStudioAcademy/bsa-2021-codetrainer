@@ -1,1 +1,1 @@
-export {InvitationBlock} from './invitation-block'
+export { InvitationBlock } from './invitation-block';
