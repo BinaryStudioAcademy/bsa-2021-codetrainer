@@ -1,7 +1,7 @@
 import React from 'react';
-import { LandingPageComponent } from 'components';
+import { LandingPage } from 'components';
 
-interface ILandingPageProps {}
-export const LandingPage = (props: ILandingPageProps) => {
-	return <LandingPageComponent />;
+interface ILandingPageCointainerProps {}
+export const LandingPageCointainer = (props: ILandingPageCointainerProps) => {
+	return <LandingPage />;
 };

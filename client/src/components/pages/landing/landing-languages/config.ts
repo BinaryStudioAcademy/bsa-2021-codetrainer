@@ -1,11 +1,29 @@
 import { language } from './language-choice/language-choice';
-import {ReactComponent as jsIcon} from 'assets/icons/js.svg'
+import { ReactComponent as jsIcon } from 'assets/icons/js.svg';
 
-export const LANGUAGES:language[] = [
-    {
-        name: 'Javascript',
-        icon: jsIcon
-    },
+export const LANGUAGES: language[] = [
+	{
+		name: 'Javascript',
+		icon: jsIcon,
+	},
+	{
+		name: 'Javascript',
+		icon: jsIcon,
+	},
+	{
+		name: 'Javascript',
+		icon: jsIcon,
+	},
+	{
+		name: 'Javascript',
+		icon: jsIcon,
+	},
+	{
+		name: 'Javascript',
+		icon: jsIcon,
+	},
+	{
+		name: 'Javascript',
+		icon: jsIcon,
+	},
 ];
-
-

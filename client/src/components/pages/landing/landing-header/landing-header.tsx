@@ -8,7 +8,7 @@ export const LandingHeader = (props: ILandingHeaderProps) => {
 	return (
 		<div className={styles.header}>
 			<div className={styles.logotype}>
-				<img src={logo} alt="" className={styles.logotypeImage} />
+				<img src={logo} alt="Codetrainer" className={styles.logotypeImage} />
 			</div>
 			<LandingNav />
 		</div>
