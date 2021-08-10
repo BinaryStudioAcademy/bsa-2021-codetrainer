@@ -54,7 +54,8 @@ const searchPageProps: ISearchPageProps = {
 			numberOfTasks: 52,
 		},
 	],
-	challenge: {
+	challenges: [{
+		id: '1',
 		linkToAuthor: '/',
 		author: {
 			firstName: 'A',
@@ -68,5 +69,5 @@ const searchPageProps: ISearchPageProps = {
 		title: 'Title',
 		rank: 2,
 		tags: ['Tag 1', 'Tag 2'],
-	},
+	}],
 };

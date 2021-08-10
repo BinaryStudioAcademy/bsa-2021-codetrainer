@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@blueprintjs/core';
 import styles from './challenge-stats.module.scss';
-import { IChallengeStatsProps } from '../types';
+import { IChallengeStats } from '../types';
 
-const ChallengeStats: React.FC<{ stats: IChallengeStatsProps }> = ({
+const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 	stats: { favoriteSaves, positiveFeedback, author },
 }) => {
 	return (

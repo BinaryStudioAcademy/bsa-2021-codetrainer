@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './challenge-tags-lise.module.scss';
+import styles from './challenge-tags-list.module.scss';
 import ChallengeTag from './challenge-tag';
 
 interface IChallengeTagsListProps {

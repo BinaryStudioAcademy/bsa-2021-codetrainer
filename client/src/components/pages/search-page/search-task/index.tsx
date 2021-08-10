@@ -3,7 +3,10 @@ import { Formik, Form, Field } from 'formik';
 import { FormInput, FormSelect, Rank } from 'components';
 import styles from './search-task.module.scss';
 import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task';
-import { Checkbox } from 'components/basic';
+import { Button, Checkbox } from 'components/basic';
+import { ButtonClasses } from 'components/basic/button';
+import clsx from 'clsx';
+import { Box } from '@material-ui/core';
 
 interface ISearchTask {
 	tags: string[];
@@ -13,7 +16,9 @@ interface ISearchTask {
 const SearchTask: React.FC<ISearchTask> = ({ tags, ranks }) => {
 	return (
 		<>
-			<h4>Search Task</h4>
+			<Box mb={2}>
+				<h4>Search Task</h4>
+			</Box>
 			<Formik
 				initialValues={{
 					query: '',
@@ -63,9 +68,7 @@ const SearchTask: React.FC<ISearchTask> = ({ tags, ranks }) => {
 							<Checkbox key={id} label={tag} name={tag} />
 						))}
 					</div>
-					<button type="submit" className={styles.submitButton}>
-						Sign Up
-					</button>
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.submitBtn)}>Search</Button>
 				</Form>
 			</Formik>
 		</>
