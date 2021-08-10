@@ -9,6 +9,8 @@
 	padding: 15px 0;
 	a {
 		color: var.$french-rose;
+		font: var.$sixth-title-font !important;
+
 		&:hover {
 			color: var.$french-rose;
 			opacity: 0.7;
