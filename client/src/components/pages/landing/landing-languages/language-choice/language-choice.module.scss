@@ -1,14 +1,14 @@
 @use 'styles/variables.scss' as var;
 
 .languageChoiceBlock {
-	width: 650px;
-	height: 375px;
+	min-width: 650px;
+	min-height: 275px;
 	background-color: var.$white-lilac;
 	border-radius: 7px;
 	display: flex;
 	flex-direction: column;
 	h3 {
-		margin: 0;
+		margin: 3px 0;
 		font: var.$menu-font;
 		color: var.$mine-shaft;
 		text-align: center;
@@ -19,8 +19,9 @@
 }
 
 .languageChoice {
+	padding: 10px 15px 5px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(5, 1fr);
 	grid-gap: 10px;
-	grid-template-rows: repeat(auto-fill, 40);
+	grid-template-rows: repeat(auto-fill, 1fr);
 }

@@ -1,0 +1,38 @@
+@use 'styles/variables.scss' as var;
+
+.infoBlock {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 50px;
+	opacity: 0.5;
+	padding: 15px 0;
+	img {
+		opacity: 1;
+		width: 475px;
+	}
+}
+.textBlock {
+	max-width: 400px;
+	display: flex;
+	flex-direction: column;
+	h1 {
+		font: var.$third-title-font;
+		font-weight: 600;
+	}
+	p {
+		font: var.$sixth-title-font;
+		font-weight: 500;
+		line-height: 26px;
+	}
+}
+
+.cornflowerBlue {
+	background-color: var.$cornflower-blue;
+	color: var.$white-lilac;
+}
+
+.whiteLilac {
+	background-color: var.$white-lilac;
+	color: var.$cornflower-blue;
+}

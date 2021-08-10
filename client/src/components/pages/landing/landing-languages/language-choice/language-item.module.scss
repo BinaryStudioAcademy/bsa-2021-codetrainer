@@ -1,0 +1,13 @@
+@use 'styles/variables.scss' as var;
+
+.languageItem {
+	width: 120px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	svg {
+		padding-right: 5px;
+	}
+}

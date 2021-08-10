@@ -38,6 +38,23 @@ const SearchPage: React.FC = () => {
 						tags: ['Tag 1', 'Tag 2'],
 					}}
 				/>
+				<Challenge
+					challenge={{
+						link: '/',
+						author: {
+							firstName: 'A',
+							lastName: 'B',
+							link: '/',
+						},
+						stats: {
+							favoriteSaves: 12,
+							positiveFeedback: 12,
+						},
+						title: 'Title',
+						rank: 6,
+						tags: ['Tag 1', 'Tag 2'],
+					}}
+				/>
 			</div>
 		</div>
 	);
