@@ -1,4 +1,4 @@
-export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification, Button } from './basic';
+export { Avatar, Label, Rank, PublicRoute, Notification, Button } from './basic';
 
 export {
 	Example,
