@@ -1,7 +1,5 @@
 @import "styles/variables";
 
 .formControlLabel {
-    font-size: 14px;
-    font-family: $base-font-family;
-    font-weight: 500;
+    font: $base-font-family;
 }

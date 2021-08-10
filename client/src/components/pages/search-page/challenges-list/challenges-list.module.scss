@@ -1,10 +1,10 @@
+@import "styles/variables";
+
 .challengesAmount {
     padding-top: 10px;
     padding-left: 25px;
-    font-family: "Montserrat";
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 22px;
-    color: #282828;
+    font: $fifth-title-font;
+
+    color: $mine-shaft;
     opacity: 0.5;
 }

@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .rankContainer {
 	display: flex;
 	grid-gap: 15px;
@@ -13,8 +15,6 @@
 }
 
 h6 {
-	margin: 20px 0px 10px 0px;
-	font-family: "Montserrat", sans-serif;
-	font-weight: 600;
-	font-size: 16px;
+	margin: 20px 0px 10px;
+	font: $tub-font;
 }
