@@ -1,38 +1,25 @@
 import React from 'react';
-import { H3, Icon } from '@blueprintjs/core';
+import CloseIcon from '@material-ui/icons/Close';
 import ReactModal from 'react-modal';
-import styles from './modal.module.scss';
 import { modalStyles } from './config';
+import { IModalProps } from './types';
+import styles from './modal.module.scss';
 
-interface IModalProps {
-	isOpen: boolean;
-	setIsOpen: (isOpen: boolean) => void;
-	elements: {
-		title: string;
-		showCloseButton?: boolean;
-		body: string | React.ReactNode;
-		footer?: React.ReactNode;
-	};
-	modalProps?: Partial<ReactModal.Props>;
-}
-
-export const Modal: React.FC<IModalProps> = (props) => {
-	const { title, body, footer, showCloseButton } = props.elements;
-
+export const Modal: React.FC<IModalProps> = ({
+	elements: { title, body, footer, showCloseButton },
+	isOpen,
+	modalProps,
+	setIsOpen,
+}) => {
 	ReactModal.setAppElement('#root');
 
 	return (
-		<ReactModal shouldFocusAfterRender={true} isOpen={props.isOpen} style={modalStyles} {...props.modalProps}>
+		<ReactModal shouldFocusAfterRender={true} isOpen={isOpen} style={modalStyles} {...modalProps}>
 			<div className={styles.modalContent}>
 				<div className={styles.header}>
-					<H3 className={styles.title}>{title}</H3>
+					<h3 className={styles.title}>{title}</h3>
 					{showCloseButton && (
-						<Icon
-							icon="cross"
-							className={styles.closeIcon}
-							size={25}
-							onClick={() => props.setIsOpen(false)}
-						/>
+						<CloseIcon className={styles.closeIcon} size={25} onClick={() => setIsOpen(false)} />
 					)}
 				</div>
 				<div className={styles.body}>{body}</div>

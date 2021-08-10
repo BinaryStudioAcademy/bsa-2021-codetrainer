@@ -1,18 +1,15 @@
 import React from 'react';
 import styles from './image-upload.module.scss';
 import placeholderImage from '../../../../../assets/images/placeholder-image.png';
+import { IImageUploadProps } from './types';
 
-interface IImageUploadProps {
-	label: string;
-}
-
-const ImageUpload: React.FC<IImageUploadProps> = (props) => {
+const ImageUpload: React.FC<IImageUploadProps> = ({ label }) => {
 	return (
 		<div className={styles.container}>
 			<img src={placeholderImage} />
-			<form action="">
+			<form action="#">
 				<label>
-					{props.label}
+					{label}
 					<input type="file" accept="image/png, image/jpeg" />
 				</label>
 			</form>

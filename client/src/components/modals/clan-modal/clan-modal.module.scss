@@ -1,51 +1,53 @@
-:local(.container) {
+@import 'styles/variables';
+
+.container {
 	width: 700px;
+
+	a {
+		cursor: pointer;
+	}
 }
 
-:local(.container a) {
-	cursor: pointer;
-}
-
-:local(.flex) {
+.flex {
 	display: flex;
 }
 
-:local(.pictures) {
+.pictures {
 	display: flex;
 	margin-top: 30px;
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
 
-:local(.title) {
+.title {
 	margin: 0;
 	font-size: 20px;
 }
 
-:local(.close) {
+.close {
 	margin-left: auto;
 	text-decoration: none;
-	color: #ec4179;
+	color: $french-rose;
 	font-weight: 600;
 	font-size: 20px;
+
+	&:hover {
+		text-decoration: none;
+		color: $french-rose;
+	}
 }
 
-:local(.close:hover) {
-	text-decoration: none;
-	color: #ec4179;
-}
-
-:local(.form) {
+.form {
 	margin-top: 20px;
-}
 
-:local(.form button) {
-	margin-top: 5px;
-	border: #705ff5 2px solid;
-	background: #fafbff;
-	color: #705ff5;
-}
+	button {
+		margin-top: 5px;
+		border: $cornflower-blue 2px solid;
+		background: $zircon;
+		color: $cornflower-blue;
+	}
 
-:local(.form span) {
-	color: #ec4179;
+	span {
+		color: $french-rose;
+	}
 }

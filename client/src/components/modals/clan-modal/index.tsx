@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import ImageUpload from './components/image-upload';
 import { FormInput } from 'components';
 import { Button } from '../../basic';
-import styles from './clan-modal.module.scss';
 import { Modal } from '../';
+import styles from './clan-modal.module.scss';
 
 export const ClanModal: React.FC = () => {
-	const [isOpen, setIsOpen] = React.useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
 	// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjNzQ4YmQwLWQyNGQtNDY2Yi1iMWMxLTVkOTQ1MDczN2VhYSIsImlhdCI6MTYyODA5MTIwNywiZXhwIjoxNjI4MTc3NjA3fQ.5ChvB4gmO-R9EXfmakMcjtUZhKhnVDHFav_6-76xCHo'
 
