@@ -10,6 +10,7 @@ export {
 	Spinner,
 	Header,
 	Social,
+	MainSidebar,
 	TaskInstructions,
 } from './common';
 
