@@ -2,20 +2,21 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { FormInput } from 'components';
+import FormInput from '../form-input';
 import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import clsx from 'clsx';
 import styles from './change-password.module.scss';
 
 const ChangePasswordSchema = Yup.object().shape({
-	password: Yup.string().min(8, 'Too short').required('Required'),
-	confirmPassword: Yup.string()
+	newPassword: Yup.string().min(8, 'Too short').required('Required'),
+	confirmNewPassword: Yup.string()
 		.min(8, 'Too short')
 		.required('Required')
 		.test('passwords-match', 'Passwords must match', function (value) {
-			return this.parent.password === value;
+			return this.parent.newPassword === value;
 		}),
+	currentPassword: Yup.string().min(8, 'Too short').required('Required'),
 });
 
 const ChangePassword: React.FC = () => {
@@ -24,8 +25,9 @@ const ChangePassword: React.FC = () => {
 			<h4 className={styles.header}>Change Password</h4>
 			<Formik
 				initialValues={{
-					password: '',
-					confirmPassord: '',
+					newPassword: '',
+					confirmNewPassword: '',
+					currentPassword: '',
 				}}
 				validationSchema={ChangePasswordSchema}
 				onSubmit={(values) => {
@@ -37,7 +39,6 @@ const ChangePassword: React.FC = () => {
 						id="newPassword"
 						name="newPassword"
 						label="New Password (Leave blank if you don`t wish change it)"
-						placeholder="********"
 						type="password"
 						component={FormInput}
 					/>
@@ -45,7 +46,6 @@ const ChangePassword: React.FC = () => {
 						id="confirmNewPassword"
 						name="confirmNewPassword"
 						label="Confirm New Password"
-						placeholder="********"
 						type="password"
 						component={FormInput}
 					/>
@@ -53,7 +53,6 @@ const ChangePassword: React.FC = () => {
 						id="currentPassword"
 						name="currentPassword"
 						label="Current Password (Needed if you change your password)"
-						placeholder="********"
 						type="password"
 						component={FormInput}
 					/>

@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { FormInput } from 'components';
+import FormInput from '../form-input';
 import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import List from '../list-radio';
@@ -10,10 +10,10 @@ import { IFormItem, IInformationProps } from './interfaces';
 import styles from './information.module.scss';
 
 const SignupSchema = Yup.object().shape({
-	name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	username: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	clan: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	skills: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+	name: Yup.string().min(2, 'Too short').max(50, 'Too long').required('Required'),
+	username: Yup.string().min(2, 'Too short').max(50, 'Too long').required('Required'),
+	clan: Yup.string().min(2, 'Too short').max(50, 'Too long').required('Required'),
+	skills: Yup.string().min(2, 'Too short').max(50, 'Too long').required('Required'),
 	email: Yup.string().email('Invalid email').required('Required'),
 });
 
