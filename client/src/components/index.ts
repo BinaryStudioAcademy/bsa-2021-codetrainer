@@ -1,4 +1,20 @@
-export { Avatar, Label, Rank, PrivateRoute, PublicRoute, Notification, Button } from './basic';
+export {
+	Avatar,
+	Label,
+	Rank,
+	PrivateRoute,
+	PublicRoute,
+	Notification,
+	Button,
+	Checkbox,
+	Popover,
+	Switch,
+	List,
+	ProgressBar,
+	Select,
+	Tag,
+	TagsList,
+} from './basic';
 
 export {
 	Example,

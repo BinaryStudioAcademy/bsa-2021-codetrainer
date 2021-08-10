@@ -1,11 +1,11 @@
 import React from 'react';
 import Tag from 'components/basic/tag';
+import { ITagListProps } from './types';
 import styles from './tag-list.module.scss';
-import { ITagListProps } from './interface';
 
-const TagList: React.FC<ITagListProps> = ({ tags }) => {
+const TagsList: React.FC<ITagListProps> = ({ tags }) => {
 	return (
-		<div className={styles.tagWrappers}>
+		<div className={styles.tagsList}>
 			{tags.map((tag, index) => (
 				<Tag key={index} text={tag} />
 			))}
@@ -13,4 +13,4 @@ const TagList: React.FC<ITagListProps> = ({ tags }) => {
 	);
 };
 
-export default TagList;
+export default TagsList;

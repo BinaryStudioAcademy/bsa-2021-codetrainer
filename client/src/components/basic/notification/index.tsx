@@ -1,34 +1,26 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { Snackbar } from '@material-ui/core';
-import { alertStyles, notificationConfig } from './config';
+import { ECloseReasons, INotificationProps } from './types.d';
+import { notificationConfig } from './config';
+import styles from './notification.module.scss';
 
-export type TAlertTypes = 'error' | 'info' | 'success' | 'warning';
-
-export interface INotificationProps {
-	handleClose: () => void;
-	severity?: TAlertTypes;
-	text?: string | React.ReactNode;
-	title?: string;
-	id?: string;
-}
-
-export const Notification: React.FC<INotificationProps> = (props) => {
-	const { handleClose, severity, text, title, id } = props;
+export const Notification: React.FC<INotificationProps> = ({ onClose, severity, text, title, id }) => {
 	const { autoHideDuration, position, transitionDuration } = notificationConfig;
-
-	const [isOpen, setIsOpen] = useState(false);
+	const [isActive, setIsActive] = useState(false);
 
 	useEffect(() => {
 		if (id) {
-			setIsOpen(true);
+			setIsActive(true);
 
 			const closeTimeoutId = setTimeout(() => {
-				setIsOpen(false);
+				setIsActive(false);
 			}, autoHideDuration);
 
 			const removeFromStoreTimeoutId = setTimeout(() => {
-				handleClose();
+				if (onClose) {
+					onClose();
+				}
 			}, autoHideDuration + transitionDuration);
 
 			return () => {
@@ -38,26 +30,24 @@ export const Notification: React.FC<INotificationProps> = (props) => {
 		}
 	}, [id]);
 
-	const onClose = (event: SyntheticEvent, reason: string) => {
-		if (reason !== 'clickaway') {
-			setIsOpen(false);
+	const closeHanlder = (event: SyntheticEvent, reason: string) => {
+		if (reason !== ECloseReasons.CLICKAWAY) {
+			setIsActive(false);
 		}
 	};
 
 	return (
-		<div>
-			<Snackbar
-				transitionDuration={transitionDuration}
-				open={!!(text && isOpen)}
-				anchorOrigin={position}
-				autoHideDuration={autoHideDuration}
-				onClose={onClose}
-			>
-				<Alert style={alertStyles} severity={severity} onClose={() => setIsOpen(false)}>
-					{title && <AlertTitle>{title}</AlertTitle>}
-					{text}
-				</Alert>
-			</Snackbar>
-		</div>
+		<Snackbar
+			transitionDuration={transitionDuration}
+			open={Boolean(text && isActive)}
+			anchorOrigin={position}
+			autoHideDuration={autoHideDuration}
+			onClose={closeHanlder}
+		>
+			<Alert className={styles.alert} severity={severity} onClose={() => setIsActive(false)}>
+				{title && <AlertTitle>{title}</AlertTitle>}
+				{text}
+			</Alert>
+		</Snackbar>
 	);
 };

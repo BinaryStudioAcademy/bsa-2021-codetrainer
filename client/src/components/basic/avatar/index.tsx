@@ -1,23 +1,16 @@
 import React from 'react';
-import styles from './avatar.module.scss';
 import defaultAvatar from 'assets/images/header/default-avatar.png';
+import { IAvatarProps } from './types';
+import styles from './avatar.module.scss';
 
-interface IAvatarProps {
-	avatar?: string;
-	size?: number;
-	color?: string;
-}
-
-const Avatar: React.FC<IAvatarProps> = (props) => {
+const Avatar: React.FC<IAvatarProps> = ({ avatar, width = '50px', height = '50px', color }) => {
 	const changebleStyle = {
-		width: props.size,
-		height: props.size,
-		backgroundColor: props.color,
+		width,
+		height,
+		backgroundColor: color,
 	};
 
-	return (
-		<img src={props.avatar || defaultAvatar} className={styles.avatar} style={changebleStyle} alt="userAvatar" />
-	);
+	return <img src={avatar || defaultAvatar} className={styles.avatar} style={changebleStyle} alt="Avatar" />;
 };
 
 export default Avatar;

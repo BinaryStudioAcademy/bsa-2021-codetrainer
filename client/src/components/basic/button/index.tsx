@@ -1,8 +1,8 @@
-import React, { ButtonHTMLAttributes, FC } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import styles from './button.module.scss';
 
-const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
+const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
 	<button {...props} className={clsx(styles.button, props.className)}>
 		{props.children}
 	</button>

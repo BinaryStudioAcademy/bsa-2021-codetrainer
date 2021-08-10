@@ -1,9 +1,9 @@
 import React from 'react';
+import { ITagProps } from './types';
 import styles from './tag.module.scss';
-import { ITagProps } from './interface';
 
 const Tag: React.FC<ITagProps> = ({ text }) => {
-	return <span className={styles.wrapper}>{text}</span>;
+	return <span className={styles.tag}>{text}</span>;
 };
 
 export default Tag;

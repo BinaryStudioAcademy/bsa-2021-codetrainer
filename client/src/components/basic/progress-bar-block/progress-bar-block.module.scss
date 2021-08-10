@@ -1,37 +1,44 @@
-@use 'styles/variables.scss' as var;
+@import 'styles/variables.scss';
 
-.progressBarBlock {
-	.progressBarInfo {
-		display: flex;
-		align-items: flex-end;
-		justify-content: space-between;
-		height: 18px;
+.progressBar {
+	&Block {
+		.progressInfo {
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			height: 18px;
 
-		.progressName {
-			margin-bottom: 0;
-			font: var.$progress-bar-font;
-		}
-		.progressInfoDone {
-			margin-bottom: 0;
-			.progressDone {
-				color: #ec4179;
-				font: var.$base-font;
+			&Name {
+				margin-bottom: 0;
+				font: $progress-bar-font;
+			}
+
+			&Value {
+				margin-bottom: 0;
+			}
+
+			&Done {
+				color: $french-rose;
+				font: $base-font;
 				font-weight: 500;
 				font-size: 16px;
 			}
-			.progressOfSymbol {
-				color: rgba(40, 40, 40, 0.5);
+
+			&Left,
+			&Symbol {
+				color: $mine-shaft;
 			}
-			.progressLeft {
-				color: rgba(40, 40, 40, 0.5);
+
+			&:first-child {
+				margin-top: 0;
 			}
 		}
 	}
-	&:first-child {
-		margin-top: 0;
-	}
-}
-.progressBar {
-	background-color: #f0f3f9;
+
+	background: $white-lilac !important;
 	margin: 3px 0;
+
+	&Done {
+		background: $french-rose !important;
+	}
 }

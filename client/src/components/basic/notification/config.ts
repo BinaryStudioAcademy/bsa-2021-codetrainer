@@ -5,9 +5,3 @@ export const notificationConfig = {
 	autoHideDuration: 5000,
 	transitionDuration: 500,
 };
-
-export const alertStyles = {
-	maxWidth: '400px',
-	display: 'flex',
-	alignItems: 'center',
-};

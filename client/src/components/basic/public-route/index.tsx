@@ -1,20 +1,13 @@
+import React from 'react';
 import { Header } from 'components';
 import MainSidebar from 'components/common/main-sidebar';
 import { ROUTES } from 'constants/routes';
 import { headerProps } from 'containers/header/mock';
 import { useAppSelector } from 'hooks/useAppSelector';
-import * as React from 'react';
-import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+import { IPublicRouteProps } from './types';
 
-interface IPublicRouteProps extends RouteProps {
-	restricted: boolean;
-	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-	needHeader?: boolean;
-	needSideBar?: boolean;
-}
-
-const PublicRoute = (props: IPublicRouteProps) => {
-	const { restricted, component: Component, ...rest } = props;
+const PublicRoute: React.FC<IPublicRouteProps> = ({ restricted, component: Component, ...rest }) => {
 	const { user } = useAppSelector((state) => state.auth.userData);
 	const isAuthorized = Boolean(user);
 

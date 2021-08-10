@@ -1,10 +1,12 @@
-@use 'styles/variables.scss' as var;
+@import 'styles/variables';
 
-.fieldName {
-	color: rgba(40, 40, 40, 0.5);
-	font: var.$base-font;
-}
+.listItem {
+	&Name {
+		color: $mine-shaft;
+		font: $base-font;
+	}
 
-.fieldValue {
-	font-weight: 500;
+	&Value {
+		font-weight: 500;
+	}
 }

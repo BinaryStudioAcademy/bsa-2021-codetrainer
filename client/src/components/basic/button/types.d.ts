@@ -1,4 +1,4 @@
-import React from 'react';
+import { MouseEvent } from 'react';
 
 export interface IButtonProps {
 	color?: string;
@@ -7,5 +7,5 @@ export interface IButtonProps {
 	fill?: boolean;
 	disabled?: boolean;
 	taskButton?: boolean;
-	onClick?: (ev?: React.MouseEvent) => void;
+	onClick?: (event: MouseEvent) => void;
 }

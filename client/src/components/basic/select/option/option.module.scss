@@ -1,0 +1,27 @@
+@import 'styles/variables';
+
+.option {
+	display: flex;
+	align-items: center;
+	height: 15px;
+	padding: 20px;
+	font: 500 14px;
+
+	&:hover {
+		background: #f0f3f9;
+		cursor: pointer;
+	}
+
+	&Active {
+		color: $cornflower-blue;
+	}
+
+	&Icon {
+		width: 15px;
+		height: 15px;
+	}
+
+	svg {
+		margin-right: 15px;
+	}
+}

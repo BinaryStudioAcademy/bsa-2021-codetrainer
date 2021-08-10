@@ -1,0 +1,23 @@
+.tagsList {
+	display: flex;
+	width: 100%;
+	margin-top: 10px;
+	flex-wrap: wrap;
+	padding: 5px 0;
+
+	overflow: hidden;
+	overflow-x: auto;
+
+	&::-webkit-scrollbar {
+		height: 6px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #ec41794d;
+		border-radius: 10px;
+	}
+
+	&s:hover::-webkit-scrollbar-thumb {
+		background-color: #ec417999;
+	}
+}

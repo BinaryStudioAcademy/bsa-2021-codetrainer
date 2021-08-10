@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import styles from './select.module.scss';
-import { Option } from '..';
-import { ISelectProps, ISelectValue } from './interface';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
-import { IRootState } from 'typings/root-state';
+import Option from './option';
+import { ISelectProps, ISelectValue } from './types';
+import arrowIcon from './assets/arrow.svg';
+import styles from './select.module.scss';
 
-const Select = ({ values, onChange }: ISelectProps) => {
+const Select: React.FC<ISelectProps> = ({ activeValue, values, onChange }) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
-	const listStyles = clsx(styles.optionsList, { [styles.optionsActive]: optionsListActive });
-	const activeValue = useSelector((state: IRootState) => state.createTask.languageVersion);
-	const handleChange = (value: ISelectValue) => {
+	const [activeOption, setActiveOption] = useState<ISelectValue | undefined>(activeValue);
+
+	const listStyles = clsx(styles.optionsList, {
+		[styles.optionsActive]: optionsListActive,
+	});
+
+	const changeHandler = (value: ISelectValue) => {
 		setOptionsListActive(false);
+		setActiveOption(value);
 		if (onChange) {
 			onChange(value);
 		}
@@ -20,12 +24,21 @@ const Select = ({ values, onChange }: ISelectProps) => {
 	return (
 		<div className={styles.selectWrapper}>
 			<h5 className={styles.select} onClick={() => setOptionsListActive(!optionsListActive)}>
-				{activeValue.iconFC ? <activeValue.iconFC width={15} height={15} /> : <img src="" alt="icon" />}
-				{activeValue.title}
+				{activeOption && activeOption.iconFC ? (
+					<activeOption.iconFC className={styles.selectIcon} />
+				) : (
+					<img src={arrowIcon} alt="Icon" className={styles.selectIcon} />
+				)}
+				{activeOption && activeOption.title}
 			</h5>
 			<ul className={listStyles}>
 				{values.map((value, index) => (
-					<Option key={index} value={value} isActive={value.id === activeValue.id} onChange={handleChange} />
+					<Option
+						key={index}
+						value={value}
+						isActive={value.id === activeOption?.id}
+						onChange={changeHandler}
+					/>
 				))}
 			</ul>
 		</div>

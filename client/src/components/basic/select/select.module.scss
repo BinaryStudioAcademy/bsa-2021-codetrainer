@@ -3,16 +3,13 @@
 }
 
 .select {
-	box-sizing: border-box;
-
 	display: flex;
 	align-items: center;
 	height: 45px;
 	margin: 0;
 	padding: 14px 20px;
 
-	font-size: 14px;
-	font-weight: 500;
+	font: 500 14px;
 
 	border: none;
 	border-radius: 10px;
@@ -26,15 +23,18 @@
 	outline: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-}
 
-.select svg {
-	margin-right: 15px;
-}
+	&Icon {
+		margin-right: 15px;
 
-.select::selection,
-.select img::selection {
-	background: none;
+		&::selection {
+			background: none;
+		}
+	}
+
+	&::selection {
+		background: none;
+	}
 }
 
 .optionsList {

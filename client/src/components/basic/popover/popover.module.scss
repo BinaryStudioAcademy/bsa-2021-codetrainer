@@ -1,0 +1,26 @@
+@import 'styles/variables';
+
+.popover {
+	border: 1px solid $french-rose;
+	border-radius: 7px;
+	background: $white-lilac;
+	color: $mine-shaft;
+	font-size: 12px;
+	margin-top: 5px;
+	padding: 0.5rem;
+	width: 300px;
+
+	&Button {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		outline: none;
+		vertical-align: bottom;
+		cursor: pointer;
+	}
+
+	&Icon {
+		width: 100%;
+		height: 100%;
+	}
+}

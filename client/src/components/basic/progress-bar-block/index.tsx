@@ -1,33 +1,26 @@
 import React from 'react';
-import { ProgressBar } from '@blueprintjs/core';
-import styles from './progress-bar-block.module.scss';
-import honorStyles from 'components/pages/profile/profile-info/tabs/stats/honor-breakdown/honor-breakdown.module.scss';
-import './progress-bar.scss';
+import { LinearProgress } from '@material-ui/core';
 import clsx from 'clsx';
+import styles from './progress-bar-block.module.scss';
+import { IProgressBarBlockProps } from './types';
+import honorStyles from 'components/pages/profile/profile-info/tabs/stats/honor-breakdown/honor-breakdown.module.scss';
 
-interface IProgressBarBlockProps {
-	name: string;
-	done: number | null;
-	left: number;
-}
-
-const ProgressBarBlock: React.FC<IProgressBarBlockProps> = (props) => {
-	const { name, done, left } = props;
-
+const ProgressBarBlock: React.FC<IProgressBarBlockProps> = ({ name, done, left }) => {
 	return (
 		<div className={clsx(honorStyles.progressBarBlock, styles.progressBarBlock)}>
-			<div className={styles.progressBarInfo}>
-				<p className={styles.progressName}>{name}</p>
-				<p className={styles.progressInfoDone}>
-					<span className={styles.progressDone}>{done}</span>
-					{left !== 0 && <span className={styles.progressOfSymbol}>/</span>}
-					<span className={styles.progressLeft}>{left}</span>
+			<div className={styles.progressInfo}>
+				<p className={styles.progressInfoName}>{name}</p>
+
+				<p className={styles.progressInfoValue}>
+					<span className={styles.progressInfoDone}>{done}</span>
+					{left !== 0 && <span className={styles.progressInfoSymbol}>/</span>}
+					<span className={styles.progresInfosLeft}>{left}</span>
 				</p>
 			</div>
-			<ProgressBar
-				animate={false}
-				stripes={false}
-				className={styles.progressBar}
+
+			<LinearProgress
+				variant="determinate"
+				classes={{ root: styles.progressBar, bar1Determinate: styles.progressBarDone }}
 				value={done ? done / left : 0}
 			/>
 		</div>

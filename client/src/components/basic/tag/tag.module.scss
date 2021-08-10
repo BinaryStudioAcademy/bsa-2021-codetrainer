@@ -1,12 +1,17 @@
-.wrapper {
+@import 'styles/variables';
+
+.tag {
 	margin-right: 15px;
 	padding: 4px 9px;
 
-	color: rgba(40, 40, 40, 0.5);
-	font-weight: normal;
+	color: $mine-shaft;
 	font-size: 14px;
 	white-space: nowrap;
 
-	background: #f0f3f9;
+	background: $white-lilac;
 	border-radius: 4px;
+
+	&::selection {
+		background: none;
+	}
 }

@@ -1,20 +1,16 @@
 import React from 'react';
+import { ILabelProps } from './types';
 import styles from './label.module.scss';
 
-interface ILabelProps {
-	label: string | number;
-	color: string;
-}
-
-const Label: React.FC<ILabelProps> = (props) => {
+const Label: React.FC<ILabelProps> = ({ color, label }) => {
 	const changebleStyles = {
-		color: props.color,
-		borderColor: props.color,
+		color: color,
+		borderColor: color,
 	};
 
 	return (
 		<div className={styles.label} style={changebleStyles}>
-			{props.label}
+			{label}
 		</div>
 	);
 };

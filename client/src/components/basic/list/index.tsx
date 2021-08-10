@@ -1,14 +1,16 @@
 import React from 'react';
-import { IItemProps, Item } from './item';
+import { Item } from './item';
+import { IListProps } from './types';
+import styles from './list.module.scss';
 
-interface IListProps {
-	items: Array<IItemProps>;
-}
-
-export const List: React.FC<IListProps> = (props) => {
-	const list = props.items.map(({ name, value }, index) => {
-		return <Item name={name} value={value} key={index} />;
-	});
-
-	return <div>{list}</div>;
+const List: React.FC<IListProps> = ({ items }) => {
+	return (
+		<ul className={styles.list}>
+			{items.map(({ name, value }, index) => (
+				<Item name={name} value={value} key={index} />
+			))}
+		</ul>
+	);
 };
+
+export default List;

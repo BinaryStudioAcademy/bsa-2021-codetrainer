@@ -1,19 +1,12 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import { IItemProps } from './types';
 import styles from './item.module.scss';
 
-export interface IItemProps {
-	name: string;
-	value?: ReactElement | string | number;
-}
-
-export const Item: React.FC<IItemProps> = (props) => {
-	const { name } = props;
-	const value = props.value || props.value === 0 ? props.value : 'Unknown';
-
+export const Item: React.FC<IItemProps> = ({ value, name }) => {
 	return (
-		<p>
-			<span className={styles.fieldName}>{name}: </span>
-			<span className={styles.fieldValue}>{value}</span>
-		</p>
+		<li className={styles.listItem}>
+			{name && <span className={styles.listItemName}>{name}: </span>}
+			<span className={styles.listItemValue}>{value || value === 0 ? value : 'Unknown'}</span>
+		</li>
 	);
 };
