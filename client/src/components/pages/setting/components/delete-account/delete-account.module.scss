@@ -1,3 +1,5 @@
+@use 'styles/variables.scss' as var;
+
 .header {
 	margin: 0 0 10px;
 	font-size: 18px;
@@ -9,7 +11,7 @@
 	display: flex;
 	justify-content: center;
 	.submitBtn {
-		border: 2px solid #EC4179;
+		border: 2px solid var.$french-rose;
 	}
 }
 

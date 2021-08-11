@@ -17,7 +17,7 @@ export const LanguageChoice = ({ languages }: ILandingLanguagesProps) => {
 			<h3>Choose your language to begin...</h3>
 			<div className={styles.languageChoice}>
 				{languages.map((lang: language, index: number) => {
-					return <LanguageItem key={index} lang={lang}/>;
+					return <LanguageItem key={index} lang={lang} />;
 				})}
 			</div>
 		</div>
