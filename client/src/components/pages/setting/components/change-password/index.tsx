@@ -8,14 +8,15 @@ import clsx from 'clsx';
 import styles from './change-password.module.scss';
 
 const ChangePasswordSchema = Yup.object().shape({
-	newPassword: Yup.string().min(8, 'Too short').required('Required'),
+	newPassword: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 	confirmNewPassword: Yup.string()
-		.min(8, 'Too short')
+		.min(8, 'Minimum length: 8')
+		.max(25, 'Maximum length: 25')
 		.required('Required')
 		.test('passwords-match', 'Passwords must match', function (value) {
 			return this.parent.newPassword === value;
 		}),
-	currentPassword: Yup.string().min(8, 'Too short').required('Required'),
+	currentPassword: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 });
 
 const ChangePassword: React.FC = () => {
