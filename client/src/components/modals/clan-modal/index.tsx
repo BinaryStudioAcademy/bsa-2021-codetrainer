@@ -14,7 +14,7 @@ interface IClanModalProps {
 }
 
 const CreateClanSchema = Yup.object().shape({
-	createClan: Yup.string().min(2, 'Your input is too short').max(5, 'Your input is too long').required('Required'),
+	createClan: Yup.string().min(2, 'Your input is too short').max(20, 'Your input is too long').required('Required'),
 });
 
 export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
