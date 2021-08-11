@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../avatar';
+import { Avatar } from 'components';
 import { Link } from 'react-router-dom';
 import styles from './profile-picture.module.scss';
 
