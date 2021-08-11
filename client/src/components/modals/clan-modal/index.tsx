@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import ImageUpload from './components/image-upload';
 import { FormInput } from 'components';
 import { Button } from '../../basic';
@@ -12,15 +13,11 @@ interface IClanModalProps {
 	setIsOpen: (isOpen: boolean) => void;
 }
 
-export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
-	const validateClanName = (value: string) => {
-		let error;
-		if (value.length === 0) {
-			error = "Input field can't be empty";
-		}
-		return error;
-	};
+const CreateClanSchema = Yup.object().shape({
+	createClan: Yup.string().min(2, 'Your input is too short').max(5, 'Your input is too long').required('Required'),
+});
 
+export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 	const onSubmit = async (value: string, setFieldError: any) => {
 		try {
 			await createClan(value);
@@ -40,6 +37,7 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 			<div>
 				<Formik
 					initialValues={{ createClan: '' }}
+					validationSchema={CreateClanSchema}
 					onSubmit={(values, { setFieldError }) => onSubmit(values.createClan, setFieldError)}
 				>
 					{({ validateField }) => (
@@ -54,7 +52,6 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 								}
 								type="text"
 								component={FormInput}
-								validate={validateClanName}
 							/>
 							<Button onClick={() => validateField('createClan')} type="submit">
 								Create Clan
