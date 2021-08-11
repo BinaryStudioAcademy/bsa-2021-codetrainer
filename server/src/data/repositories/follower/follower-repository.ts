@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Follower } from '../../models/follower';
-import { IFollowerFields } from '../../../types/follower';
 
 @EntityRepository(Follower)
 export class FollowerRepository extends Repository<Follower> {
@@ -18,11 +17,11 @@ export class FollowerRepository extends Repository<Follower> {
 			.getMany();
 	}
 
-	post(data: Partial<IFollowerFields>) {
+	post(data: Partial<Follower>) {
 		return this.save(data);
 	}
 
-	removeById(data: Partial<IFollowerFields>) {
+	removeById(data: Partial<Follower>) {
 		return this.delete(data);
 	}
 }

@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 import { TFollowerRepository } from '../../data';
-import { IFollowerFields } from '../../types/follower';
+import { Follower } from '../../data/models/follower';
 
-export class Follower {
+export class FollowerService {
 	protected followerRepository: TFollowerRepository;
 
 	constructor({ follower }: { follower: TFollowerRepository }) {
@@ -25,7 +25,7 @@ export class Follower {
 		};
 	}
 
-	async create(data: IFollowerFields) {
+	async create(data: Follower) {
 		const repository = getCustomRepository(this.followerRepository);
 
 		return {
@@ -33,7 +33,7 @@ export class Follower {
 		};
 	}
 
-	async delete(data: IFollowerFields) {
+	async delete(data: Partial<Follower>) {
 		const repository = getCustomRepository(this.followerRepository);
 		const res = await repository.removeById(data);
 
