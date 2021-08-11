@@ -1,38 +1,39 @@
-:local(.taskContainer) {
-	font-family: 'Montserrat', sans-serif;
-	font-size: 16px;
+@use 'styles/variables.scss' as var;
+
+.taskContainer {
+	font: var.$sixth-title-font;
 }
 
-:local(.taskContainer a) {
+.taskContainer a {
 	cursor: pointer;
 }
 
-:local(.header) {
+.header {
 	display: flex;
 	padding: 20px 0;
 }
 
-:local(.taskContainer h2) {
+.taskContainer h2 {
 	margin: 0 0 0 10px;
 	font-size: 18px;
 }
 
-:local(.task) {
+.task {
 	border-radius: 15px;
 	background: #fafbff;
 	padding: 20px 20px;
 }
 
-:local(.taskContainer hr) {
+.taskContainer hr {
 	margin: 20px -20px;
 	border: 1px solid #eaecf1;
 }
 
-:local(.switch) {
+.switch {
 	display: flex;
 }
 
-:local(.switch button) {
+.switch button {
 	margin-right: 20px;
 	font-weight: 600;
 	font-size: 16px;
@@ -43,12 +44,12 @@
 	cursor: pointer;
 }
 
-:local(.switch .active) {
-	color: #705ff5;
-	border-bottom: #705ff5 2px solid;
+.switch .active {
+	color: var.$cornflower-blue;
+	border-bottom: var.$cornflower-blue 2px solid;
 }
 
-:local(.infoContainer) {
+.infoContainer {
 	display: flex;
 	margin-top: 10px;
 }

@@ -19,12 +19,19 @@ const PrivateRoute = (props: IPrivateRouteProps) => {
 		<>
 			{rest.needHeader ? <Header /> : null}
 			{rest.needSideBar ? <MainSidebar /> : null}
-			<div className="content_container">
+			{rest.needHeader && rest.needSideBar ? (
+				<div className="contentContainer">
+					<Route
+						{...rest}
+						render={(props) => (isAuthorized ? <Component {...props} /> : <Redirect to={ROUTES.SignIn} />)}
+					/>
+				</div>
+			) : (
 				<Route
 					{...rest}
 					render={(props) => (isAuthorized ? <Component {...props} /> : <Redirect to={ROUTES.SignIn} />)}
 				/>
-			</div>
+			)}
 		</>
 	);
 };
