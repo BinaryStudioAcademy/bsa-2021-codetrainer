@@ -91,7 +91,7 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 				</Form>
 			</Formik>
 			<div className={styles.footer}>
-				Already Signep up?{' '}
+				Already Signed up?{' '}
 				<Link to={ROUTES.SignIn} className={styles.link}>
 					Sign in
 				</Link>
