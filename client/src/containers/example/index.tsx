@@ -7,9 +7,9 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { ClanModal } from 'components/modals';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
+import ProgressBarBlock from 'components/basic/progress-bar-block';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<ClanModal />
+			<ProgressBarBlock name="string" left={10} done={null} />
 		</div>
 	);
 };
