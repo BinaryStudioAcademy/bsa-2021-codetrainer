@@ -3,6 +3,7 @@ import { FieldProps, getIn } from 'formik';
 import styles from './form-input.module.scss';
 import hideIcon from 'assets/icons/hide.svg';
 import showIcon from 'assets/icons/show.svg';
+import { Link } from 'react-router-dom';
 
 interface IFormInputProps extends FieldProps {
 	id: string;
@@ -10,6 +11,7 @@ interface IFormInputProps extends FieldProps {
 	label?: string;
 	type: string;
 	placeholder: string;
+	showForgotPassword: boolean;
 }
 
 const FormInput: React.FC<IFormInputProps> = ({
@@ -19,6 +21,7 @@ const FormInput: React.FC<IFormInputProps> = ({
 	placeholder,
 	field: { name, value, onChange },
 	form: { errors, touched },
+	showForgotPassword = false,
 }) => {
 	const error = getIn(errors, name);
 	const isTouched = getIn(touched, name);
@@ -32,11 +35,18 @@ const FormInput: React.FC<IFormInputProps> = ({
 
 	return (
 		<div className={styles.container}>
-			{label && (
-				<label htmlFor={id} className={styles.label}>
-					{label}
-				</label>
-			)}
+			<div className={styles.labelWrapper}>
+				{label && (
+					<label htmlFor={id} className={styles.label}>
+						{label}
+					</label>
+				)}
+				{showForgotPassword && (
+					<Link to="forgot-password" className={styles.right}>
+						Forgot password?
+					</Link>
+				)}
+			</div>
 			<div className={styles.inputWrapper}>
 				<input
 					id={id}
