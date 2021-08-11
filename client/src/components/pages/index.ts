@@ -9,6 +9,7 @@ export { default as SignInPage } from './sign-in';
 export { ClansPage, ClanPage } from './clans';
 export { default as SignUpPage } from './sign-up';
 export { default as HomePage } from './home';
+export { LandingPage } from './landing';
 export { CreateTaskSettings } from './create-task';
 export { default as SettingPage } from './setting';
 export { Tasks as ProfileTasks } from './profile/profile-tasks/tasks';

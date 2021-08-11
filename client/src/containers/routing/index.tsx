@@ -12,6 +12,7 @@ import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import TestPrivate from './test-private';
+import { LandingPageCointainer } from 'containers/landing-page';
 import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
@@ -40,15 +41,23 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
+			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPageCointainer} />
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute
+				exact
+				path={ROUTES.createTask}
+				component={CreateTaskPage}
+				needHeader={true}
+				needSideBar={true}
+			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.SignUp}
 				component={SignUp}
 				needHeader={false}
@@ -79,29 +88,8 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={false}
 			/>
 			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
-			<PublicRoute
-				exact
-				restricted={false}
-				needHeader={true}
-				needSideBar={true}
-				path={ROUTES.Clans}
-				component={Clans}
-			/>
-			<PublicRoute
-				exact
-				restricted={false}
-				needHeader={true}
-				needSideBar={true}
-				path={ROUTES.Clan}
-				component={Clan}
-			/>
-			<PrivateRoute
-				exact
-				path={ROUTES.createTask}
-				component={CreateTaskPage}
-				needHeader={true}
-				needSideBar={true}
-			/>
+			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
+			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
 		</Switch>
 	);
 };

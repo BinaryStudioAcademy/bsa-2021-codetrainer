@@ -1,5 +1,6 @@
 export { default as Example } from './example';
 export { default as TaskDescription } from './task-description';
+export { default as MainSidebar } from './main-sidebar';
 export { default as NextTask } from './next-task';
 export { default as Header } from './header';
 export { default as Challenge } from './challenge';
