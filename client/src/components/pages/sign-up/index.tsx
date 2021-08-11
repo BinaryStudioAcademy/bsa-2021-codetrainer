@@ -12,7 +12,7 @@ import { ISignUpForm } from 'typings/sign-up-form';
 
 const SignupSchema = Yup.object().shape({
 	username: Yup.string()
-		.matches(/^[a-zA-Z0-9\-]+$/, 'USe only letters, numbers and hyphens')
+		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
 		.min(3, 'Minimum length: 3')
 		.max(20, 'Maximum length: 20')
 		.required('Required'),
