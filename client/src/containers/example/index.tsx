@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
+import { NotificationType } from '../notification/logic/models';
+import { TSetNotificationArgs } from '../notification/logic/action-types';
+import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
+import { ClanModal } from 'components/modals';
+import { ROUTES } from 'constants/routes';
+import historyHelper from 'helpers/history.helper';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -12,9 +18,35 @@ const Example: React.FC = () => {
 	const getExampleText = (exampleName: string) => {
 		dispatch(actions.getExampleText({ exampleName }));
 	};
+	const showNotification = (notification: TSetNotificationArgs) => {
+		dispatch(setNotificationState(notification));
+	};
+
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
+				SIGN IN
+			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
+				SIGN UP
+			</button>
+			<div>
+				{Object.values(NotificationType).map((type) => {
+					return (
+						<button
+							className={styles.btn}
+							key={type}
+							onClick={() => {
+								showNotification({ notificationType: type, title: type, message: `${type} message` });
+							}}
+						>
+							{type}
+						</button>
+					);
+				})}
+			</div>
+
 			<button className={styles.btn} onClick={() => getExampleText('first')}>
 				get first text
 			</button>
@@ -38,7 +70,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<img src="https://codetrainer-images.s3.eu-north-1.amazonaws.com/7c79b29f-8b8e-4940-9402-8639f477825d.png" />
+			<ClanModal />
 		</div>
 	);
 };

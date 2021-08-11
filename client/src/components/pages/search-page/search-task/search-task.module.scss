@@ -1,14 +1,4 @@
-.submitButton {
-	background: #ec4179;
-	border-radius: 7px;
-	border: 0;
-	font: 600 16px 'Montserrat', sans-serif;
-	text-align: center;
-	color: #ffffff;
-	cursor: pointer;
-	padding: 12px 20px;
-	margin-top: 20px;
-}
+@import "styles/variables";
 
 .rankContainer {
 	display: flex;
@@ -21,4 +11,10 @@
 .checkboxContainer {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+h6 {
+	margin: 20px 0px 10px;
+	font: $tub-font;
 }

@@ -1,3 +1,5 @@
+@use 'styles/variables.scss' as var;
+
 .progressBarBlock {
 	.progressBarInfo {
 		display: flex;
@@ -7,11 +9,15 @@
 
 		.progressName {
 			margin-bottom: 0;
+			font: var.$progress-bar-font;
 		}
 		.progressInfoDone {
 			margin-bottom: 0;
 			.progressDone {
 				color: #ec4179;
+				font: var.$base-font;
+				font-weight: 500;
+				font-size: 16px;
 			}
 			.progressOfSymbol {
 				color: rgba(40, 40, 40, 0.5);

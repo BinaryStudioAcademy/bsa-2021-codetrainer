@@ -7,49 +7,72 @@ import { FormInput, CoverLayout } from 'components';
 import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import styles from './sign-up.module.scss';
+import { ROUTES } from 'constants/routes';
+import { ISignUpForm } from 'typings/sign-up-form';
 
 const SignupSchema = Yup.object().shape({
-	firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+	username: Yup.string()
+		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
+		.min(3, 'Minimum length: 3')
+		.max(20, 'Maximum length: 20')
+		.required('Required'),
+	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+	surname: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
 	email: Yup.string().email('Invalid email').required('Required'),
-	password: Yup.string().min(8, 'Too short').required('Required'),
+	password: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 	confirmPassword: Yup.string()
-		.min(8, 'Too short')
+		.min(8, 'Minimum length: 8')
+		.max(25, 'Maximum length: 25')
 		.required('Required')
 		.test('passwords-match', 'Passwords must match', function (value) {
 			return this.parent.password === value;
 		}),
 });
 
-const SignUp: React.FC = () => {
+interface ISignUnPageProps {
+	onFormSubmit: (form: ISignUpForm) => void;
+	error?: string;
+}
+
+const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 	return (
 		<CoverLayout>
 			<h4>SignUp</h4>
+			{!!error && <div className={styles.error}>{error}</div>}
 			<Formik
 				initialValues={{
-					firstName: '',
-					lastName: '',
+					username: '',
+					name: '',
+					surname: '',
 					email: '',
 					password: '',
 					confirmPassword: '',
 				}}
 				validationSchema={SignupSchema}
 				onSubmit={(values) => {
-					console.log(values);
+					onFormSubmit(values);
 				}}
 			>
 				<Form>
 					<Field
-						id="firstName"
-						name="firstName"
+						id="username"
+						name="username"
+						label="Username"
+						placeholder="Enter your username"
+						type="text"
+						component={FormInput}
+					/>
+					<Field
+						id="name"
+						name="name"
 						label="First Name"
 						placeholder="Enter your first name"
 						type="text"
 						component={FormInput}
 					/>
 					<Field
-						id="lastName"
-						name="lastName"
+						id="surname"
+						name="surname"
 						label="Last Name"
 						placeholder="Enter your last name"
 						type="text"
@@ -83,8 +106,8 @@ const SignUp: React.FC = () => {
 				</Form>
 			</Formik>
 			<div className={styles.footer}>
-				Already Signep up?{' '}
-				<Link to="/sign-in" className={styles.link}>
+				Already Signed up?{' '}
+				<Link to={ROUTES.SignIn} className={styles.link}>
 					Sign in
 				</Link>
 			</div>
@@ -92,4 +115,4 @@ const SignUp: React.FC = () => {
 	);
 };
 
-export default SignUp;
+export default SignUpPage;

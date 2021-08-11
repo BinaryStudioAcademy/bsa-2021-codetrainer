@@ -1,17 +1,17 @@
 import React from 'react';
-import IChallengeProps from 'components/common/challenge/types';
+import { IChallenge } from 'components/common/challenge/types';
 import { Challenge } from 'components/common';
 
-import styles from './styles.module.scss';
+import styles from './tasks.module.scss';
 
 interface IProfileTasks {
-	tasks: IChallengeProps[];
+	tasks: IChallenge[];
 }
 
 export const Tasks: React.FC<IProfileTasks> = ({ tasks }) => (
 	<div className={styles.root}>
 		{tasks.map((task, index) => (
-			<Challenge challenge={task} key={index.toString()} />
+			<Challenge {...task} key={index.toString()} />
 		))}
 	</div>
 );

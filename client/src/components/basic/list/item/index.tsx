@@ -13,7 +13,7 @@ export const Item: React.FC<IItemProps> = (props) => {
 	return (
 		<p>
 			<span className={styles.fieldName}>{name}: </span>
-			<span>{value}</span>
+			<span className={styles.fieldValue}>{value}</span>
 		</p>
 	);
 };

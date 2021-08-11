@@ -3,12 +3,12 @@ import { Avatar, Label } from 'components';
 import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
 
-interface IHeaderProps {
+export interface IHeaderProps {
 	name: string;
 	rank: number;
 	notificationCounter: number;
 	mark: number;
-	avatar: string;
+	avatar?: string;
 	listItems: Array<IListItem>;
 }
 
@@ -16,6 +16,7 @@ interface IListItem {
 	image: string;
 	text: string;
 	id: string;
+	onClick?: () => void
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
@@ -25,12 +26,12 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		setListVisibility(!isListVisible);
 	};
 
-	const getListItem = (item: IListItem) => {
+	const getListItem = ({ image, text, id, onClick = () => { } }: IListItem) => {
 		return (
-			<li className={styles.navigationItem} key={item.id}>
+			<li className={styles.navigationItem} key={id} onClick={() => { onClick(); changeVisible() }}>
 				<div className={styles.navigationLink}>
-					<img src={item.image} alt="listItem" />
-					<span>{item.text}</span>
+					<img src={image} alt="listItem" />
+					<span>{text}</span>
 				</div>
 			</li>
 		);

@@ -1,0 +1,29 @@
+:local(.info) {
+	display: flex;
+	width: 130px;
+	font-size: 12px;
+}
+
+:local(.infoDescription) {
+	color: rgba(40, 40, 40, 0.5);
+}
+
+:local(.infoDescription p) {
+	margin: 0 0 0 5px;
+}
+
+:local(.infoDescription a) {
+	color: rgba(#ec4179, 0.5);
+	text-decoration: underline;
+}
+
+:local(.infoDivider) {
+	border-left: rgba(40, 40, 40, 0.5) 1px solid;
+	border-right: rgba(40, 40, 40, 0.5) 1px solid;
+	padding: 0 10px;
+	margin: 0 10px;
+}
+
+:local(.infoDescription a:hover) {
+	color: rgba(#705ff5, 0.5);
+}

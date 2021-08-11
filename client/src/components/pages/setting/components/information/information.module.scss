@@ -1,0 +1,54 @@
+@use 'styles/variables.scss' as var;
+
+.container {
+	width: 916px;
+	margin: 80px auto;
+	font-family: var.$base-font-family;
+	color: var.$mine-shaft;
+}
+
+.submitBtn {
+	width: 100%;
+	background: var.$french-rose;
+	border-radius: 7px;
+	border: 0;
+	font: var.$button-font;
+	line-height: 20px;
+	text-align: center;
+	color: var.$white;
+	cursor: pointer;
+	padding: 12px 20px;
+	margin-top: 10px;
+}
+
+.form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 70px);
+	grid-gap: 20px;
+
+	.inputField label {
+		pointer-events: none;
+	}
+}
+
+.header {
+	margin: 0 0 10px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.experience {
+	grid-column: span 2;
+	width: 100%;
+}
+
+.listContainer {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	.listItem {
+		margin: 0 5px;	
+	}
+}
