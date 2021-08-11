@@ -5,7 +5,7 @@ import * as actions from './actions';
 
 export function* fetchForgotPassword({ payload }: ReturnType<typeof actions.forgotPassword>) {
 	try {
-		yield put(actions.recoverPasswordStateReset());
+		yield put(actions.recoverPasswordBeforeFetch());
 		yield call({ context: authServices, fn: authServices.forgotPassword }, payload);
 		yield put(actions.recoverPasswordSuccess());
 	} catch (error) {
@@ -15,7 +15,7 @@ export function* fetchForgotPassword({ payload }: ReturnType<typeof actions.forg
 
 export function* fetchResetPassword({ payload }: ReturnType<typeof actions.resetPassword>) {
 	try {
-		yield put(actions.recoverPasswordStateReset());
+		yield put(actions.recoverPasswordBeforeFetch());
 		yield call({ context: authServices, fn: authServices.resetPassword }, payload);
 		yield put(actions.recoverPasswordSuccess());
 	} catch (error) {

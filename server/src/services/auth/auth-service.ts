@@ -70,10 +70,10 @@ export class AuthService {
 	}
 
 	async resetPassword({ token, password }: { token: string; password: string }) {
-		verifyToken(token, TokenTypes.RESET);
+		const { id } = verifyToken(token, TokenTypes.RESET);
 		const repository = getCustomRepository(this.userRepository);
 		const user = await repository.getByToken(token);
-		if (!user) {
+		if (!user || user.id !== id) {
 			throw new ValidationError(CODE_ERRORS.USER_NOT_EXIST);
 		}
 		await repository.updateById(user.id, { password: await encrypt(password), resetToken: undefined });

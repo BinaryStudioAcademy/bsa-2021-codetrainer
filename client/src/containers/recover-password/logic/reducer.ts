@@ -20,6 +20,14 @@ const recoverPassword = createReducer<IRecoverPassword>(initialState, {
 	[actionTypes.RECOVER_PASSWORD_STATE_RESET](state) {
 		return {
 			...state,
+			isLoading: false,
+			isSuccess: false,
+			errors: null,
+		};
+	},
+	[actionTypes.RECOVER_PASSWORD_BEFORE_FETCH](state) {
+		return {
+			...state,
 			isLoading: true,
 			isSuccess: false,
 			errors: null,

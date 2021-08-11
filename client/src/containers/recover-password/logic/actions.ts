@@ -7,6 +7,8 @@ export const recoverPasswordError = createAction<actionTypes.TRecoverPasswordErr
 
 export const recoverPasswordStateReset = createAction(actionTypes.RECOVER_PASSWORD_STATE_RESET);
 
+export const recoverPasswordBeforeFetch = createAction(actionTypes.RECOVER_PASSWORD_BEFORE_FETCH);
+
 export const forgotPassword = createAction<actionTypes.TForgotPassword>(actionTypes.FORGOT_PASSWORD);
 
 export const resetPassword = createAction<actionTypes.TResetPassword>(actionTypes.RESET_PASSWORD);

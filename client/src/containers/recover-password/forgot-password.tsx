@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { ForgotPassword as Password, FullscreenLoader } from 'components';
 import { useAppSelector } from 'hooks/useAppSelector';
-import { forgotPassword } from './logic/actions';
+import { forgotPassword, recoverPasswordStateReset } from './logic/actions';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 
@@ -30,6 +30,7 @@ export const ForgotPassword: React.FC = () => {
 				title: 'Forgot Password',
 			}),
 		);
+		dispatch(recoverPasswordStateReset());
 	}, [isSuccess]);
 
 	if (isLoading) {

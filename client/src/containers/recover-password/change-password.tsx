@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ChangePassword as Password, FullscreenLoader } from 'components';
 import { useAppSelector } from 'hooks/useAppSelector';
-import { resetPassword } from './logic/actions';
+import { resetPassword, recoverPasswordStateReset } from './logic/actions';
 import { useQuery } from 'hooks/useQuery';
 import { ROUTES } from 'constants/routes';
 
@@ -25,6 +25,7 @@ export const ChangePassword: React.FC = () => {
 		if (!isSuccess) {
 			return;
 		}
+		dispatch(recoverPasswordStateReset());
 		history.push(ROUTES.SignIn);
 	}, [isSuccess]);
 

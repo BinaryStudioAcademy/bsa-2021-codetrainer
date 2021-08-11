@@ -20,7 +20,7 @@ import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -49,7 +49,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.SignUp}
 				component={SignUp}
 				needHeader={false}
@@ -65,7 +65,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.ForgotPassword}
 				component={ForgotPassword}
 				needHeader={false}
@@ -73,7 +73,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.ChangePassword}
 				component={ChangePassword}
 				needHeader={false}
