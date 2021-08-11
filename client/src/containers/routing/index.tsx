@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Clans, Clan } from 'containers/clans';
 import { CreateTaskPage } from 'containers/create-new-task';
 import SettingPage from 'containers/setting-page';
-import { FullscreenLoader, PrivateRoute, PublicRoute, ForgotPassword, ChangePassword, SearchPage } from 'components';
+import { FullscreenLoader, PublicRoute, ForgotPassword, ChangePassword } from 'components';
 import TaskPage from '../task-page';
 import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
@@ -12,10 +12,13 @@ import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import TestPrivate from './test-private';
+import { LandingPageCointainer } from 'containers/landing-page';
 import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
+import { SearchPage } from 'containers/search-page';
+import PrivateRoute from 'containers/private-route';
 
 interface IRoutingProps {}
 
@@ -38,15 +41,23 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
+			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPageCointainer} />
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute
+				exact
+				path={ROUTES.createTask}
+				component={CreateTaskPage}
+				needHeader={true}
+				needSideBar={true}
+			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
-			<PrivateRoute path="/setting" component={SettingPage} needHeader={true} needSideBar={true} />
+			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.SignUp}
 				component={SignUp}
 				needHeader={false}
@@ -77,29 +88,8 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={false}
 			/>
 			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
-			<PublicRoute
-				exact
-				restricted={false}
-				needHeader={true}
-				needSideBar={true}
-				path={ROUTES.Clans}
-				component={Clans}
-			/>
-			<PublicRoute
-				exact
-				restricted={false}
-				needHeader={true}
-				needSideBar={true}
-				path={ROUTES.Clan}
-				component={Clan}
-			/>
-			<PrivateRoute
-				exact
-				path={ROUTES.createTask}
-				component={CreateTaskPage}
-				needHeader={true}
-				needSideBar={true}
-			/>
+			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
+			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
 		</Switch>
 	);
 };

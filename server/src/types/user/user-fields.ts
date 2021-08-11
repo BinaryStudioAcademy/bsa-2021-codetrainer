@@ -9,6 +9,7 @@ export interface IProfileClan {
 
 export interface IUserFields {
 	id: string;
+	username: string;
 	password: string;
 	email: string;
 	name?: string;

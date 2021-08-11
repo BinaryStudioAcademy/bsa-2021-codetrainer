@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { Challenge, ProfileTabWithSidebar } from 'components';
-import IChallengeProps from 'components/common/challenge/types';
+import { IChallenge } from 'components/common/challenge/types';
 
 interface IProfileTasks {
 	profileTasks: {
 		title: string;
 		id: string;
-		tasks: IChallengeProps[];
+		tasks: IChallenge[];
 	}[];
 }
 

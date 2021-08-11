@@ -1,4 +1,5 @@
-export interface IChallengeStatsProps {
+
+export interface IChallengeStats {
 	favoriteSaves: number;
 	positiveFeedback: number;
 	author: {
@@ -8,10 +9,25 @@ export interface IChallengeStatsProps {
 	};
 }
 
-export interface IChallengeHeaderProps {
+export interface IChallengeHeader {
 	title: string;
 	rank: number;
 	linkToAuthor: string;
 }
 
-export default IChallengeProps;
+export interface IChallenge {
+	id: string;
+	author: {
+		firstName: string;
+		lastName: string;
+		link: string;
+	};
+	linkToAuthor: string;
+	title: string;
+	rank: number;
+	stats: {
+		favoriteSaves: number;
+		positiveFeedback: number;
+	};
+	tags: TChallengeTags;
+}

@@ -6,8 +6,9 @@ namespace WebApi.Entities {
 	}
 	interface IUser {
 		id: string;
+		username: string;
 		name: string;
-		lastname: string;
+		surname: string;
 		email: string;
 		clan?: string;
 		profileClan?: string;

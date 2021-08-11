@@ -17,4 +17,9 @@ export const ROUTES = {
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
+
+	Setting: '/setting',
+
+	Landing: '/landing',
+	// should be in future '/'
 };

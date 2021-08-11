@@ -1,28 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@use 'styles/variables.scss' as var;
 
-.inputWrapper {
+.container {
 	position: relative;
+	height: 82px;
 
 	.inputField,
 	.passwordField {
 		box-sizing: border-box;
 		width: 100%;
-		background: #f0f3f9;
+		background: var.$white-lilac;
 		border-radius: 7px;
 		border: 0;
-		margin-bottom: 15px;
-		font-family: 'Montserrat', sans-serif;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 14px;
+		font: var.$base-font;
 		line-height: 17px;
-		color: #282828;
+		color: var.$mine-shaft;
 		padding: 15px 20px;
-	}
+		outline: none;
+		transition: var.$base-animation-time;
 
-	.passwordField {
-		width: 300px;
-		padding-right: 40px;
+		&:hover {
+			background-color: #dee4f2;
+		}
 	}
 
 	.inputField::placeholder,
@@ -31,26 +29,57 @@
 		opacity: 0.4;
 	}
 
-	.visibilityBtn {
-		margin-left: -40px;
-		cursor: pointer;
+	.inputWrapper {
+		position: relative;
 	}
 
-	.label {
-		display: block;
-		font-family: 'Montserrat', sans-serif;
-		font-style: normal;
-		font-weight: 500;
-		font-size: 12px;
-		line-height: 15px;
-		color: #282828;
-		margin-bottom: 5px;
+	.iconWrapper {
+		position: absolute;
+		cursor: pointer;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 0;
+		width: 47px;
+		height: 47px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 7px;
+		transition: var.$base-animation-time;
+
+		&:hover {
+			background-color: rgb(228, 228, 255);
+		}
+	}
+
+	.visibilityIcon {
+		user-select: none;
+		width: 15px;
+		height: 15px;
+	}
+	.labelWrapper {
+		display: flex;
+		justify-content: space-between;
+
+		.label {
+			display: block;
+			font: var.$progress-bar-font;
+			line-height: 15px;
+			color: var.$mine-shaft;
+			margin-bottom: 5px;
+		}
+
+		.right {
+			text-align: right;
+			text-decoration: underline;
+		}
 	}
 
 	.error {
-		color: red;
-		font-size: 10px;
-		position: absolute;
-		bottom: 0px;
+		text-align: right;
+		margin-top: 5px;
+		height: 12px;
+		font-size: 12px;
+		color: var.$french-rose;
 	}
 }
