@@ -3,7 +3,7 @@ import { Tag } from '../../models';
 
 @EntityRepository(Tag)
 export class TagRepository extends Repository<Tag> {
-	getAll(skip: number, take: number) {
+	getAll() {
 		return this.createQueryBuilder('tag')
 			.leftJoinAndSelect('tag.tasks', 'tasks')
 			.select(['tag'])

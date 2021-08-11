@@ -1,15 +1,18 @@
 import { getCustomRepository } from 'typeorm';
-import { Task, User, TTaskRepository, TUserRepository } from '../../data';
-import { TASK_STATUS } from '../../common';
+import { Task, User, TTaskRepository, TUserRepository, TTagRepository, TaskSorts } from '../../data';
+import { TASK_ON_PAGE, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
 
 	protected userRepository: TUserRepository;
 
-	constructor({ task, user }: { task: TTaskRepository; user: TUserRepository }) {
+	protected tagRepository: TTagRepository;
+
+	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
 		this.taskRepository = task;
 		this.userRepository = user;
+		this.tagRepository = tag;
 	}
 
 	async create(user: User, task: Task) {
@@ -19,7 +22,7 @@ export class TaskService {
 			...task,
 			user,
 			isPublished: false,
-			status: TASK_STATUS.EDITABLE,
+			status: TASK_STATUS.BETA,
 		});
 		await userRepository.save({ id: user.id, tasks: [...user.tasks, newTask] });
 		const savedTask = await repository.getById(newTask.id);
@@ -50,7 +53,30 @@ export class TaskService {
 		return clans;
 	}
 
-	// async search(query) {
-	// 	const repository = getCustomRepository(this.taskRepository);
-	// }
+	async search(
+		query: {
+			q?: string;
+			sort?: TaskSorts;
+			status?: string;
+			progress?: string;
+			rank?: number;
+			tags?: string;
+			page: number;
+		},
+		user: User,
+	) {
+		const { sort, page, ...where } = query;
+		const repository = getCustomRepository(this.taskRepository);
+		const tagRepository = getCustomRepository(this.tagRepository);
+		return {
+			tags: await tagRepository.getAll(),
+			tasks: await repository.search({
+				where,
+				sort,
+				skip: page * TASK_ON_PAGE,
+				take: TASK_ON_PAGE,
+				userId: user.id,
+			}),
+		};
+	}
 }
