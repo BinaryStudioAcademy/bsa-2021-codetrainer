@@ -3,7 +3,7 @@ import { IconName } from '@blueprintjs/icons';
 
 export interface ITabProps {
 	onChange: (text: string) => void;
-	value: string;
+	value?: string;
 	editable?: boolean;
 }
 

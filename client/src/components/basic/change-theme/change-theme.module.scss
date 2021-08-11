@@ -1,0 +1,9 @@
+.changeScheme {
+	margin-left: auto;
+	margin-bottom: 6px;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.7;
+		color: #282828;
+	}
+}
