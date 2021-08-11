@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FieldProps, getIn } from 'formik';
 import styles from './form-input.module.scss';
-import { Icon } from '@blueprintjs/core';
+import hideIcon from 'assets/icons/hide.svg';
+import showIcon from 'assets/icons/show.svg';
 
 interface IFormInputProps extends FieldProps {
 	id: string;
@@ -30,25 +31,28 @@ const FormInput: React.FC<IFormInputProps> = ({
 	};
 
 	return (
-		<div className={styles.inputWrapper}>
+		<div className={styles.container}>
 			{label && (
 				<label htmlFor={id} className={styles.label}>
 					{label}
 				</label>
 			)}
-			<input
-				id={id}
-				name={name}
-				onChange={onChange}
-				value={value}
-				type={type}
-				placeholder={placeholder}
-				className={isPasswordField ? styles.passwordField : styles.inputField}
-			/>
-			{isPasswordField && (
-				//@ts-ignore
-				<Icon onClick={togglePasswordVisibility} icon="eye-off" className={styles.visibilityBtn} />
-			)}
+			<div className={styles.inputWrapper}>
+				<input
+					id={id}
+					name={name}
+					onChange={onChange}
+					value={value}
+					type={type}
+					placeholder={placeholder}
+					className={isPasswordField ? styles.passwordField : styles.inputField}
+				/>
+				{isPasswordField && (
+					<div className={styles.iconWrapper} onClick={togglePasswordVisibility}>
+						<img src={type === 'password' ? hideIcon : showIcon} className={styles.visibilityIcon} />
+					</div>
+				)}
+			</div>
 			{isTouched && error && <div className={styles.error}>{error}</div>}
 		</div>
 	);
