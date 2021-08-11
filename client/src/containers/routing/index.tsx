@@ -41,8 +41,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
-			<PublicRoute restricted={false}
-						 path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
+			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path="/setting" component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
