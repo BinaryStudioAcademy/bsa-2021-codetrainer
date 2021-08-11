@@ -49,4 +49,8 @@ export class TaskService {
 		const clans = await repository.getAll(skip, take);
 		return clans;
 	}
+
+	// async search(query) {
+	// 	const repository = getCustomRepository(this.taskRepository);
+	// }
 }

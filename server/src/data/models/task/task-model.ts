@@ -6,8 +6,11 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	ManyToOne,
+	ManyToMany,
+	JoinColumn,
 } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
+import { Tag } from '../tag';
 import { User } from '../user';
 
 @Entity()
@@ -50,4 +53,8 @@ export class Task extends BaseEntity {
 
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
+
+	@ManyToMany(() => Tag, (tag) => tag.tasks)
+	@JoinColumn()
+	tags!: Tag[];
 }
