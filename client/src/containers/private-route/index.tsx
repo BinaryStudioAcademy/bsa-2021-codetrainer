@@ -2,7 +2,7 @@ import * as React from 'react';
 import Header from 'containers/header';
 import MainSidebar from 'components/common/main-sidebar';
 import { ROUTES } from 'constants/routes';
-import { useAppSelector } from 'hooks/useAppSelector';
+// import { useAppSelector } from 'hooks/useAppSelector';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
 
 interface IPrivateRouteProps extends RouteProps {
@@ -13,8 +13,8 @@ interface IPrivateRouteProps extends RouteProps {
 
 const PrivateRoute = (props: IPrivateRouteProps) => {
 	const { component: Component, ...rest } = props;
-	const { user } = useAppSelector((state) => state.auth.userData);
-	const isAuthorized = Boolean(user);
+	// const { user } = useAppSelector((state) => state.auth.userData);
+	const isAuthorized = true;
 	return (
 		<>
 			{rest.needHeader ? <Header /> : null}

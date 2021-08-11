@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { FieldProps, getIn } from 'formik';
 import styles from './form-input.module.scss';
-import { Icon } from '@blueprintjs/core';
+import hideIcon from 'assets/icons/hide.svg';
+import showIcon from 'assets/icons/show.svg';
+import clsx from 'clsx';
 
 interface IFormInputProps extends FieldProps {
 	id: string;
@@ -47,7 +49,14 @@ const FormInput: React.FC<IFormInputProps> = ({
 			/>
 			{isPasswordField && (
 				//@ts-ignore
-				<Icon onClick={togglePasswordVisibility} icon="eye-off" className={styles.visibilityBtn} />
+				<img
+					onClick={togglePasswordVisibility}
+					className={clsx(styles.visibilityBtn, type === 'password' && styles.opacity)}
+					src={type === 'password' ? showIcon : hideIcon}
+					width={20}
+					height={25}
+					alt="hide"
+				/>
 			)}
 			{isTouched && error && <div className={styles.error}>{error}</div>}
 		</div>

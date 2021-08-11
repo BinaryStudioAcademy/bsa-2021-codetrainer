@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Icon } from '@blueprintjs/core';
+// import { Icon } from '@blueprintjs/core';
 import clsx from 'clsx';
 import ReactTooltip from 'react-tooltip';
-import { IconTaskPageTab } from 'common';
+// import { IconTaskPageTab } from 'common';
 import { TCreateTabs } from '../types';
 
 import styles from './styles.module.scss';
@@ -30,13 +30,13 @@ export const Header: React.FC<IHeaderProps> = ({ tabs, onChange }) => {
 					<span>{header.title}</span>
 					{header.icon ? (
 						<>
-							<Icon
+							{/* <Icon
 								icon={header.icon.name}
 								data-for={`id-for-tooltip-${i}-${timestamp}`}
 								className={styles.icon}
 								color={header.icon.color || IconTaskPageTab.COLOR}
 								data-tip
-							/>
+							/> */}
 							<ReactTooltip id={`id-for-tooltip-${i}-${timestamp}`}>{header.toolTipTitle}</ReactTooltip>
 						</>
 					) : null}

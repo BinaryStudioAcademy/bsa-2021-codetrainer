@@ -69,21 +69,15 @@ export const CreateTaskSettings = ({
 				</label>
 				<input className={Classes.INPUT} id="tags" placeholder="Enter Tags (separated by comma)" />
 
-				<Switch
-					inline
-					id="allow-contributors"
-					checked={isSelectedSwitch}
-					onChange={() => onSwitchClick(!isSelectedSwitch)}
-					labelElement={
-						<label>
-							Allow contributors?
-							<InfoPopover>
-								Check to allow contributors to make changes to this task while it&apos;s in beta. You
-								will be notified of any edits made by other users.
-							</InfoPopover>
-						</label>
-					}
-				/>
+				<Switch checked={isSelectedSwitch} onChange={() => onSwitchClick(!isSelectedSwitch)}>
+					<label>
+						Allow contributors?
+						<InfoPopover>
+							Check to allow contributors to make changes to this task while it&apos;s in beta. You will
+							be notified of any edits made by other users.
+						</InfoPopover>
+					</label>
+				</Switch>
 			</form>
 		</div>
 	);

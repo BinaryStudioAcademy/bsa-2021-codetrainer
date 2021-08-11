@@ -28,12 +28,19 @@
 	.inputField::placeholder,
 	.passwordField::placeholder {
 		color: rgba(40, 40, 40, 0.5);
+
 		opacity: 0.4;
 	}
 
 	.visibilityBtn {
+		position: relative;
+		top: 8px;
 		margin-left: -40px;
 		cursor: pointer;
+	}
+
+	.opacity {
+		opacity: 0.2;
 	}
 
 	.label {
