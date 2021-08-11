@@ -1,12 +1,11 @@
+@use 'styles/variables.scss' as var;
+
 .listContainer {
 	.header {
 		display: block;
-	  font-family: "Montserrat", sans-serif;
-	  font-style: normal;
-	  font-weight: 500;
-	  font-size: 12px;
+	  font: var.$base-font;
 	  line-height: 15px;
-	  color: #282828;
+	  color: var.$mine-shaft;
 	  margin-bottom: 5px;
 	}
 

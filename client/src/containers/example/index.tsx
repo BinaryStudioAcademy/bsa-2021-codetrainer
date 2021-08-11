@@ -7,6 +7,8 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
+import { ROUTES } from 'constants/routes';
+import historyHelper from 'helpers/history.helper';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -22,6 +24,12 @@ const Example: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
+				SIGN IN
+			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
+				SIGN UP
+			</button>
 			<div>
 				{Object.values(NotificationType).map((type) => {
 					return (

@@ -2,18 +2,21 @@ import React from 'react';
 import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { FormInput } from 'components';
-import { Button } from 'components/basic';
+import { FormInput, Button } from 'components';
 import { ButtonClasses } from 'components/basic/button';
 import List from '../list-radio';
 import { IFormItem, IInformationProps } from './interfaces';
 import styles from './information.module.scss';
 
 const SignupSchema = Yup.object().shape({
-	name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	username: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	clan: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	skills: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+	username: Yup.string()
+		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
+		.min(3, 'Minimum length: 3')
+		.max(20, 'Maximum length: 20')
+		.required('Required'),
+	clan: Yup.string().min(4, 'Minimum length: 4').max(30, 'Maximum length: 30').required('Required'),
+	skills: Yup.string().min(2, 'Minimum length: 2').max(50, 'Maximum length: 50').required('Required'),
 	email: Yup.string().email('Invalid email').required('Required'),
 });
 
