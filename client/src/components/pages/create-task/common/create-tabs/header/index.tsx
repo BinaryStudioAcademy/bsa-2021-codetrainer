@@ -30,6 +30,7 @@ export const Header: React.FC<IHeaderProps> = ({ tabs, onChange }) => {
 					<span>{header.title}</span>
 					{header.icon ? (
 						<>
+							{/* dont get what this icon is for and where it is used */}
 							{/* <Icon
 								icon={header.icon.name}
 								data-for={`id-for-tooltip-${i}-${timestamp}`}
