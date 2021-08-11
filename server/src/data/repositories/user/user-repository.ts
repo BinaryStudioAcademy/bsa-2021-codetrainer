@@ -1,4 +1,4 @@
-import { EntityRepository, Repository, SimpleConsoleLogger } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 import { User } from '../../models';
 
 @EntityRepository(User)
