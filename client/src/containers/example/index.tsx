@@ -8,6 +8,8 @@ import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ClanModal } from 'components/modals';
+import { ROUTES } from 'constants/routes';
+import { useHistory } from 'react-router-dom';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -19,10 +21,17 @@ const Example: React.FC = () => {
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
 	};
+	const history = useHistory();
 
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
+			<button className={styles.btn} onClick={() => history.push(ROUTES.SignIn)}>
+				SIGN IN
+			</button>
+			<button className={styles.btn} onClick={() => history.push(ROUTES.SignUp)}>
+				SIGN UP
+			</button>
 			<div>
 				{Object.values(NotificationType).map((type) => {
 					return (
