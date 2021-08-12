@@ -4,7 +4,7 @@ import { IClanItemProps } from './types';
 import { Button } from 'components/basic';
 import { MemberRoles } from 'common/enum/app/clans';
 import { ButtonClasses } from 'components/basic/button';
-import { getMonthName } from 'common/helpers/date';
+import { getMonthName } from 'helpers/date';
 
 const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
 	const currentUserMember = clan.members.find((member) => member.id === userId);
