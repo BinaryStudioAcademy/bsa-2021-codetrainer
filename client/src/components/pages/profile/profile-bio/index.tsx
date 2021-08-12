@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './profile-bio.module.scss';
-import { List } from 'components/basic';
+import { Avatar, Label, List } from 'components/basic';
 
 export interface IProfileBioProps {
-	img: string;
+	img?: string;
 	name: string;
 	nickname: string;
 	clan?: string;
@@ -13,6 +13,8 @@ export interface IProfileBioProps {
 	followingQuantity: number;
 	followersQuantity: number;
 	communityQuantity: number;
+	rank: number;
+	score: number;
 }
 
 export const ProfileBio = (props: IProfileBioProps) => {
@@ -27,6 +29,8 @@ export const ProfileBio = (props: IProfileBioProps) => {
 		followingQuantity,
 		followersQuantity,
 		communityQuantity,
+		rank,
+		score,
 	} = props;
 
 	const gitHubLink = gitHubUrl ? (
@@ -55,8 +59,10 @@ export const ProfileBio = (props: IProfileBioProps) => {
 	return (
 		<div className={styles.profileBio}>
 			<div className={styles.profileHeader}>
-				<img src={img} className={styles.avatar} />
-				<h5>{name}</h5>
+				{img ? <Avatar avatar={img} size={57} /> : <Avatar size={57} />}
+				<h5 className={styles.name}>{name}</h5>
+				<Label label={rank + ' rank'} color="#EC4179" />
+				<Label label={score} color="#EC4179" />
 			</div>
 			<div className={styles.fields}>
 				<List items={listItems1} />

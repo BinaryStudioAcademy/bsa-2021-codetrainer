@@ -1,5 +1,8 @@
 .selectWrapper {
 	position: relative;
+	h5 {
+		padding-right: 45px;
+	}
 }
 
 .select {
@@ -28,7 +31,7 @@
 	-moz-appearance: none;
 }
 
-.select svg {
+.select img {
 	margin-right: 15px;
 }
 

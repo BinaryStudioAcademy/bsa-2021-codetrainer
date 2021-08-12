@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { ISignUpForm } from 'typings/sign-up-form';
-import { SignUpPage, Spinner } from 'components';
+import { FullscreenLoader, SignUpPage } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
@@ -22,7 +22,7 @@ const SignUp: React.FC = () => {
 		}
 	}, [isSuccess]);
 
-	return isLoading ? <Spinner /> : <SignUpPage onFormSubmit={onFormSubmit} error={error} />;
+	return isLoading ? <FullscreenLoader /> : <SignUpPage onFormSubmit={onFormSubmit} error={error} />;
 };
 
 export default SignUp;

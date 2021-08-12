@@ -34,6 +34,10 @@ export class UserRepository extends Repository<User> {
 		return this.findOne({ githubId });
 	}
 
+	getByToken(token: string) {
+		return this.createQueryBuilder('user').where('user.resetToken = :token', { token }).getOne();
+	}
+
 	updateById(id: string, data: Partial<User>) {
 		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}

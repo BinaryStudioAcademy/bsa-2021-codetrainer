@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux';
 import { Clans, Clan } from 'containers/clans';
 import { CreateTaskPage } from 'containers/create-new-task';
 import SettingPage from 'containers/setting-page';
-import { FullscreenLoader, PublicRoute, ForgotPassword, ChangePassword } from 'components';
+import { FullscreenLoader, PublicRoute } from 'components';
 import TaskPage from '../task-page';
 import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
+import { ForgotPassword, ChangePassword } from 'containers/recover-password';
 import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
@@ -52,7 +53,12 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={true}
 			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
-			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
+			<PrivateRoute
+				path={ROUTES.UserProfile}
+				component={Profile}
+				needHeader={true}
+				needSideBar={true}
+			/>
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
@@ -73,7 +79,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.ForgotPassword}
 				component={ForgotPassword}
 				needHeader={false}
@@ -81,7 +87,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.ChangePassword}
 				component={ChangePassword}
 				needHeader={false}

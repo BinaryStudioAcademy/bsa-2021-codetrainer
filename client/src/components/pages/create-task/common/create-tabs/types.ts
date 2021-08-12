@@ -3,7 +3,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export interface ITabProps {
 	onChange: (text: string) => void;
-	value: string;
+	value?: string;
 	editable?: boolean;
 }
 
