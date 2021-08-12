@@ -1,0 +1,1 @@
+export { createLinkResetPassword } from './createLinkResetPassword';

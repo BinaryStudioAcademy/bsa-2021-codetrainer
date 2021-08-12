@@ -17,3 +17,4 @@ export const validationMiddleware =
 	};
 
 export { taskSchema, taskIdSchema } from './task-validation';
+export { resetPasswordSchema, forgotPasswordSchema } from './auth-validation';

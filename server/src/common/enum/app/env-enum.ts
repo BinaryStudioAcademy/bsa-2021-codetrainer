@@ -1,16 +1,18 @@
 import { getEnv } from '../../../helpers';
 
-const ConfigVariables = process.env;
+const variables = process.env;
 
 const ENV = {
 	APP: {
 		PORT: getEnv('PORT'),
 		API_PATH: '/api',
+		URL: variables?.NODE_ENV === 'development' ? 'http://localhost:3000' : getEnv('APP_URL'),
 	},
 	JWT: {
 		SECRET: getEnv('SECRET_KEY'),
 		EXPIRES_IN: '30m',
 		REFRESH_EXPIRES_IN: '30d',
+		RESET_EXPIRES_IN: '1d',
 	},
 	COOKIE: {
 		SECRET: getEnv('COOKIE_SECRET'),
@@ -41,6 +43,8 @@ const ENV = {
 	MAILER: {
 		ADDRESS: getEnv('EMAIL_ADDRESS'),
 		PASSWORD: getEnv('EMAIL_PASSWORD'),
+		HOST: getEnv('EMAIL_HOST'),
+		PORT: getEnv('EMAIL_PORT'),
 	},
 	GITHUB: {
 		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
@@ -49,4 +53,4 @@ const ENV = {
 	},
 };
 
-export { ENV, ConfigVariables };
+export { ENV };

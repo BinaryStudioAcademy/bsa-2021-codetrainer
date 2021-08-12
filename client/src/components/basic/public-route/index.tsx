@@ -17,7 +17,6 @@ const PublicRoute = (props: IPublicRouteProps) => {
 	const { restricted, component: Component, ...rest } = props;
 	const { user } = useAppSelector((state) => state.auth.userData);
 	const isAuthorized = Boolean(user);
-
 	return (
 		<>
 			{rest.needSideBar ? (
