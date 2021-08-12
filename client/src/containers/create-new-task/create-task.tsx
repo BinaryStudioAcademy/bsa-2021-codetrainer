@@ -111,6 +111,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
 					<ButtonsBlock />
 					<CreateTabs {...tabsInstructions} />
+					<div className={styles.validationButtons}>
+						<Button className={clsx(ButtonClasses.blue)}>Validate Solution</Button>
+						<Button className={clsx(ButtonClasses.blue)}>Insert Example</Button>
+					</div>
 				</div>
 				<div className={clsx(styles.solution, 'taskSolution')}>
 					<CreateTabs {...tabsCode} />
