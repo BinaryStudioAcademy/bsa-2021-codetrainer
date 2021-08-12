@@ -234,6 +234,31 @@ import { IUserFields } from '../../types';
 /**
  * @swagger
  * /api/clans/{id}:
+ *   patch:
+ *     tags:
+ *       - Clans
+ *     summary: Join or leave a clan
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the clan to join/leave
+ *     requestBody:
+ *       required: false
+ *     responses:
+ *       200:
+ *         description: Updated clan
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clan'
+ */
+
+/**
+ * @swagger
+ * /api/clans/{id}:
  *   delete:
  *     tags:
  *       - Clans
