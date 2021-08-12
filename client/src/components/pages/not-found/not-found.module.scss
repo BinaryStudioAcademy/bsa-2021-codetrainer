@@ -1,0 +1,35 @@
+@import "styles/variables";
+
+.container {
+    position: relative;
+
+    .content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        max-width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        & > button {
+            height: 50px;
+        }
+
+        .mainHeader {
+            color: $french-rose;
+            font-family: $base-font;
+            font-size: 80px;
+            font-weight: 600;
+        }
+
+        .secondHeader {
+            color: $mine-shaft;
+            font-family: $base-font;
+            font-size: 30px;
+        }
+    }
+}
