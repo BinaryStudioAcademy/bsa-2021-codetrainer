@@ -53,8 +53,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={true}
 			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
-			<PublicRoute
-				restricted={false}
+			<PrivateRoute
 				path={ROUTES.UserProfile}
 				component={Profile}
 				needHeader={true}
