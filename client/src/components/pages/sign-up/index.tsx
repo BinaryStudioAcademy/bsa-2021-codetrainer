@@ -56,7 +56,7 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 				}}
 			>
 				<Form className={styles.form}>
-					<h4>SignUp</h4>
+					<h4 className={styles.header}>SignUp</h4>
 					{!!error && <div className={styles.error}>{error}</div>}
 					<Field
 						id="username"

@@ -24,7 +24,7 @@ a {
 		margin: auto;
 		display: flex;
 		flex-direction: column;
-		gap: 0px;
+		gap: 5px;
 		& > button {
 			height: 50px;
 		}
@@ -32,6 +32,9 @@ a {
 			color: $french-rose;
 			margin-top: -20px;
 			margin-bottom: 5px;
+		}
+		.header {
+			margin-top: 10px;
 		}
 	}
 
