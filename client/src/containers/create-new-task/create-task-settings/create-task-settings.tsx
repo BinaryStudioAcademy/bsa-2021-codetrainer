@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CreateTaskSettings } from 'components/pages';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from '../mock';
 import { Discipline, IDisciplineItem } from '../logic/models';
 import { ISelectValue } from 'components/basic/select/interface';
 
-export const CreateSettings = () => {
-	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
-	const onChangeDiscipline = (newDiscipline: Discipline) => {
-		const foundDisciplineItem: IDisciplineItem = findDisciplineItem(newDiscipline);
-		setDiscipline(foundDisciplineItem);
-	};
-	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
-	const onSwitchClick = (newSwitchState: boolean) => {
-		setSelectedSwitch(newSwitchState);
-	};
+interface ICreateSettingsProps {
+	chosenDiscipline: IDisciplineItem;
+	onChangeDiscipline: (newDiscipline: Discipline) => void;
+	isSelectedSwitch: boolean;
+	onSwitchClick: (newSwitchState: boolean) => void;
+	language: ISelectValue;
+	setLanguage: (value: ISelectValue) => void;
+	taskName: string;
+	setTaskName: (value: string) => void;
+	rank: string;
+	setRank: (value: string) => void;
+	tags: string;
+	setTags: (value: string) => void;
+}
 
-	const [language, setLanguage] = useState(SELECT_PROPS.values[0]);
+export const CreateSettings = ({
+	chosenDiscipline,
+	onChangeDiscipline,
+	isSelectedSwitch,
+	onSwitchClick,
+	language,
+	setLanguage,
+	taskName,
+	setTaskName,
+	rank,
+	setRank,
+	tags,
+	setTags,
+}: ICreateSettingsProps) => {
 	return (
 		<div>
 			<CreateTaskSettings
+				taskName={taskName}
+				setTaskName={setTaskName}
 				disciplineItems={DISCIPLINE_ITEMS}
 				chosenDiscipline={chosenDiscipline.value}
 				onChangeDiscipline={onChangeDiscipline}
@@ -31,12 +50,16 @@ export const CreateSettings = () => {
 						setLanguage(value);
 					},
 				}}
+				rank={rank}
+				setRank={setRank}
+				tags={tags}
+				setTags={setTags}
 			/>
 		</div>
 	);
 };
 
-const findDisciplineItem = (newDiscipline: Discipline) => {
+export const findDisciplineItem = (newDiscipline: Discipline) => {
 	const result = DISCIPLINE_ITEMS.find((item) => item.value === newDiscipline);
 	if (result) {
 		return result;

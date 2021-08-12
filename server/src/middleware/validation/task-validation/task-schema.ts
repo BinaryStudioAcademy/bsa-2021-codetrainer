@@ -6,7 +6,6 @@ export const taskSchema = checkSchema({
 		errorMessage: 'Wrong name format',
 		trim: true,
 		isString: true,
-		optional: true,
 		notEmpty: true,
 	},
 	difficulty: {
