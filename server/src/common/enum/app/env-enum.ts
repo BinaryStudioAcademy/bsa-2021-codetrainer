@@ -43,8 +43,6 @@ const ENV = {
 	MAILER: {
 		ADDRESS: getEnv('EMAIL_ADDRESS'),
 		PASSWORD: getEnv('EMAIL_PASSWORD'),
-		HOST: getEnv('EMAIL_HOST'),
-		PORT: getEnv('EMAIL_PORT'),
 	},
 	GITHUB: {
 		CLIEND_ID: getEnv('GITHUB_CLIENT_ID'),
