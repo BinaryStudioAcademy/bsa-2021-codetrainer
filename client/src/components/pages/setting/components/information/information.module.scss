@@ -1,25 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@use 'styles/variables.scss' as var;
 
 .container {
 	width: 916px;
 	margin: 80px auto;
-
-	font-family: 'Montserrat', Arial, sans-serif;
-	color: #282828;
+	font-family: var.$base-font-family;
+	color: var.$mine-shaft;
 }
 
 .submitBtn {
 	width: 100%;
-	background: #ec4179;
+	background: var.$french-rose;
 	border-radius: 7px;
 	border: 0;
-	font-family: 'Montserrat', sans-serif;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 16px;
+	font: var.$button-font;
 	line-height: 20px;
 	text-align: center;
-	color: #ffffff;
+	color: var.$white;
 	cursor: pointer;
 	padding: 12px 20px;
 	margin-top: 10px;
@@ -33,16 +29,6 @@
 
 	.inputField label {
 		pointer-events: none;
-	}
-
-	input {
-		cursor: pointer;
-		outline: none;
-		background: #fff;
-
-		&:hover {
-			background-color:rgb(228, 228, 228);
-		}
 	}
 }
 
@@ -66,6 +52,3 @@
 		margin: 0 5px;	
 	}
 }
-
-
-

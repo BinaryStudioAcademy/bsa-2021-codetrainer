@@ -21,7 +21,7 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange }) => {
 	};
 
 	return (
-		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)}>
+		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit, 'markdown')}>
 			<Icon
 				icon={IconTaskPageFullScreen.NAME}
 				size={IconTaskPageFullScreen.SIZE}
