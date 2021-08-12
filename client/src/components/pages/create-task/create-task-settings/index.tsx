@@ -1,5 +1,5 @@
 import React from 'react';
-import { Classes, H2, H4, Label, RadioGroup } from '@blueprintjs/core';
+import { Classes, Label, RadioGroup } from '@blueprintjs/core';
 import RadioItem from '../radio-item';
 import { InfoPopover, Select, Switch } from 'components/basic';
 import styles from './create-task-settings.module.scss';
@@ -25,12 +25,12 @@ export const CreateTaskSettings = ({
 }: ICreateTaskSettingsProps) => {
 	return (
 		<div className={styles.createTaskSettings}>
-			<H2 className="heading">Create a New Task</H2>
+			<h2 className="heading">Create a New Task</h2>
 			<form className={styles.settingsTask}>
 				<Label htmlFor="task-name">Name</Label>
 				<input className={Classes.INPUT} id="task-name" placeholder="Enter Task Name" />
 
-				<H4 className={styles.disciplinesHeading}>Disciplines</H4>
+				<h4 className={styles.disciplinesHeading}>Disciplines</h4>
 				<RadioGroup
 					name="discipline"
 					onChange={(event) => onChangeDiscipline(event.currentTarget.value as Discipline)}

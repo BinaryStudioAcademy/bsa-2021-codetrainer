@@ -1,5 +1,5 @@
 import { TaskTabTypes } from 'common';
-import { IconName } from '@blueprintjs/icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export interface ITabProps {
 	onChange: (text: string) => void;
@@ -13,7 +13,7 @@ export interface ICreateTabsProps {
 			title: string;
 			toolTipTitle?: string | JSX.Element;
 			icon?: {
-				name: IconName;
+				name: IconDefinition;
 				color?: string;
 			};
 		};

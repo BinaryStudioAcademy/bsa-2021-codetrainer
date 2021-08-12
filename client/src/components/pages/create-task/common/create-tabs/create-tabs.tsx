@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from '@blueprintjs/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import { Header } from './header';
 import { IconTaskPageFullScreen } from 'common';
@@ -22,13 +22,13 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange }) => {
 
 	return (
 		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)}>
-			<Icon
+			<FontAwesomeIcon
 				icon={IconTaskPageFullScreen.NAME}
 				size={IconTaskPageFullScreen.SIZE}
 				color={IconTaskPageFullScreen.COLOR}
 				className={styles.icon}
 				onClick={handleFullScreen}
-			/>
+			/>{' '}
 			<Header tabs={tabs} onChange={handleChangeTab} />
 			<div className={styles.panel}>
 				<div />
