@@ -287,6 +287,12 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 					.then((data) => res.send(data))
 					.catch(next),
 		)
+		.patch(`${ClanApiPath.ROOT}:id`, (req, res, next) =>
+			clansService
+				.toggleMember(req.user, req.params.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.delete(ClanApiPath.ROOT, clanAdminPermissionMiddleware, checkClanIdMiddleware, (req, res, next) =>
 			clansService
 				.delete(req.clan)
