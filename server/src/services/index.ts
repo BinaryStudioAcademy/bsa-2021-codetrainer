@@ -1,4 +1,4 @@
-import { FollowerService } from './follower';
+import { FollowersService } from './follower';
 import {
 	UserRepository,
 	ClanRepository,
@@ -17,8 +17,8 @@ const authService = new AuthService({ user: UserRepository });
 
 const clanService = new ClanService({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
 
-const follower = new FollowerService({ follower: FollowerRepository });
-type TFollowerService = InstanceType<typeof FollowerService>;
+const follower = new FollowersService({ follower: FollowerRepository });
+type TFollowerService = InstanceType<typeof FollowersService>;
 
 const imagesService = new ImagesService(imagesRepository);
 const githubService = new GithubService({ authService, userRepository: UserRepository });

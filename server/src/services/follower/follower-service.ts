@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm';
 import { TFollowerRepository } from '../../data';
 import { Follower } from '../../data/models/follower';
 
-export class FollowerService {
+export class FollowersService {
 	protected followerRepository: TFollowerRepository;
 
 	constructor({ follower }: { follower: TFollowerRepository }) {
