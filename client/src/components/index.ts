@@ -32,6 +32,7 @@ export {
 	LandingPage,
 	CreateTaskSettings,
 	SettingPage,
+	NotFound
 } from './pages';
 
 export { Modal } from './modals';

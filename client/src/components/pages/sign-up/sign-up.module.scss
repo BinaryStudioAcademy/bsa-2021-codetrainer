@@ -34,14 +34,14 @@ a {
 			margin-bottom: 5px;
 		}
 		.header {
-			margin-top: 10px;
+			margin-top: 0px;
 		}
 	}
 
 	footer {
 		font-family: $base-font-family;
 		position: absolute;
-		bottom: 10px;
+		bottom: 20px;
 		left: 50%;
 		transform: translate(-50%);
 		font-size: 14px;
