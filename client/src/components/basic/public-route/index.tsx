@@ -1,7 +1,6 @@
-import { Header } from 'components';
+import Header from 'containers/header';
 import MainSidebar from 'components/common/main-sidebar';
 import { ROUTES } from 'constants/routes';
-import { headerProps } from 'containers/header/mock';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
@@ -19,10 +18,10 @@ const PublicRoute = (props: IPublicRouteProps) => {
 	const isAuthorized = Boolean(user);
 	return (
 		<>
-			{rest.needSideBar ? (
-				<div className="content_container">
-					{rest.needHeader ? <Header {...headerProps} /> : null}
-					<MainSidebar />
+			{rest.needHeader ? <Header /> : null}
+			{rest.needSideBar ? <MainSidebar /> : null}
+			{rest.needHeader && rest.needSideBar ? (
+				<div className="contentContainer">
 					<Route
 						{...rest}
 						render={(props) =>
