@@ -17,7 +17,7 @@ const Select = ({ activeValue, values, onChange }: ISelectProps) => {
 	return (
 		<div className={styles.selectWrapper}>
 			<h5 className={styles.select} onClick={() => setOptionsListActive(!optionsListActive)}>
-				<img src={activeValue?.icon} alt="icon" />
+				{activeValue?.icon && <img src={activeValue?.icon} alt="icon" />}
 				{activeValue?.title}
 			</h5>
 			<ul className={listStyles}>
