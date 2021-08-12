@@ -42,7 +42,7 @@ export const Notification: React.FC<INotificationProps> = (props) => {
 		if (reason !== 'clickaway') {
 			setIsOpen(false);
 		}
-	};
+	}
 
 	return (
 		<div>

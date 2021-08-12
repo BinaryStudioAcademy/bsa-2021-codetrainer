@@ -29,7 +29,11 @@ const Example: React.FC = () => {
 							className={styles.btn}
 							key={type}
 							onClick={() => {
-								showNotification({ notificationType: type, title: type, message: `${type} message` });
+								showNotification({ state: {
+									notificationType: type,
+									title: type,
+									message: `${type} message`
+								}});
 							}}
 						>
 							{type}
