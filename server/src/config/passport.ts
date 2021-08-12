@@ -20,7 +20,6 @@ passport.use(
 	new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
 		const repository = getCustomRepository(UserRepository);
 		try {
-			console.log('user => ', email);
 			const user = await repository.getByEmail(email);
 			if (!user) {
 				return done({ status: 401, message: 'Incorrect email.' }, null);
@@ -38,14 +37,19 @@ passport.use(
 	'register',
 	new LocalStrategy(
 		{ passReqToCallback: true, usernameField: 'email' },
-		async ({ body: { name, surname } }, email, password, done) => {
+		async ({ body: { username, name, surname } }, email, password, done) => {
 			const repository = getCustomRepository(UserRepository);
 			try {
 				const userByEmail = await repository.getByEmail(email);
 				if (userByEmail) {
 					return done({ status: 401, message: 'Email is already taken.' }, null);
 				}
-				return done(null, { email, name, surname, password });
+
+				const userByUsername = await repository.getByUsername(username);
+				if (userByUsername) {
+					return done({ status: 401, message: 'Username is already taken.' }, null);
+				}
+				return done(null, { username, email, name, surname, password });
 			} catch (err) {
 				return done(err);
 			}

@@ -8,7 +8,6 @@ import {
 	checkClanIdMiddleware,
 } from '../../middleware';
 import { ClanService } from '../../services';
-import { IUserFields } from '../../types';
 
 /**
  * @swagger
@@ -261,7 +260,7 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.get(`${ClanApiPath.ROOT}:id`, clanMemberPermissionMiddleware, (req, res, next) =>
+		.get(ClanApiPath.$ID, clanMemberPermissionMiddleware, (req, res, next) =>
 			clansService
 				.getClan(req.params.id)
 				.then((data) => res.send(data))

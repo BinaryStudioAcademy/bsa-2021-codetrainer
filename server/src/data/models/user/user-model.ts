@@ -20,6 +20,9 @@ export class User extends BaseEntity {
 	id!: string;
 
 	@Column({ type: 'varchar', length: 25, nullable: true })
+	username?: string;
+
+	@Column({ type: 'varchar', length: 25, nullable: true })
 	name?: string;
 
 	@Column({ type: 'varchar', length: 25, nullable: true })
@@ -57,6 +60,9 @@ export class User extends BaseEntity {
 
 	@Column({ type: 'int', default: 0 })
 	honour!: number;
+
+	@Column({ type: 'varchar', length: 250, nullable: true })
+	resetToken?: string;
 
 	@OneToOne(() => ProfileClan, (profileClan) => profileClan.user, { eager: true, cascade: true })
 	@JoinColumn()

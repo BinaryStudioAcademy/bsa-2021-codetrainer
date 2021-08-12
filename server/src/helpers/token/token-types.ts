@@ -1,0 +1,5 @@
+export enum TokenTypes {
+	ACCESS = 'EXPIRES_IN',
+	REFRESH = 'REFRESH_EXPIRES_IN',
+	RESET = 'RESET_EXPIRES_IN',
+}
