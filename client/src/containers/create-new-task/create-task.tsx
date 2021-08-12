@@ -163,7 +163,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				languageId: language.id,
 				rank: Number(rank),
 				allowContributors: isSelectedSwitch,
-				tags: tags.split(',').map((tag) => tag.trim()),
+				tags: tags.trim(),
 				description: textDescription,
 			};
 			const result = await http.callWebApi({
