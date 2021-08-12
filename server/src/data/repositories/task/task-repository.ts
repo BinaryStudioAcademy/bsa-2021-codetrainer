@@ -1,71 +1,54 @@
-import { EntityRepository, SelectQueryBuilder, Brackets } from 'typeorm';
+import { EntityRepository, SelectQueryBuilder, ObjectLiteral } from 'typeorm';
 import { AbstractRepository } from '../abstract';
 import { Task } from '../../models';
-
-enum Keys {
-	STATUS = 'status',
-	PROGRESS = 'progress',
-	Q = 'q',
-	RANK = 'rank',
-	TAGS = 'tags',
-}
-
-export enum TaskSorts {
-	NEWEST = 'newest',
-	OLDEST = 'oldest',
-	HARDEST = 'hardest',
-	EASIEST = 'easiest',
-	NAME = 'name',
-}
+import { TASK_ORDER_BY, SEARCH_KEYS } from '../../../common';
 
 type IWhere = {
-	[K in Keys]?: number | string | string[];
+	[K in SEARCH_KEYS]?: number | string | string[];
 };
 
-const sortFn = <T>(query: SelectQueryBuilder<T>, sorts?: TaskSorts): SelectQueryBuilder<T> => {
+const sortQuery = <T>(query: SelectQueryBuilder<T>, sorts?: TASK_ORDER_BY): SelectQueryBuilder<T> => {
 	switch (sorts) {
-		case TaskSorts.NAME:
+		case TASK_ORDER_BY.NAME:
 			return query.orderBy('task.name', 'ASC');
-		case TaskSorts.EASIEST:
-			return query.orderBy('task.difficulty', 'DESC');
-		case TaskSorts.HARDEST:
+		case TASK_ORDER_BY.EASIEST:
 			return query.orderBy('task.difficulty', 'ASC');
-		case TaskSorts.NEWEST:
-			return query.orderBy('task.createdAt', 'ASC');
-		case TaskSorts.OLDEST:
+		case TASK_ORDER_BY.HARDEST:
+			return query.orderBy('task.difficulty', 'DESC');
+		case TASK_ORDER_BY.NEWEST:
 			return query.orderBy('task.createdAt', 'DESC');
+		case TASK_ORDER_BY.OLDEST:
+			return query.orderBy('task.createdAt', 'ASC');
 		default:
 			return query;
 	}
 };
 
-const filter = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IWhere): SelectQueryBuilder<T> => {
+const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IWhere): SelectQueryBuilder<T> => {
 	if (!where) {
 		return query;
 	}
-	Object.entries(where).forEach(([key, isValue]) => {
+	Object.entries(where).forEach(([key, value]) => {
 		switch (key) {
-			case Keys.STATUS:
-				query.andWhere(`task.status = :isValue`, { isValue });
+			case SEARCH_KEYS.STATUS:
+				query.andWhere(`task.status = :status`, { status: value });
 				break;
-			case Keys.Q:
-				query.andWhere('task.name ILIKE :isValue', { isValue: `%${isValue}%` });
+			case SEARCH_KEYS.Q:
+				query.andWhere('task.name LIKE :q', { q: `%${value}%` });
 				break;
-			case Keys.RANK:
-				query.andWhere('task.difficulty = :isValue', { isValue });
+			case SEARCH_KEYS.RANK:
+				query.andWhere('task.difficulty = :rank', { rank: value });
 				break;
-			case Keys.TAGS:
-				if (Array.isArray(isValue)) {
-					isValue.forEach((tag) => {
-						query.andWhere('tag.name = :isValue', { isValue: tag });
-					});
-				}
+			case SEARCH_KEYS.TAGS:
+				query.andWhere('tag.name IN (:tags)', { tags: value });
 				break;
-			case Keys.PROGRESS:
-				if (isValue === 'all') {
+			case SEARCH_KEYS.PROGRESS:
+				if (value === 'all') {
 					break;
 				}
-				query.andWhere('user.id = :id', { id: userId }).andWhere('solution.status = :isValue', { isValue });
+				query
+					.andWhere('user.id = :id', { id: userId })
+					.andWhere('solution.status = :solutionStatus', { solutionStatus: value });
 				break;
 			default:
 				break;
@@ -90,35 +73,23 @@ export class TaskRepository extends AbstractRepository<Task> {
 	}
 
 	getById(id: string) {
-		return this.createQueryBuilder('task').where('task.id = :id', { id }).getOne();
+		return this.createQueryBuilder('task')
+			.leftJoinAndSelect('task.solutions', 'solution')
+			.leftJoinAndSelect('task.tags', 'tag')
+			.select(['task', 'solution.id', 'tag.id'])
+			.where('task.id = :id', { id })
+			.getOne();
 	}
 
-	search({
-		where,
-		sort,
-		skip,
-		take,
-		userId,
-	}: {
-		where?: IWhere;
-		sort?: TaskSorts;
-		skip: number;
-		take: number;
-		userId: string;
-	}) {
-		return sortFn(
-			filter(
-				this.createQueryBuilder('task')
-					.leftJoinAndSelect('task.tags', 'tag')
-					.leftJoinAndSelect('task.solutions', 'solution')
-					.leftJoinAndSelect('solution.users', 'user'),
-				userId,
-				where,
-			),
-			sort,
-		)
-			.skip(skip)
-			.take(take)
-			.getMany();
+	search(query: { where?: IWhere; sort?: TASK_ORDER_BY; skip: number; take: number; userId: string }) {
+		const searchQuery = filterQuery(
+			this.createQueryBuilder('task')
+				.leftJoinAndSelect('task.tags', 'tag')
+				.leftJoinAndSelect('task.solutions', 'solution')
+				.leftJoinAndSelect('solution.user', 'user'),
+			query.userId,
+			query.where,
+		);
+		return sortQuery(searchQuery, query.sort).skip(query.skip).take(query.take).getMany();
 	}
 }

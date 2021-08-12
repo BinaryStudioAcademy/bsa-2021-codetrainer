@@ -6,7 +6,7 @@ import { SOLUTION_STATUS } from '../../../common';
 
 @Entity()
 export class Solution extends AbstractEntity {
-	@Column({ type: 'enum', enum: SOLUTION_STATUS })
+	@Column({ type: 'enum', enum: SOLUTION_STATUS, default: SOLUTION_STATUS.NOT_COMPLETED })
 	status!: SOLUTION_STATUS;
 
 	@Column({ type: 'text', default: '' })

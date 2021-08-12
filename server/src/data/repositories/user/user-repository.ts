@@ -16,6 +16,7 @@ export class UserRepository extends Repository<User> {
 			.leftJoinAndSelect('user.profileClan', 'profileClan')
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
+			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
 				'user.username',
@@ -23,6 +24,7 @@ export class UserRepository extends Repository<User> {
 				'user.surname',
 				'user.email',
 				'clan',
+				'solution.id',
 				'profileClan',
 				'task.id',
 			])

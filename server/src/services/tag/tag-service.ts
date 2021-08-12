@@ -62,7 +62,7 @@ export class TagService {
 
 	async getTags() {
 		const repository = getCustomRepository(this.tagRepository);
-		const clans = await repository.getAll();
-		return clans;
+		const tags = await repository.getAll();
+		return tags;
 	}
 }

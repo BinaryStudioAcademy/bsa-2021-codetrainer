@@ -3,3 +3,4 @@ export { AuthApiPath } from './auth-api-path';
 export { ClanApiPath } from './clan-api-path';
 export { TaskApiPath } from './task-api-path';
 export { GithubApiPath } from './github-api-path';
+export { SolutionApiPath } from './solution-api-path';

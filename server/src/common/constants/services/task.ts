@@ -1,4 +1,4 @@
-export const TASK_ON_PAGE = 10;
+export const TASKS_ON_PAGE = 10;
 
 export enum TASK_ORDER_BY {
 	NEWEST = 'newest',
@@ -6,6 +6,20 @@ export enum TASK_ORDER_BY {
 	HARDEST = 'hardest',
 	EASIEST = 'easiest',
 	NAME = 'name',
+}
+
+export enum SEARCH_PROGRESS {
+	COMPLETED = 'completed',
+	NOT_COMPLETED = 'notCompleted',
+	ALL = 'all',
+}
+
+export enum SEARCH_KEYS {
+	STATUS = 'status',
+	PROGRESS = 'progress',
+	Q = 'q',
+	RANK = 'rank',
+	TAGS = 'tags',
 }
 
 export const TASK_QUERY_SEPARATOR = ',';

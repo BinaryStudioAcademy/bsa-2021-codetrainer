@@ -1,10 +1,10 @@
 import { checkSchema } from 'express-validator';
-import { CODE_ERRORS, SOLUTION_STATUS, TASK_ORDER_BY, TASK_QUERY_SEPARATOR, TASK_STATUS } from '../../../common';
+import { CODE_ERRORS, SEARCH_PROGRESS, TASK_ORDER_BY, TASK_QUERY_SEPARATOR, TASK_STATUS } from '../../../common';
 import { ValidationError } from '../../../helpers';
 
-export const taskSchema = checkSchema({
+export const taskSearchSchema = checkSchema({
 	q: {
-		in: 'params',
+		in: 'query',
 		errorMessage: 'Wrong name format',
 		trim: true,
 		isString: true,
@@ -12,7 +12,7 @@ export const taskSchema = checkSchema({
 		notEmpty: true,
 	},
 	sort: {
-		in: 'params',
+		in: 'query',
 		errorMessage: 'Wrong sort format',
 		custom: {
 			options: (orderBy) => {
@@ -29,7 +29,7 @@ export const taskSchema = checkSchema({
 		notEmpty: true,
 	},
 	status: {
-		in: 'params',
+		in: 'query',
 		errorMessage: 'Wrong status format',
 		custom: {
 			options: (value) => {
@@ -46,11 +46,11 @@ export const taskSchema = checkSchema({
 		notEmpty: true,
 	},
 	progress: {
-		in: 'params',
+		in: 'query',
 		errorMessage: 'Wrong progress format',
 		custom: {
 			options: (value) => {
-				const status = Object.entries(SOLUTION_STATUS).find(
+				const status = Object.entries(SEARCH_PROGRESS).find(
 					([_key, solutionStatus]) => solutionStatus === value,
 				);
 				if (!status) {
@@ -65,14 +65,14 @@ export const taskSchema = checkSchema({
 		notEmpty: true,
 	},
 	rank: {
-		in: 'params',
+		in: 'query',
 		errorMessage: 'Wrong rank format',
 		isInt: true,
 		optional: true,
 		notEmpty: true,
 	},
 	tags: {
-		in: 'params',
+		in: 'query',
 		errorMessage: 'Wrong tags format',
 		custom: {
 			options: (value: string) => {
@@ -86,14 +86,24 @@ export const taskSchema = checkSchema({
 		customSanitizer: {
 			options: (value: string) => value.split(TASK_QUERY_SEPARATOR),
 		},
-		trim: true,
-		isString: true,
 		optional: true,
 		notEmpty: true,
 	},
 	page: {
-		in: 'body',
+		in: 'query',
 		errorMessage: 'Wrong page format',
-		isInt: true,
+		custom: {
+			options: (value) => {
+				const page = Number(value);
+				if (typeof page !== 'number' || Number.isNaN(page)) {
+					throw new ValidationError(CODE_ERRORS.TASK_QUERY('page'));
+				}
+				return true;
+			},
+		},
+		customSanitizer: {
+			options: (value) => Number(value),
+		},
+		notEmpty: true,
 	},
 });

@@ -3,6 +3,7 @@ import { ClanRepository } from './clan';
 import { ImagesRepository } from './images.repository';
 import { TaskRepository } from './task/task-repository';
 import { TagRepository } from './tag';
+import { SolutionRepository } from './solution';
 
 type TUserRepository = typeof UserRepository;
 type TClanRepository = typeof ClanRepository;
@@ -10,6 +11,7 @@ type TProfileClanRepository = typeof ProfileClanRepository;
 const imagesRepository = new ImagesRepository();
 type TTaskRepository = typeof TaskRepository;
 type TTagRepository = typeof TagRepository;
+type TSolutionRepository = typeof SolutionRepository;
 
 export { UserRepository, TUserRepository };
 export { ClanRepository, TClanRepository };
@@ -18,3 +20,4 @@ export { imagesRepository, ImagesRepository };
 export { TaskRepository, TTaskRepository };
 export { TagRepository, TTagRepository };
 export { TaskSorts } from './task/task-repository';
+export { SolutionRepository, TSolutionRepository };

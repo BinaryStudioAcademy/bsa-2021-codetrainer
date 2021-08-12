@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, ManyToMany, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
 import { AbstractEntity } from '../abstract';
 import { Solution } from '../solution';
@@ -41,6 +41,6 @@ export class Task extends AbstractEntity {
 	solutions!: Solution[];
 
 	@ManyToMany(() => Tag, (tag) => tag.tasks)
-	@JoinColumn()
+	@JoinTable()
 	tags!: Tag[];
 }

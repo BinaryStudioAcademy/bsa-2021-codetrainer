@@ -13,6 +13,7 @@ import {
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 import { Task } from '../task';
+import { Solution } from '../solution';
 
 @Entity()
 export class User extends BaseEntity {
@@ -59,6 +60,10 @@ export class User extends BaseEntity {
 	@OneToMany(() => Task, (task) => task.user)
 	@JoinColumn()
 	tasks!: Task[];
+
+	@OneToMany(() => Solution, (solution) => solution.user)
+	@JoinColumn()
+	solutions!: Solution[];
 
 	@Column({ nullable: true })
 	profileUrl?: string;

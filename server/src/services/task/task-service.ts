@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { Task, User, TTaskRepository, TUserRepository, TTagRepository, TaskSorts } from '../../data';
-import { TASK_ON_PAGE, TASK_STATUS } from '../../common';
+import { TASKS_ON_PAGE, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -29,12 +29,19 @@ export class TaskService {
 		return savedTask;
 	}
 
-	async delete(user: User, id: string) {
+	async delete(user: User, task: Task) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
-		const tasks = user.tasks.filter((task) => task.id !== id);
-		await userRepository.save({ id: user.id, tasks });
-		await repository.deleteById(id);
+		const tagRepository = getCustomRepository(this.tagRepository);
+		await Promise.all(
+			task.tags.map((tag) => {
+				const newTasks = tag.tasks.filter((taskT) => taskT.id !== task.id);
+				return tagRepository.save({ ...tag, tasks: newTasks });
+			}),
+		);
+		const userTasks = user.tasks.filter((taskU) => taskU.id !== task.id);
+		await userRepository.save({ ...user, tasks: userTasks });
+		await repository.deleteById(task.id);
 		return {
 			delete: 'success',
 		};
@@ -43,14 +50,14 @@ export class TaskService {
 	async update(newTask: Task, taskId: string) {
 		const repository = getCustomRepository(this.taskRepository);
 		await repository.updateById(taskId, newTask);
-		const updatedTask = await repository.getById(newTask.id);
+		const updatedTask = await repository.getById(taskId);
 		return updatedTask;
 	}
 
 	async getTasks({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.taskRepository);
-		const clans = await repository.getAll(skip, take);
-		return clans;
+		const tasks = await repository.getAll(skip, take);
+		return tasks;
 	}
 
 	async search(
@@ -73,8 +80,8 @@ export class TaskService {
 			tasks: await repository.search({
 				where,
 				sort,
-				skip: page * TASK_ON_PAGE,
-				take: TASK_ON_PAGE,
+				skip: page * TASKS_ON_PAGE,
+				take: TASKS_ON_PAGE,
 				userId: user.id,
 			}),
 		};

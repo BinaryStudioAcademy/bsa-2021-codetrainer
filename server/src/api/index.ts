@@ -3,9 +3,9 @@ import { initAuth } from './auth';
 import { initClan } from './clan';
 import { imagesRouter } from './images.router';
 import { githubRouter } from './github.router';
-import { initTask } from './task/task-api';
+import { initTaskApi } from './task';
 import { ApiPath } from '../common';
-import { authService, clanService, imagesService, taskService, githubService } from '../services';
+import { authService, clanService, imagesService, githubService } from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -34,7 +34,7 @@ export function initApi(): Router {
 		}),
 	);
 
-	apiRouter.use(ApiPath.TASK, initTask(Router, { task: taskService }));
+	apiRouter.use(ApiPath.TASK, initTaskApi());
 
 	return apiRouter;
 }
