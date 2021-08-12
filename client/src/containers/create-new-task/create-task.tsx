@@ -13,9 +13,9 @@ import { findDisciplineItem } from './create-task-settings/create-task-settings'
 import { ISelectValue } from 'components/basic/select/interface';
 import { NotificationContainer } from 'containers/notification';
 import { useDispatch } from 'react-redux';
-import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 import { http } from 'services';
+import { setNotificationState } from 'containers/notification/logic/actions';
 
 export interface ICreateTaskProps {}
 
@@ -31,19 +31,34 @@ const TestTabs = {
 };
 
 export const CreateTask = (props: ICreateTaskProps) => {
+	const dispatch = useDispatch();
+	const createErrorMessage = (message: string) => {
+		dispatch(
+			setNotificationState({
+				state: {
+					message,
+					notificationType: NotificationType.Error,
+				},
+			}),
+		);
+	};
+	//settings block
+	const [taskName, setTaskName] = useState('');
+	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
+	const onChangeDiscipline = (newDiscipline: Discipline) => {
+		const foundDisciplineItem: IDisciplineItem = findDisciplineItem(newDiscipline);
+		setDiscipline(foundDisciplineItem);
+	};
+	const [language, setLanguage] = useState<ISelectValue>(SELECT_PROPS.values[0]);
+	const [rank, setRank] = useState('8');
+	const [tags, setTags] = useState('');
+	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
+	const onSwitchClick = (newSwitchState: boolean) => {
+		setSelectedSwitch(newSwitchState);
+	};
+	//taskInstructions
 	const [instructionTab, setInstructionTab] = useState(0);
-	const [codeTab, setCodeTab] = useState(0);
-	const [testTab, setTestTab] = useState(0);
-
 	const [textDescription, setTextDescription] = useState('');
-
-	const [completeSolution, setCompleteSolution] = useState('');
-	const [initialSolution, setInitialSolution] = useState('');
-	const [preloaded, setPreloaded] = useState('');
-
-	const [testCases, setTestCases] = useState('');
-	const [exampleTestCases, setExampleTestCases] = useState('');
-
 	const tabsInstructions: ICreateTabsProps = {
 		selectedTab: instructionTab,
 		tabs: [
@@ -79,6 +94,11 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		onChange: (text) => setTextDescription(text),
 		onSelectTab: (tab) => setInstructionTab(tab),
 	};
+	//taskSolution
+	const [codeTab, setCodeTab] = useState(0);
+	const [completeSolution, setCompleteSolution] = useState('');
+	const [initialSolution, setInitialSolution] = useState('');
+	const [preloaded, setPreloaded] = useState('');
 	const tabsCode: ICreateTabsProps = {
 		selectedTab: codeTab,
 		tabs: [
@@ -129,6 +149,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		},
 		onSelectTab: (tab) => setCodeTab(tab),
 	};
+	//taskTests
+	const [testTab, setTestTab] = useState(0);
+	const [testCases, setTestCases] = useState('');
+	const [exampleTestCases, setExampleTestCases] = useState('');
 	const tabsTests: ICreateTabsProps = {
 		selectedTab: testTab,
 		tabs: [
@@ -168,64 +192,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		},
 		onSelectTab: (tab) => setTestTab(tab),
 	};
-	//settings block
-	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
-	const onChangeDiscipline = (newDiscipline: Discipline) => {
-		const foundDisciplineItem: IDisciplineItem = findDisciplineItem(newDiscipline);
-		setDiscipline(foundDisciplineItem);
-	};
-	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
-	const onSwitchClick = (newSwitchState: boolean) => {
-		setSelectedSwitch(newSwitchState);
-	};
-	const [language, setLanguage] = useState<ISelectValue>(SELECT_PROPS.values[0]);
-	const [taskName, setTaskName] = useState('');
-	const [rank, setRank] = useState('8');
-	const [tags, setTags] = useState('');
-
-	const dispatch = useDispatch();
-	const createErrorMessage = (message: string) => {
-		dispatch(
-			setNotificationState({
-				notificationType: NotificationType.Error,
-				message,
-			}),
-		);
-	};
-	//taskInstructions
-	const [textDescription, setTextDescription] = useState('');
-	const tabsInstructions: ICreateTabsProps = {
-		tabs: [
-			{
-				header: {
-					title: 'Description',
-				},
-				type: TaskTabTypes.TEXT,
-				text: textDescription,
-				editable: true,
-			},
-			{
-				header: {
-					title: 'Preview',
-					toolTipTitle: 'Look how your description looks',
-					icon: {
-						name: 'help',
-					},
-				},
-				type: TaskTabTypes.MARKDOWN,
-				markdownContent: textDescription,
-			},
-			{
-				header: {
-					title: 'Help',
-					toolTipTitle: <em>comment</em>,
-				},
-				type: TaskTabTypes.MARKDOWN,
-				markdownContent: `# Header`,
-			},
-		],
-		onChange: (text) => setTextDescription(text),
-	};
+	//validation
 	let validationStatus = true; //true is okay ,false if there are mistakes
 	const createNewTask = async () => {
 		validationStatus = true;
@@ -245,6 +212,22 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			validationStatus = false;
 			createErrorMessage('Description can`t be empty.');
 		}
+		if (completeSolution.trim() === '') {
+			validationStatus = false;
+			createErrorMessage('Complete Solution can`t be empty.');
+		}
+		if (initialSolution.trim() === '') {
+			validationStatus = false;
+			createErrorMessage('Initial Solution can`t be empty.');
+		}
+		if (testCases.trim() === '') {
+			validationStatus = false;
+			createErrorMessage('Test Cases tab can`t be empty.');
+		}
+		if (exampleTestCases.trim() === '') {
+			validationStatus = false;
+			createErrorMessage('Example Test Cases tab can`t be empty.');
+		}
 		if (validationStatus) {
 			const requestBody = {
 				name: taskName,
@@ -254,6 +237,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				allowContributors: isSelectedSwitch,
 				tags: tags.trim(),
 				description: textDescription,
+				completeSolution,
+				initialSolution,
+				testCases,
+				exampleTestCases,
 			};
 			const result = await http.callWebApi({
 				endpoint: 'task',
@@ -264,8 +251,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			if (result) {
 				dispatch(
 					setNotificationState({
-						notificationType: NotificationType.Success,
-						message: `Task ${taskName} is saved`,
+						state: {
+							message: `Task ${taskName} is saved`,
+							notificationType: NotificationType.Success,
+						},
 					}),
 				);
 			}
@@ -311,7 +300,9 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				<Button className={clsx(ButtonClasses.red)} onClick={createNewTask}>
 					Save
 				</Button>
-				<Button className={clsx(ButtonClasses.red)}>Reset</Button>
+				<Button className={clsx(ButtonClasses.red)} onClick={}>
+					Reset
+				</Button>
 				<Button className={clsx(ButtonClasses.red)}>Delete</Button>
 			</div>
 		</>
