@@ -12,8 +12,7 @@ class Mailer {
 
 	private getTransporter() {
 		return createTransport({
-			host: ENV.MAILER.HOST,
-			port: ENV.MAILER.PORT,
+			service: 'gmail',
 			auth: {
 				user: ENV.MAILER.ADDRESS,
 				pass: ENV.MAILER.PASSWORD,
