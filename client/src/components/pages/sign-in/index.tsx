@@ -4,12 +4,11 @@ import { Field, Form, Formik } from 'formik';
 import clsx from 'clsx';
 import { ISignInForm } from 'typings/sign-in-form';
 import { SIGN_IN_SCHEMA } from './config';
-import CoverLayout from './cover-layout';
 import Separator from './separator';
 import Button, { ButtonClasses } from 'components/basic/button';
 import styles from './sign-in.module.scss';
 import { ROUTES } from 'constants/routes';
-import { FormInput } from 'components';
+import { FormInput, CoverLayout } from 'components';
 
 interface ISignInPageProps {
 	onFormSubmit: (form: ISignInForm) => void;
@@ -58,7 +57,10 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn =
 				</Form>
 			</Formik>
 			<footer>
-				No account? <Link to={ROUTES.SignUp}>Sign up</Link>
+				No account?{' '}
+				<Link to={ROUTES.SignUp} className={styles.link}>
+					Sign up
+				</Link>
 			</footer>
 		</CoverLayout>
 	);

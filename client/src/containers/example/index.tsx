@@ -25,7 +25,7 @@ const Example: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
-			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignIn)}>
 				SIGN IN
 			</button>
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
@@ -38,7 +38,11 @@ const Example: React.FC = () => {
 							className={styles.btn}
 							key={type}
 							onClick={() => {
-								showNotification({ notificationType: type, title: type, message: `${type} message` });
+								showNotification({ state: {
+									notificationType: type,
+									title: type,
+									message: `${type} message`
+								}});
 							}}
 						>
 							{type}

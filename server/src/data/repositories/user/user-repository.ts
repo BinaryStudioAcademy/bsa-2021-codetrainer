@@ -16,13 +16,26 @@ export class UserRepository extends Repository<User> {
 			.leftJoinAndSelect('user.profileClan', 'profileClan')
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
-			.select(['user.id', 'user.username', 'user.name', 'user.surname', 'user.email', 'clan', 'profileClan', 'task.id'])
+			.select([
+				'user.id',
+				'user.username',
+				'user.name',
+				'user.surname',
+				'user.email',
+				'clan',
+				'profileClan',
+				'task.id',
+			])
 			.where('user.id = :id', { id })
 			.getOne();
 	}
 
 	getByGithubId(githubId: string): Promise<User | undefined> {
 		return this.findOne({ githubId });
+	}
+
+	getByToken(token: string) {
+		return this.createQueryBuilder('user').where('user.resetToken = :token', { token }).getOne();
 	}
 
 	updateById(id: string, data: Partial<User>) {
