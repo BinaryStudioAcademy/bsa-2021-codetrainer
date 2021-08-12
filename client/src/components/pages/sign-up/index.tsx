@@ -18,7 +18,11 @@ const SignupSchema = Yup.object().shape({
 		.required('Required'),
 	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
 	surname: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
-	email: Yup.string().email('Invalid email').required('Required'),
+	email: Yup.string()
+		.email('Invalid email')
+		.min(5, 'Minimum length: 5')
+		.max(50, 'Maximum length: 50')
+		.required('Required'),
 	password: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 	confirmPassword: Yup.string()
 		.min(8, 'Minimum length: 8')
@@ -36,9 +40,7 @@ interface ISignUnPageProps {
 
 const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 	return (
-		<CoverLayout>
-			<h4>SignUp</h4>
-			{!!error && <div className={styles.error}>{error}</div>}
+		<CoverLayout className={styles.signUp}>
 			<Formik
 				initialValues={{
 					username: '',
@@ -53,7 +55,9 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 					onFormSubmit(values);
 				}}
 			>
-				<Form>
+				<Form className={styles.form}>
+					<h4>SignUp</h4>
+					{!!error && <div className={styles.error}>{error}</div>}
 					<Field
 						id="username"
 						name="username"
@@ -102,15 +106,12 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 						type="password"
 						component={FormInput}
 					/>
-					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.submitBtn)}>Sign Up</Button>
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Sign Up</Button>
 				</Form>
 			</Formik>
-			<div className={styles.footer}>
-				Already Signed up?{' '}
-				<Link to={ROUTES.SignIn} className={styles.link}>
-					Sign in
-				</Link>
-			</div>
+			<footer>
+				Already Signed up? <Link to={ROUTES.SignIn}>Sign in</Link>
+			</footer>
 		</CoverLayout>
 	);
 };

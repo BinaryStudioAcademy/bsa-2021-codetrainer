@@ -1,36 +1,14 @@
-// TODO: replace font and colors to variables
-
-label {
-	font-family: Montserrat;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 15px;
-	letter-spacing: 0em;
-	text-align: left;
-	color: #282828;
-}
+@import "styles/variables";
 
 h4 {
-	margin: 0;
-	font-family: Montserrat;
-	font-size: 24px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: 29px;
-	letter-spacing: 0em;
-	text-align: left;
-	color: #282828;
+	font: $fourth-title-font;
 }
 
 a {
-	font-family: Montserrat;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 12px;
-	line-height: 15px;
-	text-decoration-line: underline;
+	font-family: $base-font;
+	font-size: 14px;
 	color: #705ff5;
+	text-decoration: underline;
 }
 
 .signIn {
@@ -53,36 +31,19 @@ a {
 		.light {
 			color: #e5e5e5;
 		}
-		.errorLabel,
-		.right {
-			text-align: right;
-		}
-		.errorLabel {
-			margin-top: 5px;
-			height: 16px;
-			font-size: 16px;
-			color: #ec4179;
-		}
 		.error {
-			color: #ec4179;
-			border-color: #ec4179;
-		}
-		.labelWrapper {
+			color: $french-rose;
+			margin-top: -20px;
 			margin-bottom: 5px;
-			display: flex;
-			justify-content: space-between;
-			align-items: flex-end;
-		}
-		input {
-			width: 100%;
 		}
 	}
 
 	footer {
 		position: absolute;
-		bottom: 20px;
+		bottom: 10px;
 		left: 50%;
 		transform: translate(-50%);
 		font-size: 14px;
+		color: rgba(40, 40, 40, 0.5);
 	}
 }
