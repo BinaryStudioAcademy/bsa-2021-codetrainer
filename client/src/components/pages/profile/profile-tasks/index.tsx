@@ -2,7 +2,7 @@ import React from 'react';
 import { IChallenge } from 'components/common/challenge/types';
 import { Challenge } from 'components/common';
 
-import styles from './tasks.module.scss';
+import styles from './styles.module.scss';
 
 interface IProfileTasks {
 	tasks: IChallenge[];

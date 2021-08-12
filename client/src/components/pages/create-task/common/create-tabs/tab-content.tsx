@@ -21,13 +21,13 @@ export const TabContent: React.FC<IProps> = ({ tab, onChange }) => {
 
 	switch (tab.type) {
 		case TaskTabTypes.TEXT:
-			return <CreateText onChange={handleChange} editable={tab.editable} />;
+			return <CreateText onChange={handleChange} editable={tab.editable} value={tab.text} />;
 		case TaskTabTypes.MARKDOWN:
 			return <Markdown text={tab.markdownContent || ''} />;
 		case TaskTabTypes.PREVIEW:
 			return <Markdown />;
 		case TaskTabTypes.CODE:
-			return <CreateCode onChange={handleChange} editable={tab.editable} />;
+			return <CreateCode onChange={handleChange} editable={tab.editable} value={tab.text} />;
 		default:
 			return null;
 	}

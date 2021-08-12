@@ -1,32 +1,54 @@
+import { createTransport } from 'nodemailer';
+import Mail from 'nodemailer/lib/mailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { ENV } from '../../common';
+import { User } from '../../data';
+import { getMailerTexts } from './texts';
 
-const nodemailer = require('nodemailer');
+class Mailer {
+	private getMailerTexts = getMailerTexts;
 
-const transporter = nodemailer.createTransport(
-	{
-		host: 'smtp.gmail.com',
-		port: 587,
-		secure: false,
-		auth: {
-			user: ENV.MAILER.ADDRESS,
-			pass: ENV.MAILER.PASSWORD,
-		},
-	},
-	{
-		from: `Codetrainer <${ENV.MAILER.ADDRESS}>`,
-	},
-);
+	private from = `Codetrain team - ${ENV.MAILER.ADDRESS}`;
 
-export interface IMessageMailer {
-	to: string;
-	subject: string;
-	html: string;
+	private getTransporter() {
+		return createTransport({
+			service: 'gmail',
+			auth: {
+				user: ENV.MAILER.ADDRESS,
+				pass: ENV.MAILER.PASSWORD,
+			},
+		} as SMTPTransport.MailOptions);
+	}
+
+	async forgotPassword(email: string, payload: { name: string; link: string }) {
+		return this.sendMail({
+			from: this.from,
+			to: email,
+			subject: 'Reset Password',
+			html: this.getMailerTexts.forgotPassword(payload),
+		});
+	}
+
+	async signUp(user: User) {
+		return this.sendMail({
+			from: this.from,
+			to: user.email,
+			subject: 'Thank you for registration on Codetrainer!',
+			html: this.getMailerTexts.onSignUp(user),
+		});
+	}
+
+	private async sendMail(options: Mail.Options) {
+		try {
+			const transport = this.getTransporter();
+			await transport.sendMail(options);
+			return { success: true };
+		} catch (error) {
+			throw new Error(error?.message ?? 'Send Error');
+		}
+	}
 }
 
-export const mailer = (message: IMessageMailer) => {
-	transporter.sendMail(message, (err: any, info: any) => {
-		if (err) {
-			throw new Error(`Something went wrong with sending email message to ${message.to}`);
-		}
-	});
-};
+const mailer = new Mailer();
+
+export { mailer };

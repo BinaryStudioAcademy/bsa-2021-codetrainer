@@ -43,6 +43,22 @@ export class Auth {
 		}
 	}
 
+	async forgotPassword(body: Containers.IForgotPassword) {
+		const { message } = await this.load({
+			endpoint: AuthApiPath.FORGOT_PASSWORD,
+			body,
+		});
+		return message;
+	}
+
+	async resetPassword(body: Containers.IResetPassword) {
+		const { message } = await this.load({
+			endpoint: AuthApiPath.RESET_PASSWORD,
+			body,
+		});
+		return message;
+	}
+
 	async logout() {
 		await this.load({ endpoint: AuthApiPath.LOGOUT, skipAuthorization: false });
 		AccessToken.resetToken();

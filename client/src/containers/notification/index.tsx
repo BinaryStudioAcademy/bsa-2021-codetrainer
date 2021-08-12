@@ -9,7 +9,7 @@ export const NotificationContainer = () => {
 	const notification = useAppSelector((rootState) => rootState.notification.state);
 
 	const handleClose = () => {
-		dispatch(actions.setNotificationState(null));
+		dispatch(actions.setNotificationState({ state: null }));
 	};
 
 	return (
