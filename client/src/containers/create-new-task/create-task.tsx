@@ -10,9 +10,33 @@ import { ButtonClasses } from 'components/basic/button';
 
 export interface ICreateTaskProps {}
 
+const CodeTabs = {
+	COMPLETE_SOLUTION: 0,
+	INITIAL_SOLUTION: 1,
+	PRELOADED: 2
+};
+
+const TestTabs = {
+	TEST_CASES: 0,
+	EXAMPLE_TEST_CASES: 1
+};
+
 export const CreateTask = (props: ICreateTaskProps) => {
+	const [instructionTab, setInstructionTab] = useState(0);
+	const [codeTab, setCodeTab] = useState(0);
+	const [testTab, setTestTab] = useState(0);
+
 	const [textDescription, setTextDescription] = useState('');
+
+	const [completeSolution, setCompleteSolution] = useState('');
+	const [initialSolution, setInitialSolution] = useState('');
+	const [preloaded, setPreloaded] = useState('');
+
+	const [testCases, setTestCases] = useState('');
+	const [exampleTestCases, setExampleTestCases] = useState('');
+
 	const tabsInstructions: ICreateTabsProps = {
+		selectedTab: instructionTab,
 		tabs: [
 			{
 				header: {
@@ -31,6 +55,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					},
 				},
 				type: TaskTabTypes.MARKDOWN,
+				text: textDescription,
 				markdownContent: textDescription,
 			},
 			{
@@ -43,8 +68,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			},
 		],
 		onChange: (text) => setTextDescription(text),
+		onSelectTab: (tab) => setInstructionTab(tab)
 	};
 	const tabsCode: ICreateTabsProps = {
+		selectedTab: codeTab,
 		tabs: [
 			{
 				header: {
@@ -52,6 +79,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				},
 				type: TaskTabTypes.CODE,
 				editable: true,
+				text: completeSolution
 			},
 			{
 				header: {
@@ -59,6 +87,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				},
 				editable: true,
 				type: TaskTabTypes.CODE,
+				text: initialSolution
 			},
 			{
 				header: {
@@ -66,6 +95,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				},
 				type: TaskTabTypes.CODE,
 				editable: true,
+				text: preloaded
 			},
 			{
 				header: {
@@ -75,9 +105,23 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				markdownContent: `# Help`,
 			},
 		],
-		onChange: (text) => {},
+		onChange: (text) => {
+			switch(codeTab) {
+				case CodeTabs.COMPLETE_SOLUTION:
+					setCompleteSolution(text);
+					break;
+				case CodeTabs.INITIAL_SOLUTION:
+					setInitialSolution(text);
+					break;
+				case CodeTabs.PRELOADED:
+					setPreloaded(text);
+					break;
+			}
+		},
+		onSelectTab: (tab) => setCodeTab(tab)
 	};
 	const tabsTests: ICreateTabsProps = {
+		selectedTab: testTab,
 		tabs: [
 			{
 				header: {
@@ -85,6 +129,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				},
 				type: TaskTabTypes.CODE,
 				editable: true,
+				text: testCases
 			},
 			{
 				header: {
@@ -92,6 +137,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				},
 				editable: true,
 				type: TaskTabTypes.CODE,
+				text: exampleTestCases
 			},
 			{
 				header: {
@@ -101,7 +147,17 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				markdownContent: `# Header`,
 			},
 		],
-		onChange: (text) => {},
+		onChange: (text) => {
+			switch(testTab) {
+				case TestTabs.TEST_CASES:
+					setTestCases(text);
+					break;
+				case TestTabs.EXAMPLE_TEST_CASES:
+					setExampleTestCases(text);
+					break;
+			}
+		},
+		onSelectTab: (tab) => setTestTab(tab)
 	};
 
 	return (
