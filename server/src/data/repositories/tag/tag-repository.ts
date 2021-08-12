@@ -1,8 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Tag } from '../../models';
+import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Tag)
-export class TagRepository extends Repository<Tag> {
+export class TagRepository extends AbstractRepository<Tag> {
 	getAll() {
 		return this.createQueryBuilder('tag')
 			.leftJoinAndSelect('tag.tasks', 'tasks')
@@ -12,7 +13,7 @@ export class TagRepository extends Repository<Tag> {
 			.getRawMany();
 	}
 
-	getById(id: string) {
-		return this.createQueryBuilder('tag').where('tag.id = :id', { id }).getOne();
+	getByKey(value: string, key: string) {
+		return this.createQueryBuilder('tag').where(`tag.${key} = :value`, { value }).getOne();
 	}
 }
