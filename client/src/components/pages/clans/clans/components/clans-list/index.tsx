@@ -1,9 +1,9 @@
 import React from 'react';
-import { TClans } from 'containers/clans/types';
 import ClanItem from '../clan-item';
+import { IClansListProps } from './types';
 import styles from './clans-list.module.scss';
 
-const ClansList: React.FC<{ clans: TClans }> = ({ clans }) => {
+const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveClan }) => {
 	return (
 		<div className={styles.clansList}>
 			<table className={styles.clansListTable}>
@@ -18,7 +18,7 @@ const ClansList: React.FC<{ clans: TClans }> = ({ clans }) => {
 						<td></td>
 					</tr>
 					{clans.map((clan) => (
-						<ClanItem clan={clan} key={clan.id} />
+						<ClanItem joinClan={joinClan} leaveClan={leaveClan} clan={clan} key={clan.id} userId={userId} />
 					))}
 				</tbody>
 			</table>

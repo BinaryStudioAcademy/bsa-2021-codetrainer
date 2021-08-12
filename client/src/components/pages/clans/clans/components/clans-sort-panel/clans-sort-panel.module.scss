@@ -10,6 +10,10 @@
 		background: none;
 		font: $base-font;
 		border: none;
+
+		&Active {
+			color: $french-rose;
+		}
 	}
 
 	&Button:not(:last-of-type) {
