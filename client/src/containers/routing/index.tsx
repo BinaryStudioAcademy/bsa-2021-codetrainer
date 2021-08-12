@@ -43,7 +43,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPageCointainer} />
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
-			<PublicRoute exact restricted={true} path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
+			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute
 				exact
 				path={ROUTES.createTask}
