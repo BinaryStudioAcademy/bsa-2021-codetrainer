@@ -194,7 +194,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	};
 	//validation
 	let validationStatus = true; //true is okay ,false if there are mistakes
-	const createNewTask = async () => {
+	const handleSave = async () => {
 		validationStatus = true;
 		if (taskName.trim() === '') {
 			validationStatus = false;
@@ -262,6 +262,23 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			console.log(result);
 		}
 	};
+	const handleReset = () => {
+		// 	completeSolution,
+		// 	initialSolution,
+		// 	testCases,
+		// 	exampleTestCases,
+		setTaskName('');
+		setDiscipline(DISCIPLINE_ITEMS[0]);
+		setLanguage(SELECT_PROPS.values[0]);
+		setRank('8');
+		setSelectedSwitch(false);
+		setTags('');
+		setTextDescription('');
+		setCompleteSolution('');
+		setInitialSolution('');
+		setTestCases('');
+		setExampleTestCases('');
+	};
 	return (
 		<>
 			<NotificationContainer />
@@ -297,10 +314,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			</div>
 			<div className={styles.buttonsBottom}>
 				<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Publish</Button>
-				<Button className={clsx(ButtonClasses.red)} onClick={createNewTask}>
+				<Button className={clsx(ButtonClasses.red)} onClick={handleSave}>
 					Save
 				</Button>
-				<Button className={clsx(ButtonClasses.red)} onClick={}>
+				<Button className={clsx(ButtonClasses.red)} onClick={handleReset}>
 					Reset
 				</Button>
 				<Button className={clsx(ButtonClasses.red)}>Delete</Button>
