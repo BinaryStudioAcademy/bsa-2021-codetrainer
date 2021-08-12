@@ -1,44 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CreateTaskSettings } from 'components/pages';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from '../mock';
-import { useDispatch, useSelector } from 'react-redux';
-import { Discipline } from '../logic/models';
-import { IRootState } from 'typings/root-state';
-import * as actions from '../logic/actions';
-import { useCallback } from 'react';
+import { Discipline, IDisciplineItem } from '../logic/models';
 import { ISelectValue } from 'components/basic/select/interface';
 
 export const CreateSettings = () => {
-	const dispatch = useDispatch();
-	const chosenDiscipline = useSelector((state: IRootState) => state.createTask.discipline);
-	const onChangeDiscipline = useCallback(
-		(newDiscipline: Discipline) => {
-			dispatch(actions.setDiscipline({ discipline: newDiscipline }));
-		},
-		[dispatch],
-	);
-	const isSelectedSwitch = useSelector((state: IRootState) => state.createTask.isSelectedSwitch);
+	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
+	const onChangeDiscipline = (newDiscipline: Discipline) => {
+		const foundDisciplineItem: IDisciplineItem = findDisciplineItem(newDiscipline);
+		setDiscipline(foundDisciplineItem);
+	};
+	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
 	const onSwitchClick = (newSwitchState: boolean) => {
-		dispatch(actions.setSwitch({ isSelectedSwitch: newSwitchState }));
+		setSelectedSwitch(newSwitchState);
 	};
 
+	const [language, setLanguage] = useState(SELECT_PROPS.values[0]);
 	return (
-		// header and sidebar etc here
 		<div>
 			<CreateTaskSettings
 				disciplineItems={DISCIPLINE_ITEMS}
-				chosenDiscipline={chosenDiscipline}
+				chosenDiscipline={chosenDiscipline.value}
 				onChangeDiscipline={onChangeDiscipline}
 				isSelectedSwitch={isSelectedSwitch}
 				onSwitchClick={onSwitchClick}
-				//work here
 				selectProps={{
 					...SELECT_PROPS,
+					activeValue: language,
 					onChange: (value: ISelectValue) => {
-						dispatch(actions.setLanguageVersion({ languageVersion: value }));
+						setLanguage(value);
 					},
 				}}
 			/>
 		</div>
 	);
+};
+
+const findDisciplineItem = (newDiscipline: Discipline) => {
+	const result = DISCIPLINE_ITEMS.find((item) => item.value === newDiscipline);
+	if (result) {
+		return result;
+	}
+	return DISCIPLINE_ITEMS[0];
 };
