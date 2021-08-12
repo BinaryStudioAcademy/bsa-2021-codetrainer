@@ -6,12 +6,17 @@
 	background: #fafbff;
 	.profileHeader {
 		display: flex;
+		gap: 10px;
 		padding-bottom: 20px;
 		align-items: center;
 		.avatar {
 			width: 57px;
 			height: 57px;
 			cursor: pointer;
+		}
+		.name {
+			padding-top: 7px;
+			font-size: 18px;
 		}
 	}
 	.link {
