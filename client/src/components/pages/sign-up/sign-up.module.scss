@@ -36,11 +36,15 @@ a {
 	}
 
 	footer {
+		font-family: $base-font-family;
 		position: absolute;
 		bottom: 10px;
 		left: 50%;
 		transform: translate(-50%);
 		font-size: 14px;
 		color: rgba(40, 40, 40, 0.5);
+		.link {
+			text-decoration: underline;
+		}
 	}
 }
