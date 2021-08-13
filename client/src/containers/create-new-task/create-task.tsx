@@ -346,7 +346,50 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			}
 		}
 	};
+	const handleInsertExample = () => {
+		setTextDescription(
+			`# Это самый крупный заголовок, он превращается в тег <h1>
+## <h2>
+### <h3>
+#### <h4>
+##### <h5>
+###### <h6>`,
+		);
+		setCompleteSolution(`function twoOldestAges(ages){
+	var oldest = 0, nextOldest;
+	for(var i = 0;i < ages.length;i++){
+		var age = ages[i];
+		if (age > oldest){
+			nextOldest = oldest;
+			oldest = age;
+		}
+		else if(age > nextOldest){
+			nextOldest = age;
+		}
+	}
+	return [nextOldest, oldest];
+	}`);
+		setInitialSolution(`//return the two oldest/oldest ages within the array of ages passed in.
+// it should return the two ages as a sorted array, youngest age first
+function twoOldestAges(ages){
+				
+}`);
+		setPreloaded('');
+		setTestCases(`const chai = require("chai");
+const assert = chai.assert;
+chai.config.truncateThreshold = 0;
+		
+describe("twoOldestAges", function() {
+	it("given [1,5,87,45,8,8]", function() {
+	assert.deepEqual(twoOldestAges([1, 5, 87, 45, 8, 8]), [45, 87]);
+	});
 
+	it("given [6,5,83,5,3,18]", function() {
+	assert.deepEqual(twoOldestAges([6, 5, 83, 5, 3, 18]), [18, 83]);
+	});
+});`);
+		setExampleTestCases('');
+	};
 	return (
 		<>
 			<NotificationContainer />
@@ -372,7 +415,9 @@ export const CreateTask = (props: ICreateTaskProps) => {
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>
 							Validate Solution
 						</Button>
-						<Button className={clsx(ButtonClasses.blue)}>Insert Example</Button>
+						<Button className={clsx(ButtonClasses.blue)} onClick={handleInsertExample}>
+							Insert Example
+						</Button>
 					</div>
 				</div>
 				<div className={clsx(styles.solution, 'taskSolution')}>
