@@ -14,3 +14,4 @@ export { CreateTaskSettings, ButtonsBlock } from './create-task';
 export { default as SettingPage } from './setting';
 export { Tasks as ProfileTasks } from './profile/profile-tasks';
 export type { ICreateTabsProps } from './create-task';
+export { default as NotFound } from './not-found';
