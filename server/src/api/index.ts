@@ -5,7 +5,8 @@ import { imagesRouter } from './images.router';
 import { githubRouter } from './github.router';
 import { initTaskApi } from './task';
 import { ApiPath } from '../common';
-import { authService, clanService, imagesService, githubService } from '../services';
+import { initFollower } from './follower';
+import { authService, clanService, imagesService, githubService, follower } from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -25,6 +26,13 @@ export function initApi(): Router {
 	);
 
 	apiRouter.use(ApiPath.IMAGES, imagesRouter(imagesService));
+
+	apiRouter.use(
+		ApiPath.FOLLOWERS,
+		initFollower(Router, {
+			follower,
+		}),
+	);
 
 	apiRouter.use(
 		ApiPath.AUTH + ApiPath.GITHUB,

@@ -1,3 +1,4 @@
+import { FollowersService } from './follower';
 import {
 	UserRepository,
 	ClanRepository,
@@ -6,6 +7,7 @@ import {
 	TaskRepository,
 	TagRepository,
 	SolutionRepository,
+	FollowerRepository,
 } from '../data';
 import { AuthService } from './auth';
 import { ClanService } from './clan';
@@ -17,6 +19,10 @@ import { SolutionService } from './solution/solution-service';
 
 const authService = new AuthService({ user: UserRepository });
 const clanService = new ClanService({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
+
+const follower = new FollowersService({ follower: FollowerRepository });
+type TFollowerService = InstanceType<typeof FollowersService>;
+
 const imagesService = new ImagesService(imagesRepository);
 const githubService = new GithubService({ authService, userRepository: UserRepository });
 const taskService = new TaskService({ task: TaskRepository, user: UserRepository, tag: TagRepository });
@@ -34,3 +40,4 @@ export { taskService, TaskService };
 export { githubService, GithubService };
 export { tagService, TagService };
 export { solutionService, SolutionService };
+export { follower, TFollowerService };

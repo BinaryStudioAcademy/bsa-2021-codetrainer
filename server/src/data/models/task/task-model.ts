@@ -10,23 +10,38 @@ export class Task extends AbstractEntity {
 	@Column({ type: 'varchar', length: 250, default: '' })
 	name!: string;
 
+	@Column({ type: 'varchar', default: '' })
+	discipline?: string;
+
+	// @Column({ type: 'int' })
+	// languageId?: number;
+	
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	rank?: number;
+
+	@Column({ type: 'text', default: '' })
+	tags?: string;
+
+	@Column({ type: 'bool', default: false, width:1 })
+	allowContributors?: boolean;
 
 	@Column({ type: 'text', default: '' })
 	description?: string;
 
 	@Column({ type: 'text', default: '' })
-	testCase?: string;
-
-	@Column({ type: 'text', default: '' })
-	testCaseSample?: string;
+	completeSolution?: string;
 
 	@Column({ type: 'text', default: '' })
 	initialSolution?: string;
 
 	@Column({ type: 'text', default: '' })
-	completeSolution?: string;
+	preloader?: string;
+
+	@Column({ type: 'text', default: '' })
+	testCases?: string;
+
+	@Column({ type: 'text', default: '' })
+	exampleTestCases?: string;
 
 	@Column({ type: 'enum', enum: TASK_STATUS })
 	status!: TASK_STATUS;

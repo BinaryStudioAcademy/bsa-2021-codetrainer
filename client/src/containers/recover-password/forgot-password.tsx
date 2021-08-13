@@ -25,9 +25,11 @@ export const ForgotPassword: React.FC = () => {
 		}
 		dispatch(
 			setNotificationState({
-				notificationType: NotificationType.Success,
-				message: 'Email send',
-				title: 'Forgot Password',
+				state: {
+					notificationType: NotificationType.Success,
+					message: 'Email send',
+					title: 'Forgot Password',
+				},
 			}),
 		);
 		dispatch(recoverPasswordStateReset());

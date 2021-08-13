@@ -1,15 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../../typings/root-state';
+import { useDispatch } from 'react-redux';
 import { Notification } from '../../components';
 import * as actions from './logic/actions';
+import { useAppSelector } from 'hooks/useAppSelector';
 
 export const NotificationContainer = () => {
 	const dispatch = useDispatch();
-	const notification = useSelector((rootState: IRootState) => rootState.notification.state);
+	const notification = useAppSelector((rootState) => rootState.notification.state);
 
 	const handleClose = () => {
-		dispatch(actions.setNotificationState(null));
+		dispatch(actions.setNotificationState({ state: null }));
 	};
 
 	return (

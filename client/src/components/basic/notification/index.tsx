@@ -13,8 +13,7 @@ export interface INotificationProps {
 	id?: string;
 }
 
-export const Notification: React.FC<INotificationProps> = (props) => {
-	const { handleClose, severity, text, title, id } = props;
+export const Notification = ({ handleClose, severity, text, title, id }: INotificationProps) => {
 	const { autoHideDuration, position, transitionDuration } = notificationConfig;
 
 	const [isOpen, setIsOpen] = useState(false);
