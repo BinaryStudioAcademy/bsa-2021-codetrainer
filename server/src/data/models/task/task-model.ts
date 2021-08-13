@@ -11,7 +11,7 @@ export class Task extends AbstractEntity {
 	name!: string;
 
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
-	difficulty?: number;
+	rank?: number;
 
 	@Column({ type: 'text', default: '' })
 	description?: string;

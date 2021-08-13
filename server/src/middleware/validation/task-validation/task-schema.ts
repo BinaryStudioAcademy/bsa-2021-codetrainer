@@ -9,7 +9,7 @@ export const taskSchema = checkSchema({
 		optional: true,
 		notEmpty: true,
 	},
-	difficulty: {
+	rank: {
 		in: 'body',
 		errorMessage: 'Wrong difficulty format',
 		isInt: true,

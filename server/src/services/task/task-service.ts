@@ -61,8 +61,8 @@ export class TaskService {
 	}
 
 	async search(
-		query: {
-			q?: string;
+		queryFilter: {
+			query?: string;
 			sort?: TaskSorts;
 			status?: string;
 			progress?: string;
@@ -72,7 +72,7 @@ export class TaskService {
 		},
 		user: User,
 	) {
-		const { sort, page, ...where } = query;
+		const { sort, page, ...where } = queryFilter;
 		const repository = getCustomRepository(this.taskRepository);
 		const tagRepository = getCustomRepository(this.tagRepository);
 		return {
@@ -80,8 +80,8 @@ export class TaskService {
 			tasks: await repository.search({
 				where,
 				sort,
-				skip: page * TASKS_ON_PAGE,
-				take: TASKS_ON_PAGE,
+				// skip: page * TASKS_ON_PAGE,
+				// take: TASKS_ON_PAGE,
 				userId: user.id,
 			}),
 			ranks: await repository.getRanks(),

@@ -1,40 +1,51 @@
-interface ITask {
-	name: string;
-}
-
 export interface ISearchState {
 	isLoading: boolean;
 	errors: Record<string, { msg: string }[]> | string | null;
 	isSuccess: boolean;
+	onSubmit: boolean;
 	filter: {
-		status?: string;
-		progress?: string;
-		query?: string;
-		rank?: string;
-		tags?: string[];
-		sort?: string;
+		status: string;
+		progress: string;
+		query: string;
+		rank: number | null;
+		tags: string;
+		sort: string;
 	};
 	search: {
 		tags: {
 			name: string;
-			numberOfTasks: string;
+			numberOfTasks: number;
 		}[];
 		ranks: {
-			difficulty: number;
+			rank: number;
 		}[];
 		tasks: {
 			id: string;
 			name: string;
 			status: string;
 			tags: string[];
+			rank: number;
+			user: {
+				username: string;
+				name: string;
+				surname: string;
+			};
 		}[];
 	} | null;
 }
 
 export const initialState: ISearchState = {
-	isLoading: false,
+	isLoading: true,
 	isSuccess: false,
 	errors: null,
-	filter: {},
+	onSubmit: true,
+	filter: {
+		status: 'approved',
+		progress: 'all',
+		query: '',
+		sort: 'newest',
+		tags: '',
+		rank: null,
+	},
 	search: null,
 };

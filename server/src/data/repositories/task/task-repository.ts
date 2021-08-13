@@ -12,9 +12,9 @@ const sortQuery = <T>(query: SelectQueryBuilder<T>, sorts?: TASK_ORDER_BY): Sele
 		case TASK_ORDER_BY.NAME:
 			return query.orderBy('task.name', 'ASC');
 		case TASK_ORDER_BY.EASIEST:
-			return query.orderBy('task.difficulty', 'ASC');
+			return query.orderBy('task.rank', 'ASC');
 		case TASK_ORDER_BY.HARDEST:
-			return query.orderBy('task.difficulty', 'DESC');
+			return query.orderBy('task.rank', 'DESC');
 		case TASK_ORDER_BY.NEWEST:
 			return query.orderBy('task.createdAt', 'DESC');
 		case TASK_ORDER_BY.OLDEST:
@@ -33,11 +33,11 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 			case SEARCH_KEYS.STATUS:
 				query.andWhere(`task.status = :status`, { status: value });
 				break;
-			case SEARCH_KEYS.Q:
+			case SEARCH_KEYS.Query:
 				query.andWhere('task.name LIKE :q', { q: `%${value}%` });
 				break;
 			case SEARCH_KEYS.RANK:
-				query.andWhere('task.difficulty = :rank', { rank: value });
+				query.andWhere('task.rank = :rank', { rank: value });
 				break;
 			case SEARCH_KEYS.TAGS:
 				query.andWhere('tag.name IN (:tags)', { tags: value });
@@ -82,18 +82,21 @@ export class TaskRepository extends AbstractRepository<Task> {
 	}
 
 	getRanks() {
-		return this.createQueryBuilder('task').select('difficulty').distinct(true).getRawMany();
+		return this.createQueryBuilder('task').select('rank').distinct(true).getRawMany();
 	}
 
-	search(query: { where?: IWhere; sort?: TASK_ORDER_BY; skip: number; take: number; userId: string }) {
+	search(query: { where?: IWhere; sort?: TASK_ORDER_BY; userId: string }) {
 		const searchQuery = filterQuery(
 			this.createQueryBuilder('task')
 				.leftJoinAndSelect('task.tags', 'tag')
 				.leftJoinAndSelect('task.solutions', 'solution')
-				.leftJoinAndSelect('solution.user', 'user'),
+				.leftJoinAndSelect('solution.user', 'user')
+				.leftJoinAndSelect('task.user', 'author'),
 			query.userId,
 			query.where,
 		);
-		return sortQuery(searchQuery, query.sort).skip(query.skip).take(query.take).getMany();
+		return sortQuery(searchQuery, query.sort)
+			.select(['task', 'author.username', 'author.id', 'tag', 'author.name', 'author.surname'])
+			.getMany();
 	}
 }

@@ -10,20 +10,13 @@ export const searchReducer = createReducer<ISearchState>(initialState, {
 			errors: action.payload,
 		};
 	},
-	[actionTypes.SEARCH_STATE_RESET](state) {
-		return {
-			...state,
-			isLoading: false,
-			isSuccess: false,
-			errors: null,
-		};
-	},
 	[actionTypes.SEARCH_BEFORE_FETCH](state) {
 		return {
 			...state,
 			isLoading: true,
 			isSuccess: false,
 			errors: null,
+			onSubmit: false,
 		};
 	},
 	[actionTypes.SEARCH_SUCCESS](state) {
@@ -36,13 +29,22 @@ export const searchReducer = createReducer<ISearchState>(initialState, {
 	[actionTypes.SEARCH_CHANGE_FILTER](state, action: actionTypes.TSearchChangeFilter) {
 		return {
 			...state,
-			...action.partialFilter,
+			filter: {
+				...state.filter,
+				...action.partialFilter,
+			},
 		};
 	},
 	[actionTypes.SEARCH_SET_DATA](state, action: actionTypes.TSearchSetData) {
 		return {
 			...state,
-			search: action.payload,
+			search: action.data,
+		};
+	},
+	[actionTypes.SEARCH_SET_SUBMIT](state, action: actionTypes.TSearchSetSubmit) {
+		return {
+			...state,
+			onSubmit: action.payload,
 		};
 	},
 });

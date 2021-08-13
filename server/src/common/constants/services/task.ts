@@ -17,7 +17,7 @@ export enum SEARCH_PROGRESS {
 export enum SEARCH_KEYS {
 	STATUS = 'status',
 	PROGRESS = 'progress',
-	Q = 'q',
+	Query = 'query',
 	RANK = 'rank',
 	TAGS = 'tags',
 }
