@@ -11,12 +11,22 @@ import { ROUTES } from 'constants/routes';
 import { ISignUpForm } from 'typings/sign-up-form';
 
 const SignupSchema = Yup.object().shape({
-	name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	surname: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-	email: Yup.string().email('Invalid email').required('Required'),
-	password: Yup.string().min(8, 'Too short').required('Required'),
+	username: Yup.string()
+		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
+		.min(3, 'Minimum length: 3')
+		.max(20, 'Maximum length: 20')
+		.required('Required'),
+	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+	surname: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+	email: Yup.string()
+		.email('Invalid email')
+		.min(5, 'Minimum length: 5')
+		.max(50, 'Maximum length: 50')
+		.required('Required'),
+	password: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 	confirmPassword: Yup.string()
-		.min(8, 'Too short')
+		.min(8, 'Minimum length: 8')
+		.max(25, 'Maximum length: 25')
 		.required('Required')
 		.test('passwords-match', 'Passwords must match', function (value) {
 			return this.parent.password === value;
@@ -30,11 +40,10 @@ interface ISignUnPageProps {
 
 const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 	return (
-		<CoverLayout>
-			<h4>SignUp</h4>
-			{!!error && <div className={styles.error}>{error}</div>}
+		<CoverLayout className={styles.signUp}>
 			<Formik
 				initialValues={{
+					username: '',
 					name: '',
 					surname: '',
 					email: '',
@@ -46,7 +55,17 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 					onFormSubmit(values);
 				}}
 			>
-				<Form>
+				<Form className={styles.form}>
+					<h4 className={styles.header}>SignUp</h4>
+					{!!error && <div className={styles.error}>{error}</div>}
+					<Field
+						id="username"
+						name="username"
+						label="Username"
+						placeholder="Enter your username"
+						type="text"
+						component={FormInput}
+					/>
 					<Field
 						id="name"
 						name="name"
@@ -87,15 +106,15 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, error }) => {
 						type="password"
 						component={FormInput}
 					/>
-					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.submitBtn)}>Sign Up</Button>
+					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Sign Up</Button>
 				</Form>
 			</Formik>
-			<div className={styles.footer}>
+			<footer>
 				Already Signed up?{' '}
 				<Link to={ROUTES.SignIn} className={styles.link}>
 					Sign in
 				</Link>
-			</div>
+			</footer>
 		</CoverLayout>
 	);
 };

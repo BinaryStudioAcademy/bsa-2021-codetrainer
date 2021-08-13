@@ -8,20 +8,15 @@ import { ICreateTabsProps } from './types';
 
 import styles from './styles.module.scss';
 
-export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange }) => {
-	const [tab, setTab] = useState<number>(0);
+export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelectTab, selectedTab }) => {
 	const [fullScreen, setFullScreen] = useState<boolean>(false);
-
-	const handleChangeTab = (tabNumber: number) => {
-		setTab(tabNumber);
-	};
 
 	const handleFullScreen = () => {
 		setFullScreen((state) => !state);
 	};
 
 	return (
-		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)}>
+		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit, 'markdown')}>
 			<Icon
 				icon={IconTaskPageFullScreen.NAME}
 				size={IconTaskPageFullScreen.SIZE}
@@ -29,11 +24,11 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange }) => {
 				className={styles.icon}
 				onClick={handleFullScreen}
 			/>
-			<Header tabs={tabs} onChange={handleChangeTab} />
+			<Header tabs={tabs} onChange={onSelectTab} />
 			<div className={styles.panel}>
 				<div />
 				<div>
-					<TabContent onChange={onChange} tab={tabs[tab]} />
+					<TabContent onChange={onChange} tab={tabs[selectedTab]} />
 				</div>
 			</div>
 		</div>

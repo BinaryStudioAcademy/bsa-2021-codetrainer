@@ -9,4 +9,6 @@ export const WHITE_ROUTES = [
 	`${ApiPath.AUTH}${ApiPath.GITHUB}${GithubApiPath.LINK}`,
 	`${ApiPath.AUTH}${ApiPath.GITHUB}${GithubApiPath.CALLBACK}${GithubApiPath.LOGIN}`,
 	`${ApiPath.AUTH}${ApiPath.GITHUB}${GithubApiPath.CALLBACK}${GithubApiPath.REGISTER}`,
+	`${ApiPath.AUTH}${AuthApiPath.FORGOT_PASSWORD}`,
+	`${ApiPath.AUTH}${AuthApiPath.RESET_PASSWORD}`,
 ];
