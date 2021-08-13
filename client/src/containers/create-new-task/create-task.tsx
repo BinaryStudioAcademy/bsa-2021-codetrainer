@@ -90,7 +90,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					toolTipTitle: <em>comment</em>,
 				},
 				type: TaskTabTypes.MARKDOWN,
-				markdownContent: `# Header`,
+				markdownContent: `# [Read more about markdown](https://guides.hexlet.io/markdown/)`,
 			},
 		],
 		onChange: (text) => setTextDescription(text),
@@ -133,7 +133,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					title: 'Help',
 				},
 				type: TaskTabTypes.MARKDOWN,
-				markdownContent: `# Help`,
+				markdownContent: `### In "Complete Solution" you should solve your own task
+### In "Initial Soultion" write code that will be given to the user at the start
+### "Preloader" is optional here. This is code that will be loaded before the solution code within the execution path.
+This allows you to setup code that can be used by the warrior's solution, but not directly edited within the solution code.`,
 			},
 		],
 		onChange: (text) => {
@@ -179,7 +182,10 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					title: 'Help',
 				},
 				type: TaskTabTypes.MARKDOWN,
-				markdownContent: `# Header`,
+				markdownContent: `### "Test Cases" is where you write all hidden tests for the user's solution.
+### "Example Test Cases" is where you write all example test for user's solution.
+
+Remember! Your solution in "Complete solution" should pass all these tests too!`,
 			},
 		],
 		onChange: (text) => {
@@ -347,14 +353,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		}
 	};
 	const handleInsertExample = () => {
-		setTextDescription(
-			`# Это самый крупный заголовок, он превращается в тег <h1>
-## <h2>
-### <h3>
-#### <h4>
-##### <h5>
-###### <h6>`,
-		);
+		setTextDescription(`### In this task you have to find 2 biggest numbers in the array`);
 		setCompleteSolution(`function twoOldestAges(ages){
 	var oldest = 0, nextOldest;
 	for(var i = 0;i < ages.length;i++){
