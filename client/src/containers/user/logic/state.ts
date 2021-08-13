@@ -1,4 +1,4 @@
-import { IUser } from 'typings/sign-in-form';
+import { IUser } from 'typings/webapi';
 
 export enum UserAccessToken {
 	LOADING = 'loading',

@@ -1,7 +1,8 @@
 import { ISignUpForm } from 'typings/sign-up-form';
+import { IUser } from 'typings/webapi';
 import callWebApi from '../helpers/call-api.helper';
 
-export const signUp = async (userData: ISignUpForm): Promise<WebApi.Entities.IUser> => {
+export const signUp = async (userData: ISignUpForm): Promise<IUser> => {
 	try {
 		const response = await callWebApi({
 			method: 'POST',
@@ -14,7 +15,7 @@ export const signUp = async (userData: ISignUpForm): Promise<WebApi.Entities.IUs
 			throw error.message;
 		}
 		const { user } = await response.json();
-		return user as WebApi.Entities.IUser;
+		return user as IUser;
 	} catch (error) {
 		throw error;
 	}

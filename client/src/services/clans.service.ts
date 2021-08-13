@@ -1,48 +1,96 @@
-import { IMember, TClans } from 'containers/clans/types';
-import { IClan } from 'containers/clans/types';
-import callWebApi from '../helpers/call-api.helper';
+import { TClans, IClan, IMember } from 'typings/webapi';
+import { ApiRoutes, HttpMethods } from 'constants/services';
+import { http } from 'services';
 
 export interface TFetchClansArgs {
 	take: number;
 	skip: number;
 }
 
-export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<TClans> => {
-	const res = await callWebApi({
-		method: 'GET',
-		endpoint: 'clan',
-		query: {
-			take,
-			skip,
-		},
-	});
+export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<TClans | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.GET,
+			endpoint: ApiRoutes.CLANS,
+			query: {
+				take,
+				skip,
+			},
+		});
 
-	const clans = (await res.json()).map((clan: IClan) => ({
-		...clan,
-		createdAt: new Date(clan.createdAt),
-	}));
+		const clans = response.map((clan: IClan) => ({
+			...clan,
+			createdAt: new Date(clan.createdAt),
+		}));
 
-	return clans;
+		return clans;
+	} catch (error) {
+		return error;
+	}
 };
 
-export const fetchClan = async (id: string): Promise<IClan> => {
-	const res = await callWebApi({
-		method: 'GET',
-		endpoint: `clan/${id}`,
-	});
+export const fetchClan = async (id: string): Promise<IClan | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.GET,
+			endpoint: `${ApiRoutes.CLANS}${id}`,
+		});
 
-	const clan = await res.json().then((clan) => ({
-		...clan,
-		members: clan.members.map((member: IMember) => ({
-			...member,
-			createdAt: new Date(member.createdAt),
-		})),
-		createdAt: new Date(clan.createdAt),
-	}));
+		const clan = {
+			...response,
+			members: response.members.map((member: IMember) => ({
+				...member,
+				createdAt: new Date(member.createdAt),
+			})),
+			createdAt: new Date(response.createdAt),
+		};
 
-	return clan;
+		return clan;
+	} catch (error) {
+		return error;
+	}
 };
 
-export const joinClan = async (id: string): Promise<void> => {};
+export const joinClan = async (id: string): Promise<IClan | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.PATCH,
+			endpoint: `${ApiRoutes.CLANS}${id}`,
+		});
 
-export const leaveClan = async (id: string): Promise<void> => {};
+		const clan = {
+			...response,
+			members: response.members.map((member: IMember) => ({
+				...member,
+				createdAt: new Date(member.createdAt),
+			})),
+			createdAt: new Date(response.createdAt),
+		};
+
+		return clan;
+	} catch (error) {
+		return error;
+	}
+};
+
+export const leaveClan = async (id: string): Promise<IClan | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.PATCH,
+			endpoint: `${ApiRoutes.CLANS}${id}`,
+		});
+
+		const clan = {
+			...response,
+			members: response.members.map((member: IMember) => ({
+				...member,
+				createdAt: new Date(member.createdAt),
+			})),
+			createdAt: new Date(response.createdAt),
+		};
+
+		return clan;
+	} catch (error) {
+		return error;
+	}
+};

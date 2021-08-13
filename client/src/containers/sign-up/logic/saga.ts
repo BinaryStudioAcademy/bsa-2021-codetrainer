@@ -3,7 +3,7 @@ import { authServices } from 'services';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import * as userActions from 'containers/user/logic/actions';
-import { IUser } from 'typings/sign-in-form';
+import { IUser } from 'typings/webapi';
 
 export function* signUpUser(action: ReturnType<typeof actions.signUpUser>) {
 	try {
