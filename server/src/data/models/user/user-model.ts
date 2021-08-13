@@ -71,9 +71,6 @@ export class User extends BaseEntity {
 	@ManyToOne(() => Clan, (clan) => clan.members, { nullable: true })
 	clan?: Clan;
 
-	@CreateDateColumn()
-	createdAt!: Date;
-
 	@UpdateDateColumn()
 	updatedAt!: Date;
 
