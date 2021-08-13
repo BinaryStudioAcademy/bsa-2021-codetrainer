@@ -1,3 +1,4 @@
+import { User } from './users';
 import { FollowersService } from './follower';
 import {
 	UserRepository,
@@ -18,6 +19,11 @@ import { TagService } from './tag/tag-service';
 import { SolutionService } from './solution/solution-service';
 
 const authService = new AuthService({ user: UserRepository });
+
+const users = new User({ user: UserRepository });
+type TUsersService = InstanceType<typeof User>;
+
+export { users, TUsersService };
 const clanService = new ClanService({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
 
 const follower = new FollowersService({ follower: FollowerRepository });

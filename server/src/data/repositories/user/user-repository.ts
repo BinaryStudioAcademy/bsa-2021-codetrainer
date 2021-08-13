@@ -3,6 +3,24 @@ import { User } from '../../models';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+	userFields = [
+		'user.id',
+		'user.name',
+		'user.surname',
+		'user.nickname',
+		'user.avatar',
+		'user.createdAt',
+		'user.lastVisit',
+		'user.skills',
+		'user.devLevel',
+		'user.social',
+		'user.email',
+	];
+
+	getAll() {
+		return this.createQueryBuilder('user').select(this.userFields).getMany();
+	}
+
 	getByEmail(email: string) {
 		return this.createQueryBuilder('user').where('user.email = :email', { email }).getOne();
 	}
@@ -30,6 +48,10 @@ export class UserRepository extends Repository<User> {
 			])
 			.where('user.id = :id', { id })
 			.getOne();
+	}
+
+	removeById(id: string) {
+		return this.delete({ id });
 	}
 
 	getByGithubId(githubId: string): Promise<User | undefined> {

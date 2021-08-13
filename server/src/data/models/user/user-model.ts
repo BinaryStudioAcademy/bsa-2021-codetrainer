@@ -29,6 +29,24 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 25, nullable: true })
 	surname?: string;
 
+	@Column({ type: 'varchar', length: 25, default: '' })
+	nickname?: string;
+
+	@Column({ type: 'varchar', length: 500, default: '' })
+	avatar?: string;
+
+	@Column({ type: 'timestamptz', nullable: true })
+	lastVisit?: Date;
+
+	@Column({ type: 'text', array: true, default: [] })
+	skills?: string[];
+
+	@Column({ type: 'varchar', length: 50, default: '' })
+	devLevel?: string;
+
+	@Column({ type: 'text', array: true, default: [] })
+	social?: string[];
+
 	@Column({ type: 'varchar', length: 100, unique: true })
 	email!: string;
 
