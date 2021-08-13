@@ -1,6 +1,6 @@
 import * as actionTypes from './action-types';
 import { IClansState, initialState } from './state';
-import { IClan } from '../../types';
+import { WebApi } from 'typings/webapi';
 import { createReducer } from 'helpers/create-reducer.helper';
 import { SortOptions } from './state';
 
@@ -38,7 +38,7 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 	[actionTypes.UPDATE_CLAN](state, { id, clan: updatedClan }: actionTypes.IUpdateClanArgs) {
 		return {
 			...state,
-			data: state.data.map((clan: IClan) => (clan.id === id ? updatedClan : clan)),
+			data: state.data.map((clan: WebApi.Entities.IClan) => (clan.id === id ? updatedClan : clan)),
 		};
 	},
 	[actionTypes.SORT_BY_TIME](state, action) {

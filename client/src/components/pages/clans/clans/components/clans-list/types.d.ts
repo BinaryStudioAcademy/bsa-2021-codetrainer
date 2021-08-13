@@ -1,7 +1,7 @@
-import { TClans } from 'containers/clans/types';
+import { WebApi } from 'typings/webapi';
 
 export interface IClansListProps {
-	clans: TClans;
+	clans: WebApi.Entities.TClans;
 	userId: string;
 	joinClan: (clanId: string) => void;
 	leaveClan: (clanId: string) => void;

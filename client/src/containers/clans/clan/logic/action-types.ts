@@ -1,4 +1,4 @@
-import { IClan } from '../../types';
+import { WebApi } from 'typings/webapi';
 
 export const START_LOADING = 'CLAN:START_LOADING';
 export const FETCH_CLAN = 'CLAN:FETCH_CLAN';
@@ -15,7 +15,7 @@ export interface IFetchClanArgs {
 }
 
 export interface ISetClansArgs {
-	clan: IClan;
+	clan: WebApi.Entities.IClan;
 }
 
 export interface IAddErrorArgs {

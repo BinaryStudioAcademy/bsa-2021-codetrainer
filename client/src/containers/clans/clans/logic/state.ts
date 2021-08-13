@@ -1,4 +1,4 @@
-import { TClans } from '../../types';
+import { WebApi } from 'typings/webapi';
 
 export enum SortOptions {
 	DEFAULT = 'DEFAULT',
@@ -13,7 +13,7 @@ export interface IClansState {
 		take: number;
 		sortBy: SortOptions;
 	};
-	data: TClans;
+	data: WebApi.Entities.TClans;
 	isLoading: boolean;
 	errors: Array<string>;
 }

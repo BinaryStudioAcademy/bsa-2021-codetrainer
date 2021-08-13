@@ -1,4 +1,4 @@
-import { IClan } from '../../types';
+import { WebApi } from 'typings/webapi';
 
 export enum SortOptions {
 	DEFAULT = 'DEFAULT',
@@ -11,7 +11,7 @@ export interface IClanState {
 		sortBY: SortOptions;
 	};
 	isLoading: boolean;
-	data: IClan | null;
+	data: WebApi.Entities.IClan | null;
 	errors: Array<string>;
 }
 

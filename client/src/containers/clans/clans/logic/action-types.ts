@@ -1,5 +1,4 @@
-import { TClans, IClan } from '../../types';
-
+import { WebApi } from 'typings/webapi';
 export const START_LOADING = 'CLANS:START_LOADING';
 export const FETCH_CLANS = 'CLANS:FETCH_CLANS';
 export const FETCH_CLAN = 'CLANS:FETCH_CLAN';
@@ -15,12 +14,12 @@ export const SORT_BY_RANK = 'CLANS:SORT_BY_RANK';
 export const SORT_BY_SIZE = 'CLANS:SORT_BY_SIZE';
 
 export interface IAddClansArgs {
-	clans: TClans;
+	clans: WebApi.Entities.TClans;
 }
 
 export interface IUpdateClanArgs {
 	id: string;
-	clan: IClan;
+	clan: WebApi.Entities.IClan;
 }
 
 export interface IFetchClanArgs {

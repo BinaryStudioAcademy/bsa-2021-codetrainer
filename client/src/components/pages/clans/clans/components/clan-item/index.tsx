@@ -7,11 +7,12 @@ import { MemberRoles } from 'common/enum/app/clans';
 import { ButtonClasses } from 'components/basic/button';
 import { getMonthName } from 'helpers/date';
 import { ROUTES } from 'constants/routes';
+import { WebApi } from 'typings/webapi';
 import styles from './clan-item.module.scss';
 
 const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
 	const history = useHistory();
-	const currentUserMember = clan.members.find((member) => member.id === userId);
+	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
 
 	const goToClanHanler = (event: MouseEvent<HTMLElement>) => {
 		event.stopPropagation();

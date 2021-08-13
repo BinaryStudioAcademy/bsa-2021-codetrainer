@@ -1,5 +1,5 @@
-import { IMember } from 'containers/clans/types';
+import { WebApi } from 'typings/webapi';
 
 export interface IMemberItemProps {
-	member: IMember;
+	member: WebApi.Entities.IMember;
 }

@@ -1,6 +1,6 @@
-import { IClan } from 'containers/clans/types';
+import { WebApi } from 'typings/webapi';
 
 export interface IClanInfoProps {
 	leaveClan: () => void;
-	clan: IClan;
+	clan: WebApi.Entities.IClan;
 }

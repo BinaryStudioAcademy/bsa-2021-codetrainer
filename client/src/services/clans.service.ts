@@ -1,13 +1,13 @@
-import { TClans, IClan, IMember, IUser } from 'typings/webapi';
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
+import { WebApi } from 'typings/webapi';
 
 export interface TFetchClansArgs {
 	take: number;
 	skip: number;
 }
 
-export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<TClans | Error> => {
+export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
@@ -18,7 +18,7 @@ export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<TClan
 			},
 		});
 
-		const clans = response.map((clan: IClan) => ({
+		const clans = response.map((clan: WebApi.Entities.IMember) => ({
 			...clan,
 			createdAt: new Date(clan.createdAt),
 		}));
@@ -29,7 +29,7 @@ export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<TClan
 	}
 };
 
-export const fetchClan = async (id: string): Promise<IClan | Error> => {
+export const fetchClan = async (id: string): Promise<WebApi.Entities.IClan | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
@@ -38,7 +38,7 @@ export const fetchClan = async (id: string): Promise<IClan | Error> => {
 
 		const clan = {
 			...response,
-			members: response.members.map((member: IMember) => ({
+			members: response.members.map((member: WebApi.Entities.IMember) => ({
 				...member,
 				createdAt: new Date(member.createdAt),
 			})),
@@ -51,7 +51,9 @@ export const fetchClan = async (id: string): Promise<IClan | Error> => {
 	}
 };
 
-export const toggleClanMember = async (id: string): Promise<{ clan: IClan; user: IUser } | Error> => {
+export const toggleClanMember = async (
+	id: string,
+): Promise<{ clan: WebApi.Entities.IClan; user: WebApi.Entities.IUser } | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.PATCH,
@@ -63,7 +65,7 @@ export const toggleClanMember = async (id: string): Promise<{ clan: IClan; user:
 		return {
 			clan: {
 				...clan,
-				members: clan.members.map((member: IMember) => ({
+				members: clan.members.map((member: WebApi.Entities.IMember) => ({
 					...member,
 					createdAt: new Date(member.createdAt),
 				})),

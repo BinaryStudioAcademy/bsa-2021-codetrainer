@@ -1,5 +1,5 @@
 import { TSortCallback } from '../../../types';
-import { SortOptions } from 'containers/clans/clans/logic/state';
+import { SortOptions } from 'containers/clans/logic/state';
 
 export interface IClansSortProps {
 	sortByTime: TSortCallback;
