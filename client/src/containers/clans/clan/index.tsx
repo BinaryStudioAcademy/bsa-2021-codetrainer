@@ -18,6 +18,7 @@ const Clan: React.FC = () => {
 		const clanId = user?.clan?.id;
 
 		if (clanId) {
+			dispatch(actions.clearClan());
 			dispatch(actions.fetchClan({ id: clanId }));
 		} else {
 			history.push(ROUTES.Clans);

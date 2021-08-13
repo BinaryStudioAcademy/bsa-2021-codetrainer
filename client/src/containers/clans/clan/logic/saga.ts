@@ -1,7 +1,8 @@
-import { fetchClan, leaveClan } from 'services/clans.service';
+import { fetchClan, toggleClanMember } from 'services/clans.service';
 import { all, put, call, select, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
+import * as userActions from '../../../user/logic/actions';
 import { IRootState } from 'typings/root-state';
 
 export function* fetchClanWorker({ id }: ReturnType<typeof actions.fetchClan>): any {
@@ -26,10 +27,12 @@ export function* leaveClanWorker(action: ReturnType<typeof actions.leaveClan>): 
 	yield put(actions.startLoading());
 
 	const id = yield select((state: IRootState) => state.clan.data?.id);
-	const response = yield call(leaveClan, id);
+	const response = yield call(toggleClanMember, id);
 
 	if (response instanceof Error) {
 		yield put(actions.addError({ error: response.message }));
+	} else {
+		yield put(userActions.setUser({ user: response.user }));
 	}
 
 	yield put(actions.endLoading());

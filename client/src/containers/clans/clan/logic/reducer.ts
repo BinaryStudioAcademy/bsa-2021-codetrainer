@@ -27,6 +27,12 @@ export const clanReducer = createReducer<IClanState>(initialState, {
 			errors: [...state.errors, error],
 		};
 	},
+	[actionTypes.CLEAR_CLAN](state, action) {
+		return {
+			...state,
+			data: null,
+		};
+	},
 	[actionTypes.SORT_MEMBERS_BY_TIME](state, action) {
 		if (state.data) {
 			return {
