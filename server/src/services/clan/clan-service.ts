@@ -156,6 +156,7 @@ export class ClanService {
 	}
 
 	async toggleMember(user: User, id: string) {
+		const userRepository = getCustomRepository(this.userRepository);
 		const clan = await this.getClan(id);
 
 		if (!clan) {
@@ -170,8 +171,12 @@ export class ClanService {
 			await this.joinClan(user, id);
 		}
 
-		const updatedClan = this.getClan(id);
+		const updatedClan = await this.getClan(id);
+		const updatedUser = await userRepository.getById(user.id);
 
-		return updatedClan;
+		return {
+			user: updatedUser,
+			clan: updatedClan,
+		};
 	}
 }
