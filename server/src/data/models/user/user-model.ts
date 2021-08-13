@@ -34,9 +34,6 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 500, default: '' })
 	avatar?: string;
 
-	@CreateDateColumn({ type: 'timestamptz' })
-	createdAt!: Date;
-
 	@Column({ type: 'timestamptz', nullable: true })
 	lastVisit?: Date;
 
