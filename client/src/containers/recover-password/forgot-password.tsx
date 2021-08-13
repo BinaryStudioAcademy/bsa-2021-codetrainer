@@ -29,7 +29,7 @@ export const ForgotPassword: React.FC = () => {
 					notificationType: NotificationType.Success,
 					message: 'Email send',
 					title: 'Forgot Password',
-				}
+				},
 			}),
 		);
 		dispatch(recoverPasswordStateReset());

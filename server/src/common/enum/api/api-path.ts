@@ -4,6 +4,6 @@ export const ApiPath = {
 	CLAN: '/clan',
 	FOLLOWERS: '/followers',
 	IMAGES: '/images',
-	TASK: '/task',
+	TASK: '/tasks',
 	GITHUB: '/github',
 };

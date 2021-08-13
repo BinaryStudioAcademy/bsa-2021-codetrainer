@@ -8,12 +8,7 @@ import { ICreateTabsProps } from './types';
 
 import styles from './styles.module.scss';
 
-export const CreateTabs: React.FC<ICreateTabsProps> = ({ 
-	tabs, 
-	onChange, 
-	onSelectTab,
-	selectedTab 
-}) => {
+export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelectTab, selectedTab }) => {
 	const [fullScreen, setFullScreen] = useState<boolean>(false);
 
 	const handleFullScreen = () => {
