@@ -3,6 +3,7 @@ import { all, put, takeEvery, call } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { UserAccessToken, IUserDataState } from './state';
+import * as signInActions from 'containers/sign-in/logic/actions';
 
 export function* fetchCheckToken() {
 	yield put(actions.setUserAccessTokenLoading({ accessToken: UserAccessToken.LOADING }));
@@ -14,6 +15,7 @@ export function* fetchCheckToken() {
 function* fetchUserLogout() {
 	yield call([authServices, authServices.logout]);
 	yield put(actions.setUser({ user: null }));
+	yield put(signInActions.signInDataClear())
 }
 
 function* watchCheckToken() {
