@@ -1,3 +1,7 @@
-export interface ICreateTaskState {}
+export interface ICreateTaskState {
+	taskId: string | null;
+}
 
-export const initialState: ICreateTaskState = {};
+export const initialState: ICreateTaskState = {
+	taskId: null,
+};

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Clans, Clan } from 'containers/clans';
 import { CreateTaskPage } from 'containers/create-new-task';
 import SettingPage from 'containers/setting-page';
-import { FullscreenLoader, PublicRoute } from 'components';
+import { FullscreenLoader, NotFound, PublicRoute } from 'components';
 import TaskPage from '../task-page';
 import SignIn from 'containers/sign-in';
 import SignUp from 'containers/sign-up';
@@ -20,8 +20,9 @@ import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
+import { Redirect, Route } from 'react-router-dom';
 
-interface IRoutingProps {}
+interface IRoutingProps { }
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -53,12 +54,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={true}
 			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
-			<PrivateRoute
-				path={ROUTES.UserProfile}
-				component={Profile}
-				needHeader={true}
-				needSideBar={true}
-			/>
+			<PrivateRoute path={ROUTES.UserProfile} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
@@ -96,6 +92,8 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
+			<Route path={ROUTES.NotFound} component={NotFound} />
+			<Redirect from='*' to={ROUTES.NotFound} />
 		</Switch>
 	);
 };

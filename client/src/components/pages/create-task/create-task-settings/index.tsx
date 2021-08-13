@@ -1,5 +1,5 @@
-import React from 'react';
-import { Classes, Label, RadioGroup } from '@blueprintjs/core';
+import React, { ChangeEvent } from 'react';
+import { Classes, RadioGroup } from '@blueprintjs/core';
 import RadioItem from '../radio-item';
 import { InfoPopover, Select, Switch } from 'components/basic';
 import styles from './create-task-settings.module.scss';
@@ -13,6 +13,12 @@ interface ICreateTaskSettingsProps {
 	onSwitchClick: (newValue: boolean) => void;
 	isSelectedSwitch: boolean;
 	selectProps: ISelectProps;
+	taskName: string;
+	setTaskName: (value: string) => void;
+	rank: string;
+	setRank: (value: string) => void;
+	tags: string;
+	setTags: (value: string) => void;
 }
 
 export const CreateTaskSettings = ({
@@ -22,13 +28,25 @@ export const CreateTaskSettings = ({
 	onSwitchClick,
 	isSelectedSwitch,
 	selectProps,
+	taskName,
+	setTaskName,
+	rank,
+	setRank,
+	tags,
+	setTags,
 }: ICreateTaskSettingsProps) => {
 	return (
 		<div className={styles.createTaskSettings}>
 			<h2 className="heading">Create a New Task</h2>
 			<form className={styles.settingsTask}>
-				<Label htmlFor="task-name">Name</Label>
-				<input className={Classes.INPUT} id="task-name" placeholder="Enter Task Name" />
+				<label htmlFor="task-name">Name</label>
+				<input
+					className={Classes.INPUT}
+					id="task-name"
+					placeholder="Enter Task Name"
+					value={taskName}
+					onChange={(newText: ChangeEvent<HTMLInputElement>) => setTaskName(newText.target.value)}
+				/>
 
 				<h4 className={styles.disciplinesHeading}>Disciplines</h4>
 				<RadioGroup
@@ -62,12 +80,22 @@ export const CreateTaskSettings = ({
 					Estimated Rank
 					<InfoPopover>Choose the rank you are expecting this task to be ranked as.</InfoPopover>
 				</label>
-				<input className={Classes.INPUT} id="estimated-rank" placeholder="Enter Estimated Rank" />
+				<input
+					className={Classes.INPUT}
+					id="estimated-rank"
+					placeholder="Enter Estimated Rank"
+					value={rank}
+					onChange={(newRank: ChangeEvent<HTMLInputElement>) => setRank(newRank.target.value)}
+				/>
 
-				<label htmlFor="tags">
-					Tags <InfoPopover>Choose tags you consider fit for this task.</InfoPopover>
-				</label>
-				<input className={Classes.INPUT} id="tags" placeholder="Enter Tags (separated by comma)" />
+				<label htmlFor="tags">Tags</label>
+				<input
+					className={Classes.INPUT}
+					id="tags"
+					placeholder="Enter Tags (separated by comma)"
+					value={tags}
+					onChange={(newRank: ChangeEvent<HTMLInputElement>) => setTags(newRank.target.value)}
+				/>
 
 				<Switch checked={isSelectedSwitch} onChange={() => onSwitchClick(!isSelectedSwitch)}>
 					<label>
