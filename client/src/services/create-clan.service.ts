@@ -5,9 +5,14 @@ export const createClan = async (name: string) => {
 		name: name,
 		isPublic: 'true',
 	};
-	await http.callWebApi({
-		method: 'POST',
-		endpoint: 'clan',
-		body: body,
-	});
+	try {
+		const data = await http.callWebApi({
+			method: 'POST',
+			endpoint: 'clan',
+			body: body,
+		});
+		return data;
+	} catch (error) {
+		return error;
+	}
 };
