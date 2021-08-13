@@ -7,7 +7,6 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { ClanModal } from 'components/modals';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
 
@@ -76,7 +75,11 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<ClanModal />
+			<div className="theme-dark">
+				<div className="themed-container" style={{ width: '100px', height: '100px' }}>
+					text
+				</div>
+			</div>
 		</div>
 	);
 };
