@@ -81,6 +81,10 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.getOne();
 	}
 
+	getRanks() {
+		return this.createQueryBuilder('task').select('difficulty').distinct(true).getRawMany();
+	}
+
 	search(query: { where?: IWhere; sort?: TASK_ORDER_BY; skip: number; take: number; userId: string }) {
 		const searchQuery = filterQuery(
 			this.createQueryBuilder('task')

@@ -5,3 +5,4 @@ const http = new Http();
 const authServices = new Auth({ http });
 
 export { authServices, http };
+export { fetchTasksSearch } from './task/tasks-search';

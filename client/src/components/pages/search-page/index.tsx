@@ -11,7 +11,7 @@ export interface ISearchPageProps {
 }
 
 export interface ITag {
-	tagName: string;
+	name: string;
 	numberOfTasks: number;
 }
 
@@ -22,7 +22,7 @@ const SearchPage = ({ ranks, tags, challenges }: ISearchPageProps) => {
 				<SearchTask
 					ranks={ranks}
 					tags={tags.map((tag) => {
-						return tag.tagName + '(' + tag.numberOfTasks.toString() + ')';
+						return tag.name + '(' + tag.numberOfTasks.toString() + ')';
 					})}
 				/>
 			</div>

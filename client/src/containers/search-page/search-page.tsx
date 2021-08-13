@@ -14,60 +14,62 @@ const searchPageProps: ISearchPageProps = {
 	ranks: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 	tags: [
 		{
-			tagName: 'Fundamentals',
+			name: 'Fundamentals',
 			numberOfTasks: 350,
 		},
 		{
-			tagName: 'Rank Up',
+			name: 'Rank Up',
 			numberOfTasks: 45,
 		},
 		{
-			tagName: 'Practice and Repeat',
+			name: 'Practice and Repeat',
 			numberOfTasks: 68,
 		},
 		{
-			tagName: 'Beta',
+			name: 'Beta',
 			numberOfTasks: 108,
 		},
 		{
-			tagName: 'Random',
+			name: 'Random',
 			numberOfTasks: 52,
 		},
 		{
-			tagName: 'Fundamentals',
+			name: 'Fundamentals',
 			numberOfTasks: 350,
 		},
 		{
-			tagName: 'Rank Up',
+			name: 'Rank Up',
 			numberOfTasks: 45,
 		},
 		{
-			tagName: 'Practice and Repeat',
+			name: 'Practice and Repeat',
 			numberOfTasks: 68,
 		},
 		{
-			tagName: 'Beta',
+			name: 'Beta',
 			numberOfTasks: 108,
 		},
 		{
-			tagName: 'Random',
+			name: 'Random',
 			numberOfTasks: 52,
 		},
 	],
-	challenges: [{
-		id: '1',
-		linkToAuthor: '/',
-		author: {
-			firstName: 'A',
-			lastName: 'B',
-			link: '/',
+	challenges: [
+		{
+			id: '1',
+			linkToAuthor: '/',
+			author: {
+				firstName: 'A',
+				lastName: 'B',
+				link: '/',
+			},
+			stats: {
+				favoriteSaves: 12,
+				positiveFeedback: 12,
+			},
+			title: 'Title',
+			rank: 2,
+			tags: ['Tag 1', 'Tag 2'],
 		},
-		stats: {
-			favoriteSaves: 12,
-			positiveFeedback: 12,
-		},
-		title: 'Title',
-		rank: 2,
-		tags: ['Tag 1', 'Tag 2'],
-	}],
+	],
 };

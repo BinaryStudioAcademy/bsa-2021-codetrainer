@@ -84,6 +84,7 @@ export class TaskService {
 				take: TASKS_ON_PAGE,
 				userId: user.id,
 			}),
+			ranks: await repository.getRanks(),
 		};
 	}
 }
