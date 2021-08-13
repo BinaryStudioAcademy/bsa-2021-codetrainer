@@ -12,10 +12,12 @@ import { DISCIPLINE_ITEMS, SELECT_PROPS } from './mock';
 import { findDisciplineItem } from './create-task-settings/create-task-settings';
 import { ISelectValue } from 'components/basic/select/interface';
 import { NotificationContainer } from 'containers/notification';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NotificationType } from 'containers/notification/logic/models';
 import { http } from 'services';
 import { setNotificationState } from 'containers/notification/logic/actions';
+import { setTask } from './logic/actions';
+import { IRootState } from 'typings/root-state';
 
 export interface ICreateTaskProps {}
 
@@ -193,46 +195,40 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		onSelectTab: (tab) => setTestTab(tab),
 	};
 	//validation
+	const taskId = useSelector((state: IRootState) => state.createTask.taskId);
 	let validationStatus = true; //true is okay ,false if there are mistakes
 	const handleSave = async () => {
 		validationStatus = true;
 		if (taskName.trim() === '') {
 			validationStatus = false;
 			createErrorMessage('Task name can`t be empty.');
-		}
-		if (rank.trim().length > 1 || Number(rank.trim()) > 8 || Number(rank.trim()) < 1) {
+		} else if (rank.trim().length > 1 || Number(rank.trim()) > 8 || Number(rank.trim()) < 1) {
 			validationStatus = false;
 			createErrorMessage('Rank must be a number from 1 to 8.');
-		}
-		if (!Object.values(Discipline).includes(chosenDiscipline.value)) {
+		} else if (!Object.values(Discipline).includes(chosenDiscipline.value)) {
 			validationStatus = false;
 			createErrorMessage('You`ve chosen wronk discipline.');
-		}
-		if (textDescription.trim() === '') {
+		} else if (textDescription.trim() === '') {
 			validationStatus = false;
 			createErrorMessage('Description can`t be empty.');
-		}
-		if (completeSolution.trim() === '') {
+		} else if (completeSolution.trim() === '') {
 			validationStatus = false;
 			createErrorMessage('Complete Solution can`t be empty.');
-		}
-		if (initialSolution.trim() === '') {
+		} else if (initialSolution.trim() === '') {
 			validationStatus = false;
 			createErrorMessage('Initial Solution can`t be empty.');
-		}
-		if (testCases.trim() === '') {
+		} else if (testCases.trim() === '') {
 			validationStatus = false;
 			createErrorMessage('Test Cases tab can`t be empty.');
-		}
-		if (exampleTestCases.trim() === '') {
+		} else if (exampleTestCases.trim() === '') {
 			validationStatus = false;
 			createErrorMessage('Example Test Cases tab can`t be empty.');
 		}
 		if (validationStatus) {
 			const requestBody = {
 				name: taskName,
-				discipline: chosenDiscipline.value,
-				languageId: language.id,
+				discipline: chosenDiscipline.value as string,
+				// languageId: language.id.toString(),
 				rank: Number(rank),
 				allowContributors: isSelectedSwitch,
 				tags: tags.trim(),
@@ -242,31 +238,43 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				testCases,
 				exampleTestCases,
 			};
-			const result = await http.callWebApi({
-				endpoint: 'task',
-				method: 'POST',
-				skipAuthorization: false,
-				body: requestBody,
-			});
+			let result;
+			console.log(requestBody);
+
+			if (!taskId) {
+				result = await http.callWebApi({
+					endpoint: 'tasks',
+					method: 'POST',
+					skipAuthorization: false,
+					body: requestBody,
+				});
+			} else {
+				result = await http.callWebApi({
+					endpoint: 'tasks/' + taskId,
+					method: 'PUT',
+					skipAuthorization: false,
+					body: requestBody,
+				});
+			}
+			console.log(result);
+
 			if (result) {
+				dispatch(setTask({ taskId: result.id }));
 				dispatch(
 					setNotificationState({
 						state: {
-							message: `Task ${taskName} is saved`,
+							message: `Task ${taskName} is ${taskId ? 'updated' : 'saved'}`,
 							notificationType: NotificationType.Success,
 						},
 					}),
 				);
+				return result.id;
 			}
-			console.log(requestBody);
-			console.log(result);
+			return null;
 		}
+		return null;
 	};
 	const handleReset = () => {
-		// 	completeSolution,
-		// 	initialSolution,
-		// 	testCases,
-		// 	exampleTestCases,
 		setTaskName('');
 		setDiscipline(DISCIPLINE_ITEMS[0]);
 		setLanguage(SELECT_PROPS.values[0]);
@@ -276,9 +284,69 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		setTextDescription('');
 		setCompleteSolution('');
 		setInitialSolution('');
+		setPreloaded('');
 		setTestCases('');
 		setExampleTestCases('');
 	};
+	const handleDelete = async () => {
+		if (!taskId) {
+			createErrorMessage('You haven`t saved this task yet.');
+		} else {
+			const result = await http.callWebApi({
+				endpoint: 'tasks/' + taskId,
+				method: 'DELETE',
+				skipAuthorization: false,
+			});
+			console.log(result);
+			if (result) {
+				dispatch(
+					setNotificationState({
+						state: {
+							message: `Task ${result.name} is deleted.`,
+							notificationType: NotificationType.Success,
+						},
+					}),
+				);
+				handleReset();
+				dispatch(setTask({ taskId: null }));
+			}
+		}
+	};
+	const handleValidateSolution = async () => {
+		return true;
+	};
+	const handlePublish = async () => {
+		const thisTaskId = await handleSave();
+		if (thisTaskId) {
+			const result = await handleValidateSolution();
+			if (result) {
+				const requestBody = {
+					isPublished: true,
+				};
+				const requestResult = await http.callWebApi({
+					endpoint: 'tasks/' + thisTaskId,
+					method: 'PUT',
+					skipAuthorization: false,
+					body: requestBody,
+				});
+				if (requestResult) {
+					dispatch(
+						setNotificationState({
+							state: {
+								message: `Task ${requestResult.name} is published`,
+								notificationType: NotificationType.Success,
+							},
+						}),
+					);
+				} else {
+					createErrorMessage('Can`t be published');
+				}
+			} else {
+				createErrorMessage('Your solution doesn`t fit the tests.');
+			}
+		}
+	};
+
 	return (
 		<>
 			<NotificationContainer />
@@ -301,7 +369,9 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					<ButtonsBlock />
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
-						<Button className={clsx(ButtonClasses.blue)}>Validate Solution</Button>
+						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>
+							Validate Solution
+						</Button>
 						<Button className={clsx(ButtonClasses.blue)}>Insert Example</Button>
 					</div>
 				</div>
@@ -313,14 +383,22 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				</div>
 			</div>
 			<div className={styles.buttonsBottom}>
-				<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Publish</Button>
+				<Button
+					className={clsx(ButtonClasses.red, ButtonClasses.filled)}
+					id="publishButton"
+					onClick={handlePublish}
+				>
+					Publish
+				</Button>
 				<Button className={clsx(ButtonClasses.red)} onClick={handleSave}>
 					Save
 				</Button>
 				<Button className={clsx(ButtonClasses.red)} onClick={handleReset}>
 					Reset
 				</Button>
-				<Button className={clsx(ButtonClasses.red)}>Delete</Button>
+				<Button className={clsx(ButtonClasses.red)} onClick={handleDelete}>
+					Delete
+				</Button>
 			</div>
 		</>
 	);
