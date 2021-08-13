@@ -21,9 +21,6 @@ const Example: React.FC = () => {
 		dispatch(setNotificationState(notification));
 	};
 
-	// const string = 'string';
-	// const number = 5;
-
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
@@ -40,11 +37,13 @@ const Example: React.FC = () => {
 							className={styles.btn}
 							key={type}
 							onClick={() => {
-								showNotification({ state: {
-									notificationType: type,
-									title: type,
-									message: `${type} message`
-								}});
+								showNotification({
+									state: {
+										notificationType: type,
+										title: type,
+										message: `${type} message`,
+									},
+								});
 							}}
 						>
 							{type}
@@ -52,7 +51,6 @@ const Example: React.FC = () => {
 					);
 				})}
 			</div>
-
 			<button className={styles.btn} onClick={() => getExampleText('first')}>
 				get first text
 			</button>
