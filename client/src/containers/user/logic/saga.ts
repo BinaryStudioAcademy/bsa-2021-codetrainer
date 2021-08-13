@@ -4,6 +4,7 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { UserAccessToken, IUserDataState } from './state';
 import * as signInActions from 'containers/sign-in/logic/actions';
+import * as signUpActions from 'containers/sign-up/logic/actions';
 
 export function* fetchCheckToken() {
 	yield put(actions.setUserAccessTokenLoading({ accessToken: UserAccessToken.LOADING }));
@@ -16,6 +17,7 @@ function* fetchUserLogout() {
 	yield call([authServices, authServices.logout]);
 	yield put(actions.setUser({ user: null }));
 	yield put(signInActions.signInDataClear())
+	yield put(signUpActions.signUpDataClear())
 }
 
 function* watchCheckToken() {
