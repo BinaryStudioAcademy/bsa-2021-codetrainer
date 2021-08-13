@@ -17,6 +17,12 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 			isLoading: false,
 		};
 	},
+	[actionTypes.CLEAR_CLANS](state, action) {
+		return {
+			...state,
+			data: [],
+		};
+	},
 	[actionTypes.ADD_CLANS](state, { clans }: actionTypes.IAddClansArgs) {
 		return {
 			...state,

@@ -12,6 +12,7 @@ const Clans: React.FC = () => {
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 
 	useEffect(() => {
+		dispatch(actions.clearClans());
 		dispatch(actions.fetchClans());
 	}, []);
 
