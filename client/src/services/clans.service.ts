@@ -1,4 +1,4 @@
-import { TClans, IClan, IMember } from 'typings/webapi';
+import { TClans, IClan, IMember, IUser } from 'typings/webapi';
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
 
@@ -51,45 +51,26 @@ export const fetchClan = async (id: string): Promise<IClan | Error> => {
 	}
 };
 
-export const joinClan = async (id: string): Promise<IClan | Error> => {
+export const toggleClanMember = async (id: string): Promise<{ clan: IClan; user: IUser } | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.PATCH,
 			endpoint: `${ApiRoutes.CLANS}${id}`,
 		});
 
-		const clan = {
-			...response,
-			members: response.members.map((member: IMember) => ({
-				...member,
-				createdAt: new Date(member.createdAt),
-			})),
-			createdAt: new Date(response.createdAt),
+		const { clan, user } = response;
+
+		return {
+			clan: {
+				...clan,
+				members: clan.members.map((member: IMember) => ({
+					...member,
+					createdAt: new Date(member.createdAt),
+				})),
+				createdAt: new Date(response.clan.createdAt),
+			},
+			user,
 		};
-
-		return clan;
-	} catch (error) {
-		return error;
-	}
-};
-
-export const leaveClan = async (id: string): Promise<IClan | Error> => {
-	try {
-		const response = await http.callWebApi({
-			method: HttpMethods.PATCH,
-			endpoint: `${ApiRoutes.CLANS}${id}`,
-		});
-
-		const clan = {
-			...response,
-			members: response.members.map((member: IMember) => ({
-				...member,
-				createdAt: new Date(member.createdAt),
-			})),
-			createdAt: new Date(response.createdAt),
-		};
-
-		return clan;
 	} catch (error) {
 		return error;
 	}
