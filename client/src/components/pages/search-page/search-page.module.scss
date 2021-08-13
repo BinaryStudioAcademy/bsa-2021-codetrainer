@@ -3,9 +3,7 @@
 	display: grid;
 	grid-template-columns: 270px 2fr 4fr;
 	grid-template-rows: 100px calc(100vh - 100px);
-	grid-template-areas:
-		". . ."
-		". searchPanel challengesList";
+	grid-template-areas: 'searchPanel challengesList';
 }
 
 .searchPanel {

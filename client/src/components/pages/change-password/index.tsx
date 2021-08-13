@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
 import styles from './change-password.module.scss';
 import { ROUTES } from 'constants/routes';
+import { IRecoverPassword } from '../forgot-password/types';
+import { Errors } from '../forgot-password/errors/errors';
 
 const ChangePasswordSchema = Yup.object().shape({
 	password: Yup.string().min(8, 'Too short').required('Required'),
@@ -16,19 +18,18 @@ const ChangePasswordSchema = Yup.object().shape({
 		}),
 });
 
-const ChangePassword: React.FC = () => {
+const ChangePassword: React.FC<IRecoverPassword> = ({ onSubmit, errors }) => {
 	return (
 		<CoverLayout>
 			<h4>Change Password</h4>
+			<Errors errors={errors} />
 			<Formik
 				initialValues={{
 					password: '',
-					confirmPassord: '',
+					confirmPassword: '',
 				}}
 				validationSchema={ChangePasswordSchema}
-				onSubmit={(values) => {
-					console.log(values);
-				}}
+				onSubmit={({ password }) => onSubmit(password)}
 			>
 				<Form className={styles.form}>
 					<Field

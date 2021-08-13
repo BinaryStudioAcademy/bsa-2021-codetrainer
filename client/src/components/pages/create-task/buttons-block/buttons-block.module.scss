@@ -1,0 +1,13 @@
+.buttonsBlock {
+	display: flex;
+	gap: 25px;
+	width: 100%;
+	align-items: flex-end;
+	margin-bottom: 15px;
+	label.noMargin {
+		margin-bottom: 0 !important;
+	}
+}
+.button {
+	height: 45px;
+}

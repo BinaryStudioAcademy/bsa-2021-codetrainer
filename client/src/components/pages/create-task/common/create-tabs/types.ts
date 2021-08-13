@@ -3,11 +3,12 @@ import { IconName } from '@blueprintjs/icons';
 
 export interface ITabProps {
 	onChange: (text: string) => void;
-	value: string;
+	value?: string;
 	editable?: boolean;
 }
 
 export interface ICreateTabsProps {
+	selectedTab: number;
 	tabs: {
 		header: {
 			title: string;
@@ -23,6 +24,7 @@ export interface ICreateTabsProps {
 		markdownContent?: string;
 	}[];
 	onChange: (text: string) => void;
+	onSelectTab: (tab: number) => void;
 }
 
 export type TCreateTabs = ICreateTabsProps['tabs'];

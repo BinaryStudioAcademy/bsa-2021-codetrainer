@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { ISignInForm } from 'typings/sign-in-form';
-import { SignInPage, Spinner } from 'components';
+import { FullscreenLoader, SignInPage } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
 	}, [isSuccess]);
 
 	return isLoading ? (
-		<Spinner />
+		<FullscreenLoader />
 	) : (
 		<SignInPage onFormSubmit={onFormSubmit} onGithubSignIn={onGithubSignIn} error={error} />
 	);

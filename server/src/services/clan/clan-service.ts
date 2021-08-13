@@ -3,7 +3,6 @@ import { Clan, TClanRepository, TProfileClanRepository, TUserRepository, User } 
 import { ValidationError } from '../../helpers';
 import { Clan as ClanType } from '../../data/models';
 import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
-import { IUserFields } from '../../types';
 
 export class ClanService {
 	protected clanRepository: TClanRepository;
@@ -108,7 +107,7 @@ export class ClanService {
 		const clan = await repository.getById(id);
 
 		if (!clan) {
-			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
 		}
 
 		return {
@@ -118,12 +117,12 @@ export class ClanService {
 		};
 	}
 
-	async joinClan(user: IUserFields, id: string) {
+	async joinClan(user: User, id: string) {
 		const repository = getCustomRepository(this.clanRepository);
 		const clan = await this.getClan(id);
 
 		if (!clan) {
-			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
 		}
 
 		if (user.clan) {
@@ -133,15 +132,15 @@ export class ClanService {
 		await repository.addMember(id, user.id);
 	}
 
-	async leaveClan(user: IUserFields, id: string) {
+	async leaveClan(user: User, id: string) {
 		const repository = getCustomRepository(this.clanRepository);
 		const clan = await this.getClan(id);
 
 		if (!clan) {
-			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
 		}
 
-		if (user.clan.id !== id) {
+		if (user?.clan?.id !== id) {
 			throw new ValidationError(CODE_ERRORS.NOT_IN_CLAN);
 		}
 
@@ -152,11 +151,11 @@ export class ClanService {
 		await repository.deleteMember(id, user.id);
 	}
 
-	async toggleMember(user: IUserFields, id: string) {
+	async toggleMember(user: User, id: string) {
 		const clan = await this.getClan(id);
 
 		if (!clan) {
-			throw new ValidationError(CODE_ERRORS.NOT_EXIST(id));
+			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
 		}
 
 		const existingMember = clan.members.find((member) => member.id === user.id);

@@ -5,23 +5,24 @@ import * as Yup from 'yup';
 import { FormInput, CoverLayout } from 'components';
 import styles from './forgot-password.module.scss';
 import { ROUTES } from 'constants/routes';
+import { IRecoverPassword } from './types';
+import { Errors } from './errors/errors';
 
 const ForgotPasswordSchema = Yup.object().shape({
 	email: Yup.string().email('Invalid email').required('Required'),
 });
 
-const ForgotPassword: React.FC = () => {
+const ForgotPassword: React.FC<IRecoverPassword> = ({ onSubmit, errors }) => {
 	return (
 		<CoverLayout>
 			<h4>Forgot Password</h4>
+			<Errors errors={errors} />
 			<Formik
 				initialValues={{
 					email: '',
 				}}
 				validationSchema={ForgotPasswordSchema}
-				onSubmit={(values) => {
-					console.log(values);
-				}}
+				onSubmit={({ email }) => onSubmit(email)}
 			>
 				<Form className={styles.form}>
 					<Field
