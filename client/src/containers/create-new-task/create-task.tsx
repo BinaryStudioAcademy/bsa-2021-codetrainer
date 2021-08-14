@@ -5,7 +5,6 @@ import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import { CreateSettings } from './create-task-settings';
 import styles from './create-task.module.scss';
 import { ButtonsBlock } from 'components/pages';
-import './create-task.scss';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 import { Discipline, IDisciplineItem } from './logic/models';
@@ -413,7 +412,7 @@ describe("twoOldestAges", function() {
 					setTags={setTags}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
-					<ButtonsBlock />
+					<ButtonsBlock handlePreviewClick={() => setInstructionTab(1)} />
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>
