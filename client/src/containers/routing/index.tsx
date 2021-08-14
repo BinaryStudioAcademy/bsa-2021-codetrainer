@@ -19,6 +19,7 @@ import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
+import Github from 'containers/github';
 
 interface IRoutingProps {}
 
@@ -87,6 +88,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
+			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
