@@ -16,4 +16,6 @@ export interface IUserFields {
 	surname?: string;
 	profileClan?: IProfileClan;
 	clan: IClanFields;
+	githubId?: string;
+	profileUrl?: string;
 }
