@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { getCustomRepository } from 'typeorm';
 import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as CustomStrategy } from 'passport-custom';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import { ENV } from '../common';
@@ -9,6 +10,7 @@ import { cryptCompare } from '../helpers';
 import { GithubApiPath } from '../common/enum/api/github-api-path';
 import { ValidationError } from '../helpers/errors/validation-error';
 import { HttpCodes } from '../common/enum/http-codes';
+import { githubService } from '../services';
 
 const options = {
 	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -41,13 +43,10 @@ passport.use(
 		async ({ body: { username, name, surname } }, email, password, done) => {
 			const repository = getCustomRepository(UserRepository);
 			try {
-				const userByEmail = await repository.getByEmail(email);
-				if (userByEmail) {
+				if (await repository.exists({ email })) {
 					return done({ status: 401, message: 'Email is already taken.' }, null);
 				}
-
-				const userByUsername = await repository.getByUsername(username);
-				if (userByUsername) {
+				if (await repository.exists({ username })) {
 					return done({ status: 401, message: 'Username is already taken.' }, null);
 				}
 				return done(null, { username, email, name, surname, password });
@@ -83,12 +82,12 @@ passport.use(
 			const { id }: { id: string } = profile;
 			const user = await repository.getByGithubId(id);
 			if (user) {
-				done(null, await user);
+				done(null, user);
 			} else {
 				done(
 					new ValidationError({
 						status: HttpCodes.UNAUTHORIZED,
-						message: 'No user with this github account',
+						message: 'No account linked to github',
 					}),
 				);
 			}
@@ -97,7 +96,7 @@ passport.use(
 );
 
 passport.use(
-	'github-register',
+	'github-continue-register',
 	new GithubStrategy(
 		{
 			clientID: ENV.GITHUB.CLIEND_ID,
@@ -107,20 +106,60 @@ passport.use(
 		},
 		async (_access: string, _refresh: string, profile: any, done: any) => {
 			const repository: UserRepository = getCustomRepository(UserRepository);
-			const { id }: { id: string } = profile;
-			const user = await repository.getByGithubId(id);
-			if (!user) {
+			const { id: githubId }: { id: string } = profile;
+			if (!(await repository.exists({ githubId }))) {
 				done(null, profile);
 			} else {
 				done(
 					new ValidationError({
 						status: HttpCodes.UNAUTHORIZED,
-						message: 'Already exists',
+						message: 'Github account already taken',
 					}),
 				);
 			}
 		},
 	),
+);
+
+passport.use(
+	'github-finish-register',
+	new CustomStrategy(async (req, done) => {
+		const repository: UserRepository = getCustomRepository(UserRepository);
+		const { githubId, email, username } = req.body;
+		if (await repository.exists({ email })) {
+			return done(
+				new ValidationError({
+					status: HttpCodes.UNAUTHORIZED,
+					message: 'Email is already taken',
+				}),
+			);
+		}
+		if (await repository.exists({ username })) {
+			return done(
+				new ValidationError({
+					status: HttpCodes.UNAUTHORIZED,
+					message: 'Username is alredy taken',
+				}),
+			);
+		}
+		if (!(await githubService.githubAccountExists(githubId))) {
+			return done(
+				new ValidationError({
+					status: HttpCodes.UNAUTHORIZED,
+					message: 'It is no github account',
+				}),
+			);
+		}
+		if (await repository.exists({ githubId })) {
+			return done(
+				new ValidationError({
+					status: HttpCodes.UNAUTHORIZED,
+					message: 'Github account already taken',
+				}),
+			);
+		}
+		return done(null, { githubId, email, username });
+	}),
 );
 
 passport.use(
@@ -134,14 +173,13 @@ passport.use(
 		async (_access: string, _refresh: string, profile: any, done: any) => {
 			const repository: UserRepository = getCustomRepository(UserRepository);
 			const { id: githubId }: { id: string } = profile;
-			const user = await repository.getByGithubId(githubId);
-			if (!user) {
+			if (!(await repository.exists({ githubId }))) {
 				done(null, { githubId });
 			} else {
 				done(
 					new ValidationError({
 						status: HttpCodes.BAD_REQUEST,
-						message: 'User with this github account already exists',
+						message: 'Github account already taken',
 					}),
 				);
 			}
