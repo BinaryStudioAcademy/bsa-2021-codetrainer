@@ -1,8 +1,8 @@
 import React from 'react';
-import { ProgressBar } from '@blueprintjs/core';
+import { withStyles } from '@material-ui/core/styles';
+import { LinearProgress } from '@material-ui/core';
 import styles from './progress-bar-block.module.scss';
 import honorStyles from 'components/pages/profile/profile-info/tabs/stats/honor-breakdown/honor-breakdown.module.scss';
-import './progress-bar.scss';
 import clsx from 'clsx';
 
 interface IProgressBarBlockProps {
@@ -10,6 +10,20 @@ interface IProgressBarBlockProps {
 	done: number | null;
 	left: number;
 }
+
+const StyledProgressBar = withStyles((theme) => ({
+	root: {
+		height: 5,
+		borderRadius: '5px',
+	},
+	colorPrimary: {
+		backgroundColor: '#F0F3F9',
+	},
+	bar: {
+		borderRadius: '5px',
+		backgroundColor: '#EC4179',
+	},
+}))(LinearProgress);
 
 const ProgressBarBlock: React.FC<IProgressBarBlockProps> = (props) => {
 	const { name, done, left } = props;
@@ -24,12 +38,7 @@ const ProgressBarBlock: React.FC<IProgressBarBlockProps> = (props) => {
 					<span className={styles.progressLeft}>{left}</span>
 				</p>
 			</div>
-			<ProgressBar
-				animate={false}
-				stripes={false}
-				className={styles.progressBar}
-				value={done ? done / left : 0}
-			/>
+			<StyledProgressBar variant="determinate" value={done ? (done / left) * 100 : 0} />
 		</div>
 	);
 };

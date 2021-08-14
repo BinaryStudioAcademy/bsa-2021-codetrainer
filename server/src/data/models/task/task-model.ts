@@ -23,14 +23,14 @@ export class Task extends BaseEntity {
 
 	// @Column({ type: 'int' })
 	// languageId?: number;
-	
+
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	rank?: number;
 
 	@Column({ type: 'text', default: '' })
 	tags?: string;
 
-	@Column({ type: 'bool', default: false, width:1 })
+	@Column({ type: 'bool', default: false, width: 1 })
 	allowContributors?: boolean;
 
 	@Column({ type: 'text', default: '' })
