@@ -42,7 +42,7 @@ const FormInput: React.FC<IFormInputProps> = ({
 					</label>
 				)}
 				{showForgotPassword && (
-					<Link to="forgot-password" className={styles.right}>
+					<Link to="forgot-password" className={styles.forgot}>
 						Forgot password?
 					</Link>
 				)}

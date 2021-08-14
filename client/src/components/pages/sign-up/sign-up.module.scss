@@ -1,12 +1,30 @@
-@import "styles/variables";
+@import 'styles/variables';
 
 h4 {
 	font: $fourth-title-font;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
+}
+
+.light {
+	color: $nobel;
+}
+
+.info,
+.error {
+	margin-bottom: 15px;
 }
 
 .error {
 	color: $french-rose;
+}
+
+.form {
+	& > button {
+		width: 100%;
+	}
+	.cancel {
+		float: right;
+	}
 }
 
 .footer {
@@ -16,8 +34,13 @@ h4 {
 	text-align: center;
 	font: $base-font;
 	line-height: 17px;
-	color: rgba(40, 40, 40, 0.5);
-	.link {
-		color: #705ff5;
+	color: $nobel;
+}
+
+.form,
+.footer {
+	a {
+		color: $cornflower-blue;
+		text-decoration: underline;
 	}
 }

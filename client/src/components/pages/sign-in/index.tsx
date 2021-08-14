@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
 import clsx from 'clsx';
+import { Field, Form, Formik } from 'formik';
+import { Link } from 'react-router-dom';
 import { ISignInForm } from 'typings/sign-in-form';
 import { SIGN_IN_SCHEMA } from './config';
-import CoverLayout from './cover-layout';
-import Separator from './separator';
+import { CoverLayout, Separator } from 'components/common';
 import Button, { ButtonClasses } from 'components/basic/button';
-import styles from './sign-in.module.scss';
 import { ROUTES } from 'constants/routes';
 import { FormInput } from 'components';
+import styles from '../sign-up/sign-up.module.scss';
 
 interface ISignInPageProps {
 	onFormSubmit: (form: ISignInForm) => void;
@@ -19,7 +18,9 @@ interface ISignInPageProps {
 
 const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn = () => {}, error }) => {
 	return (
-		<CoverLayout className={styles.signIn}>
+		<CoverLayout>
+			<h4>Sign in</h4>
+			{!!error && <div className={styles.error}>{error}</div>}
 			<Formik
 				initialValues={{
 					email: '',
@@ -29,8 +30,6 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn =
 				onSubmit={onFormSubmit}
 			>
 				<Form className={styles.form}>
-					<h4>Sign in</h4>
-					{!!error && <div className={styles.error}>{error}</div>}
 					<Button type="button" className={ButtonClasses.red} onClick={onGithubSignIn}>
 						Sing in with GitHub
 					</Button>
@@ -57,7 +56,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn =
 					</Button>
 				</Form>
 			</Formik>
-			<footer>
+			<footer className={styles.footer}>
 				No account? <Link to={ROUTES.SignUp}>Sign up</Link>
 			</footer>
 		</CoverLayout>

@@ -1,3 +1,4 @@
+@import 'styles/variables';
 
 .socialContainer {
 	.header {
@@ -11,8 +12,9 @@
 	}
 
 	.socialItem {
+		font: $base-font;
 		color: #686868;
-		background-color: #EAEDF2;
+		background-color: #eaedf2;
 		border-radius: 7px;
 		margin-bottom: 10px;
 		padding: 5px 10px;
@@ -20,19 +22,20 @@
 		list-style: none;
 		position: relative;
 		cursor: pointer;
-		
+
 		&:hover {
-			background-color:rgb(228, 228, 228);
+			background-color: rgb(228, 228, 228);
 			.inputField {
-				background-color:rgb(228, 228, 228);
+				background-color: rgb(228, 228, 228);
 				cursor: pointer;
 			}
 		}
 
 		.inputField {
+			font: $base-font;
 			outline: none;
 			border: none;
-			background-color: #EAEDF2;
+			background-color: #eaedf2;
 			color: #686868;
 			width: calc(100% - 32px);
 			height: 28px;
@@ -45,23 +48,44 @@
 	.socialButton {
 		list-style: none;
 		margin-bottom: 10px;
-		
+
 		button {
+			font: $base-font;
 			min-width: 300px;
 			padding: 5px 10px;
 			outline: none;
 			border: none;
 			border-radius: 7px;
 			cursor: pointer;
-			background-color:rgb(255, 255, 255);
+			background-color: rgb(255, 255, 255);
 
 			&:hover {
-				background-color:rgb(228, 228, 228);
+				background-color: rgb(228, 228, 228);
 			}
 		}
 	}
 	.socialIcon {
 		margin-right: 7px;
+	}
+
+	.github {
+		* {
+			margin-bottom: 0;
+		}
+		.socialItem {
+			display: inline-block;
+			width: fit-content;
+			min-width: 0;
+		}
+		.unlink {
+			margin-left: 10px;
+			vertical-align: baseline;
+			width: min-content;
+			min-width: 0 !important;
+		}
+		a {
+			color: $cornflower-blue;
+		}
 	}
 
 	.submitBtn {

@@ -2,7 +2,7 @@
 
 .container {
 	position: relative;
-	height: 82px;
+	height: 88px;
 
 	.inputField,
 	.passwordField {
@@ -69,15 +69,17 @@
 			margin-bottom: 5px;
 		}
 
-		.right {
+		.forgot {
 			text-align: right;
 			text-decoration: underline;
+			color: var.$cornflower-blue;
+			font: var.$progress-bar-font;
 		}
 	}
 
 	.error {
 		text-align: right;
-		margin-top: 5px;
+		margin-top: 2px;
 		height: 12px;
 		font-size: 12px;
 		color: var.$french-rose;
