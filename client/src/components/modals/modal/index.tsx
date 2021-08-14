@@ -1,8 +1,9 @@
 import React from 'react';
-import { H3, Icon } from '@blueprintjs/core';
 import ReactModal from 'react-modal';
 import styles from './modal.module.scss';
 import { modalStyles } from './config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 
 interface IModalProps {
 	isOpen: boolean;
@@ -25,13 +26,13 @@ export const Modal: React.FC<IModalProps> = (props) => {
 		<ReactModal shouldFocusAfterRender={true} isOpen={props.isOpen} style={modalStyles} {...props.modalProps}>
 			<div className={styles.modalContent}>
 				<div className={styles.header}>
-					<H3 className={styles.title}>{title}</H3>
+					<h3 className={styles.title}>{title}</h3>
 					{showCloseButton && (
-						<Icon
-							icon="cross"
+						<FontAwesomeIcon
 							className={styles.closeIcon}
-							size={25}
 							onClick={() => props.setIsOpen(false)}
+							icon={faTimesCircle}
+							size="sm"
 						/>
 					)}
 				</div>

@@ -6,7 +6,7 @@ export const notificationReducer = createReducer<INotificationState>(initialStat
 	[actionTypes.SET_NOTIFICATION_STATE](state, action: actionTypes.TSetNotificationArgs) {
 		return {
 			...state,
-			state: action ? { ...action, id: String(new Date()) } : null,
+			state: action.state ? { ...action.state, id: String(new Date()) } : null,
 		};
 	},
 });

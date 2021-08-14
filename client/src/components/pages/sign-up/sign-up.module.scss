@@ -14,8 +14,11 @@ h4 {
 	margin-bottom: 15px;
 }
 
-.error {
-	color: $french-rose;
+a {
+	font-family: $base-font;
+	font-size: 14px;
+	color: #705ff5;
+	text-decoration: underline;
 }
 
 .form {

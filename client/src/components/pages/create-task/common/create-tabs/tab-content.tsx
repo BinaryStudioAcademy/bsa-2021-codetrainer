@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TaskTabTypes } from 'common';
 import { CreateText } from './create-text';
 import { CreateCode } from './create-code';
@@ -15,21 +15,19 @@ interface IProps {
 }
 
 export const TabContent: React.FC<IProps> = ({ tab, onChange }) => {
-	const [value, setValue] = useState<string>(tab.text || '');
 	const handleChange = (newValue: string) => {
-		setValue(newValue);
 		onChange(newValue);
 	};
 
 	switch (tab.type) {
 		case TaskTabTypes.TEXT:
-			return <CreateText onChange={handleChange} value={value} editable={tab.editable} />;
+			return <CreateText onChange={handleChange} editable={tab.editable} value={tab.text} />;
 		case TaskTabTypes.MARKDOWN:
 			return <Markdown text={tab.markdownContent || ''} />;
 		case TaskTabTypes.PREVIEW:
-			return <Markdown text={value} />;
+			return <Markdown />;
 		case TaskTabTypes.CODE:
-			return <CreateCode onChange={handleChange} value={value} editable={tab.editable} />;
+			return <CreateCode onChange={handleChange} editable={tab.editable} value={tab.text} />;
 		default:
 			return null;
 	}

@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Text } from '@blueprintjs/core';
 import CommunityUser from '../community-user';
 import styles from './community.module.scss';
 import { Button } from 'components/basic';
@@ -11,24 +10,16 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 	return (
 		<div className={styles.community}>
 			<div>
-				<Text tagName="h4" className={styles.communityHeader}>
-					Community
-				</Text>
-				<Text className={styles.communityDescription}>
+				<h4 className={styles.communityHeader}>Community</h4>
+				<p className={styles.communityDescription}>
 					You are automatically given an allegiance with anyone who is in the same clan as you. You can also
 					become allies with other warriors by following each other or inviting new warriors to join.
-				</Text>
+				</p>
 
 				<div className={styles.communityTableHeader}>
-					<Text tagName="h5" className={styles.communityColumnTitle}>
-						User
-					</Text>
-					<Text tagName="h5" className={styles.communityColumnTitle}>
-						Clan
-					</Text>
-					<Text tagName="h5" className={styles.communityColumnTitle}>
-						Honor
-					</Text>
+					<h5 className={styles.communityColumnTitle}>User</h5>
+					<h5 className={styles.communityColumnTitle}>Clan</h5>
+					<h5 className={styles.communityColumnTitle}>Honor</h5>
 				</div>
 
 				<div className={styles.communityTableBody}>
@@ -40,17 +31,17 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 
 					<div className={styles.communityColumn}>
 						{users.map((user) => (
-							<Text key={user.id} className={styles.columnText}>
+							<p key={user.id} className={styles.columnText}>
 								{user.clan}
-							</Text>
+							</p>
 						))}
 					</div>
 
 					<div className={styles.communityColumn}>
 						{users.map((user) => (
-							<Text key={user.id} className={styles.columnText}>
+							<p key={user.id} className={styles.columnText}>
 								{user.honor}
-							</Text>
+							</p>
 						))}
 					</div>
 				</div>

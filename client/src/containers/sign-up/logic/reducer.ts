@@ -35,4 +35,8 @@ export const signUpReducer = createReducer<ISignUpState>(initialState, {
 			github: action.github,
 		};
 	},
+
+	[actionTypes.SIGN_UP_DATA_CLEAR]() {
+		return initialState;
+	},
 });

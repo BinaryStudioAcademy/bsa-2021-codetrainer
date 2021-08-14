@@ -1,5 +1,5 @@
 import { CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../common';
-import { IClanFields } from '../clan';
+// import { IClanFields } from '../clan';
 
 export interface IProfileClan {
 	id?: string;
@@ -9,13 +9,19 @@ export interface IProfileClan {
 
 export interface IUserFields {
 	id: string;
-	username: string;
 	password: string;
 	email: string;
 	name?: string;
 	surname?: string;
 	profileClan?: IProfileClan;
-	clan: IClanFields;
+	// clan: IClanFields;
+	nickname?: string;
+	avatar?: string;
+	createdAt: string;
+	lastVisit?: string;
+	skills?: string[];
+	devLevel?: string;
+	social?: string[];
 	githubId?: string;
 	profileUrl?: string;
 }

@@ -1,44 +1,68 @@
 import React from 'react';
 import { CreateTaskSettings } from 'components/pages';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from '../mock';
-import { useDispatch, useSelector } from 'react-redux';
-import { Discipline } from '../logic/models';
-import { IRootState } from 'typings/root-state';
-import * as actions from '../logic/actions';
-import { useCallback } from 'react';
+import { Discipline, IDisciplineItem } from '../logic/models';
 import { ISelectValue } from 'components/basic/select/interface';
 
-export const CreateSettings = () => {
-	const dispatch = useDispatch();
-	const chosenDiscipline = useSelector((state: IRootState) => state.createTask.discipline);
-	const onChangeDiscipline = useCallback(
-		(newDiscipline: Discipline) => {
-			dispatch(actions.setDiscipline({ discipline: newDiscipline }));
-		},
-		[dispatch],
-	);
-	const isSelectedSwitch = useSelector((state: IRootState) => state.createTask.isSelectedSwitch);
-	const onSwitchClick = (newSwitchState: boolean) => {
-		dispatch(actions.setSwitch({ isSelectedSwitch: newSwitchState }));
-	};
+interface ICreateSettingsProps {
+	chosenDiscipline: IDisciplineItem;
+	onChangeDiscipline: (newDiscipline: Discipline) => void;
+	isSelectedSwitch: boolean;
+	onSwitchClick: (newSwitchState: boolean) => void;
+	language: ISelectValue;
+	setLanguage: (value: ISelectValue) => void;
+	taskName: string;
+	setTaskName: (value: string) => void;
+	rank: string;
+	setRank: (value: string) => void;
+	tags: string;
+	setTags: (value: string) => void;
+}
 
+export const CreateSettings = ({
+	chosenDiscipline,
+	onChangeDiscipline,
+	isSelectedSwitch,
+	onSwitchClick,
+	language,
+	setLanguage,
+	taskName,
+	setTaskName,
+	rank,
+	setRank,
+	tags,
+	setTags,
+}: ICreateSettingsProps) => {
 	return (
-		// header and sidebar etc here
 		<div>
 			<CreateTaskSettings
+				taskName={taskName}
+				setTaskName={setTaskName}
 				disciplineItems={DISCIPLINE_ITEMS}
-				chosenDiscipline={chosenDiscipline}
+				chosenDiscipline={chosenDiscipline.value}
 				onChangeDiscipline={onChangeDiscipline}
 				isSelectedSwitch={isSelectedSwitch}
 				onSwitchClick={onSwitchClick}
-				//work here
 				selectProps={{
 					...SELECT_PROPS,
+					activeValue: language,
 					onChange: (value: ISelectValue) => {
-						dispatch(actions.setLanguageVersion({ languageVersion: value }));
+						setLanguage(value);
 					},
 				}}
+				rank={rank}
+				setRank={setRank}
+				tags={tags}
+				setTags={setTags}
 			/>
 		</div>
 	);
+};
+
+export const findDisciplineItem = (newDiscipline: Discipline) => {
+	const result = DISCIPLINE_ITEMS.find((item) => item.value === newDiscipline);
+	if (result) {
+		return result;
+	}
+	return DISCIPLINE_ITEMS[0];
 };

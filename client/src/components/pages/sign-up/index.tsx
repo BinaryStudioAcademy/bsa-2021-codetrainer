@@ -17,18 +17,22 @@ const SignUpGithubSchema = Yup.object().shape({
 		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
 		.min(3, 'Minimum length: 3')
 		.max(20, 'Maximum length: 20'),
-	email: Yup.string().required('Required').email('Invalid email'),
+	email: Yup.string()
+		.email('Invalid email')
+		.min(5, 'Minimum length: 5')
+		.max(50, 'Maximum length: 50')
+		.required('Required'),
 });
 
 const SignUpSchema = SignUpGithubSchema.concat(
 	Yup.object().shape({
-		name: Yup.string().required('Required').min(2, 'Minimum length: 2').max(30, 'Maximum length: 30'),
-		surname: Yup.string().required('Required').min(2, 'Minimum length: 2').max(30, 'Maximum length: 30'),
-		password: Yup.string().required('Required').min(8, 'Minimum length: 8').max(25, 'Maximum length: 25'),
+		name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+		surname: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+		password: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 		confirmPassword: Yup.string()
-			.required('Required')
 			.min(8, 'Minimum length: 8')
 			.max(25, 'Maximum length: 25')
+			.required('Required')
 			.test('passwords-match', 'Passwords must match', function (value) {
 				return this.parent.password === value;
 			}),
@@ -44,9 +48,7 @@ interface ISignUnPageProps {
 
 const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, github, error }) => {
 	return (
-		<CoverLayout>
-			<h4>Sign up</h4>
-			{!!error && <div className={styles.error}>{error}</div>}
+		<CoverLayout className={styles.signUp}>
 			<Formik
 				initialValues={{
 					email: github?.email || '',
@@ -62,6 +64,8 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, 
 				}}
 			>
 				<Form className={styles.form}>
+					<h4 className={styles.header}>SignUp</h4>
+					{!!error && <div className={styles.error}>{error}</div>}
 					{github ? (
 						<div className={styles.info}>
 							Linked to{' '}

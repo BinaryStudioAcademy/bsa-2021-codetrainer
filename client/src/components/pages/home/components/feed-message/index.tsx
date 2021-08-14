@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from '@blueprintjs/core';
 import styles from './feed-message.module.scss';
 import defaultUserIcon from './assets/user.svg';
 
@@ -17,21 +16,13 @@ const FeedMessage: React.FC<IFeedMessageProps> = ({ userImageSource, userName, c
 			<img className={styles.messageUserImage} src={userImageSource || defaultUserIcon} alt="user" />
 			<div>
 				<div className={styles.messageDataWrapper}>
-					<Text tagName="span" className={styles.messageData}>
-						{userName}
-					</Text>
+					<span className={styles.messageData}>{userName}</span>
 					<span className={styles.separator}></span>
-					<Text tagName="span" className={styles.messageData}>
-						{clan}
-					</Text>
+					<span className={styles.messageData}>{clan}</span>
 					<span className={styles.separator}></span>
-					<Text tagName="span" className={styles.messageData}>
-						{date}
-					</Text>
+					<span className={styles.messageData}>{date}</span>
 				</div>
-				<Text tagName="p" className={styles.messageText}>
-					{text}
-				</Text>
+				<p className={styles.messageText}>{text}</p>
 			</div>
 		</div>
 	);

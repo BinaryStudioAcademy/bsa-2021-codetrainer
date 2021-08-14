@@ -7,7 +7,6 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { ClanModal } from 'components/modals';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
 
@@ -41,7 +40,13 @@ const Example: React.FC = () => {
 							className={styles.btn}
 							key={type}
 							onClick={() => {
-								showNotification({ notificationType: type, title: type, message: `${type} message` });
+								showNotification({
+									state: {
+										notificationType: type,
+										title: type,
+										message: `${type} message`,
+									},
+								});
 							}}
 						>
 							{type}
@@ -49,7 +54,6 @@ const Example: React.FC = () => {
 					);
 				})}
 			</div>
-
 			<button className={styles.btn} onClick={() => getExampleText('first')}>
 				get first text
 			</button>
@@ -73,7 +77,6 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<ClanModal />
 		</div>
 	);
 };

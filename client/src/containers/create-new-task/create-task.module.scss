@@ -1,0 +1,24 @@
+.createTaskBlock {
+	display: grid;
+	height: 200%;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 580px 350px;
+	grid-gap: 15px;
+}
+.taskInstructions {
+	position: relative;
+}
+.buttonsBottom {
+	display: flex;
+	gap: 15px;
+	width: 100%;
+	justify-content: flex-end;
+	margin-right: 20px;
+	margin-bottom: 40px;
+}
+.validationButtons {
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 15px;
+}

@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 @mixin radio-item-color($color) {
 	color: $color;
 	svg path {
@@ -11,20 +13,21 @@
 		display: none !important;
 	}
 	.radioLabel {
+		max-width: 110px;
 		cursor: pointer;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 10px;
+		user-select: none;
+		padding-right: 10px;
 		input {
 			position: absolute;
 			width: 65px;
 			height: 65px;
 		}
 		.text {
-			font-weight: 500;
-			font-size: 14px;
-			line-height: 15px;
+			font: $menu-font;
+			font-size: 15px;
 			margin-bottom: 10px;
 			margin-top: 15px;
 		}

@@ -26,6 +26,7 @@
 	.inputField::placeholder,
 	.passwordField::placeholder {
 		color: rgba(40, 40, 40, 0.5);
+
 		opacity: 0.4;
 	}
 
@@ -72,8 +73,9 @@
 		.forgot {
 			text-align: right;
 			text-decoration: underline;
+			font-size: 12px;
+			font-family: var.$base-font-family;
 			color: var.$cornflower-blue;
-			font: var.$progress-bar-font;
 		}
 	}
 

@@ -6,8 +6,8 @@ import { MarkdownHighlighterSettings } from 'common';
 
 import styles from './styles.module.scss';
 
-interface IProps {
-	text: string;
+interface IMarkdownProps {
+	text?: string;
 }
 
 const Components: ReactMarkdownOptions['components'] = {
@@ -30,10 +30,10 @@ const Components: ReactMarkdownOptions['components'] = {
 	},
 };
 
-export const Markdown: React.FC<IProps> = ({ text }) => {
+export const Markdown: React.FC<IMarkdownProps> = ({ text }) => {
 	return (
 		<div className={styles.markdown__body}>
-			<ReactMarkdown children={text} components={Components} />
+			<ReactMarkdown children={text ? text : ''} components={Components} />
 		</div>
 	);
 };

@@ -1,7 +1,7 @@
 import { AuthApiPath } from 'enum';
 import { HttpMethods } from 'constants/services';
 import serverFetch from 'helpers/call-api.helper';
-import { UnauthorizedError } from 'helpers/error';
+import { UnauthorizedError, ValidationError } from 'helpers/error';
 import { AccessToken } from '../auth';
 
 export class Http {
@@ -31,6 +31,9 @@ export class Http {
 			return response;
 		}
 		let textBody;
+		if (response.status === 400) {
+			throw new ValidationError(await response.json());
+		}
 		try {
 			textBody = await response.text();
 			const parsedException = JSON.parse(textBody);

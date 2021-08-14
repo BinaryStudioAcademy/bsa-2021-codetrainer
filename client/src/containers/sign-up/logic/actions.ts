@@ -8,3 +8,4 @@ export const continueByGithub = createAction<actionTypes.TContrinueByGithubArgs>
 export const signUpUserByGithub = createAction<actionTypes.TSignUpByGithubArgs>(actionTypes.SIGN_UP_BY_GITHUB);
 export const signUpUserSuccess = createAction(actionTypes.SIGN_UP_USER_SUCCESS);
 export const signUpUserError = createAction<{ error: string }>(actionTypes.SIGN_UP_USER_ERROR);
+export const signUpDataClear = createAction(actionTypes.SIGN_UP_DATA_CLEAR);
