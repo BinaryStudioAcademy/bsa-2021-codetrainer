@@ -25,11 +25,14 @@ const Example: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
-			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
-				SIGN IN
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignIn)}>
+				sign in
 			</button>
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
-				SIGN UP
+				sign up
+			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
+				home
 			</button>
 			<div>
 				{Object.values(NotificationType).map((type) => {
