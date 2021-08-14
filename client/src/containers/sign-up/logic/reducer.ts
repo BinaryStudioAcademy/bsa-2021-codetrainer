@@ -25,4 +25,8 @@ export const signUpReducer = createReducer<ISignUpState>(initialState, {
 			error: action.error,
 		};
 	},
+
+	[actionTypes.SIGN_UP_DATA_CLEAR]() {
+		return initialState
+	},
 });

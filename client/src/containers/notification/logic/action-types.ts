@@ -7,5 +7,5 @@ export type TSetNotificationArgs = {
 		notificationType: NotificationType;
 		message: string;
 		title?: string;
-	}
+	};
 };

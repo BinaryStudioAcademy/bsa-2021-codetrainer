@@ -51,7 +51,6 @@ const Example: React.FC = () => {
 					);
 				})}
 			</div>
-
 			<button className={styles.btn} onClick={() => getExampleText('first')}>
 				get first text
 			</button>
