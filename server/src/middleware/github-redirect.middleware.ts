@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { HttpCodes } from '../common/enum/http-codes';
-import { ENV } from '../common';
+import { ENV, HttpCodes } from '../common';
 
 // passport-github isn't the perfect solution
 // GithubStrategy set 302 status code so it's impossible to handle this in fetch
