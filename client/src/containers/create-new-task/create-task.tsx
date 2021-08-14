@@ -244,10 +244,9 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 				initialSolution,
 				testCases,
 				exampleTestCases,
+				//add here userName of the author
 			};
 			let result;
-			console.log(requestBody);
-
 			if (!taskId) {
 				result = await http.callWebApi({
 					endpoint: 'tasks',
@@ -263,7 +262,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					body: requestBody,
 				});
 			}
-			console.log(result);
 
 			if (result) {
 				dispatch(setTask({ taskId: result.id }));
@@ -282,6 +280,13 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		return null;
 	};
 	const handleReset = () => {
+		if (taskId) {
+			createErrorMessage('You can`t reset the saved task. Instead create a new one.');
+			return;
+		}
+		resetAllFields();
+	};
+	const resetAllFields = () => {
 		setTaskName('');
 		setDiscipline(DISCIPLINE_ITEMS[0]);
 		setLanguage(SELECT_PROPS.values[0]);
@@ -304,17 +309,16 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 				method: 'DELETE',
 				skipAuthorization: false,
 			});
-			console.log(result);
 			if (result) {
 				dispatch(
 					setNotificationState({
 						state: {
-							message: `Task ${result.name} is deleted.`,
+							message: `Task is deleted.`,
 							notificationType: NotificationType.Success,
 						},
 					}),
 				);
-				handleReset();
+				resetAllFields();
 				dispatch(setTask({ taskId: null }));
 			}
 		}
