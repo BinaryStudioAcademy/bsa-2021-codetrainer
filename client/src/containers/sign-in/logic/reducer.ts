@@ -26,4 +26,8 @@ export const signInReducer = createReducer<ISignInState>(initialState, {
 			error: action.error,
 		};
 	},
+
+	[actionTypes.SIGN_IN_DATA_CLEAR]() {
+		return initialState
+	},
 });

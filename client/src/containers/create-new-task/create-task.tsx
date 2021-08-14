@@ -1,6 +1,7 @@
 import { TaskTabTypes } from 'common';
 import { Button, CreateTabs, ICreateTabsProps } from 'components';
 import React, { useState } from 'react';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import { CreateSettings } from './create-task-settings';
 import styles from './create-task.module.scss';
 import { ButtonsBlock } from 'components/pages';
@@ -77,7 +78,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					title: 'Preview',
 					toolTipTitle: 'Look how your description looks',
 					icon: {
-						name: 'help',
+						name: faInfo,
 					},
 				},
 				type: TaskTabTypes.MARKDOWN,

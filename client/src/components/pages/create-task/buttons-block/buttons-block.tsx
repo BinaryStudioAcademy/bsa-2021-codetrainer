@@ -1,5 +1,4 @@
 import { Button, Select } from 'components/basic';
-import { Label } from '@blueprintjs/core';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 import React from 'react';
@@ -24,7 +23,7 @@ export const ButtonsBlock = (props: IButtonsBlockProps) => {
 			<div className={styles.buttonsBlock}>
 				<Button className={clsx(ButtonClasses.red, styles.button)}>Preview</Button>
 				<div className="select">
-					<Label>Go to</Label>
+					<label>Go to</label>
 					<Select
 						values={goToValues}
 						activeValue={goToActiveValue}
@@ -32,7 +31,7 @@ export const ButtonsBlock = (props: IButtonsBlockProps) => {
 					/>
 				</div>
 				<div className="select">
-					<Label>Your challenge</Label>
+					<label>Your challenge</label>
 					<Select
 						values={challengeValues}
 						activeValue={challengeActiveValue}

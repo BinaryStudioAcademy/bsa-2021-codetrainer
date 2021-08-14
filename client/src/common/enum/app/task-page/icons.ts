@@ -1,4 +1,5 @@
-import { IconName } from '@blueprintjs/core';
+import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
 
 export const IconTaskPageTab = {
 	COLOR: '#ec4179',
@@ -6,6 +7,6 @@ export const IconTaskPageTab = {
 
 export const IconTaskPageFullScreen = {
 	COLOR: '#78797d',
-	SIZE: 18,
-	NAME: 'fullscreen' as IconName,
+	SIZE: 'sm' as SizeProp,
+	NAME: faExpand,
 };

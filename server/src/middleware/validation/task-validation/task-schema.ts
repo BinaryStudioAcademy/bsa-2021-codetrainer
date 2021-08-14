@@ -9,7 +9,7 @@ export const taskSchema = checkSchema({
 		notEmpty: true,
 		optional: true,
 	},
-	discipline:{
+	discipline: {
 		in: 'body',
 		errorMessage: 'Wrong discipline format',
 		trim: true,

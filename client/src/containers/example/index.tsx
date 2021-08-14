@@ -51,7 +51,6 @@ const Example: React.FC = () => {
 					);
 				})}
 			</div>
-
 			<button className={styles.btn} onClick={() => getExampleText('first')}>
 				get first text
 			</button>
@@ -75,11 +74,6 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<div className="theme-dark">
-				<div className="themed-container" style={{ width: '100px', height: '100px' }}>
-					text
-				</div>
-			</div>
 		</div>
 	);
 };
