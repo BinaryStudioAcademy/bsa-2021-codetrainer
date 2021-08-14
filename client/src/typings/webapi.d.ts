@@ -10,7 +10,11 @@ namespace WebApi.Entities {
 		name: string;
 		surname: string;
 		email: string;
+		rank: number;
+		honor: number;
 		clan?: string;
 		profileClan?: string;
+		githubId?: string;
+		profileUrl?: string;
 	}
 }
