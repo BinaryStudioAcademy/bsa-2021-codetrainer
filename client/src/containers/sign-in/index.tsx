@@ -1,11 +1,13 @@
 import React, { useEffect, useCallback } from 'react';
 import { ISignInForm } from 'typings/sign-in-form';
-import { SignInPage, Spinner } from 'components';
+import { FullscreenLoader, SignInPage } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
+import { redirect } from 'helpers/redirect-github.helper';
+import { GithubEndpoints } from 'services/github.service';
 
 const SignIn: React.FC = () => {
 	const history = useHistory();
@@ -17,7 +19,7 @@ const SignIn: React.FC = () => {
 	}, []);
 
 	const onGithubSignIn = useCallback(() => {
-		// TODO: implement
+		redirect(GithubEndpoints.LOGIN);
 	}, []);
 
 	useEffect(() => {
@@ -27,7 +29,7 @@ const SignIn: React.FC = () => {
 	}, [isSuccess]);
 
 	return isLoading ? (
-		<Spinner />
+		<FullscreenLoader />
 	) : (
 		<SignInPage onFormSubmit={onFormSubmit} onGithubSignIn={onGithubSignIn} error={error} />
 	);
