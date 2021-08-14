@@ -14,10 +14,14 @@ interface IClanModalProps {
 }
 
 const CreateClanSchema = Yup.object().shape({
-	createClan: Yup.string().min(2, 'Your input is too short').max(20, 'Your input is too long').required('Required'),
+	createClan: Yup.string()
+		.min(2, 'Your input is too short')
+		.max(30, 'Your input is too long')
+		.required("Input field can't be empty"),
 });
 
 export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
+	const [isPrompt, setIsPrompt] = React.useState(false);
 	const onSubmit = async (value: string, setFieldError: any) => {
 		try {
 			await createClan(value);
@@ -27,6 +31,16 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 			setFieldError('createClan', 'Something went wrong');
 		}
 	};
+
+	const prompt = (validateField: (field: string) => Promise<string>) => (
+		<div className={styles.prompt}>
+			<p>Are you sure?</p>
+			<Button type="submit" onClick={() => validateField('createClan')}>
+				Submit
+			</Button>
+			<Button onClick={() => setIsPrompt(false)}>Cancel</Button>
+		</div>
+	);
 
 	const element = (
 		<div className={styles.container}>
@@ -53,9 +67,13 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 								type="text"
 								component={FormInput}
 							/>
-							<Button onClick={() => validateField('createClan')} type="submit">
-								Create Clan
-							</Button>
+							{isPrompt ? (
+								prompt(validateField as (field: string) => Promise<string>)
+							) : (
+								<Button style={{ marginTop: '26px' }} onClick={() => setIsPrompt(true)}>
+									Create Clan
+								</Button>
+							)}
 						</Form>
 					)}
 				</Formik>
