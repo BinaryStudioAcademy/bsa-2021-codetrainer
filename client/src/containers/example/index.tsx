@@ -9,6 +9,7 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
+import { ClanModal } from 'components/modals';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -74,6 +75,12 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
+			<div className="theme-dark">
+				<div className="themed-container" style={{ width: '100px', height: '100px' }}>
+					text
+				</div>
+			</div>
+			<ClanModal />
 		</div>
 	);
 };

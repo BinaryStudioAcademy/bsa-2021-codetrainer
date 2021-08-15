@@ -4,48 +4,25 @@
 @import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
 @import './variables.scss';
 
-$themes: (
-	'light': (
-		'background-color': $white,
-		'content-color': $mine-shaft,
-		'border-color': $mine-shaft,
-	),
-	'dark': (
-		'background-color': $mine-shaft,
-		'content-color': $white,
-		'border-color': $white,
-	),
-);
-
-@mixin themify($themes) {
-	@each $theme, $map in $themes {
-		.theme-#{$theme} & {
-			$theme-map: () !global;
-			@each $key, $submap in $map {
-				$value: map-get(map-get($themes, $theme), '#{$key}');
-				$theme-map: map-merge(
-					$theme-map,
-					(
-						$key: $value,
-					)
-				) !global;
-			}
-			@content;
-			$theme-map: null !global;
-		}
-	}
+[data-theme^='light'],
+[data-theme] [data-theme^='light'] {
+	--main-color: #000;
+	--background-color: #fff;
+	--box-color: lightgrey;
 }
 
-@function themed($key) {
-	@return map-get($theme-map, $key);
+[data-theme^='dark'],
+[data-theme] [data-theme^='dark'] {
+	--blue-color: #1da1f2;
+	--main-color: #fff;
+	--background-color: #000;
+	--sidebar-color: #333;
+	--box-color: grey;
 }
 
-.themed-container {
-	@include themify($themes) {
-		color: themed('content-color');
-		background: themed('background-color');
-		border: themed('border-color') 1px solid;
-	}
+body {
+	color: var(--main-color);
+	background-color: var(--background-color);
 }
 
 body {
