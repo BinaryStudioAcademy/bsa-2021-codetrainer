@@ -11,7 +11,6 @@ import { Discipline, IDisciplineItem } from './logic/models';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from './mock';
 import { findDisciplineItem } from './create-task-settings/create-task-settings';
 import { ISelectValue } from 'components/basic/select/interface';
-import { NotificationContainer } from 'containers/notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationType } from 'containers/notification/logic/models';
 import { setNotificationState } from 'containers/notification/logic/actions';
@@ -362,7 +361,6 @@ describe("twoOldestAges", function() {
 	};
 	return (
 		<>
-			<NotificationContainer />
 			<div className={styles.createTaskBlock}>
 				<CreateSettings
 					chosenDiscipline={chosenDiscipline}
