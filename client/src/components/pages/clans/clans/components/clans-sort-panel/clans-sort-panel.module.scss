@@ -6,10 +6,15 @@
 
 	&Button {
 		display: block;
+		cursor: pointer;
 		margin: 0 auto;
 		background: none;
 		font: $base-font;
 		border: none;
+
+		&Active {
+			color: $french-rose;
+		}
 	}
 
 	&Button:not(:last-of-type) {

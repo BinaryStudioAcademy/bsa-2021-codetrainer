@@ -1,4 +1,5 @@
 import { ISignInForm } from 'typings/sign-in-form';
+import { WebApi } from 'typings/webapi';
 import callWebApi from '../helpers/call-api.helper';
 
 export const signIn = async (userData: ISignInForm): Promise<WebApi.Entities.IUser> => {

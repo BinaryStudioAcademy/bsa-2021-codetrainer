@@ -3,12 +3,12 @@ import { authServices } from 'services';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import * as userActions from 'containers/user/logic/actions';
-import { IUser } from 'typings/sign-in-form';
+import { WebApi } from 'typings/webapi';
 
 export function* signUpUser(action: ReturnType<typeof actions.signUpUser>) {
 	try {
 		const { userData } = action;
-		const user: IUser = yield call({ context: authServices, fn: authServices.register }, userData);
+		const user: WebApi.Entities.IUser = yield call({ context: authServices, fn: authServices.register }, userData);
 		yield put(actions.signUpUserSuccess());
 		yield put(userActions.setUser({ user }));
 	} catch (error) {
