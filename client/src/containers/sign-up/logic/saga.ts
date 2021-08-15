@@ -13,6 +13,7 @@ export function* signUpUser(action: ReturnType<typeof actions.signUpUser>) {
 	try {
 		const { userData } = action;
 		const user: IUser = yield call({ context: authServices, fn: authServices.register }, userData);
+		yield put(actions.signUpUserSuccess());
 		yield put(userActions.setUser({ user }));
 		historyHelper.push(ROUTES.Home);
 		yield put(actions.setGithub({ github: undefined }));
