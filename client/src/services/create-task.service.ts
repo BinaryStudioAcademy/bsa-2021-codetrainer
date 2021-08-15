@@ -1,5 +1,5 @@
 import { http } from 'services';
-
+import * as Yup from 'yup';
 interface ICreateTaskBody {
 	name?: string;
 	discipline?: string;
@@ -15,40 +15,38 @@ interface ICreateTaskBody {
 	isPublished?: boolean;
 }
 
-const requestBodyValidation = (requestBody: ICreateTaskBody) => {
-	const { name, rank, description, completeSolution, initialSolution, testCases, exampleTestCases } = requestBody;
-	let validationStatus = true;
-	let errorMessage = '';
-	if (name && name.trim() === '') {
-		validationStatus = false;
-		errorMessage = 'Task name can`t be empty.';
-	} else if (rank && (rank.toString().trim().length > 1 || rank > 8 || rank < 1)) {
-		validationStatus = false;
-		errorMessage = 'Rank must be a number from 1 to 8.';
-	} else if (description && description.trim() === '') {
-		validationStatus = false;
-		errorMessage = 'Description can`t be empty.';
-	} else if (completeSolution && completeSolution.trim() === '') {
-		validationStatus = false;
-		errorMessage = 'Complete Solution can`t be empty.';
-	} else if (initialSolution && initialSolution.trim() === '') {
-		validationStatus = false;
-		errorMessage = 'Initial Solution can`t be empty.';
-	} else if (testCases && testCases.trim() === '') {
-		validationStatus = false;
-		errorMessage = 'Test Cases tab can`t be empty.';
-	} else if (exampleTestCases && exampleTestCases.trim() === '') {
-		validationStatus = false;
-		errorMessage = 'Example Test Cases tab can`t be empty.';
-	}
-	return {
-		validationStatus,
-		errorMessage,
-	};
-};
+const validationSchema = Yup.object().shape({
+	name: Yup.string().min(1, 'Task name can`t be empty').required('Task name can`t be empty.'),
+	discipline: Yup.string().required('discipline can`t be empty.'),
+	rank: Yup.number()
+		.min(1, 'Rank must be a number from 1 to 8.')
+		.max(8, 'Rank must be a number from 1 to 8.')
+		.required('Rank must be a number from 1 to 8.'),
+	allowContributors: Yup.boolean().required('allowContributors name can`t be empty.'),
+	tags: Yup.string(),
+	description: Yup.string().min(1, 'description can`t be empty.').required('Task name can`t be empty.'),
+	completeSolution: Yup.string().min(1, 'completeSolution can`t be empty.').required('Task name can`t be empty.'),
+	initialSolution: Yup.string().min(1, 'initialSolution can`t be empty.').required('Task name can`t be empty.'),
+	testCases: Yup.string().min(1, 'testCases can`t be empty.').required('Task name can`t be empty.'),
+	exampleTestCases: Yup.string()
+		.min(1, 'exampleTestCases can`t be empty.')
+		.required('exampleTestCases can`t be empty.'),
+	isPublished: Yup.boolean(),
+});
 
 export const createTask = async (requestBody: ICreateTaskBody) => {
-	const { validationStatus, errorMessage } = requestBodyValidation(requestBody);
+	const validationStatus = true;
+	let errorMessage = '';
+	try {
+		await validationSchema.validate(requestBody);
+	} catch (validationErrors) {
+		errorMessage = validationErrors.message;
+		return {
+			error: true,
+			message: errorMessage,
+		};
+	}
+
 	if (validationStatus) {
 		const res = await http.callWebApi({
 			method: 'POST',
@@ -73,7 +71,17 @@ export const createTask = async (requestBody: ICreateTaskBody) => {
 };
 
 export const updateTask = async (requestBody: ICreateTaskBody, taskId: string) => {
-	const { validationStatus, errorMessage } = requestBodyValidation(requestBody);
+	const validationStatus = true;
+	let errorMessage = '';
+	try {
+		await validationSchema.validate(requestBody);
+	} catch (validationErrors) {
+		errorMessage = validationErrors.message;
+		return {
+			error: true,
+			message: errorMessage,
+		};
+	}
 	if (validationStatus) {
 		const res = await http.callWebApi({
 			method: 'PUT',

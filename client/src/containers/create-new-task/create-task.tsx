@@ -53,7 +53,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		setDiscipline(foundDisciplineItem);
 	};
 	const [language, setLanguage] = useState<ISelectValue>(SELECT_PROPS.values[0]);
-	const [rank, setRank] = useState('8');
+	const [rank, setRank] = useState('');
 	const [tags, setTags] = useState('');
 	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
 	const onSwitchClick = (newSwitchState: boolean) => {
@@ -219,6 +219,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		let result;
 		if (!taskId) {
 			result = await createTask(requestBody);
+			console.log(result);
 		} else {
 			result = await updateTask(requestBody, taskId);
 		}
@@ -242,7 +243,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		setTaskName('');
 		setDiscipline(DISCIPLINE_ITEMS[0]);
 		setLanguage(SELECT_PROPS.values[0]);
-		setRank('8');
+		setRank('');
 		setSelectedSwitch(false);
 		setTags('');
 		setTextDescription('');
@@ -283,6 +284,17 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			const result = await handleValidateSolution();
 			if (result) {
 				const requestBody = {
+					name: taskName,
+					discipline: chosenDiscipline.value as string,
+					// languageId: language.id.toString(),
+					rank: Number(rank),
+					allowContributors: isSelectedSwitch,
+					tags: tags.trim(),
+					description: textDescription,
+					completeSolution,
+					initialSolution,
+					testCases,
+					exampleTestCases,
 					isPublished: true,
 				};
 				const requestResult = await updateTask(requestBody, thisTaskId);
