@@ -233,6 +233,31 @@ import { ClanService } from '../../services';
 /**
  * @swagger
  * /api/clans/{id}:
+ *   patch:
+ *     tags:
+ *       - Clans
+ *     summary: Join or leave a clan
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the clan to join/leave
+ *     requestBody:
+ *       required: false
+ *     responses:
+ *       200:
+ *         description: Updated clan
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clan'
+ */
+
+/**
+ * @swagger
+ * /api/clans/{id}:
  *   delete:
  *     tags:
  *       - Clans
@@ -285,6 +310,12 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 					.update(req.clan, req.body)
 					.then((data) => res.send(data))
 					.catch(next),
+		)
+		.patch(`${ClanApiPath.ROOT}:id`, (req, res, next) =>
+			clansService
+				.toggleMember(req.user, req.params.id)
+				.then((data) => res.send(data))
+				.catch(next),
 		)
 		.delete(ClanApiPath.ROOT, clanAdminPermissionMiddleware, checkClanIdMiddleware, (req, res, next) =>
 			clansService

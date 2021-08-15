@@ -4,6 +4,16 @@
 	background: $zircon;
 	margin-bottom: 20px;
 
+	&Avatar {
+		max-height: 500px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
 	&Description {
 		padding: 20px;
 		width: 100%;
