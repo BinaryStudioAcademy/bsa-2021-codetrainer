@@ -1,9 +1,10 @@
 // will be removed after connecting local fonts
 
 .container {
+	background-color: var(--background-color);
 	width: 916px;
 	font-family: 'Montserrat', Arial, sans-serif;
-	color: #282828;
+	color: var(--text-color);
 }
 
 .userGreeting {

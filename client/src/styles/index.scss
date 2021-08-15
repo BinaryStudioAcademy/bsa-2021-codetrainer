@@ -6,22 +6,34 @@
 
 [data-theme^='light'],
 [data-theme] [data-theme^='light'] {
-	--main-color: #000;
-	--background-color: #fff;
-	--box-color: lightgrey;
+	--text-color: #{$mine-shaft};
+	--background-color: #{$white};
+	--container-color: #{$zircon};
+	--pink: #{$french-rose};
+	--purple: #{$cornflower-blue};
+	--rank-color: rgba(#fff, 0);
+	--divider: #e5e5e5;
+	--header: #{$white-lilac};
+	--misc: #{$french-rose};
+	--border: #efefef;
 }
 
 [data-theme^='dark'],
 [data-theme] [data-theme^='dark'] {
-	--blue-color: #1da1f2;
-	--main-color: #fff;
-	--background-color: #000;
-	--sidebar-color: #333;
-	--box-color: grey;
+	--text-color: #{$white};
+	--background-color: #{$mine-shaft};
+	--container-color: #{$oslo-grey};
+	--pink: #{$french-rose};
+	--purple: #{$cornflower-blue};
+	--rank-color: #{$white};
+	--divider: #{$french-rose};
+	--header: #{$nobel};
+	--misc: orange;
+	--border: #{$white};
 }
 
 body {
-	color: var(--main-color);
+	color: var(--text-color);
 	background-color: var(--background-color);
 }
 

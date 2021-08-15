@@ -10,7 +10,7 @@
 .messageData {
 	margin: 0 10px;
 
-	color: #282828;
+	color: var(--text-color);
 	font-size: 14px;
 	font-weight: 400;
 
@@ -26,14 +26,14 @@
 	width: 25px;
 	margin-right: 14px;
 
-	border: 1px solid #ec4179;
+	border: 1px solid var(--pink);
 	border-radius: 50%;
 }
 
 .messageText {
 	margin: 0;
 
-	color: #282828;
+	color: var(--text-color);
 	font-size: 14px;
 }
 
