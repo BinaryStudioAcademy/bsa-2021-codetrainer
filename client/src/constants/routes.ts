@@ -21,5 +21,6 @@ export const ROUTES = {
 	Setting: '/setting',
 
 	Landing: '/landing',
-	// should be in future '/'
+
+	Github: '/github',
 };

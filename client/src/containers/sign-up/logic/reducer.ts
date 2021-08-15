@@ -10,23 +10,33 @@ export const signUpReducer = createReducer<ISignUpState>(initialState, {
 		};
 	},
 
-	[actionTypes.SIGN_UP_USER_SUCCESS]() {
+	[actionTypes.SIGN_UP_USER_SUCCESS](state) {
 		return {
+			...state,
 			isLoading: false,
 			isSuccess: true,
 			error: '',
+			github: undefined,
 		};
 	},
 
-	[actionTypes.SIGN_UP_USER_ERROR](_, action: { error: string }) {
+	[actionTypes.SIGN_UP_USER_ERROR](state, action: { error: string }) {
 		return {
+			...state,
 			isLoading: false,
 			isSuccess: false,
 			error: action.error,
 		};
 	},
 
+	[actionTypes.SET_GITHUB](state, action: actionTypes.TSetGithubArgs) {
+		return {
+			...state,
+			github: action.github,
+		};
+	},
+
 	[actionTypes.SIGN_UP_DATA_CLEAR]() {
-		return initialState
+		return initialState;
 	},
 });

@@ -1,10 +1,10 @@
 /* eslint-disable camelcase, no-underscore-dangle */
-import { User } from '../data';
 
-export interface IGithubProfile {
+export interface IRawGithubProfile {
 	id: string;
 	username: string;
 	_json: {
+		html_url: string;
 		avatar_url?: string;
 	};
 	emails: [
@@ -14,12 +14,20 @@ export interface IGithubProfile {
 	];
 }
 
-export function mapGithubProfileToUserFields(profile: IGithubProfile): Omit<User, 'id' | 'password'> {
+export interface IGithubProfile {
+	id: string;
+	email: string;
+	login: string;
+	url: string;
+	profileUrl?: string;
+}
+
+export function mapGithubResponseToGithubProfile(profile: IRawGithubProfile): IGithubProfile {
 	return {
+		id: profile.id,
 		email: profile.emails[0].value,
-		name: profile.username,
-		surname: '',
-		githubId: profile.id,
+		login: profile.username,
 		profileUrl: profile._json.avatar_url,
-	} as User;
+		url: profile._json.html_url,
+	};
 }
