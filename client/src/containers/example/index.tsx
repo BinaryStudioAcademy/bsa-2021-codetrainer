@@ -9,7 +9,6 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
-import { ClanModal } from 'components/modals';
 
 const Example: React.FC = () => {
 	const dispatch = useDispatch();
@@ -22,6 +21,22 @@ const Example: React.FC = () => {
 		dispatch(setNotificationState(notification));
 	};
 
+	console.log(document.documentElement.getAttribute('data-theme'));
+
+	const changeTheme = () => {
+		const theme = localStorage.getItem('theme');
+		switch (theme) {
+			case 'light':
+				localStorage.setItem('theme', 'dark');
+				break;
+			case 'dark':
+				localStorage.setItem('theme', 'light');
+				break;
+			default:
+				break;
+		}
+	};
+
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
@@ -30,6 +45,9 @@ const Example: React.FC = () => {
 			</button>
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
 				SIGN UP
+			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
+				HOME
 			</button>
 			<div>
 				{Object.values(NotificationType).map((type) => {
@@ -75,12 +93,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<div className="theme-dark">
-				<div className="themed-container" style={{ width: '100px', height: '100px' }}>
-					text
-				</div>
-			</div>
-			<ClanModal />
+			<button onClick={() => changeTheme()}>SWITCH THEME</button>
 		</div>
 	);
 };

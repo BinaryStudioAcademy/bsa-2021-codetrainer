@@ -5,7 +5,7 @@
 	}
 
 	li::marker {
-		color: #ec4179;
+		color: var(--pink);
 		font-size: 150%;
 	}
 
@@ -14,7 +14,7 @@
 	}
 
 	.example {
-		background: #eaecf1;
+		background: var(--secondary-container-color);
 		border-radius: 10px;
 		padding: 8px;
 	}
@@ -31,8 +31,9 @@
 	.tags a {
 		margin: 0 10px 0 0;
 		text-decoration: none;
-		background: #f0f3f9;
-		color: rgba(40, 40, 40, 0.5);
+		background: var(--secondary-container-color);
+		color: var(--text-color);
+		opacity: 0.5;
 		border-radius: 4px;
 		padding: 4px 9px;
 	}

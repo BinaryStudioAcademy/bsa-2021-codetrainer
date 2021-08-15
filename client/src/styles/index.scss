@@ -9,11 +9,13 @@
 	--text-color: #{$mine-shaft};
 	--background-color: #{$white};
 	--container-color: #{$zircon};
+	--secondary-container-color: #{$white-lilac};
 	--pink: #{$french-rose};
 	--purple: #{$cornflower-blue};
 	--rank-color: rgba(#fff, 0);
 	--divider: #e5e5e5;
 	--header: #{$white-lilac};
+	--sidebar: #{$cornflower-blue};
 	--misc: #{$french-rose};
 	--border: #efefef;
 }
@@ -23,11 +25,13 @@
 	--text-color: #{$white};
 	--background-color: #{$mine-shaft};
 	--container-color: #{$oslo-grey};
+	--secondary-container-color: #{$nobel};
 	--pink: #{$french-rose};
 	--purple: #{$cornflower-blue};
 	--rank-color: #{$white};
 	--divider: #{$french-rose};
 	--header: #{$nobel};
+	--sidebar: #d15252;
 	--misc: orange;
 	--border: #{$white};
 }

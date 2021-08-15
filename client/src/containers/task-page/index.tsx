@@ -6,11 +6,11 @@ const TaskPage: React.FC = (props) => {
 	const [activeTab, setActiveTab] = React.useState('instructions');
 
 	return (
-		<div style={{ display: 'flex' }}>
-			<div style={{ width: '800px' }}>
+		<div style={{ display: 'flex', width: '916px' }}>
+			<div style={{ width: '50%' }}>
 				<TaskInstructions data={mockData} activeTab={activeTab} onClick={(tab: string) => setActiveTab(tab)} />
 			</div>
-			<div style={{ width: '554px', background: '#705ff5' }}>Solution</div>
+			<div>Solution</div>
 		</div>
 	);
 };
