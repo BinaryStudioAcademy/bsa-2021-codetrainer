@@ -36,6 +36,7 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.profileClan', 'profileClan')
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
+			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
 				'user.username',
@@ -44,6 +45,7 @@ export class UserRepository extends AbstractRepository<User> {
 				'user.email',
 				'user.githubId',
 				'clan',
+				'solution.id',
 				'profileClan',
 				'task.id',
 			])
