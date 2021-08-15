@@ -12,7 +12,6 @@ function* linkToGithub(action: ReturnType<typeof actions.linkToGithub>) {
 		const { code } = action;
 		const user: IUser = yield call({ context: githubAuthService, fn: githubAuthService.link }, code);
 		yield put(userActions.setUser({ user }));
-		// yield put(actions.githubError({ error: 'щото пашло нитак' }));
 	} catch (error) {
 		yield put(actions.githubError({ error: error?.message ?? 'unknown error' }));
 	} finally {
