@@ -5,6 +5,7 @@ import { IClanState } from 'containers/clans/clan/logic/state';
 import { IAuthState } from 'containers/auth/logic/state';
 import { IProfileState } from 'containers/profile/logic/state';
 import { INotificationState } from '../containers/notification/logic/state';
+import { ISettingsState } from '../containers/setting-page/logic/state';
 
 export interface IRootState {
 	notification: INotificationState;
@@ -14,4 +15,5 @@ export interface IRootState {
 	createTask: ICreateTaskState;
 	example: IExampleState;
 	auth: IAuthState;
+	settings: ISettingsState;
 }

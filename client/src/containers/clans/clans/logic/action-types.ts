@@ -1,7 +1,11 @@
-import { IClan, TClans } from '../../types';
-
+import { WebApi } from 'typings/webapi';
+export const START_LOADING = 'CLANS:START_LOADING';
 export const FETCH_CLANS = 'CLANS:FETCH_CLANS';
-export const ADD_CLANS = 'CLANS:ADD_CLAN';
+export const FETCH_CLAN = 'CLANS:FETCH_CLAN';
+export const END_LOADING = 'CLANS:END_LOADING';
+export const CLEAR_CLANS = 'CLANS:CLEAR_CLANS';
+export const ADD_CLANS = 'CLANS:ADD_CLANS';
+export const ADD_ERROR = 'CLANS:ADD_ERROR';
 export const JOIN_CLAN = 'CLANS:JOIN_CLAN';
 export const LEAVE_CLAN = 'CLANS:LEAVE_CLAN';
 export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
@@ -9,18 +13,27 @@ export const SORT_BY_TIME = 'CLANS:SORT_BY_TIME';
 export const SORT_BY_RANK = 'CLANS:SORT_BY_RANK';
 export const SORT_BY_SIZE = 'CLANS:SORT_BY_SIZE';
 
-export type TAddArgs = {
-	clans: TClans;
-};
+export interface IAddClansArgs {
+	clans: WebApi.Entities.TClans;
+}
 
-export type TUpdateArgs = {
-	clan: IClan;
-};
+export interface IUpdateClanArgs {
+	id: string;
+	clan: WebApi.Entities.IClan;
+}
 
-export type TLeaveArgs = {
-	clanId: string;
-};
+export interface IFetchClanArgs {
+	id: string;
+}
 
-export type TJoinArgs = {
-	clanId: string;
-};
+export interface IJoinClanArgs {
+	id: string;
+}
+
+export interface ILeaveClanArgs {
+	id: string;
+}
+
+export interface IAddErrorArgs {
+	error: string;
+}

@@ -1,0 +1,24 @@
+@import 'styles/variables';
+
+.membersSortPanel {
+	padding: 20px;
+	background: $zircon;
+
+	&Button {
+		cursor: pointer;
+		display: block;
+		margin: 0 auto;
+		background: none;
+		font: $base-font;
+		border: none;
+		outline: none;
+
+		&Active {
+			color: $french-rose;
+		}
+	}
+
+	&Button:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+}

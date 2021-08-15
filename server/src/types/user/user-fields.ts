@@ -22,4 +22,6 @@ export interface IUserFields {
 	skills?: string[];
 	devLevel?: string;
 	social?: string[];
+	githubId?: string;
+	profileUrl?: string;
 }

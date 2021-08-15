@@ -20,9 +20,10 @@ import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
+import Github from 'containers/github';
 import { Redirect, Route } from 'react-router-dom';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -89,11 +90,12 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
+			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
 			<Route path={ROUTES.NotFound} component={NotFound} />
-			<Redirect from='*' to={ROUTES.NotFound} />
+			<Redirect from="*" to={ROUTES.NotFound} />
 		</Switch>
 	);
 };
