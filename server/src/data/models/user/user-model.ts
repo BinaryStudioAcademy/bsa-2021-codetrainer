@@ -83,9 +83,9 @@ export class User extends BaseEntity {
 	@JoinColumn()
 	solutions!: Solution[];
 
-	@Column({ nullable: true })
+	@Column({ type: 'varchar', length: 100, nullable: true })
 	profileUrl?: string;
 
-	@Column({ unique: true, nullable: true })
+	@Column({ type: 'varchar', length: 100, unique: true, nullable: true })
 	githubId?: string;
 }

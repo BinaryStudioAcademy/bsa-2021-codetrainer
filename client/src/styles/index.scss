@@ -30,8 +30,10 @@ code {
 a {
 	text-decoration: none;
 }
+
 .contentContainer {
-	margin-left: 310px;
 	margin-top: 110px;
-	width: calc(100% - 400px);
+	position: absolute;
+	left: calc(50% + 122px);
+	transform: translateX(-50%);
 }

@@ -1,9 +1,12 @@
+import { IUser } from 'typings/common/IUser';
+import { mapUserResponseToUser } from 'helpers/user.helper';
 import { HttpMethods } from 'constants/services';
 import { AuthApiPath } from 'enum';
 import { ISignInForm } from 'typings/sign-in-form';
 import { ISignUpForm } from 'typings/sign-up-form';
 import { THttp } from '../http';
 import { AccessToken } from './access-token';
+import { WebApi } from 'typings/webapi';
 
 export class Auth {
 	private http: THttp;
@@ -11,32 +14,32 @@ export class Auth {
 		this.http = http;
 	}
 
-	private load({ endpoint, body, skipAuthorization = true }: Omit<Helpers.IRequestArgs, 'method'>) {
+	protected load({ endpoint, body, query, skipAuthorization = true }: Omit<Helpers.IRequestArgs, 'method'>) {
 		return this.http.callWebApi({
 			method: HttpMethods.POST,
 			endpoint,
 			body,
+			query,
 			skipAuthorization,
 		});
 	}
 
-	async login(body: ISignInForm) {
-		const { user, token } = await this.load({ endpoint: AuthApiPath.LOGIN, body });
+	protected async authorize({ user, token }: { user: WebApi.Entities.IUser; token: string }): Promise<IUser> {
 		AccessToken.setToken(token);
-		return user;
+		return mapUserResponseToUser(user);
+	}
+
+	async login(body: ISignInForm) {
+		return this.authorize(await this.load({ endpoint: AuthApiPath.LOGIN, body }));
 	}
 
 	async register(body: ISignUpForm) {
-		const { user, token } = await this.load({ endpoint: AuthApiPath.REGISTER, body });
-		AccessToken.setToken(token);
-		return user;
+		return this.authorize(await this.load({ endpoint: AuthApiPath.REGISTER, body }));
 	}
 
 	async refreshToken() {
 		try {
-			const { user, token } = await this.load({ endpoint: AuthApiPath.REFRESH_TOKEN });
-			AccessToken.setToken(token);
-			return user;
+			return this.authorize(await this.load({ endpoint: AuthApiPath.REFRESH_TOKEN }));
 		} catch (e) {
 			AccessToken.resetToken();
 			return null;

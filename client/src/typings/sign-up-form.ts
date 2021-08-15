@@ -5,3 +5,9 @@ export interface ISignUpForm {
 	email: string;
 	password: string;
 }
+
+export interface ISignUpByGithubForm {
+	githubId: string;
+	username: string;
+	email: string;
+}

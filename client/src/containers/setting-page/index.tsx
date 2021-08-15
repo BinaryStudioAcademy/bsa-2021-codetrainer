@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { SettingPage } from 'components/pages';
+import { GithubEndpoints } from 'services/github.service';
+import * as socialSettingsActions from './social/logic/actions';
+import { useSettingsSelector, useUserSelector } from 'hooks/useAppSelector';
+import { redirect } from '../../helpers/redirect-github.helper';
 
 const radioListItems = [
 	{
@@ -76,13 +81,32 @@ const socialLinks = {
 };
 
 const SettingPageContainer: React.FC = () => {
+	const dispatch = useDispatch();
+	const user = useUserSelector();
+	const settings = useSettingsSelector();
+
+	const toggleGithubLink = useCallback(() => {
+		if (!user?.github) {
+			redirect(GithubEndpoints.LINK);
+		} else {
+			dispatch(socialSettingsActions.unlinkFromGithub());
+		}
+	}, [user]);
+
 	return (
 		<SettingPage
 			information={{
 				list: list,
 				formItems: formItems,
 			}}
-			social={socialLinks}
+			social={{
+				github: {
+					profile: user?.github,
+					onGithubLink: toggleGithubLink,
+					error: settings.social.github.error,
+				},
+				...socialLinks,
+			}}
 		/>
 	);
 };

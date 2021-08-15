@@ -1,7 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { Clan, TClanRepository, TProfileClanRepository, TUserRepository, User } from '../../data';
 import { ValidationError } from '../../helpers';
-import { Clan as ClanType } from '../../data/models';
 import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
 
 export class ClanService {
@@ -78,23 +77,18 @@ export class ClanService {
 		return newClan;
 	}
 
-	getHonour({ members }: ClanType) {
+	getHonour({ members }: Clan) {
 		return +(members.reduce((sum, member) => sum + member.honour, 0) / members.length).toFixed();
 	}
 
-	getRank({ members }: ClanType) {
+	getRank({ members }: Clan) {
 		return +(members.reduce((sum, member) => sum + member.rank, 0) / members.length).toFixed();
 	}
 
 	async getClans({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.clanRepository);
 		const clans = (await repository.getAll(skip, take)).map((clan) => ({
-			id: clan.id,
-			name: clan.name,
-			isPublic: clan.isPublic,
-			maxMembers: clan.maxMembers,
-			numberOfMembers: clan.numberOfMembers,
-			createdAt: clan.createdAt,
+			...clan,
 			honour: this.getHonour(clan),
 			rank: this.getRank(clan),
 		}));
@@ -119,6 +113,8 @@ export class ClanService {
 
 	async joinClan(user: User, id: string) {
 		const repository = getCustomRepository(this.clanRepository);
+		const userRepository = getCustomRepository(this.userRepository);
+		const profileClanRepository = getCustomRepository(this.profileClanRepository);
 		const clan = await this.getClan(id);
 
 		if (!clan) {
@@ -129,18 +125,25 @@ export class ClanService {
 			throw new ValidationError(CODE_ERRORS.IN_CLAN);
 		}
 
+		const profileClan = await profileClanRepository.save({
+			role: CLAN_MEMBER_ROLE.MEMBER,
+			status: CLAN_MEMBER_STATUS.APPROVED,
+		});
+
+		await userRepository.updateById(user.id, { profileClan });
 		await repository.addMember(id, user.id);
 	}
 
 	async leaveClan(user: User, id: string) {
 		const repository = getCustomRepository(this.clanRepository);
+		const userRepository = getCustomRepository(this.userRepository);
 		const clan = await this.getClan(id);
 
 		if (!clan) {
 			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
 		}
 
-		if (user?.clan?.id !== id) {
+		if (user.clan?.id !== id) {
 			throw new ValidationError(CODE_ERRORS.NOT_IN_CLAN);
 		}
 
@@ -148,10 +151,12 @@ export class ClanService {
 			throw new ValidationError(CODE_ERRORS.ADMIN_LEAVE);
 		}
 
+		await userRepository.updateById(user.id, { profileClan: undefined });
 		await repository.deleteMember(id, user.id);
 	}
 
 	async toggleMember(user: User, id: string) {
+		const userRepository = getCustomRepository(this.userRepository);
 		const clan = await this.getClan(id);
 
 		if (!clan) {
@@ -166,8 +171,12 @@ export class ClanService {
 			await this.joinClan(user, id);
 		}
 
-		const updatedClan = this.getClan(id);
+		const updatedClan = await this.getClan(id);
+		const updatedUser = await userRepository.getById(user.id);
 
-		return updatedClan;
+		return {
+			user: updatedUser,
+			clan: updatedClan,
+		};
 	}
 }

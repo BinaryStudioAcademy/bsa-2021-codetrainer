@@ -1,5 +1,4 @@
 import { Button, Select } from 'components/basic';
-import { Label } from '@blueprintjs/core';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 import React from 'react';
@@ -9,8 +8,10 @@ import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
 import { ChangeTheme } from 'components/basic/change-theme';
 
-interface IButtonsBlockProps {}
-export const ButtonsBlock = (props: IButtonsBlockProps) => {
+interface IButtonsBlockProps {
+	handlePreviewClick: () => void;
+}
+export const ButtonsBlock = ({ handlePreviewClick }: IButtonsBlockProps) => {
 	const [goToActiveValue, setGoToActiveValue] = useState({
 		id: 1,
 		title: 'Go to',
@@ -22,9 +23,11 @@ export const ButtonsBlock = (props: IButtonsBlockProps) => {
 	return (
 		<>
 			<div className={styles.buttonsBlock}>
-				<Button className={clsx(ButtonClasses.red, styles.button)}>Preview</Button>
+				<Button className={clsx(ButtonClasses.red, styles.button)} onClick={handlePreviewClick}>
+					Preview
+				</Button>
 				<div className="select">
-					<Label>Go to</Label>
+					<label>Go to</label>
 					<Select
 						values={goToValues}
 						activeValue={goToActiveValue}
@@ -32,7 +35,7 @@ export const ButtonsBlock = (props: IButtonsBlockProps) => {
 					/>
 				</div>
 				<div className="select">
-					<Label>Your challenge</Label>
+					<label>Your challenge</label>
 					<Select
 						values={challengeValues}
 						activeValue={challengeActiveValue}

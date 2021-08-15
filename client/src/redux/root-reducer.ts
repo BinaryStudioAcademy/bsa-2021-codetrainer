@@ -8,6 +8,7 @@ import { combineReducers, Reducer } from 'redux';
 import { IRootState } from 'typings/root-state';
 import { notificationReducer } from '../containers/notification/logic/reducer';
 import { searchReducer } from 'containers/search-page/logic/reducer';
+import { settingsReducer } from './../containers/setting-page/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,
@@ -18,6 +19,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	createTask: createTaskReducer,
 	notification: notificationReducer,
 	search: searchReducer,
+	settings: settingsReducer,
 });
 
 export default rootReducer;

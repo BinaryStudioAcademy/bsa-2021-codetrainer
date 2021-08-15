@@ -1,5 +1,4 @@
 import React from 'react';
-import { H5 } from '@blueprintjs/core';
 import styles from './profile-bio.module.scss';
 import { Avatar, Label, List } from 'components/basic';
 
@@ -61,7 +60,7 @@ export const ProfileBio = (props: IProfileBioProps) => {
 		<div className={styles.profileBio}>
 			<div className={styles.profileHeader}>
 				{img ? <Avatar avatar={img} size={57} /> : <Avatar size={57} />}
-				<H5 className={styles.name}>{name}</H5>
+				<h5 className={styles.name}>{name}</h5>
 				<Label label={rank + ' rank'} color="#EC4179" />
 				<Label label={score} color="#EC4179" />
 			</div>

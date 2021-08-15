@@ -7,7 +7,6 @@ import { TSetNotificationArgs } from '../notification/logic/action-types';
 import { setNotificationState } from '../notification/logic/actions';
 import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
-import { ClanModal } from 'components/modals';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
 
@@ -26,10 +25,13 @@ const Example: React.FC = () => {
 		<div className={styles.root}>
 			<h2>Example Component</h2>
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignIn)}>
-				SIGN IN
+				sign in
 			</button>
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.SignUp)}>
-				SIGN UP
+				sign up
+			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
+				home
 			</button>
 			<div>
 				{Object.values(NotificationType).map((type) => {
@@ -52,7 +54,6 @@ const Example: React.FC = () => {
 					);
 				})}
 			</div>
-
 			<button className={styles.btn} onClick={() => getExampleText('first')}>
 				get first text
 			</button>
@@ -76,7 +77,6 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<ClanModal />
 		</div>
 	);
 };

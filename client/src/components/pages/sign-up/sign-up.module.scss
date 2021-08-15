@@ -1,7 +1,17 @@
-@import "styles/variables";
+@import 'styles/variables';
 
 h4 {
 	font: $fourth-title-font;
+	margin-bottom: 15px;
+}
+
+.light {
+	color: $nobel;
+}
+
+.info,
+.error {
+	margin-bottom: 15px;
 }
 
 a {
@@ -11,43 +21,29 @@ a {
 	text-decoration: underline;
 }
 
-.signUp {
-	position: relative;
-
-	.form {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 300px;
-		max-width: 80%;
-		margin: auto;
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-		& > button {
-			height: 50px;
-		}
-		.error {
-			color: $french-rose;
-			margin-top: -20px;
-			margin-bottom: 5px;
-		}
-		.header {
-			margin-top: 0px;
-		}
+.form {
+	& > button {
+		width: 100%;
 	}
+	.cancel {
+		float: right;
+	}
+}
 
-	footer {
-		font-family: $base-font-family;
-		position: absolute;
-		bottom: 20px;
-		left: 50%;
-		transform: translate(-50%);
-		font-size: 14px;
-		color: rgba(40, 40, 40, 0.5);
-		.link {
-			text-decoration: underline;
-		}
+.footer {
+	position: absolute;
+	bottom: 20px;
+	width: 100%;
+	text-align: center;
+	font: $base-font;
+	line-height: 17px;
+	color: $nobel;
+}
+
+.form,
+.footer {
+	a {
+		color: $cornflower-blue;
+		text-decoration: underline;
 	}
 }

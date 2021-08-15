@@ -1,8 +1,9 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository } from 'typeorm';
+import { AbstractRepository } from '../abstract/index';
 import { User } from '../../models';
 
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export class UserRepository extends AbstractRepository<User> {
 	userFields = [
 		'user.id',
 		'user.name',
@@ -15,6 +16,7 @@ export class UserRepository extends Repository<User> {
 		'user.devLevel',
 		'user.social',
 		'user.email',
+		'user.githubId',
 	];
 
 	getAll() {
@@ -41,6 +43,7 @@ export class UserRepository extends Repository<User> {
 				'user.name',
 				'user.surname',
 				'user.email',
+				'user.githubId',
 				'clan',
 				'solution.id',
 				'profileClan',

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Icon } from '@blueprintjs/core';
 import clsx from 'clsx';
-import ReactTooltip from 'react-tooltip';
-import { IconTaskPageTab } from 'common';
 import { TCreateTabs } from '../types';
 
 import styles from './styles.module.scss';
+import { InfoPopover } from 'components/basic';
 
 interface IHeaderProps {
 	tabs: TCreateTabs;
@@ -18,7 +16,6 @@ export const Header: React.FC<IHeaderProps> = ({ tabs, onChange }) => {
 		onChange(index);
 		setActive(index);
 	};
-	const timestamp = Date.now();
 	return (
 		<div className={styles.tabs}>
 			{tabs.map(({ header }, i) => (
@@ -28,20 +25,10 @@ export const Header: React.FC<IHeaderProps> = ({ tabs, onChange }) => {
 					className={clsx(styles.tab, i === active && tabs.length !== 1 && styles.tab__active)}
 				>
 					<span>{header.title}</span>
-					{header.icon ? (
-						<>
-							<Icon
-								icon={header.icon.name}
-								data-for={`id-for-tooltip-${i}-${timestamp}`}
-								className={styles.icon}
-								color={header.icon.color || IconTaskPageTab.COLOR}
-								data-tip
-							/>
-							<ReactTooltip id={`id-for-tooltip-${i}-${timestamp}`}>{header.toolTipTitle}</ReactTooltip>
-						</>
-					) : null}
+					{header.icon ? <InfoPopover iconType={'help'}>{header.toolTipTitle}</InfoPopover> : null}
 				</span>
 			))}
 		</div>
 	);
 };
+//header.toolTipTitle
