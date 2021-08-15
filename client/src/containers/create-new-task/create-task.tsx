@@ -15,10 +15,10 @@ import { ISelectValue } from 'components/basic/select/interface';
 import { NotificationContainer } from 'containers/notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationType } from 'containers/notification/logic/models';
-import { http } from 'services';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
+import { createTask, deleteTask, updateTask } from 'services/create-task.service';
 
 export interface ICreateTaskProps {}
 
@@ -203,81 +203,39 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 	};
 	//validation
 	const taskId = useSelector((state: IRootState) => state.createTask.taskId);
-	let validationStatus = true; //true is okay ,false if there are mistakes
 	const handleSave = async () => {
-		validationStatus = true;
-		if (taskName.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Task name can`t be empty.');
-		} else if (rank.trim().length > 1 || Number(rank.trim()) > 8 || Number(rank.trim()) < 1) {
-			validationStatus = false;
-			createErrorMessage('Rank must be a number from 1 to 8.');
-		} else if (!Object.values(Discipline).includes(chosenDiscipline.value)) {
-			validationStatus = false;
-			createErrorMessage('You`ve chosen wronk discipline.');
-		} else if (textDescription.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Description can`t be empty.');
-		} else if (completeSolution.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Complete Solution can`t be empty.');
-		} else if (initialSolution.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Initial Solution can`t be empty.');
-		} else if (testCases.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Test Cases tab can`t be empty.');
-		} else if (exampleTestCases.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Example Test Cases tab can`t be empty.');
+		const requestBody = {
+			name: taskName,
+			discipline: chosenDiscipline.value as string,
+			// languageId: language.id.toString(),
+			rank: Number(rank),
+			allowContributors: isSelectedSwitch,
+			tags: tags.trim(),
+			description: textDescription,
+			completeSolution,
+			initialSolution,
+			testCases,
+			exampleTestCases,
+		};
+		let result;
+		if (!taskId) {
+			result = await createTask(requestBody);
+		} else {
+			result = await updateTask(requestBody, taskId);
 		}
-		if (validationStatus) {
-			const requestBody = {
-				name: taskName,
-				discipline: chosenDiscipline.value as string,
-				// languageId: language.id.toString(),
-				rank: Number(rank),
-				allowContributors: isSelectedSwitch,
-				tags: tags.trim(),
-				description: textDescription,
-				completeSolution,
-				initialSolution,
-				testCases,
-				exampleTestCases,
-			};
-			let result;
-			console.log(requestBody);
-
-			if (!taskId) {
-				result = await http.callWebApi({
-					endpoint: 'tasks',
-					method: 'POST',
-					skipAuthorization: false,
-					body: requestBody,
-				});
-			} else {
-				result = await http.callWebApi({
-					endpoint: 'tasks/' + taskId,
-					method: 'PUT',
-					skipAuthorization: false,
-					body: requestBody,
-				});
-			}
-			console.log(result);
-
-			if (result) {
-				dispatch(setTask({ taskId: result.id }));
-				dispatch(
-					setNotificationState({
-						state: {
-							message: `Task ${taskName} is ${taskId ? 'updated' : 'saved'}`,
-							notificationType: NotificationType.Success,
-						},
-					}),
-				);
-				return result.id;
-			}
-			return null;
+		if (result.error) {
+			createErrorMessage(result.message);
+		} else if (!result.error) {
+			dispatch(setTask({ taskId: result.id }));
+			dispatch(
+				setNotificationState({
+					state: {
+						message: `Task ${taskName} is ${taskId ? 'updated' : 'saved'}`,
+						notificationType: NotificationType.Success,
+					},
+				}),
+			);
+			return result.id;
 		}
 		return null;
 	};
@@ -299,17 +257,15 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		if (!taskId) {
 			createErrorMessage('You haven`t saved this task yet.');
 		} else {
-			const result = await http.callWebApi({
-				endpoint: 'tasks/' + taskId,
-				method: 'DELETE',
-				skipAuthorization: false,
-			});
+			const result = await deleteTask(taskId);
 			console.log(result);
-			if (result) {
+			if (result.error) {
+				createErrorMessage('Something went wrong.');
+			} else if (!result.error) {
 				dispatch(
 					setNotificationState({
 						state: {
-							message: `Task ${result.name} is deleted.`,
+							message: `Task is deleted.`,
 							notificationType: NotificationType.Success,
 						},
 					}),
@@ -330,13 +286,8 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 				const requestBody = {
 					isPublished: true,
 				};
-				const requestResult = await http.callWebApi({
-					endpoint: 'tasks/' + thisTaskId,
-					method: 'PUT',
-					skipAuthorization: false,
-					body: requestBody,
-				});
-				if (requestResult) {
+				const requestResult = await updateTask(requestBody, thisTaskId);
+				if (!requestResult.error) {
 					dispatch(
 						setNotificationState({
 							state: {
