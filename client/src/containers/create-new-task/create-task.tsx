@@ -25,7 +25,7 @@ export interface ICreateTaskProps {}
 const CodeTabs = {
 	COMPLETE_SOLUTION: 0,
 	INITIAL_SOLUTION: 1,
-	PRELOADED: 2,
+	preloader: 2,
 };
 
 const TestTabs = {
@@ -101,7 +101,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const [codeTab, setCodeTab] = useState(0);
 	const [completeSolution, setCompleteSolution] = useState('');
 	const [initialSolution, setInitialSolution] = useState('');
-	const [preloaded, setPreloaded] = useState('');
+	const [preloader, setPreloader] = useState('');
 	const tabsCode: ICreateTabsProps = {
 		selectedTab: codeTab,
 		tabs: [
@@ -123,11 +123,11 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			},
 			{
 				header: {
-					title: 'Preloaded',
+					title: 'preloader',
 				},
 				type: TaskTabTypes.CODE,
 				editable: true,
-				text: preloaded,
+				text: preloader,
 			},
 			{
 				header: {
@@ -148,8 +148,8 @@ This allows you to setup code that can be used by the warrior's solution, but no
 				case CodeTabs.INITIAL_SOLUTION:
 					setInitialSolution(text);
 					break;
-				case CodeTabs.PRELOADED:
-					setPreloaded(text);
+				case CodeTabs.preloader:
+					setPreloader(text);
 					break;
 			}
 		},
@@ -215,6 +215,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			initialSolution,
 			testCases,
 			exampleTestCases,
+			preloader,
 		};
 		let result;
 		if (!taskId) {
@@ -249,7 +250,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		setTextDescription('');
 		setCompleteSolution('');
 		setInitialSolution('');
-		setPreloaded('');
+		setPreloader('');
 		setTestCases('');
 		setExampleTestCases('');
 	};
@@ -296,6 +297,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					testCases,
 					exampleTestCases,
 					isPublished: true,
+					preloader,
 				};
 				const requestResult = await updateTask(requestBody, thisTaskId);
 				if (!requestResult.error) {
@@ -336,7 +338,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 function twoOldestAges(ages){
 				
 }`);
-		setPreloaded('');
+		setPreloader('');
 		setTestCases(`const chai = require("chai");
 const assert = chai.assert;
 chai.config.truncateThreshold = 0;
