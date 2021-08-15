@@ -1,45 +1,46 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import ImageUpload from './components/image-upload';
 import { FormInput } from 'components';
 import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 import { Modal } from '../';
+import { createClan } from 'services/create-clan.service';
 
-export const ClanModal: React.FC = () => {
-	const [isOpen, setIsOpen] = React.useState(false);
+interface IClanModalProps {
+	isOpen: boolean;
+	setIsOpen: (isOpen: boolean) => void;
+}
 
-	// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjNzQ4YmQwLWQyNGQtNDY2Yi1iMWMxLTVkOTQ1MDczN2VhYSIsImlhdCI6MTYyODA5MTIwNywiZXhwIjoxNjI4MTc3NjA3fQ.5ChvB4gmO-R9EXfmakMcjtUZhKhnVDHFav_6-76xCHo'
+const CreateClanSchema = Yup.object().shape({
+	createClan: Yup.string()
+		.min(2, 'Your input is too short')
+		.max(30, 'Your input is too long')
+		.required("Input field can't be empty"),
+});
 
-	// const createClan = React.useCallback((name: string) => {
-	// 	const header = {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			Authorization: `Bearer ${token}`,
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		withCredentials: true,
-	// 		body: JSON.stringify({ name: name, isPublic: true }),
-	// 	};
-	// 	const call = async () => {
-	// 		const response = await fetch('http://localhost:5000/api/clan', header);
-	// 		const data = await response.json();
-	// 		console.log(data);
-	// 	};
-	// 	call();
-	// }, []);
-
-	const validateClanName = (value: string) => {
-		let error;
-		if (value.length < 4) {
-			error = 'Clan name should be minimum four letters';
+export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
+	const [isPrompt, setIsPrompt] = React.useState(false);
+	const onSubmit = async (value: string, setFieldError: any) => {
+		try {
+			await createClan(value);
+			setIsOpen(false);
+		} catch (e) {
+			console.log(e);
+			setFieldError('createClan', 'Something went wrong');
 		}
-		return error;
 	};
 
-	const openModal = () => {
-		setIsOpen(true);
-	};
+	const prompt = (validateField: (field: string) => Promise<string>) => (
+		<div className={styles.prompt}>
+			<p>Are you sure?</p>
+			<Button type="submit" onClick={() => validateField('createClan')}>
+				Submit
+			</Button>
+			<Button onClick={() => setIsPrompt(false)}>Cancel</Button>
+		</div>
+	);
 
 	const element = (
 		<div className={styles.container}>
@@ -48,7 +49,11 @@ export const ClanModal: React.FC = () => {
 				<ImageUpload label="Set clan icon" />
 			</div>
 			<div>
-				<Formik initialValues={{ createClan: '' }} onSubmit={() => console.log('submited')}>
+				<Formik
+					initialValues={{ createClan: '' }}
+					validationSchema={CreateClanSchema}
+					onSubmit={(values, { setFieldError }) => onSubmit(values.createClan, setFieldError)}
+				>
 					{({ validateField }) => (
 						<Form className={styles.form}>
 							<Field
@@ -61,11 +66,14 @@ export const ClanModal: React.FC = () => {
 								}
 								type="text"
 								component={FormInput}
-								validate={validateClanName}
 							/>
-							<Button onClick={() => validateField('createClan')} type="submit">
-								Create Clan
-							</Button>
+							{isPrompt ? (
+								prompt(validateField as (field: string) => Promise<string>)
+							) : (
+								<Button style={{ marginTop: '26px' }} onClick={() => setIsPrompt(true)}>
+									Create Clan
+								</Button>
+							)}
 						</Form>
 					)}
 				</Formik>
@@ -75,7 +83,6 @@ export const ClanModal: React.FC = () => {
 
 	return (
 		<div>
-			<button onClick={openModal}>Open Modal</button>
 			<Modal
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
