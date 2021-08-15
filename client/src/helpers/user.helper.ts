@@ -1,3 +1,4 @@
+import { WebApi } from 'typings/webapi';
 import { getProfile } from 'services/github.service';
 import { IUser } from 'typings/common/IUser';
 

@@ -2,6 +2,7 @@ import { GITHUB_CALLBACK, GithubEndpoints } from 'services/github.service';
 import { ISignUpByGithubForm } from 'typings/sign-up-form';
 import { Auth as AuthService } from './auth-services';
 import { mapUserResponseToUser } from 'helpers/user.helper';
+import { WebApi } from 'typings/webapi';
 
 export class GithubAuthService extends AuthService {
 	async loginByGithub(code: string) {

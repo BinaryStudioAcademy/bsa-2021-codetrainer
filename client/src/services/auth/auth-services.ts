@@ -6,6 +6,7 @@ import { ISignInForm } from 'typings/sign-in-form';
 import { ISignUpForm } from 'typings/sign-up-form';
 import { THttp } from '../http';
 import { AccessToken } from './access-token';
+import { WebApi } from 'typings/webapi';
 
 export class Auth {
 	private http: THttp;

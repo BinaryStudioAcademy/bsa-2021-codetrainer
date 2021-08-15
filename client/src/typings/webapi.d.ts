@@ -9,6 +9,7 @@ declare namespace WebApi.Entities {
 
 	export interface IUser {
 		id: string;
+		username: string;
 		name: string;
 		surname: string;
 		email: string;
