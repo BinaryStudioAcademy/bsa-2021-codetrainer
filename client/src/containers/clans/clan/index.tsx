@@ -1,16 +1,28 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { ClanPage } from 'components';
 import * as actions from './logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
+import { ROUTES } from 'constants/routes';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
-	const clan = useSelector((state: IRootState) => state.clan.item);
+	const currentSort = useSelector((state: IRootState) => state.clan.options.sortBY);
+	const user = useSelector((state: IRootState) => state.auth.userData.user);
+	const clan = useSelector((state: IRootState) => state.clan.data);
 
 	useEffect(() => {
-		dispatch(actions.fetchClan({ id: '5d2f8bb5-0ca5-49d5-b74b-82de834eb016' }));
+		const clanId = user?.clan?.id;
+
+		if (clanId) {
+			dispatch(actions.clearClan());
+			dispatch(actions.fetchClan({ id: clanId }));
+		} else {
+			history.push(ROUTES.Clans);
+		}
 	}, []);
 
 	const sortByRank = () => {
@@ -21,10 +33,21 @@ const Clan: React.FC = () => {
 		dispatch(actions.sortClanMemberByTime());
 	};
 
+	const leaveClan = () => {
+		dispatch(actions.leaveClan());
+		history.push(ROUTES.Clans);
+	};
+
 	return (
-		<div>
-			<ClanPage clan={clan} sortByRank={sortByRank} sortByTime={sortByTime} />
-		</div>
+		clan && (
+			<ClanPage
+				clan={clan}
+				sortByRank={sortByRank}
+				sortByTime={sortByTime}
+				leaveClan={leaveClan}
+				currentSort={currentSort}
+			/>
+		)
 	);
 };
 

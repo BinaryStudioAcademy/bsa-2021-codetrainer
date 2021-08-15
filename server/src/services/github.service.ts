@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
+import axios from 'axios';
 import { User, UserRepository } from '../data';
 import { AuthService } from './auth';
-import { IGithubProfile, mapGithubProfileToUserFields } from '../helpers';
 
 export class GithubService {
 	protected authService: AuthService;
@@ -17,14 +17,27 @@ export class GithubService {
 		this.usersRepositoryType = userRepository;
 	}
 
+	async githubAccountExists(githubId: string): Promise<boolean> {
+		try {
+			await axios.get(`https://api.github.com/user/${githubId}`);
+			return true;
+		} catch {
+			return false;
+		}
+	}
+
 	async getUserByGithubId(githubId: string): Promise<User | undefined> {
 		return this.usersRepository.getByGithubId(githubId);
 	}
 
-	async registerUserFromGithubProfile(profile: IGithubProfile) {
+	async registerFromGithub({ githubId, email, username }: { githubId: string; email: string; username: string }) {
 		const newUser: Omit<User, 'id'> = {
-			...mapGithubProfileToUserFields(profile),
-		};
+			githubId,
+			email,
+			username,
+			name: username,
+			surname: '',
+		} as User;
 		return this.authService.register(newUser);
 	}
 

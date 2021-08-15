@@ -1,16 +1,16 @@
 import React from 'react';
-import styles from './clan.module.scss';
 import { IClanProps } from '../types';
-import ClanInfo from './common/clan-info';
-import MembersList from './common/members-list';
-import MembersSortPanel from './common/members-sort-panel';
+import ClanInfo from './components/clan-info';
+import MembersList from './components/members-list';
+import MembersSortPanel from './components/members-sort-panel';
+import styles from './clan.module.scss';
 
-const ClanPage: React.FC<IClanProps> = ({ clan, sortByRank, sortByTime }) => {
+const ClanPage: React.FC<IClanProps> = ({ clan, sortByRank, sortByTime, leaveClan, currentSort }) => {
 	return (
 		<div className={styles.container}>
-			<ClanInfo clan={clan} />
+			<ClanInfo clan={clan} leaveClan={leaveClan} />
 			<section className={styles.membersSection}>
-				<MembersSortPanel sortByRank={sortByRank} sortByTime={sortByTime} />
+				<MembersSortPanel sortByRank={sortByRank} sortByTime={sortByTime} currentSort={currentSort} />
 				<MembersList members={clan.members} />
 			</section>
 		</div>

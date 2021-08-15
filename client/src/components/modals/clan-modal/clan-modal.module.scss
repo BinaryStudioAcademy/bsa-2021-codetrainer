@@ -49,3 +49,16 @@
 :local(.form span) {
 	color: #ec4179;
 }
+
+:local(.create-button) {
+	margin-top: 60px;
+}
+
+:local(.prompt button) {
+	margin-right: 10px;
+}
+
+:local(.prompt p) {
+	margin: auto 0;
+	font-size: larger;
+}
