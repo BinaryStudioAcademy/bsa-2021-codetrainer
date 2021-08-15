@@ -201,7 +201,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		},
 		onSelectTab: (tab) => setTestTab(tab),
 	};
-	//validation
 	const taskId = useSelector((state: IRootState) => state.createTask.taskId);
 	const handleSave = async () => {
 		const requestBody = {
