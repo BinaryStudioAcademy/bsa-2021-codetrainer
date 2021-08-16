@@ -31,7 +31,7 @@ const SignInPage: React.FC<ISignInPageProps> = ({ onFormSubmit, onGithubSignIn =
 			>
 				<Form className={styles.form}>
 					<Button type="button" className={ButtonClasses.red} onClick={onGithubSignIn}>
-						Sing in with GitHub
+						Sign in with GitHub
 					</Button>
 					<Separator className={styles.light}>or</Separator>
 					<Field
