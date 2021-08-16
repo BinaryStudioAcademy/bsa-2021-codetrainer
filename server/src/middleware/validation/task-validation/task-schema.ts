@@ -1,4 +1,5 @@
 import { checkSchema } from 'express-validator';
+import { tagsValidation } from './task-tags-validation';
 
 export const taskSchema = checkSchema({
 	name: {
@@ -34,8 +35,7 @@ export const taskSchema = checkSchema({
 	},
 	tags: {
 		in: 'body',
-		errorMessage: 'Wrong tags format',
-		optional: true,
+		...tagsValidation,
 	},
 	allowContributors: {
 		in: 'body',
