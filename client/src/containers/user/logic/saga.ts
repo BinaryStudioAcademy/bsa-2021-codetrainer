@@ -1,4 +1,6 @@
 import { authServices } from 'services';
+import { updateUser } from 'services/settings.service';
+
 import { all, put, takeEvery, call } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
@@ -20,6 +22,21 @@ function* fetchUserLogout() {
 	yield put(signUpActions.signUpDataClear());
 }
 
+function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
+	
+
+	try {
+		const { id, user } = action;
+		console.log({action});
+		yield call(updateUser, {id, body:user});
+		yield put(actions.setUser({ user }));
+	} catch (error) {
+		console.log(error);
+	}
+
+	
+}
+
 function* watchCheckToken() {
 	yield takeEvery(actionTypes.USER_CHECK_TOKEN, fetchCheckToken);
 }
@@ -27,7 +44,10 @@ function* watchCheckToken() {
 export function* watchLogout() {
 	yield takeEvery(actionTypes.USER_LOGOUT, fetchUserLogout);
 }
+function* watchUserUpdate() {
+	yield takeEvery(actionTypes.UPDATE_USER, fetchUserUpdate);
+}
 
 export default function* UserSaga() {
-	yield all([watchCheckToken(), watchLogout()]);
+	yield all([watchCheckToken(), watchLogout(), watchUserUpdate()]);
 }

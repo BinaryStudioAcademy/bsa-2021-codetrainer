@@ -1,4 +1,4 @@
-import { ApiPath, AuthApiPath, GithubApiPath } from '../../enum';
+import { ApiPath, AuthApiPath, GithubApiPath, UsersApiPath } from '../../enum';
 
 export const WHITE_ROUTES = [
 	`${ApiPath.AUTH}${AuthApiPath.LOGIN}`,

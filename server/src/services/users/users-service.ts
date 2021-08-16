@@ -1,7 +1,7 @@
 import Express from 'express';
 import { getCustomRepository } from 'typeorm';
 import { TUserRepository } from '../../data';
-import { IUserFields } from '../../types/user/user-fields';
+import { User as UserType } from '../../data/models';
 
 export class User {
 	protected userRepository: TUserRepository;
@@ -26,7 +26,7 @@ export class User {
 		};
 	}
 
-	async update(id: string, body: IUserFields) {
+	async update(id: string, body: UserType) {
 		const repository = getCustomRepository(this.userRepository);
 
 		return {
