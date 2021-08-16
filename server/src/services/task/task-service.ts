@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { Task, User, TTaskRepository, TUserRepository, TTagRepository, TaskSorts } from '../../data';
-import { TASKS_ON_PAGE, TASK_STATUS } from '../../common';
+import { TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
