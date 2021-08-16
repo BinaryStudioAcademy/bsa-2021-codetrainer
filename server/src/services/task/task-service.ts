@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import { Task, User, TTaskRepository, TUserRepository, TTagRepository, TaskSorts } from '../../data';
-import { TASKS_ON_PAGE, TASK_STATUS } from '../../common';
+import { Task, User, TTaskRepository, TUserRepository, TTagRepository } from '../../data';
+import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -63,7 +63,7 @@ export class TaskService {
 	async search(
 		queryFilter: {
 			query?: string;
-			sort?: TaskSorts;
+			sort?: TASK_ORDER_BY;
 			status?: string;
 			progress?: string;
 			rank?: number;
