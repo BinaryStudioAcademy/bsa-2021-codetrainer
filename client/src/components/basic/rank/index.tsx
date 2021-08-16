@@ -6,7 +6,7 @@ import { mapRankToStyle } from './helpers';
 type TRankProps = { rank: number; honor?: never } | { rank?: never; honor: number };
 
 const Rank: FC<TRankProps> = (props) => (
-	<span className={clsx(styles.rank, mapRankToStyle(props.rank))}>
+	<span className={clsx(styles.rank, mapRankToStyle({ rank: props.rank }))}>
 		{props.rank !== undefined ? `${props.rank} rank` : props.honor}
 	</span>
 );

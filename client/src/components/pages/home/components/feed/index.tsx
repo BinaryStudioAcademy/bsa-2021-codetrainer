@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from '@blueprintjs/core';
 import styles from './feed.module.scss';
 import FeedMessage from '../feed-message';
 import { Button } from 'components/basic';
@@ -18,9 +17,9 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 		};
 
 		return (
-			<Text key={category} tagName="h4" className={className} onClick={handleSelectFeedCategory}>
+			<h4 key={category} className={className} onClick={handleSelectFeedCategory}>
 				{category}
-			</Text>
+			</h4>
 		);
 	});
 
@@ -40,9 +39,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 		<div className={styles.feed}>
 			<div>
 				<div className={styles.feedHeader}>
-					<Text tagName="h4" className={styles.title}>
-						Feed
-					</Text>
+					<h4 className={styles.title}>Feed</h4>
 					<span className={styles.separator}></span>
 					{feedCategoriesJSX}
 				</div>

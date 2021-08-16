@@ -13,6 +13,7 @@ import {
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 import { Task } from '../task';
+import { Solution } from '../solution';
 
 @Entity()
 export class User extends BaseEntity {
@@ -33,9 +34,6 @@ export class User extends BaseEntity {
 
 	@Column({ type: 'varchar', length: 500, default: '' })
 	avatar?: string;
-
-	@CreateDateColumn({ type: 'timestamptz' })
-	createdAt!: Date;
 
 	@Column({ type: 'timestamptz', nullable: true })
 	lastVisit?: Date;
@@ -81,9 +79,13 @@ export class User extends BaseEntity {
 	@JoinColumn()
 	tasks!: Task[];
 
-	@Column({ nullable: true })
+	@OneToMany(() => Solution, (solution) => solution.user)
+	@JoinColumn()
+	solutions!: Solution[];
+
+	@Column({ type: 'varchar', length: 100, nullable: true })
 	profileUrl?: string;
 
-	@Column({ unique: true, nullable: true })
+	@Column({ type: 'varchar', length: 100, unique: true, nullable: true })
 	githubId?: string;
 }

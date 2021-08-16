@@ -1,53 +1,54 @@
-import { fetchClans, joinClan, leaveClan } from 'services/clans.service';
+import { fetchClans, toggleClanMember } from 'services/clans.service';
 import { all, put, call, select, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
+import * as userActions from '../../../user/logic/actions';
 import * as actions from './actions';
 import { IRootState } from 'typings/root-state';
 
 export function* fetchClansWorker(action: ReturnType<typeof actions.fetchClans>): any {
+	yield put(actions.startLoading());
+
 	const options = yield select((state: IRootState) => state.clans.options);
-	const clans = yield call(fetchClans, options);
-	yield put(actions.addClans({ clans }));
+	const response = yield call(fetchClans, options);
+
+	if (response instanceof Error) {
+		yield put(actions.addError({ error: response.message }));
+	} else {
+		yield put(actions.addClans({ clans: response }));
+	}
+
+	yield put(actions.endLoading());
 }
 
 export function* fetchClansWatcher() {
 	yield takeEvery(actionTypes.FETCH_CLANS, fetchClansWorker);
 }
 
-export function* joinClanWorker(action: ReturnType<typeof actions.joinClan>): any {
-	const { clanId } = action;
+export function* toggleMemberWorker({ id }: ReturnType<typeof actions.joinClan>): any {
+	yield put(actions.startLoading());
 
-	try {
-		const updatedClan = yield call(joinClan, clanId);
+	const response = yield call(toggleClanMember, id);
+
+	if (response instanceof Error) {
+		yield put(actions.addError({ error: response.message }));
+	} else {
+		yield put(userActions.setUser({ user: response.user }));
 		yield put(
 			actions.updateClan({
-				clan: updatedClan,
+				id: response.clan.id,
+				clan: response.clan,
 			}),
 		);
-	} catch (error) {}
+	}
+
+	yield put(actions.endLoading());
 }
 
-export function* joinClanWatcher() {
-	yield takeEvery(actionTypes.JOIN_CLAN, joinClanWorker);
-}
-
-export function* leaveClanWorker(action: ReturnType<typeof actions.joinClan>): any {
-	const { clanId } = action;
-
-	try {
-		const updatedClan = yield call(leaveClan, clanId);
-		yield put(
-			actions.updateClan({
-				clan: updatedClan,
-			}),
-		);
-	} catch (error) {}
-}
-
-export function* leaveClanWatcher() {
-	yield takeEvery(actionTypes.LEAVE_CLAN, leaveClanWorker);
+export function* toggleMemberWatcher() {
+	yield takeEvery(actionTypes.LEAVE_CLAN, toggleMemberWorker);
+	yield takeEvery(actionTypes.JOIN_CLAN, toggleMemberWorker);
 }
 
 export default function* clansSaga() {
-	yield all([fetchClansWatcher(), joinClanWatcher(), leaveClanWatcher()]);
+	yield all([fetchClansWatcher(), toggleMemberWatcher()]);
 }

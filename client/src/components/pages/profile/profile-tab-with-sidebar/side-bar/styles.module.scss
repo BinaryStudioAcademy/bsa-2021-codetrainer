@@ -11,6 +11,9 @@
 		border-bottom: 1px solid transparent;
 		background-color: inherit;
 	}
+	.active {
+		cursor: default;
+	}
 	.active,
 	.item:hover {
 		color: #705ff5;
