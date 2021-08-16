@@ -26,11 +26,6 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 		} else {
 			tagsState.delete(data.name);
 		}
-
-		// const tags = filter.tags.replace(data.name, '').split(',');
-		console.log('tags => ', tagsState);
-		// console.log('tags => 1', data.checked ? [...tags, data.name].join(',') : tags);
-		// console.log('tags => 1', [...tags, data.name].join(','));
 		onChange({ tags: tagsState });
 	};
 
