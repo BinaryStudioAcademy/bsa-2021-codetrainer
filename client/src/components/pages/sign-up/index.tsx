@@ -49,6 +49,8 @@ interface ISignUnPageProps {
 const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, github, error }) => {
 	return (
 		<CoverLayout className={styles.signUp}>
+			<h4 className={styles.header}>SignUp</h4>
+			{!!error && <div className={styles.error}>{error}</div>}
 			<Formik
 				initialValues={{
 					email: github?.email || '',
@@ -64,8 +66,6 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, 
 				}}
 			>
 				<Form className={styles.form}>
-					<h4 className={styles.header}>SignUp</h4>
-					{!!error && <div className={styles.error}>{error}</div>}
 					{github ? (
 						<div className={styles.info}>
 							Linked to{' '}
