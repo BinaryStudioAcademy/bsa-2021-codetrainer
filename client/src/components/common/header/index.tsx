@@ -4,6 +4,7 @@ import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { Rank } from 'components/basic';
 
 export interface IHeaderProps {
 	name: string;
@@ -83,7 +84,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
 				{isListVisible && <div className={styles.navigation}>{renderList(props.listItems)}</div>}
 			</div>
-			<Label label={props.rank + ' rank'} color="#EC4179" />
+			<Rank rank={props.rank} />
 			<Label label={props.mark} color="#EC4179" />
 		</div>
 	);
