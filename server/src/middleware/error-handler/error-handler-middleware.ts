@@ -5,6 +5,7 @@ export const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, next
 	if (res.headersSent) {
 		next(err);
 	} else {
+		console.log('err => ', err);
 		const { status = HttpCodes.INTERNAL_SERVER_ERROR, message = '' } = err;
 		res.status(status).send({ message });
 	}

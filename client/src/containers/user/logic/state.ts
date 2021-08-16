@@ -1,4 +1,4 @@
-import { WebApi } from 'typings/webapi';
+import { IUser } from 'typings/common/IUser';
 
 export enum UserAccessToken {
 	LOADING = 'loading',
@@ -6,7 +6,7 @@ export enum UserAccessToken {
 }
 
 export interface IUserDataState {
-	user: WebApi.Entities.IUser | null;
+	user: IUser | null;
 	accessToken: UserAccessToken;
 }
 

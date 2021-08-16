@@ -1,6 +1,6 @@
 export enum TASK_STATUS {
-	READY = 'ready',
-	EDITABLE = 'editable',
+	APPROVED = 'approved',
+	BETA = 'beta',
 }
 
 export const TASK_DIFFICULTY_DEFAULT = 1;

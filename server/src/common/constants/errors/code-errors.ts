@@ -11,6 +11,16 @@ export const CODE_ERRORS = {
 	TOKEN_VERIFY: { message: 'Token verify error', status: 401 },
 	TOKEN_EXPIRED: { message: 'Token expired', status: 401 },
 	TOKEN_INVALID: { message: 'Invalid token', status: 401 },
-	EMAIL_NOT_EXIST: (email: string) => ({ message: `User with email: ${email}, not exist!`, status: 401 }),
-	USER_NOT_EXIST: { message: `User not exist!`, status: 401 },
+	TASK_QUERY: (value: string) => ({ message: `Invalid ${value} format`, status: HttpCodes.BAD_REQUEST }),
+	TAG_NAME_EXIT: (name: string) => ({
+		message: `Tag name: ${name} is already taken.`,
+		status: HttpCodes.BAD_REQUEST,
+	}),
+	EMAIL_NOT_EXIST: (email: string) => ({
+		message: `User with email: ${email}, not exist!`,
+		status: HttpCodes.NOT_FOUND,
+	}),
+	USER_NOT_EXIST: { message: `User not exist!`, status: HttpCodes.NOT_FOUND },
+	NOT_USER_SOLUTION: { message: "not this user's solution", status: HttpCodes.BAD_REQUEST },
+	SOLUTION_STATUS_WRONG: { message: 'solution status wrong', status: HttpCodes.BAD_REQUEST },
 };

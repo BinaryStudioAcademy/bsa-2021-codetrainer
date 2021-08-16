@@ -4,6 +4,12 @@ h4 {
 	font: $fourth-title-font;
 }
 
+.error {
+	color: $french-rose;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
 a {
 	font-family: $base-font;
 	font-size: 14px;
@@ -30,11 +36,6 @@ a {
 		}
 		.light {
 			color: #e5e5e5;
-		}
-		.error {
-			color: $french-rose;
-			margin-top: -20px;
-			margin-bottom: 5px;
 		}
 	}
 

@@ -16,8 +16,8 @@ export function* fetchCheckToken() {
 function* fetchUserLogout() {
 	yield call([authServices, authServices.logout]);
 	yield put(actions.setUser({ user: null }));
-	yield put(signInActions.signInDataClear())
-	yield put(signUpActions.signUpDataClear())
+	yield put(signInActions.signInDataClear());
+	yield put(signUpActions.signUpDataClear());
 }
 
 function* watchCheckToken() {

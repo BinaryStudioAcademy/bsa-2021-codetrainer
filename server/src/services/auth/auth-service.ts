@@ -11,6 +11,16 @@ export class AuthService {
 		this.userRepository = user;
 	}
 
+	async isEmailAvaliable(email: string): Promise<boolean> {
+		const repository = getCustomRepository(this.userRepository);
+		return !(await repository.exists({ email }));
+	}
+
+	async isUsernameAvaliable(username: string): Promise<boolean> {
+		const repository = getCustomRepository(this.userRepository);
+		return !(await repository.exists({ username }));
+	}
+
 	async login({ id }: { id: string }) {
 		const repository = getCustomRepository(this.userRepository);
 		return {

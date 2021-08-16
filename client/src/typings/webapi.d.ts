@@ -9,11 +9,16 @@ declare namespace WebApi.Entities {
 
 	export interface IUser {
 		id: string;
+		username: string;
 		name: string;
 		surname: string;
 		email: string;
 		clan?: IClan;
+		rank: number;
+		honor: number;
 		profileClan?: string;
+		githubId?: string;
+		profileUrl?: string;
 	}
 
 	export interface IMember {

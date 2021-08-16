@@ -8,8 +8,10 @@ import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
 import { ChangeTheme } from 'components/basic/change-theme';
 
-interface IButtonsBlockProps {}
-export const ButtonsBlock = (props: IButtonsBlockProps) => {
+interface IButtonsBlockProps {
+	handlePreviewClick: () => void;
+}
+export const ButtonsBlock = ({ handlePreviewClick }: IButtonsBlockProps) => {
 	const [goToActiveValue, setGoToActiveValue] = useState({
 		id: 1,
 		title: 'Go to',
@@ -21,7 +23,9 @@ export const ButtonsBlock = (props: IButtonsBlockProps) => {
 	return (
 		<>
 			<div className={styles.buttonsBlock}>
-				<Button className={clsx(ButtonClasses.red, styles.button)}>Preview</Button>
+				<Button className={clsx(ButtonClasses.red, styles.button)} onClick={handlePreviewClick}>
+					Preview
+				</Button>
 				<div className="select">
 					<label>Go to</label>
 					<Select
