@@ -1,9 +1,6 @@
 .container {
 	padding: 20px;
-	display: grid;
-	grid-template-columns: 270px 1fr;
-	grid-template-rows: 100px calc(100vh - 100px);
-	grid-template-areas: 'searchPanel challengesList';
+	display: flex;
 }
 
 .searchPanel {
