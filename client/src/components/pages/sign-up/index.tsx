@@ -76,7 +76,7 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, 
 					) : (
 						<>
 							<Button type="button" className={ButtonClasses.red} onClick={onGithubSignUp}>
-								Sing up with GitHub
+								Sign up with GitHub
 							</Button>
 							<Separator className={styles.light}>or</Separator>
 						</>
