@@ -1,20 +1,12 @@
-import {
-	Entity,
-	PrimaryGeneratedColumn,
-	Column,
-	BaseEntity,
-	CreateDateColumn,
-	UpdateDateColumn,
-	ManyToOne,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
+import { AbstractEntity } from '../abstract';
+import { Solution } from '../solution';
+import { Tag } from '../tag';
 import { User } from '../user';
 
 @Entity()
-export class Task extends BaseEntity {
-	@PrimaryGeneratedColumn('uuid')
-	id!: string;
-
+export class Task extends AbstractEntity {
 	@Column({ type: 'varchar', length: 250, default: '' })
 	name!: string;
 
@@ -23,14 +15,14 @@ export class Task extends BaseEntity {
 
 	// @Column({ type: 'int' })
 	// languageId?: number;
-	
+
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	rank?: number;
 
 	@Column({ type: 'text', default: '' })
 	tags?: string;
 
-	@Column({ type: 'bool', default: false, width:1 })
+	@Column({ type: 'bool', default: false, width: 1 })
 	allowContributors?: boolean;
 
 	@Column({ type: 'text', default: '' })
@@ -57,12 +49,13 @@ export class Task extends BaseEntity {
 	@Column({ type: 'boolean', default: false })
 	isPublished!: boolean;
 
-	@CreateDateColumn()
-	createdAt!: Date;
-
-	@UpdateDateColumn()
-	updatedAt!: Date;
-
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
+
+	@OneToMany(() => Solution, (solution) => solution.task)
+	solutions!: Solution[];
+
+	@ManyToMany(() => Tag, (tag) => tag.tasks)
+	@JoinTable()
+	tags!: Tag[];
 }

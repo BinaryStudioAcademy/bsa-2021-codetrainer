@@ -1,30 +1,29 @@
 import { TaskTabTypes } from 'common';
 import { Button, CreateTabs, ICreateTabsProps } from 'components';
 import React, { useState } from 'react';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import { CreateSettings } from './create-task-settings';
 import styles from './create-task.module.scss';
 import { ButtonsBlock } from 'components/pages';
-import './create-task.scss';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 import { Discipline, IDisciplineItem } from './logic/models';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from './mock';
 import { findDisciplineItem } from './create-task-settings/create-task-settings';
 import { ISelectValue } from 'components/basic/select/interface';
-import { NotificationContainer } from 'containers/notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationType } from 'containers/notification/logic/models';
-import { http } from 'services';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
+import { createTask, deleteTask, updateTask } from 'services/create-task.service';
 
 export interface ICreateTaskProps {}
 
 const CodeTabs = {
 	COMPLETE_SOLUTION: 0,
 	INITIAL_SOLUTION: 1,
-	PRELOADED: 2,
+	preloader: 2,
 };
 
 const TestTabs = {
@@ -52,7 +51,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		setDiscipline(foundDisciplineItem);
 	};
 	const [language, setLanguage] = useState<ISelectValue>(SELECT_PROPS.values[0]);
-	const [rank, setRank] = useState('8');
+	const [rank, setRank] = useState('');
 	const [tags, setTags] = useState('');
 	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
 	const onSwitchClick = (newSwitchState: boolean) => {
@@ -77,7 +76,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 					title: 'Preview',
 					toolTipTitle: 'Look how your description looks',
 					icon: {
-						name: 'help',
+						name: faInfo,
 					},
 				},
 				type: TaskTabTypes.MARKDOWN,
@@ -100,7 +99,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const [codeTab, setCodeTab] = useState(0);
 	const [completeSolution, setCompleteSolution] = useState('');
 	const [initialSolution, setInitialSolution] = useState('');
-	const [preloaded, setPreloaded] = useState('');
+	const [preloader, setPreloader] = useState('');
 	const tabsCode: ICreateTabsProps = {
 		selectedTab: codeTab,
 		tabs: [
@@ -122,11 +121,11 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			},
 			{
 				header: {
-					title: 'Preloaded',
+					title: 'preloader',
 				},
 				type: TaskTabTypes.CODE,
 				editable: true,
-				text: preloaded,
+				text: preloader,
 			},
 			{
 				header: {
@@ -147,8 +146,8 @@ This allows you to setup code that can be used by the warrior's solution, but no
 				case CodeTabs.INITIAL_SOLUTION:
 					setInitialSolution(text);
 					break;
-				case CodeTabs.PRELOADED:
-					setPreloaded(text);
+				case CodeTabs.preloader:
+					setPreloader(text);
 					break;
 			}
 		},
@@ -200,97 +199,63 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		},
 		onSelectTab: (tab) => setTestTab(tab),
 	};
-	//validation
 	const taskId = useSelector((state: IRootState) => state.createTask.taskId);
-	let validationStatus = true; //true is okay ,false if there are mistakes
 	const handleSave = async () => {
-		validationStatus = true;
-		if (taskName.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Task name can`t be empty.');
-		} else if (rank.trim().length > 1 || Number(rank.trim()) > 8 || Number(rank.trim()) < 1) {
-			validationStatus = false;
-			createErrorMessage('Rank must be a number from 1 to 8.');
-		} else if (!Object.values(Discipline).includes(chosenDiscipline.value)) {
-			validationStatus = false;
-			createErrorMessage('You`ve chosen wronk discipline.');
-		} else if (textDescription.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Description can`t be empty.');
-		} else if (completeSolution.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Complete Solution can`t be empty.');
-		} else if (initialSolution.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Initial Solution can`t be empty.');
-		} else if (testCases.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Test Cases tab can`t be empty.');
-		} else if (exampleTestCases.trim() === '') {
-			validationStatus = false;
-			createErrorMessage('Example Test Cases tab can`t be empty.');
-		}
-		if (validationStatus) {
-			const requestBody = {
-				name: taskName,
-				discipline: chosenDiscipline.value as string,
-				// languageId: language.id.toString(),
-				rank: Number(rank),
-				allowContributors: isSelectedSwitch,
-				tags: tags.trim(),
-				description: textDescription,
-				completeSolution,
-				initialSolution,
-				testCases,
-				exampleTestCases,
-			};
-			let result;
-			console.log(requestBody);
-
-			if (!taskId) {
-				result = await http.callWebApi({
-					endpoint: 'tasks',
-					method: 'POST',
-					skipAuthorization: false,
-					body: requestBody,
-				});
-			} else {
-				result = await http.callWebApi({
-					endpoint: 'tasks/' + taskId,
-					method: 'PUT',
-					skipAuthorization: false,
-					body: requestBody,
-				});
-			}
+		const requestBody = {
+			name: taskName,
+			discipline: chosenDiscipline.value as string,
+			// languageId: language.id.toString(),
+			rank: Number(rank),
+			allowContributors: isSelectedSwitch,
+			tags: tags.trim(),
+			description: textDescription,
+			completeSolution,
+			initialSolution,
+			testCases,
+			exampleTestCases,
+			preloader,
+		};
+		let result;
+		if (!taskId) {
+			result = await createTask(requestBody);
 			console.log(result);
-
-			if (result) {
-				dispatch(setTask({ taskId: result.id }));
-				dispatch(
-					setNotificationState({
-						state: {
-							message: `Task ${taskName} is ${taskId ? 'updated' : 'saved'}`,
-							notificationType: NotificationType.Success,
-						},
-					}),
-				);
-				return result.id;
-			}
-			return null;
+		} else {
+			result = await updateTask(requestBody, taskId);
+		}
+		if (result.error) {
+			createErrorMessage(result.message);
+		} else if (!result.error) {
+			dispatch(setTask({ taskId: result.id }));
+			dispatch(
+				setNotificationState({
+					state: {
+						message: `Task ${taskName} is ${taskId ? 'updated' : 'saved'}`,
+						notificationType: NotificationType.Success,
+					},
+				}),
+			);
+			return result.id;
 		}
 		return null;
 	};
 	const handleReset = () => {
+		if (taskId) {
+			createErrorMessage('You can`t reset the saved task. Instead create a new one.');
+			return;
+		}
+		resetAllFields();
+	};
+	const resetAllFields = () => {
 		setTaskName('');
 		setDiscipline(DISCIPLINE_ITEMS[0]);
 		setLanguage(SELECT_PROPS.values[0]);
-		setRank('8');
+		setRank('');
 		setSelectedSwitch(false);
 		setTags('');
 		setTextDescription('');
 		setCompleteSolution('');
 		setInitialSolution('');
-		setPreloaded('');
+		setPreloader('');
 		setTestCases('');
 		setExampleTestCases('');
 	};
@@ -298,22 +263,20 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		if (!taskId) {
 			createErrorMessage('You haven`t saved this task yet.');
 		} else {
-			const result = await http.callWebApi({
-				endpoint: 'tasks/' + taskId,
-				method: 'DELETE',
-				skipAuthorization: false,
-			});
+			const result = await deleteTask(taskId);
 			console.log(result);
-			if (result) {
+			if (result.error) {
+				createErrorMessage('Something went wrong.');
+			} else if (!result.error) {
 				dispatch(
 					setNotificationState({
 						state: {
-							message: `Task ${result.name} is deleted.`,
+							message: `Task is deleted.`,
 							notificationType: NotificationType.Success,
 						},
 					}),
 				);
-				handleReset();
+				resetAllFields();
 				dispatch(setTask({ taskId: null }));
 			}
 		}
@@ -327,15 +290,22 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			const result = await handleValidateSolution();
 			if (result) {
 				const requestBody = {
+					name: taskName,
+					discipline: chosenDiscipline.value as string,
+					// languageId: language.id.toString(),
+					rank: Number(rank),
+					allowContributors: isSelectedSwitch,
+					tags: tags.trim(),
+					description: textDescription,
+					completeSolution,
+					initialSolution,
+					testCases,
+					exampleTestCases,
 					isPublished: true,
+					preloader,
 				};
-				const requestResult = await http.callWebApi({
-					endpoint: 'tasks/' + thisTaskId,
-					method: 'PUT',
-					skipAuthorization: false,
-					body: requestBody,
-				});
-				if (requestResult) {
+				const requestResult = await updateTask(requestBody, thisTaskId);
+				if (!requestResult.error) {
 					dispatch(
 						setNotificationState({
 							state: {
@@ -373,7 +343,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 function twoOldestAges(ages){
 				
 }`);
-		setPreloaded('');
+		setPreloader('');
 		setTestCases(`const chai = require("chai");
 const assert = chai.assert;
 chai.config.truncateThreshold = 0;
@@ -391,7 +361,6 @@ describe("twoOldestAges", function() {
 	};
 	return (
 		<>
-			<NotificationContainer />
 			<div className={styles.createTaskBlock}>
 				<CreateSettings
 					chosenDiscipline={chosenDiscipline}
@@ -408,7 +377,7 @@ describe("twoOldestAges", function() {
 					setTags={setTags}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
-					<ButtonsBlock />
+					<ButtonsBlock handlePreviewClick={() => setInstructionTab(1)} />
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>

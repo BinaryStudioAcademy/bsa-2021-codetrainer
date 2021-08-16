@@ -11,6 +11,12 @@ $hard: #419aec;
 	color: $color;
 }
 
+@mixin active-rank-color($color) {
+	border-color: $color;
+	color: #ffffff;
+	background-color: $color;
+}
+
 .rank {
 	display: inline-block;
 	width: 50px;
@@ -42,6 +48,19 @@ $hard: #419aec;
 		font-family: Inter, sans-serif;
 		font-size: 14px;
 	}
+	&.active_easy {
+		@include active-rank-color(($easy));
+	}
+	&.active_medium {
+		@include active-rank-color(($medium));
+	}
+	&.active_hard {
+		@include active-rank-color(($hard));
+	}
+}
+
+.rank__clickable {
+	cursor: pointer;
 }
 
 label:checked .rank {

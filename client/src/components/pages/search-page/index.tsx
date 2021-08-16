@@ -1,33 +1,42 @@
 import React from 'react';
-import SearchTask from './search-task';
+import { SearchTask } from './search-task';
 import styles from './search-page.module.scss';
 import ChallengesList from './challenges-list';
 import { IChallenge } from 'components/common/challenge/types';
+import { ISearchState } from 'containers/search-page/logic/state';
 
 export interface ISearchPageProps {
-	ranks: number[];
-	tags: ITag[];
-	challenges: IChallenge[];
+	data: {
+		ranks: number[];
+		tags: {
+			name: string;
+			numberOfTasks: number;
+		}[];
+		challenges: IChallenge[];
+	};
+	filter: ISearchState['filter'];
+	onChange: (filter: Record<string, any>) => void;
+	onSubmit: () => void;
 }
 
-export interface ITag {
-	tagName: string;
-	numberOfTasks: number;
-}
-
-const SearchPage = ({ ranks, tags, challenges }: ISearchPageProps) => {
+const SearchPage: React.FC<ISearchPageProps> = (props) => {
+	const { data, filter, onChange, onSubmit } = props;
 	return (
 		<div className={styles.container}>
 			<div className={styles.searchPanel}>
 				<SearchTask
-					ranks={ranks}
-					tags={tags.map((tag) => {
-						return tag.tagName + '(' + tag.numberOfTasks.toString() + ')';
-					})}
+					ranks={data.ranks}
+					tags={data.tags.map((tag) => ({
+						label: tag.name + '(' + tag.numberOfTasks.toString() + ')',
+						name: tag.name,
+					}))}
+					filter={filter}
+					onSubmit={onSubmit}
+					onChange={onChange}
 				/>
 			</div>
 			<div className={styles.challengesList}>
-				<ChallengesList challenges={challenges} />
+				<ChallengesList challenges={data.challenges} />
 			</div>
 		</div>
 	);

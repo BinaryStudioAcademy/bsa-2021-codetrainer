@@ -1,73 +1,45 @@
-import React from 'react';
-import { SearchPage as SearchPageComponent } from 'components';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { FullscreenLoader, SearchPage as SearchPageComponent } from 'components';
 import { ISearchPageProps } from 'components/pages/search-page';
+import { useAppSelector } from 'hooks/useAppSelector';
+import * as actions from './logic/actions';
+import { mapFilterToSearch, mapSearchData } from './mapSearchData';
 
-export const SearchPage = () => {
+export const SearchPage: React.FC = () => {
+	const { isLoading, search, filter, onSubmit } = useAppSelector((state) => state.search);
+	const [searchData, setSearchData] = useState<ISearchPageProps['data']>(mapSearchData(search));
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setSearchData(mapSearchData(search));
+	}, [search]);
+
+	useEffect(() => {
+		if (!onSubmit) {
+			return;
+		}
+		dispatch(
+			actions.searchFetchData({
+				partialFilter: mapFilterToSearch(filter),
+			}),
+		);
+	}, [onSubmit]);
+
+	const handleChange = (partialFilter: Record<string, any>) => {
+		dispatch(actions.searchChangeFilter({ partialFilter }));
+	};
+
+	const handleSubmit = () => {
+		dispatch(actions.searchSetSubmit({ payload: true }));
+	};
+
+	if (isLoading) {
+		return <FullscreenLoader />;
+	}
 	return (
 		<>
-			<SearchPageComponent {...searchPageProps} />
+			<SearchPageComponent data={searchData} filter={filter} onChange={handleChange} onSubmit={handleSubmit} />
 		</>
 	);
-};
-
-const searchPageProps: ISearchPageProps = {
-	ranks: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-	tags: [
-		{
-			tagName: 'Fundamentals',
-			numberOfTasks: 350,
-		},
-		{
-			tagName: 'Rank Up',
-			numberOfTasks: 45,
-		},
-		{
-			tagName: 'Practice and Repeat',
-			numberOfTasks: 68,
-		},
-		{
-			tagName: 'Beta',
-			numberOfTasks: 108,
-		},
-		{
-			tagName: 'Random',
-			numberOfTasks: 52,
-		},
-		{
-			tagName: 'Fundamentals',
-			numberOfTasks: 350,
-		},
-		{
-			tagName: 'Rank Up',
-			numberOfTasks: 45,
-		},
-		{
-			tagName: 'Practice and Repeat',
-			numberOfTasks: 68,
-		},
-		{
-			tagName: 'Beta',
-			numberOfTasks: 108,
-		},
-		{
-			tagName: 'Random',
-			numberOfTasks: 52,
-		},
-	],
-	challenges: [{
-		id: '1',
-		linkToAuthor: '/',
-		author: {
-			firstName: 'A',
-			lastName: 'B',
-			link: '/',
-		},
-		stats: {
-			favoriteSaves: 12,
-			positiveFeedback: 12,
-		},
-		title: 'Title',
-		rank: 2,
-		tags: ['Tag 1', 'Tag 2'],
-	}],
 };

@@ -9,6 +9,7 @@
 	background-color: rgba(#705ff5, 0.9);
 	backdrop-filter: blur(2px);
 	display: flex;
+	z-index: 1100;
 }
 
 :local(.loader) {
