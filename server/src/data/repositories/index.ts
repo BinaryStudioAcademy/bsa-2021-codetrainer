@@ -23,5 +23,4 @@ export { FollowerRepository, TFollowerRepository };
 export { imagesRepository, ImagesRepository };
 export { TaskRepository, TTaskRepository };
 export { TagRepository, TTagRepository };
-export { TaskSorts } from './task/task-repository';
 export { SolutionRepository, TSolutionRepository };
