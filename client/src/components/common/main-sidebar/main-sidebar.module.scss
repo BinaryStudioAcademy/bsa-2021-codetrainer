@@ -3,13 +3,13 @@
 .mainSidebar {
 	padding: 38px 40px;
 	background: $cornflower-blue;
-	margin-top: -110px;
 	width: 245px;
 	min-height: 100vh;
 	height: 100%;
 	position: fixed;
 	z-index: 10;
 	justify-self: flex-start;
+	box-sizing: border-box;
 }
 
 .logotype {
