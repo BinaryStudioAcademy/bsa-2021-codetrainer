@@ -1,5 +1,5 @@
 import { authServices } from 'services';
-import { updateUser } from 'services/settings.service';
+import { updateUser, deleteUser } from 'services/settings.service';
 
 import { all, put, takeEvery, call } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
@@ -23,18 +23,31 @@ function* fetchUserLogout() {
 }
 
 function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
-	
-
 	try {
 		const { id, user } = action;
-		console.log({action});
-		yield call(updateUser, {id, body:user});
+		console.log({ action });
+		yield call(updateUser, { id, body: user });
 		yield put(actions.setUser({ user }));
 	} catch (error) {
 		console.log(error);
 	}
+}
 
-	
+function* fetchUserDelete(action: ReturnType<typeof actions.deleteUser>): any {
+	try {
+		const { id } = action;
+		console.log(action);
+		console.log(id);
+		//yield call(deleteUser, id);
+
+		yield all([authServices, authServices.logout, deleteUser(id)]);
+		// yield call(deleteUser, id);
+		yield put(actions.setUser({ user: null }));
+		yield put(signInActions.signInDataClear());
+		yield put(signUpActions.signUpDataClear());
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 function* watchCheckToken() {
@@ -44,10 +57,15 @@ function* watchCheckToken() {
 export function* watchLogout() {
 	yield takeEvery(actionTypes.USER_LOGOUT, fetchUserLogout);
 }
+
 function* watchUserUpdate() {
 	yield takeEvery(actionTypes.UPDATE_USER, fetchUserUpdate);
 }
 
+function* watchUserDelete() {
+	yield takeEvery(actionTypes.DELETE_USER, fetchUserDelete);
+}
+
 export default function* UserSaga() {
-	yield all([watchCheckToken(), watchLogout(), watchUserUpdate()]);
+	yield all([watchCheckToken(), watchLogout(), watchUserUpdate(), watchUserDelete()]);
 }

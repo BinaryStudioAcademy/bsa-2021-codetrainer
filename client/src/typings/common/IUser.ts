@@ -11,4 +11,8 @@ export interface IUser {
 	clan?: WebApi.Entities.IClan;
 	profileUrl?: string;
 	github?: IGithubProfile;
+	email?: string;
+	skills?: Array<string>;
+	devLevel?: string;
+	social?: Array<string>;
 }

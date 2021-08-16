@@ -29,7 +29,6 @@ const FormInput: React.FC<IFormInputProps> = ({
 	const isTouched = getIn(touched, name);
 	const [type, setType] = useState(initialType);
 	const isPasswordField = initialType === 'password';
-	console.log(label, readonly);
 	const togglePasswordVisibility = () => {
 		const newType = type === 'password' ? 'text' : 'password';
 		setType(newType);

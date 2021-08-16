@@ -5,4 +5,5 @@ export interface ISettingProps {
 	information: IInformationProps;
 	social: ISocialProps;
 	avatar?: string;
+	onDelete: () => void;
 }

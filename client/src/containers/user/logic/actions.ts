@@ -3,6 +3,7 @@ import * as actionTypes from './action-types';
 
 export const setUser = createAction<actionTypes.TSetUser>(actionTypes.SET_USER);
 export const updateUser = createAction<actionTypes.TSetUser>(actionTypes.UPDATE_USER);
+export const deleteUser = createAction<actionTypes.TDeleteUser>(actionTypes.DELETE_USER);
 
 export const checkRefreshToken = createAction(actionTypes.USER_CHECK_TOKEN);
 
