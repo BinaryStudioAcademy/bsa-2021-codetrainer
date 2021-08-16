@@ -3,7 +3,8 @@
 	margin-bottom: 42px;
 	display: flex;
 	width: 100%;
-	background: var(--background-color);
+	background: var(--container-color);
 	justify-content: flex-start;
 	flex-direction: column;
+	border-radius: 20px;
 }

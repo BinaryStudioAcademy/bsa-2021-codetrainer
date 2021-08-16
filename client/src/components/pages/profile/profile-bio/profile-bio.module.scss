@@ -3,7 +3,8 @@
 	height: 206px;
 	padding: 20px;
 	margin: 42px;
-	background: var(--background-color);
+	background: var(--container-color);
+	border-radius: 20px;
 	.profileHeader {
 		display: flex;
 		gap: 10px;

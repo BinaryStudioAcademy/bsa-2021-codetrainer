@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Avatar, Label } from 'components';
 import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAdjust } from '@fortawesome/free-solid-svg-icons';
 
 export interface IHeaderProps {
 	name: string;
@@ -24,6 +26,20 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
 	const changeVisible = () => {
 		setListVisibility(!isListVisible);
+	};
+
+	const changeTheme = () => {
+		const theme = localStorage.getItem('theme');
+		switch (theme) {
+			case 'light':
+				localStorage.setItem('theme', 'dark');
+				break;
+			case 'dark':
+				localStorage.setItem('theme', 'light');
+				break;
+			default:
+				break;
+		}
 	};
 
 	const getListItem = ({ image, text, id, onClick = () => {} }: IListItem) => {
@@ -50,6 +66,9 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
 	return (
 		<div className={styles.header}>
+			<div className={styles.themeSwitcher}>
+				<FontAwesomeIcon size="lg" icon={faAdjust} onClick={() => changeTheme()} />
+			</div>
 			<div className={styles.bell}>
 				<img src={bellImg} alt="bell" />
 				<div className={styles.bellCounter}>

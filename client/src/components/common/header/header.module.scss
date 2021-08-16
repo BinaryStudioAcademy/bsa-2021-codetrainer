@@ -50,9 +50,13 @@
 		span {
 			font-family: Inter;
 			font-size: 10px;
-			color: var(--text-color);
+			color: #fff;
 		}
 	}
+}
+
+.themeSwitcher {
+	cursor: pointer;
 }
 
 .avatarCover {
