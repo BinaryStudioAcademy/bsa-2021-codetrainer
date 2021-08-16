@@ -14,7 +14,7 @@ const Social: React.FC<ISocialProps> = ({ user: { rank, profileUrl, name, clan, 
 			<Rank rank={rank} />
 			<img className={styles.userImage} src={profileUrl || defaultUserPhoto} alt={name} />
 			<span>{name}</span>
-			<span>{clan}</span>
+			<span>{clan?.name}</span>
 			<span>{honor}</span>
 		</div>
 	);
