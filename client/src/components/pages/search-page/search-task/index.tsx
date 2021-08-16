@@ -47,27 +47,12 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 			>
 				<Form>
 					<Field id="query" name="query" placeholder="Search..." type="text" component={FormInput} />
-					<Field
-						id="sortBy"
-						name="sort"
-						label="Sort By"
-						options={TASK_SORT_BY_OPTIONS}
-						component={FormSelect}
-					/>
-					<Field
-						id="status"
-						name="status"
-						label="Status"
-						options={TASK_STATUS_OPTIONS}
-						component={FormSelect}
-					/>
-					<Field
-						id="progress"
-						name="progress"
-						label="Progress"
-						options={TASK_PROGRESS_OPTIONS}
-						component={FormSelect}
-					/>
+					<label htmlFor="sort">Sort By</label>
+					<Field id="sortBy" name="sort" options={TASK_SORT_BY_OPTIONS} component={FormSelect} />
+					<label htmlFor="status">Status</label>
+					<Field id="status" name="status" options={TASK_STATUS_OPTIONS} component={FormSelect} />
+					<label htmlFor="progress">Progress</label>
+					<Field id="progress" name="progress" options={TASK_PROGRESS_OPTIONS} component={FormSelect} />
 
 					<h6>Difficulty</h6>
 					<div className={styles.rankContainer}>
