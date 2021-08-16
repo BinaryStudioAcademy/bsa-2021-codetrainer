@@ -21,7 +21,7 @@ const PrivateRoute = (props: IPrivateRouteProps) => {
 			{rest.needHeader ? <Header /> : null}
 
 			{rest.needHeader && rest.needSideBar ? (
-				<div className="contentContainer">
+				<>
 					{rest.needSideBar ? <MainSidebar /> : null}
 					<PageContainer>
 						<Route
@@ -31,7 +31,7 @@ const PrivateRoute = (props: IPrivateRouteProps) => {
 							}
 						/>
 					</PageContainer>
-				</div>
+				</>
 			) : (
 				<Route
 					{...rest}
