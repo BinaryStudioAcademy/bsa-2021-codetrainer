@@ -12,6 +12,7 @@ export {
 	Social,
 	MainSidebar,
 	TaskInstructions,
+	MainLayout,
 } from './common';
 
 export type { ICreateTabsProps } from './pages';

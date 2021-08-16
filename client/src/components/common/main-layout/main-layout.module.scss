@@ -1,0 +1,37 @@
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 250px calc(100vw - 250px);
+    grid-template-rows: 80px calc(100vh - 80px);
+    grid-template-areas: "sidebar header" "sidebar main";
+}
+
+.container--sidebar {
+    grid-template-areas: "sidebar main" "sidebar main";
+}
+
+.container--sidebar .header {
+    display: none;
+}
+
+.container--header {
+    grid-template-areas: "header header" "main main";
+}
+
+.container--header .sidebar {
+    display: none;
+}
+
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.main {
+    overflow-y: auto;
+    grid-area: main;
+    margin: auto;
+}

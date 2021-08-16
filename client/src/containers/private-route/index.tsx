@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Header from 'containers/header';
-import MainSidebar from 'components/common/main-sidebar';
 import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
+import { MainLayout } from 'components';
 
 interface IPrivateRouteProps extends RouteProps {
 	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
@@ -17,15 +16,13 @@ const PrivateRoute = (props: IPrivateRouteProps) => {
 	const isAuthorized = Boolean(user);
 	return (
 		<>
-			{rest.needHeader ? <Header /> : null}
-			{rest.needSideBar ? <MainSidebar /> : null}
 			{rest.needHeader && rest.needSideBar ? (
-				<div className="contentContainer">
+				<MainLayout>
 					<Route
 						{...rest}
 						render={(props) => (isAuthorized ? <Component {...props} /> : <Redirect to={ROUTES.SignIn} />)}
 					/>
-				</div>
+				</MainLayout>
 			) : (
 				<Route
 					{...rest}

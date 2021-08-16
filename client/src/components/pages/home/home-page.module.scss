@@ -1,14 +1,13 @@
-// will be removed after connecting local fonts
+@import "styles/variables";
 
 .container {
 	width: 916px;
-	font-family: 'Montserrat', Arial, sans-serif;
+	font-family: $base-font;
 	color: #282828;
 }
 
 .userGreeting {
-	margin: 40px 0 25px;
-
+	margin: 40px 25px;
 	font-weight: 500;
 	font-size: 36px;
 }
