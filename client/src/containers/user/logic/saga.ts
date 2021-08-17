@@ -24,24 +24,19 @@ function* fetchUserLogout() {
 
 function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
 	try {
-		const { id, user } = action;
-		console.log({ action });
-		yield call(updateUser, { id, body: user });
+		const { user } = action;
+		yield call(updateUser, user);
 		yield put(actions.setUser({ user }));
+		yield put(actions.userChangeNotification({ error: false, message: 'User updated' }));
 	} catch (error) {
-		console.log(error);
+		yield put(actions.userChangeNotification({ error: true, message: error.errors.message }));
 	}
 }
 
 function* fetchUserDelete(action: ReturnType<typeof actions.deleteUser>): any {
 	try {
 		const { id } = action;
-		console.log(action);
-		console.log(id);
-		//yield call(deleteUser, id);
-
 		yield all([authServices, authServices.logout, deleteUser(id)]);
-		// yield call(deleteUser, id);
 		yield put(actions.setUser({ user: null }));
 		yield put(signInActions.signInDataClear());
 		yield put(signUpActions.signUpDataClear());

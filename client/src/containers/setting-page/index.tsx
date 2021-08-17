@@ -1,12 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { GithubEndpoints } from 'services/github.service';
 import * as socialSettingsActions from './social/logic/actions';
-//import { useSettingsSelector } from 'hooks/useAppSelector';
 import { useSettingsSelector, useUserSelector } from 'hooks/useAppSelector';
 import { redirect } from '../../helpers/redirect-github.helper';
 import { SettingPage } from 'components/pages';
-//import { useAppSelector } from 'hooks/useAppSelector';
+import { useAppSelector } from 'hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
+
 import * as actions from 'containers/user/logic/actions';
 
 const radioListItems = [
@@ -31,6 +33,7 @@ const radioListItems = [
 const SettingPageContainer: React.FC = () => {
 	const dispatch = useDispatch();
 	const user = useUserSelector();
+
 	const settings = useSettingsSelector();
 
 	const toggleGithubLink = useCallback(() => {
@@ -43,33 +46,62 @@ const SettingPageContainer: React.FC = () => {
 
 	const onSubmit = useCallback(
 		(values: any) => {
-			console.log(values);
 			if (values.skills && !Array.isArray(values.skills)) {
 				values.skills = values.skills.split(',');
-				console.log(values.skills);
 			}
+
+			console.log(values);
 
 			const data: any = {
 				id: user?.id,
 				user: {
+					id: user?.id,
 					name: user?.name,
 					surname: user?.surname,
 					...values,
 				},
 			};
 
-			console.log(data);
-
 			dispatch(actions.updateUser(data));
 		},
 		[user],
 	);
+	const requestError = useAppSelector((state) => state.auth.userData.requestError);
+	useEffect(() => {
+		dispatch(actions.userClearNotification());
+	}, []);
+
+	useEffect(() => {
+		if (requestError?.message?.trim() !== '') {
+			if (!requestError?.error) {
+				dispatch(
+					setNotificationState({
+						state: {
+							notificationType: NotificationType.Success,
+							message: requestError?.message as string,
+							title: 'Update user',
+						},
+					}),
+				);
+				return;
+			} else {
+				dispatch(
+					setNotificationState({
+						state: {
+							notificationType: NotificationType.Error,
+							message: requestError?.message as string,
+							title: 'Update user',
+						},
+					}),
+				);
+			}
+		}
+	}, [requestError]);
 
 	const onDelete = () => {
 		const data: any = {
 			id: user?.id,
 		};
-		console.log(data);
 		dispatch(actions.deleteUser(data));
 	};
 
@@ -125,8 +157,9 @@ const SettingPageContainer: React.FC = () => {
 		},
 	];
 
+	const inititalDevLevel = user?.devLevel || 'trainee';
 	const list = {
-		initialValue: user?.devLevel,
+		initialValue: inititalDevLevel,
 		name: 'devLevel',
 		items: radioListItems,
 	};
@@ -162,6 +195,7 @@ const SettingPageContainer: React.FC = () => {
 				onSubmit,
 			}}
 			onDelete={onDelete}
+			avatar={user?.avatar}
 		/>
 	);
 };
