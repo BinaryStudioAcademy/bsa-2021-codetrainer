@@ -2,6 +2,8 @@ import Express from 'express';
 import { getCustomRepository } from 'typeorm';
 import { TUserRepository } from '../../data';
 import { User as UserType } from '../../data/models';
+import { ValidationError } from '../../helpers';
+import { CODE_ERRORS } from '../../common';
 
 export class User {
 	protected userRepository: TUserRepository;
@@ -28,6 +30,19 @@ export class User {
 
 	async update(id: string, body: UserType) {
 		const repository = getCustomRepository(this.userRepository);
+		const user = await repository.getById(id);
+
+		if (user?.email !== body.email) {
+			if (await repository.exists({ email: body.email })) {
+				throw new ValidationError(CODE_ERRORS.EMAIL_ALREDY_EXIST);
+			}
+		}
+
+		if(user?.username !== body.username) {
+			if(await repository.exists({ username: body.username })) {
+				throw new ValidationError(CODE_ERRORS.USERNAME_ALREDY_EXIST);
+			}
+		}
 
 		return {
 			user: await repository.updateById(id, body),
