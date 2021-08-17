@@ -1,7 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
-import { CODE_ERRORS } from '../../common';
+import { CODE_ERRORS, ENV } from '../../common';
 import { ValidationError } from '../../helpers';
+import { rabbitChannel } from '../../config/amqplib';
 
 export class SolutionService {
 	protected taskRepository: TTaskRepository;
@@ -41,6 +42,12 @@ export class SolutionService {
 			...user,
 			solutions: [...user.solutions, newSolution],
 		});
+		const dataForRabbit = {
+			code,
+			userId: user.id,
+			taskId: task.id,
+		};
+		rabbitChannel.sendToQueue(ENV.AMQP.QUEUE, Buffer.from(JSON.stringify(dataForRabbit)));
 		return newSolution;
 	}
 
