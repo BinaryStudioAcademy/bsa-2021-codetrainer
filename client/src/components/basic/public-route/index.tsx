@@ -20,9 +20,9 @@ const PublicRoute = (props: IPublicRouteProps) => {
 	return (
 		<>
 			{rest.needHeader ? <Header /> : null}
-			
+
 			{rest.needHeader && rest.needSideBar ? (
-				<div className="contentContainer">
+				<>
 					{rest.needSideBar ? <MainSidebar /> : null}
 					<PageContainer>
 						<Route
@@ -32,7 +32,7 @@ const PublicRoute = (props: IPublicRouteProps) => {
 							}
 						/>
 					</PageContainer>
-				</div>
+				</>
 			) : (
 				<Route
 					{...rest}

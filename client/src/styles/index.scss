@@ -30,13 +30,3 @@ code {
 a {
 	text-decoration: none;
 }
-
-.mainContent {
-	position: relative;
-	width: 100%;
-	padding-left: 245px; /* padding-left must be the same as sidebar width */
-	box-sizing: border-box;
-	padding-top: 91px; /* padding-top must be the same as header height */
-	display: flex;
-	justify-content: center;
-}
