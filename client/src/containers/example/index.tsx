@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { NotificationType } from '../notification/logic/models';
@@ -9,8 +9,15 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
+import { setTheme } from 'components/common/theme-switcher/logic/actions';
+import { TSetThemeArgs } from 'components/common/theme-switcher/logic/action-types';
+import { ThemeType } from 'components/common/theme-switcher/logic/models';
 
-const Example: React.FC = () => {
+interface IExample {
+	theme: string;
+}
+
+const Example: React.FC<IExample> = (props) => {
 	const dispatch = useDispatch();
 	const text = useSelector((rootState: IRootState) => rootState.example.name);
 	const [file, setFile] = useState<Blob | null>(null);
@@ -20,8 +27,13 @@ const Example: React.FC = () => {
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
 	};
+	const kek = (name: TSetThemeArgs) => {
+		dispatch(setTheme(name));
+	};
 
-	console.log(document.documentElement.getAttribute('data-theme'));
+	React.useEffect(() => {
+		changeTheme();
+	}, [props.theme]);
 
 	const changeTheme = () => {
 		const theme = localStorage.getItem('theme');
@@ -96,9 +108,15 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
-			<button onClick={() => changeTheme()}>SWITCH THEME</button>
+			<button onClick={() => kek({ theme: ThemeType.Dark })}>DARK</button>
+			<button onClick={() => kek({ theme: ThemeType.Light })}>LIGHT</button>
 		</div>
 	);
 };
 
-export default Example;
+function mapStateToProps(state: any) {
+	const { theme } = state;
+	return { theme: theme };
+}
+
+export default connect(mapStateToProps)(Example);

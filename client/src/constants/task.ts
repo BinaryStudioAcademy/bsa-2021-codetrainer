@@ -17,7 +17,7 @@ export const TASK_SORT_BY_OPTIONS = [
 	},
 	{
 		value: 'name',
-		label: 'name',
+		label: 'Name',
 	},
 ];
 
@@ -28,7 +28,7 @@ export const TASK_STATUS_OPTIONS = [
 	},
 	{
 		value: 'beta',
-		label: 'beta',
+		label: 'Beta',
 	},
 ];
 

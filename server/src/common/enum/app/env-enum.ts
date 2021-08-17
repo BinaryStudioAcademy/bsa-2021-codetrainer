@@ -49,6 +49,10 @@ const ENV = {
 		SECRET: getEnv('GITHUB_SECRET'),
 		CALLBACK: getEnv('GITHUB_CALLBACK'),
 	},
+	AMQP: {
+		URL: getEnv('AMQP_URL'),
+		QUEUE: getEnv('AMQP_QUEUE'),
+	},
 };
 
 export { ENV };

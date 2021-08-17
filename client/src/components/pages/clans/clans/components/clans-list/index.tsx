@@ -15,7 +15,7 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 						<td>Name</td>
 						<td>Size</td>
 						<td>Creation date</td>
-						<td>Honour</td>
+						<td>Honor</td>
 						<td></td>
 					</tr>
 					{clans.map((clan: WebApi.Entities.IClan) => (

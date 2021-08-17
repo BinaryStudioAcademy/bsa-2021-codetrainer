@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
 :local(.root) {
+	width: 595px;
+	height: 385px;
 	display: flex;
 	flex-flow: column nowrap;
 	font-family: 'Montserrat', sans-serif;
@@ -42,4 +44,8 @@
 	right: 10px;
 	top: 15px;
 	cursor: pointer;
+}
+
+.sideBlock {
+	height: 330px;
 }

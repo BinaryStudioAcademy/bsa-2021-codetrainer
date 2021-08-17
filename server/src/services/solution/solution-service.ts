@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
-import { CODE_ERRORS } from '../../common';
+import { CODE_ERRORS, ENV } from '../../common';
 import { ValidationError } from '../../helpers';
 
 export class SolutionService {

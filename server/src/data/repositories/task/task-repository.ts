@@ -40,7 +40,7 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 				query.andWhere('task.rank = :rank', { rank: value });
 				break;
 			case SEARCH_KEYS.TAGS:
-				query.andWhere('tag.name IN (:tags)', { tags: value });
+				query.andWhere('tag.name IN (:...tags)', { tags: value });
 				break;
 			case SEARCH_KEYS.PROGRESS:
 				if (value === 'all') {

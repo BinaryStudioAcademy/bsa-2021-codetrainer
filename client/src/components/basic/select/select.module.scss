@@ -53,7 +53,7 @@
 	display: none;
 	margin: 0;
 	padding: 0;
-	width: 100%;
+	width: 175px;
 
 	border-radius: 5px;
 
@@ -66,4 +66,8 @@
 	display: block;
 	z-index: 5;
 	margin-bottom: 50px;
+}
+
+.buttonBlock {
+	margin-top: 0;
 }
