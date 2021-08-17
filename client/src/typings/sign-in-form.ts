@@ -11,4 +11,6 @@ export interface IUser {
 	email: string;
 	clan?: string;
 	profileClan?: string;
+	rank: number,
+	honor: number
 }

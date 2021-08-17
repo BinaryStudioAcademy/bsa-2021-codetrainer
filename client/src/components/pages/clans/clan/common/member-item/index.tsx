@@ -16,7 +16,7 @@ const MemberItem: React.FC<{ member: IMember }> = ({ member }) => {
 			<td>
 				{getMounthName(member.createdAt)} {member.createdAt.getFullYear()}
 			</td>
-			<td>{member.honour}</td>
+			<td>{member.honor}</td>
 		</tr>
 	);
 };

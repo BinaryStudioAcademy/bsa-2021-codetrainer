@@ -13,4 +13,15 @@ namespace WebApi.Entities {
 		clan?: string;
 		profileClan?: string;
 	}
+	interface ITask {
+		id: string,
+		name: string,
+		description?: string,
+		// tags?: string[],
+		rank?: number,
+	}
+
+	interface ITasks {
+		tasks: ITask[]
+	}
 }

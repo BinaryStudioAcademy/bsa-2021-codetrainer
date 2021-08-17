@@ -7,6 +7,7 @@ import { authReducer } from 'containers/auth/logic/reducer';
 import { combineReducers, Reducer } from 'redux';
 import { IRootState } from 'typings/root-state';
 import { notificationReducer } from '../containers/notification/logic/reducer';
+import { homeReducer } from '../containers/home-page/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,
@@ -16,6 +17,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	auth: authReducer,
 	createTask: createTaskReducer,
 	notification: notificationReducer,
+	home: homeReducer,
 });
 
 export default rootReducer;

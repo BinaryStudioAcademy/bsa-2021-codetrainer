@@ -40,6 +40,8 @@ export class UserRepository extends Repository<User> {
 				'user.name',
 				'user.surname',
 				'user.email',
+				'user.rank',
+				'user.honor',
 				'clan',
 				'profileClan',
 				'task.id',

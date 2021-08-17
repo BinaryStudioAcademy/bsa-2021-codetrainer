@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './social.module.scss';
 import defaultUserPhoto from 'assets/icons/user.svg';
 import { Rank } from 'components/basic';
-import { IUser } from 'components/pages/home/components/community/interfce';
+import { IUser } from 'components/pages/home/components/community/interface';
 
 interface ISocialProps {
 	user: IUser;

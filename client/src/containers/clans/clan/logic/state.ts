@@ -10,7 +10,7 @@ export const initialState: IClanState = {
 		name: '',
 		rank: 0,
 		avatar: '',
-		honour: 0,
+		honor: 0,
 		isPublic: true,
 		maxMembers: 0,
 		numberOfMembers: 0,

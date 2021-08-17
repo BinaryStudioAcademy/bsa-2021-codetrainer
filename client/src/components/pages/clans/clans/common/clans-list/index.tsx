@@ -14,7 +14,7 @@ const ClansList: React.FC<{ clans: TClans }> = ({ clans }) => {
 						<td>Name</td>
 						<td>Size</td>
 						<td>Creation date</td>
-						<td>Honour</td>
+						<td>Honor</td>
 						<td></td>
 					</tr>
 					{clans.map((clan) => (

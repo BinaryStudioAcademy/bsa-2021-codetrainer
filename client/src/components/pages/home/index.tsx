@@ -15,7 +15,7 @@ const Home: React.FC<IHomeProps> = ({
 }) => {
 	return (
 		<div className={styles.container}>
-			<h3 className={styles.userGreeting}>Hi, {activeUser.name}!</h3>
+			<h3 className={styles.userGreeting}>Hi, {activeUser?.name}!</h3>
 
 			<div className={styles.nextTaskWrapper}>{nextTaskContent}</div>
 

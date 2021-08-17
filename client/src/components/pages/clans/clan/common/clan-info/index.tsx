@@ -18,7 +18,7 @@ const ClanInfo: React.FC<{ clan: IClan }> = ({ clan }) => {
 			<div className={styles.clanInfoDescription}>
 				<span>{clan.name}</span>
 				<Rank rank={clan.rank} />
-				<Rank honor={clan.honour} />
+				<Rank honor={clan.honor} />
 				<span>
 					{getMounthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>

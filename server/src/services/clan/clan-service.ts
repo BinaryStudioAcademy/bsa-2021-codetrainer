@@ -78,8 +78,8 @@ export class ClanService {
 		return newClan;
 	}
 
-	getHonour({ members }: ClanType) {
-		return +(members.reduce((sum, member) => sum + member.honour, 0) / members.length).toFixed();
+	getHonor({ members }: ClanType) {
+		return +(members.reduce((sum, member) => sum + member.honor, 0) / members.length).toFixed();
 	}
 
 	getRank({ members }: ClanType) {
@@ -95,7 +95,7 @@ export class ClanService {
 			maxMembers: clan.maxMembers,
 			numberOfMembers: clan.numberOfMembers,
 			createdAt: clan.createdAt,
-			honour: this.getHonour(clan),
+			honor: this.getHonor(clan),
 			rank: this.getRank(clan),
 		}));
 
@@ -112,7 +112,7 @@ export class ClanService {
 
 		return {
 			...clan,
-			honour: this.getHonour(clan),
+			honor: this.getHonor(clan),
 			rank: this.getRank(clan),
 		};
 	}

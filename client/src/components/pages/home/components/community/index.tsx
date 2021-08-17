@@ -5,7 +5,7 @@ import CommunityUser from '../community-user';
 import styles from './community.module.scss';
 import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
-import { ICommunityProps } from './interfce';
+import { ICommunityProps } from './interface';
 
 const Community: React.FC<ICommunityProps> = ({ users }) => {
 	return (

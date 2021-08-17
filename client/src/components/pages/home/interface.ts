@@ -1,9 +1,9 @@
 import React from 'react';
-import { IUser } from './components/community/interfce';
+import { IUser } from './components/community/interface';
 import { IMessage } from './components/feed/interface';
 
 export interface IHomeProps {
-	activeUser: IUser;
+	activeUser: IUser | null;
 	users: IUser[];
 	messages: IMessage[];
 	selectedFeedCategory: string;

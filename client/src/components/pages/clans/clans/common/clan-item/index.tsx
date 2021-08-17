@@ -25,7 +25,7 @@ const ClanItem: React.FC<{ clan: IClan }> = ({ clan }) => {
 				</span>
 			</td>
 			<td>
-				<span className={styles.clanItemHonour}>{clan.honour}</span>
+				<span className={styles.clanItemHonor}>{clan.honor}</span>
 			</td>
 			<td>
 				<Button>Join</Button>

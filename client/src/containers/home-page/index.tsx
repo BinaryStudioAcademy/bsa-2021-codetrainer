@@ -1,57 +1,10 @@
 import React, { useState } from 'react';
 import { HomePage } from 'components/pages';
 import NextTaskContainer from 'containers/next-task';
-const testActiveUser = {
-	id: '13',
-	rank: 5,
-	imageSource: '',
-	name: 'Test User',
-	clan: 'Test',
-	honor: 322,
-};
-
-const testUsers = [
-	{
-		id: '1',
-		rank: 9,
-		imageSource: '',
-		name: 'Rayna Herwitz',
-		clan: 'Fiksiki',
-		honor: 455,
-	},
-	{
-		id: '2',
-		rank: 2,
-		imageSource: '',
-		name: 'Dulce Workman',
-		clan: 'Fiksiki',
-		honor: 555,
-	},
-	{
-		id: '3',
-		rank: 2,
-		imageSource: '',
-		name: 'Dulce Workman',
-		clan: 'Fiksiki',
-		honor: 555,
-	},
-	{
-		id: '4',
-		rank: 2,
-		imageSource: '',
-		name: 'Dulce Workman',
-		clan: 'Fiksiki',
-		honor: 555,
-	},
-	{
-		id: '5',
-		rank: 2,
-		imageSource: '',
-		name: 'Dulce Workman',
-		clan: 'Fiksiki',
-		honor: 555,
-	},
-];
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../typings/root-state';
+import { ROUTES } from '../../constants/routes';
+import { Redirect } from 'react-router-dom';
 
 const testMessages = {
 	messages: [
@@ -84,17 +37,26 @@ const testMessages = {
 };
 
 const HomePageContainer: React.FC = () => {
+
+	const user = useSelector((rootState: IRootState) => rootState.auth.userData.user);
+	const clan = useSelector((rootState: IRootState) => rootState.clan.item);
 	const [selectedFeedCategory, setSelectedFeedCategory] = useState('All');
 
 	const handleSelectFeedCategory = (category: string) => {
 		setSelectedFeedCategory(category);
 	};
 
+	if (!user) {
+		return <Redirect from='/home' to={ROUTES.NotFound} />
+	}
+
+	const users = clan.members.length ? clan.members : [user];
+
 	return (
 		<>
 			<HomePage
-				activeUser={testActiveUser}
-				users={testUsers}
+				activeUser={user}
+				users={users}
 				messages={testMessages.messages}
 				selectedFeedCategory={selectedFeedCategory}
 				onSelectFeedCategory={handleSelectFeedCategory}

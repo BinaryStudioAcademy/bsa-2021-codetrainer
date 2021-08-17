@@ -1,9 +1,9 @@
 export interface IUser {
 	id: string;
 	rank: number;
-	imageSource: string;
+	imageSource?: string;
 	name: string;
-	clan: string;
+	clan?: string;
 	honor: number;
 }
 
