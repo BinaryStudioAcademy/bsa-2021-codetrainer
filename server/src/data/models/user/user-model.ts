@@ -57,7 +57,7 @@ export class User extends BaseEntity {
 	rank!: number;
 
 	@Column({ type: 'int', default: 0 })
-	honour!: number;
+	honor!: number;
 
 	@Column({ type: 'varchar', length: 250, nullable: true })
 	resetToken?: string;

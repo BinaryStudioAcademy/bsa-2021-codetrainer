@@ -18,7 +18,7 @@ export class ClanRepository extends AbstractRepository<Clan> {
 				'member.createdAt',
 				'member.surname',
 				'member.id',
-				'member.honour',
+				'member.honor',
 				'member.rank',
 				'profileClan.role',
 				'profileClan.status',
@@ -31,7 +31,7 @@ export class ClanRepository extends AbstractRepository<Clan> {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
 			.leftJoinAndSelect('member.profileClan', 'profileClan')
-			.select(['clan', 'member.id', 'member.rank', 'member.honour', 'profileClan.role', 'profileClan.status'])
+			.select(['clan', 'member.id', 'member.rank', 'member.honor', 'profileClan.role', 'profileClan.status'])
 			.skip(skip)
 			.take(take)
 			.getMany();
