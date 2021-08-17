@@ -23,7 +23,7 @@ export interface ICreateTaskProps {}
 const CodeTabs = {
 	COMPLETE_SOLUTION: 0,
 	INITIAL_SOLUTION: 1,
-	preloader: 2,
+	preloaded: 2,
 };
 
 const TestTabs = {
@@ -99,7 +99,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const [codeTab, setCodeTab] = useState(0);
 	const [completeSolution, setCompleteSolution] = useState('');
 	const [initialSolution, setInitialSolution] = useState('');
-	const [preloader, setPreloader] = useState('');
+	const [preloaded, setPreloaded] = useState('');
 	const tabsCode: ICreateTabsProps = {
 		selectedTab: codeTab,
 		tabs: [
@@ -121,11 +121,11 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			},
 			{
 				header: {
-					title: 'preloader',
+					title: 'Preloaded',
 				},
 				type: TaskTabTypes.CODE,
 				editable: true,
-				text: preloader,
+				text: preloaded,
 			},
 			{
 				header: {
@@ -134,7 +134,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 				type: TaskTabTypes.MARKDOWN,
 				markdownContent: `### In "Complete Solution" you should solve your own task
 ### In "Initial Soultion" write code that will be given to the user at the start
-### "Preloader" is optional here. This is code that will be loaded before the solution code within the execution path.
+### "Preloaded" is optional here. This is code that will be loaded before the solution code within the execution path.
 This allows you to setup code that can be used by the warrior's solution, but not directly edited within the solution code.`,
 			},
 		],
@@ -146,8 +146,8 @@ This allows you to setup code that can be used by the warrior's solution, but no
 				case CodeTabs.INITIAL_SOLUTION:
 					setInitialSolution(text);
 					break;
-				case CodeTabs.preloader:
-					setPreloader(text);
+				case CodeTabs.preloaded:
+					setPreloaded(text);
 					break;
 			}
 		},
@@ -213,7 +213,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			initialSolution,
 			testCases,
 			exampleTestCases,
-			preloader,
+			preloaded,
 		};
 		let result;
 		if (!taskId) {
@@ -255,7 +255,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		setTextDescription('');
 		setCompleteSolution('');
 		setInitialSolution('');
-		setPreloader('');
+		setPreloaded('');
 		setTestCases('');
 		setExampleTestCases('');
 	};
@@ -302,7 +302,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					testCases,
 					exampleTestCases,
 					isPublished: true,
-					preloader,
+					preloaded,
 				};
 				const requestResult = await updateTask(requestBody, thisTaskId);
 				if (!requestResult.error) {
@@ -343,7 +343,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 function twoOldestAges(ages){
 				
 }`);
-		setPreloader('');
+		setPreloaded('');
 		setTestCases(`const chai = require("chai");
 const assert = chai.assert;
 chai.config.truncateThreshold = 0;

@@ -26,7 +26,7 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelec
 			/>
 			<Header tabs={tabs} onChange={onSelectTab} />
 			<div className={styles.panel}>
-				<div />
+				<div className={styles.sideBlock}/>
 				<div>
 					<TabContent onChange={onChange} tab={tabs[selectedTab]} />
 				</div>
