@@ -9,7 +9,7 @@ export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['d
 			id: task.id,
 			title: task.name,
 			rank: task.rank,
-			tags: [],
+			tags: task.tags.map((tag) => tag.name),
 			linkToAuthor: '/',
 			author: {
 				firstName: task.user.name,
@@ -25,12 +25,16 @@ export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['d
 };
 
 export const mapFilterToSearch = (filter: ISearchState['filter']): Record<string, any> => {
-	return Object.fromEntries(
-		Object.entries(filter).filter(([key, value]) => {
+	const filterMod = Object.fromEntries(
+		Object.entries(filter).filter(([_key, value]) => {
 			if (typeof value !== 'string') {
 				return Boolean(value);
 			}
 			return Boolean(value.length);
 		}),
 	);
+	return {
+		...filterMod,
+		...(Boolean(filter.tags.size) ? { tags: Array.from(filter.tags).join(',') } : {}),
+	};
 };

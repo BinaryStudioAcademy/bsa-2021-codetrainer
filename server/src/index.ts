@@ -14,6 +14,7 @@ import { cookieConfig, corsConfig } from './config';
 import 'reflect-metadata';
 import './data/db/connection';
 import './config/passport';
+import './config/amqplib';
 
 const app = express();
 

@@ -20,8 +20,13 @@ interface ISearchTask {
 
 export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSubmit, filter }) => {
 	const handleChangeTags = (data: { name: string; checked: boolean }) => {
-		const tags = filter.tags.replace(data.name, '').split(',');
-		onChange({ tags: data.checked ? [...tags, data.name].join(',') : tags });
+		const tagsState = new Set(filter.tags);
+		if (data.checked) {
+			tagsState.add(data.name);
+		} else {
+			tagsState.delete(data.name);
+		}
+		onChange({ tags: tagsState });
 	};
 
 	const handleChangeRank = (rank: number) => {
@@ -90,7 +95,7 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 										key={id.toString()}
 										label={tag.label}
 										name={tag.name}
-										checked={filter.tags.includes(tag.name)}
+										checked={filter.tags.has(tag.name)}
 										onChange={(checked: boolean) => handleChangeTags({ name: tag.name, checked })}
 									/>
 							  ))

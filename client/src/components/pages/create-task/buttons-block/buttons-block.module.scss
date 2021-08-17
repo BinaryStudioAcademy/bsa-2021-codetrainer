@@ -2,12 +2,17 @@
 	display: flex;
 	gap: 25px;
 	width: 100%;
-	align-items: flex-end;
+	align-items: center;
 	margin-bottom: 15px;
+	margin-top: 10px;
 	label.noMargin {
 		margin-bottom: 0 !important;
 	}
 }
 .button {
 	height: 45px;
+	margin-top: 8px;
+}
+.buttonBlockSelect {
+	margin-top: 0;
 }

@@ -27,7 +27,7 @@ declare namespace WebApi.Entities {
 		avatar: string;
 		name: string;
 		surname: string;
-		honour: number;
+		honor: number;
 		profileClan: {
 			role: MemberRoles;
 			status: MemberStatus;
@@ -40,7 +40,7 @@ declare namespace WebApi.Entities {
 		name: string;
 		rank: number;
 		avatar: string;
-		honour: number;
+		honor: number;
 		isPublic: boolean;
 		maxMembers: number;
 		numberOfMembers: number;

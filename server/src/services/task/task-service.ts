@@ -1,28 +1,39 @@
 import { getCustomRepository } from 'typeorm';
-import { Task, User, TTaskRepository, TUserRepository, TTagRepository } from '../../data';
+import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag } from '../../data';
 import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
-
 	protected userRepository: TUserRepository;
-
 	protected tagRepository: TTagRepository;
+	protected getTagBind: (name: string) => Promise<Tag>;
 
 	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
 		this.taskRepository = task;
 		this.userRepository = user;
 		this.tagRepository = tag;
+		this.getTagBind = this.getTag.bind(this);
 	}
 
-	async create(user: User, task: Task) {
+	async getTag(name: string) {
+		const tagService = getCustomRepository(this.tagRepository);
+		let tag = await tagService.getByKey(name, 'name');
+		if (!tag) {
+			tag = await tagService.save({ name });
+		}
+		return tag;
+	}
+
+	async create(user: User, task: Task, tags: string[] | []) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
+		const tagsForSave = await Promise.all(tags.map(this.getTagBind));
 		const newTask = await repository.save({
 			...task,
 			user,
 			isPublished: false,
 			status: TASK_STATUS.BETA,
+			...(Boolean(tagsForSave.length) ? { tags: tagsForSave } : {}),
 		});
 		await userRepository.save({ id: user.id, tasks: [...user.tasks, newTask] });
 		const savedTask = await repository.getById(newTask.id);

@@ -1,6 +1,7 @@
 import { checkSchema } from 'express-validator';
 import { CODE_ERRORS, SEARCH_PROGRESS, TASK_ORDER_BY, TASK_QUERY_SEPARATOR, TASK_STATUS } from '../../../common';
 import { ValidationError } from '../../../helpers';
+import { tagsValidation } from './task-tags-validation';
 
 export const taskSearchSchema = checkSchema({
 	query: {
@@ -72,21 +73,7 @@ export const taskSearchSchema = checkSchema({
 	},
 	tags: {
 		in: 'query',
-		errorMessage: 'Wrong tags format',
-		custom: {
-			options: (value: string) => {
-				const tags = value.split(TASK_QUERY_SEPARATOR).filter((v) => Boolean(v.length));
-				if (!tags.length) {
-					throw new ValidationError(CODE_ERRORS.TASK_QUERY('tags'));
-				}
-				return true;
-			},
-		},
-		customSanitizer: {
-			options: (value: string) => value.split(TASK_QUERY_SEPARATOR),
-		},
-		optional: true,
-		notEmpty: true,
+		...tagsValidation,
 	},
 	// page: {
 	// 	in: 'query',
