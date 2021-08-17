@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
 import { CODE_ERRORS, ENV } from '../../common';
 import { ValidationError } from '../../helpers';
-import { rabbitChannel } from '../../config/amqplib';
+import { rabbitChannel } from '../../config';
 
 export class SolutionService {
 	protected taskRepository: TTaskRepository;
