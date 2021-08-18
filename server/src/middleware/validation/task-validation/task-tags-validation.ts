@@ -7,13 +7,13 @@ export const tagsValidation: Schema[''] = {
 	custom: {
 		options: (value: string) => {
 			if (typeof value !== 'string') {
-				return;
+				return false;
 			}
 			const tags = value.split(TASK_QUERY_SEPARATOR).filter((v) => Boolean(v.length));
 			if (!tags.length) {
 				throw new ValidationError(CODE_ERRORS.TASK_QUERY('tags'));
 			}
-			// return true;
+			return true;
 		},
 	},
 	customSanitizer: {
