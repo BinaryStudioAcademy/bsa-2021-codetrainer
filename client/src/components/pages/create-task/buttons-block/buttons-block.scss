@@ -1,6 +1,8 @@
+@import 'styles/variables.scss';
+
 .select {
 	width: 175px;
 	label {
-		margin-bottom: 0 !important;
+		padding-top: 10px;
 	}
 }

@@ -1,23 +1,13 @@
-import {
-	Entity,
-	PrimaryGeneratedColumn,
-	Column,
-	BaseEntity,
-	CreateDateColumn,
-	UpdateDateColumn,
-	ManyToOne,
-	OneToMany,
-	JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable, JoinColumn } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
+import { AbstractEntity } from '../abstract';
+import { Solution } from '../solution';
+import { Tag } from '../tag';
 import { User } from '../user';
 import { CommentTask } from '../comment-task';
 
 @Entity()
-export class Task extends BaseEntity {
-	@PrimaryGeneratedColumn('uuid')
-	id!: string;
-
+export class Task extends AbstractEntity {
 	@Column({ type: 'varchar', length: 250, default: '' })
 	name!: string;
 
@@ -29,9 +19,6 @@ export class Task extends BaseEntity {
 
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	rank?: number;
-
-	@Column({ type: 'text', default: '' })
-	tags?: string;
 
 	@Column({ type: 'bool', default: false, width: 1 })
 	allowContributors?: boolean;
@@ -46,7 +33,7 @@ export class Task extends BaseEntity {
 	initialSolution?: string;
 
 	@Column({ type: 'text', default: '' })
-	preloader?: string;
+	preloaded?: string;
 
 	@Column({ type: 'text', default: '' })
 	testCases?: string;
@@ -60,16 +47,17 @@ export class Task extends BaseEntity {
 	@Column({ type: 'boolean', default: false })
 	isPublished!: boolean;
 
-	@CreateDateColumn()
-	createdAt!: Date;
-
-	@UpdateDateColumn()
-	updatedAt!: Date;
-
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
 
 	@OneToMany(() => CommentTask, (commentTask) => commentTask.task)
 	@JoinColumn()
 	comments!: CommentTask[];
+
+	@OneToMany(() => Solution, (solution) => solution.task)
+	solutions!: Solution[];
+
+	@ManyToMany(() => Tag, (tag) => tag.tasks)
+	@JoinTable()
+	tags!: Tag[];
 }

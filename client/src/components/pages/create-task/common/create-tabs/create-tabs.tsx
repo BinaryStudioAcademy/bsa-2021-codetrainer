@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from '@blueprintjs/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import { Header } from './header';
 import { IconTaskPageFullScreen } from 'common';
@@ -16,8 +16,8 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelec
 	};
 
 	return (
-		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit, 'markdown')}>
-			<Icon
+		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)}>
+			<FontAwesomeIcon
 				icon={IconTaskPageFullScreen.NAME}
 				size={IconTaskPageFullScreen.SIZE}
 				color={IconTaskPageFullScreen.COLOR}
@@ -26,7 +26,7 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelec
 			/>
 			<Header tabs={tabs} onChange={onSelectTab} />
 			<div className={styles.panel}>
-				<div />
+				<div className={styles.sideBlock} />
 				<div>
 					<TabContent onChange={onChange} tab={tabs[selectedTab]} />
 				</div>

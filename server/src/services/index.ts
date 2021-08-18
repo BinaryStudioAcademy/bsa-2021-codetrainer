@@ -6,6 +6,8 @@ import {
 	ProfileClanRepository,
 	imagesRepository,
 	TaskRepository,
+	TagRepository,
+	SolutionRepository,
 	FollowerRepository,
 	CommentTaskRepository,
 } from '../data';
@@ -14,7 +16,9 @@ import { ClanService } from './clan';
 import { TaskService } from './task/task-service';
 import { ImagesService } from './images.service';
 import { GithubService } from './github.service';
-import { CommentTaskService } from './comment-task/comment-task-service';
+import { CommentTaskService } from './comment-task';
+import { TagService } from './tag/tag-service';
+import { SolutionService } from './solution/solution-service';
 
 const authService = new AuthService({ user: UserRepository });
 
@@ -28,8 +32,14 @@ const follower = new FollowersService({ follower: FollowerRepository });
 const imagesService = new ImagesService(imagesRepository);
 const githubService = new GithubService({ authService, userRepository: UserRepository });
 
-const taskService = new TaskService({ task: TaskRepository, user: UserRepository });
 const commentTaskService = new CommentTaskService({ commentTask: CommentTaskRepository });
+const taskService = new TaskService({ task: TaskRepository, user: UserRepository, tag: TagRepository });
+const tagService = new TagService({ tag: TagRepository, task: TaskRepository });
+const solutionService = new SolutionService({
+	user: UserRepository,
+	task: TaskRepository,
+	solution: SolutionRepository,
+});
 
 export { authService, AuthService };
 export { clanService, ClanService };
@@ -38,3 +48,5 @@ export { taskService, TaskService };
 export { githubService, GithubService };
 export { follower, FollowersService };
 export { commentTaskService, CommentTaskService };
+export { tagService, TagService };
+export { solutionService, SolutionService };

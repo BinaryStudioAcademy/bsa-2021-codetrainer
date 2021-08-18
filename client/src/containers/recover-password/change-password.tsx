@@ -6,6 +6,8 @@ import { useAppSelector } from 'hooks/useAppSelector';
 import { resetPassword, recoverPasswordStateReset } from './logic/actions';
 import { useQuery } from 'hooks/useQuery';
 import { ROUTES } from 'constants/routes';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
 
 export const ChangePassword: React.FC = () => {
 	const dispatch = useDispatch();
@@ -26,6 +28,15 @@ export const ChangePassword: React.FC = () => {
 			return;
 		}
 		dispatch(recoverPasswordStateReset());
+		dispatch(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Success,
+					message: 'Password change',
+					title: 'Attention',
+				},
+			}),
+		);
 		history.push(ROUTES.SignIn);
 	}, [isSuccess]);
 

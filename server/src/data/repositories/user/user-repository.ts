@@ -1,8 +1,9 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository } from 'typeorm';
+import { AbstractRepository } from '../abstract/index';
 import { User } from '../../models';
 
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export class UserRepository extends AbstractRepository<User> {
 	userFields = [
 		'user.id',
 		'user.name',
@@ -15,6 +16,7 @@ export class UserRepository extends Repository<User> {
 		'user.devLevel',
 		'user.social',
 		'user.email',
+		'user.githubId',
 	];
 
 	getAll() {
@@ -34,6 +36,7 @@ export class UserRepository extends Repository<User> {
 			.leftJoinAndSelect('user.profileClan', 'profileClan')
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
+			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
 				'user.username',
@@ -42,7 +45,9 @@ export class UserRepository extends Repository<User> {
 				'user.email',
 				'user.rank',
 				'user.honor',
+				'user.githubId',
 				'clan',
+				'solution.id',
 				'profileClan',
 				'task.id',
 			])

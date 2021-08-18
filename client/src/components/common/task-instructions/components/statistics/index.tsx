@@ -1,10 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './statistics.module.scss';
-import { Icon, IconName } from '@blueprintjs/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 interface IStatisticsProps {
-	icon: IconName;
+	icon: IconDefinition;
 	content: JSX.Element;
 	divider?: boolean;
 }
@@ -12,7 +13,7 @@ interface IStatisticsProps {
 const Statistics: React.FC<IStatisticsProps> = ({ icon, content, divider = false }) => {
 	return (
 		<div className={clsx(styles.info, { [styles.infoDivider]: divider })}>
-			<Icon icon={icon} color="rgba(40, 40, 40, 0.5)" />
+			<FontAwesomeIcon icon={icon} size="lg" color="rgba(40, 40, 40, 0.5)" />
 			<div className={styles.infoDescription}>{content}</div>
 		</div>
 	);

@@ -32,7 +32,7 @@ export const CreateCode: React.FC<ITabProps> = ({ onChange, value, editable }) =
 		<AceEditor
 			onFocus={handleFocus}
 			style={{
-				height: '100%',
+				height: '330px',
 				width: '100%',
 			}}
 			readOnly={!Boolean(editable)}

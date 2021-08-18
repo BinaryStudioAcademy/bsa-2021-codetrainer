@@ -4,6 +4,7 @@ import MainSidebar from 'components/common/main-sidebar';
 import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
+import PageContainer from 'components/basic/page-container';
 
 interface IPrivateRouteProps extends RouteProps {
 	component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
@@ -18,14 +19,19 @@ const PrivateRoute = (props: IPrivateRouteProps) => {
 	return (
 		<>
 			{rest.needHeader ? <Header /> : null}
-			{rest.needSideBar ? <MainSidebar /> : null}
+
 			{rest.needHeader && rest.needSideBar ? (
-				<div className="contentContainer">
-					<Route
-						{...rest}
-						render={(props) => (isAuthorized ? <Component {...props} /> : <Redirect to={ROUTES.SignIn} />)}
-					/>
-				</div>
+				<>
+					{rest.needSideBar ? <MainSidebar /> : null}
+					<PageContainer>
+						<Route
+							{...rest}
+							render={(props) =>
+								isAuthorized ? <Component {...props} /> : <Redirect to={ROUTES.SignIn} />
+							}
+						/>
+					</PageContainer>
+				</>
 			) : (
 				<Route
 					{...rest}

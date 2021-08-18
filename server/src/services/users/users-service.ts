@@ -1,6 +1,6 @@
 import Express from 'express';
 import { getCustomRepository } from 'typeorm';
-import { TUserRepository, User as UserModel } from '../../data';
+import { TUserRepository, User as UserEntity } from '../../data';
 
 export class User {
 	protected userRepository: TUserRepository;
@@ -25,7 +25,7 @@ export class User {
 		};
 	}
 
-	async update(id: string, body: UserModel) {
+	async update(id: string, body: UserEntity) {
 		const repository = getCustomRepository(this.userRepository);
 
 		return {

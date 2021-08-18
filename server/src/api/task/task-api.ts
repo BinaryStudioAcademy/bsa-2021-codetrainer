@@ -1,7 +1,12 @@
 import { Router } from 'express';
 import { TaskApiPath } from '../../common';
-import { taskIdSchema, taskSchema, validationMiddleware } from '../../middleware';
-import { checkTaskIdMiddleware } from '../../middleware/check/task/task-id-middleware';
+import {
+	taskIdSchema,
+	taskSchema,
+	validationMiddleware,
+	checkTaskIdMiddleware,
+	taskSearchSchema,
+} from '../../middleware';
 import { TaskService } from '../../services';
 
 export const initTask = (appRouter: typeof Router, services: { task: TaskService }) => {
@@ -9,20 +14,20 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 	const router = appRouter();
 
 	router
-		.get(TaskApiPath.ROOT, (req, res, next) =>
+		.get(TaskApiPath.SEARCH, validationMiddleware([taskSearchSchema]), (req, res, next) =>
 			taskService
-				.getTasks(req.body)
-				.then((data) => res.send(data))
-				.catch(next),
-		)
-		.post(TaskApiPath.ROOT, validationMiddleware([taskSchema]), (req, res, next) =>
-			taskService
-				.create(req.user, req.body)
+				.search(req.validData, req.user)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
 		.get(TaskApiPath.$ID, validationMiddleware([taskIdSchema]), checkTaskIdMiddleware, (req, res, _next) =>
 			res.send(req.task),
+		)
+		.get(TaskApiPath.ROOT, (req, res, next) =>
+			taskService
+				.getTasks(req.validData || {})
+				.then((data) => res.send(data))
+				.catch(next),
 		)
 		.put(
 			TaskApiPath.$ID,
@@ -30,13 +35,19 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 			checkTaskIdMiddleware,
 			(req, res, next) =>
 				taskService
-					.update(req.body, req.task.id)
+					.update(req.validData, req.task.id)
 					.then((data) => res.send(data))
 					.catch(next),
 		)
+		.post(TaskApiPath.ROOT, validationMiddleware([taskSchema]), (req, res, next) =>
+			taskService
+				.create(req.user, req.validData, req.validData?.tags)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.delete(TaskApiPath.$ID, validationMiddleware([taskIdSchema]), checkTaskIdMiddleware, (req, res, next) =>
 			taskService
-				.delete(req.user, req.body.id)
+				.delete(req.user, req.task)
 				.then((data) => res.send(data))
 				.catch(next),
 		);

@@ -6,6 +6,8 @@ import { IAuthState } from 'containers/auth/logic/state';
 import { IProfileState } from 'containers/profile/logic/state';
 import { INotificationState } from '../containers/notification/logic/state';
 import { IHomeState } from '../containers/home-page/logic/state';
+import { ISearchState } from 'containers/search-page/logic/state';
+import { ISettingsState } from '../containers/setting-page/logic/state';
 
 export interface IRootState {
 	notification: INotificationState;
@@ -16,4 +18,6 @@ export interface IRootState {
 	example: IExampleState;
 	auth: IAuthState;
 	home: IHomeState;
+	search: ISearchState;
+	settings: ISettingsState;
 }

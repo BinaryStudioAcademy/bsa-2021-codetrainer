@@ -2,7 +2,7 @@
 
 .mainSidebar {
 	padding: 38px 40px;
-	background: #705ff5;
+	background: $cornflower-blue;
 	width: 245px;
 	min-height: 100vh;
 	height: 100%;
@@ -10,6 +10,7 @@
 	top: 0;
 	z-index: 10;
 	justify-self: flex-start;
+	box-sizing: border-box;
 }
 
 .logotype {

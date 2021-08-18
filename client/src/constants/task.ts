@@ -1,40 +1,48 @@
 export const TASK_SORT_BY_OPTIONS = [
 	{
-		value: 'NEWEST',
+		value: 'newest',
 		label: 'Newest',
 	},
 	{
-		value: 'OLDEST',
+		value: 'oldest',
 		label: 'Oldest',
+	},
+	{
+		value: 'hardest',
+		label: 'Hardest',
+	},
+	{
+		value: 'easiest',
+		label: 'Easiest',
+	},
+	{
+		value: 'name',
+		label: 'Name',
 	},
 ];
 
 export const TASK_STATUS_OPTIONS = [
 	{
-		value: 'APPROVED',
+		value: 'approved',
 		label: 'Approved',
 	},
 	{
-		value: 'SUBMITTED',
-		label: 'Submitted',
-	},
-	{
-		value: 'NOT_APPROVED',
-		label: 'Not Approved',
+		value: 'beta',
+		label: 'Beta',
 	},
 ];
 
 export const TASK_PROGRESS_OPTIONS = [
 	{
-		value: 'ALL',
+		value: 'all',
 		label: 'All',
 	},
 	{
-		value: 'IN_PROGRESS',
-		label: 'In Progress',
+		value: 'completed',
+		label: 'Task Completed',
 	},
 	{
-		value: 'NOT_STARTED',
-		label: 'Not Started',
+		value: 'notCompleted',
+		label: 'Task Not Completed',
 	},
 ];

@@ -1,27 +1,63 @@
-namespace WebApi.Entities {
-	interface IExample {
+import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
+
+declare namespace WebApi.Entities {
+	export interface IExample {
 		id: string;
 		name?: string;
 		email?: string;
 	}
-	interface IUser {
+
+	export interface IUser {
 		id: string;
 		username: string;
 		name: string;
 		surname: string;
 		email: string;
-		clan?: string;
+		clan?: IClan;
+		rank: number;
+		honor: number;
 		profileClan?: string;
+		githubId?: string;
+		profileUrl?: string;
 	}
 	interface ITask {
-		id: string,
-		name: string,
-		description?: string,
+		id: string;
+		name: string;
+		description?: string;
 		// tags?: string[],
-		rank?: number,
+		rank?: number;
 	}
 
 	interface ITasks {
-		tasks: ITask[]
+		tasks: ITask[];
 	}
+
+	export interface IMember {
+		id: string;
+		rank: number;
+		avatar: string;
+		name: string;
+		surname: string;
+		honor: number;
+		profileClan: {
+			role: MemberRoles;
+			status: MemberStatus;
+		};
+		createdAt: Date;
+	}
+
+	export interface IClan {
+		id: string;
+		name: string;
+		rank: number;
+		avatar: string;
+		honor: number;
+		isPublic: boolean;
+		maxMembers: number;
+		numberOfMembers: number;
+		createdAt: Date;
+		members: Array<IMember>;
+	}
+
+	export type TClans = Array<IClan>;
 }
