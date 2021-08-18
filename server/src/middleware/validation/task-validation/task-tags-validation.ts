@@ -7,19 +7,23 @@ export const tagsValidation: Schema[''] = {
 	custom: {
 		options: (value: string) => {
 			if (typeof value !== 'string') {
-				return;
+				return false;
 			}
 
 			const tags = value.split(TASK_QUERY_SEPARATOR).filter((v) => Boolean(v.length));
 			if (!tags.length && value !== '') {
 				throw new ValidationError(CODE_ERRORS.TASK_QUERY('tags'));
 			}
-			// eslint-disable-next-line consistent-return
 			return true;
 		},
 	},
 	customSanitizer: {
-		options: (value: string) => value.split(TASK_QUERY_SEPARATOR),
+		options: (value: string) => {
+			if (!Boolean(value.length)) {
+				return [];
+			}
+			return value.split(TASK_QUERY_SEPARATOR);
+		},
 	},
 	optional: true,
 };

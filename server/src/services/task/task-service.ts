@@ -4,40 +4,31 @@ import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
-
 	protected userRepository: TUserRepository;
-
 	protected tagRepository: TTagRepository;
-
-	protected getTagBind: (name: string) => Promise<Tag>;
 
 	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
 		this.taskRepository = task;
 		this.userRepository = user;
 		this.tagRepository = tag;
-		this.getTagBind = this.getTag.bind(this);
 	}
 
-	async getTag(name: string) {
-		const tagService = getCustomRepository(this.tagRepository);
-		let tag = await tagService.getByKey(name, 'name');
-		if (!tag) {
-			tag = await tagService.save({ name });
-		}
-		return tag;
+	async getTags(tags: string[] = []) {
+		const getTag = async (tagName: string) => {
+			const tagService = getCustomRepository(this.tagRepository);
+			let tag = await tagService.getByKey(tagName, 'name');
+			if (!tag) {
+				tag = await tagService.save({ name: tagName });
+			}
+			return tag;
+		};
+		return await Promise.all(tags.map(getTag));
 	}
 
-	async create(user: User, task: Task, tags: string[] | []) {
+	async create(user: User, task: Task, tags: string[] = []) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
-		let tagsForSave = [
-			{
-				name: '',
-			},
-		];
-		if (tags) {
-			tagsForSave = await Promise.all(tags.map(this.getTagBind));
-		}
+		const tagsForSave = await this.getTags(tags);
 		const newTask = await repository.save({
 			...task,
 			user,
@@ -68,9 +59,10 @@ export class TaskService {
 		};
 	}
 
-	async update(newTask: Task, taskId: string) {
+	async update(newTask: Task, taskId: string, tags: string[] = []) {
 		const repository = getCustomRepository(this.taskRepository);
-		await repository.updateById(taskId, newTask);
+		const tagsForSave = await this.getTags(tags);
+		await repository.save({ ...newTask, ...(tagsForSave.length ? { tags: tagsForSave } : {}) });
 		const updatedTask = await repository.getById(taskId);
 		return updatedTask;
 	}
