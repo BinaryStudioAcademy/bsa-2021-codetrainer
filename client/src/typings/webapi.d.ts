@@ -49,4 +49,8 @@ declare namespace WebApi.Entities {
 	}
 
 	export type TClans = Array<IClan>;
+
+	export interface ITask {
+		id: string | null;
+	}
 }

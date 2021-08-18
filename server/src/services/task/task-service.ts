@@ -56,7 +56,7 @@ export class TaskService {
 		const tagRepository = getCustomRepository(this.tagRepository);
 		await Promise.all(
 			task.tags.map((tag) => {
-				const newTasks = tag.tasks.filter((taskT) => taskT.id !== task.id);
+				const newTasks = tag.tasks?.filter((taskT) => taskT.id !== task.id);
 				return tagRepository.save({ ...tag, tasks: newTasks });
 			}),
 		);

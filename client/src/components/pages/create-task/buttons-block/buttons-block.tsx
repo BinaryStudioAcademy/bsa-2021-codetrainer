@@ -11,14 +11,15 @@ import { ChangeTheme } from 'components/basic/change-theme';
 interface IButtonsBlockProps {
 	handlePreviewClick: () => void;
 	taskId: string | null;
+	yourChallengeValues?: ISelectValue[] | null;
 }
-export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps) => {
-	const [goToActiveValue, setGoToActiveValue] = useState({
-		id: 1,
+export const ButtonsBlock = ({ handlePreviewClick, taskId, yourChallengeValues }: IButtonsBlockProps) => {
+	const [goToActiveValue, setGoToActiveValue] = useState<ISelectValue>({
+		id: '1',
 		title: 'Go to',
 	});
-	const [challengeActiveValue, setChallengeActiveValue] = useState({
-		id: 0,
+	const [challengeActiveValue, setChallengeActiveValue] = useState<ISelectValue>({
+		id: '0',
 		title: 'Switch task',
 	});
 	return (
@@ -42,12 +43,14 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps)
 
 				<div className={clsx('select', { rightPart: taskId ? false : true })}>
 					<label className="label">Your challenge</label>
-					<Select
-						values={challengeValues}
-						activeValue={challengeActiveValue}
-						onChange={(newValue: ISelectValue) => setChallengeActiveValue(newValue)}
-						isButtonBlockSelect={true}
-					/>
+					{yourChallengeValues ? (
+						<Select
+							values={yourChallengeValues}
+							activeValue={challengeActiveValue}
+							onChange={(newValue: ISelectValue) => setChallengeActiveValue(newValue)}
+							isButtonBlockSelect={true}
+						/>
+					) : null}
 				</div>
 				<ChangeTheme />
 			</div>
@@ -56,42 +59,27 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps)
 };
 const goToValues = [
 	{
-		id: 1,
+		id: '1',
 		title: 'Details',
 	},
 	{
-		id: 2,
+		id: '2',
 		title: 'Discourse',
 	},
 	{
-		id: 3,
+		id: '3',
 		title: 'Solutions',
 	},
 	{
-		id: 4,
+		id: '4',
 		title: 'Translations',
 	},
 	{
-		id: 5,
+		id: '5',
 		title: 'Revisions',
 	},
 	{
-		id: 6,
+		id: '6',
 		title: 'Trainer',
-	},
-];
-
-const challengeValues = [
-	{
-		id: 1,
-		title: 'New task',
-	},
-	{
-		id: 2,
-		title: 'User task1',
-	},
-	{
-		id: 3,
-		title: 'User task2',
 	},
 ];

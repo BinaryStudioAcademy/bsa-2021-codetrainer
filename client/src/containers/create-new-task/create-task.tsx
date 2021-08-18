@@ -18,6 +18,11 @@ import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { createTask, deleteTask, updateTask } from 'services/create-task.service';
 import historyHelper from 'helpers/history.helper';
+import { addTask } from 'containers/user/logic/actions';
+import { useAppSelector } from 'hooks/useAppSelector';
+import { WebApi } from 'typings/webapi';
+import { getById } from 'services/task/task.service';
+import { useEffect } from 'react';
 
 export interface ICreateTaskProps {}
 
@@ -44,6 +49,35 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			}),
 		);
 	};
+	const yourChallengeIds = useAppSelector((state) => state.auth.userData.user?.tasks);
+	const getYourChallengeValues = async () => {
+		if (!yourChallengeIds) {
+			return null;
+		}
+		const yourChallengeValues = await yourChallengeIds.map<Promise<{ id: string | null; title: string }>>(
+			async (task: WebApi.Entities.ITask) => {
+				const result = await getById(task.id);
+				return {
+					id: task.id,
+					title: result.name,
+				};
+			},
+		);
+		return Promise.all(yourChallengeValues).then((res) => {
+			return res;
+		});
+	};
+	const [yourChallengeValues, setYourChallengeValues] = useState<{ id: string | null; title: string }[] | null>([
+		{
+			id: '0',
+			title: 'New task',
+		},
+	]);
+	useEffect(() => {
+		getYourChallengeValues().then((result) =>
+			setYourChallengeValues(result ? [{ id: '0', title: 'New task' }, ...result] : null),
+		);
+	}, []);
 	//settings block
 	const [taskName, setTaskName] = useState('');
 	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
@@ -58,6 +92,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const onSwitchClick = (newSwitchState: boolean) => {
 		setSelectedSwitch(newSwitchState);
 	};
+
 	//taskInstructions
 	const [instructionTab, setInstructionTab] = useState(0);
 	const [textDescription, setTextDescription] = useState('');
@@ -228,6 +263,13 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		} else if (!result.error) {
 			dispatch(setTask({ taskId: result.id }));
 			dispatch(
+				addTask({
+					task: {
+						id: result.id,
+					},
+				}),
+			);
+			dispatch(
 				setNotificationState({
 					state: {
 						message: `Task ${taskName} is ${taskId ? 'updated' : 'saved'}`,
@@ -363,6 +405,7 @@ describe("twoOldestAges", function() {
 	const handlePreviewClick = (task: string | null) => {
 		historyHelper.push(task ? '/task/' + task : '');
 	};
+
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -381,7 +424,11 @@ describe("twoOldestAges", function() {
 					setTags={setTags}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
-					<ButtonsBlock handlePreviewClick={() => handlePreviewClick(taskId)} taskId={taskId} />
+					<ButtonsBlock
+						handlePreviewClick={() => handlePreviewClick(taskId)}
+						taskId={taskId}
+						yourChallengeValues={yourChallengeValues}
+					/>
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>

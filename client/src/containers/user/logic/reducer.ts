@@ -15,6 +15,12 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 			accessToken: action.accessToken,
 		};
 	},
+	[actionTypes.ADD_TASK](state, action: actionTypes.TUserAddTask) {
+		return {
+			...state,
+			tasks: state.user?.tasks?.concat(action.task)
+		};
+	},
 });
 
 export default routingReducer;

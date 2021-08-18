@@ -1,7 +1,7 @@
 import { TSvgFC } from 'containers/create-new-task/logic/models';
 
 export interface ISelectValue {
-	id: number;
+	id: string | null;
 	title: string;
 	icon?: string;
 	iconFC?: TSvgFC;
