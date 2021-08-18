@@ -7,13 +7,21 @@ import './buttons-block.scss';
 import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
 import { ChangeTheme } from 'components/basic/change-theme';
+import { useDispatch } from 'react-redux';
+import { setTask } from 'containers/create-new-task/logic/actions';
 
 interface IButtonsBlockProps {
 	handlePreviewClick: () => void;
 	taskId: string | null;
 	yourChallengeValues?: ISelectValue[] | null;
+	onChallengeChange: (id: string | null) => void;
 }
-export const ButtonsBlock = ({ handlePreviewClick, taskId, yourChallengeValues }: IButtonsBlockProps) => {
+export const ButtonsBlock = ({
+	handlePreviewClick,
+	taskId,
+	yourChallengeValues,
+	onChallengeChange,
+}: IButtonsBlockProps) => {
 	const [goToActiveValue, setGoToActiveValue] = useState<ISelectValue>({
 		id: '1',
 		title: 'Go to',
@@ -22,6 +30,8 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId, yourChallengeValues }
 		id: '0',
 		title: 'Switch task',
 	});
+	const dispatch = useDispatch();
+
 	return (
 		<>
 			<div className={styles.buttonsBlock}>
@@ -47,7 +57,11 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId, yourChallengeValues }
 						<Select
 							values={yourChallengeValues}
 							activeValue={challengeActiveValue}
-							onChange={(newValue: ISelectValue) => setChallengeActiveValue(newValue)}
+							onChange={(newValue: ISelectValue) => {
+								dispatch(setTask({ taskId: newValue.id }));
+								onChallengeChange(newValue.id);
+								setChallengeActiveValue(newValue);
+							}}
 							isButtonBlockSelect={true}
 						/>
 					) : null}

@@ -16,12 +16,11 @@ import { NotificationType } from 'containers/notification/logic/models';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
-import { createTask, deleteTask, updateTask } from 'services/create-task.service';
+import { createTask, deleteTask, updateTask, getById } from 'services/task/task.service';
 import historyHelper from 'helpers/history.helper';
 import { addTask } from 'containers/user/logic/actions';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { WebApi } from 'typings/webapi';
-import { getById } from 'services/task/task.service';
 import { useEffect } from 'react';
 
 export interface ICreateTaskProps {}
@@ -251,24 +250,51 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			exampleTestCases,
 			preloaded,
 		};
-		let result;
+		let task: { error: any; message: string; id: string | null; name: any };
 		if (!taskId) {
-			result = await createTask(requestBody);
-			console.log(result);
+			task = await createTask(requestBody);
+			console.log(task);
 		} else {
-			result = await updateTask(requestBody, taskId);
+			task = await updateTask(requestBody, taskId);
 		}
-		if (result.error) {
-			createErrorMessage(result.message);
-		} else if (!result.error) {
-			dispatch(setTask({ taskId: result.id }));
+		if (task.error) {
+			createErrorMessage(task.message);
+		} else if (!task.error) {
+			dispatch(setTask({ taskId: task.id }));
 			dispatch(
 				addTask({
 					task: {
-						id: result.id,
+						id: task.id,
 					},
 				}),
 			);
+			if (yourChallengeValues) {
+				const foundChallenge = yourChallengeValues.find((item) => item.id === task.id);
+				if (foundChallenge) {
+					const newChallenges = yourChallengeValues.map((item) => {
+						if (item.id === task.id) {
+							return {
+								id: item.id,
+								title: task.name,
+							};
+						}
+						return item;
+					});
+					setYourChallengeValues(newChallenges);
+				} else {
+					setYourChallengeValues([
+						...yourChallengeValues,
+						{
+							id: task.id,
+							title: task.name,
+						},
+					]);
+				}
+			} else {
+				setYourChallengeValues(null);
+			}
+			if (!taskId) {
+			}
 			dispatch(
 				setNotificationState({
 					state: {
@@ -277,7 +303,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					},
 				}),
 			);
-			return result.id;
+			return task.id;
 		}
 		return null;
 	};
@@ -402,10 +428,31 @@ describe("twoOldestAges", function() {
 });`);
 		setExampleTestCases('');
 	};
-	const handlePreviewClick = (task: string | null) => {
-		historyHelper.push(task ? '/task/' + task : '');
+	const handlePreviewClick = (taskId: string | null) => {
+		historyHelper.push(taskId ? '/task/' + taskId : '');
 	};
-
+	const handleTaskChange = async (taskId: string | null) => {
+		if (taskId) {
+			const task = await getById(taskId);
+			console.log(task);
+			let tags = '';
+			task.tags.forEach((tag: { name: string }) => {
+				tags += tag.name + ',';
+			});
+			setTaskName(task.name);
+			setDiscipline(DISCIPLINE_ITEMS[0]);
+			setLanguage(SELECT_PROPS.values[0]);
+			setRank(task.rank);
+			setSelectedSwitch(task.allowContributors);
+			setTags(tags.substr(0, tags.length - 1));
+			setTextDescription(task.description);
+			setCompleteSolution(task.completeSolution);
+			setInitialSolution(task.initialSolution);
+			setPreloaded(task.preloaded);
+			setTestCases(task.testCases);
+			setExampleTestCases(task.exampleTestCases);
+		}
+	};
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -428,6 +475,7 @@ describe("twoOldestAges", function() {
 						handlePreviewClick={() => handlePreviewClick(taskId)}
 						taskId={taskId}
 						yourChallengeValues={yourChallengeValues}
+						onChallengeChange={handleTaskChange}
 					/>
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
