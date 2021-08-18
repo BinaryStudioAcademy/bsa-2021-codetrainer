@@ -1,34 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Avatar, Label } from 'components';
 import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
+import { TNotification } from 'typings/common/INotification';
+import Notification, { mapNotificationToProps } from '../notification';
 
 export interface IHeaderProps {
 	name: string;
 	rank: number;
-	notificationCounter: number;
+	notifications: TNotification[];
 	mark: number;
 	avatar?: string;
 	listItems: Array<IListItem>;
+	onReadNotification: (id: string) => void;
 }
 
 interface IListItem {
 	image: string;
 	text: string;
 	id: string;
-	onClick?: () => void
+	onClick?: () => void;
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
+	const [isNotificationsVisible, setNotificationsVisibility] = useState(false);
 
 	const changeVisible = () => {
 		setListVisibility(!isListVisible);
+		setNotificationsVisibility(false);
 	};
 
-	const getListItem = ({ image, text, id, onClick = () => { } }: IListItem) => {
+	const toggleNotificationsVisibility = useCallback(() => {
+		setNotificationsVisibility(!isNotificationsVisible);
+		setListVisibility(false);
+	}, [isNotificationsVisible]);
+
+	const getListItem = ({ image, text, id, onClick = () => {} }: IListItem) => {
 		return (
-			<li className={styles.navigationItem} key={id} onClick={() => { onClick(); changeVisible() }}>
+			<li
+				className={styles.navigationItem}
+				key={id}
+				onClick={() => {
+					onClick();
+					changeVisible();
+				}}
+			>
 				<div className={styles.navigationLink}>
 					<img src={image} alt="listItem" />
 					<span>{text}</span>
@@ -41,13 +58,32 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		return <ul className={styles.navigationList}>{items.map((item: IListItem) => getListItem(item))}</ul>;
 	};
 
+	const unreadedCounter = props.notifications.filter((notification) => !notification.read).length;
+
 	return (
 		<div className={styles.header}>
-			<div className={styles.bell}>
+			<div className={styles.bell} onClick={toggleNotificationsVisibility}>
 				<img src={bellImg} alt="bell" />
-				<div className={styles.bellCounter}>
-					<span>{props.notificationCounter}</span>
-				</div>
+				{unreadedCounter !== 0 ? (
+					<div className={styles.bellCounter}>
+						<span>{unreadedCounter}</span>
+					</div>
+				) : null}
+				{isNotificationsVisible ? (
+					<div className={styles.notifications}>
+						{props.notifications.length !== 0 ? (
+							props.notifications.map((notification) => (
+								<Notification
+									{...mapNotificationToProps(notification)}
+									onRead={() => props.onReadNotification(notification.id)}
+									key={notification.id}
+								/>
+							))
+						) : (
+							<div className={styles.noNotifications}>You do not have any notifications</div>
+						)}
+					</div>
+				) : null}
 			</div>
 			<span className={styles.name}>{props.name}</span>
 			<div className={styles.avatarCover}>
