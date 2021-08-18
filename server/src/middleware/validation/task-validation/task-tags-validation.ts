@@ -13,6 +13,7 @@ export const tagsValidation: Schema[''] = {
 			if (!tags.length) {
 				throw new ValidationError(CODE_ERRORS.TASK_QUERY('tags'));
 			}
+			// return true;
 		},
 	},
 	customSanitizer: {
