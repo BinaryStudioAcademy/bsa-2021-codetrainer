@@ -20,7 +20,7 @@ const icons = {
 };
 
 const NextTaskContainer = () => {
-	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ id: 0, title: '', icon: '' });
+	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ id: 0, title: 'Fundamentals', icon: '' });
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
 	const task = useAppSelector((rootState) => rootState.home.state?.nextTask);
 

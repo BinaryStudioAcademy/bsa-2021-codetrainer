@@ -7,7 +7,17 @@ import { initTask } from './task/task-api';
 import { ApiPath } from '../common';
 import { initUsers } from './users/users-api';
 import { initFollower } from './follower';
-import { authService, clanService, imagesService, taskService, githubService, follower, users } from '../services';
+import {
+	authService,
+	clanService,
+	imagesService,
+	taskService,
+	githubService,
+	follower,
+	users,
+	commentTaskService,
+} from '../services';
+import { initCommentTask } from './comment-task';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -51,6 +61,8 @@ export function initApi(): Router {
 	);
 
 	apiRouter.use(ApiPath.TASK, initTask(Router, { task: taskService }));
+
+	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
 
 	return apiRouter;
 }

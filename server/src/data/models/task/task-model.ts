@@ -6,9 +6,12 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	ManyToOne,
+	OneToMany,
+	JoinColumn,
 } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
 import { User } from '../user';
+import { CommentTask } from '../comment-task';
 
 @Entity()
 export class Task extends BaseEntity {
@@ -23,14 +26,14 @@ export class Task extends BaseEntity {
 
 	// @Column({ type: 'int' })
 	// languageId?: number;
-	
+
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	rank?: number;
 
 	@Column({ type: 'text', default: '' })
 	tags?: string;
 
-	@Column({ type: 'bool', default: false, width:1 })
+	@Column({ type: 'bool', default: false, width: 1 })
 	allowContributors?: boolean;
 
 	@Column({ type: 'text', default: '' })
@@ -65,4 +68,8 @@ export class Task extends BaseEntity {
 
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
+
+	@OneToMany(() => CommentTask, (commentTask) => commentTask.task)
+	@JoinColumn()
+	comments!: CommentTask[];
 }

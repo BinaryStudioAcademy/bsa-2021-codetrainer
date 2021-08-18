@@ -1,5 +1,5 @@
 import { CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../common';
-import { IClanFields } from '../clan';
+import { CommentTask, Clan } from '../../data';
 
 export interface IProfileClan {
 	id?: string;
@@ -14,7 +14,7 @@ export interface IUserFields {
 	name?: string;
 	surname?: string;
 	profileClan?: IProfileClan;
-	clan: IClanFields;
+	clan: Clan;
 	nickname?: string;
 	avatar?: string;
 	createdAt: string;
@@ -22,4 +22,5 @@ export interface IUserFields {
 	skills?: string[];
 	devLevel?: string;
 	social?: string[];
+	commentTasks?: CommentTask[];
 }

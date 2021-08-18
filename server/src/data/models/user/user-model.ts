@@ -13,6 +13,7 @@ import {
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 import { Task } from '../task';
+import { CommentTask } from '../comment-task';
 
 @Entity()
 export class User extends BaseEntity {
@@ -83,4 +84,8 @@ export class User extends BaseEntity {
 
 	@Column({ unique: true, nullable: true })
 	githubId?: string;
+
+	@OneToMany(() => CommentTask, (commentTask) => commentTask.user)
+	@JoinColumn()
+	commentTasks?: CommentTask[];
 }
