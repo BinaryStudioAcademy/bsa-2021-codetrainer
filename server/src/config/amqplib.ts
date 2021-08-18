@@ -3,9 +3,13 @@ import { ENV } from '../common';
 
 class RabbitConnect {
 	private uri: string;
+
 	private queueName: string;
+
 	private connection!: Connection;
+
 	private channel!: Channel;
+
 	constructor() {
 		this.uri = ENV.AMQP.URL;
 		this.queueName = ENV.AMQP.QUEUE;

@@ -4,5 +4,5 @@ import './config/amqplib';
 const app = express();
 
 app.listen(() => {
-	console.log(`Testing service listening`);
+	console.log('Testing service listening');
 });
