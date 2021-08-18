@@ -24,7 +24,20 @@
 	right: 0;
 	bottom: 0;
 	z-index: 1001;
+	width: 100vw;
 	height: 100vh !important;
+	.panel {
+		.sideBlock {
+			height: 100% !important;
+		}
+		textarea {
+			height: 100% !important;
+		}
+		.markdownText {
+			height: 100% !important;
+			position: absolute;
+		}
+	}
 }
 
 :local(.panel) {
