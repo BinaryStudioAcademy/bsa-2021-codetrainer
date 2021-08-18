@@ -17,7 +17,7 @@ const Setting: React.FC<ISettingProps> = (props) => {
 			/>
 			<div className={styles.gridContainer}>
 				<Social {...props.social} />
-				<ProfilePicture />
+				<ProfilePicture onSubmit={props.information.onSubmit} avatar={props.avatar} />
 			</div>
 			<ChangePassword />
 			<DeleteAccount onDelete={props.onDelete} />

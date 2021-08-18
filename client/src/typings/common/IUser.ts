@@ -15,4 +15,5 @@ export interface IUser {
 	skills?: Array<string>;
 	devLevel?: string;
 	social?: Array<string>;
+	avatar?: string;
 }
