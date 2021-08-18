@@ -5,7 +5,8 @@ import clanSaga from 'containers/clans/clan/logic/saga';
 import authSaga from 'containers/auth/logic/saga';
 import settingsSaga from 'containers/setting-page/logic/saga';
 import searchSaga from 'containers/search-page/logic/saga';
+import { headerSaga } from 'containers/header/logic/saga';
 
 export default function* rootSaga() {
-	yield all([exampleSaga(), authSaga(), clansSaga(), clanSaga(), searchSaga(), settingsSaga()]);
+	yield all([exampleSaga(), authSaga(), clansSaga(), clanSaga(), searchSaga(), settingsSaga(), headerSaga()]);
 }

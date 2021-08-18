@@ -9,6 +9,7 @@ import { IRootState } from 'typings/root-state';
 import { notificationReducer } from '../containers/notification/logic/reducer';
 import { searchReducer } from 'containers/search-page/logic/reducer';
 import { settingsReducer } from './../containers/setting-page/logic/reducer';
+import { headerReducer } from 'containers/header/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,
@@ -20,6 +21,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	notification: notificationReducer,
 	search: searchReducer,
 	settings: settingsReducer,
+	header: headerReducer,
 });
 
 export default rootReducer;
