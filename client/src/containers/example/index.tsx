@@ -14,7 +14,7 @@ import { TSetThemeArgs } from 'components/common/theme-switcher/logic/action-typ
 import { ThemeType } from 'components/common/theme-switcher/logic/models';
 
 interface IExample {
-	theme: string;
+	theme: { theme: string };
 }
 
 const Example: React.FC<IExample> = (props) => {
@@ -27,27 +27,16 @@ const Example: React.FC<IExample> = (props) => {
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
 	};
-	const kek = (name: TSetThemeArgs) => {
+
+	const onClickTheme = (name: TSetThemeArgs) => {
+		// localStorage.setItem('theme', name.theme);
 		dispatch(setTheme(name));
 	};
 
+	//dont know how to force rerender on theme change either in local storage or redux
 	React.useEffect(() => {
-		changeTheme();
+		localStorage.theme = props.theme.theme;
 	}, [props.theme]);
-
-	const changeTheme = () => {
-		const theme = localStorage.getItem('theme');
-		switch (theme) {
-			case 'light':
-				localStorage.setItem('theme', 'dark');
-				break;
-			case 'dark':
-				localStorage.setItem('theme', 'light');
-				break;
-			default:
-				break;
-		}
-	};
 
 	return (
 		<div className={styles.root}>
@@ -108,15 +97,15 @@ const Example: React.FC<IExample> = (props) => {
 				/>
 				<input type="submit" />
 			</form>
-			<button onClick={() => kek({ theme: ThemeType.Dark })}>DARK</button>
-			<button onClick={() => kek({ theme: ThemeType.Light })}>LIGHT</button>
+			<button onClick={() => onClickTheme({ theme: ThemeType.Dark })}>DARK</button>
+			<button onClick={() => onClickTheme({ theme: ThemeType.Light })}>LIGHT</button>
 		</div>
 	);
 };
 
 function mapStateToProps(state: any) {
 	const { theme } = state;
-	return { theme: theme };
+	return { theme };
 }
 
 export default connect(mapStateToProps)(Example);
