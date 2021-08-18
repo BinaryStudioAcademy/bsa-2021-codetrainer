@@ -18,7 +18,7 @@ import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { createTask, deleteTask, updateTask, getById } from 'services/task/task.service';
 import historyHelper from 'helpers/history.helper';
-import { addTask } from 'containers/user/logic/actions';
+import { addTask, deleteTaskRedux } from 'containers/user/logic/actions';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { WebApi } from 'typings/webapi';
 import { useEffect } from 'react';
@@ -48,12 +48,22 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			}),
 		);
 	};
+	const [challengeActiveValue, setChallengeActiveValue] = useState<ISelectValue>({
+		id: '0',
+		title: 'Switch task',
+	});
 	const yourChallengeIds = useAppSelector((state) => state.auth.userData.user?.tasks);
-	const getYourChallengeValues = async () => {
+	const getYourChallengeValues = async (except?: string) => {
 		if (!yourChallengeIds) {
 			return null;
 		}
-		const yourChallengeValues = await yourChallengeIds.map<Promise<{ id: string | null; title: string }>>(
+		let startingArray;
+		if (!except) {
+			startingArray = yourChallengeIds;
+		} else {
+			startingArray = yourChallengeIds.filter((task) => task.id !== except);
+		}
+		const yourChallengeValues = await startingArray.map<Promise<{ id: string | null; title: string }>>(
 			async (task: WebApi.Entities.ITask) => {
 				const result = await getById(task.id);
 				return {
@@ -253,7 +263,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		let task: { error: any; message: string; id: string | null; name: any };
 		if (!taskId) {
 			task = await createTask(requestBody);
-			console.log(task);
 		} else {
 			task = await updateTask(requestBody, taskId);
 		}
@@ -268,6 +277,10 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					},
 				}),
 			);
+			setChallengeActiveValue({
+				id: task.id,
+				title: task.name,
+			});
 			if (yourChallengeValues) {
 				const foundChallenge = yourChallengeValues.find((item) => item.id === task.id);
 				if (foundChallenge) {
@@ -292,8 +305,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 				}
 			} else {
 				setYourChallengeValues(null);
-			}
-			if (!taskId) {
 			}
 			dispatch(
 				setNotificationState({
@@ -333,7 +344,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			createErrorMessage('You haven`t saved this task yet.');
 		} else {
 			const result = await deleteTask(taskId);
-			console.log(result);
 			if (result.error) {
 				createErrorMessage('Something went wrong.');
 			} else if (!result.error) {
@@ -345,6 +355,14 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 						},
 					}),
 				);
+				dispatch(deleteTaskRedux({ task: { id: taskId } }));
+				getYourChallengeValues(taskId).then((result) => {
+					setYourChallengeValues(result ? [{ id: '0', title: 'New task' }, ...result] : null);
+				});
+				setChallengeActiveValue({
+					id: '0',
+					title: 'Switch task',
+				});
 				resetAllFields();
 				dispatch(setTask({ taskId: null }));
 			}
@@ -439,8 +457,9 @@ describe("twoOldestAges", function() {
 			task.tags.forEach((tag: { name: string }) => {
 				tags += tag.name + ',';
 			});
+			const discipline = DISCIPLINE_ITEMS.find((item) => item.value === task.discipline);
 			setTaskName(task.name);
-			setDiscipline(DISCIPLINE_ITEMS[0]);
+			setDiscipline(discipline ? discipline : DISCIPLINE_ITEMS[0]);
 			setLanguage(SELECT_PROPS.values[0]);
 			setRank(task.rank);
 			setSelectedSwitch(task.allowContributors);
@@ -453,6 +472,7 @@ describe("twoOldestAges", function() {
 			setExampleTestCases(task.exampleTestCases);
 		}
 	};
+
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -476,6 +496,12 @@ describe("twoOldestAges", function() {
 						taskId={taskId}
 						yourChallengeValues={yourChallengeValues}
 						onChallengeChange={handleTaskChange}
+						handleReset={() => {
+							resetAllFields();
+							dispatch(setTask({ taskId: null }));
+						}}
+						challengeActiveValue={challengeActiveValue}
+						setChallengeActiveValue={setChallengeActiveValue}
 					/>
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>

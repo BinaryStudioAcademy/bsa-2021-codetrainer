@@ -15,21 +15,24 @@ interface IButtonsBlockProps {
 	taskId: string | null;
 	yourChallengeValues?: ISelectValue[] | null;
 	onChallengeChange: (id: string | null) => void;
+	handleReset: ()=>void
+	challengeActiveValue: ISelectValue;
+	setChallengeActiveValue: (value:ISelectValue)=>void;
 }
 export const ButtonsBlock = ({
 	handlePreviewClick,
 	taskId,
 	yourChallengeValues,
 	onChallengeChange,
+	handleReset,
+	challengeActiveValue,
+	setChallengeActiveValue
 }: IButtonsBlockProps) => {
 	const [goToActiveValue, setGoToActiveValue] = useState<ISelectValue>({
 		id: '1',
 		title: 'Go to',
 	});
-	const [challengeActiveValue, setChallengeActiveValue] = useState<ISelectValue>({
-		id: '0',
-		title: 'Switch task',
-	});
+	
 	const dispatch = useDispatch();
 
 	return (
@@ -59,7 +62,12 @@ export const ButtonsBlock = ({
 							activeValue={challengeActiveValue}
 							onChange={(newValue: ISelectValue) => {
 								dispatch(setTask({ taskId: newValue.id }));
-								onChallengeChange(newValue.id);
+								if(newValue.id!=='0'){
+									onChallengeChange(newValue.id);
+								}
+								else{
+									handleReset();
+								}
 								setChallengeActiveValue(newValue);
 							}}
 							isButtonBlockSelect={true}

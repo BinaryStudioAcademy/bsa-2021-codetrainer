@@ -11,3 +11,4 @@ export const setUserAccessTokenLoading = createAction<actionTypes.TUserAccessTok
 
 export const logoutUser = createAction(actionTypes.USER_LOGOUT);
 export const addTask = createAction<actionTypes.TUserAddTask>(actionTypes.ADD_TASK);
+export const deleteTaskRedux = createAction<actionTypes.TUserDeleteTask>(actionTypes.DELETE_TASK);
