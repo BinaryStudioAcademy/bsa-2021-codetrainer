@@ -9,7 +9,7 @@ import { authReducer } from 'containers/auth/logic/reducer';
 import { notificationReducer } from '../containers/notification/logic/reducer';
 import { searchReducer } from 'containers/search-page/logic/reducer';
 import { settingsReducer } from './../containers/setting-page/logic/reducer';
-import { themeReducer } from '../components/common/theme-switcher/logic/reducer';
+import { themeReducer } from 'containers/theme-switcher/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,

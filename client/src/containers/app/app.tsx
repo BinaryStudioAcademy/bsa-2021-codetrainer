@@ -4,13 +4,14 @@ import { Provider } from 'react-redux';
 import history from 'helpers/history.helper';
 import store from 'redux/store';
 import Routing from 'containers/routing';
+
 import { NotificationContainer } from '../notification';
 
 const App: React.FC = () => {
-	if (!localStorage.getItem('theme')) {
-		localStorage.setItem('theme', 'dark');
-	}
-	document.documentElement.setAttribute('data-theme', localStorage.theme);
+	// if (!localStorage.getItem('theme')) {
+	// 	localStorage.setItem('theme', 'dark');
+	// }
+
 	return (
 		<Provider store={store}>
 			<Router history={history}>

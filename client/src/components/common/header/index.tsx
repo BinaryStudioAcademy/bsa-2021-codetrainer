@@ -3,7 +3,7 @@ import { Avatar, Label } from 'components';
 import styles from './header.module.scss';
 import bellImg from 'assets/icons/header/bell.svg';
 import { Rank } from 'components/basic';
-import ThemeSwitcher from '../theme-switcher';
+import ThemeSwitcher from '../../../containers/theme-switcher';
 
 export interface IHeaderProps {
 	name: string;

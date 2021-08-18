@@ -9,9 +9,7 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
-import { setTheme } from 'components/common/theme-switcher/logic/actions';
-import { TSetThemeArgs } from 'components/common/theme-switcher/logic/action-types';
-import { ThemeType } from 'components/common/theme-switcher/logic/models';
+import ThemeSwitcher from 'containers/theme-switcher';
 
 interface IExample {
 	theme: { theme: string };
@@ -26,11 +24,6 @@ const Example: React.FC<IExample> = (props) => {
 	};
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
-	};
-
-	const onClickTheme = (name: TSetThemeArgs) => {
-		// localStorage.setItem('theme', name.theme);
-		dispatch(setTheme(name));
 	};
 
 	//dont know how to force rerender on theme change either in local storage or redux
@@ -97,8 +90,7 @@ const Example: React.FC<IExample> = (props) => {
 				/>
 				<input type="submit" />
 			</form>
-			<button onClick={() => onClickTheme({ theme: ThemeType.Dark })}>DARK</button>
-			<button onClick={() => onClickTheme({ theme: ThemeType.Light })}>LIGHT</button>
+			<ThemeSwitcher />
 		</div>
 	);
 };

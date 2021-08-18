@@ -12,4 +12,3 @@ export { default as Spinner } from './spinner';
 export { default as Social } from './social';
 export { default as TaskInstructions } from './task-instructions';
 export { default as Separator } from './separator';
-export { default as ThemeSwitcher } from './theme-switcher';
