@@ -72,4 +72,11 @@ export class UserRepository extends AbstractRepository<User> {
 	updateById(id: string, data: Partial<User>) {
 		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
+
+	getPasswordById(id: string) {
+		return this.createQueryBuilder('user')
+			.select(['user.password'])
+			.where('user.id = :id', { id })
+			.getOne();
+	}
 }

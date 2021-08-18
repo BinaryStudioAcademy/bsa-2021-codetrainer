@@ -10,6 +10,7 @@ import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 
 import * as actions from 'containers/user/logic/actions';
+import { updatePassword } from 'services/settings.service';
 
 const radioListItems = [
 	{
@@ -50,8 +51,6 @@ const SettingPageContainer: React.FC = () => {
 				values.skills = values.skills.split(',');
 			}
 
-			console.log(values);
-
 			const data: any = {
 				id: user?.id,
 				user: {
@@ -66,6 +65,43 @@ const SettingPageContainer: React.FC = () => {
 		},
 		[user],
 	);
+
+	const onSubmitPasswordChange = useCallback(
+		async (values: { currentPassword: string; newPassword: string }) => {
+			const data: any = {
+				id: user?.id,
+				password: values.currentPassword,
+				newPassword: values.newPassword,
+			};
+			try {
+				await updatePassword(data);
+			} catch (res) {
+				console.log('err', res.errors.message);
+				dispatch(
+					setNotificationState({
+						state: {
+							notificationType: NotificationType.Error,
+							message: res.errors.message,
+							title: 'Update password',
+						},
+					}),
+				);
+				return;
+			}
+
+			dispatch(
+				setNotificationState({
+					state: {
+						notificationType: NotificationType.Success,
+						message: 'Password updated succesfull',
+						title: 'Update password',
+					},
+				}),
+			);
+		},
+		[user],
+	);
+
 	const requestError = useAppSelector((state) => state.auth.userData.requestError);
 	useEffect(() => {
 		dispatch(actions.userClearNotification());
@@ -196,6 +232,7 @@ const SettingPageContainer: React.FC = () => {
 			}}
 			onDelete={onDelete}
 			avatar={user?.avatar}
+			onSubmitPasswordChange={onSubmitPasswordChange}
 		/>
 	);
 };

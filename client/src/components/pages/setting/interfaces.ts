@@ -6,4 +6,5 @@ export interface ISettingProps {
 	social: ISocialProps;
 	avatar?: string;
 	onDelete: () => void;
+	onSubmitPasswordChange: (form: any) => void;
 }

@@ -19,7 +19,7 @@ const Setting: React.FC<ISettingProps> = (props) => {
 				<Social {...props.social} />
 				<ProfilePicture onSubmit={props.information.onSubmit} avatar={props.avatar} />
 			</div>
-			<ChangePassword />
+			<ChangePassword onSubmitPasswordChange={props.onSubmitPasswordChange} />
 			<DeleteAccount onDelete={props.onDelete} />
 		</div>
 	);

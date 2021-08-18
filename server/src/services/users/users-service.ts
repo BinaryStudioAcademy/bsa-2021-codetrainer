@@ -2,7 +2,7 @@ import Express from 'express';
 import { getCustomRepository } from 'typeorm';
 import { TUserRepository } from '../../data';
 import { User as UserType } from '../../data/models';
-import { ValidationError } from '../../helpers';
+import { ValidationError, cryptCompare, encrypt } from '../../helpers';
 import { CODE_ERRORS } from '../../common';
 
 export class User {
@@ -60,6 +60,23 @@ export class User {
 		}
 
 		return { delete: isDeleted };
+	}
+
+	async updatePassword(id: string, body: UserType & {newPassword: string}) {
+		const repository = getCustomRepository(this.userRepository);
+		const user = await repository.getPasswordById(id);
+
+		if(body.password && !(await cryptCompare(body.password, user?.password))) {
+			throw new ValidationError(CODE_ERRORS.PASSWORD_NOT_MATCH);
+		}
+
+		await repository.updateById(id, {
+			password: await encrypt(body.newPassword)
+		});
+
+		return {
+			passwordChanged: true
+		};
 	}
 }
 
