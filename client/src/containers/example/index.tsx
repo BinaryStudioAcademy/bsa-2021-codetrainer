@@ -9,7 +9,6 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
-import ThemeSwitcher from 'containers/theme-switcher';
 
 interface IExample {
 	theme: { theme: string };
@@ -26,11 +25,6 @@ const Example: React.FC<IExample> = (props) => {
 		dispatch(setNotificationState(notification));
 	};
 
-	//dont know how to force rerender on theme change either in local storage or redux
-	React.useEffect(() => {
-		localStorage.theme = props.theme.theme;
-	}, [props.theme]);
-
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
@@ -46,6 +40,7 @@ const Example: React.FC<IExample> = (props) => {
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
 				HOME
 			</button>
+
 			<div>
 				{Object.values(NotificationType).map((type) => {
 					return (
@@ -90,7 +85,6 @@ const Example: React.FC<IExample> = (props) => {
 				/>
 				<input type="submit" />
 			</form>
-			<ThemeSwitcher />
 		</div>
 	);
 };

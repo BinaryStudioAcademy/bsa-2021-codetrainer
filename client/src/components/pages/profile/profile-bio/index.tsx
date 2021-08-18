@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile-bio.module.scss';
-import { Avatar, Label, List } from 'components/basic';
+import { Avatar, Label, List, Rank } from 'components/basic';
 
 export interface IProfileBioProps {
 	img?: string;
@@ -61,7 +61,7 @@ export const ProfileBio = (props: IProfileBioProps) => {
 			<div className={styles.profileHeader}>
 				{img ? <Avatar avatar={img} size={57} /> : <Avatar size={57} />}
 				<h5 className={styles.name}>{name}</h5>
-				<Label label={rank + ' rank'} color="#EC4179" />
+				<Rank rank={rank} />
 				<Label label={score} color="#EC4179" />
 			</div>
 			<div className={styles.fields}>
