@@ -103,6 +103,7 @@ const SettingPageContainer: React.FC = () => {
 	);
 
 	const requestError = useAppSelector((state) => state.auth.userData.requestError);
+
 	useEffect(() => {
 		dispatch(actions.userClearNotification());
 	}, []);

@@ -7,10 +7,6 @@ import { ButtonClasses } from 'components/basic/button';
 import List from '../list-radio';
 import { IFormItem, IInformationProps } from './interfaces';
 import styles from './information.module.scss';
-// import { useDispatch } from 'react-redux';
-// import * as actions from 'containers/user/logic/actions';
-
-
 
 const SignupSchema = Yup.object().shape({
 	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
@@ -56,8 +52,8 @@ const Information: React.FC<IInformationProps> = (props) => {
 				initialValues={initialValues}
 				validationSchema={SignupSchema}
 				onSubmit={(value) => {
-					const {clan, ...info} = value;
-					props.onSubmit(info)
+					const { clan, ...info } = value;
+					props.onSubmit(info);
 				}}
 			>
 				<Form className={styles.form}>

@@ -24,9 +24,6 @@ const DeleteAccount: React.FC<IDeleteAccountProps> = (props) => {
 				insted be attached to a generic profile that is not associated with any of your personal information.
 				After deleting your account you are free to sign up againg using same email address.
 			</p>
-			{/* <div className={styles.buttonWrapper}>
-				<Button className={clsx(ButtonClasses.red, styles.submitBtn)} onClick={showModal}>Delete Account</Button>
-			</div> */}
 			{isHideConfirm ? (
 				<div className={styles.buttonWrapper}>
 					<Button className={clsx(ButtonClasses.red, styles.submitBtn)} onClick={showModal}>
