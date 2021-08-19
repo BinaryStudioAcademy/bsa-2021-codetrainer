@@ -21,7 +21,6 @@ export const profileReducer = createReducer<IProfileState>(initialState, {
 		return initialState;
 	},
 	[actionTypes.SEARCH_USER_SUCCESS](state, action: actionTypes.TSearchSetData) {
-		debugger;
 		return {
 			...state,
 			isLoading: false,

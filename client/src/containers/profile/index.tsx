@@ -31,7 +31,7 @@ export const Profile = (props: RouteComponentProps) => {
 	useEffect(() => {
 		dispatch(
 			actions.searchUser({
-				partialFilter: { username }
+				query: { username }
 			}),
 		);
 	}, [username]);
