@@ -98,6 +98,10 @@ const goToValues = [
 	},
 	{
 		id: '4',
+		title: 'Translations',
+	},
+	{
+		id: '5',
 		title: 'Trainer',
 	},
 ];

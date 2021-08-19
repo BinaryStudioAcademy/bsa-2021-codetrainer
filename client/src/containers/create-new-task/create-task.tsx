@@ -486,6 +486,9 @@ describe("twoOldestAges", function() {
 				historyHelper.push(taskId ? '/task/' + taskId : '');
 				break;
 			case '4':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '5':
 				historyHelper.push(taskId ? '/task/' + taskId + '/train' : '');
 				break;
 		}
