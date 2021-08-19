@@ -1,5 +1,7 @@
 import Express from 'express';
 import { getCustomRepository } from 'typeorm';
+import { ValidationError } from '../../helpers';
+import { CODE_ERRORS } from '../../common';
 import { TUserRepository, User as UserEntity } from '../../data';
 
 export class User {
@@ -48,9 +50,11 @@ export class User {
 
 	async search(query: { username: string }) {
 		const userRepository = getCustomRepository(this.userRepository);
-		return {
-			user: await userRepository.search(query),
-		};
+		const user = await userRepository.search(query);
+		if (!user) {
+			throw new ValidationError(CODE_ERRORS.USERNAME_NOT_EXIST(query.username));
+		}
+		return { user };
 	}
 }
 
