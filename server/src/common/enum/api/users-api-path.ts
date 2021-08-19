@@ -3,4 +3,5 @@ export const UsersApiPath = {
 	GET_ONE: '/:id',
 	UPDATE: '/:id',
 	DELETE: '/:id',
+	SEARCH: '/search',
 };
