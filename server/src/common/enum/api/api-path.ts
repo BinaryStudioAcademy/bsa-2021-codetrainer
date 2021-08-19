@@ -6,5 +6,6 @@ export const ApiPath = {
 	FOLLOWERS: '/followers',
 	IMAGES: '/images',
 	TASK: '/tasks',
+	COLLECTIONS: '/collections',
 	GITHUB: '/github',
 };
