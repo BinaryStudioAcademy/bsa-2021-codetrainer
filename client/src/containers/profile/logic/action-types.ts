@@ -8,14 +8,12 @@ export const SEARCH_USER_SUCCESS = 'SEARCH_USER:SUCCESS';
 export const CLEAR_DATA = 'CLEAR_DATA';
 
 export type TSearchError = {
-	payload: string
+	payload: string;
 };
-
 
 export type TSearchSetData = {
-	user: IUser
+	user: IUser;
 };
-
 
 export type TSetActiveTabArgs = {
 	activeTab: ActiveTabId;

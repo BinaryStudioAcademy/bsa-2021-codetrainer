@@ -29,11 +29,10 @@ export const Profile = (props: RouteComponentProps) => {
 	useEffect(() => {
 		dispatch(
 			actions.searchUser({
-				query: { username }
+				query: { username },
 			}),
 		);
 	}, [username]);
-
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
@@ -60,21 +59,19 @@ export const Profile = (props: RouteComponentProps) => {
 		});
 	}, [setActiveTab]);
 
-
-	return (
-		isLoading
-			? <FullscreenLoader />
-			:
-			<ProfilePage
-				error={error}
-				userInfo={userData}
-				profileInfoProps={{
-					getTabContent,
-					profileRouteProps: {
-						tabItems,
-						activeTabId,
-					},
-				}}
-			/>
+	return isLoading ? (
+		<FullscreenLoader />
+	) : (
+		<ProfilePage
+			error={error}
+			userInfo={userData}
+			profileInfoProps={{
+				getTabContent,
+				profileRouteProps: {
+					tabItems,
+					activeTabId,
+				},
+			}}
+		/>
 	);
 };

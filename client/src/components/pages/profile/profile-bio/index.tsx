@@ -3,16 +3,14 @@ import styles from './profile-bio.module.scss';
 import { Avatar, Label, List } from 'components/basic';
 import { IUser } from 'typings/common/IUser';
 
-export type IProfileBioProps =
-	IUser & {
-		followingQuantity?: number;
-		followersQuantity?: number;
-		communityQuantity?: number;
-		memberSince?: string;
-		lastSeen?: string;
-		score?: number;
-
-	}
+export type IProfileBioProps = IUser & {
+	followingQuantity?: number;
+	followersQuantity?: number;
+	communityQuantity?: number;
+	memberSince?: string;
+	lastSeen?: string;
+	score?: number;
+};
 
 export const ProfileBio = (props: IProfileBioProps) => {
 	const {

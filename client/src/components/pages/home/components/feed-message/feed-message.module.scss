@@ -1,6 +1,9 @@
 .messageUser {
 	display: flex;
 	margin-bottom: 25px;
+	:first-child {
+		margin: 5px;
+	}
 }
 
 .messageDataWrapper {

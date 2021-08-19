@@ -25,8 +25,7 @@ export const profileReducer = createReducer<IProfileState>(initialState, {
 			...state,
 			isLoading: false,
 			isSuccess: true,
-			userData: action.user
+			userData: action.user,
 		};
 	},
-
 });
