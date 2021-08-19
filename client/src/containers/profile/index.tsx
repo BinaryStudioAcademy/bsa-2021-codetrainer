@@ -24,9 +24,7 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const { isLoading, error, userData } = useAppSelector((state) => state.profile);
 
-	//@ts-ignore
-	const { username } = useParams();
-
+	const { username } = useParams<{ username: string }>();
 
 	useEffect(() => {
 		dispatch(
