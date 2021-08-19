@@ -8,11 +8,8 @@ import menuProfile from 'assets/icons/header/menu/avatar.svg';
 import menuSettings from 'assets/icons/header/menu/settings.svg';
 import menuChallenge from 'assets/icons/header/menu/goal.svg';
 import menuSignout from 'assets/icons/header/menu/logout.svg';
-import logo from 'assets/images/logo.svg';
 import { ROUTES } from 'constants/routes';
 import { useHistory } from 'react-router-dom';
-
-console.log(logo);
 
 const Header = () => {
 	const history = useHistory();
@@ -33,7 +30,7 @@ const Header = () => {
 					id: '1',
 					image: menuProfile,
 					text: 'View Profile',
-					onClick: () => history.push(ROUTES.UserProfile),
+					onClick: () => history.push(`/users/${user?.username}`),
 				},
 				{
 					id: '2',
