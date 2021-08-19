@@ -43,7 +43,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 					<span className={styles.separator}></span>
 					{feedCategoriesJSX}
 				</div>
-				{feedContentJSX}
+				{messages ? feedContentJSX : 'No messages yet'}
 			</div>
 			{!isLastPage ? loadMoreButton : null}
 		</div>

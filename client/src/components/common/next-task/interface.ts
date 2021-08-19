@@ -1,5 +1,9 @@
 import { ISelectValue } from '../../basic/select/interface';
 
+export interface ITag {
+	id: string;
+	name: string;
+}
 export interface ITask {
 	id: string;
 	name: string;
@@ -7,7 +11,7 @@ export interface ITask {
 	description?: string;
 	exampleTestCases?: string;
 	rank: number;
-	tags: string[];
+	tags: ITag[];
 }
 
 export interface INextTaskProps {

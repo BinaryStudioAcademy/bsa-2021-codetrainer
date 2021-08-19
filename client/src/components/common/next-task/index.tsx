@@ -27,23 +27,25 @@ const NextTask: React.FC<INextTaskProps> = ({
 
 				<div>
 					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Train</Button>
-					<Button
-						onClick={handleSkipClick}
-						className={clsx(ButtonClasses.red, styles.skipButton)}>Skip</Button>
+					<Button onClick={handleSkipClick} className={clsx(ButtonClasses.red, styles.skipButton)}>
+						Skip
+					</Button>
 				</div>
 			</div>
 
 			<div className={styles.taskContainer}>
-				{
-					task ? (
-						<TaskDescription
-							rank={task.rank}
-							name={task.name}
-							description={task.description}
-							examples={task.exampleTestCases}
-							content={task.description || ''} tags={task.tags} />
-					) : <Spinner />
-				}
+				{task ? (
+					<TaskDescription
+						rank={task.rank}
+						name={task.name}
+						description={task.description}
+						examples={task.exampleTestCases}
+						content={task.description || ''}
+						tags={task.tags?.map((item) => item.name)}
+					/>
+				) : (
+					<Spinner />
+				)}
 			</div>
 		</article>
 	);

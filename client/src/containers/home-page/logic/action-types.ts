@@ -1,4 +1,5 @@
 import { IMessage } from '../types';
+import { ITag } from '../../../components/common/next-task/interface';
 
 export const GET_TASKS = 'HOME:GET_TASKS';
 export const SET_TASK = 'HOME:SET_TASK';
@@ -16,7 +17,7 @@ export type TSetTask = {
 		name: string;
 		description: string;
 		rank: number;
-		tags: string[];
+		tags: ITag[];
 	};
 };
 

@@ -14,7 +14,7 @@ const HomePageContainer: React.FC = () => {
 		return <Redirect from="/home" to={ROUTES.NotFound} />;
 	}
 
-	const users = user.clan?.members.length ? user.clan.members : [user];
+	const users = user.clan?.members?.length ? user.clan.members : [user];
 
 	return (
 		<>
