@@ -3,21 +3,19 @@ import { all, put, call, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 
-export function* fetchUserSearch({ partialFilter }: ReturnType<typeof actions.searchFetchData>) {
+export function* fetchUserSearch({ partialFilter }: ReturnType<typeof actions.searchUser>) {
     try {
-        debugger;
-        yield put(actions.searchBeforeFetch());
+        yield put(actions.clearData());
         //@ts-ignore
-        const data: any = yield call(fetchUsersSearch, partialFilter);
-        yield put(actions.searchSuccess());
-        yield put(actions.searchSetData({ data }));
+        const userData: any = yield call(fetchUsersSearch, partialFilter);
+        yield put(actions.searchUserSuccess(userData));
     } catch (error) {
-        yield put(actions.searchError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));
+        yield put(actions.searchUserError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));
     }
 }
 
 function* watchFetchSearch() {
-    yield takeLatest(actionTypes.SEARCH_FETCH, fetchUserSearch);
+    yield takeLatest(actionTypes.SEARCH_USER_FETCH, fetchUserSearch);
 }
 
 export default function* SearchSaga() {

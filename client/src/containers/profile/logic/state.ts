@@ -3,20 +3,16 @@ import { ActiveTabId } from './models';
 
 export interface IProfileState {
 	activeTab: ActiveTabId;
-	user: IUser | null;
 	isLoading: boolean;
 	errors: Record<string, { msg: string }[]> | string | null;
 	isSuccess: boolean;
-	onSubmit: boolean;
-	username: string;
+	userData: IUser | null;
 }
 
 export const initialState: IProfileState = {
 	activeTab: ActiveTabId.Stats,
-	user: null,
 	isLoading: false,
 	errors: null,
 	isSuccess: false,
-	onSubmit: false,
-	username: ''
+	userData: null,
 };

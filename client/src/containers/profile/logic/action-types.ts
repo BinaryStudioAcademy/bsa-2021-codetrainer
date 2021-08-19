@@ -1,12 +1,11 @@
 import { ActiveTabId } from './models';
 export const SET_ACTIVE_TAB = 'PROFILE:SET_ACTIVE_TAB';
 
-export const SEARCH_SET_DATA = 'SEARCH:SET_DATA';
-export const SEARCH_SET_SUBMIT = 'SEARCH:SET_SUBMIT';
-export const SEARCH_ERROR = 'SEARCH:ERROR';
-export const SEARCH_SUCCESS = 'SEARCH:SUCCESS';
-export const SEARCH_FETCH = 'SEARCH:FETCH';
-export const SEARCH_BEFORE_FETCH = 'SEARCH:BEFORE_FETCH';
+export const SEARCH_USER_FETCH = 'SEARCH_USER:FETCH';
+export const SEARCH_USER_ERROR = 'SEARCH_USER:ERROR';
+export const SEARCH_USER_SUCCESS = 'SEARCH_USER:SUCCESS';
+export const CLEAR_DATA = 'CLEAR_DATA';
+
 
 export type TSearchSetSubmit = {
 	payload: boolean;
@@ -18,7 +17,7 @@ export type TSearchError = {
 
 
 export type TSearchSetData = {
-	data: any//ISearchState['search'];
+	user: any//ISearchState['search'];
 };
 
 

@@ -33,10 +33,8 @@ export const Profile = (props: RouteComponentProps) => {
 
 
 	useEffect(() => {
-
-		debugger;
 		dispatch(
-			actions.searchFetchData({
+			actions.searchUser({
 				partialFilter: { username }
 			}),
 		);
