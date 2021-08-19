@@ -26,7 +26,7 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 	let feedContentJSX = null;
 	switch (selectedFeedCategory) {
 		case 'All':
-			feedContentJSX = messages.map((message) => <FeedMessage key={message.id} {...message} />);
+			feedContentJSX = messages?.map((message) => <FeedMessage key={message.id} {...message} />);
 			break;
 		case 'Questions':
 			feedContentJSX = 'questions';

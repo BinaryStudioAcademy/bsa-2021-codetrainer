@@ -7,9 +7,19 @@ export const homeReducer = createReducer<IHomeState>(initialState, {
 		return {
 			...state,
 			state: {
-				nextTask: action.task
-			}
+				...state.state,
+				nextTask: action.task,
+			},
+		};
+	},
+
+	[actionTypes.SET_MESSAGES](state, action: actionTypes.TSetMessages) {
+		return {
+			...state,
+			state: {
+				...state.state,
+				messages: action.messages,
+			},
 		};
 	},
 });
-

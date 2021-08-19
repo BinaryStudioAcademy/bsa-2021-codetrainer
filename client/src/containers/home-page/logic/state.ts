@@ -1,3 +1,5 @@
+import { IMessage } from '../types';
+
 export interface IHomeState {
 	state: {
 		nextTask: {
@@ -6,12 +8,14 @@ export interface IHomeState {
 			description: string;
 			rank: number;
 			tags: string[];
-		} | null,
-	} | null
+		} | null;
+		messages: IMessage[] | null;
+	};
 }
 
 export const initialState: IHomeState = {
 	state: {
-		nextTask: null
-	}
+		nextTask: null,
+		messages: null,
+	},
 };

@@ -8,9 +8,15 @@ export class CommentTaskService {
 		this.commentTaskRepository = commentTask;
 	}
 
-	async getCommentTasks(id: string, { skip = 0, take = 10 }) {
+	async getCommentTasksByTaskId(id: string, { skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.commentTaskRepository);
-		const commentTask = await repository.getAll(id, skip, take);
+		const commentTask = await repository.getAllByTaskId(id, skip, take);
+		return commentTask;
+	}
+
+	async getAllCommentTasks({ skip = 0, take = 10 }) {
+		const repository = getCustomRepository(this.commentTaskRepository);
+		const commentTask = await repository.getAll(skip, take);
 		return commentTask;
 	}
 

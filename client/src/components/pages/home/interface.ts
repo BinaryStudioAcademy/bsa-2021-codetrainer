@@ -1,13 +1,14 @@
 import React from 'react';
 import { IUser } from './components/community/interface';
-import { IMessage } from './components/feed/interface';
+// import { IMessage } from './components/feed/interface';
 
 export interface IHomeProps {
 	activeUser: IUser | null;
 	users: IUser[];
-	messages: IMessage[];
-	selectedFeedCategory: string;
-	onSelectFeedCategory: (category: string) => void;
-	isLastPage: boolean;
+	// messages: IMessage[];
+	// selectedFeedCategory: string;
+	// onSelectFeedCategory: (category: string) => void;
+	// isLastPage: boolean;
 	nextTaskContent: React.ReactNode;
+	feedContent: React.ReactNode;
 }

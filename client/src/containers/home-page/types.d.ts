@@ -2,7 +2,6 @@ export interface IMessage {
 	id: string;
 	user: {
 		id: string;
-		imageSource?: string;
 		name: string;
 		surname: string;
 		clan: {
@@ -16,11 +15,4 @@ export interface IMessage {
 	};
 	body: string;
 	createdAt: Date;
-}
-
-export interface IFeedProps {
-	messages: IMessage[] | null;
-	selectedFeedCategory: string;
-	onSelectFeedCategory: (category: string) => void;
-	isLastPage: boolean;
 }

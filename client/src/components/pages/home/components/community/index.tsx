@@ -38,7 +38,7 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					<div className={styles.communityColumn}>
 						{users.map((user) => (
 							<p key={user.id} className={styles.columnText}>
-								{user.clan}
+								{user.clan?.name}
 							</p>
 						))}
 					</div>
