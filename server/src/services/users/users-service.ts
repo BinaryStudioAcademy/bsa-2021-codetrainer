@@ -45,6 +45,13 @@ export class User {
 
 		return { delete: isDeleted };
 	}
+
+	async search(query: { username: string }) {
+		const userRepository = getCustomRepository(this.userRepository);
+		return {
+			user: await userRepository.search(query),
+		};
+	}
 }
 
 export type TUsers = InstanceType<typeof User>;

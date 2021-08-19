@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './profile.module.scss';
-import { IProfileBioProps, ProfileBio } from './profile-bio';
+import { ProfileBio } from './profile-bio';
 import { IProfileInfoProps, ProfileInfo } from './profile-info';
+import { IUser } from 'typings/common/IUser';
 
 interface IProfileProps {
-	userInfo: IProfileBioProps;
+	userInfo: IUser;
 	profileInfoProps: IProfileInfoProps;
 }
 
