@@ -1,6 +1,6 @@
 import { Channel, connect, Connection, ConsumeMessage } from 'amqplib';
 import { ENV } from '../common/env-enum';
-import { callApi } from '../helpers/call-api';
+import { sendTestResult } from '../helpers/call-api';
 import { sendToServer } from './amqp-mocks';
 
 interface IMessageConsume {
@@ -53,9 +53,11 @@ class RabbitConnect {
 
 		this.channel.ack(message);
 		const { taskId, solutionId, userId } = parseMessage;
-		callApi(taskId, solutionId, {
-			body: result,
+		sendTestResult({
+			result,
 			userId,
+			taskId,
+			solutionId,
 		});
 	}
 

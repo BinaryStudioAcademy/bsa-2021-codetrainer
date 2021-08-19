@@ -7,7 +7,8 @@ import { initTaskApi } from './task';
 import { ApiPath } from '../common';
 import { initUsers } from './users/users-api';
 import { initFollower } from './follower';
-import { authService, clanService, imagesService, githubService, follower, users } from '../services';
+import { initTest } from './test/test-api';
+import { authService, clanService, imagesService, githubService, follower, users, solutionService } from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -51,6 +52,8 @@ export function initApi(): Router {
 	);
 
 	apiRouter.use(ApiPath.TASK, initTaskApi());
+
+	apiRouter.use(ApiPath.TESTS, initTest(Router, { solution: solutionService }));
 
 	return apiRouter;
 }
