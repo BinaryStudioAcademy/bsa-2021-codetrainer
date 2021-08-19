@@ -37,9 +37,7 @@ const testMessages = {
 };
 
 const HomePageContainer: React.FC = () => {
-
 	const user = useSelector((rootState: IRootState) => rootState.auth.userData.user);
-	const clan = useSelector((rootState: IRootState) => rootState.clan.item);
 	const [selectedFeedCategory, setSelectedFeedCategory] = useState('All');
 
 	const handleSelectFeedCategory = (category: string) => {
@@ -47,10 +45,10 @@ const HomePageContainer: React.FC = () => {
 	};
 
 	if (!user) {
-		return <Redirect from='/home' to={ROUTES.NotFound} />
+		return <Redirect from="/home" to={ROUTES.NotFound} />;
 	}
 
-	const users = clan.members.length ? clan.members : [user];
+	const users = user.clan?.members.length ? user.clan.members : [user];
 
 	return (
 		<>
