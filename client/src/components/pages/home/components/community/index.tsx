@@ -52,9 +52,6 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					</div>
 				</div>
 				<div className={styles.buttonsContainer}>
-					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.addButton)}>
-						Add New Friend
-					</Button>
 					<Button onClick={openModal} className={clsx(ButtonClasses.red, styles.createButton)}>
 						Create New Clan
 					</Button>
