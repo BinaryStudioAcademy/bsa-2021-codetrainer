@@ -50,7 +50,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 				</span>
 			</td>
 			<td>
-				<span>{clan.honour}</span>
+				<span>{clan.honor}</span>
 			</td>
 			<td>
 				{currentUserMember ? (

@@ -27,7 +27,7 @@ export const ButtonsBlock = ({ handlePreviewClick }: IButtonsBlockProps) => {
 					Preview
 				</Button>
 				<div className="select">
-					<label>Go to</label>
+					<label className="label">Go to</label>
 					<Select
 						values={goToValues}
 						activeValue={goToActiveValue}
@@ -35,11 +35,12 @@ export const ButtonsBlock = ({ handlePreviewClick }: IButtonsBlockProps) => {
 					/>
 				</div>
 				<div className="select">
-					<label>Your challenge</label>
+					<label className="label">Your challenge</label>
 					<Select
 						values={challengeValues}
 						activeValue={challengeActiveValue}
 						onChange={(newValue: ISelectValue) => setChallengeActiveValue(newValue)}
+						isButtonBlockSelect={true}
 					/>
 				</div>
 				<ChangeTheme />

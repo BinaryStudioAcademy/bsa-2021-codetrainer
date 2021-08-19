@@ -1,9 +1,9 @@
 import Express from 'express';
 import { getCustomRepository } from 'typeorm';
-import { TUserRepository } from '../../data';
 import { User as UserType } from '../../data/models';
 import { ValidationError, cryptCompare, encrypt } from '../../helpers';
 import { CODE_ERRORS } from '../../common';
+import { TUserRepository, User as UserEntity } from '../../data';
 
 export class User {
 	protected userRepository: TUserRepository;
@@ -28,7 +28,7 @@ export class User {
 		};
 	}
 
-	async update(id: string, body: UserType) {
+	async update(id: string, body: UserEntity) {
 		const repository = getCustomRepository(this.userRepository);
 		const user = await repository.getById(id);
 
@@ -77,6 +77,14 @@ export class User {
 		return {
 			passwordChanged: true
 		};
+	}
+	async search(query: { username: string }) {
+		const userRepository = getCustomRepository(this.userRepository);
+		const user = await userRepository.search(query);
+		if (!user) {
+			throw new ValidationError(CODE_ERRORS.USERNAME_NOT_EXIST(query.username));
+		}
+		return { user };
 	}
 }
 

@@ -40,7 +40,7 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 				query.andWhere('task.rank = :rank', { rank: value });
 				break;
 			case SEARCH_KEYS.TAGS:
-				query.andWhere('tag.name IN (:tags)', { tags: value });
+				query.andWhere('tag.name IN (:...tags)', { tags: value });
 				break;
 			case SEARCH_KEYS.PROGRESS:
 				if (value === 'all') {
@@ -60,12 +60,15 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 @EntityRepository(Task)
 export class TaskRepository extends AbstractRepository<Task> {
 	getAll(skip: number, take: number) {
-		return this.createQueryBuilder('task')
-			.leftJoinAndSelect('task.user', 'user')
-			.select(['task', 'user.name', 'user.id'])
-			.skip(skip)
-			.take(take)
-			.getMany();
+		return (
+			this.createQueryBuilder('task')
+				.leftJoinAndSelect('task.user', 'user')
+				.leftJoinAndSelect('task.tags', 'tag')
+				.select(['task', 'user.name', 'user.id', 'tag.id', 'tag.name'])
+				.skip(skip)
+				.take(take)
+				.getMany()
+		);
 	}
 
 	updateById(id: string, data: Partial<Task>) {
@@ -76,7 +79,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task')
 			.leftJoinAndSelect('task.solutions', 'solution')
 			.leftJoinAndSelect('task.tags', 'tag')
-			.select(['task', 'solution.id', 'tag.id'])
+			.select(['task', 'solution.id', 'tag.id', 'tag.name'])
 			.where('task.id = :id', { id })
 			.getOne();
 	}

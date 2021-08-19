@@ -30,7 +30,7 @@ const Header = () => {
 					id: '1',
 					image: menuProfile,
 					text: 'View Profile',
-					onClick: () => history.push(ROUTES.UserProfile),
+					onClick: () => history.push(`/users/${user?.username}`),
 				},
 				{
 					id: '2',

@@ -1,31 +1,27 @@
 import React from 'react';
 import styles from './profile-bio.module.scss';
 import { Avatar, Label, List } from 'components/basic';
+import { IUser } from 'typings/common/IUser';
 
-export interface IProfileBioProps {
-	img?: string;
-	name: string;
-	nickname: string;
-	clan?: string;
-	memberSince: string;
-	lastSeen: string;
-	gitHubUrl?: string;
-	followingQuantity: number;
-	followersQuantity: number;
-	communityQuantity: number;
-	rank: number;
-	score: number;
-}
+export type IProfileBioProps = IUser & {
+	followingQuantity?: number;
+	followersQuantity?: number;
+	communityQuantity?: number;
+	memberSince?: string;
+	lastSeen?: string;
+	score?: number;
+};
 
 export const ProfileBio = (props: IProfileBioProps) => {
 	const {
 		img,
 		name,
-		nickname,
+		surname,
+		username,
 		clan,
 		memberSince,
 		lastSeen,
-		gitHubUrl,
+		github,
 		followingQuantity,
 		followersQuantity,
 		communityQuantity,
@@ -33,17 +29,17 @@ export const ProfileBio = (props: IProfileBioProps) => {
 		score,
 	} = props;
 
-	const gitHubLink = gitHubUrl ? (
-		<a href={'https://github.com/' + name} className={styles.link}>
-			{gitHubUrl}
+	const gitHubLink = github ? (
+		<a href={github.profileUrl} className={styles.link}>
+			{github.profileUrl}
 		</a>
 	) : (
-		gitHubUrl
+		'Github account not connected'
 	);
 
 	const listItems1 = [
-		{ name: 'Name', value: nickname },
-		{ name: 'Clan', value: clan },
+		{ name: 'Name', value: username },
+		{ name: 'Clan', value: clan?.name ?? 'No clan' },
 	];
 	const listItems2 = [
 		{ name: 'Member since', value: memberSince },
@@ -60,9 +56,9 @@ export const ProfileBio = (props: IProfileBioProps) => {
 		<div className={styles.profileBio}>
 			<div className={styles.profileHeader}>
 				{img ? <Avatar avatar={img} size={57} /> : <Avatar size={57} />}
-				<h5 className={styles.name}>{name}</h5>
+				<h5 className={styles.name}>{`${name} ${surname}`}</h5>
 				<Label label={rank + ' rank'} color="#EC4179" />
-				<Label label={score} color="#EC4179" />
+				<Label label={score ?? 0} color="#EC4179" />
 			</div>
 			<div className={styles.fields}>
 				<List items={listItems1} />

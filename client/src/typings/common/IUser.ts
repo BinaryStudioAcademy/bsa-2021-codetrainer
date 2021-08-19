@@ -7,6 +7,7 @@ export interface IUser {
 	rank: number;
 	honor: number;
 	name: string;
+	img?: string;
 	surname?: string;
 	clan?: WebApi.Entities.IClan;
 	profileUrl?: string;

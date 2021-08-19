@@ -13,10 +13,10 @@ import styles from './sign-up.module.scss';
 
 const SignUpGithubSchema = Yup.object().shape({
 	username: Yup.string()
-		.matches(/^[^\-][a-zA-Z0-9]{1,}\-?[a-zA-Z0-9]*[^\-]+$/, 'Use only letters, numbers and hyphens')
-		.required('Required')
 		.min(3, 'Minimum length: 3')
-		.max(20, 'Maximum length: 20'),
+		.max(20, 'Maximum length: 20')
+		.matches(/^[a-zA-Z0-9]+\-?[a-zA-Z0-9]+$/, 'Use only letters, numbers and hyphens')
+		.required('Required'),
 	email: Yup.string()
 		.email('Invalid email')
 		.min(5, 'Minimum length: 5')
@@ -49,6 +49,8 @@ interface ISignUnPageProps {
 const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, github, error }) => {
 	return (
 		<CoverLayout className={styles.signUp}>
+			<h4 className={styles.header}>SignUp</h4>
+			{!!error && <div className={styles.error}>{error}</div>}
 			<Formik
 				initialValues={{
 					email: github?.email || '',
@@ -64,8 +66,6 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, 
 				}}
 			>
 				<Form className={styles.form}>
-					<h4 className={styles.header}>SignUp</h4>
-					{!!error && <div className={styles.error}>{error}</div>}
 					{github ? (
 						<div className={styles.info}>
 							Linked to{' '}
@@ -76,7 +76,7 @@ const SignUpPage: React.FC<ISignUnPageProps> = ({ onFormSubmit, onGithubSignUp, 
 					) : (
 						<>
 							<Button type="button" className={ButtonClasses.red} onClick={onGithubSignUp}>
-								Sing up with GitHub
+								Sign up with GitHub
 							</Button>
 							<Separator className={styles.light}>or</Separator>
 						</>

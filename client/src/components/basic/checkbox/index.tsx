@@ -15,8 +15,7 @@ const Checkbox: React.FC<ICheckboxProps> = ({ checked, label, name, onChange }) 
 	};
 	return (
 		<FormControlLabel
-			control={<MaterialCheckbox checked={checked} name={name} />}
-			onChange={() => handleChange}
+			control={<MaterialCheckbox checked={checked} onChange={handleChange} name={name} />}
 			label={<Typography className={styles.formControlLabel}>{label}</Typography>}
 		/>
 	);
