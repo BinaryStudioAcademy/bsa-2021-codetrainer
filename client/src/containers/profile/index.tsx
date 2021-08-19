@@ -1,4 +1,4 @@
-import { ProfilePage } from '../../components';
+import { FullscreenLoader, ProfilePage } from '../../components';
 import React, { useMemo, useCallback, useEffect } from 'react';
 import { Stats, ProfileTasks, ProfileSocial } from './tabs';
 import { statsProps } from './mocks';
@@ -7,17 +7,12 @@ import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
-import {
-	RouteComponentProps, useParams,
-	// useParams
-} from 'react-router-dom';
+import { RouteComponentProps, useParams } from 'react-router-dom';
 import { profileTasks } from './tabs/tasks/mocks';
 import { social } from './tabs/social/mocks';
 import { useAppSelector } from 'hooks/useAppSelector';
-// import { useEffect } from 'react';
 
 export const Profile = (props: RouteComponentProps) => {
-	// const [userToDisplay, setUserToDisplay] = useState(null);
 	const { activeTab: activeTabId } = useSelector((state: IRootState) => state.profile);
 	const dispatch = useDispatch();
 	const setActiveTab = useCallback(
@@ -27,7 +22,8 @@ export const Profile = (props: RouteComponentProps) => {
 		[dispatch],
 	);
 
-	const { user } = useAppSelector((state) => state.auth.userData);
+	const { isLoading, error, userData } = useAppSelector((state) => state.profile);
+
 	//@ts-ignore
 	const { username } = useParams();
 
@@ -40,18 +36,6 @@ export const Profile = (props: RouteComponentProps) => {
 		);
 	}, [username]);
 
-	//@ts-ignore
-	// const { username } = useParams();
-
-	// useEffect(() => {
-	// 	if (user?.username === username) {
-	// 		setUserToDisplay(user);
-	// 	}
-	// 	else {
-
-	// 	}
-
-	// }, [username, user])
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
@@ -78,19 +62,21 @@ export const Profile = (props: RouteComponentProps) => {
 		});
 	}, [setActiveTab]);
 
-	// console.log(userToDisplay);
 
 	return (
-		user &&
-		<ProfilePage
-			userInfo={user}
-			profileInfoProps={{
-				getTabContent,
-				profileRouteProps: {
-					tabItems,
-					activeTabId,
-				},
-			}}
-		/>
+		isLoading
+			? <FullscreenLoader />
+			:
+			<ProfilePage
+				error={error}
+				userInfo={userData}
+				profileInfoProps={{
+					getTabContent,
+					profileRouteProps: {
+						tabItems,
+						activeTabId,
+					},
+				}}
+			/>
 	);
 };

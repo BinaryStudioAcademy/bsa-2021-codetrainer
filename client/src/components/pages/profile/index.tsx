@@ -5,15 +5,20 @@ import { IProfileInfoProps, ProfileInfo } from './profile-info';
 import { IUser } from 'typings/common/IUser';
 
 interface IProfileProps {
-	userInfo: IUser;
+	error: string | null;
+	userInfo: IUser | null;
 	profileInfoProps: IProfileInfoProps;
 }
 
-export const Profile = ({ userInfo, profileInfoProps }: IProfileProps) => {
+export const Profile = ({ userInfo, error, profileInfoProps }: IProfileProps) => {
 	return (
 		<div className={styles.profile}>
-			<ProfileBio {...userInfo} />
-			<ProfileInfo {...profileInfoProps} />
+			{error ? <div className={styles.error}>{error}</div>
+				: userInfo && (
+					<>
+						<ProfileBio {...userInfo} />
+						<ProfileInfo {...profileInfoProps} />
+					</>)}
 		</div>
 	);
 };

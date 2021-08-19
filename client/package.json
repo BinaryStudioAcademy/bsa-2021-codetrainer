@@ -28,6 +28,7 @@
 		"formik": "^2.2.9",
 		"jwt-decode": "^3.1.2",
 		"qs": "^6.10.1",
+		"ramda": "^0.27.1",
 		"react": "^17.0.2",
 		"react-ace": "^9.4.3",
 		"react-circular-progressbar": "^2.0.4",
@@ -74,9 +75,10 @@
 		]
 	},
 	"devDependencies": {
+		"@types/ramda": "^0.27.44",
+		"@types/react-modal": "^3.12.1",
 		"@types/react-select": "^4.0.17",
 		"@types/react-syntax-highlighter": "^13.5.2",
-		"@types/react-modal": "^3.12.1",
 		"@typescript-eslint/eslint-plugin": "^4.28.4",
 		"@typescript-eslint/parser": "^4.28.4",
 		"eslint-config-prettier": "^8.3.0",

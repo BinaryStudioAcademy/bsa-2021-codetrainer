@@ -8,6 +8,7 @@ export function* fetchUserSearch({ partialFilter }: ReturnType<typeof actions.se
         yield put(actions.clearData());
         //@ts-ignore
         const userData: any = yield call(fetchUsersSearch, partialFilter);
+        debugger;
         yield put(actions.searchUserSuccess(userData));
     } catch (error) {
         yield put(actions.searchUserError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));

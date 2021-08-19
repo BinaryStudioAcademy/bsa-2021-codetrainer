@@ -4,7 +4,7 @@ import { ActiveTabId } from './models';
 export interface IProfileState {
 	activeTab: ActiveTabId;
 	isLoading: boolean;
-	errors: Record<string, { msg: string }[]> | string | null;
+	error: string | null
 	isSuccess: boolean;
 	userData: IUser | null;
 }
@@ -12,7 +12,7 @@ export interface IProfileState {
 export const initialState: IProfileState = {
 	activeTab: ActiveTabId.Stats,
 	isLoading: false,
-	errors: null,
+	error: null,
 	isSuccess: false,
 	userData: null,
 };

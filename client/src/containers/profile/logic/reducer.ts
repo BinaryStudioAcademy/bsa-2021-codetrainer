@@ -14,7 +14,7 @@ export const profileReducer = createReducer<IProfileState>(initialState, {
 		return {
 			...state,
 			isLoading: false,
-			errors: action.payload,
+			error: action.payload,
 		};
 	},
 	[actionTypes.CLEAR_DATA](state) {
