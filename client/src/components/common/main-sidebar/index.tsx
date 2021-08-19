@@ -33,7 +33,7 @@ const MainSidebar: React.FC = () => {
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
-						<NavLink to="/clans" className={styles.navigationLink}>
+						<NavLink to={ROUTES.Clans} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
 							Clans
 						</NavLink>
