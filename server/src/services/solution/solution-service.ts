@@ -43,6 +43,7 @@ export class SolutionService {
 			solutions: [...user.solutions, newSolution],
 		});
 		const dataForRabbit = {
+			test: task.testCases,
 			code,
 			userId: user.id,
 			solutionId: newSolution.id,
@@ -92,12 +93,11 @@ export class SolutionService {
 	}
 
 	async setResult(data: { result: string; token: string }) {
-		console.log('result => ', data);
+		console.info('result => ', data);
 		const { id } = verifyToken(data.token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
 		}
-		console.info('result => 1', data.result);
 		return { message: 'success' };
 	}
 }

@@ -45,12 +45,6 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 			validationMiddleware([solutionIdSchema]),
 			checkSolutionIdMiddleware,
 			(req, res, _next) => res.send(req.solution),
-		)
-		.post(SolutionApiPath.RESULT, (req, res, next) =>
-			solutionService
-				.setResult(req.body)
-				.then((data) => res.send(data))
-				.catch(next),
 		);
 
 	return router;

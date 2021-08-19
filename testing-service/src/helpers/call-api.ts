@@ -33,7 +33,7 @@ const getArgs = (args: Record<string, any>): RequestInit => {
 export const callApi = async (args: Record<string, any>) => {
 	try {
 		const res: Response = await fetch(getUrl(args), getArgs(args));
-		console.info('response => ', res);
+		// console.info('response => ', res);
 	} catch (error) {
 		console.info('error => ', error);
 	}
