@@ -34,7 +34,9 @@
 	width: 29px;
 	height: 28px;
 	cursor: pointer;
-
+	svg path {
+		stroke: var(--text-color);
+	}
 	&Counter {
 		position: absolute;
 		right: 0;

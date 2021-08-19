@@ -27,6 +27,16 @@
 	grid-template-rows: repeat(2, 70px);
 	grid-gap: 20px;
 
+	.inputField input {
+		background: var(--secondary-container-color);
+		color: var(--text-color);
+	}
+
+	.inputfield input:hover {
+		background: cyan;
+		color: var(--text-color);
+	}
+
 	.inputField label {
 		pointer-events: none;
 	}

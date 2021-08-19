@@ -1,7 +1,12 @@
-@import "styles/variables";
+@import 'styles/variables';
 
 h4 {
 	font: $fourth-title-font;
+}
+
+body {
+	background: var(--background-color);
+	color: var(--text-color);
 }
 
 .error {
