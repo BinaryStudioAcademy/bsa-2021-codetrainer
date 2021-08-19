@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { NotificationType } from '../notification/logic/models';
@@ -9,6 +9,7 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
+import ThemeSwitcher from 'containers/theme-switcher';
 
 interface IExample {
 	theme: { theme: string };
@@ -85,13 +86,9 @@ const Example: React.FC<IExample> = (props) => {
 				/>
 				<input type="submit" />
 			</form>
+			<ThemeSwitcher />
 		</div>
 	);
 };
 
-function mapStateToProps(state: any) {
-	const { theme } = state;
-	return { theme };
-}
-
-export default connect(mapStateToProps)(Example);
+export default Example;
