@@ -18,7 +18,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 	return (
 		<article className={styles.wrapper}>
 			<div className={styles.selectingContainer}>
-				<h5 className={styles.title}>Next Task</h5>
+				<h5 className={styles.title}>Next Challenge</h5>
 
 				<div className={styles.focusWrapper}>
 					<p className={styles.focusTitle}>Choose Today’s Focus</p>

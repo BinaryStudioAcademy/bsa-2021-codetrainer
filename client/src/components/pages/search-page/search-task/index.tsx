@@ -39,7 +39,7 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 	return (
 		<>
 			<Box mb={2}>
-				<h4>Search Task</h4>
+				<h4>Search Challenge</h4>
 			</Box>
 			<Formik
 				initialValues={{
