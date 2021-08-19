@@ -14,9 +14,6 @@ export class Task extends AbstractEntity {
 	@Column({ type: 'varchar', default: '' })
 	discipline?: string;
 
-	// @Column({ type: 'int' })
-	// languageId?: number;
-
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
 	rank?: number;
 
