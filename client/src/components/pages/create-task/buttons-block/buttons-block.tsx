@@ -15,9 +15,10 @@ interface IButtonsBlockProps {
 	taskId: string | null;
 	yourChallengeValues?: ISelectValue[] | null;
 	onChallengeChange: (id: string | null) => void;
-	handleReset: ()=>void
+	handleReset: () => void;
 	challengeActiveValue: ISelectValue;
-	setChallengeActiveValue: (value:ISelectValue)=>void;
+	setChallengeActiveValue: (value: ISelectValue) => void;
+	handleGoToChange: (taskId: string | null, actionId: string | null) => void;
 }
 export const ButtonsBlock = ({
 	handlePreviewClick,
@@ -26,13 +27,14 @@ export const ButtonsBlock = ({
 	onChallengeChange,
 	handleReset,
 	challengeActiveValue,
-	setChallengeActiveValue
+	setChallengeActiveValue,
+	handleGoToChange,
 }: IButtonsBlockProps) => {
 	const [goToActiveValue, setGoToActiveValue] = useState<ISelectValue>({
 		id: '1',
 		title: 'Go to',
 	});
-	
+
 	const dispatch = useDispatch();
 
 	return (
@@ -49,7 +51,10 @@ export const ButtonsBlock = ({
 						<Select
 							values={goToValues}
 							activeValue={goToActiveValue}
-							onChange={(newValue: ISelectValue) => setGoToActiveValue(newValue)}
+							onChange={(newValue: ISelectValue) => {
+								handleGoToChange(taskId, newValue.id);
+								setGoToActiveValue(newValue);
+							}}
 						/>
 					</div>
 				) : null}
@@ -62,10 +67,9 @@ export const ButtonsBlock = ({
 							activeValue={challengeActiveValue}
 							onChange={(newValue: ISelectValue) => {
 								dispatch(setTask({ taskId: newValue.id }));
-								if(newValue.id!=='0'){
+								if (newValue.id !== '0') {
 									onChallengeChange(newValue.id);
-								}
-								else{
+								} else {
 									handleReset();
 								}
 								setChallengeActiveValue(newValue);
@@ -94,14 +98,6 @@ const goToValues = [
 	},
 	{
 		id: '4',
-		title: 'Translations',
-	},
-	{
-		id: '5',
-		title: 'Revisions',
-	},
-	{
-		id: '6',
 		title: 'Trainer',
 	},
 ];

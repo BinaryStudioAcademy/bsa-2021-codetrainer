@@ -86,6 +86,9 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		getYourChallengeValues().then((result) =>
 			setYourChallengeValues(result ? [{ id: '0', title: 'New task' }, ...result] : null),
 		);
+		if (taskId) {
+			handleTaskChange(taskId);
+		}
 	}, []);
 	//settings block
 	const [taskName, setTaskName] = useState('');
@@ -452,7 +455,6 @@ describe("twoOldestAges", function() {
 	const handleTaskChange = async (taskId: string | null) => {
 		if (taskId) {
 			const task = await getById(taskId);
-			console.log(task);
 			let tags = '';
 			task.tags.forEach((tag: { name: string }) => {
 				tags += tag.name + ',';
@@ -472,7 +474,22 @@ describe("twoOldestAges", function() {
 			setExampleTestCases(task.exampleTestCases);
 		}
 	};
-
+	const handleGoToChange = (taskId: string | null, actionId: string | null) => {
+		switch (actionId) {
+			case '1':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '2':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '3':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '4':
+				historyHelper.push(taskId ? '/task/' + taskId + '/train' : '');
+				break;
+		}
+	};
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -502,6 +519,7 @@ describe("twoOldestAges", function() {
 						}}
 						challengeActiveValue={challengeActiveValue}
 						setChallengeActiveValue={setChallengeActiveValue}
+						handleGoToChange={handleGoToChange}
 					/>
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
