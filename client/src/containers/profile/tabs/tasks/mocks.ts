@@ -1,7 +1,7 @@
 export const profileTasks = [
 	{
-		title: 'Completed',
-		id: 'completed',
+		title: 'Published',
+		id: 'published',
 		tasks: [
 			{
 				id: '1',
@@ -38,8 +38,8 @@ export const profileTasks = [
 		],
 	},
 	{
-		title: 'Authored',
-		id: 'authored',
+		title: 'Not published',
+		id: 'notPublished',
 		tasks: [
 			{
 				id: '3',
