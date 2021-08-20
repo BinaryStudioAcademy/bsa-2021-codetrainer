@@ -38,7 +38,7 @@
 	+ .label {
 		margin-top: 10px;
 		font-size: 16px;
-		color: var.$cornflower-blue;
+		color: var(--purple);
 	
 		&:hover {
 			cursor: pointer;
