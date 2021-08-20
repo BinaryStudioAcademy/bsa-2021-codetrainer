@@ -76,7 +76,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute
 				exact
-				restricted={true}
+				restricted={false}
 				path={ROUTES.ForgotPassword}
 				component={ForgotPassword}
 				needHeader={false}
