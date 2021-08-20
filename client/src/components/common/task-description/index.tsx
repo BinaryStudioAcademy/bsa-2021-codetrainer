@@ -1,15 +1,30 @@
 import React from 'react';
 import styles from './task-description.module.scss';
-import { TagList, Rank } from 'components/basic';
+import { Rank, TagList } from 'components/basic';
 import { ITaskDescriptionProps } from './interface';
 import { insertStylesInIframe } from '../../../helpers/iframe.helper';
 
-const TaskDescription: React.FC<ITaskDescriptionProps> = ({ rank, title, content, tags }) => {
+const TaskDescription: React.FC<ITaskDescriptionProps> = ({ rank, name, description, examples, tags }) => {
+	const codeExamples = examples
+		? `<h6>Examples:</h6>
+		<div>
+			<code>
+			${examples}
+			</code>
+		</div>`
+		: '';
+
+	const content = `
+	<div>
+		<p>${description}</p>
+		${codeExamples}
+	</div>`;
+
 	return (
 		<>
 			<span className={styles.taskTitleWrapper}>
 				<Rank rank={rank} />
-				<h6 className={styles.taskTitle}>{title}</h6>
+				<h6 className={styles.taskTitle}>{name}</h6>
 			</span>
 			<div>
 				{/* // TODO: replace with markdown */}
@@ -20,7 +35,7 @@ const TaskDescription: React.FC<ITaskDescriptionProps> = ({ rank, title, content
 					onLoad={() => insertStylesInIframe('taskDescriptionFrame')}
 				/>
 			</div>
-			<TagList tags={tags} />
+			{tags && <TagList tags={tags} />}
 		</>
 	);
 };

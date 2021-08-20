@@ -6,7 +6,6 @@ import styles from './buttons-block.module.scss';
 import './buttons-block.scss';
 import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
-import { ChangeTheme } from 'components/basic/change-theme';
 import { useDispatch } from 'react-redux';
 import { setTask } from 'containers/create-new-task/logic/actions';
 
@@ -78,7 +77,6 @@ export const ButtonsBlock = ({
 						/>
 					) : null}
 				</div>
-				<ChangeTheme />
 			</div>
 		</>
 	);

@@ -1,5 +1,5 @@
 :local(.tabs) {
-	background-color: #f0f3f9;
+	background-color: var(--container-color);
 	padding: 0.75rem 0 0.75rem 1rem;
 	display: flex;
 	flex-wrap: nowrap;
@@ -13,8 +13,8 @@
 	}
 }
 :local(.tab__active) {
-	border-bottom-color: #705ff5;
-	color: #705ff5;
+	border-bottom-color: var(--purple);
+	color: var(--purple);
 }
 :local(.icon) {
 	position: absolute;

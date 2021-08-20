@@ -14,7 +14,7 @@ interface ICreateTaskBody {
 	testCases?: string;
 	exampleTestCases?: string;
 	isPublished?: boolean;
-	preloaded?:string;
+	preloaded?: string;
 }
 
 const validationSchema = Yup.object().shape({
@@ -51,7 +51,7 @@ export const createTask = async (requestBody: ICreateTaskBody) => {
 	}
 	if (validationStatus) {
 		console.log(requestBody);
-		
+
 		const res = await http.callWebApi({
 			method: 'POST',
 			endpoint: `tasks`,
@@ -88,14 +88,14 @@ export const updateTask = async (requestBody: ICreateTaskBody, taskId: string) =
 	}
 	if (validationStatus) {
 		console.log(requestBody);
-		
+
 		const res = await http.callWebApi({
 			method: 'PUT',
 			endpoint: 'tasks/' + taskId,
 			skipAuthorization: false,
 			body: requestBody,
 		});
-		
+
 		if (res) {
 			return res;
 		} else {
@@ -132,17 +132,17 @@ export const deleteTask = async (taskId: string) => {
 };
 
 export const getById = async (id: string | null) => {
-    if(id===null){
-        return {
-            error: true,
-            message: 'Task is not found'
-        }
-    }
+	if (id === null) {
+		return {
+			error: true,
+			message: 'Task is not found',
+		};
+	}
 	const result = await http.callWebApi({
 		method: 'GET',
-		endpoint: TaskApiPath.ROOT+id,
-        skipAuthorization: false
+		endpoint: TaskApiPath.ROOT + id,
+		skipAuthorization: false,
 	});
-    
+
 	return result;
 };

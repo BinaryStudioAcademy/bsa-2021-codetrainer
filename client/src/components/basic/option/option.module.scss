@@ -9,11 +9,11 @@
 }
 
 .wrapper.activeOption {
-	color: #705ff5;
+	color: var(--purple);
 }
 
 .wrapper:hover {
-	background: #f0f3f9;
+	background: var(--secondary-container-color);
 
 	cursor: pointer;
 }

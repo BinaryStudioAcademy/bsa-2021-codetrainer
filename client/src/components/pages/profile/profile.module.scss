@@ -1,7 +1,15 @@
+@import "styles/variables";
+
 .profile {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	max-width: 916px;
 	border-radius: 15px;
+}
+
+.error {
+	color: $french-rose;
+	margin-top: 30px;
+	font: $fourth-title-font;
 }

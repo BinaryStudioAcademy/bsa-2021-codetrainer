@@ -2,11 +2,13 @@ import React from 'react';
 import WbSunnySharpIcon from '@material-ui/icons/WbSunnySharp';
 import styles from './change-theme.module.scss';
 
-interface IChangeThemeProps {}
+interface IChangeThemeProps {
+	onClick: () => void;
+}
 
-export const ChangeTheme = (props: IChangeThemeProps) => {
+export const ChangeTheme: React.FC<IChangeThemeProps> = ({ onClick }) => {
 	return (
-		<div className={styles.changeScheme}>
+		<div className={styles.changeScheme} onClick={() => onClick()}>
 			<WbSunnySharpIcon />
 		</div>
 	);
