@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Avatar, Label } from 'components';
+import { ClickAwayListener } from '@material-ui/core';
+import { Avatar } from 'components';
 import styles from './header.module.scss';
-import { Rank } from 'components/basic';
 import ThemeSwitcher from '../../../containers/theme-switcher';
 
 export interface IHeaderProps {
@@ -23,10 +23,6 @@ interface IListItem {
 const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
 
-	const changeVisible = () => {
-		setListVisibility(!isListVisible);
-	};
-
 	const getListItem = ({ icon: Icon, text, id, onClick = () => {} }: IListItem) => {
 		return (
 			<li
@@ -34,7 +30,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 				key={id}
 				onClick={() => {
 					onClick();
-					changeVisible();
+					setListVisibility(false);
 				}}
 			>
 				<div className={styles.navigationLink}>
@@ -59,15 +55,15 @@ const Header: React.FC<IHeaderProps> = (props) => {
 				</div>
 			</div>
 			<span className={styles.name}>{props.name}</span>
-			<div className={styles.avatarCover}>
-				<div onClick={changeVisible}>
-					<Avatar avatar={props.avatar} size={61} color="#EC4179" />
-				</div>
+			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
+				<div className={styles.avatarCover}>
+					<div onClick={() => setListVisibility(!isListVisible)}>
+						<Avatar avatar={props.avatar} size={61} color="#EC4179" />
+					</div>
 
-				{isListVisible && <div className={styles.navigation}>{renderList(props.listItems)}</div>}
-			</div>
-			<Rank rank={props.rank} />
-			<Label label={props.mark} color="#EC4179" />
+					{isListVisible && <div className={styles.navigation}>{renderList(props.listItems)}</div>}
+				</div>
+			</ClickAwayListener>
 		</div>
 	);
 };
