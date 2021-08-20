@@ -19,20 +19,26 @@
 		transition: var.$base-animation-time;
 
 		&:hover {
-			background-color: var(--text-color);
-			color: var(--background-color);
+			background-color: var(--white);
+			color: var(--black);
+		}
+		&:hover::placeholder {
+			color: var(--black);
 		}
 		&:focus {
-			background-color: var(--text-color);
-			color: var(--background-color);
+			background-color: var(--white);
+			color: var(--black);
+		}
+		&:focus::placeholder {
+			color: var(--black);
 		}
 	}
 
 	.inputField::placeholder,
 	.passwordField::placeholder {
-		color: var(--text-color);
+		color: var(--placeholder);
 
-		opacity: 0.4;
+		opacity: 0.5;
 	}
 
 	.inputWrapper {
@@ -54,8 +60,8 @@
 		transition: var.$base-animation-time;
 
 		&:hover {
-			background-color: var(--text-color);
-			color: var(--background-color);
+			background-color: var(--white);
+			color: var(--black);
 		}
 	}
 
