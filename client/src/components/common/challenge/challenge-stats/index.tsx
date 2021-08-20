@@ -11,25 +11,25 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 	return (
 		<div className={styles.challengeStats}>
 			<div className={styles.challengeStatsItem}>
-				<p className={styles.challengeStatsItemText}>
+				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<div className={styles.challengeStatsItemIcon}>
 						<FontAwesomeIcon icon={faStar} size="lg" color="rgba(40, 40, 40, 0.5)" />
 					</div>
 					{favoriteSaves} saved to favorites
-				</p>
+				</div>
 			</div>
 			<div className={styles.challengeStatsItem}>
-				<p className={styles.challengeStatsItemText}>
+				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<div className={styles.challengeStatsItemIcon}>
 						<FontAwesomeIcon icon={faChartBar} size="lg" color="rgba(40, 40, 40, 0.5)" />
 					</div>
 					{positiveFeedback} positive feedback
-				</p>
+				</div>
 			</div>
 			<div className={styles.challengeStatsItem}>
-				<p className={styles.challengeStatsItemText}>
+				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<div className={styles.challengeStatsItemIcon}>
 						<FontAwesomeIcon icon={faUser} size="lg" color="rgba(40, 40, 40, 0.5)" />
@@ -38,7 +38,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 					<Link to={author.link} className={styles.challengeStatsItemLink}>
 						{author.firstName} {author.lastName}
 					</Link>
-				</p>
+				</div>
 			</div>
 		</div>
 	);
