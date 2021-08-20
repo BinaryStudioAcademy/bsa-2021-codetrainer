@@ -35,25 +35,25 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 
 	return (
 		<TableRow onClick={goToClanHanler} className={currentUserMember && styles.clanJoined}>
-			<TableCell>
+			<TableCell align="center">
 				<Rank rank={clan.rank} />
-			</TableCell>
-			<TableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
-			<TableCell>
+			</TableCell >
+			<TableCell align="center">{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
+			<TableCell align="center">
 				<span>{clan.name}</span>
-			</TableCell>
-			<TableCell>
+			</TableCell >
+			<TableCell align="center">
 				<span>{clan.maxMembers}</span>
 			</TableCell>
-			<TableCell>
+			<TableCell align="center">
 				<span>
 					{getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>
 			</TableCell>
-			<TableCell>
+			<TableCell align="center">
 				<span>{clan.honor}</span>
 			</TableCell>
-			<TableCell>
+			<TableCell align="center">
 				{currentUserMember ? (
 					currentUserMember.profileClan?.role !== MemberRoles.ADMIN ? (
 						<Button className={ButtonClasses.red} onClick={leaveClanHanler}>
