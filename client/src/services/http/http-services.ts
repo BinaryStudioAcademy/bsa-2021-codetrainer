@@ -32,9 +32,9 @@ export class Http {
 		}
 		let textBody;
 		if (response.status === 400) {
-			const text = await response.json()
+			const text = await response.json();
 			console.log(text);
-			
+
 			throw new ValidationError(text);
 		}
 		try {

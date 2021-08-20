@@ -13,7 +13,7 @@ interface ICreateTaskBody {
 	testCases?: string;
 	exampleTestCases?: string;
 	isPublished?: boolean;
-	preloaded?:string;
+	preloaded?: string;
 }
 
 const validationSchema = Yup.object().shape({
@@ -50,7 +50,7 @@ export const createTask = async (requestBody: ICreateTaskBody) => {
 	}
 	if (validationStatus) {
 		console.log(requestBody);
-		
+
 		const res = await http.callWebApi({
 			method: 'POST',
 			endpoint: `tasks`,

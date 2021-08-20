@@ -35,10 +35,12 @@ const NextTaskContainer = () => {
 	}, []);
 
 	useEffect(() => {
-		dispatch(getTasks({
-			discipline: activeFocusValue.title,
-			currentTask: task?.id
-		}));
+		dispatch(
+			getTasks({
+				discipline: activeFocusValue.title,
+				currentTask: task?.id,
+			}),
+		);
 	}, [activeFocusValue.title]);
 
 	const handleTrainClick = () => {
@@ -46,10 +48,12 @@ const NextTaskContainer = () => {
 	};
 
 	const handleSkipClick = () => {
-		dispatch(getTasks({
-			discipline: activeFocusValue.title,
-			currentTask: task?.id
-		}));
+		dispatch(
+			getTasks({
+				discipline: activeFocusValue.title,
+				currentTask: task?.id,
+			}),
+		);
 	};
 
 	return (
@@ -60,8 +64,8 @@ const NextTaskContainer = () => {
 				activeFocusValue={activeFocusValue}
 				setActiveFocusValue={setActiveFocusValue}
 				handleTrainClick={handleTrainClick}
-				handleSkipClick={handleSkipClick} />
-
+				handleSkipClick={handleSkipClick}
+			/>
 		</>
 	);
 };
