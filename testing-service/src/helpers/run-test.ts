@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 import { spawn } from 'child_process';
 import { getPath } from './path';
-import { MOCHA_IMPORT } from '../common/constants';
+import { IMPORT } from '../common/constants';
 
 const saveFile = (solution: string, test: string) => {
-	fs.writeFile('test/test.js', `${MOCHA_IMPORT}\n${solution}\n${test}`, (err) => {
+	fs.writeFile('test/test.js', `${IMPORT}\n${solution}\n${test}`, (err) => {
 		console.info('error save => ', err);
 	});
 };
@@ -21,10 +21,18 @@ export const runTest = (solution: string, test: string) => {
 			output += data;
 		});
 		docker.on('close', (code) => {
-			resolve({ code, message: output.toString() });
+			const response = output.toString();
+			let parseResponse!: Record<string, unknown>;
+			try {
+				parseResponse = { response: JSON.parse(response) };
+			} catch (e) {
+				parseResponse = { error: response };
+			} finally {
+				resolve({ success: code === 0, ...parseResponse });
+			}
 		});
 		docker.on('error', (error) => {
-			resolve({ code: 1, message: error.message });
+			resolve({ success: false, error: error.message });
 		});
 	});
 };
