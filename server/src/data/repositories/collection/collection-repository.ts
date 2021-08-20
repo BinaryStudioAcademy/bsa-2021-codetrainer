@@ -3,50 +3,32 @@ import { Collection } from '../../models';
 import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Collection)
-export class ClanRepository extends AbstractRepository<Collection> {
+export class CollectionRepository extends AbstractRepository<Collection> {
 	getByName(name: string) {
 		return this.findOne({ name });
 	}
 
 	getById(id: string) {
-		return this.createQueryBuilder('clan')
-			.leftJoinAndSelect('clan.members', 'member')
-			.leftJoinAndSelect('member.profileClan', 'profileClan')
-			.select([
-				'clan',
-				'member.name',
-				'member.createdAt',
-				'member.surname',
-				'member.id',
-				'member.honor',
-				'member.rank',
-				'profileClan.role',
-				'profileClan.status',
-			])
-			.where('clan.id = :id', { id })
+		return this.createQueryBuilder('collection')
+			.leftJoinAndSelect('collection.tasks', 'task')
+			.where('collection.id = :id', { id })
 			.getOne();
 	}
 
-	getAll(skip: number, take: number) {
-		return this.createQueryBuilder('clan')
-			.leftJoinAndSelect('clan.members', 'member')
-			.leftJoinAndSelect('member.profileClan', 'profileClan')
-			.select(['clan', 'member.id', 'member.rank', 'member.honor', 'profileClan.role', 'profileClan.status'])
-			.skip(skip)
-			.take(take)
-			.getMany();
+	createItem(data: Partial<Collection>) {
+		return this.save(data);
 	}
 
 	updateById(id: string, data: Partial<Collection>) {
 		return this.update({ id }, data);
 	}
 
-	deleteMember(id: string, memberId: string) {
-		return this.createQueryBuilder('clan').relation('members').of(id).remove(memberId);
+	deleteTask(id: string, taskId: string) {
+		return this.createQueryBuilder('collection').relation('tasks').of(id).remove(taskId);
 	}
 
-	addMember(id: string, memberId: string) {
-		return this.createQueryBuilder('clan').relation('members').of(id).add(memberId);
+	addTask(id: string, taskId: string) {
+		return this.createQueryBuilder('collection').relation('tasks').of(id).add(taskId);
 	}
 
 	deleteById(id: string) {

@@ -9,6 +9,7 @@ import {
 	TagRepository,
 	SolutionRepository,
 	FollowerRepository,
+	CollectionRepository,
 } from '../data';
 import { AuthService } from './auth';
 import { ClanService } from './clan';
@@ -17,6 +18,7 @@ import { ImagesService } from './images.service';
 import { GithubService } from './github.service';
 import { TagService } from './tag/tag-service';
 import { SolutionService } from './solution/solution-service';
+import { CollectionService } from './collection/collection-service';
 
 const authService = new AuthService({ user: UserRepository });
 
@@ -39,6 +41,8 @@ const solutionService = new SolutionService({
 	solution: SolutionRepository,
 });
 
+const collection = new CollectionService({ collection: CollectionRepository });
+
 export { authService, AuthService };
 export { clanService, ClanService };
 export { imagesService, ImagesService };
@@ -47,3 +51,4 @@ export { githubService, GithubService };
 export { tagService, TagService };
 export { solutionService, SolutionService };
 export { follower, TFollowerService };
+export { collection, CollectionService };
