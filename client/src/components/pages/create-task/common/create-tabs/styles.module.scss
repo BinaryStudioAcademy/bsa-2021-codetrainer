@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
 :local(.root) {
+	background: var(--container-color);
+	width: 595px;
+	height: 385px;
 	display: flex;
 	flex-flow: column nowrap;
 	font-family: 'Montserrat', sans-serif;
@@ -29,11 +32,11 @@
 	display: grid;
 	grid-template-columns: 35px 1fr;
 	& > *:first-child {
-		background-color: #f0f3f9;
+		background-color: var(--container-color);
 	}
 	& > *:last-child {
 		position: relative;
-		background-color: #ffffff;
+		background-color: var(--container-color);
 	}
 }
 
@@ -42,4 +45,8 @@
 	right: 10px;
 	top: 15px;
 	cursor: pointer;
+}
+
+.sideBlock {
+	height: 330px;
 }

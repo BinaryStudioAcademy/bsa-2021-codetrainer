@@ -76,9 +76,9 @@
 		]
 	},
 	"devDependencies": {
+		"@types/react-modal": "^3.12.1",
 		"@types/react-select": "^4.0.17",
 		"@types/react-syntax-highlighter": "^13.5.2",
-		"@types/react-modal": "^3.12.1",
 		"@typescript-eslint/eslint-plugin": "^4.28.4",
 		"@typescript-eslint/parser": "^4.28.4",
 		"eslint-config-prettier": "^8.3.0",

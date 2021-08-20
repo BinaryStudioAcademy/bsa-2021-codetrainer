@@ -13,6 +13,7 @@ interface ICreateTaskBody {
 	testCases?: string;
 	exampleTestCases?: string;
 	isPublished?: boolean;
+	preloaded?: string;
 }
 
 const validationSchema = Yup.object().shape({
@@ -32,7 +33,7 @@ const validationSchema = Yup.object().shape({
 		.min(1, 'exampleTestCases can`t be empty.')
 		.required('exampleTestCases can`t be empty.'),
 	isPublished: Yup.boolean(),
-	preloader: Yup.string(),
+	preloaded: Yup.string(),
 });
 
 export const createTask = async (requestBody: ICreateTaskBody) => {
@@ -47,8 +48,9 @@ export const createTask = async (requestBody: ICreateTaskBody) => {
 			message: errorMessage,
 		};
 	}
-
 	if (validationStatus) {
+		console.log(requestBody);
+
 		const res = await http.callWebApi({
 			method: 'POST',
 			endpoint: `tasks`,

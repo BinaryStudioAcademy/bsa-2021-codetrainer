@@ -23,7 +23,7 @@
 	border: none;
 	border-radius: 10px;
 
-	background: #f0f3f9;
+	background: var(--secondary-container-color);
 	background-image: url('./assets/arrow.svg');
 	background-repeat: no-repeat;
 	background-position: calc(100% - 20px) 50%;
@@ -53,11 +53,11 @@
 	display: none;
 	margin: 0;
 	padding: 0;
-	width: 100%;
+	width: 175px;
 
 	border-radius: 5px;
 
-	background: #fff;
+	background: var(--container-color);
 	box-shadow: 0px 4px 6px rgba(189, 189, 189, 0.25);
 
 	list-style-type: none;
@@ -66,4 +66,8 @@
 	display: block;
 	z-index: 5;
 	margin-bottom: 50px;
+}
+
+.buttonBlock {
+	margin-top: 0;
 }

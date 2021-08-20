@@ -20,8 +20,13 @@ interface ISearchTask {
 
 export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSubmit, filter }) => {
 	const handleChangeTags = (data: { name: string; checked: boolean }) => {
-		const tags = filter.tags.replace(data.name, '').split(',');
-		onChange({ tags: data.checked ? [...tags, data.name].join(',') : tags });
+		const tagsState = new Set(filter.tags);
+		if (data.checked) {
+			tagsState.add(data.name);
+		} else {
+			tagsState.delete(data.name);
+		}
+		onChange({ tags: tagsState });
 	};
 
 	const handleChangeRank = (rank: number) => {
@@ -47,27 +52,12 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 			>
 				<Form>
 					<Field id="query" name="query" placeholder="Search..." type="text" component={FormInput} />
-					<Field
-						id="sortBy"
-						name="sort"
-						label="Sort By"
-						options={TASK_SORT_BY_OPTIONS}
-						component={FormSelect}
-					/>
-					<Field
-						id="status"
-						name="status"
-						label="Status"
-						options={TASK_STATUS_OPTIONS}
-						component={FormSelect}
-					/>
-					<Field
-						id="progress"
-						name="progress"
-						label="Progress"
-						options={TASK_PROGRESS_OPTIONS}
-						component={FormSelect}
-					/>
+					<label htmlFor="sort">Sort By</label>
+					<Field id="sortBy" name="sort" options={TASK_SORT_BY_OPTIONS} component={FormSelect} />
+					<label htmlFor="status">Status</label>
+					<Field id="status" name="status" options={TASK_STATUS_OPTIONS} component={FormSelect} />
+					<label htmlFor="progress">Progress</label>
+					<Field id="progress" name="progress" options={TASK_PROGRESS_OPTIONS} component={FormSelect} />
 
 					<h6>Difficulty</h6>
 					<div className={styles.rankContainer}>
@@ -90,7 +80,7 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 										key={id.toString()}
 										label={tag.label}
 										name={tag.name}
-										checked={filter.tags.includes(tag.name)}
+										checked={filter.tags.has(tag.name)}
 										onChange={(checked: boolean) => handleChangeTags({ name: tag.name, checked })}
 									/>
 							  ))

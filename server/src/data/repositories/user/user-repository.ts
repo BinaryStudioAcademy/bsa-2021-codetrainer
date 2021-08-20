@@ -8,8 +8,10 @@ export class UserRepository extends AbstractRepository<User> {
 		'user.id',
 		'user.name',
 		'user.surname',
-		'user.nickname',
+		'user.username',
 		'user.avatar',
+		'user.rank',
+		'user.honor',
 		'user.createdAt',
 		'user.lastVisit',
 		'user.skills',
@@ -37,18 +39,7 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
 			.leftJoinAndSelect('user.solutions', 'solution')
-			.select([
-				'user.id',
-				'user.username',
-				'user.name',
-				'user.surname',
-				'user.email',
-				'user.githubId',
-				'clan',
-				'solution.id',
-				'profileClan',
-				'task.id',
-			])
+			.select([...this.userFields, 'clan', 'solution.id', 'profileClan', 'task.id'])
 			.where('user.id = :id', { id })
 			.getOne();
 	}
@@ -67,5 +58,28 @@ export class UserRepository extends AbstractRepository<User> {
 
 	updateById(id: string, data: Partial<User>) {
 		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
+	}
+
+	search(query: { username: string }) {
+		const { username } = query;
+		return this.createQueryBuilder('user')
+			.leftJoinAndSelect('user.profileClan', 'profileClan')
+			.leftJoinAndSelect('user.clan', 'clan')
+			.leftJoinAndSelect('user.tasks', 'task')
+			.leftJoinAndSelect('user.solutions', 'solution')
+			.select([
+				'user.id',
+				'user.username',
+				'user.name',
+				'user.surname',
+				'user.email',
+				'user.githubId',
+				'clan',
+				'solution.id',
+				'profileClan',
+				'task.id',
+			])
+			.where('user.username = :username', { username })
+			.getOne();
 	}
 }

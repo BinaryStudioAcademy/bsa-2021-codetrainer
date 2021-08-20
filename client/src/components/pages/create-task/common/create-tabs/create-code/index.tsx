@@ -32,8 +32,9 @@ export const CreateCode: React.FC<ITabProps> = ({ onChange, value, editable }) =
 		<AceEditor
 			onFocus={handleFocus}
 			style={{
-				height: '290px',
+				height: '330px',
 				width: '100%',
+				background: 'var(--secondary-container-color)',
 			}}
 			readOnly={!Boolean(editable)}
 			onLoad={handleLoadEditor}

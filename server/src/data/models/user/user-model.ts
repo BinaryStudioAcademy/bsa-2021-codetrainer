@@ -13,6 +13,7 @@ import {
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 import { Task } from '../task';
+import { CommentTask } from '../comment-task';
 import { Solution } from '../solution';
 
 @Entity()
@@ -53,11 +54,11 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 100, nullable: true })
 	password?: string;
 
-	@Column({ type: 'int', default: 0 })
+	@Column({ type: 'int', default: 9 })
 	rank!: number;
 
 	@Column({ type: 'int', default: 0 })
-	honour!: number;
+	honor!: number;
 
 	@Column({ type: 'varchar', length: 250, nullable: true })
 	resetToken?: string;
@@ -88,4 +89,8 @@ export class User extends BaseEntity {
 
 	@Column({ type: 'varchar', length: 100, unique: true, nullable: true })
 	githubId?: string;
+
+	@OneToMany(() => CommentTask, (commentTask) => commentTask.user)
+	@JoinColumn()
+	commentTasks?: CommentTask[];
 }

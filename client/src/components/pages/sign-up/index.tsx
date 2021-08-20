@@ -13,10 +13,10 @@ import styles from './sign-up.module.scss';
 
 const SignUpGithubSchema = Yup.object().shape({
 	username: Yup.string()
-		.matches(/^[^\-][a-zA-Z0-9]{1,}\-?[a-zA-Z0-9]*[^\-]+$/, 'Use only letters, numbers and hyphens')
-		.required('Required')
 		.min(3, 'Minimum length: 3')
-		.max(20, 'Maximum length: 20'),
+		.max(20, 'Maximum length: 20')
+		.matches(/^[a-zA-Z0-9]+\-?[a-zA-Z0-9]+$/, 'Use only letters, numbers and hyphens')
+		.required('Required'),
 	email: Yup.string()
 		.email('Invalid email')
 		.min(5, 'Minimum length: 5')

@@ -8,7 +8,7 @@ export interface ISearchState {
 		progress: string;
 		query: string;
 		rank: number | null;
-		tags: string;
+		tags: Set<string>;
 		sort: string;
 	};
 	search: {
@@ -23,7 +23,7 @@ export interface ISearchState {
 			id: string;
 			name: string;
 			status: string;
-			tags: string[];
+			tags: { name: string }[];
 			rank: number;
 			user: {
 				username: string;
@@ -44,7 +44,7 @@ export const initialState: ISearchState = {
 		progress: 'all',
 		query: '',
 		sort: 'newest',
-		tags: '',
+		tags: new Set(),
 		rank: null,
 	},
 	search: null,

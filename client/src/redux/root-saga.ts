@@ -3,10 +3,22 @@ import exampleSaga from 'containers/example/logic/saga';
 import clansSaga from 'containers/clans/clans/logic/saga';
 import clanSaga from 'containers/clans/clan/logic/saga';
 import authSaga from 'containers/auth/logic/saga';
+import homeSaga from '../containers/home-page/logic/saga';
 import settingsSaga from 'containers/setting-page/logic/saga';
 import searchSaga from 'containers/search-page/logic/saga';
-import { headerSaga } from 'containers/header/logic/saga';
+import headerSaga from 'containers/header/logic/saga';
+import profileSaga from 'containers/profile/logic/saga';
 
 export default function* rootSaga() {
-	yield all([exampleSaga(), authSaga(), clansSaga(), clanSaga(), searchSaga(), settingsSaga(), headerSaga()]);
+	yield all([
+		exampleSaga(),
+		authSaga(),
+		clansSaga(),
+		clanSaga(),
+		searchSaga(),
+		settingsSaga(),
+		profileSaga(),
+		homeSaga(),
+		headerSaga(),
+	]);
 }

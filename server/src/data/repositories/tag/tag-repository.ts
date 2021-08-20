@@ -7,7 +7,7 @@ export class TagRepository extends AbstractRepository<Tag> {
 	getAll() {
 		return this.createQueryBuilder('tag')
 			.leftJoinAndSelect('tag.tasks', 'tasks')
-			.select(['tag'])
+			.select(['tag.name AS name'])
 			.addSelect('Count(tasks)', 'numberOfTasks')
 			.groupBy('tag.id')
 			.getRawMany();

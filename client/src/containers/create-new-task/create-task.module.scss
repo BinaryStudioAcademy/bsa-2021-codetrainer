@@ -1,8 +1,7 @@
 .createTaskBlock {
 	display: grid;
-	height: 200%;
 	grid-template-columns: 50% 50%;
-	grid-template-rows: 580px 350px;
+	grid-template-rows: 580px 375px;
 	grid-gap: 15px;
 }
 .taskInstructions {

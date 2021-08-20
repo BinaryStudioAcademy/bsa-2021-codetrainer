@@ -14,7 +14,7 @@
 	&:not(.disabled):hover,
 	&:not(.disabled):focus {
 		border-color: $active;
-		text-decoration: solid 2px underline;
+		// text-decoration: solid 2px underline;
 		&:not(.filled) {
 			color: $active;
 		}
@@ -22,10 +22,11 @@
 			background-color: $active;
 		}
 	}
+	outline: none;
 }
 
 .button {
-	border: 1px solid;
+	border: 2px solid;
 	border-radius: 7px;
 	outline: none;
 	padding: 0 20px;
@@ -43,10 +44,10 @@
 	cursor: pointer;
 
 	&.blue {
-		@include button-color(#705ff5, #2e19c7);
+		@include button-color(var(--purple), var(--purple-active));
 	}
 	&.red {
-		@include button-color(#ec4179, #c2154f);
+		@include button-color(var(--pink), var(--pink-active));
 	}
 	&.disabled {
 		filter: grayscale(0.5);
