@@ -1,3 +1,4 @@
+import { IThemeState } from 'containers/theme-switcher/logic/state';
 import { ICreateTaskState } from 'containers/create-new-task/logic/state';
 import { IExampleState } from 'containers/example/logic/state';
 import { IClansState } from 'containers/clans/clans/logic/state';
@@ -20,4 +21,5 @@ export interface IRootState {
 	home: IHomeState;
 	search: ISearchState;
 	settings: ISettingsState;
+	theme: IThemeState;
 }

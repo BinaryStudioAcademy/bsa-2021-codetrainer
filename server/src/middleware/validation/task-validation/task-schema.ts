@@ -83,7 +83,6 @@ export const taskSchema = checkSchema({
 		trim: true,
 		isString: true,
 		optional: true,
-		notEmpty: true,
 	},
 	testCases: {
 		in: 'body',

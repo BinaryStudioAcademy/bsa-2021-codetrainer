@@ -1,7 +1,8 @@
 @use 'styles/variables.scss' as var;
 
 .fieldName {
-	color: rgba(40, 40, 40, 0.5);
+	opacity: 0.5;
+	color: var(--text-color);
 	font: var.$base-font;
 }
 
