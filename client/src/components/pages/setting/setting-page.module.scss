@@ -4,13 +4,13 @@
 	width: 916px;
 
 	font-family: 'Montserrat', Arial, sans-serif;
-	color: #282828;
+	color: var(--text-color);
 	display: grid;
 	grid-auto-flow: row;
 	grid-gap: 20px;
 
 	> * {
-		background: #f6f7fb;
+		background: var(--container-color);
 		padding: 30px 22px;
 		border-radius: 7px;
 	}
@@ -18,7 +18,7 @@
 
 .submitBtn {
 	width: 100%;
-	background: #ec4179;
+	background: var(--pink);
 	border-radius: 7px;
 	border: 0;
 	font-family: 'Montserrat', sans-serif;

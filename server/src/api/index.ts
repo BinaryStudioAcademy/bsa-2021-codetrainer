@@ -8,7 +8,15 @@ import { ApiPath } from '../common';
 import { initUsers } from './users';
 import { initFollower } from './follower';
 import { initCommentTask } from './comment-task';
-import { authService, clanService, imagesService, githubService, follower, users, commentTaskService } from '../services';
+import {
+	authService,
+	clanService,
+	imagesService,
+	githubService,
+	follower,
+	users,
+	commentTaskService,
+} from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();

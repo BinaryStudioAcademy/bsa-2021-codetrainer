@@ -77,7 +77,6 @@ export class ClanService {
 		return newClan;
 	}
 
-
 	getHonor({ members }: Clan) {
 		return +(members.reduce((sum, member) => sum + member.honor, 0) / members.length).toFixed();
 	}

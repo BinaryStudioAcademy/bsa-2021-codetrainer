@@ -1,6 +1,6 @@
 import amqp from 'amqplib';
 import { ENV } from '../common';
-
+// eslint-disable-next-line import/no-mutable-exports
 let rabbitChannel: amqp.Channel;
 
 const createConnectAmqp = async () => {

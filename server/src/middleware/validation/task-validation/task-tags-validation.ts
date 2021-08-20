@@ -7,7 +7,7 @@ export const tagsValidation: Schema[''] = {
 	custom: {
 		options: (value: string) => {
 			if (typeof value !== 'string') {
-				return;
+				return false;
 			}
 
 			const tags = value.split(TASK_QUERY_SEPARATOR).filter((v) => Boolean(v.length));

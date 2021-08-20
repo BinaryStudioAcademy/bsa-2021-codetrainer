@@ -6,7 +6,6 @@ import styles from './buttons-block.module.scss';
 import './buttons-block.scss';
 import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
-import { ChangeTheme } from 'components/basic/change-theme';
 
 interface IButtonsBlockProps {
 	handlePreviewClick: () => void;
@@ -49,7 +48,6 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps)
 						isButtonBlockSelect={true}
 					/>
 				</div>
-				<ChangeTheme />
 			</div>
 		</>
 	);
