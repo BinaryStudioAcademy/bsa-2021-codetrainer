@@ -13,10 +13,10 @@ export interface IHeaderProps {
 }
 
 interface IListItem {
-	image: string;
+	icon: React.ElementType;
 	text: string;
 	id: string;
-	onClick?: () => void
+	onClick?: () => void;
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
@@ -26,11 +26,18 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		setListVisibility(!isListVisible);
 	};
 
-	const getListItem = ({ image, text, id, onClick = () => { } }: IListItem) => {
+	const getListItem = ({ icon: Icon, text, id, onClick = () => {} }: IListItem) => {
 		return (
-			<li className={styles.navigationItem} key={id} onClick={() => { onClick(); changeVisible() }}>
+			<li
+				className={styles.navigationItem}
+				key={id}
+				onClick={() => {
+					onClick();
+					changeVisible();
+				}}
+			>
 				<div className={styles.navigationLink}>
-					<img src={image} alt="listItem" />
+					<Icon className={styles.icon} />
 					<span>{text}</span>
 				</div>
 			</li>
