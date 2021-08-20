@@ -5,7 +5,6 @@ import { Rank } from 'components/basic';
 import { INotificationProps } from './';
 
 export function mapNotificationToProps(notification: TNotification): INotificationProps {
-	const userLink = ROUTES.UserProfile + '/id';
 	const { date, read } = notification;
 
 	switch (notification.type) {
@@ -14,7 +13,6 @@ export function mapNotificationToProps(notification: TNotification): INotificati
 			return {
 				children: `You ranked up!`,
 				icon: <Rank rank={rank} />,
-				link: userLink,
 				date,
 				read,
 			};
@@ -24,7 +22,6 @@ export function mapNotificationToProps(notification: TNotification): INotificati
 			return {
 				children: `${honor}+ honor: ${unlocks}`,
 				icon: <Rank honor={honor} />,
-				link: userLink,
 				date,
 				read,
 			};
@@ -40,11 +37,11 @@ export function mapNotificationToProps(notification: TNotification): INotificati
 			};
 		}
 		case NotificationTypes.Follower: {
-			const { id, username, profileUrl } = notification.body.follower;
+			const { username, profileUrl } = notification.body.follower;
 			return {
 				children: `${username} follows you!`,
 				icon: <img src={profileUrl} width={50} height={50} />,
-				link: ROUTES.UserProfile + `/${id}`,
+				link: ROUTES.UserProfile + `/${username}`,
 				date,
 				read,
 			};
