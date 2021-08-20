@@ -7,31 +7,9 @@ import practiceAndRepeatIcon from './assets/practiceAndRepeatIcon.svg';
 import betaIcon from './assets/betaIcon.svg';
 import randomIcon from './assets/randomIcon.svg';
 import { FocusKeys } from 'constants/FocusKeys';
-import { ITask } from 'components/common/next-task/interface';
-
-// Stub for implementation until api is implemented
-const task = {
-	title: 'Stop gninnipS My sdroW!',
-	description: `
-	<div>
-		<p>Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed.</p>
-		<ul>
-			<li>Strings passed in will consist of only letters and spaces.</li>
-			<li>Spaces will be included only when more than one word is present.</li>
-		</ul>
-		<h6>Examples:</h6>
-		<div>
-			<code>
-			spinWords("Hey fellow warriors") => "Hey wollef sroirraw" <br />
-			spinWords("This is a test") => "This is a test" <br />
-			spinWords("This is another test") => "This is rehtona test" <br />
-			</code>
-		</div>
-	</div>
-	`,
-	rank: 6,
-	tags: ['Algorithms', 'Strings', 'Data Types', 'Formatting', 'Logic', 'Data Types', 'Formatting', 'Logic'],
-};
+import { useDispatch } from 'react-redux';
+import { getTasks } from '../home-page/logic/actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const icons = {
 	Fundamentals: fundamentalsIcon,
@@ -42,9 +20,11 @@ const icons = {
 };
 
 const NextTaskContainer = () => {
-	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ id: 0, title: '', icon: '' });
+	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ id: 0, title: 'Fundamentals', icon: '' });
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
-	const [currentTask, setCurrentTask] = useState<ITask>(task);
+	const task = useAppSelector((rootState) => rootState.home.state?.nextTask);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const focusValues = Object.values(FocusKeys);
@@ -55,27 +35,34 @@ const NextTaskContainer = () => {
 	}, []);
 
 	useEffect(() => {
-		// api request
-		setCurrentTask(task);
-	}, []);
+		dispatch(getTasks({
+			discipline: activeFocusValue.title,
+			currentTask: task?.id
+		}));
+	}, [activeFocusValue.title]);
 
 	const handleTrainClick = () => {
 		console.log('train click');
 	};
 
 	const handleSkipClick = () => {
-		console.log('skip click');
+		dispatch(getTasks({
+			discipline: activeFocusValue.title,
+			currentTask: task?.id
+		}));
 	};
 
 	return (
-		<NextTask
-			task={currentTask}
-			focusValues={focusValues}
-			activeFocusValue={activeFocusValue}
-			setActiveFocusValue={setActiveFocusValue}
-			handleTrainClick={handleTrainClick}
-			handleSkipClick={handleSkipClick}
-		/>
+		<>
+			<NextTask
+				task={task}
+				focusValues={focusValues}
+				activeFocusValue={activeFocusValue}
+				setActiveFocusValue={setActiveFocusValue}
+				handleTrainClick={handleTrainClick}
+				handleSkipClick={handleSkipClick} />
+
+		</>
 	);
 };
 

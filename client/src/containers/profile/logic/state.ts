@@ -4,7 +4,7 @@ import { ActiveTabId } from './models';
 export interface IProfileState {
 	activeTab: ActiveTabId;
 	isLoading: boolean;
-	error: string | null
+	error: string | null;
 	isSuccess: boolean;
 	userData: IUser | null;
 }

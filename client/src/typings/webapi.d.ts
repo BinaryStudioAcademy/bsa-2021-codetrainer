@@ -20,6 +20,17 @@ declare namespace WebApi.Entities {
 		githubId?: string;
 		profileUrl?: string;
 	}
+	interface ITask {
+		id: string;
+		name: string;
+		description?: string;
+		// tags?: string[],
+		rank?: number;
+	}
+
+	interface ITasks {
+		tasks: ITask[];
+	}
 
 	export interface IMember {
 		id: string;

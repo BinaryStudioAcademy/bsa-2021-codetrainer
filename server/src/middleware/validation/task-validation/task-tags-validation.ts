@@ -9,10 +9,12 @@ export const tagsValidation: Schema[''] = {
 			if (typeof value !== 'string') {
 				return false;
 			}
+
 			const tags = value.split(TASK_QUERY_SEPARATOR).filter((v) => Boolean(v.length));
-			if (!tags.length) {
+			if (!tags.length && value !== '') {
 				throw new ValidationError(CODE_ERRORS.TASK_QUERY('tags'));
 			}
+			// eslint-disable-next-line consistent-return
 			return true;
 		},
 	},
@@ -20,5 +22,4 @@ export const tagsValidation: Schema[''] = {
 		options: (value: string) => value.split(TASK_QUERY_SEPARATOR),
 	},
 	optional: true,
-	notEmpty: true,
 };

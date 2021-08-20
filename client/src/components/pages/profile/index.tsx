@@ -13,12 +13,16 @@ interface IProfileProps {
 export const Profile = ({ userInfo, error, profileInfoProps }: IProfileProps) => {
 	return (
 		<div className={styles.profile}>
-			{error ? <div className={styles.error}>{error}</div>
-				: userInfo && (
+			{error ? (
+				<div className={styles.error}>{error}</div>
+			) : (
+				userInfo && (
 					<>
 						<ProfileBio {...userInfo} />
 						<ProfileInfo {...profileInfoProps} />
-					</>)}
+					</>
+				)
+			)}
 		</div>
 	);
 };
