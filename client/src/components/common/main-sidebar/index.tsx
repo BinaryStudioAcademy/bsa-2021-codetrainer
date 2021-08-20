@@ -33,9 +33,9 @@ const MainSidebar: React.FC = () => {
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
-						<NavLink to="/" className={styles.navigationLink}>
+						<NavLink to={ROUTES.Clans} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
-							Blog
+							Clans
 						</NavLink>
 					</li>
 				</ul>
