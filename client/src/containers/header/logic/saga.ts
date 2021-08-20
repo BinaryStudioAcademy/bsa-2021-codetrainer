@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import { NotificationSaga } from '../notifications/logic/saga';
 
-export function* headerSaga() {
+export default function* headerSaga() {
 	yield all([NotificationSaga()]);
 }
