@@ -5,9 +5,10 @@ import { imagesRouter } from './images.router';
 import { githubRouter } from './github.router';
 import { initTaskApi } from './task';
 import { ApiPath } from '../common';
-import { initUsers } from './users/users-api';
+import { initUsers } from './users';
 import { initFollower } from './follower';
 import { initCollection } from './collection';
+import { initCommentTask } from './comment-task';
 import {
 	authService,
 	clanService,
@@ -16,6 +17,7 @@ import {
 	follower,
 	users,
 	collectionService,
+	commentTaskService,
 } from '../services';
 
 export function initApi(): Router {
@@ -67,6 +69,8 @@ export function initApi(): Router {
 	);
 
 	apiRouter.use(ApiPath.TASK, initTaskApi());
+
+	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
 
 	return apiRouter;
 }

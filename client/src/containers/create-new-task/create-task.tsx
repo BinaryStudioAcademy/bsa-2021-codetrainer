@@ -17,6 +17,7 @@ import { setNotificationState } from 'containers/notification/logic/actions';
 import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { createTask, deleteTask, updateTask } from 'services/create-task.service';
+import historyHelper from 'helpers/history.helper';
 
 export interface ICreateTaskProps {}
 
@@ -359,6 +360,9 @@ describe("twoOldestAges", function() {
 });`);
 		setExampleTestCases('');
 	};
+	const handlePreviewClick = (task: string | null) => {
+		historyHelper.push(task ? '/task/' + task : '');
+	};
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -377,7 +381,7 @@ describe("twoOldestAges", function() {
 					setTags={setTags}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
-					<ButtonsBlock handlePreviewClick={() => setInstructionTab(1)} />
+					<ButtonsBlock handlePreviewClick={() => handlePreviewClick(taskId)} taskId={taskId} />
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>

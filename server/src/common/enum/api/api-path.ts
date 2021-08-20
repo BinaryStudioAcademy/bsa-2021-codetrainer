@@ -8,4 +8,5 @@ export const ApiPath = {
 	TASK: '/tasks',
 	COLLECTIONS: '/collections',
 	GITHUB: '/github',
+	COMMENT_TASK: '/comment-task',
 };

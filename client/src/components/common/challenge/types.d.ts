@@ -1,4 +1,3 @@
-
 export interface IChallengeStats {
 	favoriteSaves: number;
 	positiveFeedback: number;

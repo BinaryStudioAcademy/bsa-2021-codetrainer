@@ -1,18 +1,19 @@
-import { ProfilePage } from '../../components';
-import React, { useMemo, useCallback } from 'react';
+import { FullscreenLoader, ProfilePage } from '../../components';
+import React, { useMemo, useCallback, useEffect } from 'react';
 import { Stats, ProfileTasks, ProfileSocial } from './tabs';
-import { mockProfileBioProps, statsProps } from './mocks';
+import { statsProps } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useParams } from 'react-router-dom';
 import { profileTasks } from './tabs/tasks/mocks';
 import { social } from './tabs/social/mocks';
+import { useAppSelector } from 'hooks/useAppSelector';
 
 export const Profile = (props: RouteComponentProps) => {
-	const activeTabId = useSelector((state: IRootState) => state.profile.activeTab);
+	const { activeTab: activeTabId } = useSelector((state: IRootState) => state.profile);
 	const dispatch = useDispatch();
 	const setActiveTab = useCallback(
 		(tabId: ActiveTabId) => {
@@ -20,6 +21,18 @@ export const Profile = (props: RouteComponentProps) => {
 		},
 		[dispatch],
 	);
+
+	const { isLoading, error, userData } = useAppSelector((state) => state.profile);
+
+	const { username } = useParams<{ username: string }>();
+
+	useEffect(() => {
+		dispatch(
+			actions.searchUser({
+				query: { username },
+			}),
+		);
+	}, [username]);
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
@@ -46,9 +59,12 @@ export const Profile = (props: RouteComponentProps) => {
 		});
 	}, [setActiveTab]);
 
-	return (
+	return isLoading ? (
+		<FullscreenLoader />
+	) : (
 		<ProfilePage
-			userInfo={mockProfileBioProps}
+			error={error}
+			userInfo={userData}
 			profileInfoProps={{
 				getTabContent,
 				profileRouteProps: {

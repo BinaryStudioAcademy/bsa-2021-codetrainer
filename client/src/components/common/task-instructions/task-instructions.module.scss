@@ -2,6 +2,7 @@
 
 .taskContainer {
 	font: var.$sixth-title-font;
+	margin-bottom: 40px;
 }
 
 .taskContainer a {
@@ -20,13 +21,13 @@
 
 .task {
 	border-radius: 15px;
-	background: #fafbff;
+	background: var(--container-color);
 	padding: 20px 20px;
 }
 
 .taskContainer hr {
 	margin: 20px -20px;
-	border: 1px solid #eaecf1;
+	border: 1px solid var(--divider);
 }
 
 .switch {
@@ -40,13 +41,14 @@
 	padding: 3px;
 	border: none;
 	outline: none;
-	background: #fafbff;
+	background: var(--container-color);
+	color: var(--text-color);
 	cursor: pointer;
 }
 
 .switch .active {
-	color: var.$cornflower-blue;
-	border-bottom: var.$cornflower-blue 2px solid;
+	color: var(--purple);
+	border-bottom: var(--purple) 2px solid;
 }
 
 .infoContainer {

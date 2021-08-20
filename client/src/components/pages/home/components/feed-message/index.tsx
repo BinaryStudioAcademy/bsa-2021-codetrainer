@@ -1,28 +1,45 @@
 import React from 'react';
 import styles from './feed-message.module.scss';
-import defaultUserIcon from './assets/user.svg';
+import { Avatar } from '../../../../basic';
 
 interface IFeedMessageProps {
-	userImageSource: string;
-	userName: string;
-	clan: string;
-	date: string;
-	text: string;
+	id: string;
+	user: {
+		id: string;
+		imageSource?: string;
+		name: string;
+		surname: string;
+		clan: {
+			id: string;
+			name: string;
+		};
+	};
+	task: {
+		id: string;
+		name: string;
+	};
+	body: string;
+	createdAt: Date;
 }
 
-const FeedMessage: React.FC<IFeedMessageProps> = ({ userImageSource, userName, clan, date, text }) => {
+const FeedMessage: React.FC<IFeedMessageProps> = ({ user, createdAt, body }) => {
 	return (
 		<div className={styles.messageUser}>
-			<img className={styles.messageUserImage} src={userImageSource || defaultUserIcon} alt="user" />
+			<Avatar avatar={user.imageSource} size={25} />
+
 			<div>
 				<div className={styles.messageDataWrapper}>
-					<span className={styles.messageData}>{userName}</span>
+					<span className={styles.messageData}>{`${user.name} ${user.surname}`}</span>
 					<span className={styles.separator}></span>
-					<span className={styles.messageData}>{clan}</span>
-					<span className={styles.separator}></span>
-					<span className={styles.messageData}>{date}</span>
+					{user.clan ? (
+						<>
+							<span className={styles.messageData}>{`Clan "${user.clan?.name}"`}</span>
+							<span className={styles.separator}></span>
+						</>
+					) : null}
+					<span className={styles.messageData}>{createdAt}</span>
 				</div>
-				<p className={styles.messageText}>{text}</p>
+				<p className={styles.messageText}>{body}</p>
 			</div>
 		</div>
 	);

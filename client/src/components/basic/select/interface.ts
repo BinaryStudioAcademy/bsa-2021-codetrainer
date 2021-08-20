@@ -11,5 +11,5 @@ export interface ISelectProps {
 	values: ISelectValue[];
 	activeValue?: ISelectValue;
 	onChange?: (value: ISelectValue) => void;
-	isButtonBlockSelect?: boolean
+	isButtonBlockSelect?: boolean;
 }

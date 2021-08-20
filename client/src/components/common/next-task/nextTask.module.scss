@@ -6,7 +6,7 @@
 	padding: 24px;
 	height: 333px;
 
-	background-color: #fafbff;
+	background-color: var(--container-color);
 	border-radius: 15px;
 }
 
@@ -17,7 +17,7 @@
 	min-width: 355px;
 	width: 355px;
 
-	border-right: 1px solid #e5e5e5;
+	border-right: 1px solid var(--divider);
 }
 
 .title {

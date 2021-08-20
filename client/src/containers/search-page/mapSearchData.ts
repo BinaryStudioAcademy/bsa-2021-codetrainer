@@ -12,8 +12,8 @@ export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['d
 			tags: task.tags.map((tag) => tag.name),
 			linkToAuthor: '/',
 			author: {
-				firstName: task.user.name,
-				lastName: task.user.surname,
+				firstName: task?.user?.name || '',
+				lastName: task?.user?.surname || '',
 				link: '/',
 			},
 			stats: {
