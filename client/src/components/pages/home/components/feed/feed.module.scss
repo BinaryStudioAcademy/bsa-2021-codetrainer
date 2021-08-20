@@ -1,7 +1,7 @@
 .feed {
 	padding: 24px;
 
-	background: #fafbff;
+	background: var(--container-color);
 	border-radius: 15px;
 }
 
@@ -37,9 +37,9 @@
 }
 
 .feedCategory.active {
-	color: #705ff5;
+	color: var(--purple);
 
-	border-bottom: 1.5px solid #705ff5;
+	border-bottom: 1.5px solid var(--purple);
 }
 
 .loadMoreButton {

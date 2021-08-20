@@ -4,7 +4,6 @@ const TaskDescriptionIframeStyles = `
 
   body {
     font-family: 'Montserrat', Arial, sans-serif;
-
     overflow: hidden;
     overflow-y: auto;
   }

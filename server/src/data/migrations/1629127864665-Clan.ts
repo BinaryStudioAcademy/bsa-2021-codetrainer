@@ -5,7 +5,7 @@ export class Clan1629127864665 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		const exampleData = [
 			{
-				name: 'PostClan',
+				name: 'PostTimeClan',
 				members: [
 					{
 						...getCustomRepository(UserRepository).getByEmail('test@test.com'),
@@ -20,9 +20,11 @@ export class Clan1629127864665 implements MigrationInterface {
 						profileClan: { role: 'member' },
 					},
 				],
+				maxMembers: 20,
+				numberOfMembers: 3,
 			},
 			{
-				name: 'TheEndOfMath',
+				name: 'TheEndOfMathNow',
 				members: [
 					{
 						...getCustomRepository(UserRepository).getByEmail('converge@test.com'),
@@ -37,9 +39,11 @@ export class Clan1629127864665 implements MigrationInterface {
 						profileClan: { role: 'member' },
 					},
 				],
+				maxMembers: 20,
+				numberOfMembers: 3,
 			},
 			{
-				name: 'Roundabout',
+				name: 'RoundaboutClan',
 				members: [
 					{
 						...getCustomRepository(UserRepository).getByEmail('anima@test.com'),
@@ -54,9 +58,11 @@ export class Clan1629127864665 implements MigrationInterface {
 						profileClan: { role: 'member' },
 					},
 				],
+				maxMembers: 20,
+				numberOfMembers: 3,
 			},
 			{
-				name: 'Streetcleaners',
+				name: 'StreetClan',
 				members: [
 					{
 						...getCustomRepository(UserRepository).getByEmail('thejesu@test.com'),
@@ -71,9 +77,11 @@ export class Clan1629127864665 implements MigrationInterface {
 						profileClan: { role: 'member' },
 					},
 				],
+				maxMembers: 20,
+				numberOfMembers: 3,
 			},
 			{
-				name: 'ExNoi',
+				name: 'ExNoiAfter',
 				members: [
 					{
 						...getCustomRepository(UserRepository).getByEmail('pcisagoodidea@test.com'),
@@ -88,6 +96,8 @@ export class Clan1629127864665 implements MigrationInterface {
 						profileClan: { role: 'member' },
 					},
 				],
+				maxMembers: 20,
+				numberOfMembers: 3,
 			},
 		];
 

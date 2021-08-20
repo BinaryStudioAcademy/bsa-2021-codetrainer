@@ -4,8 +4,11 @@ import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
+
 	protected userRepository: TUserRepository;
+
 	protected tagRepository: TTagRepository;
+
 	protected getTagBind: (name: string) => Promise<Tag>;
 
 	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
@@ -27,13 +30,20 @@ export class TaskService {
 	async create(user: User, task: Task, tags: string[] | []) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
-		const tagsForSave = await Promise.all(tags.map(this.getTagBind));
+		let tagsForSave = [
+			{
+				name: '',
+			},
+		];
+		if (tags) {
+			tagsForSave = await Promise.all(tags.map(this.getTagBind));
+		}
 		const newTask = await repository.save({
 			...task,
 			user,
 			isPublished: false,
 			status: TASK_STATUS.BETA,
-			...(Boolean(tagsForSave.length) ? { tags: tagsForSave } : {}),
+			...(tagsForSave.length ? { tags: tagsForSave } : {}),
 		});
 		await userRepository.save({ id: user.id, tasks: [...user.tasks, newTask] });
 		const savedTask = await repository.getById(newTask.id);

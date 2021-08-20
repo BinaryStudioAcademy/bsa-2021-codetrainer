@@ -1,4 +1,6 @@
 :local(.container) {
+	background: var(--background-color);
+	color: var(--text-color);
 	width: 700px;
 }
 
@@ -42,16 +44,12 @@
 :local(.form button) {
 	margin-top: 5px;
 	border: #705ff5 2px solid;
-	background: #fafbff;
-	color: #705ff5;
+	background: var(--purple);
+	color: #fff;
 }
 
 :local(.form span) {
 	color: #ec4179;
-}
-
-:local(.create-button) {
-	margin-top: 60px;
 }
 
 :local(.prompt button) {

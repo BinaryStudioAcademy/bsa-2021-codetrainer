@@ -60,15 +60,13 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 @EntityRepository(Task)
 export class TaskRepository extends AbstractRepository<Task> {
 	getAll(skip: number, take: number) {
-		return (
-			this.createQueryBuilder('task')
-				.leftJoinAndSelect('task.user', 'user')
-				.leftJoinAndSelect('task.tags', 'tag')
-				.select(['task', 'user.name', 'user.id', 'tag.id', 'tag.name'])
-				.skip(skip)
-				.take(take)
-				.getMany()
-		);
+		return this.createQueryBuilder('task')
+			.leftJoinAndSelect('task.user', 'user')
+			.leftJoinAndSelect('task.tags', 'tag')
+			.select(['task', 'user.name', 'user.id', 'tag.id', 'tag.name'])
+			.skip(skip)
+			.take(take)
+			.getMany();
 	}
 
 	updateById(id: string, data: Partial<Task>) {

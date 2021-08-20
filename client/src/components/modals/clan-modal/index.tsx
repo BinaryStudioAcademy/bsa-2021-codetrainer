@@ -56,17 +56,10 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 				>
 					{({ validateField }) => (
 						<Form className={styles.form}>
-							<Field
-								id="createClan"
-								name="createClan"
-								label={
-									<label>
-										<span>*</span> Create clan
-									</label>
-								}
-								type="text"
-								component={FormInput}
-							/>
+							<label htmlFor="createClan">
+								<span>*</span> Create clan
+							</label>
+							<Field id="createClan" name="createClan" type="text" component={FormInput} />
 							{isPrompt ? (
 								prompt(validateField as (field: string) => Promise<string>)
 							) : (

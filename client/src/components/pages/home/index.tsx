@@ -9,7 +9,6 @@ const Home: React.FC<IHomeProps> = ({ activeUser, users, nextTaskContent, feedCo
 			<h3 className={styles.userGreeting}>Hi, {activeUser?.name}!</h3>
 
 			<div className={styles.nextTaskWrapper}>{nextTaskContent}</div>
-
 			<div className={styles.communityWrapper}>
 				<Community users={users} />
 			</div>
