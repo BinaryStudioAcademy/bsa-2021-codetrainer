@@ -1,6 +1,6 @@
-import { FullscreenLoader, ProfilePage } from '../../components';
 import React, { useMemo, useCallback, useEffect } from 'react';
-import { Stats, ProfileTasks, ProfileSocial } from './tabs';
+import { FullscreenLoader, ProfilePage } from 'components';
+import { Stats, ProfileTasks, ProfileSocial, ProfileCollections } from './tabs';
 import { statsProps } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
@@ -36,14 +36,21 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
-			case ActiveTabId.Stats:
+			case ActiveTabId.Stats: {
 				return <Stats statsInfo={statsProps} />;
-			case ActiveTabId.Challenge:
+			}
+			case ActiveTabId.Challenge: {
 				return <ProfileTasks profileTasks={profileTasks} />;
-			case ActiveTabId.Social:
+			}
+			case ActiveTabId.Social: {
 				return <ProfileSocial social={social} />;
-			default:
+			}
+			case ActiveTabId.Collections: {
+				return <ProfileCollections userId={userData?.id as string}/>;
+			}
+			default: {
 				return <div />;
+			}
 		}
 	}, [activeTabId]);
 
