@@ -31,11 +31,11 @@
 			margin-bottom: 10px;
 			margin-top: 15px;
 		}
-		@include radio-item-color(#282828);
+		@include radio-item-color(var(--text-color));
 	}
 	& input[type='radio']:checked ~ .radioLabel,
 	.radioLabel:hover {
-		@include radio-item-color(#705ff5);
+		@include radio-item-color(var(--purple));
 	}
 	& input[type='radio']:checked ~ .radioLabel {
 		cursor: default;

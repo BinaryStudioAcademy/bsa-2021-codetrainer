@@ -1,9 +1,10 @@
-// will be removed after connecting local fonts
+@import 'styles/variables';
 
 .container {
+	background-color: var(--background-color);
 	width: 916px;
-	font-family: 'Montserrat', Arial, sans-serif;
-	color: #282828;
+	font-family: $base-font-family;
+	color: var(--text-color);
 }
 
 .userGreeting {

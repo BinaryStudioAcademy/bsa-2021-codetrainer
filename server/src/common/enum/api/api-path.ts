@@ -7,4 +7,5 @@ export const ApiPath = {
 	IMAGES: '/images',
 	TASK: '/tasks',
 	GITHUB: '/github',
+	COMMENT_TASK: '/comment-task',
 };

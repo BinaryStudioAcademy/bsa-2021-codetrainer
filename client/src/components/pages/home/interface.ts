@@ -1,13 +1,9 @@
 import React from 'react';
-import { IUser } from './components/community/interfce';
-import { IMessage } from './components/feed/interface';
+import { IUser } from './components/community/interface';
 
 export interface IHomeProps {
-	activeUser: IUser;
+	activeUser: IUser | null;
 	users: IUser[];
-	messages: IMessage[];
-	selectedFeedCategory: string;
-	onSelectFeedCategory: (category: string) => void;
-	isLastPage: boolean;
 	nextTaskContent: React.ReactNode;
+	feedContent: React.ReactNode;
 }

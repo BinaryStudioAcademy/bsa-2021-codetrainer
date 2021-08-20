@@ -8,6 +8,12 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsersSer
 	const router = appRouter();
 
 	router
+		.get(UsersApiPath.SEARCH, (req, res, next) =>
+			usersService
+				.search(req.query as { username: string })
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.get(UsersApiPath.GET_ALL, (req, res, next) =>
 			usersService
 				.getAllUsers()

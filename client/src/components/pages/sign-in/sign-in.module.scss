@@ -4,6 +4,11 @@ h4 {
 	font: $fourth-title-font;
 }
 
+body {
+	background: var(--background-color);
+	color: var(--text-color);
+}
+
 .error {
 	color: $french-rose;
 	margin-top: -10px;
