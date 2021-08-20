@@ -23,4 +23,6 @@ export const ROUTES = {
 	Landing: '/landing',
 
 	Github: '/github',
+
+	Collections: '/collections',
 };
