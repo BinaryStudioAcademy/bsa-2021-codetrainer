@@ -1,29 +1,34 @@
 import { Router } from 'express';
-import { REQ_TYPE, CollectionsApiPath } from '../../common';
-import { userValidationMiddleware, SchemasUserDataValidation } from '../../middleware';
-import { TUsersService } from '../../services';
+import { CollectionsApiPath } from '../../common';
+import { CollectionService } from '../../services';
 
-export const initUsers = (appRouter: typeof Router, services: { users: TUsersService }) => {
-	const { users: usersService } = services;
+export const initCollection = (appRouter: typeof Router, services: { collection: CollectionService }) => {
+	const { collection: collectionService } = services;
 	const router = appRouter();
 
 	router
-		.get(CollectionsApiPath.GET_ALL, (req, res, next) =>
-			usersService
-				.getAllUsers()
+		// .get(CollectionsApiPath.ROOT, (req, res, next) => res.send('collections'))
+		.get(CollectionsApiPath.ROOT, (req, res, next) =>
+			collectionService
+				.getCollectionByName(req.body)
+				.then((data) => res.send(data || 'heh'))
+				.catch(next),
+		)
+		.get(CollectionsApiPath.GET, (req, res, next) =>
+			collectionService
+				.getCollectionById(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.get(CollectionsApiPath.GET_ONE, (req, res, next) =>
-			usersService
-				.getOne(req.params.id)
+		.post(CollectionsApiPath.CREATE, (req, res, next) =>
+			collectionService
+				.createCollection(req.body)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
 		.delete(CollectionsApiPath.DELETE, (req, res, next) =>
-			// TODO: add user id validation
-			usersService
-				.delete(req.params.id, res)
+			collectionService
+				.deleteCollection(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		);

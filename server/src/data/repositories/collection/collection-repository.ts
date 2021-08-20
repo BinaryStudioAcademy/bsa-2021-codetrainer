@@ -9,10 +9,12 @@ export class CollectionRepository extends AbstractRepository<Collection> {
 	}
 
 	getById(id: string) {
-		return this.createQueryBuilder('collection')
-			.leftJoinAndSelect('collection.tasks', 'task')
-			.where('collection.id = :id', { id })
-			.getOne();
+		return (
+			this.createQueryBuilder('collection')
+				// .leftJoinAndSelect('collection.tasks', 'task')
+				.where('collection.id = :id', { id })
+				.getOne()
+		);
 	}
 
 	createItem(data: Partial<Collection>) {

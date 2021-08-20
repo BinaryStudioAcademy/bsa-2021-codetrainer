@@ -1,6 +1,7 @@
 export const CollectionsApiPath = {
-	GET_ALL: '/',
-	GET_ONE: '/:id',
+	ROOT: '/',
+	CREATE: '/',
+	GET: '/:id',
 	UPDATE: '/:id',
 	DELETE: '/:id',
 };

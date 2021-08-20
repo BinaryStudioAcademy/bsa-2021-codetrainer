@@ -40,8 +40,7 @@ const solutionService = new SolutionService({
 	task: TaskRepository,
 	solution: SolutionRepository,
 });
-
-const collection = new CollectionService({ collection: CollectionRepository });
+const collectionService = new CollectionService({ collection: CollectionRepository });
 
 export { authService, AuthService };
 export { clanService, ClanService };
@@ -51,4 +50,4 @@ export { githubService, GithubService };
 export { tagService, TagService };
 export { solutionService, SolutionService };
 export { follower, TFollowerService };
-export { collection, CollectionService };
+export { collectionService, CollectionService };

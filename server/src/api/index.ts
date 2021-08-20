@@ -7,7 +7,16 @@ import { initTaskApi } from './task';
 import { ApiPath } from '../common';
 import { initUsers } from './users/users-api';
 import { initFollower } from './follower';
-import { authService, clanService, imagesService, githubService, follower, users } from '../services';
+import { initCollection } from './collection';
+import {
+	authService,
+	clanService,
+	imagesService,
+	githubService,
+	follower,
+	users,
+	collectionService,
+} from '../services';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -39,6 +48,13 @@ export function initApi(): Router {
 		ApiPath.FOLLOWERS,
 		initFollower(Router, {
 			follower,
+		}),
+	);
+
+	apiRouter.use(
+		ApiPath.COLLECTIONS,
+		initCollection(Router, {
+			collection: collectionService,
 		}),
 	);
 

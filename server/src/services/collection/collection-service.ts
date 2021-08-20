@@ -29,7 +29,7 @@ export class CollectionService {
 		return collection;
 	}
 
-	async createRepository(data: Partial<Collection>) {
+	async createCollection(data: Partial<Collection>) {
 		const repository = getCustomRepository(this.collectionRepository);
 
 		const collection = await repository.createItem(data);
