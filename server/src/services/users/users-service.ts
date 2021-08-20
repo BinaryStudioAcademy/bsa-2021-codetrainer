@@ -78,6 +78,7 @@ export class User {
 			passwordChanged: true
 		};
 	}
+
 	async search(query: { username: string }) {
 		const userRepository = getCustomRepository(this.userRepository);
 		const user = await userRepository.search(query);

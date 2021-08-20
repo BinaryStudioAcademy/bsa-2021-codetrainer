@@ -30,7 +30,7 @@ const ProfilePicture: React.FC<IProfilePictureProps> = (props) => {
 								try {
 									const file = event.target.files && event.target.files[0];
 									const previewAvatar = await uploadImage(file as Blob);
-									setAvatar(previewAvatar.href);
+									setAvatar(previewAvatar);
 								} catch (err) {
 									console.log(err);
 								}
