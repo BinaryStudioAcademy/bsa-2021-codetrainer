@@ -21,4 +21,5 @@ export interface IClanProps {
 	sortByRank: TSortCallback;
 	sortByTime: TSortCallback;
 	currentSort: ClanSortOptions;
+	handleInviteClick: () => void;
 }

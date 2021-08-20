@@ -17,6 +17,7 @@ import {
 	users,
 	commentTaskService,
 } from '../services';
+import { initMailerApi } from './mailer';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -62,6 +63,8 @@ export function initApi(): Router {
 	apiRouter.use(ApiPath.TASK, initTaskApi());
 
 	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
+
+	apiRouter.use(ApiPath.MAILER, initMailerApi(Router));
 
 	return apiRouter;
 }
