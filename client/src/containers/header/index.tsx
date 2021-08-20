@@ -11,42 +11,6 @@ const Header: React.FC = () => {
 	const { user } = useAppSelector((state) => state.auth.userData);
 	const { notifications: unorderedNotifications } = useHeaderSelector();
 
-	// const headerProps: IHeaderProps = useMemo(
-	// 	() => ({
-	// 		name: `${user?.name} ${user?.surname}`,
-	// 		rank: 7,
-	// 		notificationCounter: 4,
-	// 		mark: 400,
-	// 		listItems: [
-	// 			{
-	// 				id: '1',
-	// 				image: menuProfile,
-	// 				text: 'View Profile',
-	// 				onClick: () => history.push(`/users/${user?.username}`),
-	// 			},
-	// 			{
-	// 				id: '2',
-	// 				image: menuSettings,
-	// 				text: 'Account Settings',
-	// 				onClick: () => history.push(ROUTES.Setting),
-	// 			},
-	// 			{
-	// 				id: '3',
-	// 				image: menuChallenge,
-	// 				text: 'New Challenge',
-	// 				onClick: () => history.push(ROUTES.createTask),
-	// 			},
-	// 			{
-	// 				id: '4',
-	// 				image: menuSignout,
-	// 				text: 'Sign out',
-	// 				onClick: handleLogout,
-	// 			},
-	// 		],
-	// 		avatar: user?.avatar,
-	// 	}),
-	// 	[history, handleLogout],
-	// );
 	const headerProps: IHeaderProps = {
 		name: `${user?.name} ${user?.surname}`,
 		rank: 7,
@@ -54,6 +18,7 @@ const Header: React.FC = () => {
 		mark: 400,
 		listItems: getListItems(),
 		onReadNotification: (id) => dispatch(notificationsActions.readNotification({ id })),
+		avatar: user?.avatar,
 	};
 
 	return <HeaderComponent {...headerProps} />;

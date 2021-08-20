@@ -24,13 +24,9 @@
 		position: relative;
 
 		&:hover {
-			background-color: var(--text-color);
-			color: var(--background-color);
+			background-color: rgb(228, 228, 228);
 			.inputField {
-				background-color: rgb(228, 228, 228); 
-				background-color: var(--text-color); //check this
-				color: var(--background-color); //check this
-				cursor: pointer; //check this
+				background-color: rgb(228, 228, 228);
 			}
 		}
 
