@@ -3,10 +3,12 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	OneToMany,
+	ManyToOne,
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
 } from 'typeorm';
+import { User } from '../user';
 import { Task } from '../task';
 
 @Entity()
@@ -17,8 +19,8 @@ export class Collection extends BaseEntity {
 	@Column({ type: 'varchar', length: 50, unique: true })
 	name!: string;
 
-	@Column({ type: 'varchar' })
-	author!: string;
+	@ManyToOne(() => User, (user) => user)
+	author!: User;
 
 	@CreateDateColumn()
 	createdAt!: Date;

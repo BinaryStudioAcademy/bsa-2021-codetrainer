@@ -7,26 +7,37 @@ export const initCollection = (appRouter: typeof Router, services: { collection:
 	const router = appRouter();
 
 	router
-		// .get(CollectionsApiPath.ROOT, (req, res, next) => res.send('collections'))
 		.get(CollectionsApiPath.ROOT, (req, res, next) =>
 			collectionService
-				.getCollectionByName(req.body)
-				.then((data) => res.send(data || 'heh'))
+				.getCollections()
+				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.get(CollectionsApiPath.GET, (req, res, next) =>
+		.get(CollectionsApiPath.ID, (req, res, next) =>
 			collectionService
 				.getCollectionById(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.post(CollectionsApiPath.CREATE, (req, res, next) =>
+		.post(CollectionsApiPath.ROOT, (req, res, next) =>
 			collectionService
-				.createCollection(req.body)
+				.createEmptyCollection(req.user, req.body)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.delete(CollectionsApiPath.DELETE, (req, res, next) =>
+		// .put(CollectionsApiPath.ID, (req, res, next) =>
+		// 	collectionService
+		// 		.addTaskToCollection(req.params.id, req.body)
+		// 		.then((data) => res.send(data))
+		// 		.catch(next),
+		// )
+		// .put(CollectionsApiPath.ID, (req, res, next) =>
+		// 	collectionService
+		// 		.removeTaskFromCollection(req.params.id, req.body)
+		// 		.then((data) => res.send(data))
+		// 		.catch(next),
+		// )
+		.delete(CollectionsApiPath.ID, (req, res, next) =>
 			collectionService
 				.deleteCollection(req.params.id)
 				.then((data) => res.send(data))

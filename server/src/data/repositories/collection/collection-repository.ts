@@ -4,26 +4,21 @@ import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Collection)
 export class CollectionRepository extends AbstractRepository<Collection> {
-	getByName(name: string) {
-		return this.findOne({ name });
+	getAll() {
+		return this.createQueryBuilder('collection').getMany();
 	}
 
 	getById(id: string) {
-		return (
-			this.createQueryBuilder('collection')
-				// .leftJoinAndSelect('collection.tasks', 'task')
-				.where('collection.id = :id', { id })
-				.getOne()
-		);
+		return this.createQueryBuilder('collection').where('collection.id = :id', { id }).getOne();
 	}
 
-	createItem(data: Partial<Collection>) {
-		return this.save(data);
+	deleteById(id: string) {
+		return this.createQueryBuilder().delete().where('id = :id', { id }).execute();
 	}
 
-	updateById(id: string, data: Partial<Collection>) {
-		return this.update({ id }, data);
-	}
+	// updateById(id: string, data: Partial<Collection>) {
+	// 	return this.update({ id }, data);
+	// }
 
 	deleteTask(id: string, taskId: string) {
 		return this.createQueryBuilder('collection').relation('tasks').of(id).remove(taskId);
@@ -31,9 +26,5 @@ export class CollectionRepository extends AbstractRepository<Collection> {
 
 	addTask(id: string, taskId: string) {
 		return this.createQueryBuilder('collection').relation('tasks').of(id).add(taskId);
-	}
-
-	deleteById(id: string) {
-		return this.createQueryBuilder().delete().where('id = :id', { id }).execute();
 	}
 }
