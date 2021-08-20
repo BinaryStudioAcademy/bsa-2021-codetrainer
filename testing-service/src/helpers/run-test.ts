@@ -20,11 +20,11 @@ export const runTest = (solution: string, test: string) => {
 		docker.stdout.on('data', (data) => {
 			output += data;
 		});
-		docker.on('close', () => {
-			resolve(output.toString());
+		docker.on('close', (code) => {
+			resolve({ code, message: output.toString() });
 		});
 		docker.on('error', (error) => {
-			resolve(error.message);
+			resolve({ code: 1, message: error.message });
 		});
 	});
 };
