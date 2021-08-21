@@ -1,4 +1,6 @@
 import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
+import SolutionStatus from 'common/enum/app/solutions/solution-status';
+import TaskStatus from 'common/enum/app/tasks/task-status';
 
 declare namespace WebApi.Entities {
 	export interface IExample {
@@ -49,4 +51,41 @@ declare namespace WebApi.Entities {
 	}
 
 	export type TClans = Array<IClan>;
+
+	export interface ISolution {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		status: SolutionStatus;
+		code: string;
+	}
+
+	export interface ITag {
+		id: string;
+		name: string;
+	}
+
+	export interface ITask {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		name: string;
+		discipline: string;
+		rank: number;
+		allowContributors: boolean;
+		description: string;
+		completeSolution: string;
+		initialSolution: string;
+		preloaded: string;
+		testCases: string;
+		exampleTestCases: string;
+		status: TaskStatus;
+		isPublished: boolean;
+		solutions: Array<{ id: string }>;
+		tags: Array<ITag>;
+		user: {
+			name: string;
+			surname: string;
+		};
+	}
 }

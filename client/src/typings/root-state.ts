@@ -7,6 +7,7 @@ import { IProfileState } from 'containers/profile/logic/state';
 import { INotificationState } from '../containers/notification/logic/state';
 import { ISearchState } from 'containers/search-page/logic/state';
 import { ISettingsState } from '../containers/setting-page/logic/state';
+import { ITaskState } from '../containers/task-train/logic/state';
 
 export interface IRootState {
 	notification: INotificationState;
@@ -18,4 +19,5 @@ export interface IRootState {
 	auth: IAuthState;
 	search: ISearchState;
 	settings: ISettingsState;
+	task: ITaskState;
 }
