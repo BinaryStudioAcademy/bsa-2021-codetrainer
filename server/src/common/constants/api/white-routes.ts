@@ -1,4 +1,4 @@
-import { ApiPath, AuthApiPath, GithubApiPath } from '../../enum';
+import { ApiPath, AuthApiPath, GithubApiPath, TestApiPath } from '../../enum';
 
 export const WHITE_ROUTES = [
 	`${ApiPath.AUTH}${AuthApiPath.LOGIN}`,
@@ -11,4 +11,5 @@ export const WHITE_ROUTES = [
 	`${ApiPath.AUTH}${ApiPath.GITHUB}${GithubApiPath.CALLBACK}${GithubApiPath.REGISTER}`,
 	`${ApiPath.AUTH}${AuthApiPath.FORGOT_PASSWORD}`,
 	`${ApiPath.AUTH}${AuthApiPath.RESET_PASSWORD}`,
+	`${ApiPath.TESTS}${TestApiPath.RESULT}`,
 ];
