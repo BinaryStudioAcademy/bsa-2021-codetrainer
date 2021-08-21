@@ -15,7 +15,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 	const history = useHistory();
 	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
 
-	const goToClanHanler = (event: MouseEvent<HTMLElement>) => {
+	const goToClanHandler = (event: MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 
 		if (currentUserMember) {
@@ -34,26 +34,26 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 	};
 
 	return (
-		<TableRow onClick={goToClanHanler} className={currentUserMember && styles.clanJoined}>
-			<TableCell align="center">
-				<Rank rank={clan.rank} />
-			</TableCell >
-			<TableCell align="center">{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
-			<TableCell align="center">
+		<TableRow onClick={goToClanHandler} className={currentUserMember && styles.clanJoined}>
+			<TableCell>
+				<Rank rank={clan.rank ?? 0} />
+			</TableCell>
+			<TableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
+			<TableCell>
 				<span>{clan.name}</span>
-			</TableCell >
-			<TableCell align="center">
+			</TableCell>
+			<TableCell>
 				<span>{clan.maxMembers}</span>
 			</TableCell>
-			<TableCell align="center">
+			<TableCell>
 				<span>
 					{getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>
 			</TableCell>
-			<TableCell align="center">
+			<TableCell>
 				<span>{clan.honor}</span>
 			</TableCell>
-			<TableCell align="center">
+			<TableCell>
 				{currentUserMember ? (
 					currentUserMember.profileClan?.role !== MemberRoles.ADMIN ? (
 						<Button className={ButtonClasses.red} onClick={leaveClanHanler}>
