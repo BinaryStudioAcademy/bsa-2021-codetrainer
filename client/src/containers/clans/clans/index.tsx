@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ClansPage } from 'components';
 import * as actions from './logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,19 @@ import { NotificationType } from '../../notification/logic/models';
 const Clans: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const clans = useSelector((state: IRootState) => state.clans.data);
+	let clans = useSelector((state: IRootState) => state.clans.data);
 	const currentSort = useSelector((state: IRootState) => state.clans.options.sortBy);
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
+
+	const [isSearch, setIsSearch] = useState(false);
+	if (historyHelper.location.search) {
+		const search = historyHelper.location.search;
+		const searchText = search.substr(search.indexOf('=') + 1);
+		clans = clans.filter((clan) => clan.name === searchText);
+		if (!isSearch) {
+			setIsSearch(true);
+		}
+	}
 
 	useEffect(() => {
 		dispatch(actions.clearClans());
@@ -52,6 +62,10 @@ const Clans: React.FC = () => {
 			);
 		}
 	};
+	const handleGoToClanAllClans = () => {
+		setIsSearch(false);
+		historyHelper.push('/clans');
+	};
 	return (
 		<div>
 			<ClansPage
@@ -64,6 +78,8 @@ const Clans: React.FC = () => {
 				joinClan={joinClan}
 				leaveClan={leaveClan}
 				handleGoToClan={handleGoToClan}
+				isSearch={isSearch}
+				handleGoToClanAllClans={handleGoToClanAllClans}
 			/>
 		</div>
 	);

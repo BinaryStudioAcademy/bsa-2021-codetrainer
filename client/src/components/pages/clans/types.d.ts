@@ -15,6 +15,8 @@ export interface IClansProps {
 	leaveClan: (id: string) => void;
 	currentSort: ClansSortOptions;
 	handleGoToClan: () => void;
+	isSearch: boolean;
+	handleGoToClanAllClans: () => void;
 }
 
 export interface IClanProps {
