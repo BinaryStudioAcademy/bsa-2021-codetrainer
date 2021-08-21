@@ -10,7 +10,7 @@ export const ROUTES = {
 	ChangePassword: '/change-password',
 
 	Search: '/search',
-	UserProfile: '/users/:username',
+	Users: '/users',
 
 	Clans: '/clans',
 	Clan: '/clan',
