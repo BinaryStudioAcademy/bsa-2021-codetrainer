@@ -23,6 +23,7 @@ export const CODE_ERRORS = {
 	USER_NOT_EXIST: { message: `User not exist!`, status: HttpCodes.NOT_FOUND },
 	NOT_USER_SOLUTION: { message: "not this user's solution", status: HttpCodes.BAD_REQUEST },
 	SOLUTION_STATUS_WRONG: { message: 'solution status wrong', status: HttpCodes.BAD_REQUEST },
+	TESTING_NAME_INCORRECT: { message: 'testing name incorrect', status: HttpCodes.BAD_REQUEST },
 	USERNAME_NOT_EXIST: (username: string) => ({
 		message: `User ${username} does not exist.`,
 		status: HttpCodes.NOT_FOUND,
