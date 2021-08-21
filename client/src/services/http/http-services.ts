@@ -20,6 +20,7 @@ export class Http {
 				AccessToken.setToken(token);
 			}
 		}
+
 		return serverFetch({ ...requestArgs, bearer: AccessToken.getBearer() })
 			.then(this.checkStatus)
 			.then(this.getJson)
@@ -32,11 +33,15 @@ export class Http {
 		}
 		let textBody;
 		if (response.status === 400) {
-			throw new ValidationError(await response.json());
+			const text = await response.json();
+			console.log(text);
+
+			throw new ValidationError(text);
 		}
 		try {
 			textBody = await response.text();
 			const parsedException = JSON.parse(textBody);
+			console.log(parsedException);
 			throw new Error(parsedException?.message ?? response.statusText);
 		} catch (e) {
 			if (textBody === 'Unauthorized') {

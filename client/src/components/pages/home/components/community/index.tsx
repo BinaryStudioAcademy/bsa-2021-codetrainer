@@ -4,7 +4,7 @@ import CommunityUser from '../community-user';
 import styles from './community.module.scss';
 import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
-import { ICommunityProps } from './interfce';
+import { ICommunityProps } from './interface';
 import { ClanModal } from 'components/modals';
 
 const Community: React.FC<ICommunityProps> = ({ users }) => {
@@ -38,7 +38,7 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					<div className={styles.communityColumn}>
 						{users.map((user) => (
 							<p key={user.id} className={styles.columnText}>
-								{user.clan}
+								{user.clan?.name}
 							</p>
 						))}
 					</div>
@@ -52,9 +52,6 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 					</div>
 				</div>
 				<div className={styles.buttonsContainer}>
-					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.addButton)}>
-						Add New Friend
-					</Button>
 					<Button onClick={openModal} className={clsx(ButtonClasses.red, styles.createButton)}>
 						Create New Clan
 					</Button>

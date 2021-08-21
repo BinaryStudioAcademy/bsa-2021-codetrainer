@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { FollowersApiPath, REQ_TYPE } from '../../common';
-import { TFollowerService } from '../../services';
+import { FollowersService } from '../../services';
 import { dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
 
-export const initFollower = (appRouter: typeof Router, services: { follower: TFollowerService }) => {
+export const initFollower = (appRouter: typeof Router, services: { follower: FollowersService }) => {
 	const { follower: followerService } = services;
 	const router = appRouter();
 

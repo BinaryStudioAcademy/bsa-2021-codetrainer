@@ -1,6 +1,10 @@
+import { ReactNode } from 'react';
+
 export interface ITaskDescriptionProps {
 	rank: number;
-	title: string;
-	content: string;
+	name: string;
+	description: string | ReactNode;
+	examples: string | ReactNode;
+	content?: string;
 	tags: string[];
 }

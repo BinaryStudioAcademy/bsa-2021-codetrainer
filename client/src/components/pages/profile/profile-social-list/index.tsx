@@ -9,6 +9,7 @@ interface IProfileSocialList {
 }
 
 export const ProfileSocialList: React.FC<IProfileSocialList> = ({ items }) => (
+	<div className={styles.socialTableWrapper}>
 		<table className={styles.socialTable}>
 			<tbody>
 				{items.map((item) => (
@@ -32,4 +33,5 @@ export const ProfileSocialList: React.FC<IProfileSocialList> = ({ items }) => (
 				))}
 			</tbody>
 		</table>
+	</div>
 );

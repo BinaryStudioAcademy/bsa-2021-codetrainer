@@ -9,8 +9,13 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
+import ThemeSwitcher from 'containers/theme-switcher';
 
-const Example: React.FC = () => {
+interface IExample {
+	theme: { theme: string };
+}
+
+const Example: React.FC<IExample> = (props) => {
 	const dispatch = useDispatch();
 	const text = useSelector((rootState: IRootState) => rootState.example.name);
 	const [file, setFile] = useState<Blob | null>(null);
@@ -33,6 +38,10 @@ const Example: React.FC = () => {
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
 				home
 			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
+				HOME
+			</button>
+
 			<div>
 				{Object.values(NotificationType).map((type) => {
 					return (
@@ -77,6 +86,7 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
+			<ThemeSwitcher />
 		</div>
 	);
 };

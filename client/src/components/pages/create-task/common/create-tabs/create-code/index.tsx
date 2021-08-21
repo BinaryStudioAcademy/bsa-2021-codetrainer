@@ -34,6 +34,7 @@ export const CreateCode: React.FC<ITabProps> = ({ onChange, value, editable }) =
 			style={{
 				height: '330px',
 				width: '100%',
+				background: 'var(--secondary-container-color)',
 			}}
 			readOnly={!Boolean(editable)}
 			onLoad={handleLoadEditor}

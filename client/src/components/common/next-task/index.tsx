@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Select, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
-import { TaskDescription } from 'components/common';
+import { Spinner, TaskDescription } from 'components/common';
 import { INextTaskProps } from './interface';
 
 import styles from './nextTask.module.scss';
@@ -27,12 +27,25 @@ const NextTask: React.FC<INextTaskProps> = ({
 
 				<div>
 					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Train</Button>
-					<Button className={clsx(ButtonClasses.red, styles.skipButton)}>Skip</Button>
+					<Button onClick={handleSkipClick} className={clsx(ButtonClasses.red, styles.skipButton)}>
+						Skip
+					</Button>
 				</div>
 			</div>
 
 			<div className={styles.taskContainer}>
-				<TaskDescription rank={task.rank} title={task.title} content={task.description} tags={task.tags} />
+				{task ? (
+					<TaskDescription
+						rank={task.rank}
+						name={task.name}
+						description={task.description}
+						examples={task.exampleTestCases}
+						content={task.description || ''}
+						tags={task.tags?.map((item) => item.name)}
+					/>
+				) : (
+					<Spinner />
+				)}
 			</div>
 		</article>
 	);

@@ -1,9 +1,12 @@
+import { WebApi } from '../../../../../typings/webapi';
+import IClan = WebApi.Entities.IClan;
+
 export interface IUser {
 	id: string;
 	rank: number;
-	imageSource: string;
+	imageSource?: string;
 	name: string;
-	clan: string;
+	clan?: IClan;
 	honor: number;
 }
 

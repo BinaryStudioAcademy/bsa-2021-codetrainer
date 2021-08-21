@@ -16,7 +16,12 @@ import { NotificationType } from 'containers/notification/logic/models';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
-import { createTask, deleteTask, updateTask } from 'services/create-task.service';
+import { createTask, deleteTask, updateTask, getById } from 'services/task/task.service';
+import historyHelper from 'helpers/history.helper';
+import { addTask, deleteTaskRedux } from 'containers/user/logic/actions';
+import { useAppSelector } from 'hooks/useAppSelector';
+import { WebApi } from 'typings/webapi';
+import { useEffect } from 'react';
 
 export interface ICreateTaskProps {}
 
@@ -43,6 +48,48 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			}),
 		);
 	};
+	const [challengeActiveValue, setChallengeActiveValue] = useState<ISelectValue>({
+		id: '0',
+		title: 'Switch task',
+	});
+	const yourChallengeIds = useAppSelector((state) => state.auth.userData.user?.tasks);
+	const getYourChallengeValues = async (except?: string) => {
+		if (!yourChallengeIds) {
+			return null;
+		}
+		let startingArray;
+		if (!except) {
+			startingArray = yourChallengeIds;
+		} else {
+			startingArray = yourChallengeIds.filter((task) => task.id !== except);
+		}
+		const yourChallengeValues = await startingArray.map<Promise<{ id: string | null; title: string }>>(
+			async (task: WebApi.Entities.ITask) => {
+				const result = await getById(task.id);
+				return {
+					id: task.id,
+					title: result.name,
+				};
+			},
+		);
+		return Promise.all(yourChallengeValues).then((res) => {
+			return res;
+		});
+	};
+	const [yourChallengeValues, setYourChallengeValues] = useState<{ id: string | null; title: string }[] | null>([
+		{
+			id: '0',
+			title: 'New task',
+		},
+	]);
+	useEffect(() => {
+		getYourChallengeValues().then((result) =>
+			setYourChallengeValues(result ? [{ id: '0', title: 'New task' }, ...result] : null),
+		);
+		if (taskId) {
+			handleTaskChange(taskId);
+		}
+	}, []);
 	//settings block
 	const [taskName, setTaskName] = useState('');
 	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
@@ -57,6 +104,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const onSwitchClick = (newSwitchState: boolean) => {
 		setSelectedSwitch(newSwitchState);
 	};
+
 	//taskInstructions
 	const [instructionTab, setInstructionTab] = useState(0);
 	const [textDescription, setTextDescription] = useState('');
@@ -215,17 +263,52 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			exampleTestCases,
 			preloaded,
 		};
-		let result;
+		let task: { error: any; message: string; id: string | null; name: any };
 		if (!taskId) {
-			result = await createTask(requestBody);
-			console.log(result);
+			task = await createTask(requestBody);
 		} else {
-			result = await updateTask(requestBody, taskId);
+			task = await updateTask(requestBody, taskId);
 		}
-		if (result.error) {
-			createErrorMessage(result.message);
-		} else if (!result.error) {
-			dispatch(setTask({ taskId: result.id }));
+		if (task.error) {
+			createErrorMessage(task.message);
+		} else if (!task.error) {
+			dispatch(setTask({ taskId: task.id }));
+			dispatch(
+				addTask({
+					task: {
+						id: task.id,
+					},
+				}),
+			);
+			setChallengeActiveValue({
+				id: task.id,
+				title: task.name,
+			});
+			if (yourChallengeValues) {
+				const foundChallenge = yourChallengeValues.find((item) => item.id === task.id);
+				if (foundChallenge) {
+					const newChallenges = yourChallengeValues.map((item) => {
+						if (item.id === task.id) {
+							return {
+								id: item.id,
+								title: task.name,
+							};
+						}
+						return item;
+					});
+					setYourChallengeValues(newChallenges);
+				} else {
+					setYourChallengeValues([
+						...yourChallengeValues,
+						{
+							id: task.id,
+							title: task.name,
+						},
+					]);
+				}
+			} else {
+				setYourChallengeValues(null);
+			}
 			dispatch(
 				setNotificationState({
 					state: {
@@ -234,7 +317,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					},
 				}),
 			);
-			return result.id;
+			return task.id;
 		}
 		return null;
 	};
@@ -264,7 +347,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			createErrorMessage('You haven`t saved this task yet.');
 		} else {
 			const result = await deleteTask(taskId);
-			console.log(result);
 			if (result.error) {
 				createErrorMessage('Something went wrong.');
 			} else if (!result.error) {
@@ -276,6 +358,14 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 						},
 					}),
 				);
+				dispatch(deleteTaskRedux({ task: { id: taskId } }));
+				getYourChallengeValues(taskId).then((result) => {
+					setYourChallengeValues(result ? [{ id: '0', title: 'New task' }, ...result] : null);
+				});
+				setChallengeActiveValue({
+					id: '0',
+					title: 'Switch task',
+				});
 				resetAllFields();
 				dispatch(setTask({ taskId: null }));
 			}
@@ -359,6 +449,50 @@ describe("twoOldestAges", function() {
 });`);
 		setExampleTestCases('');
 	};
+	const handlePreviewClick = (taskId: string | null) => {
+		historyHelper.push(taskId ? '/task/' + taskId : '');
+	};
+	const handleTaskChange = async (taskId: string | null) => {
+		if (taskId) {
+			const task = await getById(taskId);
+			let tags = '';
+			task.tags.forEach((tag: { name: string }) => {
+				tags += tag.name + ',';
+			});
+			const discipline = DISCIPLINE_ITEMS.find((item) => item.value === task.discipline);
+			setTaskName(task.name);
+			setDiscipline(discipline ? discipline : DISCIPLINE_ITEMS[0]);
+			setLanguage(SELECT_PROPS.values[0]);
+			setRank(task.rank);
+			setSelectedSwitch(task.allowContributors);
+			setTags(tags.substr(0, tags.length - 1));
+			setTextDescription(task.description);
+			setCompleteSolution(task.completeSolution);
+			setInitialSolution(task.initialSolution);
+			setPreloaded(task.preloaded);
+			setTestCases(task.testCases);
+			setExampleTestCases(task.exampleTestCases);
+		}
+	};
+	const handleGoToChange = (taskId: string | null, actionId: string | null) => {
+		switch (actionId) {
+			case '1':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '2':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '3':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '4':
+				historyHelper.push(taskId ? '/task/' + taskId : '');
+				break;
+			case '5':
+				historyHelper.push(taskId ? '/task/' + taskId + '/train' : '');
+				break;
+		}
+	};
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -377,7 +511,19 @@ describe("twoOldestAges", function() {
 					setTags={setTags}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
-					<ButtonsBlock handlePreviewClick={() => setInstructionTab(1)} />
+					<ButtonsBlock
+						handlePreviewClick={() => handlePreviewClick(taskId)}
+						taskId={taskId}
+						yourChallengeValues={yourChallengeValues}
+						onChallengeChange={handleTaskChange}
+						handleReset={() => {
+							resetAllFields();
+							dispatch(setTask({ taskId: null }));
+						}}
+						challengeActiveValue={challengeActiveValue}
+						setChallengeActiveValue={setChallengeActiveValue}
+						handleGoToChange={handleGoToChange}
+					/>
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>

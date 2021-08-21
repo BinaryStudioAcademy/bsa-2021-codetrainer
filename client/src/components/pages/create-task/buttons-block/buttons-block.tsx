@@ -6,66 +6,100 @@ import styles from './buttons-block.module.scss';
 import './buttons-block.scss';
 import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
-import { ChangeTheme } from 'components/basic/change-theme';
+import { useDispatch } from 'react-redux';
+import { setTask } from 'containers/create-new-task/logic/actions';
 
 interface IButtonsBlockProps {
 	handlePreviewClick: () => void;
+	taskId: string | null;
+	yourChallengeValues?: ISelectValue[] | null;
+	onChallengeChange: (id: string | null) => void;
+	handleReset: () => void;
+	challengeActiveValue: ISelectValue;
+	setChallengeActiveValue: (value: ISelectValue) => void;
+	handleGoToChange: (taskId: string | null, actionId: string | null) => void;
 }
-export const ButtonsBlock = ({ handlePreviewClick }: IButtonsBlockProps) => {
-	const [goToActiveValue, setGoToActiveValue] = useState({
-		id: 1,
+export const ButtonsBlock = ({
+	handlePreviewClick,
+	taskId,
+	yourChallengeValues,
+	onChallengeChange,
+	handleReset,
+	challengeActiveValue,
+	setChallengeActiveValue,
+	handleGoToChange,
+}: IButtonsBlockProps) => {
+	const [goToActiveValue, setGoToActiveValue] = useState<ISelectValue>({
+		id: '1',
 		title: 'Go to',
 	});
-	const [challengeActiveValue, setChallengeActiveValue] = useState({
-		id: 1,
-		title: 'Go to',
-	});
+
+	const dispatch = useDispatch();
+
 	return (
 		<>
 			<div className={styles.buttonsBlock}>
-				<Button className={clsx(ButtonClasses.red, styles.button)} onClick={handlePreviewClick}>
-					Preview
-				</Button>
-				<div className="select">
-					<label className="label">Go to</label>
-					<Select
-						values={goToValues}
-						activeValue={goToActiveValue}
-						onChange={(newValue: ISelectValue) => setGoToActiveValue(newValue)}
-					/>
-				</div>
-				<div className="select">
+				{taskId ? (
+					<Button className={clsx(ButtonClasses.red, styles.button)} onClick={handlePreviewClick}>
+						Preview
+					</Button>
+				) : null}
+				{taskId ? (
+					<div className="select">
+						<label className="label">Go to</label>
+						<Select
+							values={goToValues}
+							activeValue={goToActiveValue}
+							onChange={(newValue: ISelectValue) => {
+								handleGoToChange(taskId, newValue.id);
+								setGoToActiveValue(newValue);
+							}}
+						/>
+					</div>
+				) : null}
+
+				<div className={clsx('select', { rightPart: taskId ? false : true })}>
 					<label className="label">Your challenge</label>
-					<Select
-						values={challengeValues}
-						activeValue={challengeActiveValue}
-						onChange={(newValue: ISelectValue) => setChallengeActiveValue(newValue)}
-						isButtonBlockSelect={true}
-					/>
+					{yourChallengeValues ? (
+						<Select
+							values={yourChallengeValues}
+							activeValue={challengeActiveValue}
+							onChange={(newValue: ISelectValue) => {
+								dispatch(setTask({ taskId: newValue.id }));
+								if (newValue.id !== '0') {
+									onChallengeChange(newValue.id);
+								} else {
+									handleReset();
+								}
+								setChallengeActiveValue(newValue);
+							}}
+							isButtonBlockSelect={true}
+						/>
+					) : null}
 				</div>
-				<ChangeTheme />
 			</div>
 		</>
 	);
 };
 const goToValues = [
 	{
-		id: 1,
-		title: 'Go to',
+		id: '1',
+		title: 'Details',
 	},
 	{
-		id: 2,
-		title: 'Sopmethin else',
-	},
-];
-
-const challengeValues = [
-	{
-		id: 1,
-		title: 'New challenge',
+		id: '2',
+		title: 'Discourse',
 	},
 	{
-		id: 2,
-		title: 'Sopmethin else',
+		id: '3',
+		title: 'Solutions',
+	},
+	{
+		id: '4',
+		title: 'Translations',
+	},
+	{
+		id: '5',
+		title: 'Trainer',
 	},
 ];
