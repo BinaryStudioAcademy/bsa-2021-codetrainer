@@ -27,7 +27,7 @@ const usersMocks: WebApi.Entities.IUser[] = [
 		rank: 2,
 		honor: 5432,
 	},
-].map(user => ({ id: uniqueId('user'), ...user }));
+].map((user) => ({ id: uniqueId('user'), ...user }));
 
 const challengesMocks: WebApi.Entities.IChallenge[] = [
 	{
@@ -132,67 +132,38 @@ const challengesMocks: WebApi.Entities.IChallenge[] = [
 		author: usersMocks[1],
 		createdAt: new Date(),
 	},
-].map(challenge => ({ id: uniqueId('challenge'), ...challenge }));
+].map((challenge) => ({ id: uniqueId('challenge'), ...challenge }));
 
 const collectionsMocks: WebApi.Entities.ICollection[] = [
 	{
 		name: 'Decode Morse',
-		challenges: [
-			challengesMocks[2],
-			challengesMocks[3],
-			challengesMocks[4],
-		],
+		challenges: [challengesMocks[2], challengesMocks[3], challengesMocks[4]],
 		avatar: 'https://www.svgrepo.com/show/209154/morse-code.svg',
 		author: usersMocks[0],
 		followers: [],
-		createdAt: moment()
-			.subtract(4, 'days')
-			.toDate(),
-		updatedAt: moment()
-			.subtract(2, 'days')
-			.subtract(3, 'hours')
-			.toDate(),
+		createdAt: moment().subtract(4, 'days').toDate(),
+		updatedAt: moment().subtract(2, 'days').subtract(3, 'hours').toDate(),
 	},
 	{
 		name: 'Fibonacci Pack',
-		challenges: [
-			challengesMocks[5],
-			challengesMocks[6],
-			challengesMocks[7],
-			challengesMocks[8]
-		],
+		challenges: [challengesMocks[5], challengesMocks[6], challengesMocks[7], challengesMocks[8]],
 		avatar: 'https://www.svgrepo.com/show/152754/ratio.svg',
 		author: usersMocks[1],
 		followers: [],
-		createdAt: moment()
-			.subtract(3, 'days')
-			.subtract(4, 'hours')
-			.toDate(),
-		updatedAt: moment()
-			.subtract(5, 'hours')
-			.toDate(),
+		createdAt: moment().subtract(3, 'days').subtract(4, 'hours').toDate(),
+		updatedAt: moment().subtract(5, 'hours').toDate(),
 	},
 	{
 		name: 'Assembler',
-		challenges: [
-			challengesMocks[9],
-			challengesMocks[10],
-		],
+		challenges: [challengesMocks[9], challengesMocks[10]],
 		avatar: 'https://apprecs.org/ios/images/app-icons/256/0e/500466958.jpg',
 		author: usersMocks[0],
 		followers: [],
-		createdAt: moment()
-			.subtract(5, 'minutes')
-			.subtract(36, 'seconds')
-			.toDate(),
+		createdAt: moment().subtract(5, 'minutes').subtract(36, 'seconds').toDate(),
 	},
 	{
 		name: 'Puzzles',
-		challenges: [
-			challengesMocks[0],
-			challengesMocks[11],
-			challengesMocks[12],
-		],
+		challenges: [challengesMocks[0], challengesMocks[11], challengesMocks[12]],
 		avatar: 'https://image.flaticon.com/icons/png/512/786/786771.png',
 		author: usersMocks[2],
 		followers: [],
@@ -200,20 +171,17 @@ const collectionsMocks: WebApi.Entities.ICollection[] = [
 	},
 	{
 		name: 'IMPOSSIBLE',
-		challenges: [
-			challengesMocks[13],
-			challengesMocks[14],
-			challengesMocks[15],
-			challengesMocks[16],
-		],
+		challenges: [challengesMocks[13], challengesMocks[14], challengesMocks[15], challengesMocks[16]],
 		author: usersMocks[2],
 		followers: [],
-		createdAt: moment()
-			.subtract(3, 'months')
-			.toDate(),
+		createdAt: moment().subtract(3, 'months').toDate(),
 		updatedAt: new Date(),
-	}
-].map(collection => ({ id: uniqueId('collection'), ...collection }));
+	},
+].map((collection) => ({ id: uniqueId('collection'), ...collection }));
 
-export const authoredCollectionsMocks: WebApi.Entities.ICollection[] = collectionsMocks.filter((_, index) => index % 2 === 0);
-export const followedCollectionsMocks: WebApi.Entities.ICollection[] = collectionsMocks.filter((_, index) => index % 2 !== 0);
+export const authoredCollectionsMocks: WebApi.Entities.ICollection[] = collectionsMocks.filter(
+	(_, index) => index % 2 === 0,
+);
+export const followedCollectionsMocks: WebApi.Entities.ICollection[] = collectionsMocks.filter(
+	(_, index) => index % 2 !== 0,
+);

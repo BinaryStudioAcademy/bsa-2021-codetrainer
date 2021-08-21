@@ -81,7 +81,7 @@ declare namespace WebApi.Entities {
 		createdAt: Date;
 		updatedAt?: Date;
 	}
-	
+
 	export type TClans = Array<IClan>;
 
 	export interface ITask {

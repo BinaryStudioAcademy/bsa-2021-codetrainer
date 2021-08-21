@@ -18,51 +18,44 @@ const ProfileCollectionsList: FC<IProfileCollectionsListProps> = ({
 	collections,
 	emptyLabel,
 	hasMore,
-	onLoadMore = () => {}
+	onLoadMore = () => {},
 }) => {
 	return (
 		<div className={styles.profileCollectionsList}>
-			{
-				collections?.length !== 0 || hasMore ? (
-					<>
-					{
-						collections?.map(collection => (
-							<Collection
-								collection={collection}
-								key={collection.id}
-							/>
-						))
-					}
-					{
-						hasMore ? (
-							Array(5).fill(null).map((_, index) => (
-								index === 0 ? (
-									<InView
-										onChange={(inView) => {
-											if (inView) {
-												onLoadMore();
-											}
-										}}
-										key={index}
-									>
-										<CollectionSkeleton />
-									</InView>
-								) : (
-									<CollectionSkeleton key={index} />
+			{collections?.length !== 0 || hasMore ? (
+				<>
+					{collections?.map((collection) => (
+						<Collection collection={collection} key={collection.id} />
+					))}
+					{hasMore
+						? Array(5)
+								.fill(null)
+								.map((_, index) =>
+									index === 0 ? (
+										<InView
+											onChange={(inView) => {
+												if (inView) {
+													onLoadMore();
+												}
+											}}
+											key={index}
+										>
+											<CollectionSkeleton />
+										</InView>
+									) : (
+										<CollectionSkeleton key={index} />
+									),
 								)
-							))
-						): null
-					}
-					</>
-				) : (
-					<div className={styles.empty}>
-						<CollectionIcon className={styles.icon} width={75} height={75} />
-						{emptyLabel}
-					</div>
-				)
-			}
+						: null}
+				</>
+			) : (
+				<div className={styles.empty}>
+					<CollectionIcon className={styles.icon} width={75} height={75} />
+					{emptyLabel}
+				</div>
+			)}
 		</div>
 	);
-}
+};
 
 export default ProfileCollectionsList;

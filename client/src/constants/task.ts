@@ -39,10 +39,10 @@ export const TASK_PROGRESS_OPTIONS = [
 	},
 	{
 		value: 'completed',
-		label: 'Task Completed',
+		label: 'Completed Challenge',
 	},
 	{
 		value: 'notCompleted',
-		label: 'Task Not Completed',
+		label: 'Not Completed Challenge',
 	},
 ];
