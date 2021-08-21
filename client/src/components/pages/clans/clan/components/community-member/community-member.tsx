@@ -23,7 +23,7 @@ export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunit
 		<div className={styles.communityMember}>
 			<Avatar size={20} avatar={avatar ? avatar : undefined} />
 			<p>{name + ' ' + surname}</p>
-			<p>{username}</p>
+			<p>{username ? username : 'No username'}</p>
 			{!invited ? (
 				<Button
 					className={clsx(ButtonClasses.red, ButtonClasses.filled)}
