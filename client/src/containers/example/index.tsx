@@ -27,6 +27,8 @@ const Example: React.FC<IExample> = (props) => {
 		dispatch(setNotificationState(notification));
 	};
 
+	const [isOpen, setIsOpen] = React.useState(true);
+
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
@@ -88,7 +90,7 @@ const Example: React.FC<IExample> = (props) => {
 				<input type="submit" />
 			</form>
 			<ThemeSwitcher />
-			<CollectionModal />
+			<CollectionModal isOpen={isOpen} setIsOpen={setIsOpen} />
 		</div>
 	);
 };

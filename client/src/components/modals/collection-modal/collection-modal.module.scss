@@ -8,17 +8,6 @@
 	cursor: pointer;
 }
 
-:local(.flex) {
-	display: flex;
-}
-
-:local(.pictures) {
-	display: flex;
-	margin-top: 30px;
-	justify-content: space-around;
-	flex-wrap: wrap;
-}
-
 :local(.title) {
 	margin: 0;
 	font-size: 20px;

@@ -7,6 +7,7 @@
 	--text-color: #{$mine-shaft};
 	--minor-text-color: #{$oslo-grey};
 	--background-color: #{$white};
+	--background-color-transparent: rgba(#fff, 0.5);
 	--container-color: #{$zircon};
 	--secondary-container-color: #{$white-lilac};
 	--black: #{$mine-shaft};
@@ -30,6 +31,7 @@
 	--text-color: #{$light-gray};
 	--minor-text-color: #{$dusty-gray};
 	--background-color: #{$rich-black};
+	--background-color-transparent: rgba(#181a1b, 0.5);
 	--container-color: #{$eerie-black};
 	--secondary-container-color: #{$onyx};
 	--black: #{$mine-shaft};

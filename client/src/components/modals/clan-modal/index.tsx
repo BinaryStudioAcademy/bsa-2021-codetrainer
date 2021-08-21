@@ -27,7 +27,6 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 			await createClan(value);
 			setIsOpen(false);
 		} catch (e) {
-			console.log(e);
 			setFieldError('createClan', 'Something went wrong');
 		}
 	};
@@ -59,7 +58,9 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 							<label htmlFor="createClan">
 								<span>*</span> Create clan
 							</label>
-							<Field id="createClan" name="createClan" type="text" component={FormInput} />
+							<div className={styles.formInput}>
+								<Field id="createClan" name="createClan" type="text" component={FormInput} />
+							</div>
 							{isPrompt ? (
 								prompt(validateField as (field: string) => Promise<string>)
 							) : (
