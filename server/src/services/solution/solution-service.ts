@@ -89,4 +89,11 @@ export class SolutionService {
 		const solutions = await repository.getAll();
 		return solutions;
 	}
+
+	async getUserSolution(user: User, task: Task) {
+		const repository = getCustomRepository(this.solutionRepository);
+		const solution = await repository.findOne({ user, task });
+
+		return { solution };
+	}
 }
