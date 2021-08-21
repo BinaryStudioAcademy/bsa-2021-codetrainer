@@ -22,5 +22,7 @@ export const ROUTES = {
 
 	Landing: '/landing',
 
+	TaskTrain: '/landing',
+
 	Github: '/github',
 };
