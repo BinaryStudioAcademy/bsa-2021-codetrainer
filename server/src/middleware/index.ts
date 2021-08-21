@@ -12,3 +12,4 @@ export * from './data-validation/data-validation';
 export * from './jwt';
 export { imageMiddleware } from './image.middleware';
 export * from './validation';
+export * from './socket-middleware/socket-middleware';

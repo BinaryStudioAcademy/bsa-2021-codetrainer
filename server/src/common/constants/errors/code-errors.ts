@@ -8,7 +8,7 @@ export const CODE_ERRORS = {
 	IN_CLAN: { message: 'You are already in clan.', status: 401 },
 	NOT_IN_CLAN: { message: 'You are not in clan.', status: 401 },
 	ADMIN_LEAVE: { message: 'Admin can not leave his clan.', status: 401 },
-	TOKEN_VERIFY: { message: 'Token verify error', status: 401 },
+	TOKEN_VERIFY: { message: 'Token verify error', status: HttpCodes.UNAUTHORIZED },
 	TOKEN_EXPIRED: { message: 'Token expired', status: 401 },
 	TOKEN_INVALID: { message: 'Invalid token', status: 401 },
 	TASK_QUERY: (value: string) => ({ message: `Invalid ${value} format`, status: HttpCodes.BAD_REQUEST }),
