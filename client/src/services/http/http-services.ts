@@ -20,6 +20,7 @@ export class Http {
 				AccessToken.setToken(token);
 			}
 		}
+
 		return serverFetch({ ...requestArgs, bearer: AccessToken.getBearer() })
 			.then(this.checkStatus)
 			.then(this.getJson)

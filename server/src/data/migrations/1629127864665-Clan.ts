@@ -40,7 +40,7 @@ export class Clan1629127864665 implements MigrationInterface {
 					},
 				],
 				maxMembers: 20,
-				numberOfMembers: 3
+				numberOfMembers: 3,
 			},
 			{
 				name: 'RoundaboutClan',
@@ -59,7 +59,7 @@ export class Clan1629127864665 implements MigrationInterface {
 					},
 				],
 				maxMembers: 20,
-				numberOfMembers: 3
+				numberOfMembers: 3,
 			},
 			{
 				name: 'StreetClan',
@@ -78,7 +78,7 @@ export class Clan1629127864665 implements MigrationInterface {
 					},
 				],
 				maxMembers: 20,
-				numberOfMembers: 3
+				numberOfMembers: 3,
 			},
 			{
 				name: 'ExNoiAfter',
@@ -97,12 +97,12 @@ export class Clan1629127864665 implements MigrationInterface {
 					},
 				],
 				maxMembers: 20,
-				numberOfMembers: 3
+				numberOfMembers: 3,
 			},
 		];
 
 		await getRepository('Clan').save(exampleData);
 	}
 
-	public async down(queryRunner: QueryRunner): Promise<void> { }
+	public async down(queryRunner: QueryRunner): Promise<void> {}
 }
