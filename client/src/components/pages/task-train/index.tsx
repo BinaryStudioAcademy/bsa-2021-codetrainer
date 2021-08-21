@@ -1,9 +1,9 @@
 import React from 'react';
 import { ButtonClasses } from 'components/basic/button';
 import { Button, Rank, TagList } from 'components';
-import { Tabs } from './components';
+import Tabs from '../../common/tabs';
 import TaskStatistic from './components/task-statistic';
-import CodeEditor from './components/code-editor';
+import CodeEditor from '../../common/code-editor';
 import styles from './task-train.module.scss';
 import { Select } from 'components/basic';
 import { useState } from 'react';
