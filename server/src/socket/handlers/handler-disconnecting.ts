@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io';
-import { SOCKET_EVENTS } from '../common';
+import { SOCKET_EVENTS } from '../../common';
 import { sockets } from '../sockets/sockets';
 
 export const registerHandlerDisconnecting = (socket: Socket) => {

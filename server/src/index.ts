@@ -12,6 +12,7 @@ import { ENV, WHITE_ROUTES, ApiPath } from './common';
 import { initApi } from './api';
 import { authorizationMiddleware, errorHandlerMiddleware, socketMiddleware } from './middleware';
 import { cookieConfig, corsConfig } from './config';
+import { socketHandler } from './socket';
 
 import 'reflect-metadata';
 import './data/db/connection';
@@ -22,12 +23,13 @@ const app = express();
 
 const httpServer = createServer(app);
 const io = new Server(httpServer);
+socketHandler(io);
 
 app.set('trust proxy', 1);
 app.use(cors(corsConfig));
 app.options('*', cors() as any);
 
-app.use(socketMiddleware);
+app.use(socketMiddleware(io));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -41,6 +43,6 @@ app.use(ApiPath.API_DOCS, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use(errorHandlerMiddleware);
 
-app.listen(ENV.APP.PORT, () => {
+httpServer.listen(ENV.APP.PORT, () => {
 	console.info(`Server is running on port ${ENV.APP.PORT}`);
 });

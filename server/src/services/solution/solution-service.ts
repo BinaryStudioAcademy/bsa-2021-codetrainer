@@ -1,8 +1,16 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
-import { CODE_ERRORS, ENV } from '../../common';
+import { CODE_ERRORS, ENV, SOLUTION_STATUS } from '../../common';
 import { TokenTypes, ValidationError, verifyToken } from '../../helpers';
 import { rabbitConnect } from '../../config';
+
+interface ISolutionResult {
+	result: { success: boolean; response?: unknown; error?: Error };
+	token: string;
+	userId: string;
+	solutionId: string;
+	taskId: string;
+}
 
 export class SolutionService {
 	protected taskRepository: TTaskRepository;
@@ -92,12 +100,15 @@ export class SolutionService {
 		return solutions;
 	}
 
-	async setResult(data: { result: string; token: string }) {
+	async setResult(data: ISolutionResult) {
 		console.info('result => ', data);
 		const { id } = verifyToken(data.token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
 		}
-		return { message: 'success' };
+		const repository = getCustomRepository(this.solutionRepository);
+		const status = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
+		repository.updateById(data.solutionId, { status });
+		return data;
 	}
 }
