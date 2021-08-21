@@ -1,4 +1,5 @@
 :local(.spinner) {
+	box-sizing: border-box;
 	border: 5px solid rgba($color: #000, $alpha: 0.2);
 	margin: auto;
 	border-radius: 50%;
