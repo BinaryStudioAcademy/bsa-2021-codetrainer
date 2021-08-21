@@ -140,7 +140,7 @@ export const getById = async (id: string | null) => {
 	}
 	const result = await http.callWebApi({
 		method: 'GET',
-		endpoint: TaskApiPath.ROOT + id,
+		endpoint: '/' + TaskApiPath.ROOT + id,
 		skipAuthorization: false,
 	});
 
