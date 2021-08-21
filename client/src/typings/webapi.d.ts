@@ -63,6 +63,29 @@ declare namespace WebApi.Entities {
 		members: Array<IMember>;
 	}
 
+	export interface IChallenge {
+		id: string;
+		name: string;
+		rank: number;
+		description?: string;
+		avatar?: string;
+		author: IUser;
+		createdAt: Date;
+		updatedAt?: Date;
+	}
+
+	export interface ICollection {
+		id: string;
+		name: string;
+		challenges: IChallenge[];
+		description?: string;
+		avatar?: string;
+		author: IUser;
+		followers: IUser[];
+		createdAt: Date;
+		updatedAt?: Date;
+	}
+
 	export type TClans = Array<IClan>;
 
 	export interface ITask {

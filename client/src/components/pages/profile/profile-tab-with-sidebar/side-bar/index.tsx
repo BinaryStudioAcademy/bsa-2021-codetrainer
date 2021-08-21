@@ -7,7 +7,7 @@ export interface ISideBar {
 	sideBar: {
 		id: string;
 		title: string;
-		count: number;
+		count?: number;
 	}[];
 	activeId: string;
 	onClick: (key: string) => void;
@@ -21,7 +21,7 @@ export const SideBar: React.FC<ISideBar> = ({ sideBar, onClick, activeId }) => (
 				className={clsx(styles.item, { [styles.active]: id === activeId })}
 				onClick={() => onClick(id)}
 			>
-				<span>{title}</span> (<span>{count}</span>)
+				<span>{title}</span> {count !== undefined && <span>({count})</span>}
 			</div>
 		))}
 	</div>

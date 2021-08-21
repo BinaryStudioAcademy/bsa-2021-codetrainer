@@ -41,7 +41,7 @@ export function mapNotificationToProps(notification: TNotification): INotificati
 			return {
 				children: `${username} follows you!`,
 				icon: <img src={profileUrl} width={50} height={50} />,
-				link: ROUTES.UserProfile + `/${username}`,
+				link: ROUTES.Users + `/${username}`,
 				date,
 				read,
 			};

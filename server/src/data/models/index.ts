@@ -5,3 +5,4 @@ export { Follower } from './follower';
 export { CommentTask } from './comment-task';
 export { Tag } from './tag';
 export { Solution } from './solution';
+export { Collection } from './collection';
