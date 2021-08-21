@@ -8,13 +8,14 @@ import {
 	OneToMany,
 	BaseEntity,
 	CreateDateColumn,
-	UpdateDateColumn,
+	UpdateDateColumn
 } from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
 import { Task } from '../task';
 import { CommentTask } from '../comment-task';
 import { Solution } from '../solution';
+import { Follower } from '../follower';
 
 @Entity()
 export class User extends BaseEntity {
@@ -93,4 +94,12 @@ export class User extends BaseEntity {
 	@OneToMany(() => CommentTask, (commentTask) => commentTask.user)
 	@JoinColumn()
 	commentTasks?: CommentTask[];
+
+	@OneToMany(() => Follower, (follower) => follower.following)
+	@JoinColumn()
+	followers!: Follower[];
+
+	@OneToMany(() => Follower, (follower) => follower.follower)
+	@JoinColumn()
+	following!: Follower[];
 }

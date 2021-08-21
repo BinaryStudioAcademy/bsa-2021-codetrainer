@@ -30,7 +30,7 @@ type TUsersService = InstanceType<typeof User>;
 export { users, TUsersService };
 const clanService = new ClanService({ clan: ClanRepository, user: UserRepository, profileClan: ProfileClanRepository });
 
-const follower = new FollowersService({ follower: FollowerRepository });
+const follower = new FollowersService({ follower: FollowerRepository, user: UserRepository });
 const imagesService = new ImagesService(imagesRepository);
 const githubService = new GithubService({ authService, userRepository: UserRepository });
 
