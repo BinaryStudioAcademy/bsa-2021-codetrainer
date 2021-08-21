@@ -10,6 +10,7 @@ import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
 import ThemeSwitcher from 'containers/theme-switcher';
+import { CollectionModal } from 'components/modals';
 
 interface IExample {
 	theme: { theme: string };
@@ -87,6 +88,7 @@ const Example: React.FC<IExample> = (props) => {
 				<input type="submit" />
 			</form>
 			<ThemeSwitcher />
+			<CollectionModal />
 		</div>
 	);
 };
