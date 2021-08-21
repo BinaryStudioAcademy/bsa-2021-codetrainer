@@ -7,6 +7,7 @@ import { initTaskApi } from './task';
 import { ApiPath } from '../common';
 import { initUsers } from './users';
 import { initFollower } from './follower';
+import { initCollection } from './collection';
 import { initTest } from './test/test-api';
 import { initCommentTask } from './comment-task';
 import {
@@ -16,6 +17,7 @@ import {
 	githubService,
 	follower,
 	users,
+	collectionService,
 	commentTaskService,
 	solutionService,
 } from '../services';
@@ -50,6 +52,13 @@ export function initApi(): Router {
 		ApiPath.FOLLOWERS,
 		initFollower(Router, {
 			follower,
+		}),
+	);
+
+	apiRouter.use(
+		ApiPath.COLLECTIONS,
+		initCollection(Router, {
+			collection: collectionService,
 		}),
 	);
 

@@ -4,7 +4,9 @@ import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
+
 	protected userRepository: TUserRepository;
+
 	protected tagRepository: TTagRepository;
 
 	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
@@ -22,7 +24,8 @@ export class TaskService {
 			}
 			return tag;
 		};
-		return await Promise.all(tags.map(getTag));
+		const data = await Promise.all(tags.map(getTag));
+		return data;
 	}
 
 	async create(user: User, task: Task, tags: string[] = []) {
