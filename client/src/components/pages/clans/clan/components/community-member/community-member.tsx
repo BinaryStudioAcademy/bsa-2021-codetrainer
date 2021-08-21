@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { Avatar, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import React from 'react';
+import { useState } from 'react';
 import styles from './community-member.module.scss';
 
 interface ICommunityMemberProps {
@@ -17,20 +18,28 @@ interface ICommunityMemberProps {
 
 export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunityMemberProps) => {
 	const { avatar, name, surname, username } = user;
+	const [invited, setInvited] = useState(false);
 	return (
 		<div className={styles.communityMember}>
 			<Avatar size={20} avatar={avatar ? avatar : undefined} />
 			<p>{name + ' ' + surname}</p>
 			<p>{username}</p>
-			<Button
-				className={clsx(ButtonClasses.red, ButtonClasses.filled)}
-				onClick={() => {
-					handleInviteClick(fromUser, user);
-				}}
-			>
-				{' '}
-				Invite{' '}
-			</Button>
+			{!invited ? (
+				<Button
+					className={clsx(ButtonClasses.red, ButtonClasses.filled)}
+					onClick={() => {
+						handleInviteClick(fromUser, user);
+						setInvited(true);
+					}}
+				>
+					{' '}
+					Invite{' '}
+				</Button>
+			) : (
+				<Button className={clsx(ButtonClasses.red)} disabled>
+					Invited
+				</Button>
+			)}
 		</div>
 	);
 };
