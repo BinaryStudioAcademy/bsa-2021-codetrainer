@@ -1,5 +1,7 @@
 import { getCustomRepository } from 'typeorm';
-import { TCollectionRepository, Collection, TUserRepository, User } from '../../data';
+import { TCollectionRepository, Collection, TUserRepository, User, Task } from '../../data';
+import { ValidationError } from '../../helpers';
+import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
 
 export class CollectionService {
 	protected collectionRepository: TCollectionRepository;
@@ -29,10 +31,6 @@ export class CollectionService {
 	// 	return collection;
 	// }
 
-	async addTaskToCollection() {}
-
-	async removeTaskFromCollection() {}
-
 	async createEmptyCollection(user: User, name: { name: string }) {
 		const repository = getCustomRepository(this.collectionRepository);
 		const newCollection = await repository.save({ ...name, tasks: [], author: user });
@@ -43,5 +41,33 @@ export class CollectionService {
 		const repository = getCustomRepository(this.collectionRepository);
 		const collection = await repository.deleteById(id);
 		return collection;
+	}
+
+	async addTaskToCollection(id: string, taskId: string) {
+		const repository = getCustomRepository(this.collectionRepository);
+		const collection = await repository.addTask(id, taskId);
+		return collection;
+	}
+
+	async removeTaskFromCollection(id: string, taskId: string) {
+		const repository = getCustomRepository(this.collectionRepository);
+		const collection = await repository.removeTask(id, taskId);
+		return collection;
+	}
+
+	async manageTaskInsideCollection(id: string, taskId: string) {
+		const collection = await this.getCollectionById(id);
+
+		if (!collection) {
+			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
+		}
+
+		const existingTask = collection.tasks.find((task) => task.id === taskId);
+
+		if (existingTask) {
+			await this.removeTaskFromCollection(id, taskId);
+		} else {
+			await this.addTaskToCollection(id, taskId);
+		}
 	}
 }

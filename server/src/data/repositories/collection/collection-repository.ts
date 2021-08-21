@@ -20,7 +20,7 @@ export class CollectionRepository extends AbstractRepository<Collection> {
 	// 	return this.update({ id }, data);
 	// }
 
-	deleteTask(id: string, taskId: string) {
+	removeTask(id: string, taskId: string) {
 		return this.createQueryBuilder('collection').relation('tasks').of(id).remove(taskId);
 	}
 
