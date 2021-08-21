@@ -1,5 +1,5 @@
 import { EntityRepository } from 'typeorm';
-import { AbstractRepository } from '../abstract/index';
+import { AbstractRepository } from '../abstract';
 import { User } from '../../models';
 
 @EntityRepository(User)
@@ -22,7 +22,13 @@ export class UserRepository extends AbstractRepository<User> {
 	];
 
 	getAll() {
-		return this.createQueryBuilder('user').select(this.userFields).getMany();
+		return this.createQueryBuilder('user')
+			.leftJoinAndSelect('user.followers', 'followers')
+			.leftJoinAndSelect('user.following', 'following')
+			.select([...this.userFields,
+				'followers', 'following'
+			])
+			.getMany();
 	}
 
 	getByEmail(email: string) {
