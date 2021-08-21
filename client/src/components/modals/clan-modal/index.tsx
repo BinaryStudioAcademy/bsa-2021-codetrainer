@@ -7,6 +7,8 @@ import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 import { Modal } from '../';
 import { createClan } from 'services/create-clan.service';
+import { useDispatch } from 'react-redux';
+import * as userActions from 'containers/user/logic/actions';
 
 interface IClanModalProps {
 	isOpen: boolean;
@@ -22,10 +24,12 @@ const CreateClanSchema = Yup.object().shape({
 
 export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
+	const dispatch = useDispatch();
 	const onSubmit = async (value: string, setFieldError: any) => {
 		try {
-			await createClan(value);
+			const clan = await createClan(value);
 			setIsOpen(false);
+			dispatch(userActions.setUserClan({ clan: clan }));
 		} catch (e) {
 			console.log(e);
 			setFieldError('createClan', 'Something went wrong');
