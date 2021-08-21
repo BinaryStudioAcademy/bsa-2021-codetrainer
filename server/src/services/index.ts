@@ -42,7 +42,7 @@ const solutionService = new SolutionService({
 	task: TaskRepository,
 	solution: SolutionRepository,
 });
-const collectionService = new CollectionService({ collection: CollectionRepository });
+const collectionService = new CollectionService({ collection: CollectionRepository, user: UserRepository });
 
 export { authService, AuthService };
 export { clanService, ClanService };
