@@ -21,8 +21,8 @@ declare namespace WebApi.Entities {
 		profileUrl?: string;
 	}
 	interface ITask {
-		id: string;
-		name: string;
+		id: string | null;
+		name?: string;
 		description?: string;
 		// tags?: string[],
 		rank?: number;
@@ -60,4 +60,8 @@ declare namespace WebApi.Entities {
 	}
 
 	export type TClans = Array<IClan>;
+
+	export interface ITask {
+		id: string | null;
+	}
 }

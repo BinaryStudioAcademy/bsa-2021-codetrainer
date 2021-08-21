@@ -12,4 +12,5 @@ export interface IUser {
 	clan?: WebApi.Entities.IClan;
 	profileUrl?: string;
 	github?: IGithubProfile;
+	tasks?: WebApi.Entities.ITask[];
 }

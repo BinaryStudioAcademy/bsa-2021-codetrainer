@@ -3,8 +3,9 @@ import ReactMarkdown, { ReactMarkdownOptions } from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { MarkdownHighlighterSettings } from 'common';
-
+import stylesParent from '../styles.module.scss';
 import styles from './styles.module.scss';
+import clsx from 'clsx';
 
 interface IMarkdownProps {
 	text?: string;
@@ -32,7 +33,7 @@ const Components: ReactMarkdownOptions['components'] = {
 
 export const Markdown: React.FC<IMarkdownProps> = ({ text }) => {
 	return (
-		<div className={styles.markdown__body}>
+		<div className={clsx(styles.markdown__body, stylesParent.markdownText)}>
 			<ReactMarkdown children={text ? text : ''} components={Components} />
 		</div>
 	);

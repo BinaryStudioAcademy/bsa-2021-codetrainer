@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 		notifications: Array.from(unorderedNotifications.values()).sort((a, b) => +b.date - +a.date),
 		mark: 400,
 		listItems: getListItems(),
-		onReadNotification: id => dispatch(notificationsActions.readNotification({ id }))
+		onReadNotification: (id) => dispatch(notificationsActions.readNotification({ id })),
 	};
 
 	return <HeaderComponent {...headerProps} />;

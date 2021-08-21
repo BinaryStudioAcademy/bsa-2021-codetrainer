@@ -59,30 +59,26 @@ const Header: React.FC<IHeaderProps> = (props) => {
 			<ClickAwayListener onClickAway={() => setNotificationsVisibility(false)}>
 				<div className={styles.bell} onClick={() => setNotificationsVisibility(!isNotificationsVisible)}>
 					<BellIcon width={25} height={25} />
-					{
-						unreadedCounter !== 0 ? (
-							<div className={styles.bellCounter}>
-								<span>{unreadedCounter}</span>
-							</div>
-						) : null
-					}
-					{
-						isNotificationsVisible ? (
-							<div className={clsx(styles.notifications, styles.dropdown)}>
-								{props.notifications.length !== 0 ? (
-									props.notifications.map((notification) => (
-										<Notification
-											{...mapNotificationToProps(notification)}
-											onRead={() => props.onReadNotification(notification.id)}
-											key={notification.id}
-										/>
-									))
-								) : (
-									<div className={styles.noNotifications}>You do not have any notifications</div>
-								)}
-							</div>
-						) : null
-					}
+					{unreadedCounter !== 0 ? (
+						<div className={styles.bellCounter}>
+							<span>{unreadedCounter}</span>
+						</div>
+					) : null}
+					{isNotificationsVisible ? (
+						<div className={clsx(styles.notifications, styles.dropdown)}>
+							{props.notifications.length !== 0 ? (
+								props.notifications.map((notification) => (
+									<Notification
+										{...mapNotificationToProps(notification)}
+										onRead={() => props.onReadNotification(notification.id)}
+										key={notification.id}
+									/>
+								))
+							) : (
+								<div className={styles.noNotifications}>You do not have any notifications</div>
+							)}
+						</div>
+					) : null}
 				</div>
 			</ClickAwayListener>
 			<span className={styles.name}>{props.name}</span>
@@ -92,7 +88,9 @@ const Header: React.FC<IHeaderProps> = (props) => {
 						<Avatar avatar={props.avatar} size={61} color="#EC4179" />
 					</div>
 
-					{isListVisible && <div className={clsx(styles.navigation, styles.dropdown)}>{renderList(props.listItems)}</div>}
+					{isListVisible && (
+						<div className={clsx(styles.navigation, styles.dropdown)}>{renderList(props.listItems)}</div>
+					)}
 				</div>
 			</ClickAwayListener>
 		</div>
