@@ -10,4 +10,5 @@ export const ApiPath = {
 	GITHUB: '/github',
 	TESTS: '/tests',
 	COMMENT_TASK: '/comment-task',
+	MAILER: '/mailer'
 };

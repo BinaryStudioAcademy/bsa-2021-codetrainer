@@ -12,7 +12,6 @@ import { ForgotPassword, ChangePassword } from 'containers/recover-password';
 import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
-import TestPrivate from './test-private';
 import { LandingPageCointainer } from 'containers/landing-page';
 import Example from 'containers/example';
 import HomePage from 'containers/home-page';
@@ -45,7 +44,6 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={false}
 			/>
 			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPageCointainer} />
-			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute
 				exact
@@ -91,9 +89,8 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={false}
 			/>
 			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
-			<PrivateRoute exact path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
-			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
+			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
 			<Route path={ROUTES.NotFound} component={NotFound} />
 			<Redirect from="*" to={ROUTES.NotFound} />
 		</Switch>

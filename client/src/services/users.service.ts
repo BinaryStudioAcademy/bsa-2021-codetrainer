@@ -10,3 +10,12 @@ export const fetchUsersSearch = async (query: Record<string, any>): Promise<Reco
 
 	return search;
 };
+
+export const getUserById = async (id: string) => {
+	const result = await http.callWebApi({
+		endpoint: '/users/' + id,
+		method: 'GET',
+		skipAuthorization: false,
+	});
+	return result;
+};

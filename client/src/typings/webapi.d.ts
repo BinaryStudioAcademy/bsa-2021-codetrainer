@@ -13,10 +13,14 @@ declare namespace WebApi.Entities {
 		name: string;
 		surname: string;
 		email: string;
-		clan?: IClan;
+		clan?: IClan | null;
 		rank: number;
 		honor: number;
-		profileClan?: string;
+		profileClan?: {
+			id: string;
+			role: string;
+			status: string;
+		};
 		githubId?: string;
 		profileUrl?: string;
 	}
@@ -81,7 +85,7 @@ declare namespace WebApi.Entities {
 		createdAt: Date;
 		updatedAt?: Date;
 	}
-	
+
 	export type TClans = Array<IClan>;
 
 	export interface ITask {

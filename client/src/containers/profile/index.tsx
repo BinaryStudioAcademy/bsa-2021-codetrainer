@@ -46,7 +46,7 @@ export const Profile = (props: RouteComponentProps) => {
 				return <ProfileSocial social={social} />;
 			}
 			case ActiveTabId.Collections: {
-				return <ProfileCollections userId={userData?.id as string}/>;
+				return <ProfileCollections userId={userData?.id as string} />;
 			}
 			default: {
 				return <div />;

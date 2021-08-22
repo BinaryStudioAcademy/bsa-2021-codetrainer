@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import clsx from "clsx";
-import Spinner from "../spinner";
+import React, { FC } from 'react';
+import clsx from 'clsx';
+import Spinner from '../spinner';
 import styles from './collection.module.scss';
 
 const CollectionSkeleton: FC = () => (
