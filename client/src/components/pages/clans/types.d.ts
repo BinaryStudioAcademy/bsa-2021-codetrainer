@@ -19,7 +19,9 @@ export interface IClansProps {
 
 export interface IClanProps {
 	leaveClan: () => void;
+	joinClan: (id: string) => void;
 	clan: IClan;
+	isOwnClan: boolean;
 	sortByRank: TSortCallback;
 	sortByTime: TSortCallback;
 	currentSort: ClanSortOptions;

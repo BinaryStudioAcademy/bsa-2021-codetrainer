@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ClanPage } from 'components';
 import * as actions from './logic/actions';
+import * as clansActions from './../clans/logic/actions';
 import * as userActions from '../../user/logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
@@ -11,6 +12,7 @@ import { getUserById } from 'services';
 import { deleteClan } from 'services/clans.service';
 import { useUserSelector } from 'hooks/useAppSelector';
 import { IUser } from 'typings/common/IUser';
+import { useParams } from 'react-router-dom';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
@@ -20,16 +22,16 @@ const Clan: React.FC = () => {
 	const user: IUser | null = useUserSelector();
 	const clan = useSelector((state: IRootState) => state.clan.data);
 
-	useEffect(() => {
-		const clanId = user?.clan?.id;
+	const { id } = useParams<{ id: string }>();
 
-		if (clanId) {
+	useEffect(() => {
+		if (id) {
 			dispatch(actions.clearClan());
-			dispatch(actions.fetchClan({ id: clanId }));
+			dispatch(actions.fetchClan({ id }));
 		} else {
 			history.push(ROUTES.Clans);
 		}
-	}, []);
+	}, [id]);
 
 	const sortByRank = () => {
 		dispatch(actions.sortClanMemberByRank());
@@ -42,6 +44,11 @@ const Clan: React.FC = () => {
 	const leaveClan = () => {
 		dispatch(actions.leaveClan());
 	};
+
+	const joinClan = (id: string) => {
+		dispatch(clansActions.joinClan({ id }));
+	};
+
 	const handleDeleteClan = async () => {
 		await deleteClan();
 		dispatch(actions.clearClan());
@@ -80,9 +87,11 @@ const Clan: React.FC = () => {
 		clan && (
 			<ClanPage
 				clan={clan}
+				isOwnClan={id === user?.clan?.id}
 				sortByRank={sortByRank}
 				sortByTime={sortByTime}
 				leaveClan={leaveClan}
+				joinClan={joinClan}
 				currentSort={currentSort}
 				user={user}
 				handleDeleteClan={handleDeleteClan}
