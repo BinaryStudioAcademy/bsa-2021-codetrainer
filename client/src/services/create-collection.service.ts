@@ -15,3 +15,16 @@ export const createCollection = async (name: string) => {
 		return error;
 	}
 };
+
+//to do: remove when becomes obsolete
+export const getCollections = async () => {
+	try {
+		const data = await http.callWebApi({
+			method: 'GET',
+			endpoint: 'collections',
+		});
+		return data;
+	} catch (error) {
+		return error;
+	}
+};
