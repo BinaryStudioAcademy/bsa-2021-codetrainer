@@ -9,12 +9,13 @@ import { getMonthName } from 'helpers/date';
 import { ROUTES } from 'constants/routes';
 import { WebApi } from 'typings/webapi';
 import styles from './clan-item.module.scss';
+import { TableCell, TableRow } from '@material-ui/core';
 
 const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
 	const history = useHistory();
 	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
 
-	const goToClanHanler = (event: MouseEvent<HTMLElement>) => {
+	const goToClanHandler = (event: MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 
 		if (currentUserMember) {
@@ -33,26 +34,26 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 	};
 
 	return (
-		<tr onClick={goToClanHanler} className={currentUserMember && styles.clanJoined}>
-			<td>
-				<Rank rank={clan.rank} />
-			</td>
-			<td>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</td>
-			<td>
+		<TableRow onClick={goToClanHandler} className={currentUserMember && styles.clanJoined}>
+			<TableCell>
+				<Rank rank={clan.rank ?? 0} />
+			</TableCell>
+			<TableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
+			<TableCell>
 				<span>{clan.name}</span>
-			</td>
-			<td>
+			</TableCell>
+			<TableCell>
 				<span>{clan.maxMembers}</span>
-			</td>
-			<td>
+			</TableCell>
+			<TableCell>
 				<span>
 					{getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>
-			</td>
-			<td>
+			</TableCell>
+			<TableCell>
 				<span>{clan.honor}</span>
-			</td>
-			<td>
+			</TableCell>
+			<TableCell>
 				{currentUserMember ? (
 					currentUserMember.profileClan?.role !== MemberRoles.ADMIN ? (
 						<Button className={ButtonClasses.red} onClick={leaveClanHanler}>
@@ -62,8 +63,8 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 				) : (
 					<Button onClick={joinClanHanler}>Join</Button>
 				)}
-			</td>
-		</tr>
+			</TableCell>
+		</TableRow>
 	);
 };
 

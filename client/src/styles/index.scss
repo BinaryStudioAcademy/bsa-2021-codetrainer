@@ -5,6 +5,7 @@
 [data-theme^='light'],
 [data-theme] [data-theme^='light'] {
 	--text-color: #{$mine-shaft};
+	--minor-text-color: #{$oslo-grey};
 	--background-color: #{$white};
 	--container-color: #{$zircon};
 	--secondary-container-color: #{$white-lilac};
@@ -27,6 +28,7 @@
 [data-theme^='dark'],
 [data-theme] [data-theme^='dark'] {
 	--text-color: #{$light-gray};
+	--minor-text-color: #{$dusty-gray};
 	--background-color: #{$rich-black};
 	--container-color: #{$eerie-black};
 	--secondary-container-color: #{$onyx};
@@ -39,7 +41,7 @@
 	--divider: #{$onyx};
 	--header: #{$onyx};
 	--sidebar: #{$space-cadet};
-	--border: #{$white};
+	--border: #{$eerie-black};
 	--placeholder: #{$light-gray};
 	--rank-easy: #{$picton-blue};
 	--rank-medium: #{$fire-bush};

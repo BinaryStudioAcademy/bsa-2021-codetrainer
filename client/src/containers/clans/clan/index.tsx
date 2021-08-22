@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { ClanPage, Modal, Spinner } from 'components';
+import { ClanPage } from 'components';
 import * as actions from './logic/actions';
+import * as userActions from '../../user/logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import { ROUTES } from 'constants/routes';
 import { getCommunityByUserId, sendIntitationLetter } from 'services/follower/followers.service';
 import { getUserById } from 'services';
-import { CommunityMember } from 'components/pages/clans/clan/components/community-member';
+import { deleteClan } from 'services/clans.service';
+import { useUserSelector } from 'hooks/useAppSelector';
+import { IUser } from 'typings/common/IUser';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const currentSort = useSelector((state: IRootState) => state.clan.options.sortBY);
-	const user = useSelector((state: IRootState) => state.auth.userData.user);
+	const user: IUser | null = useUserSelector();
 	const clan = useSelector((state: IRootState) => state.clan.data);
 
 	useEffect(() => {
@@ -38,11 +41,15 @@ const Clan: React.FC = () => {
 
 	const leaveClan = () => {
 		dispatch(actions.leaveClan());
+	};
+	const handleDeleteClan = async () => {
+		await deleteClan();
+		dispatch(actions.clearClan());
+		dispatch(userActions.setUserClan({ clan: null }));
 		history.push(ROUTES.Clans);
 	};
-
 	const handleInviteClick = async () => {
-		setIsOpen(true);
+		setIsInvitationOpen(true);
 		setModalLoading(true);
 		if (user) {
 			const userCommunity: string[] = await getCommunityByUserId(user.id);
@@ -67,43 +74,28 @@ const Clan: React.FC = () => {
 	};
 	const [modalLoading, setModalLoading] = useState(false);
 	const [community, setCommunity] = useState<any[]>([]);
-	const [isOpen, setIsOpen] = useState(false);
-	const element = (
-		<div>
-			{modalLoading ? (
-				<Spinner />
-			) : (
-				community.map(({ user: toUser }) => {
-					return (
-						<CommunityMember
-							key={toUser.id}
-							user={toUser}
-							fromUser={user}
-							handleInviteClick={handleInvitationSend}
-						/>
-					);
-				})
-			)}
-		</div>
-	);
+	const [isInvitationOpen, setIsInvitationOpen] = useState(false);
+	const [modalShown, setModalShown] = useState(false);
 	return (
-		<div>
-			{clan && (
-				<ClanPage
-					clan={clan}
-					sortByRank={sortByRank}
-					sortByTime={sortByTime}
-					leaveClan={leaveClan}
-					currentSort={currentSort}
-					handleInviteClick={handleInviteClick}
-				/>
-			)}
-			<Modal
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				elements={{ title: `Invite Friends To ${clan?.name}`, showCloseButton: true, body: element }}
+		clan && (
+			<ClanPage
+				clan={clan}
+				sortByRank={sortByRank}
+				sortByTime={sortByTime}
+				leaveClan={leaveClan}
+				currentSort={currentSort}
+				user={user}
+				handleDeleteClan={handleDeleteClan}
+				modalShown={modalShown}
+				setModalShown={setModalShown}
+				handleInviteClick={handleInviteClick}
+				modalLoading={modalLoading}
+				community={community}
+				handleInvitationSend={handleInvitationSend}
+				isInvitationOpen={isInvitationOpen}
+				setIsInvitationOpen={setIsInvitationOpen}
 			/>
-		</div>
+		)
 	);
 };
 

@@ -13,16 +13,20 @@ declare namespace WebApi.Entities {
 		name: string;
 		surname: string;
 		email: string;
-		clan?: IClan;
+		clan?: IClan | null;
 		rank: number;
 		honor: number;
-		profileClan?: string;
+		profileClan?: {
+			id: string;
+			role: string;
+			status: string;
+		};
 		githubId?: string;
 		profileUrl?: string;
 	}
 	interface ITask {
-		id: string;
-		name: string;
+		id: string | null;
+		name?: string;
 		description?: string;
 		// tags?: string[],
 		rank?: number;
@@ -59,5 +63,32 @@ declare namespace WebApi.Entities {
 		members: Array<IMember>;
 	}
 
+	export interface IChallenge {
+		id: string;
+		name: string;
+		rank: number;
+		description?: string;
+		avatar?: string;
+		author: IUser;
+		createdAt: Date;
+		updatedAt?: Date;
+	}
+
+	export interface ICollection {
+		id: string;
+		name: string;
+		challenges: IChallenge[];
+		description?: string;
+		avatar?: string;
+		author: IUser;
+		followers: IUser[];
+		createdAt: Date;
+		updatedAt?: Date;
+	}
+
 	export type TClans = Array<IClan>;
+
+	export interface ITask {
+		id: string | null;
+	}
 }

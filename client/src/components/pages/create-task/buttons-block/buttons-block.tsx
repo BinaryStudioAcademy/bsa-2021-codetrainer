@@ -6,20 +6,36 @@ import styles from './buttons-block.module.scss';
 import './buttons-block.scss';
 import { useState } from 'react';
 import { ISelectValue } from 'components/basic/select/interface';
+import { useDispatch } from 'react-redux';
+import { setTask } from 'containers/create-new-task/logic/actions';
 
 interface IButtonsBlockProps {
 	handlePreviewClick: () => void;
 	taskId: string | null;
+	yourChallengeValues?: ISelectValue[] | null;
+	onChallengeChange: (id: string | null) => void;
+	handleReset: () => void;
+	challengeActiveValue: ISelectValue;
+	setChallengeActiveValue: (value: ISelectValue) => void;
+	handleGoToChange: (taskId: string | null, actionId: string | null) => void;
 }
-export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps) => {
-	const [goToActiveValue, setGoToActiveValue] = useState({
-		id: 1,
+export const ButtonsBlock = ({
+	handlePreviewClick,
+	taskId,
+	yourChallengeValues,
+	onChallengeChange,
+	handleReset,
+	challengeActiveValue,
+	setChallengeActiveValue,
+	handleGoToChange,
+}: IButtonsBlockProps) => {
+	const [goToActiveValue, setGoToActiveValue] = useState<ISelectValue>({
+		id: '1',
 		title: 'Go to',
 	});
-	const [challengeActiveValue, setChallengeActiveValue] = useState({
-		id: 0,
-		title: 'Switch task',
-	});
+
+	const dispatch = useDispatch();
+
 	return (
 		<>
 			<div className={styles.buttonsBlock}>
@@ -34,19 +50,32 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps)
 						<Select
 							values={goToValues}
 							activeValue={goToActiveValue}
-							onChange={(newValue: ISelectValue) => setGoToActiveValue(newValue)}
+							onChange={(newValue: ISelectValue) => {
+								handleGoToChange(taskId, newValue.id);
+								setGoToActiveValue(newValue);
+							}}
 						/>
 					</div>
 				) : null}
 
 				<div className={clsx('select', { rightPart: taskId ? false : true })}>
 					<label className="label">Your challenge</label>
-					<Select
-						values={challengeValues}
-						activeValue={challengeActiveValue}
-						onChange={(newValue: ISelectValue) => setChallengeActiveValue(newValue)}
-						isButtonBlockSelect={true}
-					/>
+					{yourChallengeValues ? (
+						<Select
+							values={yourChallengeValues}
+							activeValue={challengeActiveValue}
+							onChange={(newValue: ISelectValue) => {
+								dispatch(setTask({ taskId: newValue.id }));
+								if (newValue.id !== '0') {
+									onChallengeChange(newValue.id);
+								} else {
+									handleReset();
+								}
+								setChallengeActiveValue(newValue);
+							}}
+							isButtonBlockSelect={true}
+						/>
+					) : null}
 				</div>
 			</div>
 		</>
@@ -54,42 +83,23 @@ export const ButtonsBlock = ({ handlePreviewClick, taskId }: IButtonsBlockProps)
 };
 const goToValues = [
 	{
-		id: 1,
+		id: '1',
 		title: 'Details',
 	},
 	{
-		id: 2,
+		id: '2',
 		title: 'Discourse',
 	},
 	{
-		id: 3,
+		id: '3',
 		title: 'Solutions',
 	},
 	{
-		id: 4,
+		id: '4',
 		title: 'Translations',
 	},
 	{
-		id: 5,
-		title: 'Revisions',
-	},
-	{
-		id: 6,
+		id: '5',
 		title: 'Trainer',
-	},
-];
-
-const challengeValues = [
-	{
-		id: 1,
-		title: 'New task',
-	},
-	{
-		id: 2,
-		title: 'User task1',
-	},
-	{
-		id: 3,
-		title: 'User task2',
 	},
 ];
