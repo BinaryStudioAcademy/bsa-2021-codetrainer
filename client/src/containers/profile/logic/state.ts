@@ -6,12 +6,21 @@ export interface IProfileState {
 	isLoading: boolean;
 	error: string | null;
 	isSuccess: boolean;
-	userData: IUser | null;
+	userData:
+		| (IUser & {
+				followingQuantity?: number;
+				followersQuantity?: number;
+				communityQuantity?: number;
+				memberSince?: string;
+				lastSeen?: string;
+				score?: number;
+		  })
+		| null;
 }
 
 export const initialState: IProfileState = {
 	activeTab: ActiveTabId.Stats,
-	isLoading: false,
+	isLoading: true,
 	error: null,
 	isSuccess: false,
 	userData: null,

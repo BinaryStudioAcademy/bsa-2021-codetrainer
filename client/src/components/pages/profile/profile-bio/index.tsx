@@ -12,23 +12,21 @@ export type IProfileBioProps = IUser & {
 	score?: number;
 };
 
-export const ProfileBio = (props: IProfileBioProps) => {
-	const {
-		img,
-		name,
-		surname,
-		username,
-		clan,
-		memberSince,
-		lastSeen,
-		github,
-		followingQuantity,
-		followersQuantity,
-		communityQuantity,
-		rank,
-		score,
-	} = props;
-
+export const ProfileBio = ({
+	img,
+	name,
+	surname,
+	username,
+	clan,
+	memberSince,
+	lastSeen,
+	github,
+	followingQuantity,
+	followersQuantity,
+	communityQuantity,
+	rank,
+	score,
+}: IProfileBioProps) => {
 	const gitHubLink = github ? (
 		<a href={github.profileUrl} className={styles.link}>
 			{github.profileUrl}
@@ -57,8 +55,8 @@ export const ProfileBio = (props: IProfileBioProps) => {
 			<div className={styles.profileHeader}>
 				{img ? <Avatar avatar={img} size={57} /> : <Avatar size={57} />}
 				<h5 className={styles.name}>{`${name} ${surname}`}</h5>
-				<Rank rank={rank} />
-				<Label label={score ?? 0} color="#EC4179" />
+				<Rank rank={rank ? rank : 9} />
+				<Label label={score ? score : 0} color="#EC4179" />
 			</div>
 			<div className={styles.fields}>
 				<List items={listItems1} />
