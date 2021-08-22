@@ -15,7 +15,7 @@ import {
 	clanService,
 	imagesService,
 	githubService,
-	follower,
+	followersService,
 	users,
 	collectionService,
 	commentTaskService,
@@ -51,7 +51,7 @@ export function initApi(): Router {
 	apiRouter.use(
 		ApiPath.FOLLOWERS,
 		initFollower(Router, {
-			follower,
+			follower: followersService
 		}),
 	);
 
