@@ -7,3 +7,4 @@ export const useUserSelector = () => useAppSelector((store) => store.auth.userDa
 export const useSignUpSelector = () => useAppSelector((store) => store.auth.signUp);
 export const useSettingsSelector = () => useAppSelector((store) => store.settings);
 export const useHeaderSelector = () => useAppSelector((store) => store.header);
+export const useThemeSelector = () => useAppSelector((store) => store.theme);
