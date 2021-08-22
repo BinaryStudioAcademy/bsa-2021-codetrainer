@@ -5,7 +5,6 @@ export const fetchCommunity = async (id: string): Promise<Record<string, any>> =
 		method: 'GET',
 		endpoint: `followers/community/${id}`,
 	});
-	console.log(community);
 
 	return community;
 };
