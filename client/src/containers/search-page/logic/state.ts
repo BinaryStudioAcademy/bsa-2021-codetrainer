@@ -3,6 +3,7 @@ export interface ISearchState {
 	errors: Record<string, { msg: string }[]> | string | null;
 	isSuccess: boolean;
 	onSubmit: boolean;
+	changePage: boolean;
 	filter: {
 		status: string;
 		progress: string;
@@ -10,13 +11,15 @@ export interface ISearchState {
 		rank: number | null;
 		tags: Set<string>;
 		sort: string;
+		page: number;
 	};
 	search: {
-		tags: {
+		count?: string;
+		tags?: {
 			name: string;
 			numberOfTasks: number;
 		}[];
-		ranks: {
+		ranks?: {
 			rank: number;
 		}[];
 		tasks: {
@@ -39,6 +42,7 @@ export const initialState: ISearchState = {
 	isSuccess: false,
 	errors: null,
 	onSubmit: true,
+	changePage: false,
 	filter: {
 		status: 'approved',
 		progress: 'all',
@@ -46,6 +50,7 @@ export const initialState: ISearchState = {
 		sort: 'newest',
 		tags: new Set(),
 		rank: null,
+		page: 0,
 	},
 	search: null,
 };

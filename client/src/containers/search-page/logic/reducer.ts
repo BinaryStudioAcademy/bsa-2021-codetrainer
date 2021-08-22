@@ -10,6 +10,24 @@ export const searchReducer = createReducer<ISearchState>(initialState, {
 			errors: action.payload,
 		};
 	},
+	[actionTypes.SEARCH_BEFORE_FETCH_NEXT_PAGE](state) {
+		return {
+			...state,
+			changePage: false,
+			isSuccess: false,
+			errors: null,
+		};
+	},
+	[actionTypes.SEARCH_CHANGE_PAGE](state) {
+		return {
+			...state,
+			changePage: true,
+			filter: {
+				...state.filter,
+				page: state.filter.page + 1,
+			},
+		};
+	},
 	[actionTypes.SEARCH_BEFORE_FETCH](state) {
 		return {
 			...state,
@@ -41,10 +59,23 @@ export const searchReducer = createReducer<ISearchState>(initialState, {
 			search: action.data,
 		};
 	},
-	[actionTypes.SEARCH_SET_SUBMIT](state, action: actionTypes.TSearchSetSubmit) {
+	[actionTypes.SEARCH_ADD_DATA_NEXT_PAGE](state, action: actionTypes.TSearchSetData) {
 		return {
 			...state,
-			onSubmit: action.payload,
+			search: {
+				...action.data,
+				tasks: [...(state.search?.tasks || []), ...(action.data?.tasks || [])],
+			},
+		};
+	},
+	[actionTypes.SEARCH_ON_SUBMIT](state) {
+		return {
+			...state,
+			onSubmit: true,
+			filter: {
+				...state.filter,
+				page: 0,
+			},
 		};
 	},
 });

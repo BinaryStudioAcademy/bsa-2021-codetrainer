@@ -15,3 +15,10 @@
 	width: calc(100% - 400px);
 	background-color: #fafbff;
 }
+
+.challengesLoading {
+	display: flex;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 10px;
+}
