@@ -21,6 +21,9 @@ const CreateCollectionSchema = Yup.object().shape({
 });
 export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIsOpen }) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
+	// const [isNoCollections, setIsNoCollections] = React.useState(false);
+
+	const isNoCollections = true;
 
 	const onSubmit = async (value: string, setFieldError: any) => {
 		try {
@@ -41,7 +44,7 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 		</div>
 	);
 
-	const element = (
+	const noCollections = (
 		<div>
 			<div>
 				<Formik
@@ -76,13 +79,23 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 		</div>
 	);
 
+	const collections = <div>TO DO: FETCH COLLECTIONS FROM BACKEND</div>;
+
 	return (
 		<div>
-			<Modal
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				elements={{ title: 'NEW COLLECTION', showCloseButton: true, body: element }}
-			/>
+			{isNoCollections ? (
+				<Modal
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					elements={{ title: 'NEW COLLECTION', showCloseButton: true, body: noCollections }}
+				/>
+			) : (
+				<Modal
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					elements={{ title: 'ADD TO COLLECTION', showCloseButton: true, body: collections }}
+				/>
+			)}
 		</div>
 	);
 };
