@@ -10,6 +10,18 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 			user: action.user,
 		};
 	},
+	[actionTypes.SET_USER_CLAN](state, action: actionTypes.TSetUserClan) {
+		const newUserState = {
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			...state.user!,
+			clan: action.clan,
+		};
+		const newState: IUserDataState = {
+			...state,
+			user: newUserState,
+		};
+		return newState;
+	},
 	[actionTypes.USER_ACCESS_TOKEN_LOADING](state, action: actionTypes.TUserAccessTokenLoading) {
 		return {
 			...state,

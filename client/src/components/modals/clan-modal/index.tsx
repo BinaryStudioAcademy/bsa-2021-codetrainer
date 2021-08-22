@@ -7,8 +7,9 @@ import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 import { Modal } from '../';
 import { createClan } from 'services/create-clan.service';
-import { useUserSelector } from 'hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
+import * as userActions from 'containers/user/logic/actions';
+import { useUserSelector } from 'hooks/useAppSelector';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 
@@ -40,8 +41,9 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 			);
 		}
 		try {
-			await createClan(value);
+			const clan = await createClan(value);
 			setIsOpen(false);
+			dispatch(userActions.setUserClan({ clan: clan }));
 		} catch (e) {
 			console.log(e);
 			setFieldError('createClan', 'Something went wrong');

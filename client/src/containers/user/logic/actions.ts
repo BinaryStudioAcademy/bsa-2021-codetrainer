@@ -2,6 +2,7 @@ import { createAction } from 'helpers/create-action.helper';
 import * as actionTypes from './action-types';
 
 export const setUser = createAction<actionTypes.TSetUser>(actionTypes.SET_USER);
+export const setUserClan = createAction<actionTypes.TSetUserClan>(actionTypes.SET_USER_CLAN);
 
 export const checkRefreshToken = createAction(actionTypes.USER_CHECK_TOKEN);
 

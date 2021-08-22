@@ -4,6 +4,9 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import * as userActions from '../../../user/logic/actions';
 import { IRootState } from 'typings/root-state';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
+import historyHelper from 'helpers/history.helper';
 
 export function* fetchClanWorker({ id }: ReturnType<typeof actions.fetchClan>): any {
 	yield put(actions.startLoading());
@@ -31,8 +34,17 @@ export function* leaveClanWorker(action: ReturnType<typeof actions.leaveClan>): 
 
 	if (response instanceof Error) {
 		yield put(actions.addError({ error: response.message }));
+		yield put(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Error,
+					message: response.message,
+				},
+			}),
+		);
 	} else {
 		yield put(userActions.setUser({ user: response.user }));
+		historyHelper.push('/clans');
 	}
 
 	yield put(actions.endLoading());
