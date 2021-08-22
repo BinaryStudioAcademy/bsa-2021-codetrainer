@@ -1,10 +1,9 @@
-// TODO: replace font and colors to variables
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import 'styles/variables';
 
 $easy: var(--rank-easy);
 $medium: var(--rank-medium);
 $hard: var(--rank-hard);
+$beta: var(--rank-beta);
 
 @mixin rank-color($color) {
 	border-color: $color;
@@ -13,7 +12,7 @@ $hard: var(--rank-hard);
 
 @mixin active-rank-color($color) {
 	border-color: $color;
-	color: #ffffff;
+	color: var(--white);
 	background-color: $color;
 }
 
@@ -25,10 +24,8 @@ $hard: var(--rank-hard);
 	box-sizing: border-box;
 	border: 1px solid;
 	border-radius: 5px;
-	font-family: Montserrat, sans-serif;
-	font-size: 12px;
+	font: $rank-font;
 	font-style: normal;
-	font-weight: 400;
 	line-height: 23px;
 	letter-spacing: 0;
 	text-align: center;
@@ -46,8 +43,11 @@ $hard: var(--rank-hard);
 	&.honor {
 		width: auto;
 		padding: 0 5px;
-		font-family: Inter, sans-serif;
-		font-size: 14px;
+		font: $honor-font;
+		line-height: 23px;
+	}
+	&.beta {
+		@include active-rank-color(($beta));
 	}
 	&.active_easy {
 		@include active-rank-color(($easy));
