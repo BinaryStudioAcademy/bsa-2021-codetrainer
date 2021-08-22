@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './profile-bio.module.scss';
 import { Avatar, Label, List, Rank } from 'components/basic';
 import { IUser } from 'typings/common/IUser';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
 export type IProfileBioProps = IUser & {
 	followingQuantity?: number;
@@ -39,7 +41,7 @@ export const ProfileBio = (props: IProfileBioProps) => {
 
 	const listItems1 = [
 		{ name: 'Name', value: username },
-		{ name: 'Clan', value: clan?.name ?? 'No clan' },
+		{ name: 'Clan', value: clan?.id ? <Link to={`${ROUTES.Clan}/${clan.id}`}>{clan?.name}</Link> : 'No clan' },
 	];
 	const listItems2 = [
 		{ name: 'Member since', value: memberSince },

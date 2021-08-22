@@ -4,7 +4,7 @@ import { FollowersService } from '../../services';
 import { dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
 import { UserRepository } from '../../data';
 
-export const initFollower = (appRouter: typeof Router, services: { follower: FollowersService, user: UserRepository }) => {
+export const initFollower = (appRouter: typeof Router, services: { follower: FollowersService }) => {
 	const { follower: followerService } = services;
 	const router = appRouter();
 

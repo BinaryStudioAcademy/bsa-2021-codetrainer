@@ -90,7 +90,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
-			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan} component={Clan} />
+			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
 			<Route path={ROUTES.NotFound} component={NotFound} />
 			<Redirect from="*" to={ROUTES.NotFound} />
 		</Switch>

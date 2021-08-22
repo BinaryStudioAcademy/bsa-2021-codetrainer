@@ -28,5 +28,5 @@ export interface IChallenge {
 		favoriteSaves: number;
 		positiveFeedback: number;
 	};
-	tags: TChallengeTags;
+	tags: string[] | [];
 }
