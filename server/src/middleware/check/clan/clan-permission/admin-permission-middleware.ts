@@ -4,6 +4,9 @@ import { ValidationError } from '../../../../helpers';
 
 const adminPermissionMiddleware: RequestHandler = (req, _response, next) => {
 	const { user } = req;
+	if (!user.profileClan) {
+		throw new ValidationError(CODE_ERRORS.USER_NO_CLAN);
+	}
 	if (user.profileClan?.role !== CLAN_MEMBER_ROLE.ADMIN) {
 		throw new ValidationError(CODE_ERRORS.CLAN_NOT_PERMISSION);
 	}

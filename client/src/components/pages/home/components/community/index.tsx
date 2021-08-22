@@ -18,8 +18,8 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 			<div>
 				<h4 className={styles.communityHeader}>Community</h4>
 				<p className={styles.communityDescription}>
-					You are automatically given an allegiance with anyone who is in the same clan as you. You can also
-					become allies with other warriors by following each other or inviting new warriors to join.
+					You automatically belong to a community with anyone who is in the same clan as you. You can also be
+					a community with other warriors by following each other or inviting new warriors to join.
 				</p>
 
 				<div className={styles.communityTableHeader}>

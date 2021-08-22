@@ -14,7 +14,7 @@ type TCollectionsTab = {
 	value: CollectionsTabValues;
 	loader: TCollectionsLoader;
 	emptyLabel: ReactNode;
-}
+};
 
 const collectionsTabs: TCollectionsTab[] = [
 	{
@@ -27,9 +27,9 @@ const collectionsTabs: TCollectionsTab[] = [
 		title: 'Followed',
 		value: CollectionsTabValues.Followed,
 		loader: getFollowedCollections,
-		emptyLabel: 'You have not started to follow any collections yet'
+		emptyLabel: 'You have not started to follow any collections yet',
 	},
-]
+];
 
 export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => {
 	const [selectedValue, setSelectedValue] = useState<CollectionsTabValues>(collectionsTabs[0].value);
@@ -39,16 +39,17 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
 	const { loader, emptyLabel } = useMemo(
-		() => collectionsTabs.find(tab => tab.value === selectedValue) as TCollectionsTab,
-		[selectedValue]
+		() => collectionsTabs.find((tab) => tab.value === selectedValue) as TCollectionsTab,
+		[selectedValue],
 	);
 
 	const sideBar = useMemo(
-		() => collectionsTabs.map(tab => ({
-			...tab,
-			id: tab.value,
-			count: tab.value === selectedValue ? full : undefined,
-		})),
+		() =>
+			collectionsTabs.map((tab) => ({
+				...tab,
+				id: tab.value,
+				count: tab.value === selectedValue ? full : undefined,
+			})),
 		[selectedValue, full],
 	);
 
@@ -64,23 +65,25 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 				setHasMore(hasMore);
 				setFull(full);
 				setCollections([...(collections || []), ...items]);
-			}
-			catch {
+			} catch {
 				setHasMore(true);
 			}
 			setLoaded(false);
 		}
 	}, [loader, collections, hasMore, isLoaded]);
 
-	const changeTab = useCallback((value: string) => {
-		const tab = value as CollectionsTabValues;
-		if (tab !== selectedValue) {
-			setCollections(undefined);
-			setFull(undefined);
-			setSelectedValue(tab);
-			setHasMore(true);
-		}
-	}, [selectedValue]);
+	const changeTab = useCallback(
+		(value: string) => {
+			const tab = value as CollectionsTabValues;
+			if (tab !== selectedValue) {
+				setCollections(undefined);
+				setFull(undefined);
+				setSelectedValue(tab);
+				setHasMore(true);
+			}
+		},
+		[selectedValue],
+	);
 
 	return (
 		<ProfileTabWithSidebar
@@ -90,10 +93,7 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 				onClick: changeTab,
 			}}
 		>
-			<ProfileCollectionsList
-				{...{ collections, hasMore, emptyLabel }}
-				onLoadMore={loadMore}
-			/>
+			<ProfileCollectionsList {...{ collections, hasMore, emptyLabel }} onLoadMore={loadMore} />
 		</ProfileTabWithSidebar>
 	);
 };

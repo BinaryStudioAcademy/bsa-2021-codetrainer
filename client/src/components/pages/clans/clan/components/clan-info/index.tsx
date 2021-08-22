@@ -6,8 +6,9 @@ import { WebApi } from 'typings/webapi';
 import { ButtonClasses } from 'components/basic/button';
 import { IClanInfoProps } from './types';
 import styles from './clan-info.module.scss';
+import clsx from 'clsx';
 
-const ClanInfo: React.FC<IClanInfoProps> = ({ clan, leaveClan }) => {
+const ClanInfo: React.FC<IClanInfoProps> = ({ clan, leaveClan, handleInviteClick }) => {
 	const clanAdmin = clan.members.find(
 		(member: WebApi.Entities.IMember) => member.profileClan.role === MemberRoles.ADMIN,
 	);
@@ -32,6 +33,9 @@ const ClanInfo: React.FC<IClanInfoProps> = ({ clan, leaveClan }) => {
 				<span>Members: {clan.members.length}</span>
 				<Button className={ButtonClasses.red} onClick={() => leaveClan()}>
 					Leave
+				</Button>
+				<Button className={clsx(ButtonClasses.blue, ButtonClasses.filled)} onClick={handleInviteClick}>
+					Invite a friend
 				</Button>
 			</div>
 		</div>

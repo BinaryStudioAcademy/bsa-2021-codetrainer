@@ -9,8 +9,13 @@ export interface IUser {
 	name: string;
 	img?: string;
 	surname?: string;
-	clan?: WebApi.Entities.IClan;
+	clan?: WebApi.Entities.IClan | null;
 	profileUrl?: string;
 	github?: IGithubProfile;
 	tasks?: WebApi.Entities.ITask[];
+	profileClan?: {
+		id: string;
+		role: string;
+		status: string;
+	};
 }
