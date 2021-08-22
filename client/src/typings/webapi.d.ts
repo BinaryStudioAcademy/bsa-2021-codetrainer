@@ -1,4 +1,6 @@
 import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
+import { TaskStatus } from './common/task';
+import { SolutionStatus } from './common/solution';
 
 declare namespace WebApi.Entities {
 	export interface IExample {
@@ -20,16 +22,25 @@ declare namespace WebApi.Entities {
 		githubId?: string;
 		profileUrl?: string;
 	}
-	interface ITask {
+
+	export interface ITask {
 		id: string | null;
 		name?: string;
 		description?: string;
 		// tags?: string[],
 		rank?: number;
+		status?: TaskStatus;
 	}
 
-	interface ITasks {
-		tasks: ITask[];
+	export interface ISolution {
+		id: string;
+		status: SolutionStatus;
+		code: string;
+		language: string;
+		user: IUser;
+		task: ITask;
+		createdAt: Date;
+		updatedAt?: Date;
 	}
 
 	export interface IMember {
@@ -59,21 +70,10 @@ declare namespace WebApi.Entities {
 		members: Array<IMember>;
 	}
 
-	export interface IChallenge {
-		id: string;
-		name: string;
-		rank: number;
-		description?: string;
-		avatar?: string;
-		author: IUser;
-		createdAt: Date;
-		updatedAt?: Date;
-	}
-
 	export interface ICollection {
 		id: string;
 		name: string;
-		challenges: IChallenge[];
+		tasks: ITask[];
 		description?: string;
 		avatar?: string;
 		author: IUser;
@@ -83,8 +83,17 @@ declare namespace WebApi.Entities {
 	}
 
 	export type TClans = Array<IClan>;
+}
 
-	export interface ITask {
-		id: string | null;
+declare namespace WebApi.Types {
+	interface IPaginationResponse<T> {
+		items: T[];
+		full: number;
+		hasMore: boolean;
+	}
+
+	interface IPaginationRequest {
+		skip: number;
+		limit: number;
 	}
 }
