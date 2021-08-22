@@ -6,6 +6,7 @@ import { IRootState } from 'typings/root-state';
 import historyHelper from 'helpers/history.helper';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from '../../notification/logic/models';
+import { ROUTES } from 'constants/routes';
 
 const Clans: React.FC = () => {
 	const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Clans: React.FC = () => {
 	};
 	const handleGoToClan = () => {
 		if (user?.clan !== null) {
-			historyHelper.push('/clan');
+			historyHelper.push(`${ROUTES.Clan}/${user?.clan?.id}`);
 		} else {
 			dispatch(
 				setNotificationState({

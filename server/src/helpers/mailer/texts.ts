@@ -15,12 +15,12 @@ export const getMailerTexts = {
 	
 	<p>Please, click the link below to reset your password</p>
 	<a href=${link}>Reset Password</a>`,
-	inviteToClan: ({toUser, fromUser}: {toUser: User,fromUser:User})=>{
+	inviteToClan: ({ toUser, fromUser }: { toUser: User; fromUser: User }) => {
 		const date = new Date();
 		return `<p>Hi, ${toUser.name} ${toUser.surname}!</p>
 		<p>You were invited to clan ${fromUser.clan?.name} by you friend ${fromUser.name} ${fromUser.surname} (@${fromUser.username})</p>
-		<p>Just follow the link: ${ENV.APP.URL}/clans/${fromUser.clan?.name}</p>
+		<p>Just follow the link: ${ENV.APP.URL}/clan/${fromUser.clan?.id}</p>
 		<br>${date}
-		`
-	}
+		`;
+	},
 };
