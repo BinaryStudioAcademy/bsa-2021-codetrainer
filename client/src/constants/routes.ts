@@ -25,4 +25,6 @@ export const ROUTES = {
 	Github: '/github',
 
 	Collections: '/collections',
+
+	Task: '/task',
 };

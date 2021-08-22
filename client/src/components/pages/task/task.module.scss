@@ -1,0 +1,7 @@
+@import "styles/variables";
+
+.container > div {
+    background-color: $zircon;
+    margin: 50px;
+    width: 900px;
+}
