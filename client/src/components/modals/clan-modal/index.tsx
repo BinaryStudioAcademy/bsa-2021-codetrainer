@@ -7,6 +7,10 @@ import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 import { Modal } from '../';
 import { createClan } from 'services/create-clan.service';
+import { useUserSelector } from 'hooks/useAppSelector';
+import { useDispatch } from 'react-redux';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
 
 interface IClanModalProps {
 	isOpen: boolean;
@@ -22,7 +26,19 @@ const CreateClanSchema = Yup.object().shape({
 
 export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
+	const dispatch = useDispatch();
+	const user = useUserSelector();
 	const onSubmit = async (value: string, setFieldError: any) => {
+		if (user?.clan !== null) {
+			dispatch(
+				setNotificationState({
+					state: {
+						notificationType: NotificationType.Error,
+						message: 'Leave the clan to create a new one first.',
+					},
+				}),
+			);
+		}
 		try {
 			await createClan(value);
 			setIsOpen(false);
