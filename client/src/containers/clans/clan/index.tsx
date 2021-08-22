@@ -6,6 +6,8 @@ import * as userActions from '../../user/logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import { ROUTES } from 'constants/routes';
+import { getCommunityByUserId, sendIntitationLetter } from 'services/follower/followers.service';
+import { getUserById } from 'services';
 import { deleteClan } from 'services/clans.service';
 import { useUserSelector } from 'hooks/useAppSelector';
 import { IUser } from 'typings/common/IUser';
@@ -46,6 +48,33 @@ const Clan: React.FC = () => {
 		dispatch(userActions.setUserClan({ clan: null }));
 		history.push(ROUTES.Clans);
 	};
+	const handleInviteClick = async () => {
+		setIsInvitationOpen(true);
+		setModalLoading(true);
+		if (user) {
+			const userCommunity: string[] = await getCommunityByUserId(user.id);
+			const users = await userCommunity.map(async (user) => {
+				const fetchedUser = getUserById(user);
+				return fetchedUser;
+			});
+			const result = await Promise.all([...users]).then((fetchedUsers) => {
+				const result = fetchedUsers.filter(({ user }) => {
+					if (user.clan === null) {
+						return user;
+					}
+				});
+				return result;
+			});
+			setCommunity(result);
+			setModalLoading(false);
+		}
+	};
+	const handleInvitationSend = (fromUser: any, toUser: any) => {
+		sendIntitationLetter(fromUser, toUser);
+	};
+	const [modalLoading, setModalLoading] = useState(false);
+	const [community, setCommunity] = useState<any[]>([]);
+	const [isInvitationOpen, setIsInvitationOpen] = useState(false);
 	const [modalShown, setModalShown] = useState(false);
 	return (
 		clan && (
@@ -59,6 +88,12 @@ const Clan: React.FC = () => {
 				handleDeleteClan={handleDeleteClan}
 				modalShown={modalShown}
 				setModalShown={setModalShown}
+				handleInviteClick={handleInviteClick}
+				modalLoading={modalLoading}
+				community={community}
+				handleInvitationSend={handleInvitationSend}
+				isInvitationOpen={isInvitationOpen}
+				setIsInvitationOpen={setIsInvitationOpen}
 			/>
 		)
 	);

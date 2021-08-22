@@ -23,8 +23,14 @@ export interface IClanProps {
 	sortByRank: TSortCallback;
 	sortByTime: TSortCallback;
 	currentSort: ClanSortOptions;
+	handleInviteClick: () => void;
 	user: IUserStore | null;
 	handleDeleteClan: () => void;
 	modalShown: boolean;
 	setModalShown: (value: boolean) => void;
+	modalLoading: boolean;
+	community: any[];
+	handleInvitationSend: (from: any, to: any) => void;
+	isInvitationOpen: boolean;
+	setIsInvitationOpen: (value: boolean) => void;
 }
