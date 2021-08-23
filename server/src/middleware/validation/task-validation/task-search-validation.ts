@@ -75,21 +75,21 @@ export const taskSearchSchema = checkSchema({
 		in: 'query',
 		...tagsValidation,
 	},
-	// page: {
-	// 	in: 'query',
-	// 	errorMessage: 'Wrong page format',
-	// 	custom: {
-	// 		options: (value) => {
-	// 			const page = Number(value);
-	// 			if (typeof page !== 'number' || Number.isNaN(page)) {
-	// 				throw new ValidationError(CODE_ERRORS.TASK_QUERY('page'));
-	// 			}
-	// 			return true;
-	// 		},
-	// 	},
-	// 	customSanitizer: {
-	// 		options: (value) => Number(value),
-	// 	},
-	// 	notEmpty: true,
-	// },
+	page: {
+		in: 'query',
+		errorMessage: 'Wrong page format',
+		custom: {
+			options: (value) => {
+				const page = Number(value);
+				if (typeof page !== 'number' || Number.isNaN(page)) {
+					throw new ValidationError(CODE_ERRORS.TASK_QUERY('page'));
+				}
+				return true;
+			},
+		},
+		customSanitizer: {
+			options: (value) => Number(value),
+		},
+		notEmpty: true,
+	},
 });
