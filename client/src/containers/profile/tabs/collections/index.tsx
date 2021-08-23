@@ -1,8 +1,10 @@
 import React, { useState, useMemo, useCallback, ReactNode } from 'react';
 import { ProfileTabWithSidebar } from 'components';
-import { getAuthoredCollections, getFollowedCollections, TCollectionsLoader } from 'services/collections.service';
+import { getAuthoredCollections, getFollowedCollections, TUserCollectionsLoader } from 'services/collections.service';
 import { WebApi } from 'typings/webapi';
-import ProfileCollectionsList from 'components/pages/profile/profile-collections-list';
+import ProfileSkeletonList from 'components/pages/profile/profile-skeleton-list';
+import { Collection, CollectionSkeleton } from 'components/common';
+import { ReactComponent as CollectionIcon } from 'assets/icons/collection.svg';
 
 enum CollectionsTabValues {
 	Authored = 'AUTHORED_COLLECTIONS',
@@ -12,22 +14,36 @@ enum CollectionsTabValues {
 type TCollectionsTab = {
 	title: string;
 	value: CollectionsTabValues;
-	loader: TCollectionsLoader;
-	emptyLabel: ReactNode;
+	loader: TUserCollectionsLoader;
+	empty: ReactNode;
 };
+
+function mapItemToCollection({ item }: { item: WebApi.Entities.ICollection }) {
+	return <Collection collection={item} />;
+}
 
 const collectionsTabs: TCollectionsTab[] = [
 	{
 		title: 'Authored',
 		value: CollectionsTabValues.Authored,
 		loader: getAuthoredCollections,
-		emptyLabel: 'There are no items to show',
+		empty: (
+			<div>
+				<CollectionIcon width={75} height={75} />
+				There are no items to show
+			</div>
+		),
 	},
 	{
 		title: 'Followed',
 		value: CollectionsTabValues.Followed,
 		loader: getFollowedCollections,
-		emptyLabel: 'You have not started to follow any collections yet',
+		empty: (
+			<div>
+				<CollectionIcon width={75} height={75} />
+				You have not started to follow any solutions yet
+			</div>
+		),
 	},
 ];
 
@@ -38,7 +54,7 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 	const [isLoaded, setLoaded] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
-	const { loader, emptyLabel } = useMemo(
+	const { loader, empty } = useMemo(
 		() => collectionsTabs.find((tab) => tab.value === selectedValue) as TCollectionsTab,
 		[selectedValue],
 	);
@@ -93,7 +109,12 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 				onClick: changeTab,
 			}}
 		>
-			<ProfileCollectionsList {...{ collections, hasMore, emptyLabel }} onLoadMore={loadMore} />
+			<ProfileSkeletonList
+				{...{ items: collections, hasMore, empty }}
+				item={mapItemToCollection}
+				skeleton={CollectionSkeleton}
+				onLoadMore={loadMore}
+			/>
 		</ProfileTabWithSidebar>
 	);
 };

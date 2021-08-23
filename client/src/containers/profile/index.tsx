@@ -10,7 +10,8 @@ import { profilePageTabs } from './config';
 import { RouteComponentProps, useParams } from 'react-router-dom';
 import { profileTasks } from './tabs/tasks/mocks';
 import { social } from './tabs/social/mocks';
-import { useAppSelector } from 'hooks/useAppSelector';
+import { useAppSelector, useUserSelector } from 'hooks/useAppSelector';
+import { ProfileSolutions } from './tabs/solutions';
 
 export const Profile = (props: RouteComponentProps) => {
 	const { activeTab: activeTabId } = useSelector((state: IRootState) => state.profile);
@@ -23,6 +24,7 @@ export const Profile = (props: RouteComponentProps) => {
 	);
 
 	const { isLoading, error, userData } = useAppSelector((state) => state.profile);
+	const visitor = useUserSelector();
 
 	const { username } = useParams<{ username: string }>();
 
@@ -42,6 +44,9 @@ export const Profile = (props: RouteComponentProps) => {
 			case ActiveTabId.Challenge: {
 				return <ProfileTasks profileTasks={profileTasks} />;
 			}
+			case ActiveTabId.Solution: {
+				return <ProfileSolutions />;
+			}
 			case ActiveTabId.Social: {
 				return <ProfileSocial social={social} />;
 			}
@@ -55,16 +60,18 @@ export const Profile = (props: RouteComponentProps) => {
 	}, [activeTabId]);
 
 	const tabItems = useMemo(() => {
-		return profilePageTabs.map((item) => {
-			return {
-				tabId: item.id,
-				tabNameText: item.name,
-				onClick: () => {
-					setActiveTab(item.id as ActiveTabId);
-				},
-			};
-		});
-	}, [setActiveTab]);
+		return profilePageTabs
+			.filter(({ tab }) => !tab.private || username === visitor?.username)
+			.map((item) => {
+				return {
+					tabId: item.id,
+					tabNameText: item.tab.name,
+					onClick: () => {
+						setActiveTab(item.id as ActiveTabId);
+					},
+				};
+			});
+	}, [setActiveTab, username, visitor]);
 
 	return isLoading ? (
 		<FullscreenLoader />
