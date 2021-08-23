@@ -15,21 +15,6 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 			accessToken: action.accessToken,
 		};
 	},
-	[actionTypes.UPDATE_USER_NOTIFICATION](state, action: actionTypes.TRequestFailed) {
-		return {
-			...state,
-			requestError: {
-				error: action.error,
-				message: action.message,
-			},
-		};
-	},
-	[actionTypes.CLEAR_USER_NOTIFICATION](state) {
-		return {
-			...state,
-			requestError: undefined,
-		};
-	},
 });
 
 export default routingReducer;

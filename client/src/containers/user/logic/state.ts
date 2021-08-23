@@ -5,15 +5,9 @@ export enum UserAccessToken {
 	LOADED = 'loaded',
 }
 
-export interface IRequestError {
-	error?: boolean;
-	message?: string | null;
-}
-
 export interface IUserDataState {
 	user: IUser | null;
 	accessToken: UserAccessToken;
-	requestError?: IRequestError;
 }
 
 export const initialState: IUserDataState = {

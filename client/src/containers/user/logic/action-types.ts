@@ -2,8 +2,6 @@ import { IUserDataState } from './state';
 
 export const SET_USER = 'USER:SET_USER';
 export const UPDATE_USER = 'USER:UPDATE_USER';
-export const UPDATE_USER_NOTIFICATION = 'UPDATE_USER_NOTIFICATION';
-export const CLEAR_USER_NOTIFICATION = 'CLEAR_USER_NOTIFICATION';
 
 export const DELETE_USER = 'USER:DELETE_USER';
 export const USER_CHECK_TOKEN = 'USER:CHECK_TOKEN';

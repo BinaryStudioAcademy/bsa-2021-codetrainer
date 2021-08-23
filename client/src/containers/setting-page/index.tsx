@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { GithubEndpoints } from 'services/github.service';
 import * as socialSettingsActions from './social/logic/actions';
 import { useSettingsSelector, useUserSelector } from 'hooks/useAppSelector';
 import { redirect } from '../../helpers/redirect-github.helper';
 import { SettingPage } from 'components/pages';
-import { useAppSelector } from 'hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
@@ -101,39 +100,6 @@ const SettingPageContainer: React.FC = () => {
 		},
 		[user],
 	);
-
-	const requestError = useAppSelector((state) => state.auth.userData.requestError);
-
-	useEffect(() => {
-		dispatch(actions.userClearNotification());
-	}, []);
-
-	useEffect(() => {
-		if (requestError?.message?.trim() !== '') {
-			if (!requestError?.error) {
-				dispatch(
-					setNotificationState({
-						state: {
-							notificationType: NotificationType.Success,
-							message: requestError?.message as string,
-							title: 'Update user',
-						},
-					}),
-				);
-				return;
-			} else {
-				dispatch(
-					setNotificationState({
-						state: {
-							notificationType: NotificationType.Error,
-							message: requestError?.message as string,
-							title: 'Update user',
-						},
-					}),
-				);
-			}
-		}
-	}, [requestError]);
 
 	const onDelete = () => {
 		const data: any = {
