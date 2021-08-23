@@ -1,0 +1,19 @@
+@import 'styles/variables';
+
+.navigation {
+	padding: 55px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	&Links {
+		font: $button-font;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	&Link {
+		color: #fff;
+	}
+}

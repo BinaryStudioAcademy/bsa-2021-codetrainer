@@ -1,0 +1,40 @@
+@import 'styles/variables';
+
+.header {
+	height: 860px;
+	display: flex;
+	flex-direction: column;
+	background: $cornflower-blue;
+
+	&Container {
+		height: 100%;
+		display: flex;
+	}
+
+	&Description {
+		text-align: center;
+		margin: auto;
+	}
+
+	&Title {
+		margin: 0;
+		color: #fff;
+		font: 700 48px $base-font-family;
+	}
+
+	&Button {
+		cursor: pointer;
+		background-color: #fff;
+		color: $french-rose;
+		font: $button-font;
+		border: none;
+		border-radius: 5px;
+		padding: 10px 20px;
+	}
+
+	&Text {
+		margin: 60px 0;
+		color: #fff;
+		font: 500 16px $base-font-family;
+	}
+}

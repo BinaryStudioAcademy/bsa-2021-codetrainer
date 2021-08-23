@@ -1,0 +1,31 @@
+.ranksSection {
+	&Text {
+		margin-top: 100px;
+	}
+
+	&Description {
+		margin: 0 auto;
+		text-align: center;
+		width: 700px;
+	}
+}
+
+.ranks {
+	width: 100%;
+	margin-top: 100px;
+	display: flex;
+	justify-content: space-between;
+
+	&Section {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+
+		& > div {
+			width: 94px;
+			height: 50px;
+			font-size: 22px;
+			line-height: 40px;
+		}
+	}
+}
