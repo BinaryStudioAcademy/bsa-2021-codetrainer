@@ -16,6 +16,7 @@ export interface IProfileState {
 				lastSeen?: string;
 				score?: number;
 				publishedTasks?: IChallenge[];
+				unpublishedTasks?: IChallenge[];
 		  })
 		| null;
 }

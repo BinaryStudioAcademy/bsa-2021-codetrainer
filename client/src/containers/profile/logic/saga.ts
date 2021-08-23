@@ -9,6 +9,42 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
 
+const getIChallenge = (
+	tasks: Array<{
+		id: string;
+		name: string;
+		rank?: number | null;
+		tags: Array<{
+			id: string;
+			name: string;
+		}>;
+	}>,
+	user: {
+		username: string;
+		name: string;
+		surname: string;
+	},
+) => {
+	return tasks.map((task) => {
+		return {
+			id: task.id,
+			linkToAuthor: '/users/' + user.username,
+			author: {
+				firstName: user.name,
+				lastName: user.surname,
+				link: '/',
+			},
+			stats: {
+				favoriteSaves: 12,
+				positiveFeedback: 12,
+			},
+			title: task.name,
+			rank: task.rank ? task.rank : 9,
+			tags: task.tags.map((tag) => tag.name),
+		};
+	});
+};
+
 export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>) {
 	try {
 		yield put(actions.clearData());
@@ -16,39 +52,23 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		const { followings } = yield call(getFollowingsByUserId, user.id);
 		const { followers } = yield call(getFollowersByUserId, user.id);
 		const community: string[] = yield call(getCommunityByUserId, user.id);
-		const tasks: any[] = yield user.tasks.map((taskObj: any) => {
-			const task = call(getTaskById, taskObj.id);
-			console.log(task);
-			return task;
-		});
-		console.log(tasks);
-
-		const publishedTasks = tasks.map((task) => {
-			return {
-				id: task.id,
-				linkToAuthor: '/users/' + user.username,
-				author: {
-					firstName: user.name,
-					lastName: user.surname,
-					link: '/',
-				},
-				stats: {
-					favoriteSaves: 12,
-					positiveFeedback: 12,
-				},
-				title: task.name,
-				rank: task.rank ? task.rank : 9,
-				tags: ['Tag 1', 'Tag 2'],
-			};
-		});
-		console.log(publishedTasks);
-
+		const tasks: any[] = yield all(
+			user.tasks.map((taskObj: any) => {
+				const task = call(getTaskById, taskObj.id);
+				return task;
+			}),
+		);
+		const publishedTasks = tasks.filter((task) => task.isPublished === true);
+		const unpublishedTasks = tasks.filter((task) => task.isPublished === false);
+		const publishedTasksProps = getIChallenge(publishedTasks, user);
+		const unpublishedTasksProps = getIChallenge(unpublishedTasks, user);
 		const userDataAllFields = {
 			...user,
 			followingQuantity: followings.length,
 			followersQuantity: followers.length,
 			communityQuantity: community.length,
-			publishedTasks,
+			publishedTasks: publishedTasksProps,
+			unpublishedTasks: unpublishedTasksProps,
 		};
 		yield put(actions.searchUserSuccess({ user: userDataAllFields }));
 	} catch (error) {

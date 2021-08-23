@@ -118,28 +118,7 @@ export const Profile = (props: RouteComponentProps) => {
 		community: mockCommunityProps,
 	};
 	const publishedTasks = userData?.publishedTasks;
-	// useEffect(() => {
-	// 	userData?.tasks?.forEach(async (taskObj) => {
-	// 		const task = await getTaskById(taskObj.id);
-	// 		const taskCorrect = {
-	// 			id: task.id,
-	// 			linkToAuthor: '/users/' + userData.username,
-	// 			author: {
-	// 				firstName: userData.name,
-	// 				lastName: userData.surname,
-	// 				link: '/',
-	// 			},
-	// 			stats: {
-	// 				favoriteSaves: 12,
-	// 				positiveFeedback: 12,
-	// 			},
-	// 			title: task.name,
-	// 			rank: task.rank ? task.rank : 9,
-	// 			tags: ['Tag 1', 'Tag 2'],
-	// 		};
-	// 		publishedTasks.push(taskCorrect);
-	// 	});
-	// }, [activeTabId]);
+	const unpublishedTasks = userData?.unpublishedTasks;
 
 	const profileTasks = [
 		{
@@ -150,40 +129,7 @@ export const Profile = (props: RouteComponentProps) => {
 		{
 			title: 'Not published',
 			id: 'notPublished',
-			tasks: [
-				{
-					id: '3',
-					linkToAuthor: '/',
-					author: {
-						firstName: 'A',
-						lastName: 'B',
-						link: '/',
-					},
-					stats: {
-						favoriteSaves: 12,
-						positiveFeedback: 12,
-					},
-					title: 'Auth',
-					rank: 2,
-					tags: ['Tag 1', 'Tag 2'],
-				},
-				{
-					id: '4',
-					linkToAuthor: '/',
-					author: {
-						firstName: 'A',
-						lastName: 'B',
-						link: '/',
-					},
-					stats: {
-						favoriteSaves: 12,
-						positiveFeedback: 12,
-					},
-					title: 'Auth',
-					rank: 2,
-					tags: ['Tag 1', 'Tag 2'],
-				},
-			],
+			tasks: unpublishedTasks,
 		},
 	];
 
