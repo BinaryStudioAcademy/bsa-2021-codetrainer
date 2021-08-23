@@ -1,0 +1,12 @@
+.imageBlock {
+	height: 600px;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.105);
+	overflow: hidden;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
