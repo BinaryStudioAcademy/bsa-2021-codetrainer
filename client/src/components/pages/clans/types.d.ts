@@ -2,15 +2,19 @@ import { SortOptions as ClansSortOptions } from 'containers/clans/clans/logic/st
 import { SortOptions as ClanSortOptions } from 'containers/clans/clan/logic/state';
 import { TClans, IClan, IUser } from 'containers/clans/types';
 import { IUser as IUserStore } from 'typings/common/IUser';
+import { ClansOrderByOptions } from 'containers/clans/clans/logic/state';
+import { Order } from 'helpers/table-helper';
 
 type TSortCallback = () => void;
 
 export interface IClansProps {
 	user: IUser;
 	clans: TClans;
-	sortByRank: TSortCallback;
-	sortByTime: TSortCallback;
-	sortBySize: TSortCallback;
+	// sortByRank: TSortCallback;
+	// sortByTime: TSortCallback;
+	// sortBySize: TSortCallback;
+	setOrder: (order: Order) => void;
+	setOrderBy: (orderBy: ClansOrderByOptions) => void;
 	joinClan: (id: string) => void;
 	leaveClan: (id: string) => void;
 	currentSort: ClansSortOptions;

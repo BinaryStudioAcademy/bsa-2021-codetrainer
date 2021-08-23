@@ -27,6 +27,25 @@ export class ClanRepository extends AbstractRepository<Clan> {
 			.getOne();
 	}
 
+	// findAll(query) {
+	// 	const take = query.take || 10
+	// 	const skip = query.skip || 0
+	// 	const keyword = query.keyword || ''
+
+	// 	const [result, total] = await this.userRepository.findAndCount(
+	// 		{
+	// 			where: { name: Like('%' + keyword + '%') }, order: { name: "DESC" },
+	// 			take: take,
+	// 			skip: skip
+	// 		}
+	// 	);
+
+	// 	return {
+	// 		data: result,
+	// 		count: total
+	// 	}
+	// }
+
 	getAll(skip: number, take: number) {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')

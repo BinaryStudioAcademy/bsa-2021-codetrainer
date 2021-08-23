@@ -7,12 +7,14 @@ import historyHelper from 'helpers/history.helper';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from '../../notification/logic/models';
 import { ROUTES } from 'constants/routes';
+import { ClansOrderByOptions } from './logic/state';
+import { Order } from 'helpers/table-helper';
 
 const Clans: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const clans = useSelector((state: IRootState) => state.clans.data);
-	const currentSort = useSelector((state: IRootState) => state.clans.options.sortBy);
+	const currentSort = useSelector((state: IRootState) => state.clans.options.orderBy);
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 
 	useEffect(() => {
@@ -20,16 +22,24 @@ const Clans: React.FC = () => {
 		dispatch(actions.fetchClans());
 	}, []);
 
-	const sortByRank = () => {
-		dispatch(actions.sortClansByRank());
+	// const sortByRank = () => {
+	// 	dispatch(actions.sortClansByRank());
+	// };
+
+	// const sortByTime = () => {
+	// 	dispatch(actions.sortClansByTime());
+	// };
+
+	// const sortBySize = () => {
+	// 	dispatch(actions.sortClansBySize());
+	// };
+
+	const setOrderBy = (orderBy: ClansOrderByOptions) => {
+		dispatch(actions.setOrderBy({ orderBy }));
 	};
 
-	const sortByTime = () => {
-		dispatch(actions.sortClansByTime());
-	};
-
-	const sortBySize = () => {
-		dispatch(actions.sortClansBySize());
+	const setOrder = (order: Order) => {
+		dispatch(actions.setOrder({ order }));
 	};
 
 	const joinClan = (id: string) => {
@@ -58,9 +68,11 @@ const Clans: React.FC = () => {
 			<ClansPage
 				clans={clans}
 				user={user}
-				sortByRank={sortByRank}
-				sortByTime={sortByTime}
-				sortBySize={sortBySize}
+				// sortByRank={sortByRank}
+				// sortByTime={sortByTime}
+				// sortBySize={sortBySize}
+				setOrderBy={setOrderBy}
+				setOrder={setOrder}
 				currentSort={currentSort}
 				joinClan={joinClan}
 				leaveClan={leaveClan}

@@ -48,7 +48,7 @@ const useStyles = makeStyles(() =>
 	}),
 );
 
-const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveClan }) => {
+const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveClan, setOrderBy: setClansOrderBy, setOrder: setClansOrder }) => {
 	const [order, setOrder] = useState<Order>(Order.ASC);
 	const [orderBy, setOrderBy] = useState<any>('name');
 	const [page, setPage] = React.useState(0);
@@ -70,7 +70,9 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 	const handleRequestSort = (property: any): void => {
 		const isAsc = orderBy === property && order === Order.ASC;
 		setOrder(isAsc ? Order.DESC : Order.ASC);
+		setClansOrder(isAsc ? Order.DESC : Order.ASC);
 		setOrderBy(property);
+		setClansOrderBy(property);
 	};
 
 	return (

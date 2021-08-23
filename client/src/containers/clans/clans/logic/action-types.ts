@@ -1,4 +1,6 @@
+import { Order } from 'helpers/table-helper';
 import { WebApi } from 'typings/webapi';
+import { ClansOrderByOptions } from './state';
 export const START_LOADING = 'CLANS:START_LOADING';
 export const FETCH_CLANS = 'CLANS:FETCH_CLANS';
 export const FETCH_CLAN = 'CLANS:FETCH_CLAN';
@@ -12,6 +14,10 @@ export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
 export const SORT_BY_TIME = 'CLANS:SORT_BY_TIME';
 export const SORT_BY_RANK = 'CLANS:SORT_BY_RANK';
 export const SORT_BY_SIZE = 'CLANS:SORT_BY_SIZE';
+
+export const SET_ORDER_BY = 'CLANS:SET_ORDER_BY';
+export const SET_ORDER = 'CLANS:SET_ORDER';
+
 
 export interface IAddClansArgs {
 	clans: WebApi.Entities.TClans;
@@ -36,4 +42,12 @@ export interface ILeaveClanArgs {
 
 export interface IAddErrorArgs {
 	error: string;
+}
+
+export interface ISetOrderByArgs {
+	orderBy: ClansOrderByOptions;
+}
+
+export interface ISetOrderArgs {
+	order: Order;
 }
