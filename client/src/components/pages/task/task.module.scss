@@ -3,5 +3,6 @@
 .container > div {
     background-color: $zircon;
     margin: 50px;
-    width: 800px;
+    width: 900px;
+    box-sizing: border-box;
 }
