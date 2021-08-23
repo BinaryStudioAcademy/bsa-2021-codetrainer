@@ -10,13 +10,17 @@ import styles from './setting-page.module.scss';
 const Setting: React.FC<ISettingProps> = (props) => {
 	return (
 		<div className={styles.container}>
-			<Information list={props.information.list} formItems={props.information.formItems} />
+			<Information
+				list={props.information.list}
+				formItems={props.information.formItems}
+				onSubmit={props.information.onSubmit}
+			/>
 			<div className={styles.gridContainer}>
 				<Social {...props.social} />
-				<ProfilePicture />
+				<ProfilePicture onSubmit={props.information.onSubmit} avatar={props.avatar} />
 			</div>
-			<ChangePassword />
-			<DeleteAccount />
+			<ChangePassword onSubmitPasswordChange={props.onSubmitPasswordChange} />
+			<DeleteAccount onDelete={props.onDelete} />
 		</div>
 	);
 };

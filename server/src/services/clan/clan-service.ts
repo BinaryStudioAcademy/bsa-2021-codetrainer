@@ -146,18 +146,18 @@ export class ClanService {
 		if (user.clan?.id !== id) {
 			throw new ValidationError(CODE_ERRORS.NOT_IN_CLAN);
 		}
-		if(user.profileClan?.role===CLAN_MEMBER_ROLE.ADMIN){
+		if (user.profileClan?.role === CLAN_MEMBER_ROLE.ADMIN) {
 			let numberOfAdmins = 0;
-			clan.members.forEach(member => {
-				if(member.profileClan?.role===CLAN_MEMBER_ROLE.ADMIN){
-					numberOfAdmins+=1;
+			clan.members.forEach((member) => {
+				if (member.profileClan?.role === CLAN_MEMBER_ROLE.ADMIN) {
+					numberOfAdmins += 1;
 				}
-			})
-			if (numberOfAdmins===1) {
+			});
+			if (numberOfAdmins === 1) {
 				throw new ValidationError(CODE_ERRORS.LAST_ADMIN_LEAVE);
 			}
 		}
-	
+
 		await userRepository.updateById(user.id, { profileClan: undefined });
 		await repository.deleteMember(id, user.id);
 	}

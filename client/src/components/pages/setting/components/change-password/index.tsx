@@ -6,6 +6,7 @@ import { FormInput, Button } from 'components';
 import { ButtonClasses } from 'components/basic/button';
 import clsx from 'clsx';
 import styles from './change-password.module.scss';
+import { IChangePasswordProps } from './interfaces';
 
 const ChangePasswordSchema = Yup.object().shape({
 	newPassword: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
@@ -19,7 +20,7 @@ const ChangePasswordSchema = Yup.object().shape({
 	currentPassword: Yup.string().min(8, 'Minimum length: 8').max(25, 'Maximum length: 25').required('Required'),
 });
 
-const ChangePassword: React.FC = () => {
+const ChangePassword: React.FC<IChangePasswordProps> = (props) => {
 	return (
 		<div>
 			<h4 className={styles.header}>Change Password</h4>
@@ -31,7 +32,10 @@ const ChangePassword: React.FC = () => {
 				}}
 				validationSchema={ChangePasswordSchema}
 				onSubmit={(values) => {
-					console.log(values);
+					props.onSubmitPasswordChange({
+						currentPassword: values.currentPassword,
+						newPassword: values.newPassword,
+					});
 				}}
 			>
 				<Form className={styles.form}>

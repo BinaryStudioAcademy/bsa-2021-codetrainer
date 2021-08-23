@@ -9,6 +9,14 @@ export interface IUser {
 	rank: number;
 	honor: number;
 	clan?: WebApi.Entities.IClan | null;
+	profileUrl?: string;
+	github?: IGithubProfile;
+	email?: string;
+	skills?: Array<string>;
+	devLevel?: string;
+	social?: Array<string>;
+	avatar?: string;
+	tasks?: WebApi.Entities.ITask[];
 	profileClan?: {
 		id: string;
 		role: string;

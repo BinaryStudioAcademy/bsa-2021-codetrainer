@@ -1,3 +1,3 @@
 export const MailerApiPath = {
-    INVITE_TO_CLAN: '/inviteToClan'
+	INVITE_TO_CLAN: '/inviteToClan',
 };
