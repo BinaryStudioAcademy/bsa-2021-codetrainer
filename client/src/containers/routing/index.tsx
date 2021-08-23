@@ -13,7 +13,7 @@ import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import TestPrivate from './test-private';
-import { LandingPageCointainer } from 'containers/landing-page';
+import LandingPageCointainer from 'containers/landing-page';
 import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
@@ -44,7 +44,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPageCointainer} />
+			<PublicRoute exact restricted={false} path={ROUTES.Landing} component={LandingPageCointainer} />
 			<PrivateRoute path="/private" component={TestPrivate} needHeader={false} needSideBar={false} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute
