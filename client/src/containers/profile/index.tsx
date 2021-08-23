@@ -7,7 +7,6 @@ import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
 import { RouteComponentProps, useParams } from 'react-router-dom';
-import { social } from './tabs/social/mocks';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { getNextRank, NextRankHonor } from 'enum/ranks';
 
@@ -130,6 +129,31 @@ export const Profile = (props: RouteComponentProps) => {
 			title: 'Not published',
 			id: 'notPublished',
 			tasks: unpublishedTasks,
+		},
+	];
+
+	const followersSocial = userData?.followersSocial;
+	const followingsSocial = userData?.followingsSocial;
+	const comminitySocial = userData?.comminitySocial;
+
+	const social = [
+		{
+			title: 'Followers',
+			id: 'followers',
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			users: followersSocial!,
+		},
+		{
+			title: 'Following',
+			id: 'following',
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			users: followingsSocial!,
+		},
+		{
+			title: 'Community',
+			id: 'community',
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			users: comminitySocial!,
 		},
 	];
 

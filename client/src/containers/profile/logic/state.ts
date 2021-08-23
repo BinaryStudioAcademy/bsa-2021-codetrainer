@@ -17,6 +17,9 @@ export interface IProfileState {
 				score?: number;
 				publishedTasks?: IChallenge[];
 				unpublishedTasks?: IChallenge[];
+				followersSocial?: IUser[];
+				followingsSocial?: IUser[];
+				comminitySocial?: IUser[];
 		  })
 		| null;
 }

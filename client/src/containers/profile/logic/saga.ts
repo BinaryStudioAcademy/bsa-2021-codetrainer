@@ -1,13 +1,15 @@
+import { WebApi } from 'typings/webapi';
 import {
 	getCommunityByUserId,
 	getFollowersByUserId,
 	getFollowingsByUserId,
 } from './../../../services/follower/followers.service';
-import { fetchUsersSearch } from 'services';
+import { fetchUsersSearch, getUserById } from 'services';
 import { all, put, call, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
+import { IUser } from 'typings/common/IUser';
 
 const getIChallenge = (
 	tasks: Array<{
@@ -45,6 +47,22 @@ const getIChallenge = (
 	});
 };
 
+const getISocialUsers = (users: IUser[]) => {
+	return users.map((user: IUser) => {
+		return {
+			id: user.id,
+			rank: user.rank ? user.rank : 9,
+			profileUrl: '',
+			username: user.username,
+			name: user.name,
+			clan: {
+				name: user.clan?.name ? user.clan?.name : 'No clan',
+			} as WebApi.Entities.IClan,
+			honor: user.honor,
+		};
+	});
+};
+
 export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>) {
 	try {
 		yield put(actions.clearData());
@@ -58,10 +76,39 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 				return task;
 			}),
 		);
+
 		const publishedTasks = tasks.filter((task) => task.isPublished === true);
 		const unpublishedTasks = tasks.filter((task) => task.isPublished === false);
 		const publishedTasksProps = getIChallenge(publishedTasks, user);
 		const unpublishedTasksProps = getIChallenge(unpublishedTasks, user);
+
+		let followersSocial: any[] = yield all(
+			followers.map((follower: any) => {
+				const user = call(getUserById, follower.user);
+				return user;
+			}),
+		);
+		let followingsSocial: any[] = yield all(
+			followings.map((following: any) => {
+				const user = call(getUserById, following.user);
+				return user;
+			}),
+		);
+		let comminitySocial: any[] = yield all(
+			community.map((community: any) => {
+				const user = call(getUserById, community);
+				return user;
+			}),
+		);
+
+		followersSocial = followersSocial.map((followerUser) => followerUser.user);
+		followingsSocial = followingsSocial.map((followingUser) => followingUser.user);
+		comminitySocial = comminitySocial.map((communityUser) => communityUser.user);
+
+		const followersSocialProps = getISocialUsers(followersSocial);
+		const followingsSocialProps = getISocialUsers(followingsSocial);
+		const comminitySocialProps = getISocialUsers(comminitySocial);
+
 		const userDataAllFields = {
 			...user,
 			followingQuantity: followings.length,
@@ -69,6 +116,9 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 			communityQuantity: community.length,
 			publishedTasks: publishedTasksProps,
 			unpublishedTasks: unpublishedTasksProps,
+			followersSocial: followersSocialProps,
+			followingsSocial: followingsSocialProps,
+			comminitySocial: comminitySocialProps,
 		};
 		yield put(actions.searchUserSuccess({ user: userDataAllFields }));
 	} catch (error) {
