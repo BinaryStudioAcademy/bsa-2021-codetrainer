@@ -36,10 +36,8 @@ function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
 function* fetchUserDelete(action: ReturnType<typeof actions.deleteUser>): any {
 	try {
 		const { id } = action;
-		yield all([authServices, authServices.logout, deleteUser(id)]);
-		yield put(actions.setUser({ user: null }));
-		yield put(signInActions.signInDataClear());
-		yield put(signUpActions.signUpDataClear());
+		yield put(actions.logoutUser());
+		yield call(deleteUser, id);
 	} catch (error) {
 		console.log(error);
 	}
