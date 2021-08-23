@@ -3,6 +3,7 @@ import { ISearchState } from './logic/state';
 
 export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['data'] => {
 	return {
+		count: Number(data?.count || '0'),
 		tags: data?.tags || [],
 		ranks: (data?.ranks || []).map(({ rank }) => rank).sort((a, b) => a - b),
 		challenges: (data?.tasks || []).map((task) => ({
@@ -27,10 +28,7 @@ export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['d
 export const mapFilterToSearch = (filter: ISearchState['filter']): Record<string, any> => {
 	const filterMod = Object.fromEntries(
 		Object.entries(filter).filter(([_key, value]) => {
-			if (typeof value !== 'string') {
-				return Boolean(value);
-			}
-			return Boolean(value.length);
+			return typeof value === 'string' ? Boolean(value.length) : value !== null;
 		}),
 	);
 	return {

@@ -9,7 +9,7 @@ export interface IUser {
 	name: string;
 	img?: string;
 	surname?: string;
-	clan?: WebApi.Entities.IClan;
+	clan?: WebApi.Entities.IClan | null;
 	profileUrl?: string;
 	github?: IGithubProfile;
 	email?: string;
@@ -17,4 +17,10 @@ export interface IUser {
 	devLevel?: string;
 	social?: Array<string>;
 	avatar?: string;
+	tasks?: WebApi.Entities.ITask[];
+	profileClan?: {
+		id: string;
+		role: string;
+		status: string;
+	};
 }

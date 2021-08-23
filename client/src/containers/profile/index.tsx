@@ -1,6 +1,6 @@
-import { FullscreenLoader, ProfilePage } from '../../components';
 import React, { useMemo, useCallback, useEffect } from 'react';
-import { Stats, ProfileTasks, ProfileSocial } from './tabs';
+import { FullscreenLoader, ProfilePage } from 'components';
+import { Stats, ProfileTasks, ProfileSocial, ProfileCollections } from './tabs';
 import { statsProps } from './mocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
@@ -10,7 +10,8 @@ import { profilePageTabs } from './config';
 import { RouteComponentProps, useParams } from 'react-router-dom';
 import { profileTasks } from './tabs/tasks/mocks';
 import { social } from './tabs/social/mocks';
-import { useAppSelector } from 'hooks/useAppSelector';
+import { useAppSelector, useUserSelector } from 'hooks/useAppSelector';
+import { ProfileSolutions } from './tabs/solutions';
 
 export const Profile = (props: RouteComponentProps) => {
 	const { activeTab: activeTabId } = useSelector((state: IRootState) => state.profile);
@@ -23,6 +24,7 @@ export const Profile = (props: RouteComponentProps) => {
 	);
 
 	const { isLoading, error, userData } = useAppSelector((state) => state.profile);
+	const visitor = useUserSelector();
 
 	const { username } = useParams<{ username: string }>();
 
@@ -36,28 +38,40 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
-			case ActiveTabId.Stats:
+			case ActiveTabId.Stats: {
 				return <Stats statsInfo={statsProps} />;
-			case ActiveTabId.Challenge:
+			}
+			case ActiveTabId.Challenge: {
 				return <ProfileTasks profileTasks={profileTasks} />;
-			case ActiveTabId.Social:
+			}
+			case ActiveTabId.Solution: {
+				return <ProfileSolutions />;
+			}
+			case ActiveTabId.Social: {
 				return <ProfileSocial social={social} />;
-			default:
+			}
+			case ActiveTabId.Collections: {
+				return <ProfileCollections userId={userData?.id as string} />;
+			}
+			default: {
 				return <div />;
+			}
 		}
 	}, [activeTabId]);
 
 	const tabItems = useMemo(() => {
-		return profilePageTabs.map((item) => {
-			return {
-				tabId: item.id,
-				tabNameText: item.name,
-				onClick: () => {
-					setActiveTab(item.id as ActiveTabId);
-				},
-			};
-		});
-	}, [setActiveTab]);
+		return profilePageTabs
+			.filter(({ tab }) => !tab.private || username === visitor?.username)
+			.map((item) => {
+				return {
+					tabId: item.id,
+					tabNameText: item.tab.name,
+					onClick: () => {
+						setActiveTab(item.id as ActiveTabId);
+					},
+				};
+			});
+	}, [setActiveTab, username, visitor]);
 
 	return isLoading ? (
 		<FullscreenLoader />

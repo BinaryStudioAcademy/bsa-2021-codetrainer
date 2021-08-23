@@ -13,3 +13,5 @@ export { default as Social } from './social';
 export { default as TaskInstructions } from './task-instructions';
 export { default as Separator } from './separator';
 export { default as Notification } from './notification';
+export * from './collection';
+export * from './task-solutions';

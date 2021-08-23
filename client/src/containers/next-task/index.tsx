@@ -20,7 +20,11 @@ const icons = {
 };
 
 const NextTaskContainer = () => {
-	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({ id: 0, title: 'Fundamentals', icon: '' });
+	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({
+		id: '0',
+		title: 'Fundamentals',
+		icon: '',
+	});
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
 	const task = useAppSelector((rootState) => rootState.home.state?.nextTask);
 
@@ -28,7 +32,11 @@ const NextTaskContainer = () => {
 
 	useEffect(() => {
 		const focusValues = Object.values(FocusKeys);
-		const selectFocusValues = focusValues.map((value, index) => ({ id: index, title: value, icon: icons[value] }));
+		const selectFocusValues = focusValues.map((value, index) => ({
+			id: index.toString(),
+			title: value,
+			icon: icons[value],
+		}));
 
 		setActiveFocusValue(selectFocusValues[0]);
 		setFocusValues(selectFocusValues);

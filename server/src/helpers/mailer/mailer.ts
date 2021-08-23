@@ -38,6 +38,15 @@ class Mailer {
 		});
 	}
 
+	async inviteToClan(fromUser: User, toUser: User) {
+		return this.sendMail({
+			from: this.from,
+			to: toUser.email,
+			subject: `Invitation to join ${fromUser.clan?.name} from your friend`,
+			html: this.getMailerTexts.inviteToClan({ toUser, fromUser }),
+		});
+	}
+
 	private async sendMail(options: Mail.Options) {
 		try {
 			const transport = this.getTransporter();

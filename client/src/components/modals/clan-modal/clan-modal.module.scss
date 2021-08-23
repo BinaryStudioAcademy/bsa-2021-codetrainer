@@ -37,6 +37,10 @@
 	color: #ec4179;
 }
 
+:local(.formInput) {
+	height: 60px;
+}
+
 :local(.form) {
 	margin-top: 20px;
 }

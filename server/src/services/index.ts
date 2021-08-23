@@ -9,6 +9,7 @@ import {
 	TagRepository,
 	SolutionRepository,
 	FollowerRepository,
+	CollectionRepository,
 	CommentTaskRepository,
 } from '../data';
 import { AuthService } from './auth';
@@ -19,6 +20,7 @@ import { GithubService } from './github.service';
 import { CommentTaskService } from './comment-task';
 import { TagService } from './tag/tag-service';
 import { SolutionService } from './solution/solution-service';
+import { CollectionService } from './collection/collection-service';
 
 const authService = new AuthService({ user: UserRepository });
 
@@ -40,6 +42,7 @@ const solutionService = new SolutionService({
 	task: TaskRepository,
 	solution: SolutionRepository,
 });
+const collectionService = new CollectionService({ collection: CollectionRepository, user: UserRepository });
 
 export { authService, AuthService };
 export { clanService, ClanService };
@@ -50,3 +53,4 @@ export { follower, FollowersService };
 export { commentTaskService, CommentTaskService };
 export { tagService, TagService };
 export { solutionService, SolutionService };
+export { collectionService, CollectionService };
