@@ -16,8 +16,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 
 	const goToClanHandler = (event: MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
-		historyHelper.push(`${ROUTES.Clan}/${clan?.id}`)
-
+		historyHelper.push(`${ROUTES.Clan}/${clan?.id}`);
 	};
 
 	const leaveClanHandler = (event: MouseEvent<HTMLElement>) => {
@@ -58,7 +57,9 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 						</Button>
 					) : null
 				) : (
-					<Button className={ButtonClasses.blue} onClick={joinClanHandler}>Join</Button>
+					<Button className={ButtonClasses.blue} onClick={joinClanHandler}>
+						Join
+					</Button>
 				)}
 			</TableCell>
 		</TableRow>

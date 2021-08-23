@@ -22,7 +22,7 @@ import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
 import { Redirect, Route } from 'react-router-dom';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
