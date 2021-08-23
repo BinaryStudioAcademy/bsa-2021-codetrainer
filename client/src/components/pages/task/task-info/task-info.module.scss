@@ -1,0 +1,19 @@
+@import "styles/variables";
+
+.taskInfo {
+    padding: 40px 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    .buttonsBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        > * {
+            margin: 10px 30px;
+        }
+        :first-child {
+            margin-top: 20px;
+        }
+    }
+}
