@@ -56,6 +56,7 @@ const SettingPageContainer: React.FC = () => {
 					id: user?.id,
 					name: user?.name,
 					surname: user?.surname,
+					avatar: user?.avatar,
 					...values,
 				},
 			};
