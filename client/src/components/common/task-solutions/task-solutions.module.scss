@@ -1,0 +1,97 @@
+@import 'styles/variables.scss';
+
+@mixin text($font, $color) {
+	font: $font;
+	color: $color;
+
+	a {
+		font: $font;
+		color: $color;
+	}
+}
+
+.taskSolutions {
+	padding: 20px;
+	border-radius: 5px;
+	background-color: var(--secondary-container-color);
+
+	.task {
+		@include text($name-font, var(--text-color));
+	}
+
+	.task,
+	.actions {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
+
+	.language,
+	.actions {
+		padding-left: 0.5em;
+	}
+
+	.solution {
+		display: grid;
+		margin: 20px 0;
+
+		.language {
+			@include text($tub-font, var(--text-color));
+		}
+
+		pre {
+			border-radius: 5px;
+			margin: 7px 0;
+		}
+
+		.actions {
+			.time {
+				@include text($minor-font, var(--minor-text-color));
+			}
+			@include text($minor-font, var(--text-color));
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	a:hover {
+		color: var(--purple) !important;
+	}
+
+	&.skeleton {
+		.task,
+		.actions {
+			span {
+				opacity: 0.5;
+				display: inline-block;
+				width: 50px;
+				height: 18px;
+				border-radius: 5px;
+				background-color: var(--minor-text-color);
+			}
+		}
+
+		.solution {
+			margin: 0;
+		}
+
+		.actions {
+			padding-left: 0;
+
+			span {
+				width: 45px;
+				height: 15px;
+			}
+
+			span:first-of-type {
+				width: 30px;
+			}
+		}
+
+		.task span:last-of-type {
+			width: 150px;
+		}
+	}
+}

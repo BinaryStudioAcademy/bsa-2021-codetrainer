@@ -23,6 +23,7 @@
 	--rank-easy: #{$picton-blue};
 	--rank-medium: #{$fire-bush};
 	--rank-hard: #{$french-rose};
+	--rank-beta: #{$dusty-gray};
 }
 
 [data-theme^='dark'],
@@ -46,6 +47,7 @@
 	--rank-easy: #{$picton-blue};
 	--rank-medium: #{$fire-bush};
 	--rank-hard: #{$french-rose};
+	--rank-beta: #{$eerie-black};
 }
 
 body {
@@ -67,6 +69,7 @@ code {
 
 ::-webkit-scrollbar {
 	width: 6px;
+	height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {

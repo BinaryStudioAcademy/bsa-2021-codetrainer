@@ -23,7 +23,7 @@ const avatarProps = {
 };
 
 const Collection: FC<ICollectionProps> = ({ collection }) => {
-	const averageRank = Math.round(mean(collection.challenges.map((challenge) => challenge.rank)));
+	const averageRank = Math.round(mean(collection.tasks.map((task) => task.rank)));
 
 	return (
 		<div className={styles.collection}>
@@ -44,8 +44,8 @@ const Collection: FC<ICollectionProps> = ({ collection }) => {
 						<div className={styles.popover}>
 							Collection includes:
 							<ul>
-								{collection.challenges.map((challenge) => (
-									<li key={challenge.id}>{challenge.name}</li>
+								{collection.tasks.map((task) => (
+									<li key={task.id}>{task.name}</li>
 								))}
 							</ul>
 						</div>
@@ -53,7 +53,7 @@ const Collection: FC<ICollectionProps> = ({ collection }) => {
 				>
 					<span>
 						<FontAwesomeIcon icon={faExchangeAlt} size="lg" />
-						{collection.challenges.length}
+						{collection.tasks.length}
 					</span>
 				</Tooltip>
 				<Link to={`${ROUTES.Users}/${collection.author.username}`}>

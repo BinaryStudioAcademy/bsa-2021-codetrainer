@@ -1,12 +1,11 @@
 @import 'styles/variables';
 
-.profileCollectionsList {
-	display: flex;
-	flex-direction: column;
-	flex-flow: column nowrap;
-	flex-grow: 1;
-	gap: 15px;
-	padding: 0 10px;
+.profileSkeletonList {
+	flex-basis: 100%;
+	flex-grow: 0;
+	display: grid;
+	grid-gap: 15px;
+	padding: 0 20px;
 	padding-bottom: 15px;
 	border-left: 1.5px solid var(--minor-text-color);
 
