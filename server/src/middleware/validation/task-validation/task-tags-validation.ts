@@ -19,7 +19,7 @@ export const tagsValidation: Schema[''] = {
 	},
 	customSanitizer: {
 		options: (value: string) => {
-			if (!Boolean(value.length)) {
+			if (!value.length) {
 				return [];
 			}
 			return value.split(TASK_QUERY_SEPARATOR);
