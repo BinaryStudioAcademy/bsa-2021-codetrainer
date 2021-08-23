@@ -26,10 +26,6 @@ declare namespace WebApi.Entities {
 	}
 	interface ITask {
 		id: string | null;
-		name?: string;
-		description?: string;
-		// tags?: string[],
-		rank?: number;
 	}
 
 	interface ITasks {

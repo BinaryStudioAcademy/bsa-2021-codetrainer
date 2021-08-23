@@ -131,7 +131,7 @@ export const deleteTask = async (taskId: string) => {
 	}
 };
 
-export const getById = async (id: string | null) => {
+export const getTaskById = async (id: string | null) => {
 	if (id === null) {
 		return {
 			error: true,

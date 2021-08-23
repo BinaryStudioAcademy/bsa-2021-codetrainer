@@ -7,7 +7,6 @@ import * as actions from './logic/actions';
 import { ActiveTabId } from './logic/models';
 import { profilePageTabs } from './config';
 import { RouteComponentProps, useParams } from 'react-router-dom';
-import { profileTasks } from './tabs/tasks/mocks';
 import { social } from './tabs/social/mocks';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { getNextRank, NextRankHonor } from 'enum/ranks';
@@ -118,6 +117,75 @@ export const Profile = (props: RouteComponentProps) => {
 		rankBreakdown: mockRankBreakDownProps,
 		community: mockCommunityProps,
 	};
+	const publishedTasks = userData?.publishedTasks;
+	// useEffect(() => {
+	// 	userData?.tasks?.forEach(async (taskObj) => {
+	// 		const task = await getTaskById(taskObj.id);
+	// 		const taskCorrect = {
+	// 			id: task.id,
+	// 			linkToAuthor: '/users/' + userData.username,
+	// 			author: {
+	// 				firstName: userData.name,
+	// 				lastName: userData.surname,
+	// 				link: '/',
+	// 			},
+	// 			stats: {
+	// 				favoriteSaves: 12,
+	// 				positiveFeedback: 12,
+	// 			},
+	// 			title: task.name,
+	// 			rank: task.rank ? task.rank : 9,
+	// 			tags: ['Tag 1', 'Tag 2'],
+	// 		};
+	// 		publishedTasks.push(taskCorrect);
+	// 	});
+	// }, [activeTabId]);
+
+	const profileTasks = [
+		{
+			title: 'Published',
+			id: 'published',
+			tasks: publishedTasks,
+		},
+		{
+			title: 'Not published',
+			id: 'notPublished',
+			tasks: [
+				{
+					id: '3',
+					linkToAuthor: '/',
+					author: {
+						firstName: 'A',
+						lastName: 'B',
+						link: '/',
+					},
+					stats: {
+						favoriteSaves: 12,
+						positiveFeedback: 12,
+					},
+					title: 'Auth',
+					rank: 2,
+					tags: ['Tag 1', 'Tag 2'],
+				},
+				{
+					id: '4',
+					linkToAuthor: '/',
+					author: {
+						firstName: 'A',
+						lastName: 'B',
+						link: '/',
+					},
+					stats: {
+						favoriteSaves: 12,
+						positiveFeedback: 12,
+					},
+					title: 'Auth',
+					rank: 2,
+					tags: ['Tag 1', 'Tag 2'],
+				},
+			],
+		},
+	];
 
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {

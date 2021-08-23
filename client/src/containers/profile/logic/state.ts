@@ -1,3 +1,4 @@
+import { IChallenge } from 'components/common/challenge/types';
 import { IUser } from 'typings/common/IUser';
 import { ActiveTabId } from './models';
 
@@ -14,6 +15,7 @@ export interface IProfileState {
 				memberSince?: string;
 				lastSeen?: string;
 				score?: number;
+				publishedTasks?: IChallenge[];
 		  })
 		| null;
 }
