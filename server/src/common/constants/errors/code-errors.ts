@@ -7,8 +7,8 @@ export const CODE_ERRORS = {
 	CLAN_NOT_PERMISSION: { message: 'no permission', status: HttpCodes.FORBIDDEN },
 	IN_CLAN: { message: 'You are already in clan.', status: 401 },
 	NOT_IN_CLAN: { message: 'You are not in clan.', status: 401 },
-	ADMIN_LEAVE: { message: 'Admin can not leave his clan.', status: 401 },
-	TOKEN_VERIFY: { message: 'Token verify error', status: HttpCodes.UNAUTHORIZED },
+	LAST_ADMIN_LEAVE: { message: 'There should be at least 1 admin after leaving the clan.', status: 401 },
+	TOKEN_VERIFY: { message: 'Token verify error', status: 401 },
 	TOKEN_EXPIRED: { message: 'Token expired', status: 401 },
 	TOKEN_INVALID: { message: 'Invalid token', status: 401 },
 	TASK_QUERY: (value: string) => ({ message: `Invalid ${value} format`, status: HttpCodes.BAD_REQUEST }),
@@ -28,4 +28,6 @@ export const CODE_ERRORS = {
 		message: `User ${username} does not exist.`,
 		status: HttpCodes.NOT_FOUND,
 	}),
+	USER_NO_CLAN: { message: 'User doesn`t have a clan', status: HttpCodes.NOT_FOUND },
+	SOCKET_AUTHORIZATION_ERROR: { message: 'Token Error', status: HttpCodes.BAD_REQUEST },
 };

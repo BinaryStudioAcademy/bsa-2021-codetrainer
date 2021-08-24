@@ -8,7 +8,6 @@ export * from './users';
 export * from './check/clan/clan-permission';
 export * from './check';
 export * from './authorization';
-export * from './data-validation/data-validation';
 export * from './jwt';
 export { imageMiddleware } from './image.middleware';
 export * from './validation';

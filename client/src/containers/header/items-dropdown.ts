@@ -1,3 +1,4 @@
+import { useUserSelector } from 'hooks/useAppSelector';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -10,6 +11,8 @@ import * as actions from '../user/logic/actions';
 export const getListItems = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const user = useUserSelector();
+
 	const handleClick = (route: string) => history.push(route);
 	const handleLogout = () => dispatch(actions.logoutUser());
 	return [
@@ -17,7 +20,7 @@ export const getListItems = () => {
 			id: '1',
 			icon: PersonOutlineIcon,
 			text: 'View Profile',
-			onClick: () => handleClick(ROUTES.UserProfile),
+			onClick: () => handleClick(ROUTES.Users + `/${user?.username}`),
 		},
 		{
 			id: '2',

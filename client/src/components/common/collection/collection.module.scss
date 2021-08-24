@@ -1,0 +1,105 @@
+@import 'styles/variables.scss';
+
+@mixin text($font, $color) {
+	font: $font;
+	color: $color;
+
+	a {
+		font: $font;
+		color: $color;
+	}
+}
+
+.popover {
+	padding: 5px 2px;
+	font: $minor-font;
+	color: var(--text-color);
+
+	ul {
+		margin: 5px 0;
+		padding-inline-start: 20px;
+	}
+}
+
+.collection {
+	display: grid;
+	grid-template-rows: repeat(2, auto);
+	grid-template-columns: auto 1fr;
+	padding: 20px;
+	grid-gap: 10px 15px;
+	border-radius: 5px;
+	background-color: var(--secondary-container-color);
+
+	svg {
+		fill: var(--text-color);
+	}
+
+	.avatar {
+		grid-row: 1 / span 2;
+		grid-column: 1;
+		align-self: center;
+	}
+
+	.name,
+	.minor {
+		display: flex;
+		align-items: center;
+
+		& > * {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	.name {
+		grid-row: 1;
+		grid-column: 2 / span 4;
+		gap: 10px;
+		@include text($name-font, var(--text-color));
+	}
+
+	.minor {
+		grid-row: 2;
+		grid-column: 2 / span 4;
+		gap: 15px;
+		@include text($minor-font, var(--minor-text-color));
+
+		svg {
+			margin-right: 5px;
+		}
+	}
+
+	a:hover {
+		color: var(--purple);
+	}
+
+	&.skeleton {
+		* {
+			opacity: 0.5;
+		}
+
+		span {
+			display: inline-block;
+			width: 50px;
+			height: 18px;
+			border-radius: 5px;
+			background-color: var(--minor-text-color);
+		}
+
+		.name span:last-of-type {
+			width: 150px;
+		}
+
+		.minor {
+			gap: 10px;
+
+			span:first-of-type {
+				width: 30px;
+			}
+			span:nth-of-type(2) {
+				width: 75px;
+			}
+		}
+	}
+}

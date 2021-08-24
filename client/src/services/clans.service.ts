@@ -77,3 +77,12 @@ export const toggleClanMember = async (
 		return error;
 	}
 };
+
+export const deleteClan = async () => {
+	const result = await http.callWebApi({
+		method: HttpMethods.DELETE,
+		endpoint: ApiRoutes.CLANS,
+		skipAuthorization: false,
+	});
+	console.log(result);
+};

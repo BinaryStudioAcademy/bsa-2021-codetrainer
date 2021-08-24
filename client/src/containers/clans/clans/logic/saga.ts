@@ -4,6 +4,8 @@ import * as actionTypes from './action-types';
 import * as userActions from '../../../user/logic/actions';
 import * as actions from './actions';
 import { IRootState } from 'typings/root-state';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
 
 export function* fetchClansWorker(action: ReturnType<typeof actions.fetchClans>): any {
 	yield put(actions.startLoading());
@@ -31,6 +33,14 @@ export function* toggleMemberWorker({ id }: ReturnType<typeof actions.joinClan>)
 
 	if (response instanceof Error) {
 		yield put(actions.addError({ error: response.message }));
+		yield put(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Error,
+					message: response.message,
+				},
+			}),
+		);
 	} else {
 		yield put(userActions.setUser({ user: response.user }));
 		yield put(
