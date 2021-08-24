@@ -10,5 +10,12 @@
     padding: 40px;
     .code {
         background-color: $white;
+        padding: 10px;
+    }
+}
+.contributors {
+    padding: 20px 40px;
+    .users > * {
+        margin: 5px;
     }
 }
