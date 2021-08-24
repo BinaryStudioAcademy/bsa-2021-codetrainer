@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@use 'styles/variables.scss' as var;
 
 .container {
 	width: 916px;
-
-	font-family: 'Montserrat', Arial, sans-serif;
+	margin-top: 42px;
+	font-family: var.$base-font-family;
 	color: var(--text-color);
 	display: grid;
 	grid-auto-flow: row;
@@ -21,10 +21,7 @@
 	background: var(--pink);
 	border-radius: 7px;
 	border: 0;
-	font-family: 'Montserrat', sans-serif;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 16px;
+	font: var.$button-font;
 	line-height: 20px;
 	text-align: center;
 	color: #ffffff;
