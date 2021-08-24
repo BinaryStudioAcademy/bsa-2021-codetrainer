@@ -10,19 +10,20 @@ const Challenge: React.FC<
 	IChallenge & {
 		showAddToCollection?: boolean;
 	}
-> = ({ linkToAuthor, author, stats, title, rank, tags, showAddToCollection }) => {
+> = ({ linkToAuthor, author, stats, title, rank, tags, showAddToCollection = true }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
+
 	return (
 		<div className={styles.challenge}>
 			<ChallengeHeader title={title} rank={rank} linkToAuthor={linkToAuthor} />
 			<ChallengeStats stats={{ ...stats, author }} />
 			{tags && Boolean(tags.length) ? <ChallengeTagsList tags={tags} /> : null}
 			{isOpen ? <CollectionModal isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
-			{showAddToCollection === undefined || showAddToCollection === true ? (
+			{showAddToCollection && (
 				<a className={styles.modal} onClick={() => setIsOpen(true)}>
 					Add to collection
 				</a>
-			) : null}
+			)}
 		</div>
 	);
 };
