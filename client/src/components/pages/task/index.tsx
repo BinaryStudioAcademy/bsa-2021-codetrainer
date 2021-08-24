@@ -8,8 +8,6 @@ export const Task = () => {
 		<div className={styles.container}>
 			<TaskInfo />
 			<DetailsTab />
-			<div>task details</div>
-			<div>contributors</div>
 		</div>
 	);
 };

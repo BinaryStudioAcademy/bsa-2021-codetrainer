@@ -3,12 +3,14 @@ import React from 'react';
 // import styles from './details-tab.module.scss';
 import { Description } from './description';
 import { Contributors } from './contributors';
+import { Stats } from './stats';
 
 export const DetailsTab = () => {
 	return (
 		<>
 			<Description />
 			<Contributors />
+			<Stats />
 			{/* <div>
 				{/* <div className={styles.description}>
 					<p>

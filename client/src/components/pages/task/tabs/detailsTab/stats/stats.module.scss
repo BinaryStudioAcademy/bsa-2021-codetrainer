@@ -1,0 +1,16 @@
+@import 'styles/variables';
+
+.stats {
+    padding: 20px 40px;
+    .data {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    .listItem {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $mine-shaft;
+        margin: 10px 0;
+    }
+}
