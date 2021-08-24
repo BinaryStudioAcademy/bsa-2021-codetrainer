@@ -4,7 +4,6 @@ import { getAuthoredCollections, getFollowedCollections, TUserCollectionsLoader 
 import { WebApi } from 'typings/webapi';
 import ProfileSkeletonList from 'components/pages/profile/profile-skeleton-list';
 import { Collection, CollectionSkeleton } from 'components/common';
-import { ReactComponent as CollectionIcon } from 'assets/icons/collection.svg';
 
 enum CollectionsTabValues {
 	Authored = 'AUTHORED_COLLECTIONS',
@@ -27,30 +26,20 @@ const collectionsTabs: TCollectionsTab[] = [
 		title: 'Authored',
 		value: CollectionsTabValues.Authored,
 		loader: getAuthoredCollections,
-		empty: (
-			<div>
-				<CollectionIcon width={75} height={75} />
-				There are no items to show
-			</div>
-		),
+		empty: 'There are no items to show',
 	},
 	{
 		title: 'Followed',
 		value: CollectionsTabValues.Followed,
 		loader: getFollowedCollections,
-		empty: (
-			<div>
-				<CollectionIcon width={75} height={75} />
-				You have not started to follow any solutions yet
-			</div>
-		),
+		empty: 'You have not started to follow any solutions yet',
 	},
 ];
 
 export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => {
 	const [selectedValue, setSelectedValue] = useState<CollectionsTabValues>(collectionsTabs[0].value);
 	const [collections, setCollections] = useState<WebApi.Entities.ICollection[] | undefined>(undefined);
-	const [full, setFull] = useState<number | undefined>(undefined);
+	const [total, setTotal] = useState<number | undefined>(undefined);
 	const [isLoaded, setLoaded] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
@@ -64,24 +53,26 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 			collectionsTabs.map((tab) => ({
 				...tab,
 				id: tab.value,
-				count: tab.value === selectedValue ? full : undefined,
+				count: tab.value === selectedValue ? total : undefined,
 			})),
-		[selectedValue, full],
+		[selectedValue, total],
 	);
 
 	const loadMore = useCallback(async () => {
 		if (hasMore && !isLoaded) {
 			setLoaded(true);
 			try {
-				const { items, hasMore, full } = await loader({
+				const skip = (collections || []).length;
+				const { collections: items, total } = await loader({
 					userId,
-					skip: collections?.length !== undefined ? collections.length : 0,
-					limit: 10,
+					skip,
+					take: 10,
 				});
-				setHasMore(hasMore);
-				setFull(full);
+				setHasMore(skip + 10 < total);
+				setTotal(total);
 				setCollections([...(collections || []), ...items]);
-			} catch {
+			} catch (e) {
+				console.error(e);
 				setHasMore(true);
 			}
 			setLoaded(false);
@@ -93,7 +84,7 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 			const tab = value as CollectionsTabValues;
 			if (tab !== selectedValue) {
 				setCollections(undefined);
-				setFull(undefined);
+				setTotal(undefined);
 				setSelectedValue(tab);
 				setHasMore(true);
 			}

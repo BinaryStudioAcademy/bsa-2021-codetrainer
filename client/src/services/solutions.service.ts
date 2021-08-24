@@ -1,3 +1,4 @@
+import { WebApi } from 'typings/webapi';
 import {
 	TTaskSolutions,
 	completedSolutionsMocks,
@@ -5,23 +6,19 @@ import {
 } from 'containers/profile/tabs/solutions/mocks';
 import { TLoader } from 'typings/common/loader';
 
-export interface TSolutionsRequestArgs {
-	skip: number;
-	limit: number;
-}
-
-export type TPrivateSolutionsLoader = TLoader<TSolutionsRequestArgs, TTaskSolutions>;
+export type TPrivateSolutionsLoader = TLoader<
+	WebApi.Types.TPaginationRequest,
+	WebApi.Types.TPaginationResponse<TTaskSolutions, 'solutions'>
+>;
 
 // TODO: implement in backend and call api
-export const getCompletedSolutions: TPrivateSolutionsLoader = async ({ skip, limit }) => ({
-	items: completedSolutionsMocks.slice(skip, skip + limit),
-	full: completedSolutionsMocks.length,
-	hasMore: skip + limit < completedSolutionsMocks.length,
+export const getCompletedSolutions: TPrivateSolutionsLoader = async ({ skip, take }) => ({
+	solutions: completedSolutionsMocks.slice(skip, skip + take),
+	total: completedSolutionsMocks.length,
 });
 
 // TODO: implement in backend and call api
-export const getUncompletedSolutions: TPrivateSolutionsLoader = async ({ skip, limit }) => ({
-	items: uncompletedSolutionsMocks.slice(skip, skip + limit),
-	full: uncompletedSolutionsMocks.length,
-	hasMore: skip + limit < uncompletedSolutionsMocks.length,
+export const getUncompletedSolutions: TPrivateSolutionsLoader = async ({ skip, take }) => ({
+	solutions: uncompletedSolutionsMocks.slice(skip, skip + take),
+	total: uncompletedSolutionsMocks.length,
 });
