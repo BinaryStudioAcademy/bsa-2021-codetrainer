@@ -10,11 +10,9 @@ type TSortCallback = () => void;
 export interface IClansProps {
 	user: IUser;
 	clans: TClans;
-	// sortByRank: TSortCallback;
-	// sortByTime: TSortCallback;
-	// sortBySize: TSortCallback;
 	setOrder: (order: Order) => void;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
+	setNameQuery: (nameQuery: string) => void;
 	joinClan: (id: string) => void;
 	leaveClan: (id: string) => void;
 	currentSort: ClansSortOptions;

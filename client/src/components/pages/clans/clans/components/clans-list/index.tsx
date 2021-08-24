@@ -48,7 +48,7 @@ const useStyles = makeStyles(() =>
 	}),
 );
 
-const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveClan, setOrderBy: setClansOrderBy, setOrder: setClansOrder }) => {
+const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveClan, setOrderBy: setClansOrderBy, setOrder: setClansOrder, setNameQuery }) => {
 	const [order, setOrder] = useState<Order>(Order.ASC);
 	const [orderBy, setOrderBy] = useState<any>('name');
 	const [page, setPage] = React.useState(0);
@@ -74,6 +74,11 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 		setOrderBy(property);
 		setClansOrderBy(property);
 	};
+
+	const handleNameSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setNameQuery(e.target.value);
+		setNameFieldValue(e.target.value);
+	}
 
 	return (
 		<Paper className={classes.paper}>
@@ -111,11 +116,7 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 													{isNameFieldOpen && (
 														<TextField
 															value={nameFieldValue}
-															onChange={(
-																e: React.ChangeEvent<HTMLInputElement>,
-															): void => {
-																setNameFieldValue(e.target.value);
-															}}
+															onChange={handleNameSearchChange}
 															type="search"
 														/>
 													)}

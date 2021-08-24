@@ -8,4 +8,5 @@ export interface IClansListProps {
 	leaveClan: (clanId: string) => void;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
 	setOrder: (order: Order) => void;
+	setNameQuery: (nameQuery: string) => void;
 }

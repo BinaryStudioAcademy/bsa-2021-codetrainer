@@ -14,7 +14,7 @@ const Clans: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const clans = useSelector((state: IRootState) => state.clans.data);
-	const currentSort = useSelector((state: IRootState) => state.clans.options.orderBy);
+	const { orderBy, order, nameQuery } = useSelector((state: IRootState) => state.clans.options);
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 
 	useEffect(() => {
@@ -22,17 +22,9 @@ const Clans: React.FC = () => {
 		dispatch(actions.fetchClans());
 	}, []);
 
-	// const sortByRank = () => {
-	// 	dispatch(actions.sortClansByRank());
-	// };
-
-	// const sortByTime = () => {
-	// 	dispatch(actions.sortClansByTime());
-	// };
-
-	// const sortBySize = () => {
-	// 	dispatch(actions.sortClansBySize());
-	// };
+	useEffect(() => {
+		dispatch(actions.fetchClans());
+	}, [orderBy, order, nameQuery]);
 
 	const setOrderBy = (orderBy: ClansOrderByOptions) => {
 		dispatch(actions.setOrderBy({ orderBy }));
@@ -40,6 +32,10 @@ const Clans: React.FC = () => {
 
 	const setOrder = (order: Order) => {
 		dispatch(actions.setOrder({ order }));
+	};
+
+	const setNameQuery = (nameQuery: string) => {
+		dispatch(actions.setNameQuery({ nameQuery }));
 	};
 
 	const joinClan = (id: string) => {
@@ -68,12 +64,10 @@ const Clans: React.FC = () => {
 			<ClansPage
 				clans={clans}
 				user={user}
-				// sortByRank={sortByRank}
-				// sortByTime={sortByTime}
-				// sortBySize={sortBySize}
 				setOrderBy={setOrderBy}
 				setOrder={setOrder}
-				currentSort={currentSort}
+				setNameQuery={setNameQuery}
+				currentSort={order}
 				joinClan={joinClan}
 				leaveClan={leaveClan}
 				handleGoToClan={handleGoToClan}

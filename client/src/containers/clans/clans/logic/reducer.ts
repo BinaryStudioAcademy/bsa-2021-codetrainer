@@ -2,7 +2,6 @@ import * as actionTypes from './action-types';
 import { IClansState, initialState } from './state';
 import { WebApi } from 'typings/webapi';
 import { createReducer } from 'helpers/create-reducer.helper';
-// import { SortOptions } from './state';
 
 export const clansReducer = createReducer<IClansState>(initialState, {
 	[actionTypes.START_LOADING](state, action) {
@@ -41,38 +40,7 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 			data: state.data.map((clan: WebApi.Entities.IClan) => (clan.id === id ? updatedClan : clan)),
 		};
 	},
-	// [actionTypes.SORT_BY_TIME](state, action) {
-	// 	return {
-	// 		...state,
-	// 		options: {
-	// 			...state.options,
-	// 			sortBy: SortOptions.BY_TIME,
-	// 		},
-	// 		data: [...state.data].sort((a, b) => (new Date(b.createdAt) > new Date(a.createdAt) ? 1 : -1)),
-	// 	};
-	// },
-	// [actionTypes.SORT_BY_RANK](state, action) {
-	// 	return {
-	// 		...state,
-	// 		options: {
-	// 			...state.options,
-	// 			sortBy: SortOptions.BY_RANK,
-	// 		},
-	// 		data: [...state.data].sort((a, b) => b.rank - a.rank),
-	// 	};
-	// },
-	// [actionTypes.SORT_BY_SIZE](state, action) {
-	// 	return {
-	// 		...state,
-	// 		options: {
-	// 			...state.options,
-	// 			sortBy: SortOptions.BY_SIZE,
-	// 		},
-	// 		data: [...state.data].sort((a, b) => b.maxMembers - a.maxMembers),
-	// 	};
-	// },
 	[actionTypes.SET_ORDER_BY](state, action) {
-		debugger;
 		return {
 			...state,
 			options: {
@@ -82,12 +50,20 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 		};
 	},
 	[actionTypes.SET_ORDER](state, action) {
-		debugger;
 		return {
 			...state,
 			options: {
 				...state.options,
 				order: action.order,
+			},
+		};
+	},
+	[actionTypes.SET_NAME_QUERY](state, action) {
+		return {
+			...state,
+			options: {
+				...state.options,
+				nameQuery: action.nameQuery,
 			},
 		};
 	},

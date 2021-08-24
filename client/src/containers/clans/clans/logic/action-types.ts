@@ -11,12 +11,10 @@ export const ADD_ERROR = 'CLANS:ADD_ERROR';
 export const JOIN_CLAN = 'CLANS:JOIN_CLAN';
 export const LEAVE_CLAN = 'CLANS:LEAVE_CLAN';
 export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
-export const SORT_BY_TIME = 'CLANS:SORT_BY_TIME';
-export const SORT_BY_RANK = 'CLANS:SORT_BY_RANK';
-export const SORT_BY_SIZE = 'CLANS:SORT_BY_SIZE';
 
 export const SET_ORDER_BY = 'CLANS:SET_ORDER_BY';
 export const SET_ORDER = 'CLANS:SET_ORDER';
+export const SET_NAME_QUERY = 'CLANS:SET_NAME_QUERY';
 
 
 export interface IAddClansArgs {
@@ -50,4 +48,8 @@ export interface ISetOrderByArgs {
 
 export interface ISetOrderArgs {
 	order: Order;
+}
+
+export interface ISetNameQueryArgs {
+	nameQuery: string;
 }

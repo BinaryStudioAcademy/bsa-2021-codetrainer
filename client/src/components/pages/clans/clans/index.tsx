@@ -6,7 +6,7 @@ import { Button } from 'components';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 
-const ClansPage: React.FC<IClansProps> = ({ user, clans, joinClan, leaveClan, setOrderBy, setOrder, handleGoToClan }) => {
+const ClansPage: React.FC<IClansProps> = ({ user, clans, joinClan, leaveClan, setOrderBy, setOrder, handleGoToClan, setNameQuery }) => {
 	return (
 		<>
 			<div className={styles.container}>
@@ -16,7 +16,7 @@ const ClansPage: React.FC<IClansProps> = ({ user, clans, joinClan, leaveClan, se
 						To my clan
 					</Button>
 				</div>
-				<ClansList joinClan={joinClan} leaveClan={leaveClan} clans={clans} userId={user.id} setOrderBy={setOrderBy} setOrder={setOrder} />
+				<ClansList joinClan={joinClan} leaveClan={leaveClan} clans={clans} userId={user.id} setOrderBy={setOrderBy} setOrder={setOrder} setNameQuery={setNameQuery} />
 			</div>
 		</>
 	);

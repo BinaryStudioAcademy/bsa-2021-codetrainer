@@ -1,13 +1,18 @@
 import { ApiRoutes, HttpMethods } from 'constants/services';
+import { ClansOrderByOptions } from 'containers/clans/clans/logic/state';
+import { Order } from 'helpers/table-helper';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
 
 export interface TFetchClansArgs {
 	take: number;
 	skip: number;
+	order: Order;
+	orderBy: ClansOrderByOptions,
+	nameQuery: string;
 }
 
-export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
+export const fetchClans = async ({ take, skip, order, orderBy, nameQuery }: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
@@ -15,6 +20,9 @@ export const fetchClans = async ({ take, skip }: TFetchClansArgs): Promise<WebAp
 			query: {
 				take,
 				skip,
+				order,
+				orderBy,
+				...(nameQuery.length ? { nameQuery } : {})
 			},
 		});
 
