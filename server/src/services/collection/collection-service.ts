@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
-import { TCollectionRepository, Collection, TUserRepository, User, Task } from '../../data';
+import { TCollectionRepository, TUserRepository, User } from '../../data';
 import { ValidationError } from '../../helpers';
-import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
+import { CODE_ERRORS } from '../../common';
 
 export class CollectionService {
 	protected collectionRepository: TCollectionRepository;
@@ -19,6 +19,43 @@ export class CollectionService {
 		return collection;
 	}
 
+	async getAuthoredCollections({ authorId, skip, take }: { authorId: string, skip: number, take: number }) {
+		const repository = getCustomRepository(this.collectionRepository);
+		const [collections, total] = await repository.findAndCount({
+			relations: ['author', 'tasks'],
+			where: {
+				author : {
+					id: authorId
+				},
+			},
+			order: {
+				createdAt: 'DESC',
+			},
+			skip,
+			take,
+		});
+		return {
+			collections,
+			total,
+		};
+	}
+
+	async getFollowedCollections({ followerId, skip, take }: { followerId: string, skip: number, take: number }) {
+		const repository = getCustomRepository(this.collectionRepository);
+		const [collections, total] = await repository.createQueryBuilder('collection')
+			.innerJoin('collection.followers', 'follower', 'follower.id = :followerId', { followerId })
+			.leftJoinAndSelect('collection.author', 'author')
+			.leftJoinAndSelect('collection.tasks', 'tasks')
+			.orderBy('collection.createdAt', 'DESC')
+			.skip(skip)
+			.take(take)
+			.getManyAndCount()
+		return {
+			collections,
+			total,
+		};
+	}
+
 	async getCollectionById(id: string) {
 		const repository = getCustomRepository(this.collectionRepository);
 		const collection = await repository.getById(id);
@@ -31,9 +68,9 @@ export class CollectionService {
 	// 	return collection;
 	// }
 
-	async createEmptyCollection(user: User, name: { name: string }) {
+	async createEmptyCollection(user: User, collection: { name: string }) {
 		const repository = getCustomRepository(this.collectionRepository);
-		const newCollection = await repository.save({ ...name, tasks: [], author: user });
+		const newCollection = await repository.save({ ...collection, tasks: [], author: user });
 		return newCollection;
 	}
 
