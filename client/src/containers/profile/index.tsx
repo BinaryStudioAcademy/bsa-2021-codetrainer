@@ -35,13 +35,13 @@ export const Profile = (props: RouteComponentProps) => {
 	}, [username]);
 
 	const mockPointsProps = {
-		rank: userData ? (userData.rank ? userData.rank : 9) : 9,
-		honor: userData ? (userData.honor ? userData.honor : 0) : 0,
-		completedChallenge: userData ? (userData.solutions ? userData.solutions.length : 0) : 0,
+		rank: userData?.rank ?? 9,
+		honor: userData?.honor ?? 0,
+		completedChallenge: userData?.solutions?.length ?? 0,
 	};
 
 	const mockLanguagesProps = {
-		languagesTrained: userData ? (userData.languages ? userData.languages.length : 0) : 0,
+		languagesTrained: userData?.languages?.length ?? 0,
 		highestTrained: userData ? (userData.languages ? userData.languages[0].name : 'JS') : 'JS',
 		mostRecent: userData ? (userData.languages ? userData.languages[0].name : 'JS') : 'JS',
 	};
@@ -67,22 +67,20 @@ export const Profile = (props: RouteComponentProps) => {
 				? userData.solutions.filter((solution) => solution.completed === true).length
 				: 0
 			: 0,
-		completedChallengeTotal: userData ? (userData.solutions ? userData.solutions.length : 0) : 0,
-		authoredChallengeDone: userData ? (userData.tasks ? userData.tasks.length : 0) : 0,
-		authoredChallengeTotal: getMaxTotal(userData ? (userData.tasks ? userData.tasks.length : 0) : 0),
-		commentsDone: userData ? (userData.comments ? userData.comments.length : 0) : 0,
-		commentsTotal: getMaxTotal(userData ? (userData.comments ? userData.comments.length : 0) : 0),
-		referralsDone: userData ? (userData.referrals ? userData.referrals.length : 0) : 0,
-		referralsTotal: getMaxTotal(userData ? (userData.referrals ? userData.referrals.length : 0) : 0),
-		achievementsDone: userData ? (userData.achivements ? userData.achivements.length : 0) : 0,
-		achievementsTotal: getMaxTotal(userData ? (userData.achivements ? userData.achivements.length : 0) : 0),
+		completedChallengeTotal: userData?.solutions?.length ?? 0,
+		authoredChallengeDone: userData?.tasks?.length ?? 0,
+		authoredChallengeTotal: getMaxTotal(userData?.tasks?.length ?? 0),
+		commentsDone: userData?.comments?.length ?? 0,
+		commentsTotal: getMaxTotal(userData?.comments?.length ?? 0),
+		referralsDone: userData?.referrals?.length ?? 0,
+		referralsTotal: getMaxTotal(userData?.referrals?.length ?? 0),
+		achievementsDone: userData?.achivements?.length ?? 0,
+		achievementsTotal: getMaxTotal(userData?.achivements?.length ?? 0),
 	};
 
 	const mockRankBreakDownProps = {
-		rankProgress:
-			((userData ? (userData.honor ? userData.honor : 0) : 0) * 100) /
-			NextRankHonor[getNextRank(userData ? (userData.rank ? userData.rank : 9) : 9)],
-		rank: userData ? (userData.rank ? userData.rank : 9) : 9,
+		rankProgress: ((userData?.honor ?? 0) * 100) / NextRankHonor[getNextRank(userData?.rank ?? 9)],
+		rank: userData?.rank ?? 9,
 	};
 
 	const getNumberOfReplies = (
@@ -104,11 +102,11 @@ export const Profile = (props: RouteComponentProps) => {
 		return result;
 	};
 	const mockCommunityProps = {
-		comments: userData ? (userData.comments ? userData.comments.length : 0) : 0,
-		replies: userData ? (userData.comments ? getNumberOfReplies(userData.comments) : 0) : 0,
-		collections: userData ? (userData.collections ? userData.collections.length : 0) : 0,
-		translations: userData ? (userData.translations ? userData.translations.length : 0) : 0,
-		approved: userData ? (userData.translations ? getApproved(userData.translations) : 0) : 0,
+		comments: userData?.comments?.length ?? 0,
+		replies: getNumberOfReplies(userData?.comments ?? [{ replies: [] }]),
+		collections: userData?.collections?.length ?? 0,
+		translations: userData?.translations?.length ?? 0,
+		approved: getApproved(userData?.translations ?? [{ approved: false }]),
 	};
 
 	const statsProps = {

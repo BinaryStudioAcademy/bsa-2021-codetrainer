@@ -94,7 +94,7 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 				return user;
 			}),
 		);
-		let comminitySocial: any[] = yield all(
+		let communitySocial: any[] = yield all(
 			community.map((community: any) => {
 				const user = call(getUserById, community);
 				return user;
@@ -103,11 +103,11 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 
 		followersSocial = followersSocial.map((followerUser) => followerUser.user);
 		followingsSocial = followingsSocial.map((followingUser) => followingUser.user);
-		comminitySocial = comminitySocial.map((communityUser) => communityUser.user);
+		communitySocial = communitySocial.map((communityUser) => communityUser.user);
 
 		const followersSocialProps = getISocialUsers(followersSocial);
 		const followingsSocialProps = getISocialUsers(followingsSocial);
-		const comminitySocialProps = getISocialUsers(comminitySocial);
+		const communitySocialProps = getISocialUsers(communitySocial);
 
 		const userDataAllFields = {
 			...user,
@@ -118,7 +118,7 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 			unpublishedTasks: unpublishedTasksProps,
 			followersSocial: followersSocialProps,
 			followingsSocial: followingsSocialProps,
-			comminitySocial: comminitySocialProps,
+			comminitySocial: communitySocialProps,
 		};
 		yield put(actions.searchUserSuccess({ user: userDataAllFields }));
 	} catch (error) {
