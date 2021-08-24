@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './stats.module.scss';
+import { Item } from './item';
 
 export const Stats = () => {
 	return (
@@ -16,20 +17,6 @@ export const Stats = () => {
 				<Item item="Created" value="Oct 21, 2013" />
 				<Item item="Created" value="Oct 21, 2013" />
 			</div>
-		</div>
-	);
-};
-
-export interface IItemProps {
-	item: string;
-	value: string;
-}
-
-export const Item = ({ item, value }: IItemProps) => {
-	return (
-		<div className={styles.listItem}>
-			<span>{item}</span>
-			<span>{value}</span>
 		</div>
 	);
 };
