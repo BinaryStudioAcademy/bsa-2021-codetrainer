@@ -1,12 +1,16 @@
-import { Avatar } from 'components/basic';
+// import { Avatar } from 'components/basic';
 import React from 'react';
-import styles from './details-tab.module.scss';
+// import styles from './details-tab.module.scss';
+import { Description } from './description';
+import { Contributors } from './contributors';
 
 export const DetailsTab = () => {
 	return (
 		<>
-			<div>
-				<div className={styles.description}>
+			<Description />
+			<Contributors />
+			{/* <div>
+				{/* <div className={styles.description}>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -16,16 +20,16 @@ export const DetailsTab = () => {
 					</p>
 					<h3 className={styles.examplesHeader}>Examples</h3>
 					<code className={styles.code}>Lorem ipsum dolor sit amet,</code>
-				</div>
-			</div>
-			<div className={styles.contributors}>
+				</div> */}
+			{/* </div> */}
+			{/* <div className={styles.contributors}>
 				<p>These users have contributed to this task:</p>
 				<div className={styles.users}>
-					<Avatar size={50} />
-					<Avatar size={50} />
-					<Avatar size={50} />
+					<Avatar size={60} />
+					<Avatar size={60} />
+					<Avatar size={60} />
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 };
