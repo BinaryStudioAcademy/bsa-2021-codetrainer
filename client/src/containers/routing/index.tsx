@@ -26,6 +26,8 @@ interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
+	const theme = useAppSelector((rootState) => rootState.theme.theme);
+	document.documentElement.setAttribute('data-theme', theme);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.checkRefreshToken());

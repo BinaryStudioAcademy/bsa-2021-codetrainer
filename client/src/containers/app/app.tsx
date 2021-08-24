@@ -8,10 +8,6 @@ import Routing from 'containers/routing';
 import { NotificationContainer } from '../notification';
 
 const App: React.FC = () => {
-	// if (!localStorage.getItem('theme')) {
-	// 	localStorage.setItem('theme', 'dark');
-	// }
-
 	return (
 		<Provider store={store}>
 			<Router history={history}>

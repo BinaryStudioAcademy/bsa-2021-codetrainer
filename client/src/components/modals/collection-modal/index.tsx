@@ -7,6 +7,8 @@ import { Button, Rank } from '../../basic';
 import styles from './collection-modal.module.scss';
 import { Modal } from '../';
 import { createCollection } from 'services/create-collection.service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface ICollectionModalProps {
 	isOpen: boolean;
@@ -55,6 +57,13 @@ const mockData = [
 				author: 'Super User',
 				rank: 3,
 			},
+			{
+				id: '231',
+				name: 'Convert HTML Entities',
+				description: 'Convert special characters to their corresponding HTML entities.',
+				author: 'Super User',
+				rank: 4,
+			},
 		],
 		image: 'https://static.vecteezy.com/system/resources/previews/002/503/041/non_2x/flat-agenda-list-clipboard-design-style-cartoon-illustration-drawing-vector.jpg',
 	},
@@ -68,9 +77,7 @@ const CreateCollectionSchema = Yup.object().shape({
 });
 export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIsOpen }) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
-	// const [isNoCollections, setIsNoCollections] = React.useState(false);
-
-	const isNoCollections = false;
+	const [isNewCollection, setIsNewCollection] = React.useState(false);
 
 	const onSubmit = async (value: string, setFieldError: any) => {
 		try {
@@ -106,13 +113,17 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 								<h5>{item.name}</h5>
 								<Rank rank={Math.trunc(sumOfRanks / item.tasks.length)} />
 							</div>
-							<p>
-								Made by <span>{item.author}</span>
-							</p>
+							<p>Number of Challenges: {item.tasks.length} </p>
 						</div>
 					</div>
 				);
 			})}
+			<div className={styles.newCollection}>
+				<div className={styles.addButton} onClick={() => setIsNewCollection(true)}>
+					<FontAwesomeIcon icon={faPlus} size="lg" />
+				</div>
+				<p>ADD NEW COLLECTION</p>
+			</div>
 		</div>
 	);
 
@@ -140,9 +151,17 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 							{isPrompt ? (
 								prompt(validateField as (field: string) => Promise<string>)
 							) : (
-								<Button style={{ marginTop: '26px' }} onClick={() => setIsPrompt(true)}>
-									Create Collection
-								</Button>
+								<>
+									<Button style={{ marginTop: '26px' }} onClick={() => setIsPrompt(true)}>
+										Create
+									</Button>
+									<Button
+										style={{ margin: '26px 0 0 20px' }}
+										onClick={() => setIsNewCollection(false)}
+									>
+										Back
+									</Button>
+								</>
 							)}
 						</Form>
 					)}
@@ -153,19 +172,15 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 
 	return (
 		<div>
-			{isNoCollections ? (
-				<Modal
-					isOpen={isOpen}
-					setIsOpen={setIsOpen}
-					elements={{ title: 'NEW COLLECTION', showCloseButton: true, body: noCollections }}
-				/>
-			) : (
-				<Modal
-					isOpen={isOpen}
-					setIsOpen={setIsOpen}
-					elements={{ title: 'ADD TO COLLECTION', showCloseButton: true, body: collections }}
-				/>
-			)}
+			<Modal
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				elements={{
+					title: 'ADD TO COLLECTION',
+					showCloseButton: true,
+					body: isNewCollection ? noCollections : collections,
+				}}
+			/>
 		</div>
 	);
 };
