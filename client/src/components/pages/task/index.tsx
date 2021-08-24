@@ -1,13 +1,19 @@
 import React from 'react';
 import { TaskInfo } from './task-info';
-import { DetailsTab } from './tabs/detailsTab';
 import styles from './task.module.scss';
+import { ITabsRouterProps, TabsRouter } from './tabs-router';
 
-export const Task = () => {
+export interface ITaskProps {
+	getTabContent: () => React.ReactNode;
+	tabsRouterProps: ITabsRouterProps;
+}
+
+export const Task = ({ tabsRouterProps, getTabContent }: ITaskProps) => {
 	return (
 		<div className={styles.container}>
 			<TaskInfo />
-			<DetailsTab />
+			<TabsRouter {...tabsRouterProps} />
+			{getTabContent()}
 		</div>
 	);
 };
