@@ -20,11 +20,11 @@ export const ROUTES = {
 
 	Setting: '/setting',
 
-	Landing: '/landing',
-
 	Github: '/github',
 
 	Collections: '/collections',
 
 	Task: '/task',
+
+	Community: '/followers/community',
 };

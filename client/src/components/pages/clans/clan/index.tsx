@@ -86,16 +86,24 @@ const ClanPage: React.FC<IClanProps> = ({
 			/>
 			<div className={styles.container}>
 				<h4>Clan Information</h4>
-				<ClanInfo clan={clan} leaveClan={leaveClan} handleInviteClick={handleInviteClick} isOwnClan={isOwnClan} joinClan={joinClan} />
+				<ClanInfo
+					clan={clan}
+					leaveClan={leaveClan}
+					handleInviteClick={handleInviteClick}
+					isOwnClan={isOwnClan}
+					joinClan={joinClan}
+				/>
 				<h4>Clan Members</h4>
-				{clan.members.length ?
+				{clan.members.length ? (
 					<section className={styles.membersSection}>
 						<MembersSortPanel sortByRank={sortByRank} sortByTime={sortByTime} currentSort={currentSort} />
 						<MembersList members={clan.members} />
 					</section>
-					: <div>This Clan has no members</div>}
+				) : (
+					<div>This Clan has no members</div>
+				)}
 			</div>
-			{(user?.profileClan?.role === 'admin' && isOwnClan) ? (
+			{user?.profileClan?.role === 'admin' && isOwnClan ? (
 				<Button
 					className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.delete)}
 					onClick={() => setModalShown(true)}

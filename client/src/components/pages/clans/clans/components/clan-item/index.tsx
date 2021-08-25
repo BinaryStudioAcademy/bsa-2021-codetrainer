@@ -2,23 +2,16 @@ import React, { MouseEvent } from 'react';
 import { Rank } from 'components';
 import { IClanItemProps } from './types';
 import { Button } from 'components/basic';
-import { MemberRoles } from 'common/enum/app/clans';
 import { ButtonClasses } from 'components/basic/button';
 import { getMonthName } from 'helpers/date';
 import { ROUTES } from 'constants/routes';
 import { WebApi } from 'typings/webapi';
 import styles from './clan-item.module.scss';
 import { TableCell, TableRow } from '@material-ui/core';
-import historyHelper from 'helpers/history.helper';
+import { Link } from 'react-router-dom';
 
 const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
 	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
-
-	const goToClanHandler = (event: MouseEvent<HTMLElement>) => {
-		event.stopPropagation();
-		historyHelper.push(`${ROUTES.Clan}/${clan?.id}`)
-
-	};
 
 	const leaveClanHandler = (event: MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
@@ -31,20 +24,20 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 	};
 
 	return (
-		<TableRow onClick={goToClanHandler} className={styles.clanRow}>
+		<TableRow className={styles.clanRow}>
 			<TableCell>
 				<Rank rank={clan.rank ?? 0} />
 			</TableCell>
 			<TableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
 			<TableCell>
-				<span>{clan.name}</span>
+				<Link to={`${ROUTES.Clan}/${clan?.id}`}>{clan.name}</Link>
 			</TableCell>
 			<TableCell>
-				<span>{clan.members.length}</span>
+				<span>{clan.numberOfMembers}</span>
 			</TableCell>
 			<TableCell>
 				<span>
-					{getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
+					{clan.createdAt.getDate()} {getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>
 			</TableCell>
 			<TableCell>
@@ -52,13 +45,13 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 			</TableCell>
 			<TableCell>
 				{currentUserMember ? (
-					currentUserMember.profileClan?.role !== MemberRoles.ADMIN ? (
-						<Button className={ButtonClasses.red} onClick={leaveClanHandler}>
-							Leave
-						</Button>
-					) : null
+					<Button className={ButtonClasses.red} onClick={leaveClanHandler}>
+						Leave
+					</Button>
 				) : (
-					<Button className={ButtonClasses.blue} onClick={joinClanHandler}>Join</Button>
+					<Button className={ButtonClasses.blue} onClick={joinClanHandler}>
+						Join
+					</Button>
 				)}
 			</TableCell>
 		</TableRow>

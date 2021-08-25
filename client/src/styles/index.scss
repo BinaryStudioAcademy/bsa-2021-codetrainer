@@ -7,6 +7,7 @@
 	--text-color: #{$mine-shaft};
 	--minor-text-color: #{$oslo-grey};
 	--background-color: #{$white};
+	--background-color-transparent: rgba(#fff, 0.5);
 	--container-color: #{$zircon};
 	--secondary-container-color: #{$white-lilac};
 	--black: #{$mine-shaft};
@@ -23,6 +24,7 @@
 	--rank-easy: #{$picton-blue};
 	--rank-medium: #{$fire-bush};
 	--rank-hard: #{$french-rose};
+	--rank-beta: #{$dusty-gray};
 }
 
 [data-theme^='dark'],
@@ -30,6 +32,7 @@
 	--text-color: #{$light-gray};
 	--minor-text-color: #{$dusty-gray};
 	--background-color: #{$rich-black};
+	--background-color-transparent: rgba(#181a1b, 0.5);
 	--container-color: #{$eerie-black};
 	--secondary-container-color: #{$onyx};
 	--black: #{$mine-shaft};
@@ -46,6 +49,7 @@
 	--rank-easy: #{$picton-blue};
 	--rank-medium: #{$fire-bush};
 	--rank-hard: #{$french-rose};
+	--rank-beta: #{$eerie-black};
 }
 
 body {
@@ -67,6 +71,7 @@ code {
 
 ::-webkit-scrollbar {
 	width: 6px;
+	height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {

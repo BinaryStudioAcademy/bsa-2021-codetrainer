@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	BaseEntity,
+	CreateDateColumn,
+	UpdateDateColumn,
+	ManyToOne, JoinColumn,
+} from 'typeorm';
+import { User } from '../user';
 
 @Entity()
 export class Follower extends BaseEntity {
@@ -11,9 +19,11 @@ export class Follower extends BaseEntity {
 	@UpdateDateColumn()
 	updatedAt!: Date;
 
-	@Column()
-	user!: string;
+	@ManyToOne(() => User, (user) => user.followers, { onUpdate: 'CASCADE' })
+	@JoinColumn()
+	following!: User;
 
-	@Column()
-	follower!: string;
+	@ManyToOne(() => User, (user) => user.following, { onUpdate: 'CASCADE' })
+	@JoinColumn()
+	follower!: User;
 }

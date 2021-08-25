@@ -70,9 +70,8 @@
 		border-radius: 50%;
 
 		span {
-			font-family: Inter;
-			font-size: 10px;
-			color: #fff;
+			font: $counter-font;
+			color: $white;
 		}
 	}
 

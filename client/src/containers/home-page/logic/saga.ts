@@ -3,6 +3,7 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { fetchTaskComments, fetchTasks } from '../../../services/home-page.service';
 import { ITask } from '../../../components/common/next-task/interface';
+import { fetchCommunity } from '../../../services/followers.service';
 
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTasks>): any {
 	const { discipline, currentTask } = action;
@@ -24,6 +25,16 @@ export function* fetchMessagesWatcher() {
 	yield takeEvery(actionTypes.GET_MESSAGES, fetchMessagesWorker);
 }
 
+export function* fetchCommunityWorker(action: ReturnType<typeof actions.getCommunity>): any {
+	const { id } = action;
+	const { community } = yield call(() => fetchCommunity(id));
+	yield put(actions.setCommunity({ community }));
+}
+
+export function* fetchCommunityWatcher() {
+	yield takeEvery(actionTypes.GET_COMMUNITY, fetchCommunityWorker);
+}
+
 export default function* homeSaga() {
-	yield all([fetchTaskWatcher(), fetchMessagesWatcher()]);
+	yield all([fetchTaskWatcher(), fetchMessagesWatcher(), fetchCommunityWatcher()]);
 }

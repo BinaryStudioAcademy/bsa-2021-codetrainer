@@ -23,7 +23,7 @@
         "isSortable": true
     },
     {
-        "id": "size",
+        "id": "numberOfMembers",
         "label": "Size",
         "style": {
             "width": "10%"

@@ -6,14 +6,14 @@ interface IProfileTasks {
 	profileTasks: {
 		title: string;
 		id: string;
-		tasks: IChallenge[];
+		tasks?: IChallenge[];
 	}[];
 }
 
 export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 	const [activeId, setActiveId] = useState<string>(profileTasks[0].id);
 	const sideBar = useMemo(
-		() => profileTasks.map(({ title, id, tasks }) => ({ id, title, count: tasks.length })),
+		() => profileTasks.map(({ title, id, tasks }) => ({ id, title, count: tasks?.length })),
 		[profileTasks],
 	);
 	const tasks = profileTasks.find(({ id }) => id === activeId)?.tasks || [];

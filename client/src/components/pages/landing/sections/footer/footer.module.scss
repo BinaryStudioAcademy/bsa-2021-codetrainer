@@ -1,0 +1,15 @@
+@import 'styles/variables';
+
+.footer {
+	padding: 30px 0;
+	background-color: $cornflower-blue;
+
+	&Container {
+		text-align: center;
+	}
+
+	&Copyright {
+		color: #fff;
+		font: 400 14px $base-font-family;
+	}
+}
