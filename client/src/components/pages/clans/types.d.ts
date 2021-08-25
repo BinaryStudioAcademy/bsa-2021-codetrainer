@@ -9,6 +9,7 @@ type TSortCallback = () => void;
 
 export interface IClansProps {
 	user: IUser;
+	isLoading: boolean;
 	clans: TClans;
 	setOrder: (order: Order) => void;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
@@ -17,6 +18,14 @@ export interface IClansProps {
 	leaveClan: (id: string) => void;
 	currentSort: ClansSortOptions;
 	handleGoToClan: () => void;
+	order: Order;
+	orderBy: ClansOrderByOptions;
+	nameQuery: string;
+	page: number;
+	itemsPerPage: number;
+	count: number;
+	setPage: (page: number) => void
+	setItemsPerPage: (itemsPerPage: number) => void
 }
 
 export interface IClanProps {

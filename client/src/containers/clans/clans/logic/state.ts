@@ -10,8 +10,8 @@ export enum ClansOrderByOptions {
 
 export interface IClansState {
 	options: {
-		skip: number;
-		take: number;
+		page: number;
+		itemsPerPage: number;
 		orderBy: ClansOrderByOptions;
 		order: Order,
 		nameQuery: string;
@@ -24,8 +24,8 @@ export interface IClansState {
 
 export const initialState: IClansState = {
 	options: {
-		skip: 0,
-		take: 10,
+		page: 0,
+		itemsPerPage: 5,
 		orderBy: ClansOrderByOptions.BY_NAME,
 		order: Order.ASC,
 		nameQuery: ''

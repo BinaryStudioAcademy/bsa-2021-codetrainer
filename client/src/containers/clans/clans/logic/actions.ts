@@ -15,3 +15,5 @@ export const updateClan = createAction<actionTypes.IUpdateClanArgs>(actionTypes.
 export const setOrderBy = createAction<actionTypes.ISetOrderByArgs>(actionTypes.SET_ORDER_BY);
 export const setOrder = createAction<actionTypes.ISetOrderArgs>(actionTypes.SET_ORDER);
 export const setNameQuery = createAction<actionTypes.ISetNameQueryArgs>(actionTypes.SET_NAME_QUERY);
+export const setPage = createAction<actionTypes.ISetPageArgs>(actionTypes.SET_PAGE);
+export const setItemsPerPage = createAction<actionTypes.ISetItemsPerPageArgs>(actionTypes.SET_ITEMS_PER_PAGE);

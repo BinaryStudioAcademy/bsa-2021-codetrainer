@@ -1,4 +1,4 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Like, Repository } from 'typeorm';
 import { Clan } from '../../models';
 import { AbstractRepository } from '../abstract';
 
@@ -27,25 +27,6 @@ export class ClanRepository extends AbstractRepository<Clan> {
 			.getOne();
 	}
 
-	// findAll(query) {
-	// 	const take = query.take || 10
-	// 	const skip = query.skip || 0
-	// 	const keyword = query.keyword || ''
-
-	// 	const [result, total] = await this.userRepository.findAndCount(
-	// 		{
-	// 			where: { name: Like('%' + keyword + '%') }, order: { name: "DESC" },
-	// 			take: take,
-	// 			skip: skip
-	// 		}
-	// 	);
-
-	// 	return {
-	// 		data: result,
-	// 		count: total
-	// 	}
-	// }
-
 	getAll(skip: number, take: number) {
 		return this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
@@ -54,6 +35,27 @@ export class ClanRepository extends AbstractRepository<Clan> {
 			.skip(skip)
 			.take(take)
 			.getMany();
+	}
+
+	async search(query: { orderBy: string; order: 'ASC' | 'DESC'; skip: number; take: number; nameQuery?: string }) {
+		const { orderBy, order, nameQuery = '', take, skip } = query;
+		const searchQuery = this.createQueryBuilder('clan')
+			.leftJoinAndSelect('clan.members', 'member')
+			.leftJoinAndSelect('member.profileClan', 'profileClan')
+			.where('clan.name ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` });
+
+		if (orderBy !== 'rank' && orderBy !== 'honor') {
+			searchQuery.orderBy(`clan.${orderBy}`, order === 'asc' ? 'ASC' : 'DESC');
+		}
+
+		return {
+			count: await searchQuery.select('DISTINCT(clan.id)').getCount(),
+			data: await searchQuery
+				.select(['clan', 'member.id', 'member.rank', 'member.honor', 'profileClan.role', 'profileClan.status'])
+				.skip(skip)
+				.take(take)
+				.getMany(),
+		};
 	}
 
 	updateById(id: string, data: Partial<Clan>) {

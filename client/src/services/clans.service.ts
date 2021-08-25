@@ -5,33 +5,33 @@ import { http } from 'services';
 import { WebApi } from 'typings/webapi';
 
 export interface TFetchClansArgs {
-	take: number;
-	skip: number;
+	page: number;
+	itemsPerPage: number;
 	order: Order;
 	orderBy: ClansOrderByOptions,
 	nameQuery: string;
 }
 
-export const fetchClans = async ({ take, skip, order, orderBy, nameQuery }: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
+export const fetchClans = async ({ page, itemsPerPage, order, orderBy, nameQuery }: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
-			endpoint: ApiRoutes.CLANS,
+			endpoint: `${ApiRoutes.CLANS}/search`,
 			query: {
-				take,
-				skip,
+				take: itemsPerPage,
+				skip: page * itemsPerPage,
 				order,
 				orderBy,
 				...(nameQuery.length ? { nameQuery } : {})
 			},
 		});
 
-		const clans = response.map((clan: WebApi.Entities.IMember) => ({
-			...clan,
-			createdAt: new Date(clan.createdAt),
-		}));
+		// const clans = response.data.map((clan: WebApi.Entities.IMember) => ({
+		// 	...clan,
+		// 	createdAt: new Date(clan.createdAt),
+		// }));
 
-		return clans;
+		return response;
 	} catch (error) {
 		return error;
 	}

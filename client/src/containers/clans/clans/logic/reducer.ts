@@ -22,10 +22,11 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 			data: [],
 		};
 	},
-	[actionTypes.ADD_CLANS](state, { clans }: actionTypes.IAddClansArgs) {
+	[actionTypes.ADD_CLANS](state, { clans, count }: actionTypes.IAddClansArgs) {
 		return {
 			...state,
 			data: [...state.data, ...clans],
+			count
 		};
 	},
 	[actionTypes.ADD_ERROR](state, { error }: actionTypes.IAddErrorArgs) {
@@ -64,6 +65,24 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 			options: {
 				...state.options,
 				nameQuery: action.nameQuery,
+			},
+		};
+	},
+	[actionTypes.SET_PAGE](state, action) {
+		return {
+			...state,
+			options: {
+				...state.options,
+				page: action.page,
+			},
+		};
+	},
+	[actionTypes.SET_ITEMS_PER_PAGE](state, action) {
+		return {
+			...state,
+			options: {
+				...state.options,
+				itemsPerPage: action.itemsPerPage,
 			},
 		};
 	},

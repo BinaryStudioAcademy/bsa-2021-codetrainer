@@ -15,10 +15,14 @@ export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
 export const SET_ORDER_BY = 'CLANS:SET_ORDER_BY';
 export const SET_ORDER = 'CLANS:SET_ORDER';
 export const SET_NAME_QUERY = 'CLANS:SET_NAME_QUERY';
+export const SET_PAGE = 'CLANS:SET_PAGE';
+export const SET_ITEMS_PER_PAGE = 'CLANS:SET_ITEMS_PER_PAGE';
+
 
 
 export interface IAddClansArgs {
 	clans: WebApi.Entities.TClans;
+	count: number;
 }
 
 export interface IUpdateClanArgs {
@@ -52,4 +56,13 @@ export interface ISetOrderArgs {
 
 export interface ISetNameQueryArgs {
 	nameQuery: string;
+}
+
+
+export interface ISetPageArgs {
+	page: number;
+}
+
+export interface ISetItemsPerPageArgs {
+	itemsPerPage: number;
 }

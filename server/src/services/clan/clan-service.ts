@@ -186,4 +186,18 @@ export class ClanService {
 			clan: updatedClan,
 		};
 	}
+
+	async search(query: { order: 'ASC' | 'DESC'; orderBy: string; nameQuery?: string; take: number; skip: number }) {
+		const clanRepository = getCustomRepository(this.clanRepository);
+
+		const result = await clanRepository.search(query);
+		return {
+			...result,
+			data: result.data.map((clan) => ({
+				...clan,
+				honor: this.getHonor(clan),
+				rank: this.getRank(clan),
+			})),
+		};
+	}
 }

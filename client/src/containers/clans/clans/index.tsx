@@ -13,18 +13,14 @@ import { Order } from 'helpers/table-helper';
 const Clans: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const clans = useSelector((state: IRootState) => state.clans.data);
-	const { orderBy, order, nameQuery } = useSelector((state: IRootState) => state.clans.options);
+	const { data: clans, isLoading, count } = useSelector((state: IRootState) => state.clans);
+	const { orderBy, order, nameQuery, page, itemsPerPage } = useSelector((state: IRootState) => state.clans.options);
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 
 	useEffect(() => {
 		dispatch(actions.clearClans());
 		dispatch(actions.fetchClans());
-	}, []);
-
-	useEffect(() => {
-		dispatch(actions.fetchClans());
-	}, [orderBy, order, nameQuery]);
+	}, [orderBy, order, nameQuery, page, itemsPerPage]);
 
 	const setOrderBy = (orderBy: ClansOrderByOptions) => {
 		dispatch(actions.setOrderBy({ orderBy }));
@@ -36,6 +32,14 @@ const Clans: React.FC = () => {
 
 	const setNameQuery = (nameQuery: string) => {
 		dispatch(actions.setNameQuery({ nameQuery }));
+	};
+
+	const setPage = (page: number) => {
+		dispatch(actions.setPage({ page }));
+	};
+
+	const setItemsPerPage = (itemsPerPage: number) => {
+		dispatch(actions.setItemsPerPage({ itemsPerPage }));
 	};
 
 	const joinClan = (id: string) => {
@@ -71,6 +75,15 @@ const Clans: React.FC = () => {
 				joinClan={joinClan}
 				leaveClan={leaveClan}
 				handleGoToClan={handleGoToClan}
+				page={page}
+				setPage={setPage}
+				itemsPerPage={itemsPerPage}
+				setItemsPerPage={setItemsPerPage}
+				order={order}
+				orderBy={orderBy}
+				count={count}
+				nameQuery={nameQuery}
+				isLoading={isLoading}
 			/>
 		</div>
 	);
