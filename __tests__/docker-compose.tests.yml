@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: codetrainer_test
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data:rw
+
+  backend:
+    image: backend:latest
+    container_name: backend
+    environment:
+      TYPEORM_DATABASE: codetrainer_test
+      TYPEORM_HOST: db
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3"
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+    volumes:
+      - "rabbitmq_data:/data"
+
+volumes:
+  pg_data:
+  rabbitmq_data:
