@@ -100,9 +100,9 @@ export class SolutionService {
 		return solutions;
 	}
 
-	async setResult(data: ISolutionResult) {
+	async setResult({ token, ...data }: ISolutionResult) {
 		console.info('result => ', data);
-		const { id } = verifyToken(data.token, TokenTypes.ACCESS);
+		const { id } = verifyToken(token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
 		}
