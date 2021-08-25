@@ -11,6 +11,7 @@ interface IFormInputProps extends FieldProps {
 	label?: string;
 	type: string;
 	placeholder: string;
+	readonly?: boolean;
 	showForgotPassword: boolean;
 }
 
@@ -19,6 +20,7 @@ const FormInput: React.FC<IFormInputProps> = ({
 	label,
 	type: initialType,
 	placeholder,
+	readonly,
 	field: { name, value, onChange },
 	form: { errors, touched },
 	showForgotPassword = false,
@@ -27,7 +29,6 @@ const FormInput: React.FC<IFormInputProps> = ({
 	const isTouched = getIn(touched, name);
 	const [type, setType] = useState(initialType);
 	const isPasswordField = initialType === 'password';
-
 	const togglePasswordVisibility = () => {
 		const newType = type === 'password' ? 'text' : 'password';
 		setType(newType);
@@ -55,6 +56,7 @@ const FormInput: React.FC<IFormInputProps> = ({
 					value={value}
 					type={type}
 					placeholder={placeholder}
+					readOnly={readonly}
 					className={isPasswordField ? styles.passwordField : styles.inputField}
 				/>
 				{isPasswordField && (

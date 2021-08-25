@@ -1,0 +1,15 @@
+.creationsSection {
+	&Description {
+		flex-basis: 50%;
+	}
+
+	&Logo {
+		flex-basis: 40%;
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+}

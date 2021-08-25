@@ -15,10 +15,25 @@ export function* fetchSearch({ partialFilter }: ReturnType<typeof actions.search
 	}
 }
 
+export function* fetchSearchNextPage({ partialFilter }: ReturnType<typeof actions.searchFetchData>) {
+	try {
+		yield put(actions.searchBeforeFetchNextPage());
+		const data: ISearchState['search'] = yield call(fetchTasksSearch, partialFilter);
+		yield put(actions.searchSuccess());
+		yield put(actions.searchAddDataNextPage({ data }));
+	} catch (error) {
+		yield put(actions.searchError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));
+	}
+}
+
 function* watchFetchSearch() {
 	yield takeLatest(actionTypes.SEARCH_FETCH, fetchSearch);
 }
 
+function* watchFetchNextPage() {
+	yield takeLatest(actionTypes.SEARCH_FETCH_NEXT_PAGE, fetchSearchNextPage);
+}
+
 export default function* SearchSaga() {
-	yield all([watchFetchSearch()]);
+	yield all([watchFetchSearch(), watchFetchNextPage()]);
 }

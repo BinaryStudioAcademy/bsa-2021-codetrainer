@@ -1,0 +1,33 @@
+@import 'styles/variables';
+
+.section {
+	padding: 160px 0;
+
+	&Container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&Title {
+		color: $cornflower-blue;
+		font: 700 48px $base-font-family;
+	}
+
+	&Text {
+		color: $cornflower-blue;
+		font: 500 24px $base-font-family;
+
+		p {
+			margin-top: 0;
+
+			&:not(:last-of-type) {
+				margin-bottom: 50px;
+			}
+		}
+	}
+
+	&Filled {
+		background-color: rgba($color: $cornflower-blue, $alpha: 0.1);
+	}
+}

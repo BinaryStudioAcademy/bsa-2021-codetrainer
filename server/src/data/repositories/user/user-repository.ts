@@ -66,6 +66,13 @@ export class UserRepository extends AbstractRepository<User> {
 		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
 
+	getPasswordById(id: string) {
+		return this.createQueryBuilder('user')
+			.select(['user.password'])
+			.where('user.id = :id', { id })
+			.getOne();
+	}
+	
 	search(query: { username: string }) {
 		const { username } = query;
 		return this.createQueryBuilder('user')

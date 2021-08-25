@@ -21,7 +21,7 @@ const Select = ({ values, activeValue, onChange, isButtonBlockSelect }: ISelectP
 			<div className={wrapperClass}>
 				<h5 className={styles.select} onClick={() => setOptionsListActive(!optionsListActive)}>
 					{activeValue?.icon && <img src={activeValue?.icon} alt="icon" />}
-					{activeValue?.title}
+					<span>{activeValue?.title}</span>
 				</h5>
 				<ul className={listStyles}>
 					{values.map((value, index) => (

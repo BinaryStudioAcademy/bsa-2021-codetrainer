@@ -18,6 +18,7 @@ const Header: React.FC = () => {
 		mark: 400,
 		listItems: getListItems(),
 		onReadNotification: (id) => dispatch(notificationsActions.readNotification({ id })),
+		avatar: user?.avatar,
 	};
 
 	return <HeaderComponent {...headerProps} />;
