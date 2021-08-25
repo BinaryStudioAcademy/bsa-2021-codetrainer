@@ -21,7 +21,7 @@ export const SideBar: React.FC<ISideBar> = ({ sideBar, onClick, activeId }) => (
 				className={clsx(styles.item, { [styles.active]: id === activeId })}
 				onClick={() => onClick(id)}
 			>
-				<span>{title}</span> {count !== undefined && <span>({count})</span>}
+				<span>{title}</span> {activeId === id && count !== undefined && <span>({count})</span>}
 			</div>
 		))}
 	</div>
