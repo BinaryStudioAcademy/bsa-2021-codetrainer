@@ -15,5 +15,19 @@
 
 	&Link {
 		color: #fff;
+
+		&Logo {
+			vertical-align: middle;
+			filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(344deg) brightness(101%) contrast(101%);
+			margin-right: 10px;
+		}
+	}
+
+	&Logo {
+		height: 50px;
+
+		img {
+			height: 100%;
+		}
 	}
 }
