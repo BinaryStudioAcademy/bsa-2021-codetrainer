@@ -3,6 +3,7 @@ import { getEnv } from '../../../helpers';
 const variables = process.env;
 
 const ENV = {
+	DEVELOPMENT: variables?.NODE_ENV === 'development',
 	APP: {
 		PORT: getEnv('PORT'),
 		API_PATH: '/api',

@@ -1,6 +1,7 @@
 import { ENV } from '../enum';
 
 export const STAGING_URL = 'https://staging.codetrain.xyz';
+export const LOCAL_HOST_URL = `http://localhost:${ENV.APP.PORT}`;
 
 export const CORS_ORIGIN_URLS = [`http://localhost:${ENV.APP.PORT}/`, `http://localhost:${ENV.APP.PORT}`, STAGING_URL];
 
