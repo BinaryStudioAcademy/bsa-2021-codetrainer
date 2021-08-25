@@ -24,7 +24,7 @@ export const ROUTES = {
 
 	Collections: '/collections',
 
-	Task: '/task',
+	TaskInfo: '/challenge-info',
 
 	Community: '/followers/community',
 };

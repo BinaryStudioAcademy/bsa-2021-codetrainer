@@ -10,6 +10,7 @@ import { IHomeState } from '../containers/home-page/logic/state';
 import { ISearchState } from 'containers/search-page/logic/state';
 import { ISettingsState } from '../containers/setting-page/logic/state';
 import { IHeaderState } from 'containers/header/logic/state';
+import { ITaskState } from 'containers/task/logic/state';
 
 export interface IRootState {
 	notification: INotificationState;
@@ -24,4 +25,5 @@ export interface IRootState {
 	settings: ISettingsState;
 	header: IHeaderState;
 	theme: IThemeState;
+	task: ITaskState;
 }

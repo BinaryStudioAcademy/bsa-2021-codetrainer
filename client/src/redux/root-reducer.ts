@@ -12,6 +12,7 @@ import { searchReducer } from 'containers/search-page/logic/reducer';
 import { settingsReducer } from './../containers/setting-page/logic/reducer';
 import { headerReducer } from 'containers/header/logic/reducer';
 import { themeReducer } from 'containers/theme-switcher/logic/reducer';
+import { taskReducer } from 'containers/task/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,
@@ -26,6 +27,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	settings: settingsReducer,
 	header: headerReducer,
 	theme: themeReducer,
+	task: taskReducer,
 });
 
 export default rootReducer;

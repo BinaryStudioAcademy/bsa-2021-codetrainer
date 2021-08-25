@@ -27,12 +27,19 @@ declare namespace WebApi.Entities {
 		profileUrl?: string;
 	}
 
+	export interface ITag {
+		id: string;
+		name: string;
+	}
+
 	export interface ITask {
 		id: string | null;
-		name?: string;
+		name: string;
+		discipline?: string;
 		description?: string;
-		// tags?: string[],
-		rank?: number;
+		exampleTestCases?: string;
+		rank: number;
+		tags: ITag[];
 		status?: TaskStatus;
 	}
 

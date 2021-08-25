@@ -94,7 +94,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute
 				exact
 				restricted={false}
-				path={ROUTES.Task}
+				path={ROUTES.TaskInfo + '/:id'}
 				component={TaskPageContainer}
 				needHeader={true}
 				needSideBar={true}

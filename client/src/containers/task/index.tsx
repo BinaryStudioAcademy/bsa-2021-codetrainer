@@ -3,6 +3,13 @@ import React from 'react';
 import { useState, useCallback, useMemo } from 'react';
 import { ITabItem } from 'components/pages/task/tabs-router';
 import { Details } from './details';
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import * as actions from './logic/actions';
+import { IRootState } from 'typings/root-state';
+import { Redirect } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -11,6 +18,14 @@ export enum ActiveTabId {
 }
 
 export const TaskPageContainer = () => {
+	const { id } = useParams<{ id: string }>();
+	const dispatch = useDispatch();
+	const notFound = useSelector((state: IRootState) => state.task.notFound);
+
+	useEffect(() => {
+		dispatch(actions.getTask({ id }));
+	}, []);
+
 	const [activeTabId, setActiveTabId] = useState(ActiveTabId.Details);
 
 	const setActiveTab = useCallback((tabId: ActiveTabId) => {
@@ -38,6 +53,10 @@ export const TaskPageContainer = () => {
 			} as ITabItem;
 		});
 	}, [setActiveTab]);
+
+	if (notFound) {
+		return <Redirect to={ROUTES.NotFound} />;
+	}
 
 	return (
 		<Task
