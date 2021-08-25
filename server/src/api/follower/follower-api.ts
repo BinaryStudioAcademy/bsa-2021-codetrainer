@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { FollowersApiPath, REQ_TYPE } from '../../common';
 import { FollowersService } from '../../services';
 import { dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
-import { UserRepository } from '../../data';
 
 export const initFollower = (appRouter: typeof Router, services: { follower: FollowersService }) => {
 	const { follower: followerService } = services;
