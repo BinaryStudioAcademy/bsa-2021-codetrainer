@@ -40,7 +40,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 					{clan.createdAt.getDate()} {getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>
 			</TableCell>
-			<TableCell >
+			<TableCell>
 				<span>{clan.honor}</span>
 			</TableCell>
 			<TableCell>
@@ -54,7 +54,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 					</Button>
 				)}
 			</TableCell>
-		</TableRow >
+		</TableRow>
 	);
 };
 

@@ -17,6 +17,6 @@ export interface IClansListProps {
 	nameQuery: string;
 	page: number;
 	itemsPerPage: number;
-	setPage: (page: number) => void
-	setItemsPerPage: (itemsPerPage: number) => void
+	setPage: (page: number) => void;
+	setItemsPerPage: (itemsPerPage: number) => void;
 }

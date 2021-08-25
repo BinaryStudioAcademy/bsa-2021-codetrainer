@@ -9,11 +9,17 @@ export interface TFetchClansArgs {
 	page: number;
 	itemsPerPage: number;
 	order: Order;
-	orderBy: ClansOrderByOptions,
+	orderBy: ClansOrderByOptions;
 	nameQuery: string;
 }
 
-export const fetchClans = async ({ page, itemsPerPage, order, orderBy, nameQuery }: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
+export const fetchClans = async ({
+	page,
+	itemsPerPage,
+	order,
+	orderBy,
+	nameQuery,
+}: TFetchClansArgs): Promise<WebApi.Entities.IClan | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
@@ -23,7 +29,7 @@ export const fetchClans = async ({ page, itemsPerPage, order, orderBy, nameQuery
 				skip: page * itemsPerPage,
 				order: order.toUpperCase(),
 				orderBy,
-				...(nameQuery.length ? { nameQuery } : {})
+				...(nameQuery.length ? { nameQuery } : {}),
 			},
 		});
 

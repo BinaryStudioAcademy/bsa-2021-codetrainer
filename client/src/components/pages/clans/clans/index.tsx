@@ -6,7 +6,25 @@ import { Button } from 'components';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 
-const ClansPage: React.FC<IClansProps> = ({ isLoading, user, clans, joinClan, leaveClan, setOrderBy, setOrder, handleGoToClan, setNameQuery, nameQuery, order, orderBy, page, setPage, count, itemsPerPage, setItemsPerPage }) => {
+const ClansPage: React.FC<IClansProps> = ({
+	isLoading,
+	user,
+	clans,
+	joinClan,
+	leaveClan,
+	setOrderBy,
+	setOrder,
+	handleGoToClan,
+	setNameQuery,
+	nameQuery,
+	order,
+	orderBy,
+	page,
+	setPage,
+	count,
+	itemsPerPage,
+	setItemsPerPage,
+}) => {
 	return (
 		<>
 			<div className={styles.container}>

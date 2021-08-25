@@ -49,7 +49,24 @@ const useStyles = makeStyles(() =>
 	}),
 );
 
-const ClansList: React.FC<IClansListProps> = ({ clans, count, isLoading, userId, order, orderBy, nameQuery, page, itemsPerPage, setPage, setItemsPerPage, joinClan, leaveClan, setOrderBy, setOrder, setNameQuery }) => {
+const ClansList: React.FC<IClansListProps> = ({
+	clans,
+	count,
+	isLoading,
+	userId,
+	order,
+	orderBy,
+	nameQuery,
+	page,
+	itemsPerPage,
+	setPage,
+	setItemsPerPage,
+	joinClan,
+	leaveClan,
+	setOrderBy,
+	setOrder,
+	setNameQuery,
+}) => {
 	const [isNameFieldOpen, setNameFieldOpen] = useState(false);
 
 	const classes = useStyles();
@@ -72,7 +89,7 @@ const ClansList: React.FC<IClansListProps> = ({ clans, count, isLoading, userId,
 	const handleNameSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPage(0);
 		setNameQuery(e.target.value);
-	}
+	};
 
 	return (
 		<Paper className={classes.paper}>
@@ -141,17 +158,23 @@ const ClansList: React.FC<IClansListProps> = ({ clans, count, isLoading, userId,
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{isLoading ? <TableRow><TableCell colSpan={7}><Spinner /></TableCell></TableRow> :
-							clans
-								.map((clan: WebApi.Entities.IClan) => (
-									<ClanItem
-										joinClan={joinClan}
-										leaveClan={leaveClan}
-										clan={clan}
-										key={clan.id}
-										userId={userId}
-									/>
-								))}
+						{isLoading ? (
+							<TableRow>
+								<TableCell colSpan={7}>
+									<Spinner />
+								</TableCell>
+							</TableRow>
+						) : (
+							clans.map((clan: WebApi.Entities.IClan) => (
+								<ClanItem
+									joinClan={joinClan}
+									leaveClan={leaveClan}
+									clan={clan}
+									key={clan.id}
+									userId={userId}
+								/>
+							))
+						)}
 					</TableBody>
 				</Table>
 			</TableContainer>

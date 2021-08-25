@@ -6,7 +6,7 @@ export enum ClansOrderByOptions {
 	BY_RANK = 'rank',
 	BY_TIME = 'createdAt',
 	BY_NAME = 'name',
-	BY_HONOR = 'honor'
+	BY_HONOR = 'honor',
 }
 
 export interface IClansState {
@@ -14,7 +14,7 @@ export interface IClansState {
 		page: number;
 		itemsPerPage: number;
 		orderBy: ClansOrderByOptions;
-		order: Order,
+		order: Order;
 		nameQuery: string;
 	};
 	data: WebApi.Entities.TClans;
@@ -29,10 +29,10 @@ export const initialState: IClansState = {
 		itemsPerPage: 5,
 		orderBy: ClansOrderByOptions.BY_NAME,
 		order: Order.ASC,
-		nameQuery: ''
+		nameQuery: '',
 	},
 	data: [],
 	isLoading: false,
 	errors: [],
-	count: 0
+	count: 0,
 };

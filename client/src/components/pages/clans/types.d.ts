@@ -24,8 +24,8 @@ export interface IClansProps {
 	page: number;
 	itemsPerPage: number;
 	count: number;
-	setPage: (page: number) => void
-	setItemsPerPage: (itemsPerPage: number) => void
+	setPage: (page: number) => void;
+	setItemsPerPage: (itemsPerPage: number) => void;
 }
 
 export interface IClanProps {

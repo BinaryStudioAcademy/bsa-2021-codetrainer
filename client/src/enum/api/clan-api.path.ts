@@ -1,4 +1,4 @@
 export const ClanApiPath = {
-    SEARCH: 'clan/search',
-    ROOT: 'clan/',
+	SEARCH: 'clan/search',
+	ROOT: 'clan/',
 };

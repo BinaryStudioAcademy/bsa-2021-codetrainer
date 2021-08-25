@@ -18,8 +18,6 @@ export const SET_NAME_QUERY = 'CLANS:SET_NAME_QUERY';
 export const SET_PAGE = 'CLANS:SET_PAGE';
 export const SET_ITEMS_PER_PAGE = 'CLANS:SET_ITEMS_PER_PAGE';
 
-
-
 export interface IAddClansArgs {
 	clans: WebApi.Entities.TClans;
 	count: number;
@@ -57,7 +55,6 @@ export interface ISetOrderArgs {
 export interface ISetNameQueryArgs {
 	nameQuery: string;
 }
-
 
 export interface ISetPageArgs {
 	page: number;

@@ -26,7 +26,7 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 		return {
 			...state,
 			data: [...state.data, ...clans],
-			count
+			count,
 		};
 	},
 	[actionTypes.ADD_ERROR](state, { error }: actionTypes.IAddErrorArgs) {
