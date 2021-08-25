@@ -1,10 +1,11 @@
-import { io, Socket } from 'socket.io-client';
+import { io, Socket, SocketOptions, ManagerOptions } from 'socket.io-client';
 import { AccessToken } from '../auth/access-token';
 import { SOCKET_EVENTS, SOCKET_URL } from 'constants/socket-constants';
 
 export class CustomSocket {
 	private socket: Socket;
-	private options = {
+	private options: Partial<SocketOptions & ManagerOptions> = {
+		withCredentials: true,
 		autoConnect: false,
 	};
 	private url = process.env.NODE_ENV === 'development' ? SOCKET_URL.LOCAL : SOCKET_URL.STAGING;
