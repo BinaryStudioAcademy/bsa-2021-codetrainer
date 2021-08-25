@@ -7,29 +7,39 @@ import historyHelper from 'helpers/history.helper';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from '../../notification/logic/models';
 import { ROUTES } from 'constants/routes';
+import { ClansOrderByOptions } from './logic/state';
+import { Order } from 'helpers/table-helper';
 
 const Clans: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const clans = useSelector((state: IRootState) => state.clans.data);
-	const currentSort = useSelector((state: IRootState) => state.clans.options.sortBy);
+	const { data: clans, isLoading, count } = useSelector((state: IRootState) => state.clans);
+	const { orderBy, order, nameQuery, page, itemsPerPage } = useSelector((state: IRootState) => state.clans.options);
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 
 	useEffect(() => {
 		dispatch(actions.clearClans());
 		dispatch(actions.fetchClans());
-	}, []);
+	}, [orderBy, order, nameQuery, page, itemsPerPage]);
 
-	const sortByRank = () => {
-		dispatch(actions.sortClansByRank());
+	const setOrderBy = (orderBy: ClansOrderByOptions) => {
+		dispatch(actions.setOrderBy({ orderBy }));
 	};
 
-	const sortByTime = () => {
-		dispatch(actions.sortClansByTime());
+	const setOrder = (order: Order) => {
+		dispatch(actions.setOrder({ order }));
 	};
 
-	const sortBySize = () => {
-		dispatch(actions.sortClansBySize());
+	const setNameQuery = (nameQuery: string) => {
+		dispatch(actions.setNameQuery({ nameQuery }));
+	};
+
+	const setPage = (page: number) => {
+		dispatch(actions.setPage({ page }));
+	};
+
+	const setItemsPerPage = (itemsPerPage: number) => {
+		dispatch(actions.setItemsPerPage({ itemsPerPage }));
 	};
 
 	const joinClan = (id: string) => {
@@ -58,13 +68,22 @@ const Clans: React.FC = () => {
 			<ClansPage
 				clans={clans}
 				user={user}
-				sortByRank={sortByRank}
-				sortByTime={sortByTime}
-				sortBySize={sortBySize}
-				currentSort={currentSort}
+				setOrderBy={setOrderBy}
+				setOrder={setOrder}
+				setNameQuery={setNameQuery}
+				currentSort={order}
 				joinClan={joinClan}
 				leaveClan={leaveClan}
 				handleGoToClan={handleGoToClan}
+				page={page}
+				setPage={setPage}
+				itemsPerPage={itemsPerPage}
+				setItemsPerPage={setItemsPerPage}
+				order={order}
+				orderBy={orderBy}
+				count={count}
+				nameQuery={nameQuery}
+				isLoading={isLoading}
 			/>
 		</div>
 	);

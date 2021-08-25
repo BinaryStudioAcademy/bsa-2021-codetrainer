@@ -19,8 +19,9 @@ import {
 	TextField,
 } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
-import { getComparator, Order, SortOrder } from 'helpers/table-helper';
+import { Order } from 'helpers/table-helper';
 import columns from './columns.json';
+import { Spinner } from 'components/common';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -48,22 +49,17 @@ const useStyles = makeStyles(() =>
 	}),
 );
 
-const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveClan }) => {
-	const [order, setOrder] = useState<Order>(Order.ASC);
-	const [orderBy, setOrderBy] = useState<any>('name');
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+const ClansList: React.FC<IClansListProps> = ({ clans, count, isLoading, userId, order, orderBy, nameQuery, page, itemsPerPage, setPage, setItemsPerPage, joinClan, leaveClan, setOrderBy, setOrder, setNameQuery }) => {
 	const [isNameFieldOpen, setNameFieldOpen] = useState(false);
-	const [nameFieldValue, setNameFieldValue] = useState('');
 
 	const classes = useStyles();
+
 	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
 	};
 
 	const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRowsPerPage(parseInt(event.target.value, 10));
+		setItemsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
 
@@ -72,6 +68,11 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 		setOrder(isAsc ? Order.DESC : Order.ASC);
 		setOrderBy(property);
 	};
+
+	const handleNameSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPage(0);
+		setNameQuery(e.target.value);
+	}
 
 	return (
 		<Paper className={classes.paper}>
@@ -108,12 +109,8 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 													<Search />
 													{isNameFieldOpen && (
 														<TextField
-															value={nameFieldValue}
-															onChange={(
-																e: React.ChangeEvent<HTMLInputElement>,
-															): void => {
-																setNameFieldValue(e.target.value);
-															}}
+															value={nameQuery}
+															onChange={handleNameSearchChange}
 															type="search"
 														/>
 													)}
@@ -144,27 +141,25 @@ const ClansList: React.FC<IClansListProps> = ({ clans, userId, joinClan, leaveCl
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{clans
-							.filter((clan) => clan.name.toLowerCase().toString().includes(nameFieldValue.toLowerCase()))
-							.sort(orderBy ? getComparator(orderBy, order) : (): SortOrder => 0)
-							.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-							.map((clan: WebApi.Entities.IClan) => (
-								<ClanItem
-									joinClan={joinClan}
-									leaveClan={leaveClan}
-									clan={clan}
-									key={clan.id}
-									userId={userId}
-								/>
-							))}
+						{isLoading ? <TableRow><TableCell colSpan={7}><Spinner /></TableCell></TableRow> :
+							clans
+								.map((clan: WebApi.Entities.IClan) => (
+									<ClanItem
+										joinClan={joinClan}
+										leaveClan={leaveClan}
+										clan={clan}
+										key={clan.id}
+										userId={userId}
+									/>
+								))}
 					</TableBody>
 				</Table>
 			</TableContainer>
 			<TablePagination
 				rowsPerPageOptions={[5, 10, 25]}
 				component="div"
-				count={clans.length}
-				rowsPerPage={rowsPerPage}
+				count={count}
+				rowsPerPage={itemsPerPage}
 				page={page}
 				onPageChange={handleChangePage}
 				onRowsPerPageChange={handleChangeRowsPerPage}
