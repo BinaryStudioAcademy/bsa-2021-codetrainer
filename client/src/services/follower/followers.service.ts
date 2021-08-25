@@ -23,10 +23,10 @@ export const getCommunityByUserId = async (id: string): Promise<Array<string>> =
 	const { followers: userFollowers } = await getFollowersByUserId(id);
 	const { followings: userFollowings } = await getFollowingsByUserId(id);
 	const userCommunity: string[] = [];
-	userFollowers.forEach((follower: { id: string; user: string }) => {
-		userFollowings.forEach((following: { id: string; user: string }) => {
-			if (follower.user === following.user) {
-				userCommunity.push(follower.user);
+	userFollowers.forEach(({user}:any) => {
+		userFollowings.forEach(({following}:any) => {
+			if (user.id === following.id) {
+				userCommunity.push(user.id);
 			}
 		});
 	});
