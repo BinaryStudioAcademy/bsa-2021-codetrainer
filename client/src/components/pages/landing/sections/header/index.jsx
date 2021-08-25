@@ -2,8 +2,12 @@ import React from 'react';
 import Container from '../../common/container';
 import Navigation from './navigation';
 import styles from './header.module.scss';
+import { useHistory } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
 const Header = () => {
+	const history = useHistory();
+
 	return (
 		<header className={styles.header}>
 			<Navigation />
@@ -14,7 +18,9 @@ const Header = () => {
 					<p className={styles.headerText}>
 						Improve your skills by training with others on real code challenges
 					</p>
-					<button className={styles.headerButton}>Sign up</button>
+					<button className={styles.headerButton} onClick={() => history.push(ROUTES.SignUp)}>
+						Sign up
+					</button>
 				</div>
 			</Container>
 		</header>
