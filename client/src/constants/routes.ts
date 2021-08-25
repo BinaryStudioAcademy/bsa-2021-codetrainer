@@ -17,12 +17,13 @@ export const ROUTES = {
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
+	TaskTrain: '/task/:id/train',
 
 	Setting: '/setting',
-
-	Landing: '/landing',
 
 	Github: '/github',
 
 	Collections: '/collections',
+
+	Community: '/followers/community',
 };

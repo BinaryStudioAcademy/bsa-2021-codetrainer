@@ -290,7 +290,7 @@ object Fib {
 ].map((solution) => ({ id: uniqueId('solution'), ...solution }));
 
 export type TTaskSolutions = {
-	task: WebApi.Entities.ITask;
+	task: Partial<WebApi.Entities.ITask>;
 	solutions: WebApi.Entities.ISolution[];
 };
 

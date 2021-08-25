@@ -1,3 +1,5 @@
+import { ApiRoutes, HttpMethods } from 'constants/services';
+import { http } from 'services';
 import { WebApi } from 'typings/webapi';
 import {
 	TTaskSolutions,
@@ -5,6 +7,59 @@ import {
 	uncompletedSolutionsMocks,
 } from 'containers/profile/tabs/solutions/mocks';
 import { TLoader } from 'typings/common/loader';
+
+export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ITask | Error> => {
+	try {
+		const { solution } = await http.callWebApi({
+			method: HttpMethods.GET,
+			endpoint: `${ApiRoutes.TASKS}${taskId}/train/user`,
+		});
+
+		return solution;
+	} catch (error) {
+		return error;
+	}
+};
+
+export const submitSolution = async ({ taskId, code }: { code: string; taskId: string }): Promise<unknown | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.POST,
+			endpoint: `${ApiRoutes.TASKS}${taskId}/train`,
+			body: { code },
+		});
+
+		return response;
+	} catch (error) {
+		return error;
+	}
+};
+
+export const editSolution = async ({
+	solutionId,
+	taskId,
+	code,
+}: {
+	solutionId: string;
+	code: string;
+	taskId: string;
+}): Promise<unknown | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.PUT,
+			endpoint: `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`,
+			body: { code },
+		});
+		return response;
+	} catch (error) {
+		return error;
+	}
+};
+
+export interface TSolutionsRequestArgs {
+	skip: number;
+	limit: number;
+}
 
 export type TPrivateSolutionsLoader = TLoader<
 	WebApi.Types.TPaginationRequest,

@@ -24,8 +24,8 @@ export class TaskService {
 			}
 			return tag;
 		};
-		const data = await Promise.all(tags.map(getTag));
-		return data;
+		const newTags = await Promise.all(tags.map(getTag));
+		return newTags;
 	}
 
 	async create(user: User, task: Task, tags: string[] = []) {

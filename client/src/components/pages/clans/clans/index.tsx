@@ -6,17 +6,52 @@ import { Button } from 'components';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 
-const ClansPage: React.FC<IClansProps> = ({ user, clans, joinClan, leaveClan, handleGoToClan }) => {
+const ClansPage: React.FC<IClansProps> = ({
+	isLoading,
+	user,
+	clans,
+	joinClan,
+	leaveClan,
+	setOrderBy,
+	setOrder,
+	handleGoToClan,
+	setNameQuery,
+	nameQuery,
+	order,
+	orderBy,
+	page,
+	setPage,
+	count,
+	itemsPerPage,
+	setItemsPerPage,
+}) => {
 	return (
 		<>
 			<div className={styles.container}>
-				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+				<div className={styles.header}>
 					<h4>Clans</h4>
 					<Button className={clsx(ButtonClasses.blue)} onClick={handleGoToClan}>
 						To my clan
 					</Button>
 				</div>
-				<ClansList joinClan={joinClan} leaveClan={leaveClan} clans={clans} userId={user.id} />
+				<ClansList
+					joinClan={joinClan}
+					isLoading={isLoading}
+					leaveClan={leaveClan}
+					clans={clans}
+					userId={user.id}
+					setOrderBy={setOrderBy}
+					setOrder={setOrder}
+					setNameQuery={setNameQuery}
+					order={order}
+					orderBy={orderBy}
+					nameQuery={nameQuery}
+					page={page}
+					count={count}
+					itemsPerPage={itemsPerPage}
+					setPage={setPage}
+					setItemsPerPage={setItemsPerPage}
+				/>
 			</div>
 		</>
 	);

@@ -30,7 +30,7 @@ const ClanInfo: React.FC<IClanInfoProps> = ({ clan, isOwnClan, leaveClan, joinCl
 				<span>
 					Admin: {clanAdmin?.name} {clanAdmin?.surname}
 				</span>
-				<span>Members: {clan.members.length}</span>
+				<span>Members: {clan.numberOfMembers}</span>
 				{isOwnClan ? (
 					<Button className={ButtonClasses.red} onClick={() => leaveClan()}>
 						Leave

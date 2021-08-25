@@ -1,0 +1,15 @@
+@import 'styles/variables';
+
+.skillsSection {
+	&Description {
+		flex-basis: 50%;
+	}
+
+	&Languages {
+		flex-basis: 40%;
+	}
+
+	.language {
+		filter: invert(86%) sepia(12%) saturate(535%) hue-rotate(203deg) brightness(103%) contrast(98%);
+	}
+}

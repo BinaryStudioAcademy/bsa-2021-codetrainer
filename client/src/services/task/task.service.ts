@@ -18,7 +18,10 @@ interface ICreateTaskBody {
 }
 
 const validationSchema = Yup.object().shape({
-	name: Yup.string().min(1, 'Task name can`t be empty').required('Task name can`t be empty.'),
+	name: Yup.string()
+		.min(1, 'Task name can`t be empty')
+		.max(25, 'Task name is max 25 symbols')
+		.required('Task name can`t be empty.'),
 	discipline: Yup.string().required('discipline can`t be empty.'),
 	rank: Yup.number()
 		.min(1, 'Rank must be a number from 1 to 8.')
@@ -50,8 +53,6 @@ export const createTask = async (requestBody: ICreateTaskBody) => {
 		};
 	}
 	if (validationStatus) {
-		console.log(requestBody);
-
 		const res = await http.callWebApi({
 			method: 'POST',
 			endpoint: `tasks`,
@@ -131,7 +132,7 @@ export const deleteTask = async (taskId: string) => {
 	}
 };
 
-export const getById = async (id: string | null) => {
+export const getTaskById = async (id: string | null) => {
 	if (id === null) {
 		return {
 			error: true,

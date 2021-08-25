@@ -15,7 +15,7 @@ export interface IMessage {
 		name: string;
 	};
 	body: string;
-	createdAt: Date;
+	createdAt: string;
 }
 
 export interface IFeedProps {

@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 :local(.root) {
 	padding: 15px;
 	background-color: var(--background-color);
@@ -5,4 +7,12 @@
 
 :local(.btn) {
 	margin-right: 15px;
+}
+
+.containerBlock {
+	background: var(--container-color);
+	.title {
+		font: $fourth-title-font;
+		padding-left: 10px;
+	}
 }

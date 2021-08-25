@@ -12,14 +12,15 @@ import { ForgotPassword, ChangePassword } from 'containers/recover-password';
 import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
-import { LandingPageCointainer } from 'containers/landing-page';
-import Example from 'containers/example';
+import LandingPageCointainer from 'containers/landing-page';
+// import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
+import TaskTrain from 'containers/task-train';
 import { Redirect, Route } from 'react-router-dom';
 
 interface IRoutingProps {}
@@ -39,11 +40,10 @@ const Routing: React.FC<IRoutingProps> = () => {
 				exact
 				restricted={false}
 				path={ROUTES.Main}
-				component={Example}
+				component={LandingPageCointainer}
 				needHeader={false}
 				needSideBar={false}
 			/>
-			<PublicRoute exact restricted={true} path={ROUTES.Landing} component={LandingPageCointainer} />
 			<PrivateRoute exact path={ROUTES.Home} component={HomePage} needHeader={true} needSideBar={true} />
 			<PrivateRoute
 				exact
@@ -52,6 +52,14 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={true}
 				needSideBar={true}
 			/>
+			<PrivateRoute
+				exact
+				path={ROUTES.TaskInstructions}
+				component={TaskPage}
+				needHeader={true}
+				needSideBar={true}
+			/>
+			<PrivateRoute exact path={ROUTES.TaskTrain} component={TaskTrain} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Users + '/:username'} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />

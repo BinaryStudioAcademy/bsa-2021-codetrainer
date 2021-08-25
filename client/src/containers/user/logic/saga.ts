@@ -3,8 +3,6 @@ import { updateUser, deleteUser } from 'services/settings.service';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 
-
-
 import { all, put, takeEvery, call } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
@@ -31,21 +29,25 @@ function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
 		const { user } = action;
 		yield call(updateUser, user);
 		yield put(actions.setUser({ user }));
-		yield put(setNotificationState({
-			state: {
-				notificationType: NotificationType.Success,
-				message:'User updated',
-				title: 'Update user',
-			},
-		}));
+		yield put(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Success,
+					message: 'User updated',
+					title: 'Update user',
+				},
+			}),
+		);
 	} catch (error) {
-		yield put(setNotificationState({
-			state: {
-				notificationType: NotificationType.Error,
-				message: error.errors.message,
-				title: 'Update user',
-			},
-		}));
+		yield put(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Error,
+					message: error.errors.message,
+					title: 'Update user',
+				},
+			}),
+		);
 	}
 }
 

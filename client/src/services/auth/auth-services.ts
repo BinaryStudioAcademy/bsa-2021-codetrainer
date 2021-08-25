@@ -7,6 +7,7 @@ import { ISignUpForm } from 'typings/sign-up-form';
 import { THttp } from '../http';
 import { AccessToken } from './access-token';
 import { WebApi } from 'typings/webapi';
+import { socket } from '../socket';
 
 export class Auth {
 	private http: THttp;
@@ -26,6 +27,7 @@ export class Auth {
 
 	protected async authorize({ user, token }: { user: WebApi.Entities.IUser; token: string }): Promise<IUser> {
 		AccessToken.setToken(token);
+		socket.connect();
 		return mapUserResponseToUser(user);
 	}
 

@@ -19,27 +19,28 @@ $beta: var(--rank-beta);
 .rank {
 	background: var(--rank-color);
 	display: inline-block;
-	width: 50px;
-	height: 25px;
 	box-sizing: border-box;
 	border: 1px solid;
 	border-radius: 5px;
+	padding: 4px 5px;
 	font: $rank-font;
-	font-style: normal;
-	line-height: 23px;
 	letter-spacing: 0;
 	text-align: center;
 	user-select: none;
+
 	&.easy,
 	&.honor {
 		@include rank-color($easy);
 	}
+
 	&.medium {
 		@include rank-color($medium);
 	}
+
 	&.hard {
 		@include rank-color($hard);
 	}
+
 	&.honor {
 		width: auto;
 		padding: 0 5px;
@@ -49,12 +50,15 @@ $beta: var(--rank-beta);
 	&.beta {
 		@include active-rank-color(($beta));
 	}
+
 	&.active_easy {
 		@include active-rank-color(($easy));
 	}
+
 	&.active_medium {
 		@include active-rank-color(($medium));
 	}
+
 	&.active_hard {
 		@include active-rank-color(($hard));
 	}
