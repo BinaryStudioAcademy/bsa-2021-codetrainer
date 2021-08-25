@@ -93,7 +93,7 @@ export class ClanService {
 		return +(members.reduce((sum, member) => sum + member.rank, 0) / members.length).toFixed();
 	}
 
-	async getClans({ skip = 1, take = 5 }) {
+	async getClans({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.clanRepository);
 		const clans = (await repository.getAll(skip, take)).map((clan) => ({
 			...clan,
