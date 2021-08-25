@@ -1,1 +1,0 @@
-export { LandingPageCointainer } from './LandingPage';
