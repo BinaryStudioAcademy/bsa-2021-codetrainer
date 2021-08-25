@@ -19,17 +19,14 @@ export const getFollowingsByUserId = async (id: string): Promise<Record<string, 
 	return followings;
 };
 
-export const getCommunityByUserId = async (id: string): Promise<Array<string>> => {
-	const { followers: userFollowers } = await getFollowersByUserId(id);
-	const { followings: userFollowings } = await getFollowingsByUserId(id);
-	const userCommunity: string[] = [];
-	userFollowers.forEach(({user}:any) => {
-		userFollowings.forEach(({following}:any) => {
-			if (user.id === following.id) {
-				userCommunity.push(user.id);
-			}
-		});
+export const getCommunityByUserId = async (id: string): Promise<Array<any>> => {
+	const {community: userCommunity} = await http.callWebApi({
+		endpoint: FollowersApiPath.ALL_COMMUNITY + id,
+		method: 'GET',
+		skipAuthorization: false,
 	});
+	console.log(userCommunity);
+	
 	return userCommunity;
 };
 

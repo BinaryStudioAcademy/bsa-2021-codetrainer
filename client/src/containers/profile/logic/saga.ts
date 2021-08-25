@@ -57,6 +57,7 @@ const getISocialUsers = (users: IUser[]) => {
 			name: user.name,
 			clan: {
 				name: user.clan?.name ? user.clan?.name : 'No clan',
+				id: user.clan?.id ?? null
 			} as WebApi.Entities.IClan,
 			honor: user.honor,
 		};
@@ -69,8 +70,7 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		const { user } = yield call(fetchUsersSearch, query);
 		const { followings } = yield call(getFollowingsByUserId, user.id);
 		const { followers } = yield call(getFollowersByUserId, user.id);
-		const community: string[] = yield call(getCommunityByUserId, user.id);
-		
+		const community: IUser[] = yield call(getCommunityByUserId, user.id);
 		const tasks: any[] = yield all(
 			user.tasks.map((taskObj: any) => {
 				const task = call(getTaskById, taskObj.id);
@@ -96,8 +96,8 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 			}),
 		);
 		let communitySocial: any[] = yield all(
-			community.map((community: string) => {
-				const user = call(getUserById, community);
+			community.map((community: IUser) => {
+				const user = call(getUserById, community.id);
 				return user;
 			}),
 		);
