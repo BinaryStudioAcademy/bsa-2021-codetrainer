@@ -1,6 +1,8 @@
+@import 'styles/variables';
+
 .challenge {
 	padding: 25px;
-	background: var(--secondary-container-color);
+	background-color: $white;
 	border-radius: 4px;
 	margin-bottom: 20px;
 }

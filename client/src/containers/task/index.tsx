@@ -1,8 +1,8 @@
 import { Task } from 'components/pages/task';
 import React from 'react';
 import { useState, useCallback, useMemo } from 'react';
-import { DetailsTab } from 'components/pages/task/tabs/detailsTab';
 import { ITabItem } from 'components/pages/task/tabs-router';
+import { Details } from './details';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -20,7 +20,7 @@ export const TaskPageContainer = () => {
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
 			case ActiveTabId.Details: {
-				return <DetailsTab />;
+				return <Details />;
 			}
 			default: {
 				return <div>{activeTabId}</div>;
