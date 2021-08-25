@@ -212,7 +212,7 @@ export class ClanService {
 			rank: this.getRank(clan),
 		}));
 
-		if (query.orderBy === 'rank' || query.orderBy === 'honor') {
+		if (query.orderBy === ClansOrderByOptions.BY_RANK || query.orderBy === ClansOrderByOptions.BY_HONOR) {
 			clansWithRankAndHonor.sort((a, b) => {
 				return query.order === 'ASC'
 					? Number(a[query.orderBy]) - Number(b[query.orderBy])
