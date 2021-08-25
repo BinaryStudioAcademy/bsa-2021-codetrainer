@@ -1,7 +1,15 @@
 import { getCustomRepository } from 'typeorm';
 import { Clan, TClanRepository, TProfileClanRepository, TUserRepository, User } from '../../data';
 import { ValidationError } from '../../helpers';
-import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
+import {
+	ClansOrderByOptions,
+	CLAN_IS_PUBLIC,
+	CLAN_MAX_MEMBERS,
+	CLAN_MEMBER_ROLE,
+	CLAN_MEMBER_STATUS,
+	CODE_ERRORS,
+	Order,
+} from '../../common';
 
 export class ClanService {
 	protected clanRepository: TClanRepository;
@@ -187,17 +195,34 @@ export class ClanService {
 		};
 	}
 
-	async search(query: { order: 'ASC' | 'DESC'; orderBy: string; nameQuery?: string; take: number; skip: number }) {
+	async search(query: {
+		order: Order;
+		orderBy: ClansOrderByOptions;
+		nameQuery?: string;
+		take: number;
+		skip: number;
+	}) {
 		const clanRepository = getCustomRepository(this.clanRepository);
 
 		const result = await clanRepository.search(query);
+
+		const clansWithRankAndHonor = result.data.map((clan) => ({
+			...clan,
+			honor: this.getHonor(clan),
+			rank: this.getRank(clan),
+		}));
+
+		if (query.orderBy === 'rank' || query.orderBy === 'honor') {
+			clansWithRankAndHonor.sort((a, b) => {
+				return query.order === 'ASC'
+					? Number(a[query.orderBy]) - Number(b[query.orderBy])
+					: Number(b[query.orderBy]) - Number(a[query.orderBy]);
+			});
+		}
+
 		return {
 			...result,
-			data: result.data.map((clan) => ({
-				...clan,
-				honor: this.getHonor(clan),
-				rank: this.getRank(clan),
-			})),
+			data: clansWithRankAndHonor,
 		};
 	}
 }

@@ -1,4 +1,5 @@
 import { EntityRepository, Like, Repository } from 'typeorm';
+import { ClansOrderByOptions } from '../../../common';
 import { Clan } from '../../models';
 import { AbstractRepository } from '../abstract';
 
@@ -37,15 +38,21 @@ export class ClanRepository extends AbstractRepository<Clan> {
 			.getMany();
 	}
 
-	async search(query: { orderBy: string; order: 'ASC' | 'DESC'; skip: number; take: number; nameQuery?: string }) {
+	async search(query: {
+		orderBy: ClansOrderByOptions;
+		order: 'ASC' | 'DESC';
+		skip: number;
+		take: number;
+		nameQuery?: string;
+	}) {
 		const { orderBy, order, nameQuery = '', take, skip } = query;
 		const searchQuery = this.createQueryBuilder('clan')
 			.leftJoinAndSelect('clan.members', 'member')
 			.leftJoinAndSelect('member.profileClan', 'profileClan')
 			.where('clan.name ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` });
 
-		if (orderBy !== 'rank' && orderBy !== 'honor') {
-			searchQuery.orderBy(`clan.${orderBy}`, order === 'asc' ? 'ASC' : 'DESC');
+		if (orderBy !== ClansOrderByOptions.BY_RANK && orderBy !== ClansOrderByOptions.BY_HONOR) {
+			searchQuery.orderBy(`clan.${orderBy}`, order);
 		}
 
 		return {

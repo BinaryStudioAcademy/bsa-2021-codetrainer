@@ -10,7 +10,7 @@ const ClansPage: React.FC<IClansProps> = ({ isLoading, user, clans, joinClan, le
 	return (
 		<>
 			<div className={styles.container}>
-				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+				<div className={styles.header}>
 					<h4>Clans</h4>
 					<Button className={clsx(ButtonClasses.blue)} onClick={handleGoToClan}>
 						To my clan

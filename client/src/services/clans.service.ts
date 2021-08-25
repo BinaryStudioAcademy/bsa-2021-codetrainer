@@ -1,5 +1,6 @@
-import { ApiRoutes, HttpMethods } from 'constants/services';
+import { HttpMethods } from 'constants/services';
 import { ClansOrderByOptions } from 'containers/clans/clans/logic/state';
+import { ClanApiPath } from 'enum/api/clan-api.path';
 import { Order } from 'helpers/table-helper';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
@@ -16,22 +17,21 @@ export const fetchClans = async ({ page, itemsPerPage, order, orderBy, nameQuery
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
-			endpoint: `${ApiRoutes.CLANS}/search`,
+			endpoint: ClanApiPath.SEARCH,
 			query: {
 				take: itemsPerPage,
 				skip: page * itemsPerPage,
-				order,
+				order: order.toUpperCase(),
 				orderBy,
 				...(nameQuery.length ? { nameQuery } : {})
 			},
 		});
 
-		// const clans = response.data.map((clan: WebApi.Entities.IMember) => ({
-		// 	...clan,
-		// 	createdAt: new Date(clan.createdAt),
-		// }));
-
-		return response;
+		const clans = response.data.map((clan: WebApi.Entities.IClan) => ({
+			...clan,
+			createdAt: new Date(clan.createdAt),
+		}));
+		return { ...response, data: clans };
 	} catch (error) {
 		return error;
 	}
@@ -41,7 +41,7 @@ export const fetchClan = async (id: string): Promise<WebApi.Entities.IClan | Err
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
-			endpoint: `${ApiRoutes.CLANS}${id}`,
+			endpoint: `${ClanApiPath.ROOT}${id}`,
 		});
 
 		const clan = {
@@ -65,7 +65,7 @@ export const toggleClanMember = async (
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.PATCH,
-			endpoint: `${ApiRoutes.CLANS}${id}`,
+			endpoint: `${ClanApiPath.ROOT}${id}`,
 		});
 
 		const { clan, user } = response;
@@ -89,7 +89,7 @@ export const toggleClanMember = async (
 export const deleteClan = async () => {
 	const result = await http.callWebApi({
 		method: HttpMethods.DELETE,
-		endpoint: ApiRoutes.CLANS,
+		endpoint: ClanApiPath.ROOT,
 		skipAuthorization: false,
 	});
 	console.log(result);

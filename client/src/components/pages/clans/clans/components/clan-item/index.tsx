@@ -26,7 +26,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 	return (
 		<TableRow className={styles.clanRow}>
 			<TableCell>
-				<Rank rank={clan.rank ?? 9} />
+				<Rank rank={clan.rank ?? 0} />
 			</TableCell>
 			<TableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
 			<TableCell>
@@ -37,7 +37,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 			</TableCell>
 			<TableCell>
 				<span>
-					{new Date(clan.createdAt).getDate()} {getMonthName(new Date(clan.createdAt))} {(new Date(clan.createdAt)).getFullYear()}
+					{clan.createdAt.getDate()} {getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
 				</span>
 			</TableCell>
 			<TableCell >

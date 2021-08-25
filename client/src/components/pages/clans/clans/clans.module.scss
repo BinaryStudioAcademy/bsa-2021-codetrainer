@@ -3,23 +3,9 @@
 .container {
 	width: 100%;
 	margin: 0 auto;
-}
-
-.sectionHeader {
-	color: $nobel;
-	padding: 20px;
-	margin-bottom: 20px;
-	background: $zircon;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	h1 {
-		margin: 0;
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
 	}
-}
-
-.clansSection {
-	display: grid;
-	grid-template-columns: 2fr 5fr;
-	gap: 20px;
 }

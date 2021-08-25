@@ -2,10 +2,11 @@ import { Order } from 'helpers/table-helper';
 import { WebApi } from 'typings/webapi';
 
 export enum ClansOrderByOptions {
-	BY_SIZE = 'size',
+	BY_SIZE = 'numberOfMembers',
 	BY_RANK = 'rank',
-	BY_TIME = 'createAt',
-	BY_NAME = 'name'
+	BY_TIME = 'createdAt',
+	BY_NAME = 'name',
+	BY_HONOR = 'honor'
 }
 
 export interface IClansState {
