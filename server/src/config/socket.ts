@@ -5,7 +5,6 @@ export const socketOptions: Partial<ServerOptions> = {
 	cors: {
 		origin: ENV.DEVELOPMENT ? LOCAL_HOST_URL : STAGING_URL,
 		methods: ['GET', 'POST'],
-		// allowedHeaders: ['my-custom-header'],
 		credentials: true,
 	},
 };
