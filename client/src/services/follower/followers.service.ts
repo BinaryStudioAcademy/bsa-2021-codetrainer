@@ -1,7 +1,7 @@
 import { http } from 'services';
 import { FollowersApiPath } from 'enum';
 
-export const getFollowersByUserId = async (id: string) => {
+export const getFollowersByUserId = async (id: string): Promise<Record<string, any>> => {
 	const followers = await http.callWebApi({
 		endpoint: FollowersApiPath.ALL_FOLLOWERS + id,
 		method: 'GET',
@@ -10,7 +10,7 @@ export const getFollowersByUserId = async (id: string) => {
 	return followers;
 };
 
-export const getFollowingsByUserId = async (id: string) => {
+export const getFollowingsByUserId = async (id: string): Promise<Record<string, any>> => {
 	const followings = await http.callWebApi({
 		endpoint: FollowersApiPath.ALL_FOLLOWINGS + id,
 		method: 'GET',
@@ -19,7 +19,7 @@ export const getFollowingsByUserId = async (id: string) => {
 	return followings;
 };
 
-export const getCommunityByUserId = async (id: string) => {
+export const getCommunityByUserId = async (id: string): Promise<Array<string>> => {
 	const { followers: userFollowers } = await getFollowersByUserId(id);
 	const { followings: userFollowings } = await getFollowingsByUserId(id);
 	const userCommunity: string[] = [];
