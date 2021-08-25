@@ -11,7 +11,6 @@ export class CustomSocket {
 	constructor() {
 		this.socket = io(this.url, this.options);
 		this.socket.on(SOCKET_EVENTS.CONNECT_ERROR, this.connectError.bind(this));
-		this.socket.on(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, this.result.bind(this));
 	}
 
 	connect() {
@@ -31,10 +30,6 @@ export class CustomSocket {
 
 	emit(event: string, ...args: any[]) {
 		this.socket.emit(event, args);
-	}
-
-	result(data: unknown) {
-		console.info('result => ', data);
 	}
 }
 

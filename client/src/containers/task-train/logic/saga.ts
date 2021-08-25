@@ -58,8 +58,6 @@ export function* submitSolutionWorker(solution: ReturnType<typeof actions.submit
 	} else {
 		yield put(actions.setSolution({ solution: response }));
 	}
-
-	yield put(actions.endLoading());
 }
 
 export function* submitSolutionWatcher() {
