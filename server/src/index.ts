@@ -11,7 +11,7 @@ import { swaggerSpec } from './config/swagger';
 import { ENV, WHITE_ROUTES, ApiPath } from './common';
 import { initApi } from './api';
 import { authorizationMiddleware, errorHandlerMiddleware, socketMiddleware } from './middleware';
-import { cookieConfig, corsConfig } from './config';
+import { cookieConfig, corsConfig, socketOptions } from './config';
 import { socketHandler } from './socket';
 
 import 'reflect-metadata';
@@ -22,7 +22,7 @@ import './config/amqplib';
 const app = express();
 
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, socketOptions);
 socketHandler(io);
 
 app.set('trust proxy', 1);
