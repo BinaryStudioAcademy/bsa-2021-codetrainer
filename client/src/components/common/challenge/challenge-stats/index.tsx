@@ -25,7 +25,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 					<div className={styles.challengeStatsItemIcon}>
 						<FontAwesomeIcon icon={faChartBar} size="lg" color="rgba(40, 40, 40, 0.5)" />
 					</div>
-					{positiveFeedback} positive feedback
+					{positiveFeedback}% positive feedback
 				</div>
 			</div>
 			<div className={styles.challengeStatsItem}>
@@ -35,9 +35,13 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 						<FontAwesomeIcon icon={faUser} size="lg" color="rgba(40, 40, 40, 0.5)" />
 					</div>
 					created{' '}
-					<Link to={author.link} className={styles.challengeStatsItemLink}>
-						{author.firstName} {author.lastName}
-					</Link>
+					{author.firstName || author.lastName ? (
+						<Link to={author.link} className={styles.challengeStatsItemLink}>
+							{author.firstName} {author.lastName}
+						</Link>
+					) : (
+						'unknown'
+					)}
 				</div>
 			</div>
 		</div>

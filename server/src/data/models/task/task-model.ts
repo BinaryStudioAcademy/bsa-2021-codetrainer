@@ -57,4 +57,10 @@ export class Task extends AbstractEntity {
 	@ManyToMany(() => Tag, (tag) => tag.tasks)
 	@JoinTable()
 	tags!: Tag[];
+
+	@Column({ default: 0 })
+	savedToFavorites!: number;
+
+	@Column({ default: 100 })
+	positiveFeedback!: number;
 }

@@ -27,13 +27,25 @@ declare namespace WebApi.Entities {
 		profileUrl?: string;
 	}
 
+	export interface ITask {
+		id: string | null;
+		name?: string;
+		description?: string;
+		tags?: ITag[];
+		rank?: number;
+		status?: TaskStatus;
+		favoriteSaves?: number;
+		positiveFeedback?: number;
+		user?: IUser;
+	}
+
 	export interface ITag {
 		id: string;
 		name: string;
 	}
 
-	export interface ITask {
-		id: string | null;
+	export interface IChallenge {
+		id: string;
 		name: string;
 		discipline?: string;
 		description?: string;
@@ -41,6 +53,9 @@ declare namespace WebApi.Entities {
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
+		savedToFavorites: number;
+		positiveFeedback: number;
+		user: IUser | null;
 	}
 
 	export interface ISolution {

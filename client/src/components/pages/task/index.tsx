@@ -2,33 +2,18 @@ import React from 'react';
 import { TaskInfo } from './task-info';
 import styles from './task.module.scss';
 import { ITabsRouterProps, TabsRouter } from './tabs-router';
+import { IChallenge } from 'components/common/challenge/types';
 
 export interface ITaskProps {
+	task: IChallenge;
 	getTabContent: () => React.ReactNode;
 	tabsRouterProps: ITabsRouterProps;
 }
 
-export const Task = ({ tabsRouterProps, getTabContent }: ITaskProps) => {
-	const challengeProps = {
-		id: 'fdsafsa',
-		author: {
-			firstName: 'fdsa',
-			lastName: 'fdsafdsagfds',
-			link: '',
-		},
-		linkToAuthor: '',
-		title: 'title',
-		rank: 8,
-		stats: {
-			favoriteSaves: 23,
-			positiveFeedback: 88,
-		},
-		tags: ['fdsafdsa', 'fdsafdsewqrwe', 'terwtree'],
-	};
-
+export const Task = ({ task, tabsRouterProps, getTabContent }: ITaskProps) => {
 	return (
 		<div className={styles.container}>
-			<TaskInfo challengeProps={challengeProps} />
+			<TaskInfo challengeProps={task} />
 			<TabsRouter {...tabsRouterProps} />
 			{getTabContent()}
 		</div>

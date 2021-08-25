@@ -9,7 +9,7 @@ export type TGetTask = {
 };
 
 export type TSetTask = {
-	task: WebApi.Entities.ITask;
+	task: WebApi.Entities.IChallenge;
 };
 
 export type TSetNotFound = {

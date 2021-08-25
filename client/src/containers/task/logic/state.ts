@@ -1,7 +1,7 @@
 import { WebApi } from 'typings/webapi';
 
 export interface ITaskState {
-	task: WebApi.Entities.ITask | null;
+	task: WebApi.Entities.IChallenge | null;
 	notFound: boolean;
 }
 

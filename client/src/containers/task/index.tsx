@@ -10,6 +10,7 @@ import * as actions from './logic/actions';
 import { IRootState } from 'typings/root-state';
 import { Redirect } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
+import { FullscreenLoader } from 'components';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -21,6 +22,7 @@ export const TaskPageContainer = () => {
 	const { id } = useParams<{ id: string }>();
 	const dispatch = useDispatch();
 	const notFound = useSelector((state: IRootState) => state.task.notFound);
+	const task = useSelector((state: IRootState) => state.task.task);
 
 	useEffect(() => {
 		dispatch(actions.getTask({ id }));
@@ -58,13 +60,35 @@ export const TaskPageContainer = () => {
 		return <Redirect to={ROUTES.NotFound} />;
 	}
 
-	return (
-		<Task
-			getTabContent={getTabContent}
-			tabsRouterProps={{
-				tabItems,
-				activeTabId,
-			}}
-		/>
-	);
+	if (task) {
+		const taskProps = {
+			id: task.id,
+			author: {
+				firstName: task.user?.name || '',
+				lastName: task.user?.surname || '',
+				link: `${ROUTES.Users}/${task.user?.username}`,
+			},
+			linkToAuthor: `${ROUTES.Users}/${task.user?.username}`,
+			title: task.name,
+			rank: task.rank,
+			stats: {
+				favoriteSaves: task.savedToFavorites,
+				positiveFeedback: task.positiveFeedback,
+			},
+			tags: task?.tags?.map((item) => item.name),
+		};
+
+		return (
+			<Task
+				task={taskProps}
+				getTabContent={getTabContent}
+				tabsRouterProps={{
+					tabItems,
+					activeTabId,
+				}}
+			/>
+		);
+	}
+
+	return <FullscreenLoader />;
 };
