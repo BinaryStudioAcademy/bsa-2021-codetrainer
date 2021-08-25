@@ -62,7 +62,8 @@ export class TaskRepository extends AbstractRepository<Task> {
 	getAll(skip: number, take: number) {
 		return this.createQueryBuilder('task')
 			.leftJoinAndSelect('task.user', 'user')
-			.select(['task', 'user.name', 'user.id'])
+			.leftJoinAndSelect('task.tags', 'tag')
+			.select(['task', 'user.name', 'user.id', 'tag.id', 'tag.name'])
 			.skip(skip)
 			.take(take)
 			.getMany();
@@ -86,7 +87,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task').select('rank').distinct(true).getRawMany();
 	}
 
-	search(query: { where?: IWhere; sort?: TASK_ORDER_BY; userId: string }) {
+	async search(query: { where?: IWhere; sort?: TASK_ORDER_BY; userId: string; skip: number; take: number }) {
 		const searchQuery = filterQuery(
 			this.createQueryBuilder('task')
 				.leftJoinAndSelect('task.tags', 'tag')
@@ -96,8 +97,13 @@ export class TaskRepository extends AbstractRepository<Task> {
 			query.userId,
 			query.where,
 		);
-		return sortQuery(searchQuery, query.sort)
-			.select(['task', 'author.username', 'author.id', 'tag', 'author.name', 'author.surname'])
-			.getMany();
+		return {
+			count: await searchQuery.select('DISTINCT(task.id)').getCount(),
+			tasks: await sortQuery(searchQuery, query.sort)
+				.select(['task', 'author.username', 'author.id', 'tag', 'author.name', 'author.surname'])
+				.skip(query.skip)
+				.take(query.take)
+				.getMany(),
+		};
 	}
 }

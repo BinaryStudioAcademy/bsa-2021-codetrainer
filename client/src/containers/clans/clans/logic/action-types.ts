@@ -1,4 +1,6 @@
+import { Order } from 'helpers/table-helper';
 import { WebApi } from 'typings/webapi';
+import { ClansOrderByOptions } from './state';
 export const START_LOADING = 'CLANS:START_LOADING';
 export const FETCH_CLANS = 'CLANS:FETCH_CLANS';
 export const FETCH_CLAN = 'CLANS:FETCH_CLAN';
@@ -9,12 +11,16 @@ export const ADD_ERROR = 'CLANS:ADD_ERROR';
 export const JOIN_CLAN = 'CLANS:JOIN_CLAN';
 export const LEAVE_CLAN = 'CLANS:LEAVE_CLAN';
 export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
-export const SORT_BY_TIME = 'CLANS:SORT_BY_TIME';
-export const SORT_BY_RANK = 'CLANS:SORT_BY_RANK';
-export const SORT_BY_SIZE = 'CLANS:SORT_BY_SIZE';
+
+export const SET_ORDER_BY = 'CLANS:SET_ORDER_BY';
+export const SET_ORDER = 'CLANS:SET_ORDER';
+export const SET_NAME_QUERY = 'CLANS:SET_NAME_QUERY';
+export const SET_PAGE = 'CLANS:SET_PAGE';
+export const SET_ITEMS_PER_PAGE = 'CLANS:SET_ITEMS_PER_PAGE';
 
 export interface IAddClansArgs {
 	clans: WebApi.Entities.TClans;
+	count: number;
 }
 
 export interface IUpdateClanArgs {
@@ -36,4 +42,24 @@ export interface ILeaveClanArgs {
 
 export interface IAddErrorArgs {
 	error: string;
+}
+
+export interface ISetOrderByArgs {
+	orderBy: ClansOrderByOptions;
+}
+
+export interface ISetOrderArgs {
+	order: Order;
+}
+
+export interface ISetNameQueryArgs {
+	nameQuery: string;
+}
+
+export interface ISetPageArgs {
+	page: number;
+}
+
+export interface ISetItemsPerPageArgs {
+	itemsPerPage: number;
 }

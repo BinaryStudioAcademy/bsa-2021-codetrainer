@@ -19,7 +19,10 @@ interface ITaskTrainPageProps {
 
 const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit }) => {
 	const [code, setCode] = useState<string>(task.preloaded || solution?.code || '');
-	const [languageVersion, setLanguageVersion] = useState({ title: 'Option 1', id: 1 });
+	const [languageVersion, setLanguageVersion] = useState<{ title: string; id: string | null }>({
+		title: 'Option 1',
+		id: '1',
+	});
 
 	const onReset = () => {
 		setCode(task.preloaded || solution?.code || '');
@@ -79,8 +82,8 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit
 							activeValue={languageVersion}
 							onChange={(value) => setLanguageVersion(value)}
 							values={[
-								{ title: 'Option 1', id: 1 },
-								{ title: 'Option 2', id: 2 },
+								{ title: 'Option 1', id: '1' },
+								{ title: 'Option 2', id: '2' },
 							]}
 						/>
 					</div>

@@ -13,21 +13,20 @@
 
 	.socialItem {
 		font: $base-font;
-		color: #686868;
-		background-color: #eaedf2;
+		color: var(--text-color);
+		background-color: var(--secondary-container-color);
 		border-radius: 7px;
 		margin-bottom: 10px;
 		padding: 5px 10px;
 		min-width: 400px;
+		height: 20px;
 		list-style: none;
 		position: relative;
-		cursor: pointer;
 
 		&:hover {
 			background-color: rgb(228, 228, 228);
 			.inputField {
 				background-color: rgb(228, 228, 228);
-				cursor: pointer;
 			}
 		}
 
@@ -35,8 +34,8 @@
 			font: $base-font;
 			outline: none;
 			border: none;
-			background-color: #eaedf2;
-			color: #686868;
+			background-color: var(--secondary-container-color);
+			color: var(--text-color);
 			width: calc(100% - 32px);
 			height: 28px;
 			position: absolute;
@@ -74,7 +73,7 @@
 		}
 		.socialItem {
 			display: inline-block;
-			width: fit-content;
+			width: 100%;
 			min-width: 0;
 		}
 		.unlink {

@@ -1,4 +1,3 @@
-
 export interface IChallengeStats {
 	favoriteSaves: number;
 	positiveFeedback: number;
@@ -29,5 +28,5 @@ export interface IChallenge {
 		favoriteSaves: number;
 		positiveFeedback: number;
 	};
-	tags: TChallengeTags;
+	tags: string[] | [];
 }

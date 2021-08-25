@@ -1,0 +1,56 @@
+[
+    {
+        "id": "rank",
+        "label": "Rank",
+        "style": {
+            "width": "15%"
+        },
+        "isSortable": true
+    },
+    {
+        "id": "avatar",
+        "label": "Avatar",
+        "style": {
+            "width": "15%"
+        }
+    },
+    {
+        "id": "name",
+        "label": "Name",
+        "style": {
+            "width": "20%"
+        },
+        "isSortable": true
+    },
+    {
+        "id": "numberOfMembers",
+        "label": "Size",
+        "style": {
+            "width": "10%"
+        },
+        "isSortable": true
+    },
+    {
+        "id": "createdAt",
+        "label": "Creation Date",
+        "style": {
+            "width": "15%"
+        },
+        "isSortable": true
+    },
+    {
+        "id": "honor",
+        "label": "Honor",
+        "style": {
+            "width": "15%"
+        },
+        "isSortable": true
+    },
+    {
+        "id": "action",
+        "label": "Action",
+        "style": {
+            "width": "15%"
+        }
+    }
+]

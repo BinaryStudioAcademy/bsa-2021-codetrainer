@@ -1,36 +1,46 @@
 import React, { useState } from 'react';
-import { Avatar, Label } from 'components';
+import { ClickAwayListener } from '@material-ui/core';
+import ThemeSwitcher from 'containers/theme-switcher';
+import { Avatar } from 'components';
+import { TNotification } from 'typings/common/INotification';
+import Notification, { mapNotificationToProps } from '../notification';
 import styles from './header.module.scss';
-import bellImg from 'assets/icons/header/bell.svg';
+import { ReactComponent as BellIcon } from 'assets/icons/bell.svg';
+import clsx from 'clsx';
 
 export interface IHeaderProps {
 	name: string;
 	rank: number;
-	notificationCounter: number;
 	mark: number;
 	avatar?: string;
 	listItems: Array<IListItem>;
+	notifications: TNotification[];
+	onReadNotification: (id: string) => void;
 }
 
 interface IListItem {
-	image: string;
+	icon: React.ElementType;
 	text: string;
 	id: string;
-	onClick?: () => void
+	onClick?: () => void;
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
+	const [isNotificationsVisible, setNotificationsVisibility] = useState(false);
 
-	const changeVisible = () => {
-		setListVisibility(!isListVisible);
-	};
-
-	const getListItem = ({ image, text, id, onClick = () => { } }: IListItem) => {
+	const getListItem = ({ icon: Icon, text, id, onClick = () => {} }: IListItem) => {
 		return (
-			<li className={styles.navigationItem} key={id} onClick={() => { onClick(); changeVisible() }}>
+			<li
+				className={styles.navigationItem}
+				key={id}
+				onClick={() => {
+					onClick();
+					setListVisibility(false);
+				}}
+			>
 				<div className={styles.navigationLink}>
-					<img src={image} alt="listItem" />
+					<Icon className={styles.icon} />
 					<span>{text}</span>
 				</div>
 			</li>
@@ -41,24 +51,48 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		return <ul className={styles.navigationList}>{items.map((item: IListItem) => getListItem(item))}</ul>;
 	};
 
+	const unreadedCounter = props.notifications.filter((notification) => !notification.read).length;
+
 	return (
 		<div className={styles.header}>
-			<div className={styles.bell}>
-				<img src={bellImg} alt="bell" />
-				<div className={styles.bellCounter}>
-					<span>{props.notificationCounter}</span>
+			<ThemeSwitcher />
+			<ClickAwayListener onClickAway={() => setNotificationsVisibility(false)}>
+				<div className={styles.bell} onClick={() => setNotificationsVisibility(!isNotificationsVisible)}>
+					<BellIcon width={25} height={25} />
+					{unreadedCounter !== 0 ? (
+						<div className={styles.bellCounter}>
+							<span>{unreadedCounter}</span>
+						</div>
+					) : null}
+					{isNotificationsVisible ? (
+						<div className={clsx(styles.notifications, styles.dropdown)}>
+							{props.notifications.length !== 0 ? (
+								props.notifications.map((notification) => (
+									<Notification
+										{...mapNotificationToProps(notification)}
+										onRead={() => props.onReadNotification(notification.id)}
+										key={notification.id}
+									/>
+								))
+							) : (
+								<div className={styles.noNotifications}>You do not have any notifications</div>
+							)}
+						</div>
+					) : null}
 				</div>
-			</div>
+			</ClickAwayListener>
 			<span className={styles.name}>{props.name}</span>
-			<div className={styles.avatarCover}>
-				<div onClick={changeVisible}>
-					<Avatar avatar={props.avatar} size={61} color="#EC4179" />
-				</div>
+			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
+				<div className={styles.avatarCover}>
+					<div onClick={() => setListVisibility(!isListVisible)}>
+						<Avatar avatar={props.avatar} size={61} color="#EC4179" />
+					</div>
 
-				{isListVisible && <div className={styles.navigation}>{renderList(props.listItems)}</div>}
-			</div>
-			<Label label={props.rank + ' rank'} color="#EC4179" />
-			<Label label={props.mark} color="#EC4179" />
+					{isListVisible && (
+						<div className={clsx(styles.navigation, styles.dropdown)}>{renderList(props.listItems)}</div>
+					)}
+				</div>
+			</ClickAwayListener>
 		</div>
 	);
 };

@@ -1,22 +1,44 @@
-import amqp from 'amqplib';
+import { Channel, connect, Connection } from 'amqplib';
 import { ENV } from '../common';
 
-let rabbitChannel: amqp.Channel;
+class RabbitConnect {
+	private uri: string;
 
-const createConnectAmqp = async () => {
-	try {
-		const connect = await amqp.connect(ENV.AMQP.URL);
-		rabbitChannel = await connect.createChannel();
-		rabbitChannel.assertQueue(ENV.AMQP.QUEUE);
-	} catch (e) {
-		throw new Error('AMQP connection not available');
+	private queueName: string;
+
+	private connection!: Connection;
+
+	private channel!: Channel;
+
+	constructor() {
+		this.uri = ENV.AMQP.URL;
+		this.queueName = ENV.AMQP.QUEUE;
 	}
-};
 
-createConnectAmqp();
+	async connect() {
+		this.connection = await connect(this.uri);
+		this.channel = await this.connection.createChannel();
+	}
 
-process.on('exit', () => {
-	rabbitChannel.close();
+	async disconnect() {
+		await this.channel.close();
+		await this.connection.close();
+	}
+
+	async send(data: Record<string, any>) {
+		await this.channel.assertQueue(this.queueName, { durable: true });
+		console.log('data => ', data);
+		this.channel.sendToQueue(this.queueName, Buffer.from(JSON.stringify(data)), {
+			contentType: 'application/json',
+		});
+	}
+}
+
+const rabbitConnect = new RabbitConnect();
+rabbitConnect.connect();
+
+process.on('exit', async () => {
+	await rabbitConnect.disconnect();
 });
 
-export { rabbitChannel };
+export { rabbitConnect };

@@ -1,6 +1,12 @@
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
+import {
+	TTaskSolutions,
+	completedSolutionsMocks,
+	uncompletedSolutionsMocks,
+} from 'containers/profile/tabs/solutions/mocks';
+import { TLoader } from 'typings/common/loader';
 
 export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ITask | Error> => {
 	try {
@@ -44,9 +50,29 @@ export const editSolution = async ({
 			endpoint: `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`,
 			body: { code },
 		});
-
 		return response;
 	} catch (error) {
 		return error;
 	}
 };
+
+export interface TSolutionsRequestArgs {
+	skip: number;
+	limit: number;
+}
+
+export type TPrivateSolutionsLoader = TLoader<TSolutionsRequestArgs, TTaskSolutions>;
+
+// TODO: implement in backend and call api
+export const getCompletedSolutions: TPrivateSolutionsLoader = async ({ skip, limit }) => ({
+	items: completedSolutionsMocks.slice(skip, skip + limit),
+	full: completedSolutionsMocks.length,
+	hasMore: skip + limit < completedSolutionsMocks.length,
+});
+
+// TODO: implement in backend and call api
+export const getUncompletedSolutions: TPrivateSolutionsLoader = async ({ skip, limit }) => ({
+	items: uncompletedSolutionsMocks.slice(skip, skip + limit),
+	full: uncompletedSolutionsMocks.length,
+	hasMore: skip + limit < uncompletedSolutionsMocks.length,
+});

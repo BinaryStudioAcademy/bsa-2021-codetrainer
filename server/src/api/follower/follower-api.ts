@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { FollowersApiPath, REQ_TYPE } from '../../common';
-import { TFollowerService } from '../../services';
+import { FollowersService } from '../../services';
 import { dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
 
-export const initFollower = (appRouter: typeof Router, services: { follower: TFollowerService }) => {
+export const initFollower = (appRouter: typeof Router, services: { follower: FollowersService }) => {
 	const { follower: followerService } = services;
 	const router = appRouter();
 
@@ -13,7 +13,7 @@ export const initFollower = (appRouter: typeof Router, services: { follower: TFo
 			dataValidationMiddleware(SchemasDataValidation.followerFieldsSchema, REQ_TYPE.BODY),
 			(req, res, next) => {
 				followerService
-					.create(req.body)
+					.create(req.body, res)
 					.then((data) => res.send(data))
 					.catch(next);
 			},
@@ -30,9 +30,14 @@ export const initFollower = (appRouter: typeof Router, services: { follower: TFo
 				.then((data) => res.send(data))
 				.catch(next);
 		})
+		.get(FollowersApiPath.COMMUNITY, (req, res, next) => {
+			followerService
+				.getCommunity(req.params.id)
+				.then((data) => res.send(data))
+				.catch(next);
+		})
 		.delete(
 			FollowersApiPath.ONE,
-			dataValidationMiddleware(SchemasDataValidation.followerFieldsSchema, REQ_TYPE.BODY),
 			(req, res, next) => {
 				followerService
 					.delete(req.body)

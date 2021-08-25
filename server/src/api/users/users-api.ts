@@ -8,6 +8,12 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsersSer
 	const router = appRouter();
 
 	router
+		.get(UsersApiPath.SEARCH, (req, res, next) =>
+			usersService
+				.search(req.query as { username: string })
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.get(UsersApiPath.GET_ALL, (req, res, next) =>
 			usersService
 				.getAllUsers()
@@ -31,12 +37,17 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsersSer
 					.catch(next),
 		)
 		.delete(UsersApiPath.DELETE, (req, res, next) =>
-			// TODO: add user id validation
 			usersService
 				.delete(req.params.id, res)
 				.then((data) => res.send(data))
 				.catch(next),
+		).put(
+			UsersApiPath.UPDATE_PASSWORD,
+			(req, res, next) =>
+				usersService
+					.updatePassword(req.params.id, req.body)
+					.then((data) => res.send(data))
+					.catch(next),
 		);
-
 	return router;
 };

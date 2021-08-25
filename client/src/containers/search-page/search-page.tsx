@@ -7,8 +7,9 @@ import * as actions from './logic/actions';
 import { mapFilterToSearch, mapSearchData } from './mapSearchData';
 
 export const SearchPage: React.FC = () => {
-	const { isLoading, search, filter, onSubmit } = useAppSelector((state) => state.search);
+	const { isLoading, search, filter, onSubmit, changePage } = useAppSelector((state) => state.search);
 	const [searchData, setSearchData] = useState<ISearchPageProps['data']>(mapSearchData(search));
+	const [filterForChangePage, setFilterForChangePage] = useState<ISearchPageProps['filter']>(filter);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -19,6 +20,7 @@ export const SearchPage: React.FC = () => {
 		if (!onSubmit) {
 			return;
 		}
+		setFilterForChangePage(filter);
 		dispatch(
 			actions.searchFetchData({
 				partialFilter: mapFilterToSearch(filter),
@@ -26,12 +28,30 @@ export const SearchPage: React.FC = () => {
 		);
 	}, [onSubmit]);
 
+	useEffect(() => {
+		if (!changePage) {
+			return;
+		}
+		dispatch(
+			actions.searchFetchNextPage({
+				partialFilter: mapFilterToSearch({ ...filterForChangePage, page: filter.page }),
+			}),
+		);
+	}, [changePage]);
+
 	const handleChange = (partialFilter: Record<string, any>) => {
 		dispatch(actions.searchChangeFilter({ partialFilter }));
 	};
 
+	const handleChangePage = (isChange: boolean) => {
+		if (!isChange) {
+			return;
+		}
+		dispatch(actions.searchChangePage());
+	};
+
 	const handleSubmit = () => {
-		dispatch(actions.searchSetSubmit({ payload: true }));
+		dispatch(actions.searchOnSubmit());
 	};
 
 	if (isLoading) {
@@ -39,7 +59,13 @@ export const SearchPage: React.FC = () => {
 	}
 	return (
 		<>
-			<SearchPageComponent data={searchData} filter={filter} onChange={handleChange} onSubmit={handleSubmit} />
+			<SearchPageComponent
+				data={searchData}
+				filter={filter}
+				onChange={handleChange}
+				onSubmit={handleSubmit}
+				onChangePage={handleChangePage}
+			/>
 		</>
 	);
 };

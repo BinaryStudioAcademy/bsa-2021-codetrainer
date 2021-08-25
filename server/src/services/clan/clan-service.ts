@@ -1,7 +1,15 @@
 import { getCustomRepository } from 'typeorm';
 import { Clan, TClanRepository, TProfileClanRepository, TUserRepository, User } from '../../data';
 import { ValidationError } from '../../helpers';
-import { CLAN_IS_PUBLIC, CLAN_MAX_MEMBERS, CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS, CODE_ERRORS } from '../../common';
+import {
+	ClansOrderByOptions,
+	CLAN_IS_PUBLIC,
+	CLAN_MAX_MEMBERS,
+	CLAN_MEMBER_ROLE,
+	CLAN_MEMBER_STATUS,
+	CODE_ERRORS,
+	Order,
+} from '../../common';
 
 export class ClanService {
 	protected clanRepository: TClanRepository;
@@ -146,9 +154,16 @@ export class ClanService {
 		if (user.clan?.id !== id) {
 			throw new ValidationError(CODE_ERRORS.NOT_IN_CLAN);
 		}
-
 		if (user.profileClan?.role === CLAN_MEMBER_ROLE.ADMIN) {
-			throw new ValidationError(CODE_ERRORS.ADMIN_LEAVE);
+			let numberOfAdmins = 0;
+			clan.members.forEach((member) => {
+				if (member.profileClan?.role === CLAN_MEMBER_ROLE.ADMIN) {
+					numberOfAdmins += 1;
+				}
+			});
+			if (numberOfAdmins === 1) {
+				throw new ValidationError(CODE_ERRORS.LAST_ADMIN_LEAVE);
+			}
 		}
 
 		await userRepository.updateById(user.id, { profileClan: undefined });
@@ -177,6 +192,37 @@ export class ClanService {
 		return {
 			user: updatedUser,
 			clan: updatedClan,
+		};
+	}
+
+	async search(query: {
+		order: Order;
+		orderBy: ClansOrderByOptions;
+		nameQuery?: string;
+		take: number;
+		skip: number;
+	}) {
+		const clanRepository = getCustomRepository(this.clanRepository);
+
+		const result = await clanRepository.search(query);
+
+		const clansWithRankAndHonor = result.data.map((clan) => ({
+			...clan,
+			honor: this.getHonor(clan),
+			rank: this.getRank(clan),
+		}));
+
+		if (query.orderBy === ClansOrderByOptions.BY_RANK || query.orderBy === ClansOrderByOptions.BY_HONOR) {
+			clansWithRankAndHonor.sort((a, b) => {
+				return query.order === 'ASC'
+					? Number(a[query.orderBy]) - Number(b[query.orderBy])
+					: Number(b[query.orderBy]) - Number(a[query.orderBy]);
+			});
+		}
+
+		return {
+			...result,
+			data: clansWithRankAndHonor,
 		};
 	}
 }

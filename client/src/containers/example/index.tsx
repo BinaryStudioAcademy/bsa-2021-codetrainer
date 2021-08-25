@@ -9,8 +9,14 @@ import { uploadImage } from 'services/images.service';
 import styles from './example.module.scss';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
+import ThemeSwitcher from 'containers/theme-switcher';
+import { Tasks } from 'components/pages/profile/profile-tasks';
 
-const Example: React.FC = () => {
+interface IExample {
+	theme: { theme: string };
+}
+
+const Example: React.FC<IExample> = (props) => {
 	const dispatch = useDispatch();
 	const text = useSelector((rootState: IRootState) => rootState.example.name);
 	const [file, setFile] = useState<Blob | null>(null);
@@ -20,7 +26,40 @@ const Example: React.FC = () => {
 	const showNotification = (notification: TSetNotificationArgs) => {
 		dispatch(setNotificationState(notification));
 	};
-
+	const tasks = [
+		{
+			id: '1',
+			linkToAuthor: '/',
+			author: {
+				firstName: 'A',
+				lastName: 'B',
+				link: '/',
+			},
+			stats: {
+				favoriteSaves: 12,
+				positiveFeedback: 12,
+			},
+			title: 'Title',
+			rank: 2,
+			tags: ['Tag 1', 'Tag 2'],
+		},
+		{
+			id: '2',
+			linkToAuthor: '/',
+			author: {
+				firstName: 'A',
+				lastName: 'B',
+				link: '/',
+			},
+			stats: {
+				favoriteSaves: 12,
+				positiveFeedback: 12,
+			},
+			title: 'Title',
+			rank: 2,
+			tags: ['Tag 1', 'Tag 2'],
+		},
+	];
 	return (
 		<div className={styles.root}>
 			<h2>Example Component</h2>
@@ -33,6 +72,10 @@ const Example: React.FC = () => {
 			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
 				home
 			</button>
+			<button className={styles.btn} onClick={() => historyHelper.push(ROUTES.Home)}>
+				HOME
+			</button>
+
 			<div>
 				{Object.values(NotificationType).map((type) => {
 					return (
@@ -77,6 +120,14 @@ const Example: React.FC = () => {
 				/>
 				<input type="submit" />
 			</form>
+			<ThemeSwitcher />
+
+			<div className={styles.containerBlock}>
+				<p className={styles.title}>Similar tasks</p>
+				<div>
+					<Tasks tasks={tasks} showAddToCollection={false} />
+				</div>
+			</div>
 		</div>
 	);
 };

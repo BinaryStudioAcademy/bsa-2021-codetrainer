@@ -12,7 +12,7 @@ import { ClanService } from '../../services';
 /**
  * @swagger
  * tags:
-     - name: Clans
+	 - name: Clans
  * components:
  *   schemas:
  *     Clan:
@@ -132,7 +132,7 @@ import { ClanService } from '../../services';
 /**
  * @swagger
  * tags:
-     - name: Clans
+	 - name: Clans
  * components:
  *   schemas:
  *     Clan:
@@ -279,13 +279,19 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 	const router = appRouter();
 
 	router
+		.get(ClanApiPath.SEARCH, (req, res, next) =>
+			clansService
+				.search(req.query)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.get(ClanApiPath.ROOT, (req, res, next) =>
 			clansService
 				.getClans(req.body)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.get(ClanApiPath.$ID, clanMemberPermissionMiddleware, (req, res, next) =>
+		.get(ClanApiPath.$ID, (req, res, next) =>
 			clansService
 				.getClan(req.params.id)
 				.then((data) => res.send(data))

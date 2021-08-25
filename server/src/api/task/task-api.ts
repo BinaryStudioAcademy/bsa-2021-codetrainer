@@ -33,11 +33,13 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 			TaskApiPath.$ID,
 			validationMiddleware([taskIdSchema, taskSchema]),
 			checkTaskIdMiddleware,
-			(req, res, next) =>
-				taskService
-					.update(req.validData, req.task.id)
+			(req, res, next) => {
+				const { tags, ...restData } = req.validData;
+				return taskService
+					.update(restData, req.task.id, tags)
 					.then((data) => res.send(data))
-					.catch(next),
+					.catch(next);
+			},
 		)
 		.post(TaskApiPath.ROOT, validationMiddleware([taskSchema]), (req, res, next) =>
 			taskService

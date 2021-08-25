@@ -46,9 +46,12 @@ export function* submitSolutionWorker(solution: ReturnType<typeof actions.submit
 	let response;
 
 	if (existingSolution) {
-		response = yield call(editSolution, { solutionId: existingSolution.id, ...solution });
+		response = yield call(
+			{ context: editSolution, fn: editSolution },
+			{ solutionId: existingSolution.id, ...solution },
+		);
 	} else {
-		response = yield call(submitSolution, solution);
+		response = yield call({ context: submitSolution, fn: submitSolution }, solution);
 	}
 
 	if (response instanceof Error) {

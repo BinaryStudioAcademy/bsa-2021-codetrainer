@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { Redirect } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { TaskTrainPage } from 'components/pages';
 import { useHistory, useParams } from 'react-router-dom';

@@ -5,9 +5,23 @@ import { imagesRouter } from './images.router';
 import { githubRouter } from './github.router';
 import { initTaskApi } from './task';
 import { ApiPath } from '../common';
-import { initUsers } from './users/users-api';
+import { initUsers } from './users';
 import { initFollower } from './follower';
-import { authService, clanService, imagesService, githubService, follower, users } from '../services';
+import { initCollection } from './collection';
+import { initTest } from './test/test-api';
+import { initCommentTask } from './comment-task';
+import {
+	authService,
+	clanService,
+	imagesService,
+	githubService,
+	followersService,
+	users,
+	collectionService,
+	commentTaskService,
+	solutionService,
+} from '../services';
+import { initMailerApi } from './mailer';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -38,7 +52,14 @@ export function initApi(): Router {
 	apiRouter.use(
 		ApiPath.FOLLOWERS,
 		initFollower(Router, {
-			follower,
+			follower: followersService
+		}),
+	);
+
+	apiRouter.use(
+		ApiPath.COLLECTIONS,
+		initCollection(Router, {
+			collection: collectionService,
 		}),
 	);
 
@@ -51,6 +72,12 @@ export function initApi(): Router {
 	);
 
 	apiRouter.use(ApiPath.TASK, initTaskApi());
+
+	apiRouter.use(ApiPath.TESTS, initTest(Router, { solution: solutionService }));
+
+	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
+
+	apiRouter.use(ApiPath.MAILER, initMailerApi(Router));
 
 	return apiRouter;
 }

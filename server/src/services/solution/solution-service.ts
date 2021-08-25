@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
 import { CODE_ERRORS, ENV } from '../../common';
-import { ValidationError } from '../../helpers';
-import { rabbitChannel } from '../../config';
+import { TokenTypes, ValidationError, verifyToken } from '../../helpers';
+import { rabbitConnect } from '../../config';
 
 export class SolutionService {
 	protected taskRepository: TTaskRepository;
@@ -43,11 +43,13 @@ export class SolutionService {
 			solutions: [...user.solutions, newSolution],
 		});
 		const dataForRabbit = {
+			test: task.testCases,
 			code,
 			userId: user.id,
+			solutionId: newSolution.id,
 			taskId: task.id,
 		};
-		rabbitChannel.sendToQueue(ENV.AMQP.QUEUE, Buffer.from(JSON.stringify(dataForRabbit)));
+		await rabbitConnect.send(dataForRabbit);
 		return newSolution;
 	}
 
@@ -95,5 +97,14 @@ export class SolutionService {
 		const solution = await repository.findOne({ user, task });
 
 		return { solution };
+	}
+
+	async setResult(data: { result: string; token: string }) {
+		console.info('result => ', data);
+		const { id } = verifyToken(data.token, TokenTypes.ACCESS);
+		if (id !== ENV.TESTING.NAME) {
+			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
+		}
+		return { message: 'success' };
 	}
 }

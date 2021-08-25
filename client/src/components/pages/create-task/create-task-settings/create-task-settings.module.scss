@@ -2,7 +2,7 @@
 
 .createTaskSettings {
 	padding: 20px;
-	color: #282828;
+	color: var(--text-color);
 	form {
 		.disciplinesHeading {
 			font: $tub-font;
@@ -16,7 +16,7 @@
 		}
 		input {
 			width: 100%;
-			background: #f0f3f9;
+			background: var(--secondary-container-color);
 			border-radius: 7px;
 			padding: 10px;
 			margin-top: 10px;

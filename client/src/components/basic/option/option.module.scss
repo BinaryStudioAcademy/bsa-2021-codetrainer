@@ -6,14 +6,20 @@
 
 	font-size: 14px;
 	font-weight: 500;
+	span {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
 
 .wrapper.activeOption {
-	color: #705ff5;
+	color: var(--purple);
 }
 
 .wrapper:hover {
-	background: #f0f3f9;
+	background: var(--secondary-container-color);
 
 	cursor: pointer;
 }
