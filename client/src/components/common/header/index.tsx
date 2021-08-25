@@ -55,7 +55,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
 	return (
 		<div className={styles.header}>
-			<ThemeSwitcher />
+			<ThemeSwitcher className={styles.themeSwitcher} />
 			<ClickAwayListener onClickAway={() => setNotificationsVisibility(false)}>
 				<div className={styles.bell} onClick={() => setNotificationsVisibility(!isNotificationsVisible)}>
 					<BellIcon width={25} height={25} />
