@@ -36,12 +36,12 @@ export const userSchema = {
     },
     username: {
       type: "string",
-      length: 25,
+      maxLength: 25,
       nullable: true,
     },
     email: {
       type: "string",
-      length: 100,
+      maxLength: 100,
       unique: true,
     },
   },

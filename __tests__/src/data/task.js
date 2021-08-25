@@ -17,12 +17,12 @@ export const taskSchema = {
     },
     name: {
       type: "string",
-      length: 25,
+      maxLength: 25,
       nullable: true,
     },
     rank: {
       type: "integer",
-      length: 1,
+      maxLength: 1,
     },
   },
 };
