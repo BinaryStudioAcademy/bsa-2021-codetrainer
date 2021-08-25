@@ -35,7 +35,7 @@ export type TUserAddTask = {
 };
 
 export type TUserDeleteTask = {
-	task: WebApi.Entities.ITask;
+	taskId: string;
 };
 
 export type TSetUserClan = {

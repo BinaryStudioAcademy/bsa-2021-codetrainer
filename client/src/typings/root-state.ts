@@ -6,9 +6,10 @@ import { IClanState } from 'containers/clans/clan/logic/state';
 import { IAuthState } from 'containers/auth/logic/state';
 import { IProfileState } from 'containers/profile/logic/state';
 import { INotificationState } from '../containers/notification/logic/state';
-import { IHomeState } from '../containers/home-page/logic/state';
+import { IHomeState } from 'containers/home-page/logic/state';
 import { ISearchState } from 'containers/search-page/logic/state';
 import { ISettingsState } from '../containers/setting-page/logic/state';
+import { ITaskState } from '../containers/task-train/logic/state';
 import { IHeaderState } from 'containers/header/logic/state';
 
 export interface IRootState {
@@ -22,6 +23,7 @@ export interface IRootState {
 	home: IHomeState;
 	search: ISearchState;
 	settings: ISettingsState;
+	task: ITaskState;
 	header: IHeaderState;
 	theme: IThemeState;
 }

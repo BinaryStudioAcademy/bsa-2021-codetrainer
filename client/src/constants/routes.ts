@@ -17,6 +17,7 @@ export const ROUTES = {
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
+	TaskTrain: '/task/:id/train',
 
 	Setting: '/setting',
 

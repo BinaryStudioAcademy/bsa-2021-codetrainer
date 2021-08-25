@@ -100,6 +100,13 @@ export class SolutionService {
 		return solutions;
 	}
 
+	async getUserSolution(user: User, task: Task) {
+		const repository = getCustomRepository(this.solutionRepository);
+		const solution = await repository.findOne({ user, task });
+
+		return { solution };
+	}
+
 	async setResult({ token, ...data }: ISolutionResult) {
 		console.info('result => ', data);
 		const { id } = verifyToken(token, TokenTypes.ACCESS);

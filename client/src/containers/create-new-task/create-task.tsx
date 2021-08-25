@@ -263,7 +263,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			exampleTestCases,
 			preloaded,
 		};
-		let task: { error: any; message: string; id: string | null; name: any };
+		let task: { error: any; message: string } & WebApi.Entities.ITask;
 		if (!taskId) {
 			task = await createTask(requestBody);
 		} else {
@@ -273,13 +273,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			createErrorMessage(task.message);
 		} else if (!task.error) {
 			dispatch(setTask({ taskId: task.id }));
-			dispatch(
-				addTask({
-					task: {
-						id: task.id,
-					},
-				}),
-			);
+			dispatch(addTask({ task }));
 			setChallengeActiveValue({
 				id: task.id,
 				title: task.name,
@@ -358,7 +352,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 						},
 					}),
 				);
-				dispatch(deleteTaskRedux({ task: { id: taskId } }));
+				dispatch(deleteTaskRedux({ taskId }));
 				getYourChallengeValues(taskId).then((result) => {
 					setYourChallengeValues(result ? [{ id: '0', title: 'New task' }, ...result] : null);
 				});

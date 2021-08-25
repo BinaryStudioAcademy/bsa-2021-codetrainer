@@ -20,6 +20,7 @@ import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
+import TaskTrain from 'containers/task-train';
 import { Redirect, Route } from 'react-router-dom';
 
 interface IRoutingProps {}
@@ -51,6 +52,14 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={true}
 				needSideBar={true}
 			/>
+			<PrivateRoute
+				exact
+				path={ROUTES.TaskInstructions}
+				component={TaskPage}
+				needHeader={true}
+				needSideBar={true}
+			/>
+			<PrivateRoute exact path={ROUTES.TaskTrain} component={TaskTrain} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Users + '/:username'} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
