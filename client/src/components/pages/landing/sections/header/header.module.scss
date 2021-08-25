@@ -4,7 +4,9 @@
 	height: 860px;
 	display: flex;
 	flex-direction: column;
-	background: $cornflower-blue;
+	background: url('../../../../../assets/images/header/background.jpg') $cornflower-blue;
+	background-size: cover;
+	background-blend-mode: multiply;
 
 	&Container {
 		height: 100%;
