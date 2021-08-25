@@ -47,8 +47,8 @@ declare namespace WebApi.Entities {
 	export interface IChallenge {
 		id: string;
 		name: string;
-		discipline?: string;
-		description?: string;
+		discipline: string;
+		description: string;
 		exampleTestCases?: string;
 		rank: number;
 		tags: ITag[];
@@ -56,6 +56,7 @@ declare namespace WebApi.Entities {
 		savedToFavorites: number;
 		positiveFeedback: number;
 		user: IUser | null;
+		exampleTestCases?: string;
 	}
 
 	export interface ISolution {

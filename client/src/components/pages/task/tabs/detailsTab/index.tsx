@@ -4,11 +4,17 @@ import styles from './details-tab.module.scss';
 import { Description } from './description';
 import { Contributors } from './contributors';
 import { Stats } from './stats';
+import { WebApi } from 'typings/webapi';
 
-export const DetailsTab = () => {
+export interface IDetailsTabProps {
+	// descriptionProps: IDescriptionProps;
+	task: WebApi.Entities.IChallenge;
+}
+
+export const DetailsTab = ({ task }: IDetailsTabProps) => {
 	return (
 		<div className={styles.detailsTab}>
-			<Description />
+			<Description description={task.description} exampleTestCases={task.exampleTestCases} />
 			<Contributors />
 			<Stats />
 		</div>
