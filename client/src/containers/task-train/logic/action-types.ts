@@ -7,6 +7,7 @@ export const FETCH_SOLUTION = 'TASK:FETCH_SOLUTION';
 export const SET_SOLUTION = 'TASK:SET_SOLUTION';
 export const START_LOADING = 'TASK:START_LOADING';
 export const END_LOADING = 'TASK:END_LOADING';
+export const SET_RESULT = 'TASK:SET_RESULT';
 
 export interface IFetchSolutionArgs {
 	taskId: string;
@@ -27,4 +28,9 @@ export interface ISetTaskArgs {
 export interface ISubmitSolutionArgs {
 	taskId: string;
 	code: string;
+}
+
+export interface ISetResult {
+	result: any;
+	success: boolean;
 }

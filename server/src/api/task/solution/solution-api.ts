@@ -26,7 +26,7 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 			checkSolutionIdMiddleware,
 			(req, res, next) =>
 				solutionService
-					.update(req.user, req.solution, req?.validData?.code)
+					.update(req.user, req.task, req.solution, req?.validData?.code)
 					.then((data) => res.send(data))
 					.catch(next),
 		)

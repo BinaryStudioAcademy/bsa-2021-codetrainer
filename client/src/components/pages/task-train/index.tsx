@@ -8,16 +8,18 @@ import styles from './task-train.module.scss';
 import { Select } from 'components/basic';
 import { useState } from 'react';
 import { WebApi } from 'typings/webapi';
-import ReactMarkdown from 'react-markdown';
+import { Markdown } from 'components/pages';
 import { useEffect } from 'react';
 
 interface ITaskTrainPageProps {
 	task: WebApi.Entities.ITask;
 	solution: WebApi.Entities.ISolution | null;
+	result: string;
+	success: boolean;
 	onSubmit: (code: string) => void;
 }
 
-const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit }) => {
+const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, result, success, onSubmit }) => {
 	const [code, setCode] = useState<string>(task.preloaded || solution?.code || '');
 	const [languageVersion, setLanguageVersion] = useState<{ title: string; id: string | null }>({
 		title: 'Option 1',
@@ -36,7 +38,7 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit
 		<div className={styles.taskContainer}>
 			<div className={styles.taskInstructionsContainer}>
 				<div className={styles.taskInstructionsHeader}>
-					<Rank rank={3} />
+					<Rank rank={task.rank} />
 					<h1 className={styles.taskInstructionsTitle}>{task.name}</h1>
 				</div>
 				<div className="taskInstructions">
@@ -46,7 +48,7 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit
 								name: 'Instruction',
 								content: (
 									<div>
-										<ReactMarkdown>{task.description}</ReactMarkdown>
+										<Markdown text={task.description} />
 										<TagList tags={task.tags.map((tag) => tag.name)} />
 									</div>
 								),
@@ -55,7 +57,7 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit
 								name: 'Output',
 								content: (
 									<div>
-										<ReactMarkdown>{task.discipline}</ReactMarkdown>
+										{Boolean(result.length) ? <Markdown text={result} /> : null}
 										<TagList tags={task.tags.map((tag) => tag.name)} />
 									</div>
 								),
@@ -68,8 +70,8 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit
 						favourites: 1,
 						positiveFeedback: 1,
 						author: {
-							name: task.user.name,
-							surname: task.user.surname,
+							name: task.user?.name,
+							surname: task.user?.surname,
 						},
 					}}
 				/>
@@ -111,10 +113,12 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, onSubmit
 					</div>
 
 					<div className={styles.taskPanelRight}>
-						<Button className={ButtonClasses.red} onClick={() => onSubmit(code)}>
+						<Button className={ButtonClasses.red} disabled={success} onClick={() => onSubmit(code)}>
 							Attempt
 						</Button>
-						<Button className={ButtonClasses.red}>Test</Button>
+						<Button className={ButtonClasses.red} disabled={success}>
+							Test
+						</Button>
 					</div>
 				</div>
 			</div>

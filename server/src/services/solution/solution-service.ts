@@ -84,13 +84,21 @@ export class SolutionService {
 		};
 	}
 
-	async update(user: User, solution: Solution, code: string) {
+	async update(user: User, task: Task, solution: Solution, code: string) {
 		if (user.id !== solution.user.id) {
 			throw new ValidationError(CODE_ERRORS.NOT_USER_SOLUTION);
 		}
 		const repository = getCustomRepository(this.solutionRepository);
 		await repository.updateById(solution.id, { code });
 		const updatedSolution = await repository.getByKey(solution.id, 'id');
+		const dataForRabbit = {
+			test: task.testCases,
+			code,
+			userId: user.id,
+			solutionId: solution.id,
+			taskId: task.id,
+		};
+		await rabbitConnect.send(dataForRabbit);
 		return updatedSolution;
 	}
 
@@ -108,7 +116,6 @@ export class SolutionService {
 	}
 
 	async setResult({ token, ...data }: ISolutionResult) {
-		console.info('result => ', data);
 		const { id } = verifyToken(token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
