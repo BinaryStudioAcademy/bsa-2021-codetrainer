@@ -10,12 +10,12 @@
 	}
 
 	&Title {
-		color: $cornflower-blue;
+		color: var(--purple);
 		font: 700 48px $base-font-family;
 	}
 
 	&Text {
-		color: $cornflower-blue;
+		color: var(--purple);
 		font: 500 24px $base-font-family;
 
 		p {

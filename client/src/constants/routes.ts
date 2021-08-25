@@ -26,4 +26,6 @@ export const ROUTES = {
 	Collections: '/collections',
 
 	Community: '/followers/community',
+
+	Example: '/example',
 };

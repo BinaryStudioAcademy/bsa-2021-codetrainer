@@ -4,7 +4,7 @@
 	height: 860px;
 	display: flex;
 	flex-direction: column;
-	background: $cornflower-blue;
+	background: var(--purple);
 
 	&Container {
 		height: 100%;
@@ -18,14 +18,14 @@
 
 	&Title {
 		margin: 0;
-		color: #fff;
+		color: var(--text-color);
 		font: 700 48px $base-font-family;
 	}
 
 	&Button {
 		cursor: pointer;
-		background-color: #fff;
-		color: $french-rose;
+		background-color: var(--white);
+		color: var(--pink);
 		font: $button-font;
 		border: none;
 		border-radius: 5px;
@@ -39,7 +39,7 @@
 
 	&Text {
 		margin: 60px 0;
-		color: #fff;
+		color: var(--text-color);
 		font: 500 16px $base-font-family;
 	}
 }
