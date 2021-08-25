@@ -16,7 +16,7 @@ import { NotificationType } from 'containers/notification/logic/models';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { setTask } from './logic/actions';
 import { IRootState } from 'typings/root-state';
-import { createTask, deleteTask, updateTask, getById } from 'services/task/task.service';
+import { createTask, deleteTask, updateTask, getTaskById } from 'services/task/task.service';
 import historyHelper from 'helpers/history.helper';
 import { addTask, deleteTaskRedux } from 'containers/user/logic/actions';
 import { useAppSelector } from 'hooks/useAppSelector';
@@ -65,7 +65,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		}
 		const yourChallengeValues = await startingArray.map<Promise<{ id: string | null; title: string }>>(
 			async (task: WebApi.Entities.ITask) => {
-				const result = await getById(task.id);
+				const result = await getTaskById(task.id);
 				return {
 					id: task.id,
 					title: result.name,
@@ -454,7 +454,7 @@ describe("twoOldestAges", function() {
 	};
 	const handleTaskChange = async (taskId: string | null) => {
 		if (taskId) {
-			const task = await getById(taskId);
+			const task = await getTaskById(taskId);
 			let tags = '';
 			task.tags.forEach((tag: { name: string }) => {
 				tags += tag.name + ',';

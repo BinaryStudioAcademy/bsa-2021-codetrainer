@@ -20,9 +20,9 @@ export const ROUTES = {
 
 	Setting: '/setting',
 
-	Landing: '/landing',
-
 	Github: '/github',
 
 	Collections: '/collections',
+
+	Community: '/followers/community',
 };

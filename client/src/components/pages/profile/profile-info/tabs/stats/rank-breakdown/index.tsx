@@ -25,7 +25,7 @@ const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 						styles={buildStyles(circularProgressBarStyles)}
 					>
 						<span className={styles.nextRankLabel}>Next Rank</span>
-						<Label label={rank + 1 + ' rank'} color="#EC4179" />
+						<Label label={rank - 1 + ' rank'} color="#EC4179" />
 					</CircularProgressbarWithChildren>
 				</div>
 				<div className={styles.progressCircleInfo}>

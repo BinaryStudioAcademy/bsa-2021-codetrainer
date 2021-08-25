@@ -22,4 +22,14 @@ export const homeReducer = createReducer<IHomeState>(initialState, {
 			},
 		};
 	},
+
+	[actionTypes.SET_COMMUNITY](state, action: actionTypes.TSetCommunity) {
+		return {
+			...state,
+			state: {
+				...state.state,
+				community: action.community,
+			},
+		};
+	},
 });

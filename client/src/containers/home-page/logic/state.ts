@@ -1,5 +1,6 @@
 import { IMessage } from '../types';
 import { ITag } from '../../../components/common/next-task/interface';
+import { WebApi } from '../../../typings/webapi';
 
 export interface IHomeState {
 	state: {
@@ -10,6 +11,7 @@ export interface IHomeState {
 			rank: number;
 			tags: ITag[];
 		} | null;
+		community: WebApi.Entities.IUser[] | null;
 		messages: IMessage[] | null;
 	};
 }
@@ -17,6 +19,7 @@ export interface IHomeState {
 export const initialState: IHomeState = {
 	state: {
 		nextTask: null,
+		community: null,
 		messages: null,
 	},
 };

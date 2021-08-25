@@ -15,8 +15,16 @@ export function* fetchClansWorker(action: ReturnType<typeof actions.fetchClans>)
 
 	if (response instanceof Error) {
 		yield put(actions.addError({ error: response.message }));
+		yield put(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Error,
+					message: response.message,
+				},
+			}),
+		);
 	} else {
-		yield put(actions.addClans({ clans: response }));
+		yield put(actions.addClans({ clans: response.data, count: response.count }));
 	}
 
 	yield put(actions.endLoading());

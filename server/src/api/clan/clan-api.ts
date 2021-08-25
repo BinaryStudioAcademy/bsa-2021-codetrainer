@@ -279,6 +279,12 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 	const router = appRouter();
 
 	router
+		.get(ClanApiPath.SEARCH, (req, res, next) =>
+			clansService
+				.search(req.query)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.get(ClanApiPath.ROOT, (req, res, next) =>
 			clansService
 				.getClans(req.body)

@@ -20,7 +20,11 @@ const Social: React.FC<ISocialProps> = (props) => {
 					stackUrl: props.stackUrl || '',
 				}}
 				onSubmit={(values) => {
-					console.log(values);
+					const twitterUrl = values.twitterUrl || ' ';
+					const linkedinUrl = values.linkedinUrl || ' ';
+					const stackUrl = values.stackUrl || ' ';
+					const socialLinks = { social: [twitterUrl, linkedinUrl, stackUrl] };
+					props.onSubmit(socialLinks);
 				}}
 			>
 				<Form>

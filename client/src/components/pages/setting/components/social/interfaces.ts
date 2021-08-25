@@ -11,4 +11,5 @@ export interface ISocialProps {
 	linkedinUrl?: string;
 	stackUrl?: string;
 	github?: IGithubProps;
+	onSubmit: (form: any) => void;
 }
