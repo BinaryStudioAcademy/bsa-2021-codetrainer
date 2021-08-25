@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ClanApiPath, REQ_TYPE } from '../../common';
+import { ClanApiPath, ClansOrderByOptions, Order, REQ_TYPE } from '../../common';
 import {
 	clanAdminPermissionMiddleware,
 	clanMemberPermissionMiddleware,
@@ -281,7 +281,15 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 	router
 		.get(ClanApiPath.SEARCH, (req, res, next) =>
 			clansService
-				.search(req.query)
+				.search(
+					req.query as unknown as {
+						order: Order;
+						orderBy: ClansOrderByOptions;
+						nameQuery?: string;
+						take: number;
+						skip: number;
+					},
+				)
 				.then((data) => res.send(data))
 				.catch(next),
 		)

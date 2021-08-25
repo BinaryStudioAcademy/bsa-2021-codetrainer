@@ -1,3 +1,4 @@
+import { Server } from 'socket.io';
 import { Clan, Task, User, Solution, Collection } from '../data';
 
 declare module 'express-serve-static-core' {
@@ -8,5 +9,6 @@ declare module 'express-serve-static-core' {
 		solution: Solution;
 		collection: Collection;
 		validData: any;
+		io: Server;
 	}
 }

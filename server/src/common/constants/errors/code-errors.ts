@@ -41,4 +41,5 @@ export const CODE_ERRORS = {
 		status: HttpCodes.NOT_FOUND,
 	}),
 	USER_NO_CLAN: { message: 'User doesn`t have a clan', status: HttpCodes.NOT_FOUND },
+	SOCKET_AUTHORIZATION_ERROR: { message: 'Token Error', status: HttpCodes.BAD_REQUEST },
 };

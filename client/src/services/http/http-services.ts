@@ -21,7 +21,7 @@ export class Http {
 			}
 		}
 
-		return serverFetch({ ...requestArgs, bearer: AccessToken.getBearer() })
+		return serverFetch({ ...requestArgs, bearer: AccessToken.bearer })
 			.then(this.checkStatus)
 			.then(this.getJson)
 			.catch(this.error);
@@ -34,14 +34,11 @@ export class Http {
 		let textBody;
 		if (response.status === 400) {
 			const text = await response.json();
-			console.log(text);
-
 			throw new ValidationError(text);
 		}
 		try {
 			textBody = await response.text();
 			const parsedException = JSON.parse(textBody);
-			console.log(parsedException);
 			throw new Error(parsedException?.message ?? response.statusText);
 		} catch (e) {
 			if (textBody === 'Unauthorized') {
