@@ -23,4 +23,6 @@ export const ROUTES = {
 	Github: '/github',
 
 	Collections: '/collections',
+
+	Community: '/followers/community',
 };
