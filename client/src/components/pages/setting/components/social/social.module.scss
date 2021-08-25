@@ -22,15 +22,11 @@
 		height: 20px;
 		list-style: none;
 		position: relative;
-		cursor: pointer;
 
 		&:hover {
-			background-color: var(--text-color);
-			color: var(--background-color);
+			background-color: rgb(228, 228, 228);
 			.inputField {
-				background-color: var(--text-color);
-				color: var(--background-color);
-				cursor: pointer;
+				background-color: rgb(228, 228, 228);
 			}
 		}
 

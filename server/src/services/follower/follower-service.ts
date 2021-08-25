@@ -14,15 +14,15 @@ export class FollowersService {
 
 	async getFollowers(id: string) {
 		const repository = getCustomRepository(this.followerRepository);
-		const followers = await repository.getFollowers(id)
-		const response = followers.map((follower:Follower) => {
+		const followers = await repository.getFollowers(id);
+		const response = followers.map((follower: Follower) => {
 			return {
 				id: follower.id,
-				user: follower.follower
-			}
-		})
+				user: follower.follower,
+			};
+		});
 		return {
-			followers: response
+			followers: response,
 		};
 	}
 

@@ -32,6 +32,12 @@
 	outline: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
+	span {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
 
 .select img {

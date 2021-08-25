@@ -8,3 +8,4 @@ export const useUserDataSelector = () => useAppSelector((store) => store.auth.us
 export const useSignUpSelector = () => useAppSelector((store) => store.auth.signUp);
 export const useSettingsSelector = () => useAppSelector((store) => store.settings);
 export const useHeaderSelector = () => useAppSelector((store) => store.header);
+export const useThemeSelector = () => useAppSelector((store) => store.theme);
