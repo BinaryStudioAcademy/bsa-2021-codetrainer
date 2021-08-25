@@ -3,5 +3,6 @@ export const UsersApiPath = {
 	GET_ONE: '/:id',
 	UPDATE: '/:id',
 	DELETE: '/:id',
+	UPDATE_PASSWORD: '/:id/password',
 	SEARCH: '/search',
 };

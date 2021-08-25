@@ -1,8 +1,9 @@
 import { WebApi } from 'typings/webapi';
 import { uniqueId } from 'lodash';
 import moment from 'moment';
+import { TaskStatus } from 'typings/common/task';
 
-const usersMocks: WebApi.Entities.IUser[] = [
+export const usersMocks: WebApi.Entities.IUser[] = [
 	{
 		username: 'i-does-not-exists',
 		name: 'Jane',
@@ -29,7 +30,7 @@ const usersMocks: WebApi.Entities.IUser[] = [
 	},
 ].map((user) => ({ id: uniqueId('user'), ...user }));
 
-const challengesMocks: WebApi.Entities.IChallenge[] = [
+export const tasksMocks: Partial<WebApi.Entities.ITask>[] = [
 	{
 		name: 'Five without numbers!',
 		rank: 9,
@@ -79,7 +80,8 @@ const challengesMocks: WebApi.Entities.IChallenge[] = [
 		createdAt: new Date(),
 	},
 	{
-		name: 'The Millionth Fibonacci Kata',
+		name: 'The Millionth Fibonacci',
+		status: TaskStatus.BETA,
 		rank: 3,
 		author: usersMocks[1],
 		createdAt: new Date(),
@@ -132,12 +134,12 @@ const challengesMocks: WebApi.Entities.IChallenge[] = [
 		author: usersMocks[1],
 		createdAt: new Date(),
 	},
-].map((challenge) => ({ id: uniqueId('challenge'), ...challenge }));
+].map((challenge) => ({ id: uniqueId('task'), status: challenge.status || TaskStatus.APPROVED, ...challenge }));
 
 const collectionsMocks: WebApi.Entities.ICollection[] = [
 	{
 		name: 'Decode Morse',
-		challenges: [challengesMocks[2], challengesMocks[3], challengesMocks[4]],
+		tasks: [tasksMocks[2], tasksMocks[3], tasksMocks[4]],
 		avatar: 'https://www.svgrepo.com/show/209154/morse-code.svg',
 		author: usersMocks[0],
 		followers: [],
@@ -146,7 +148,7 @@ const collectionsMocks: WebApi.Entities.ICollection[] = [
 	},
 	{
 		name: 'Fibonacci Pack',
-		challenges: [challengesMocks[5], challengesMocks[6], challengesMocks[7], challengesMocks[8]],
+		tasks: [tasksMocks[5], tasksMocks[6], tasksMocks[7], tasksMocks[8]],
 		avatar: 'https://www.svgrepo.com/show/152754/ratio.svg',
 		author: usersMocks[1],
 		followers: [],
@@ -155,7 +157,7 @@ const collectionsMocks: WebApi.Entities.ICollection[] = [
 	},
 	{
 		name: 'Assembler',
-		challenges: [challengesMocks[9], challengesMocks[10]],
+		tasks: [tasksMocks[9], tasksMocks[10]],
 		avatar: 'https://apprecs.org/ios/images/app-icons/256/0e/500466958.jpg',
 		author: usersMocks[0],
 		followers: [],
@@ -163,7 +165,7 @@ const collectionsMocks: WebApi.Entities.ICollection[] = [
 	},
 	{
 		name: 'Puzzles',
-		challenges: [challengesMocks[0], challengesMocks[11], challengesMocks[12]],
+		tasks: [tasksMocks[0], tasksMocks[11], tasksMocks[12]],
 		avatar: 'https://image.flaticon.com/icons/png/512/786/786771.png',
 		author: usersMocks[2],
 		followers: [],
@@ -171,7 +173,7 @@ const collectionsMocks: WebApi.Entities.ICollection[] = [
 	},
 	{
 		name: 'IMPOSSIBLE',
-		challenges: [challengesMocks[13], challengesMocks[14], challengesMocks[15], challengesMocks[16]],
+		tasks: [tasksMocks[13], tasksMocks[14], tasksMocks[15], tasksMocks[16]],
 		author: usersMocks[2],
 		followers: [],
 		createdAt: moment().subtract(3, 'months').toDate(),

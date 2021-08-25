@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag } from '../../data';
-import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
+import { TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -24,8 +24,8 @@ export class TaskService {
 			}
 			return tag;
 		};
-		const data = await Promise.all(tags.map(getTag));
-		return data;
+		const newTags = await Promise.all(tags.map(getTag));
+		return newTags;
 	}
 
 	async create(user: User, task: Task, tags: string[] = []) {
@@ -93,14 +93,14 @@ export class TaskService {
 		const tagRepository = getCustomRepository(this.tagRepository);
 		return {
 			tags: await tagRepository.getAll(),
-			tasks: await repository.search({
+			ranks: await repository.getRanks(),
+			...(await repository.search({
 				where,
 				sort,
-				// skip: page * TASKS_ON_PAGE,
-				// take: TASKS_ON_PAGE,
+				skip: page * TASKS_ON_PAGE,
+				take: TASKS_ON_PAGE,
 				userId: user.id,
-			}),
-			ranks: await repository.getRanks(),
+			})),
 		};
 	}
 }

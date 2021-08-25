@@ -10,13 +10,12 @@ import styles from './information.module.scss';
 
 const SignupSchema = Yup.object().shape({
 	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
+	surname: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
 	username: Yup.string()
 		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
 		.min(3, 'Minimum length: 3')
 		.max(20, 'Maximum length: 20')
 		.required('Required'),
-	clan: Yup.string().min(4, 'Minimum length: 4').max(30, 'Maximum length: 30').required('Required'),
-	skills: Yup.string().min(2, 'Minimum length: 2').max(50, 'Maximum length: 50').required('Required'),
 	email: Yup.string().email('Invalid email').required('Required'),
 });
 
@@ -30,6 +29,7 @@ const Information: React.FC<IInformationProps> = (props) => {
 					label={item.label}
 					placeholder={item.placeholder}
 					type={item.type}
+					readonly={item.readonly}
 					component={FormInput}
 					key={item.id}
 					className={styles.input}
@@ -51,14 +51,15 @@ const Information: React.FC<IInformationProps> = (props) => {
 			<Formik
 				initialValues={initialValues}
 				validationSchema={SignupSchema}
-				onSubmit={(values) => {
-					console.log(values);
+				onSubmit={(value) => {
+					const { clan, ...info } = value;
+					props.onSubmit(info);
 				}}
 			>
 				<Form className={styles.form}>
 					{items.map((item: IFormItem) => getFieldItem(item))}
 					<div className={styles.experience}>
-						<List header="Development experience" name="experience" items={props.list.items} />
+						<List header="Development experience" name={props.list.name} items={props.list.items} />
 					</div>
 
 					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.submitBtn)}>

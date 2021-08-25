@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { TestApiPath } from '../../common';
+import { SOCKET_EVENTS, TestApiPath } from '../../common';
 import { SolutionService } from '../../services';
+import { sockets } from '../../socket';
 
 export const initTest = (appRouter: typeof Router, services: { solution: SolutionService }) => {
 	const { solution: solutionService } = services;
@@ -9,7 +10,10 @@ export const initTest = (appRouter: typeof Router, services: { solution: Solutio
 	router.post(TestApiPath.RESULT, (req, res, next) =>
 		solutionService
 			.setResult(req.body)
-			.then((data) => res.send(data))
+			.then((data) => {
+				req.io.to(sockets.get(data.userId) || '').emit(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, data.result);
+				res.send({ message: 'ok' });
+			})
 			.catch(next),
 	);
 

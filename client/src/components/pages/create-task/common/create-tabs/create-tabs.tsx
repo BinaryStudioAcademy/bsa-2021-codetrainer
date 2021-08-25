@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import { Header } from './header';
@@ -14,9 +14,13 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelec
 	const handleFullScreen = () => {
 		setFullScreen((state) => !state);
 	};
-
+	const handleEscape = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.code === 'Escape') {
+			setFullScreen(false);
+		}
+	};
 	return (
-		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)}>
+		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)} onKeyUp={handleEscape}>
 			<FontAwesomeIcon
 				icon={IconTaskPageFullScreen.NAME}
 				size={IconTaskPageFullScreen.SIZE}

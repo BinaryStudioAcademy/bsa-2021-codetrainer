@@ -1,0 +1,57 @@
+@import 'styles/variables';
+
+.taskContainer {
+	margin-top: 42px;
+	margin-bottom: 42px;
+	width: 70vw;
+	display: grid;
+	grid-template-columns: 40% 60%;
+	gap: 50px;
+}
+
+.taskInstructions {
+	&Header {
+		color: $mine-shaft;
+		margin-bottom: 44px;
+	}
+
+	&Title {
+		font: 600 18px $base-font;
+	}
+}
+
+.taskPanel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	&Left,
+	&Right {
+		flex-wrap: wrap;
+		display: flex;
+		gap: 10px;
+	}
+}
+
+.taskInstructionsHeader {
+	& > * {
+		display: inline-block;
+		vertical-align: middle;
+
+		&:not(:last-child) {
+			margin-right: 20px;
+		}
+	}
+}
+
+.taskSolution,
+.taskTests {
+	height: 200px;
+	margin-bottom: 50px;
+}
+
+.taskLanguageSelect {
+	margin-top: 10px;
+	width: 300px;
+}

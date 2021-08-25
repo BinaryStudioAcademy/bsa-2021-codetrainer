@@ -19,7 +19,7 @@ interface IFeedMessageProps {
 		name: string;
 	};
 	body: string;
-	createdAt: Date;
+	createdAt: string;
 }
 
 const FeedMessage: React.FC<IFeedMessageProps> = ({ user, createdAt, body }) => {

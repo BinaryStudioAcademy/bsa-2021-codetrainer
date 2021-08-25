@@ -1,4 +1,6 @@
 import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
+import { TaskStatus } from './common/task';
+import { SolutionStatus } from './common/solution';
 
 declare namespace WebApi.Entities {
 	export interface IExample {
@@ -24,16 +26,16 @@ declare namespace WebApi.Entities {
 		githubId?: string;
 		profileUrl?: string;
 	}
-	interface ITask {
-		id: string | null;
-		name?: string;
-		description?: string;
-		// tags?: string[],
-		rank?: number;
-	}
 
-	interface ITasks {
-		tasks: ITask[];
+	export interface ISolution {
+		id: string;
+		status: SolutionStatus;
+		code: string;
+		language: string;
+		user: IUser;
+		task: Partial<ITask>;
+		createdAt: Date;
+		updatedAt?: Date;
 	}
 
 	export interface IMember {
@@ -63,21 +65,10 @@ declare namespace WebApi.Entities {
 		members: Array<IMember>;
 	}
 
-	export interface IChallenge {
-		id: string;
-		name: string;
-		rank: number;
-		description?: string;
-		avatar?: string;
-		author: IUser;
-		createdAt: Date;
-		updatedAt?: Date;
-	}
-
 	export interface ICollection {
 		id: string;
 		name: string;
-		challenges: IChallenge[];
+		tasks: Partial<ITask>[];
 		description?: string;
 		avatar?: string;
 		author: IUser;
@@ -88,7 +79,53 @@ declare namespace WebApi.Entities {
 
 	export type TClans = Array<IClan>;
 
+	export interface ISolution {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		status: SolutionStatus;
+		code: string;
+	}
+
+	export interface ITag {
+		id: string;
+		name: string;
+	}
+
 	export interface ITask {
-		id: string | null;
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		name: string;
+		discipline: string;
+		rank: number;
+		allowContributors: boolean;
+		description: string;
+		completeSolution: string;
+		initialSolution: string;
+		preloaded: string;
+		testCases: string;
+		exampleTestCases: string;
+		status: TaskStatus;
+		isPublished: boolean;
+		solutions: Array<{ id: string }>;
+		tags: Array<ITag>;
+		user: {
+			name: string;
+			surname: string;
+		};
+	}
+}
+
+declare namespace WebApi.Types {
+	interface IPaginationResponse<T> {
+		items: T[];
+		full: number;
+		hasMore: boolean;
+	}
+
+	interface IPaginationRequest {
+		skip: number;
+		limit: number;
 	}
 }

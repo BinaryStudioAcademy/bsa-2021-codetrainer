@@ -1,1 +1,1 @@
-export {initMailerApi} from './mailer-api'
+export { initMailerApi } from './mailer-api';

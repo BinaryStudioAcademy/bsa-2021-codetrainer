@@ -1,20 +1,20 @@
 import jwtDecode from 'jwt-decode';
 import { LocalStorageKeys } from 'constants/local-storage-keys';
 
-interface IToken {
+interface IExpires {
 	begin: number;
 	expTime: number;
 }
 
 export class AccessToken {
-	static TOKEN: IToken | null = null;
-	static BEARER = '';
+	static EXPIRES: IExpires | null = null;
+	static TOKEN: string | null = null;
 	static isTimeAccessTokenExpired() {
-		if (!AccessToken.TOKEN) {
+		if (!AccessToken.EXPIRES) {
 			return true;
 		}
 		const now = Date.now() - 10000;
-		return AccessToken.TOKEN.begin + AccessToken.TOKEN.expTime <= now;
+		return AccessToken.EXPIRES.begin + AccessToken.EXPIRES.expTime <= now;
 	}
 
 	static hasRefreshToken() {
@@ -22,22 +22,27 @@ export class AccessToken {
 	}
 
 	static setToken(token: string) {
-		AccessToken.BEARER = `Bearer ${token}`;
 		localStorage.setItem(LocalStorageKeys.REFRESH_TOKEN, 'true');
 		const { exp, iat }: { exp: number; iat: number } = jwtDecode(token);
-		AccessToken.TOKEN = {
+		AccessToken.EXPIRES = {
 			begin: Date.now(),
 			expTime: (exp - iat) * 1000,
 		};
+		AccessToken.TOKEN = token;
 	}
 
-	static getBearer() {
-		return AccessToken.BEARER;
+	static get bearer() {
+		const token = AccessToken.TOKEN;
+		return token ? `Bearer ${token}` : '';
+	}
+
+	static get token() {
+		return AccessToken.TOKEN || '';
 	}
 
 	static resetToken() {
-		AccessToken.BEARER = '';
 		AccessToken.TOKEN = null;
+		AccessToken.EXPIRES = null;
 		localStorage.removeItem(LocalStorageKeys.REFRESH_TOKEN);
 	}
 }
