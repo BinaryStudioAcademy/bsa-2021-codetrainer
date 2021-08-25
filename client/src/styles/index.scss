@@ -1,7 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 @import '~normalize.css';
-@import '~@blueprintjs/core/lib/css/blueprint.css';
-@import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
+@import './variables.scss';
+
+[data-theme^='light'],
+[data-theme] [data-theme^='light'] {
+	--text-color: #{$mine-shaft};
+	--minor-text-color: #{$oslo-grey};
+	--background-color: #{$white};
+	--background-color-transparent: rgba(#fff, 0.5);
+	--container-color: #{$zircon};
+	--secondary-container-color: #{$white-lilac};
+	--black: #{$mine-shaft};
+	--white: #{$platinum};
+	--pink: #{$french-rose};
+	--pink-active: #{$rubine-red};
+	--purple: #{$cornflower-blue};
+	--purple-active: #{$cornflower-blue};
+	--divider: #e5e5e5;
+	--header: #{$white-lilac};
+	--sidebar: #{$cornflower-blue};
+	--border: #efefef;
+	--placeholder: #{$mine-shaft};
+	--rank-easy: #{$picton-blue};
+	--rank-medium: #{$fire-bush};
+	--rank-hard: #{$french-rose};
+	--rank-beta: #{$dusty-gray};
+}
+
+[data-theme^='dark'],
+[data-theme] [data-theme^='dark'] {
+	--text-color: #{$light-gray};
+	--minor-text-color: #{$dusty-gray};
+	--background-color: #{$rich-black};
+	--background-color-transparent: rgba(#181a1b, 0.5);
+	--container-color: #{$eerie-black};
+	--secondary-container-color: #{$onyx};
+	--black: #{$mine-shaft};
+	--white: #{$platinum};
+	--pink: #{$pictorian-carmine};
+	--pink-active: #{$rubine-red};
+	--purple: #{$cornflower-blue};
+	--purple-active: #{$cornflower-blue};
+	--divider: #{$onyx};
+	--header: #{$onyx};
+	--sidebar: #{$space-cadet};
+	--border: #{$eerie-black};
+	--placeholder: #{$light-gray};
+	--rank-easy: #{$picton-blue};
+	--rank-medium: #{$fire-bush};
+	--rank-hard: #{$french-rose};
+	--rank-beta: #{$eerie-black};
+}
+
+body {
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
@@ -16,6 +71,7 @@ code {
 
 ::-webkit-scrollbar {
 	width: 6px;
+	height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {

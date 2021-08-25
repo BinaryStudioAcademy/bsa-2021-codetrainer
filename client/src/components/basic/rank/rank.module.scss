@@ -1,8 +1,9 @@
 @import 'styles/variables';
 
-$easy: #ec4179;
-$medium: #f09712;
-$hard: #419aec;
+$easy: var(--rank-easy);
+$medium: var(--rank-medium);
+$hard: var(--rank-hard);
+$beta: var(--rank-beta);
 
 @mixin rank-color($color) {
 	border-color: $color;
@@ -11,17 +12,18 @@ $hard: #419aec;
 
 @mixin active-rank-color($color) {
 	border-color: $color;
-	color: #ffffff;
+	color: var(--white);
 	background-color: $color;
 }
 
 .rank {
+	background: var(--rank-color);
 	display: inline-block;
 	box-sizing: border-box;
 	border: 1px solid;
 	border-radius: 5px;
 	padding: 4px 5px;
-	font: 400 12px $base-font-family;
+	font: $rank-font;
 	letter-spacing: 0;
 	text-align: center;
 	user-select: none;
@@ -42,8 +44,11 @@ $hard: #419aec;
 	&.honor {
 		width: auto;
 		padding: 0 5px;
-		font-family: Inter, sans-serif;
-		font-size: 14px;
+		font: $honor-font;
+		line-height: 23px;
+	}
+	&.beta {
+		@include active-rank-color(($beta));
 	}
 
 	&.active_easy {

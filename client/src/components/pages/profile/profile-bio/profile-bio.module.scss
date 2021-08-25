@@ -1,9 +1,10 @@
 .profileBio {
-	width: 916px;
+	width: 875px;
 	height: 206px;
 	padding: 20px;
 	margin: 42px;
-	background: #fafbff;
+	background: var(--container-color);
+	border-radius: 20px;
 	.profileHeader {
 		display: flex;
 		gap: 10px;
@@ -20,7 +21,7 @@
 		}
 	}
 	.link {
-		color: #705ff5;
+		color: var(--purple);
 		text-decoration: underline;
 		font-size: 14px;
 	}

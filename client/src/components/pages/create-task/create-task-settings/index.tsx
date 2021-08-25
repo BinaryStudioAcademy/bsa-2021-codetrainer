@@ -40,7 +40,7 @@ export const CreateTaskSettings = ({
 }: ICreateTaskSettingsProps) => {
 	return (
 		<div className={styles.createTaskSettings}>
-			<h2 className={clsx('heading', styles.heading)}>Create a New Task</h2>
+			<h2 className={clsx('heading', styles.heading)}>Create a New Challenge</h2>
 			<form className={styles.settingsTask}>
 				<label htmlFor="task-name" className={styles.label}>
 					Name
@@ -48,7 +48,7 @@ export const CreateTaskSettings = ({
 				<input
 					className={Classes.INPUT}
 					id="task-name"
-					placeholder="Enter Task Name"
+					placeholder="Enter Challenge Name"
 					value={taskName}
 					onChange={(newText: ChangeEvent<HTMLInputElement>) => setTaskName(newText.target.value)}
 				/>

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import { Header } from './header';
 import { IconTaskPageFullScreen } from 'common';
 import { TabContent } from './tab-content';
 import { ICreateTabsProps } from './types';
-
+import './styles.scss';
 import styles from './styles.module.scss';
 
 export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelectTab, selectedTab }) => {
@@ -14,9 +14,13 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelec
 	const handleFullScreen = () => {
 		setFullScreen((state) => !state);
 	};
-
+	const handleEscape = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (e.code === 'Escape') {
+			setFullScreen(false);
+		}
+	};
 	return (
-		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)}>
+		<div className={clsx(styles.root, fullScreen ? styles.edit__fullscreen : styles.edit)} onKeyUp={handleEscape}>
 			<FontAwesomeIcon
 				icon={IconTaskPageFullScreen.NAME}
 				size={IconTaskPageFullScreen.SIZE}
@@ -26,7 +30,7 @@ export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelec
 			/>
 			<Header tabs={tabs} onChange={onSelectTab} />
 			<div className={styles.panel}>
-				<div className={styles.sideBlock}/>
+				<div className={styles.sideBlock} />
 				<div>
 					<TabContent onChange={onChange} tab={tabs[selectedTab]} />
 				</div>

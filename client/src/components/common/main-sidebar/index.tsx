@@ -10,7 +10,9 @@ const MainSidebar: React.FC = () => {
 	return (
 		<aside className={styles.mainSidebar}>
 			<div className={styles.logotype}>
-				<img src={logo} alt="" className={styles.logotypeImage} />
+				<NavLink to={ROUTES.Home}>
+					<img src={logo} alt="" className={styles.logotypeImage} />
+				</NavLink>
 			</div>
 			<nav className={styles.navigation}>
 				<ul className={styles.navigationList}>
@@ -33,9 +35,9 @@ const MainSidebar: React.FC = () => {
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
-						<NavLink to="/" className={styles.navigationLink}>
+						<NavLink to={ROUTES.Clans} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
-							Blog
+							Clans
 						</NavLink>
 					</li>
 				</ul>

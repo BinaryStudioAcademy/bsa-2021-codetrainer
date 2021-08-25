@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@use 'styles/variables.scss' as var;
 
 .container {
 	width: 916px;
-
-	font-family: 'Montserrat', Arial, sans-serif;
-	color: #282828;
+	margin-top: 42px;
+	font-family: var.$base-font-family;
+	color: var(--text-color);
 	display: grid;
 	grid-auto-flow: row;
 	grid-gap: 20px;
 
 	> * {
-		background: #f6f7fb;
+		background: var(--container-color);
 		padding: 30px 22px;
 		border-radius: 7px;
 	}
@@ -18,13 +18,10 @@
 
 .submitBtn {
 	width: 100%;
-	background: #ec4179;
+	background: var(--pink);
 	border-radius: 7px;
 	border: 0;
-	font-family: 'Montserrat', sans-serif;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 16px;
+	font: var.$button-font;
 	line-height: 20px;
 	text-align: center;
 	color: #ffffff;

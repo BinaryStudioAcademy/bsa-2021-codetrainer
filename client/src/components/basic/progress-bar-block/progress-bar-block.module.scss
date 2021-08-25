@@ -14,16 +14,18 @@
 		.progressInfoDone {
 			margin-bottom: 0;
 			.progressDone {
-				color: #ec4179;
+				color: var(--pink);
 				font: var.$base-font;
 				font-weight: 500;
 				font-size: 16px;
 			}
 			.progressOfSymbol {
-				color: rgba(40, 40, 40, 0.5);
+				color: var(--text-color);
+				opacity: 0.5;
 			}
 			.progressLeft {
-				color: rgba(40, 40, 40, 0.5);
+				color: var(--text-color);
+				opacity: 0.5;
 			}
 		}
 	}

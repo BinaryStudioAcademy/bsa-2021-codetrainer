@@ -3,6 +3,10 @@ import { ClansPage } from 'components';
 import * as actions from './logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
+import historyHelper from 'helpers/history.helper';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from '../../notification/logic/models';
+import { ROUTES } from 'constants/routes';
 
 const Clans: React.FC = () => {
 	const dispatch = useDispatch();
@@ -35,7 +39,20 @@ const Clans: React.FC = () => {
 	const leaveClan = (id: string) => {
 		dispatch(actions.leaveClan({ id }));
 	};
-
+	const handleGoToClan = () => {
+		if (user?.clan !== null) {
+			historyHelper.push(`${ROUTES.Clan}/${user?.clan?.id}`);
+		} else {
+			dispatch(
+				setNotificationState({
+					state: {
+						notificationType: NotificationType.Error,
+						message: 'You don`t have a clan',
+					},
+				}),
+			);
+		}
+	};
 	return (
 		<div>
 			<ClansPage
@@ -47,6 +64,7 @@ const Clans: React.FC = () => {
 				currentSort={currentSort}
 				joinClan={joinClan}
 				leaveClan={leaveClan}
+				handleGoToClan={handleGoToClan}
 			/>
 		</div>
 	);

@@ -8,6 +8,9 @@ const ENV = {
 		API_PATH: '/api',
 		URL: variables?.NODE_ENV === 'development' ? 'http://localhost:3000' : getEnv('APP_URL'),
 	},
+	TESTING: {
+		NAME: 'testing',
+	},
 	JWT: {
 		SECRET: getEnv('SECRET_KEY'),
 		EXPIRES_IN: '30m',

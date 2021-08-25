@@ -8,26 +8,37 @@
 	.passwordField {
 		box-sizing: border-box;
 		width: 100%;
-		background: var.$white-lilac;
+		background: var(--secondary-container-color);
+		color: var(--text-color);
 		border-radius: 7px;
 		border: 0;
 		font: var.$base-font;
 		line-height: 17px;
-		color: var.$mine-shaft;
 		padding: 15px 20px;
 		outline: none;
 		transition: var.$base-animation-time;
 
 		&:hover {
-			background-color: #dee4f2;
+			background-color: var(--white);
+			color: var(--black);
+		}
+		&:hover::placeholder {
+			color: var(--black);
+		}
+		&:focus {
+			background-color: var(--white);
+			color: var(--black);
+		}
+		&:focus::placeholder {
+			color: var(--black);
 		}
 	}
 
 	.inputField::placeholder,
 	.passwordField::placeholder {
-		color: rgba(40, 40, 40, 0.5);
+		color: var(--placeholder);
 
-		opacity: 0.4;
+		opacity: 0.5;
 	}
 
 	.inputWrapper {
@@ -49,7 +60,8 @@
 		transition: var.$base-animation-time;
 
 		&:hover {
-			background-color: rgb(228, 228, 255);
+			background-color: var(--white);
+			color: var(--black);
 		}
 	}
 
@@ -66,7 +78,7 @@
 			display: block;
 			font: var.$progress-bar-font;
 			line-height: 15px;
-			color: var.$mine-shaft;
+			color: var(--text-color);
 			margin-bottom: 5px;
 		}
 
@@ -84,6 +96,6 @@
 		margin-top: 2px;
 		height: 12px;
 		font-size: 12px;
-		color: var.$french-rose;
+		color: var(--pink);
 	}
 }

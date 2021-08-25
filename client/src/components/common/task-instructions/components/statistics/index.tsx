@@ -13,7 +13,7 @@ interface IStatisticsProps {
 const Statistics: React.FC<IStatisticsProps> = ({ icon, content, divider = false }) => {
 	return (
 		<div className={clsx(styles.info, { [styles.infoDivider]: divider })}>
-			<FontAwesomeIcon icon={icon} size="lg" color="rgba(40, 40, 40, 0.5)" />
+			<FontAwesomeIcon className={styles.icon} icon={icon} size="lg" />
 			<div className={styles.infoDescription}>{content}</div>
 		</div>
 	);

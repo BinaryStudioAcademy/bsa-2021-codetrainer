@@ -1,14 +1,21 @@
 import { ISelectValue } from '../../basic/select/interface';
 
+export interface ITag {
+	id: string;
+	name: string;
+}
 export interface ITask {
-	title: string;
-	description: string;
+	id: string;
+	name: string;
+	discipline?: string;
+	description?: string;
+	exampleTestCases?: string;
 	rank: number;
-	tags: string[];
+	tags: ITag[];
 }
 
 export interface INextTaskProps {
-	task: ITask;
+	task?: ITask | null;
 	focusValues: ISelectValue[];
 	activeFocusValue: ISelectValue;
 	setActiveFocusValue: React.Dispatch<React.SetStateAction<ISelectValue>>;

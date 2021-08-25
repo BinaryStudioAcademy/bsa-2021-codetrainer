@@ -1,9 +1,10 @@
-import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable, JoinColumn } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
 import { AbstractEntity } from '../abstract';
 import { Solution } from '../solution';
 import { Tag } from '../tag';
 import { User } from '../user';
+import { CommentTask } from '../comment-task';
 
 @Entity()
 export class Task extends AbstractEntity {
@@ -45,6 +46,10 @@ export class Task extends AbstractEntity {
 
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
+
+	@OneToMany(() => CommentTask, (commentTask) => commentTask.task)
+	@JoinColumn()
+	comments!: CommentTask[];
 
 	@OneToMany(() => Solution, (solution) => solution.task)
 	solutions!: Solution[];

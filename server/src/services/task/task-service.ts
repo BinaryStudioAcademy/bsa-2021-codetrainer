@@ -1,39 +1,43 @@
 import { getCustomRepository } from 'typeorm';
 import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag } from '../../data';
-import { TASK_ORDER_BY, TASK_STATUS } from '../../common';
+import { TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
+
 	protected userRepository: TUserRepository;
+
 	protected tagRepository: TTagRepository;
-	protected getTagBind: (name: string) => Promise<Tag>;
 
 	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
 		this.taskRepository = task;
 		this.userRepository = user;
 		this.tagRepository = tag;
-		this.getTagBind = this.getTag.bind(this);
 	}
 
-	async getTag(name: string) {
-		const tagService = getCustomRepository(this.tagRepository);
-		let tag = await tagService.getByKey(name, 'name');
-		if (!tag) {
-			tag = await tagService.save({ name });
-		}
-		return tag;
+	async getTags(tags: string[] = []) {
+		const getTag = async (tagName: string) => {
+			const tagService = getCustomRepository(this.tagRepository);
+			let tag = await tagService.getByKey(tagName, 'name');
+			if (!tag) {
+				tag = await tagService.save({ name: tagName });
+			}
+			return tag;
+		};
+		const data = await Promise.all(tags.map(getTag));
+		return data;
 	}
 
-	async create(user: User, task: Task, tags: string[] | []) {
+	async create(user: User, task: Task, tags: string[] = []) {
 		const repository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
-		const tagsForSave = await Promise.all(tags.map(this.getTagBind));
+		const tagsForSave = await this.getTags(tags);
 		const newTask = await repository.save({
 			...task,
 			user,
 			isPublished: false,
 			status: TASK_STATUS.BETA,
-			...(Boolean(tagsForSave.length) ? { tags: tagsForSave } : {}),
+			...(tagsForSave.length ? { tags: tagsForSave } : {}),
 		});
 		await userRepository.save({ id: user.id, tasks: [...user.tasks, newTask] });
 		const savedTask = await repository.getById(newTask.id);
@@ -46,7 +50,7 @@ export class TaskService {
 		const tagRepository = getCustomRepository(this.tagRepository);
 		await Promise.all(
 			task.tags.map((tag) => {
-				const newTasks = tag.tasks.filter((taskT) => taskT.id !== task.id);
+				const newTasks = tag.tasks?.filter((taskT) => taskT.id !== task.id);
 				return tagRepository.save({ ...tag, tasks: newTasks });
 			}),
 		);
@@ -58,9 +62,10 @@ export class TaskService {
 		};
 	}
 
-	async update(newTask: Task, taskId: string) {
+	async update(newTask: Task, taskId: string, tags: string[] = []) {
 		const repository = getCustomRepository(this.taskRepository);
-		await repository.updateById(taskId, newTask);
+		const tagsForSave = await this.getTags(tags);
+		await repository.save({ ...newTask, ...(tagsForSave.length ? { tags: tagsForSave } : {}) });
 		const updatedTask = await repository.getById(taskId);
 		return updatedTask;
 	}
@@ -88,14 +93,14 @@ export class TaskService {
 		const tagRepository = getCustomRepository(this.tagRepository);
 		return {
 			tags: await tagRepository.getAll(),
-			tasks: await repository.search({
+			ranks: await repository.getRanks(),
+			...(await repository.search({
 				where,
 				sort,
-				// skip: page * TASKS_ON_PAGE,
-				// take: TASKS_ON_PAGE,
+				skip: page * TASKS_ON_PAGE,
+				take: TASKS_ON_PAGE,
 				userId: user.id,
-			}),
-			ranks: await repository.getRanks(),
+			})),
 		};
 	}
 }

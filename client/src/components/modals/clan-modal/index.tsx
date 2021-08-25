@@ -7,6 +7,11 @@ import { Button } from '../../basic';
 import styles from './clan-modal.module.scss';
 import { Modal } from '../';
 import { createClan } from 'services/create-clan.service';
+import { useDispatch } from 'react-redux';
+import * as userActions from 'containers/user/logic/actions';
+import { useUserSelector } from 'hooks/useAppSelector';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
 
 interface IClanModalProps {
 	isOpen: boolean;
@@ -22,12 +27,24 @@ const CreateClanSchema = Yup.object().shape({
 
 export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
+	const dispatch = useDispatch();
+	const user = useUserSelector();
 	const onSubmit = async (value: string, setFieldError: any) => {
+		if (user?.clan !== null) {
+			dispatch(
+				setNotificationState({
+					state: {
+						notificationType: NotificationType.Error,
+						message: 'Leave the clan to create a new one first.',
+					},
+				}),
+			);
+		}
 		try {
-			await createClan(value);
+			const clan = await createClan(value);
 			setIsOpen(false);
+			dispatch(userActions.setUserClan({ clan: clan }));
 		} catch (e) {
-			console.log(e);
 			setFieldError('createClan', 'Something went wrong');
 		}
 	};
@@ -56,17 +73,12 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 				>
 					{({ validateField }) => (
 						<Form className={styles.form}>
-							<Field
-								id="createClan"
-								name="createClan"
-								label={
-									<label>
-										<span>*</span> Create clan
-									</label>
-								}
-								type="text"
-								component={FormInput}
-							/>
+							<label htmlFor="createClan">
+								<span>*</span> Create clan
+							</label>
+							<div className={styles.formInput}>
+								<Field id="createClan" name="createClan" type="text" component={FormInput} />
+							</div>
 							{isPrompt ? (
 								prompt(validateField as (field: string) => Promise<string>)
 							) : (
