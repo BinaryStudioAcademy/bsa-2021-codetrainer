@@ -32,7 +32,7 @@ const collectionsTabs: TCollectionsTab[] = [
 		title: 'Followed',
 		value: CollectionsTabValues.Followed,
 		loader: getFollowedCollections,
-		empty: 'You have not started to follow any solutions yet',
+		empty: 'You have not started to follow any collection yet',
 	},
 ];
 

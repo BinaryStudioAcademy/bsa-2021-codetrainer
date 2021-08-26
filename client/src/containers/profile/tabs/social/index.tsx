@@ -15,7 +15,6 @@ export const ProfileSocial: React.FC<IProfileSocial> = ({ social }) => {
 	const [activeId, setActiveId] = useState<string>(social[0].id);
 	const sideBar = useMemo(() => social.map(({ title, id, users }) => ({ id, title, count: users.length })), [social]);
 	const items = social.find(({ id }) => id === activeId)?.users || [];
-
 	return (
 		<ProfileTabWithSidebar
 			sideBar={{
@@ -24,7 +23,7 @@ export const ProfileSocial: React.FC<IProfileSocial> = ({ social }) => {
 				onClick: (id: string) => setActiveId(id),
 			}}
 		>
-			<ProfileSocialList items={items} />
+			<ProfileSocialList items={items} infoType={activeId} />
 		</ProfileTabWithSidebar>
 	);
 };

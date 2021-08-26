@@ -26,7 +26,7 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 				onClick: (id: string) => setActiveId(id),
 			}}
 		>
-			<Tasks tasks={tasks} />
+			<Tasks tasks={tasks} emptyTasks={activeId} />
 		</ProfileTabWithSidebar>
 	);
 };
