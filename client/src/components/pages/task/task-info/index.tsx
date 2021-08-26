@@ -8,14 +8,17 @@ import { IChallenge } from 'components/common/challenge/types';
 
 export interface ITaskInfoProps {
 	challengeProps: IChallenge;
+	onTrainClick: () => void;
 }
 
-export const TaskInfo = ({ challengeProps }: ITaskInfoProps) => {
+export const TaskInfo = ({ challengeProps, onTrainClick }: ITaskInfoProps) => {
 	return (
 		<div className={styles.taskInfo}>
 			<Challenge {...challengeProps} showAddToCollection={false} />
 			<div className={styles.buttonsBlock}>
-				<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Train</Button>
+				<Button onClick={onTrainClick} className={clsx(ButtonClasses.red, ButtonClasses.filled)}>
+					Train
+				</Button>
 				<Button className={clsx(ButtonClasses.red, styles.skipButton)}>Skip</Button>
 			</div>
 		</div>

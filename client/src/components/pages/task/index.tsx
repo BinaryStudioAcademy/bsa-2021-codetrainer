@@ -8,12 +8,13 @@ export interface ITaskProps {
 	task: IChallenge;
 	getTabContent: () => React.ReactNode;
 	tabsRouterProps: ITabsRouterProps;
+	onTrainClick: () => void;
 }
 
-export const Task = ({ task, tabsRouterProps, getTabContent }: ITaskProps) => {
+export const Task = ({ task, tabsRouterProps, getTabContent, onTrainClick }: ITaskProps) => {
 	return (
 		<div className={styles.container}>
-			<TaskInfo challengeProps={task} />
+			<TaskInfo challengeProps={task} onTrainClick={onTrainClick} />
 			<TabsRouter {...tabsRouterProps} />
 			{getTabContent()}
 		</div>

@@ -11,6 +11,7 @@ import { IRootState } from 'typings/root-state';
 import { Redirect } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { FullscreenLoader } from 'components';
+import { useHistory } from 'react-router-dom';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -23,6 +24,7 @@ export const TaskPageContainer = () => {
 	const dispatch = useDispatch();
 	const notFound = useSelector((state: IRootState) => state.taskInfo.notFound);
 	const task = useSelector((state: IRootState) => state.taskInfo.task);
+	const history = useHistory();
 
 	useEffect(() => {
 		dispatch(actions.getTask({ id }));
@@ -56,6 +58,10 @@ export const TaskPageContainer = () => {
 		});
 	}, [setActiveTab]);
 
+	const onTrainClick = () => {
+		history.push(`/task/${task?.id}/train`);
+	};
+
 	if (notFound) {
 		return <Redirect to={ROUTES.NotFound} />;
 	}
@@ -80,6 +86,7 @@ export const TaskPageContainer = () => {
 
 		return (
 			<Task
+				onTrainClick={onTrainClick}
 				task={taskProps}
 				getTabContent={getTabContent}
 				tabsRouterProps={{
