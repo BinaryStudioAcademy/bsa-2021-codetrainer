@@ -11,6 +11,7 @@ export const SearchPage: React.FC = () => {
 	const [searchData, setSearchData] = useState<ISearchPageProps['data']>(mapSearchData(search));
 	const [filterForChangePage, setFilterForChangePage] = useState<ISearchPageProps['filter']>(filter);
 	const dispatch = useDispatch();
+	console.log(search);
 
 	useEffect(() => {
 		setSearchData(mapSearchData(search));
