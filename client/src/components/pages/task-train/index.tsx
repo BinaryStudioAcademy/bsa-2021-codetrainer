@@ -16,10 +16,20 @@ interface ITaskTrainPageProps {
 	solution: WebApi.Entities.ISolution | null;
 	result: string;
 	success: boolean;
+	activeTab: number;
+	onChangeTab: (tab: number) => void;
 	onSubmit: (code: string) => void;
 }
 
-const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, result, success, onSubmit }) => {
+const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({
+	task,
+	solution,
+	result,
+	success,
+	activeTab,
+	onChangeTab,
+	onSubmit,
+}) => {
 	const [code, setCode] = useState<string>(task.preloaded || solution?.code || '');
 	const [languageVersion, setLanguageVersion] = useState<{ title: string; id: string | null }>({
 		title: 'Option 1',
@@ -63,6 +73,8 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({ task, solution, result, 
 								),
 							},
 						]}
+						activeTabIndex={activeTab}
+						onChange={onChangeTab}
 					/>
 				</div>
 				<TaskStatistic

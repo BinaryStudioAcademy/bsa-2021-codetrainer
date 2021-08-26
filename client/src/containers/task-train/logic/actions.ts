@@ -9,3 +9,4 @@ export const submitSolution = createAction<actionTypes.ISubmitSolutionArgs>(acti
 export const startLoading = createAction<void>(actionTypes.START_LOADING);
 export const endLoading = createAction<void>(actionTypes.END_LOADING);
 export const setResult = createAction<actionTypes.ISetResult>(actionTypes.SET_RESULT);
+export const setActiveTab = createAction<actionTypes.ISetActiveTAb>(actionTypes.SET_ACTIVE_TAB);

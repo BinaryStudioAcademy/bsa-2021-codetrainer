@@ -44,7 +44,7 @@ export const initialState: ISearchState = {
 	onSubmit: true,
 	changePage: false,
 	filter: {
-		status: 'approved',
+		status: 'beta',
 		progress: 'all',
 		query: '',
 		sort: 'newest',
