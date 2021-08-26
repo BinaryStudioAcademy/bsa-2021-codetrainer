@@ -13,6 +13,26 @@ export const initCollection = (appRouter: typeof Router, services: { collection:
 				.then((data) => res.send(data))
 				.catch(next),
 		)
+		.get(CollectionsApiPath.AUTHORED, (req, res, next) =>
+			collectionService
+				.getAuthoredCollections({
+					authorId: req.query.author as string,
+					skip: Number(req.query.skip) || 0,
+					take: Number(req.query.take) || 10,
+				})
+				.then((data) => res.send(data))
+				.catch(next)
+		)
+		.get(CollectionsApiPath.FOLLOWED, (req, res, next) =>
+			collectionService
+				.getFollowedCollections({
+					followerId: req.query.follower as string,
+					skip: Number(req.query.skip) || 0,
+					take: Number(req.query.take) || 10,
+				})
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.get(CollectionsApiPath.ID, (req, res, next) =>
 			collectionService
 				.getCollectionById(req.params.id)

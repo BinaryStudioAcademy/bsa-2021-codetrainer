@@ -11,6 +11,7 @@ import { ReactComponent as DefaultCollectionIcon } from 'assets/icons/collection
 import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TaskStatus } from 'typings/common/task';
 
 interface ICollectionProps {
 	collection: WebApi.Entities.ICollection;
@@ -23,7 +24,9 @@ const avatarProps = {
 };
 
 const Collection: FC<ICollectionProps> = ({ collection }) => {
-	const averageRank = Math.round(mean(collection.tasks.map((task) => task.rank)));
+	const averageRank = Math.round(
+		mean(collection.tasks.filter((task) => task.status === TaskStatus.APPROVED).map((task) => task.rank)),
+	);
 
 	return (
 		<div className={styles.collection}>
@@ -33,7 +36,7 @@ const Collection: FC<ICollectionProps> = ({ collection }) => {
 				<DefaultCollectionIcon {...avatarProps} />
 			)}
 			<div className={styles.name}>
-				<Rank rank={averageRank} />
+				{averageRank ? <Rank rank={averageRank} /> : null}
 				<Link to={`${ROUTES.Collections}/${collection.id}`}>{collection.name}</Link>
 			</div>
 			<div className={styles.minor}>
@@ -42,12 +45,18 @@ const Collection: FC<ICollectionProps> = ({ collection }) => {
 					placement="bottom"
 					title={
 						<div className={styles.popover}>
-							Collection includes:
-							<ul>
-								{collection.tasks.map((task) => (
-									<li key={task.id}>{task.name}</li>
-								))}
-							</ul>
+							{collection.tasks ? (
+								<>
+									Collection includes:
+									<ul>
+										{collection.tasks.map((task) => (
+											<li key={task.id}>{task.name}</li>
+										))}
+									</ul>
+								</>
+							) : (
+								'Collection is empty'
+							)}
 						</div>
 					}
 				>

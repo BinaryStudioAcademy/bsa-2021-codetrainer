@@ -4,9 +4,11 @@ import {
 	Column,
 	OneToMany,
 	ManyToOne,
+	ManyToMany,
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
+	JoinTable,
 } from 'typeorm';
 import { User } from '../user';
 import { Task } from '../task';
@@ -22,12 +24,20 @@ export class Collection extends BaseEntity {
 	@ManyToOne(() => User, (user) => user)
 	author!: User;
 
+	@ManyToMany(() => User)
+	@JoinTable()
+	followers!: User[];
+
+	@Column({ type: 'varchar', length: 100, nullable: true })
+	avatar?: string;
+
 	@CreateDateColumn()
 	createdAt!: Date;
 
 	@UpdateDateColumn()
 	updatedAt!: Date;
 
-	@OneToMany(() => Task, (task) => task)
+	@ManyToMany(() => Task)
+	@JoinTable()
 	tasks!: Task[];
 }

@@ -118,14 +118,14 @@ declare namespace WebApi.Entities {
 }
 
 declare namespace WebApi.Types {
-	interface IPaginationResponse<T> {
-		items: T[];
-		full: number;
-		hasMore: boolean;
-	}
+	type TPaginationResponse<T, N extends string> = {
+		[_ in N]: T[];
+	} & {
+		total: number;
+	};
 
-	interface IPaginationRequest {
+	type TPaginationRequest = {
 		skip: number;
-		limit: number;
-	}
+		take: number;
+	};
 }
