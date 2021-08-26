@@ -9,13 +9,18 @@ interface ITab {
 
 interface ITabsProps {
 	tabs: Array<ITab>;
+	activeTabIndex?: number;
+	onChange?: (tab: number) => void;
 }
 
-const Tabs: React.FC<ITabsProps> = ({ tabs }) => {
-	const [activeTab, setActiveTab] = useState<ITab>(tabs[0]);
+const Tabs: React.FC<ITabsProps> = ({ tabs, onChange, activeTabIndex }) => {
+	const [activeTab, setActiveTab] = useState<number>(activeTabIndex || 0);
 
-	const onTabChange = (tab: ITab) => {
+	const onTabChange = (tab: number) => {
 		setActiveTab(tab);
+		if (onChange) {
+			onChange(tab);
+		}
 	};
 
 	return (
@@ -24,18 +29,18 @@ const Tabs: React.FC<ITabsProps> = ({ tabs }) => {
 				{tabs.map((tab, index) => (
 					<span
 						className={
-							tab.name === activeTab.name
+							index === activeTab
 								? clsx(styles.tabsNavigationItem, styles.tabsNavigationItemActive)
 								: styles.tabsNavigationItem
 						}
-						onClick={() => onTabChange(tab)}
+						onClick={() => onTabChange(index)}
 						key={index}
 					>
 						{tab.name}
 					</span>
 				))}
 			</div>
-			<div className={styles.tabsContent}>{activeTab.content}</div>
+			<div className={styles.tabsContent}>{tabs[activeTab].content}</div>
 		</div>
 	);
 };

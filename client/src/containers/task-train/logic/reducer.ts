@@ -27,4 +27,12 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 			solution,
 		};
 	},
+	[actionTypes.SET_RESULT](state, { result, success }: actionTypes.ISetResult) {
+		return {
+			...state,
+			hasFetched: true,
+			result,
+			success,
+		};
+	},
 });

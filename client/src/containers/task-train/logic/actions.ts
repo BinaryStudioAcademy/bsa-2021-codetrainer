@@ -8,3 +8,4 @@ export const setSolution = createAction<actionTypes.ISetSolutionArgs>(actionType
 export const submitSolution = createAction<actionTypes.ISubmitSolutionArgs>(actionTypes.SUBMIT_SOLUTION);
 export const startLoading = createAction<void>(actionTypes.START_LOADING);
 export const endLoading = createAction<void>(actionTypes.END_LOADING);
+export const setResult = createAction<actionTypes.ISetResult>(actionTypes.SET_RESULT);
