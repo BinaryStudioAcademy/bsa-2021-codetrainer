@@ -3,8 +3,12 @@
 	gap: 25px;
 	width: 100%;
 	align-items: center;
-	margin-bottom: 15px;
-	margin-top: 10px;
+	// margin-bottom: 15px;
+	margin-top: 35px;
+	label {
+		display: inline-block;
+		margin-bottom: 5px;
+	}
 	label.noMargin {
 		margin-bottom: 0 !important;
 	}
