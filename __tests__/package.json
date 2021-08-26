@@ -1,0 +1,21 @@
+{
+  "name": "api-template",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm install",
+    "test": "mocha --config ./.mocha.json"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "chai-json-schema": "^1.5.1",
+    "dotenv": "^10.0.0",
+    "got": "^11.8.2",
+    "mocha": "^9.0.3"
+  }
+}
