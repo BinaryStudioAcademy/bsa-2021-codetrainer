@@ -68,8 +68,12 @@
 }
 
 :local(.collection img) {
-	width: 75px;
+	width: 70px;
 	border-radius: 15px;
+}
+
+:local(.collection img):hover {
+	cursor: pointer;
 }
 
 :local(.collection p) {
@@ -105,4 +109,34 @@
 	display: flex;
 	flex-direction: row;
 	margin-bottom: 10px;
+}
+
+:local(.addButton) {
+	width: 70px;
+	height: 70px;
+	border-radius: 15px;
+}
+
+:local(.addButton):hover {
+	background: var(--white);
+	color: var(--black);
+	cursor: pointer;
+}
+
+:local(.newCollection):hover {
+	background: var(--secondary-container-color);
+	border-radius: 15px;
+}
+
+:local(.newCollection) {
+	display: flex;
+	flex-direction: row;
+}
+
+:local(.addButton svg) {
+	margin: 25px;
+}
+
+:local(.newCollection p) {
+	margin: auto 0 auto 20px;
 }

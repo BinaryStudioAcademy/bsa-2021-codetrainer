@@ -13,7 +13,7 @@ import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import LandingPageCointainer from 'containers/landing-page';
-// import Example from 'containers/example';
+import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
@@ -27,6 +27,8 @@ interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
+	const theme = useAppSelector((rootState) => rootState.theme.theme);
+	document.documentElement.setAttribute('data-theme', theme);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.checkRefreshToken());
@@ -100,6 +102,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
 			<Route path={ROUTES.NotFound} component={NotFound} />
+			<Route path={ROUTES.Example} component={Example} />
 			<Redirect from="*" to={ROUTES.NotFound} />
 		</Switch>
 	);
