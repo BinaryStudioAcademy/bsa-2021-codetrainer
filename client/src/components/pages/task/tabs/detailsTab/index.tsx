@@ -11,10 +11,16 @@ export interface IDetailsTabProps {
 }
 
 export const DetailsTab = ({ task }: IDetailsTabProps) => {
+	const contributors = [...task.contributors];
+
+	if (task.user) {
+		contributors.push(task.user);
+	}
+
 	return (
 		<div className={styles.detailsTab}>
 			<Description description={task.description} exampleTestCases={task.exampleTestCases} />
-			<Contributors />
+			<Contributors contributors={contributors} />
 			<Stats task={task} />
 		</div>
 	);

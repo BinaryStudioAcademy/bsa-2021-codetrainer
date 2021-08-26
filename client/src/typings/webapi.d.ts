@@ -31,11 +31,8 @@ declare namespace WebApi.Entities {
 		id: string | null;
 		name?: string;
 		description?: string;
-		tags?: ITag[];
 		rank?: number;
 		status?: TaskStatus;
-		favoriteSaves?: number;
-		positiveFeedback?: number;
 		user?: IUser;
 	}
 
@@ -67,6 +64,7 @@ declare namespace WebApi.Entities {
 		verySatisfied: number;
 		somewhatSatisfied: number;
 		notSatisfied: number;
+		contributors: IUser[];
 	}
 
 	export interface ISolution {

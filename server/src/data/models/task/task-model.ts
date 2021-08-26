@@ -93,4 +93,8 @@ export class Task extends AbstractEntity {
 
 	@Column({ default: 0 })
 	notSatisfied!: number;
+
+	@OneToMany(() => User, (user) => user.contributions)
+	@JoinColumn()
+	contributors!: User[];
 }

@@ -63,7 +63,8 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task')
 			.leftJoinAndSelect('task.user', 'user')
 			.leftJoinAndSelect('task.tags', 'tag')
-			.select(['task', 'user.name', 'user.id', 'tag.id', 'tag.name'])
+			.leftJoinAndSelect('task.contributors', 'contributors')
+			.select(['task', 'user.name', 'user.surname', 'user.id', 'tag.id', 'tag.name', 'contributors'])
 			.skip(skip)
 			.take(take)
 			.getMany();
@@ -77,7 +78,9 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task')
 			.leftJoinAndSelect('task.solutions', 'solution')
 			.leftJoinAndSelect('task.tags', 'tag')
-			.select(['task', 'solution.id', 'tag.id', 'tag.name'])
+			.leftJoinAndSelect('task.user', 'user')
+			.leftJoinAndSelect('task.contributors', 'contributors')
+			.select(['task', 'solution.id', 'tag.id', 'tag.name', 'user', 'contributors'])
 			.where('task.id = :id', { id })
 			.getOne();
 	}
