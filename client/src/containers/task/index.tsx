@@ -68,7 +68,7 @@ export const TaskPageContainer = () => {
 				lastName: task.user?.surname || '',
 				link: `${ROUTES.Users}/${task.user?.username}`,
 			},
-			linkToAuthor: `${ROUTES.Users}/${task.user?.username}`,
+			linkToTask: `${ROUTES.TaskInfo}/${task.id}`,
 			title: task.name,
 			rank: task.rank,
 			stats: {

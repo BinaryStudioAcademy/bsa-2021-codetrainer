@@ -11,7 +11,7 @@ export interface IChallengeStats {
 export interface IChallengeHeader {
 	title: string;
 	rank: number;
-	linkToAuthor: string;
+	linkToTask: string;
 }
 
 export interface IChallenge {
@@ -21,7 +21,7 @@ export interface IChallenge {
 		lastName: string;
 		link: string;
 	};
-	linkToAuthor: string;
+	linkToTask: string;
 	title: string;
 	rank: number;
 	stats: {

@@ -10,6 +10,7 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
 import { IUser } from 'typings/common/IUser';
+import { ROUTES } from 'constants/routes';
 
 const getIChallenge = (
 	tasks: Array<{
@@ -30,11 +31,11 @@ const getIChallenge = (
 	return tasks.map((task) => {
 		return {
 			id: task.id,
-			linkToAuthor: '/users/' + user.username,
+			linkToTask: `${ROUTES.TaskInfo}/${task.id}fdsafa`,
 			author: {
 				firstName: user.name,
 				lastName: user.surname,
-				link: '/',
+				link: '/users/' + user.username,
 			},
 			stats: {
 				favoriteSaves: 12,
