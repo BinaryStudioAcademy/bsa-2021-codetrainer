@@ -29,12 +29,14 @@ const ClanPage: React.FC<IClanProps> = ({
 	isInvitationOpen,
 	setIsInvitationOpen,
 }) => {
+	console.log(community);
+
 	const inviteModalElements = (
 		<div>
 			{modalLoading ? (
 				<Spinner />
 			) : (
-				community.map(({ user: toUser }: any) => {
+				community.map((toUser: any) => {
 					return (
 						<CommunityMember
 							key={toUser.id}
