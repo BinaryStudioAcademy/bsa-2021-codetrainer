@@ -42,7 +42,6 @@ export const userSchema = {
     email: {
       type: "string",
       maxLength: 100,
-      unique: true,
     },
   },
 };
