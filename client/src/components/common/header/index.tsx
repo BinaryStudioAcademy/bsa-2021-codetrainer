@@ -30,7 +30,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
 	const [isNotificationsVisible, setNotificationsVisibility] = useState(false);
 
-	const getListItem = ({ icon: Icon, text, id, onClick = () => {} }: IListItem) => {
+	const getListItem = ({ icon: Icon, text, id, onClick = () => { } }: IListItem) => {
 		return (
 			<li
 				className={styles.navigationItem}
@@ -85,7 +85,11 @@ const Header: React.FC<IHeaderProps> = (props) => {
 			<span className={styles.name}>{props.name}</span>
 			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
 				<div className={styles.avatarCover}>
-					<div onClick={() => setListVisibility(!isListVisible)}>
+					<div onClick={(e) => {
+						e.stopPropagation();
+						setListVisibility(!isListVisible)
+					}
+					}>
 						<Avatar avatar={props.avatar} size={61} color="#EC4179" />
 					</div>
 
