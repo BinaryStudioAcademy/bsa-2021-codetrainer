@@ -13,6 +13,7 @@ export interface ITaskInfoProps {
 
 export const TaskInfo = ({ challengeProps }: ITaskInfoProps) => {
 	const history = useHistory();
+
 	return (
 		<div className={styles.taskInfo}>
 			<Challenge {...challengeProps} showAddToCollection={false} />

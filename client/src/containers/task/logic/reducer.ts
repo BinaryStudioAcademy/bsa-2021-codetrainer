@@ -15,4 +15,10 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			notFound: action.notFound,
 		};
 	},
+	[actionTypes.SET_TASKS](state, action: actionTypes.TSetTasks) {
+		return {
+			...state,
+			similarTasks: action.similarTasks,
+		};
+	},
 });

@@ -5,12 +5,15 @@ import { Description } from './description';
 import { Contributors } from './contributors';
 import { Stats } from './stats';
 import { WebApi } from 'typings/webapi';
+import { IChallenge } from 'components/common/challenge/types';
+import { SimilarTasks } from './similar-tasks';
 
 export interface IDetailsTabProps {
 	task: WebApi.Entities.IChallenge;
+	tasks?: IChallenge[] | null;
 }
 
-export const DetailsTab = ({ task }: IDetailsTabProps) => {
+export const DetailsTab = ({ task, tasks }: IDetailsTabProps) => {
 	const contributors = [...task.contributors];
 
 	if (task.user) {
@@ -21,6 +24,7 @@ export const DetailsTab = ({ task }: IDetailsTabProps) => {
 		<div className={styles.detailsTab}>
 			<Description description={task.description} exampleTestCases={task.exampleTestCases} />
 			<Contributors contributors={contributors} />
+			<SimilarTasks tasks={tasks} />
 			<Stats task={task} />
 		</div>
 	);

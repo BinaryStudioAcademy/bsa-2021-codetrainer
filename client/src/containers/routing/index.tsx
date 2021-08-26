@@ -102,7 +102,8 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
-			<PrivateRoute
+			<PublicRoute
+				restricted={false}
 				exact
 				path={ROUTES.TaskInfo + '/:id'}
 				component={TaskPageContainer}
