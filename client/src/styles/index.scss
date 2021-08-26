@@ -52,6 +52,12 @@
 	--rank-beta: #{$eerie-black};
 }
 
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
 body {
 	color: var(--text-color);
 	background-color: var(--background-color);

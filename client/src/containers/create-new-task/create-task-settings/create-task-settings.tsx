@@ -34,28 +34,26 @@ export const CreateSettings = ({
 	setTags,
 }: ICreateSettingsProps) => {
 	return (
-		<div>
-			<CreateTaskSettings
-				taskName={taskName}
-				setTaskName={setTaskName}
-				disciplineItems={DISCIPLINE_ITEMS}
-				chosenDiscipline={chosenDiscipline.value}
-				onChangeDiscipline={onChangeDiscipline}
-				isSelectedSwitch={isSelectedSwitch}
-				onSwitchClick={onSwitchClick}
-				selectProps={{
-					...SELECT_PROPS,
-					activeValue: language,
-					onChange: (value: ISelectValue) => {
-						setLanguage(value);
-					},
-				}}
-				rank={rank}
-				setRank={setRank}
-				tags={tags}
-				setTags={setTags}
-			/>
-		</div>
+		<CreateTaskSettings
+			taskName={taskName}
+			setTaskName={setTaskName}
+			disciplineItems={DISCIPLINE_ITEMS}
+			chosenDiscipline={chosenDiscipline.value}
+			onChangeDiscipline={onChangeDiscipline}
+			isSelectedSwitch={isSelectedSwitch}
+			onSwitchClick={onSwitchClick}
+			selectProps={{
+				...SELECT_PROPS,
+				activeValue: language,
+				onChange: (value: ISelectValue) => {
+					setLanguage(value);
+				},
+			}}
+			rank={rank}
+			setRank={setRank}
+			tags={tags}
+			setTags={setTags}
+		/>
 	);
 };
 
