@@ -16,41 +16,6 @@ export const Details = () => {
 		dispatch(actions.getTasks());
 	}, []);
 
-	// const tasks = [
-	// 	{
-	// 		id: '1',
-	// 		linkToTask: '/',
-	// 		author: {
-	// 			firstName: 'A',
-	// 			lastName: 'B',
-	// 			link: '/',
-	// 		},
-	// 		stats: {
-	// 			favoriteSaves: 12,
-	// 			positiveFeedback: 12,
-	// 		},
-	// 		title: 'Title',
-	// 		rank: 2,
-	// 		tags: ['Tag 1', 'Tag 2'],
-	// 	},
-	// 	{
-	// 		id: '2',
-	// 		linkToTask: '/',
-	// 		author: {
-	// 			firstName: 'A',
-	// 			lastName: 'B',
-	// 			link: '/',
-	// 		},
-	// 		stats: {
-	// 			favoriteSaves: 12,
-	// 			positiveFeedback: 12,
-	// 		},
-	// 		title: 'Title',
-	// 		rank: 2,
-	// 		tags: ['Tag 1', 'Tag 2'],
-	// 	},
-	// ];
-
 	const tasks = similarTasks?.map((task) => {
 		return {
 			id: task.id,
