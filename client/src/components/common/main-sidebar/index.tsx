@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faExchangeAlt, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faExchangeAlt, faStar, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../../assets/images/logo.svg';
 import styles from './main-sidebar.module.scss';
 import { ROUTES } from 'constants/routes';
@@ -38,6 +38,12 @@ const MainSidebar: React.FC = () => {
 						<NavLink to={ROUTES.Clans} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
 							Clans
+						</NavLink>
+					</li>
+					<li className={styles.navigationItem}>
+						<NavLink to={ROUTES.LeaderBoard} className={styles.navigationLink}>
+							<FontAwesomeIcon icon={faTrophy} className={styles.navigationIcon} />
+							Leaders
 						</NavLink>
 					</li>
 				</ul>

@@ -34,6 +34,7 @@ export {
 	CreateTaskSettings,
 	SettingPage,
 	NotFound,
+	LeaderBoardPage,
 } from './pages';
 
 export { Modal } from './modals';

@@ -11,6 +11,16 @@ export const fetchUsersSearch = async (query: Record<string, any>): Promise<Reco
 	return search;
 };
 
+export const fetchUserLeaders = async (query: Record<string, any>): Promise<Record<string, any>> => {
+	const search = await http.callWebApi({
+		method: 'GET',
+		endpoint: UsersApiPath.SEARCH,
+		query,
+	});
+
+	return search;
+};
+
 export const getUserById = async (id: string) => {
 	const result = await http.callWebApi({
 		endpoint: '/users/' + id,
