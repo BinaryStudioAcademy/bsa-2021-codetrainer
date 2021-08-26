@@ -140,6 +140,9 @@ export class ClanService {
 
 		await userRepository.updateById(user.id, { profileClan });
 		await repository.addMember(id, user.id);
+		await repository.updateById(id, {
+			numberOfMembers: clan.numberOfMembers + 1,
+		});
 	}
 
 	async leaveClan(user: User, id: string) {
@@ -168,6 +171,11 @@ export class ClanService {
 
 		await userRepository.updateById(user.id, { profileClan: undefined });
 		await repository.deleteMember(id, user.id);
+		await repository.updateById(id, {
+			numberOfMembers: clan.numberOfMembers - 1,
+		});
+
+		console.log(await this.getClan(id));
 	}
 
 	async toggleMember(user: User, id: string) {
