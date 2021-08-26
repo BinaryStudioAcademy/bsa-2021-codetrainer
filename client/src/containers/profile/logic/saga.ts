@@ -31,7 +31,7 @@ const getIChallenge = (
 	return tasks.map((task) => {
 		return {
 			id: task.id,
-			linkToTask: `${ROUTES.TaskInfo}/${task.id}fdsafa`,
+			linkToTask: `${ROUTES.TaskInfo}/${task.id}`,
 			author: {
 				firstName: user.name,
 				lastName: user.surname,
