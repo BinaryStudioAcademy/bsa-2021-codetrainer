@@ -33,7 +33,7 @@ const solutionTabs: TSolutionTab[] = [
 export const ProfileSolutions: React.FC = () => {
 	const [selectedValue, setSelectedValue] = useState<SolutionStatus>(SolutionStatus.COMPLETED);
 	const [tasksSolutions, setSolutions] = useState<TTaskSolutions[] | undefined>(undefined);
-	const [full, setFull] = useState<number | undefined>(undefined);
+	const [total, setTotal] = useState<number | undefined>(undefined);
 	const [isLoaded, setLoaded] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
@@ -47,21 +47,22 @@ export const ProfileSolutions: React.FC = () => {
 			solutionTabs.map((tab) => ({
 				...tab,
 				id: tab.value,
-				count: tab.value === selectedValue ? full : undefined,
+				count: tab.value === selectedValue ? total : undefined,
 			})),
-		[selectedValue, full],
+		[selectedValue, total],
 	);
 
 	const loadMore = useCallback(async () => {
 		if (hasMore && !isLoaded) {
 			setLoaded(true);
 			try {
-				const { items, hasMore, full } = await loader({
-					skip: tasksSolutions?.length !== undefined ? tasksSolutions.length : 0,
-					limit: 10,
+				const skip = tasksSolutions?.length !== undefined ? tasksSolutions.length : 0;
+				const { solutions: items, total } = await loader({
+					skip,
+					take: 10,
 				});
-				setHasMore(hasMore);
-				setFull(full);
+				setHasMore(skip + 10 < total);
+				setTotal(total);
 				setSolutions([...(tasksSolutions || []), ...items]);
 			} catch {
 				setHasMore(true);
@@ -75,7 +76,7 @@ export const ProfileSolutions: React.FC = () => {
 			const tab = value as SolutionStatus;
 			if (tab !== selectedValue) {
 				setSolutions(undefined);
-				setFull(undefined);
+				setTotal(undefined);
 				setSelectedValue(tab);
 				setHasMore(true);
 			}

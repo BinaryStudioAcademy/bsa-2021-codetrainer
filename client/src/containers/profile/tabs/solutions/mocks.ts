@@ -1,8 +1,148 @@
+import { TaskStatus } from 'typings/common/task';
 import { SolutionStatus } from 'typings/common/solution';
-import { usersMocks, tasksMocks } from './../collections/mocks';
 import { WebApi } from 'typings/webapi';
 import { chain, uniqueId } from 'lodash';
 import moment from 'moment';
+
+const usersMocks: WebApi.Entities.IUser[] = [
+	{
+		username: 'i-does-not-exists',
+		name: 'Jane',
+		surname: 'Doe',
+		email: 'converge@test.com',
+		rank: 4,
+		honor: 1080,
+	},
+	{
+		username: 'i-does-not-exists-too',
+		name: 'John',
+		surname: 'Doe',
+		email: 'notconverge@test.com',
+		rank: 4,
+		honor: 1080,
+	},
+	{
+		username: '0xDEADDEAD',
+		name: 'Dead',
+		surname: 'Inside',
+		email: 'DEADDEAD@test.com',
+		rank: 2,
+		honor: 5432,
+	},
+].map((user) => ({ id: uniqueId('user'), ...user }));
+
+const tasksMocks: WebApi.Entities.ITask[] = [
+	{
+		name: 'Five without numbers!',
+		rank: 9,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Regular Expression for Binary Numbers Divisible by n',
+		rank: 1,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Decode Morse I',
+		rank: 7,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Decode Morse II',
+		rank: 5,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Decode Morse III',
+		rank: 2,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Fibonacci numbers',
+		rank: 8,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Perimeter of squares in a rectangle',
+		rank: 5,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Memoized Fibonacci',
+		rank: 5,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'The Millionth Fibonacci',
+		status: TaskStatus.BETA,
+		rank: 3,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Assembler interpreter EASY',
+		rank: 4,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Assembler interpreter HARD',
+		rank: 2,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'A and B?',
+		rank: 8,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Predict Math.random',
+		rank: 4,
+		author: usersMocks[0],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Symbolic differentiation of prefix expressions',
+		rank: 2,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Regular Expression for Binary Numbers Divisible by n',
+		rank: 1,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'BECOME IMMORTAL',
+		rank: 1,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+	{
+		name: 'Brainf*ck transpiler',
+		rank: 1,
+		author: usersMocks[1],
+		createdAt: new Date(),
+	},
+].map(
+	(challenge) =>
+		({
+			id: uniqueId('task'),
+			status: challenge.status || TaskStatus.APPROVED,
+			...challenge,
+		} as any as WebApi.Entities.ITask),
+);
 
 const solutionsMocks: WebApi.Entities.ISolution[] = [
 	{
