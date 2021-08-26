@@ -26,7 +26,7 @@ export const TaskPageContainer = () => {
 
 	useEffect(() => {
 		dispatch(actions.getTask({ id }));
-	}, []);
+	}, [id]);
 
 	const [activeTabId, setActiveTabId] = useState(ActiveTabId.Details);
 

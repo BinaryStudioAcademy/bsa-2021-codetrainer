@@ -6,6 +6,11 @@ export const SET_NOT_FOUND = 'TASK:SET_NOT_FOUND';
 export const GET_TASKS = 'TASK:GET_TASKS';
 export const SET_TASKS = 'TASK:SET_TASKS';
 
+export type TGetTasks = {
+	rank: number;
+	id: string;
+};
+
 export type TSetTasks = {
 	similarTasks: WebApi.Entities.IChallenge[];
 };
