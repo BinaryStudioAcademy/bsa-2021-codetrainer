@@ -10,7 +10,7 @@ export interface ITaskProps {
 	tabsRouterProps: ITabsRouterProps;
 }
 
-export const Task = ({ task, tabsRouterProps, getTabContent, onTrainClick }: ITaskProps) => {
+export const Task = ({ task, tabsRouterProps, getTabContent }: ITaskProps) => {
 	return (
 		<div className={styles.container}>
 			<TaskInfo challengeProps={task} />
