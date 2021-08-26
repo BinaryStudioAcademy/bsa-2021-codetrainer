@@ -7,7 +7,6 @@ import { Stats } from './stats';
 import { WebApi } from 'typings/webapi';
 
 export interface IDetailsTabProps {
-	// descriptionProps: IDescriptionProps;
 	task: WebApi.Entities.IChallenge;
 }
 
@@ -16,7 +15,7 @@ export const DetailsTab = ({ task }: IDetailsTabProps) => {
 		<div className={styles.detailsTab}>
 			<Description description={task.description} exampleTestCases={task.exampleTestCases} />
 			<Contributors />
-			<Stats />
+			<Stats task={task} />
 		</div>
 	);
 };

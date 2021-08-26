@@ -3,7 +3,7 @@ import styles from './item.module.scss';
 
 export interface IItemProps {
 	item: string;
-	value: string;
+	value: string | number;
 }
 
 export const Item = ({ item, value }: IItemProps) => {

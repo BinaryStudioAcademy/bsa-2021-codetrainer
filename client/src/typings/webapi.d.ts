@@ -57,6 +57,16 @@ declare namespace WebApi.Entities {
 		positiveFeedback: number;
 		user: IUser | null;
 		exampleTestCases?: string;
+		created: Date;
+		published: Date;
+		usersTrained: number;
+		skips: number;
+		codeSubmissions: number;
+		timesCompleted: number;
+		stars: number;
+		verySatisfied: number;
+		somewhatSatisfied: number;
+		notSatisfied: number;
 	}
 
 	export interface ISolution {
