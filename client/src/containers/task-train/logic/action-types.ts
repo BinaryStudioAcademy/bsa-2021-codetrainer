@@ -8,9 +8,14 @@ export const SET_SOLUTION = 'TASK:SET_SOLUTION';
 export const START_LOADING = 'TASK:START_LOADING';
 export const END_LOADING = 'TASK:END_LOADING';
 export const SET_RESULT = 'TASK:SET_RESULT';
+export const SET_ACTIVE_TAB = 'TASK:SET_ACTIVE_TAB';
 
 export interface IFetchSolutionArgs {
 	taskId: string;
+}
+
+export interface ISetActiveTAb {
+	tab: number;
 }
 
 export interface ISetSolutionArgs {
