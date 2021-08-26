@@ -10,17 +10,20 @@ import { SOCKET_EVENTS } from 'constants/socket-constants';
 import { IResult } from './logic/state';
 import { mapResultToString } from './mapResultToString';
 
+const OUTPUT = 1;
+
 const TaskTrain = () => {
 	const { id: taskId }: { id: string } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const { task, solution, hasFetched, result, success } = useAppSelector((state) => state.task);
+	const { task, solution, hasFetched, result, success, activeTab } = useAppSelector((state) => state.task);
 
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
 		dispatch(actions.fetchSolution({ taskId }));
 		socket.on(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, ({ success, ...result }: IResult & { success: boolean }) => {
+			dispatch(actions.setActiveTab({ tab: OUTPUT }));
 			dispatch(actions.setResult({ result, success }));
 		});
 	}, []);
@@ -46,8 +49,10 @@ const TaskTrain = () => {
 			<TaskTrainPage
 				task={task}
 				solution={solution}
+				activeTab={activeTab}
 				result={mapResultToString(result || {})}
 				success={success}
+				onChangeTab={(tab: number) => dispatch(actions.setActiveTab({ tab }))}
 				onSubmit={onSubmit}
 			/>
 		)

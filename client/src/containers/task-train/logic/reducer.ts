@@ -35,4 +35,10 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 			success,
 		};
 	},
+	[actionTypes.SET_ACTIVE_TAB](state, { tab }: actionTypes.ISetActiveTAb) {
+		return {
+			...state,
+			activeTab: tab,
+		};
+	},
 });

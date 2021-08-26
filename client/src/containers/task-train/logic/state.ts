@@ -16,6 +16,7 @@ export interface ITaskState {
 	hasFetched: boolean;
 	result: IResult | null;
 	success: boolean;
+	activeTab: number;
 }
 
 export const initialState: ITaskState = {
@@ -24,4 +25,5 @@ export const initialState: ITaskState = {
 	hasFetched: false,
 	result: null,
 	success: false,
+	activeTab: 0,
 };
