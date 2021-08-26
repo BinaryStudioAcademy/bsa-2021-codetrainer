@@ -41,7 +41,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 		<Switch>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.Main}
 				component={LandingPageCointainer}
 				needHeader={false}
