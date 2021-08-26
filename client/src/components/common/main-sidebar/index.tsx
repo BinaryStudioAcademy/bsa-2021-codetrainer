@@ -29,7 +29,7 @@ const MainSidebar: React.FC = () => {
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
-						<NavLink to="/" className={styles.navigationLink}>
+						<NavLink to={ROUTES.createTask} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faExchangeAlt} className={styles.navigationIcon} />
 							Challenge
 						</NavLink>

@@ -23,7 +23,7 @@ import Github from 'containers/github';
 import TaskTrain from 'containers/task-train';
 import { Redirect, Route } from 'react-router-dom';
 
-interface IRoutingProps {}
+interface IRoutingProps { }
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -40,7 +40,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 		<Switch>
 			<PublicRoute
 				exact
-				restricted={false}
+				restricted={true}
 				path={ROUTES.Main}
 				component={LandingPageCointainer}
 				needHeader={false}

@@ -30,7 +30,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
 	const [isNotificationsVisible, setNotificationsVisibility] = useState(false);
 
-	const getListItem = ({ icon: Icon, text, id, onClick = () => {} }: IListItem) => {
+	const getListItem = ({ icon: Icon, text, id, onClick = () => { } }: IListItem) => {
 		return (
 			<li
 				className={styles.navigationItem}
@@ -94,12 +94,10 @@ const Header: React.FC<IHeaderProps> = (props) => {
 					)}
 				</div>
 			</ClickAwayListener>
-			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
-				<div className={styles.userMarks}>
-					<Rank rank={props.rank} />
-					<Rank honor={props.honor} />
-				</div>
-			</ClickAwayListener>
+			<div className={styles.userMarks}>
+				<Rank rank={props.rank} />
+				<Rank honor={props.honor} />
+			</div>
 		</div>
 	);
 };
