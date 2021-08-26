@@ -98,12 +98,10 @@ const Header: React.FC<IHeaderProps> = (props) => {
 					)}
 				</div>
 			</ClickAwayListener>
-			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
-				<div className={styles.userMarks}>
-					<Rank rank={props.rank} />
-					<Rank honor={props.honor} />
-				</div>
-			</ClickAwayListener>
+			<div className={styles.userMarks}>
+				<Rank rank={props.rank} />
+				<Rank honor={props.honor} />
+			</div>
 		</div>
 	);
 };
