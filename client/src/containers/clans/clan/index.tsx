@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 import { ROUTES } from 'constants/routes';
 import { getCommunityByUserId, sendIntitationLetter } from 'services/follower/followers.service';
-import { getUserById } from 'services';
 import { deleteClan } from 'services/clans.service';
 import { useUserSelector } from 'hooks/useAppSelector';
 import { IUser } from 'typings/common/IUser';
@@ -59,20 +58,8 @@ const Clan: React.FC = () => {
 		setIsInvitationOpen(true);
 		setModalLoading(true);
 		if (user) {
-			const userCommunity: string[] = await getCommunityByUserId(user.id);
-			const users = await userCommunity.map(async (user) => {
-				const fetchedUser = getUserById(user);
-				return fetchedUser;
-			});
-			const result = await Promise.all([...users]).then((fetchedUsers) => {
-				const result = fetchedUsers.filter(({ user }) => {
-					if (user.clan === null) {
-						return user;
-					}
-				});
-				return result;
-			});
-			setCommunity(result);
+			const users: IUser[] = await getCommunityByUserId(user.id);
+			setCommunity(users);
 			setModalLoading(false);
 		}
 	};
