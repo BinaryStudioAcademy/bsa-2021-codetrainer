@@ -13,9 +13,9 @@ const Header: React.FC = () => {
 
 	const headerProps: IHeaderProps = {
 		name: `${user?.name} ${user?.surname}`,
-		rank: 7,
+		rank: user?.rank || 0,
 		notifications: Array.from(unorderedNotifications.values()).sort((a, b) => +b.date - +a.date),
-		mark: 400,
+		honor: user?.honor || 0,
 		listItems: getListItems(),
 		onReadNotification: (id) => dispatch(notificationsActions.readNotification({ id })),
 		avatar: user?.avatar,
