@@ -49,6 +49,25 @@ export function* fetchTasksWatcher() {
 	yield takeEvery(actionTypes.GET_TASKS, fetchTasksWorker);
 }
 
+export function* fetchNextTaskWorker(action: ReturnType<typeof actions.getNextTask>): any {
+	try {
+		const { id } = action;
+		const tasks = yield call(fetchTasks);
+		const filteredTasks = tasks.filter((item: WebApi.Entities.IChallenge) => item.id !== id);
+		yield put(actions.setTask({ task: filteredTasks[Math.floor(Math.random() * filteredTasks.length)] }));
+	} catch (error) {
+		yield put(
+			setNotificationState({
+				state: { notificationType: NotificationType.Error, message: "You can't skip this task" },
+			}),
+		);
+	}
+}
+
+export function* fetchNextTaskWatcher() {
+	yield takeEvery(actionTypes.GET_NEXT_TASK, fetchNextTaskWorker);
+}
+
 export default function* taskInfoSaga() {
-	yield all([fetchTaskWatcher(), fetchTasksWatcher()]);
+	yield all([fetchTaskWatcher(), fetchTasksWatcher(), fetchNextTaskWatcher()]);
 }

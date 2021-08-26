@@ -56,6 +56,10 @@ export const TaskPageContainer = () => {
 		});
 	}, [setActiveTab]);
 
+	const handleSkipClick = () => {
+		dispatch(actions.getNextTask({ id: task?.id }));
+	};
+
 	if (notFound) {
 		return <Redirect to={ROUTES.NotFound} />;
 	}
@@ -80,6 +84,7 @@ export const TaskPageContainer = () => {
 
 		return (
 			<Task
+				handleSkipClick={handleSkipClick}
 				task={taskProps}
 				getTabContent={getTabContent}
 				tabsRouterProps={{
