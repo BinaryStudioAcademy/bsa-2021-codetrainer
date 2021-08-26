@@ -30,7 +30,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 	const [isListVisible, setListVisibility] = useState(false);
 	const [isNotificationsVisible, setNotificationsVisibility] = useState(false);
 
-	const getListItem = ({ icon: Icon, text, id, onClick = () => { } }: IListItem) => {
+	const getListItem = ({ icon: Icon, text, id, onClick = () => {} }: IListItem) => {
 		return (
 			<li
 				className={styles.navigationItem}

@@ -1,0 +1,15 @@
+@import 'styles/variables';
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 600px;
+    margin: auto;
+    padding: 40px;
+    .code {
+        background-color: $white;
+        padding: 10px;
+    }
+}

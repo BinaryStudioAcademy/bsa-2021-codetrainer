@@ -1,5 +1,6 @@
 import { ISearchPageProps } from 'components/pages/search-page';
 import { ISearchState } from './logic/state';
+import { ROUTES } from 'constants/routes';
 
 export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['data'] => {
 	return {
@@ -11,7 +12,7 @@ export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['d
 			title: task.name,
 			rank: task.rank,
 			tags: task.tags.map((tag) => tag.name),
-			linkToAuthor: '/',
+			linkToTask: `${ROUTES.TaskInfo}/${task.id}`,
 			author: {
 				firstName: task?.user?.name || '',
 				lastName: task?.user?.surname || '',

@@ -10,6 +10,7 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
 import { IUser } from 'typings/common/IUser';
+import { ROUTES } from 'constants/routes';
 
 const getIChallenge = (
 	tasks: Array<{
@@ -30,11 +31,11 @@ const getIChallenge = (
 	return tasks.map((task) => {
 		return {
 			id: task.id,
-			linkToAuthor: '/users/' + user.username,
+			linkToTask: `${ROUTES.TaskInfo}/${task.id}fdsafa`,
 			author: {
 				firstName: user.name,
 				lastName: user.surname,
-				link: '/',
+				link: '/users/' + user.username,
 			},
 			stats: {
 				favoriteSaves: 12,
@@ -57,14 +58,14 @@ const getISocialUsers = (users: IUser[]) => {
 			name: user.name,
 			clan: {
 				name: user.clan?.name ? user.clan?.name : 'No clan',
-				id: user.clan?.id ?? null
+				id: user.clan?.id ?? null,
 			} as WebApi.Entities.IClan,
 			honor: user.honor,
 		};
 	});
 };
 
-export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>):any {
+export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>): any {
 	try {
 		yield put(actions.clearData());
 		const { user } = yield call(fetchUsersSearch, query);
@@ -84,13 +85,13 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		const unpublishedTasksProps = getIChallenge(unpublishedTasks, user);
 
 		let followersSocial: any[] = yield all(
-			followers.map(({user}: any) => {
+			followers.map(({ user }: any) => {
 				const gotUser = call(getUserById, user.id);
 				return gotUser;
 			}),
 		);
 		let followingsSocial: any[] = yield all(
-			followings.map(({following}: any) => {
+			followings.map(({ following }: any) => {
 				const user = call(getUserById, following.id);
 				return user;
 			}),

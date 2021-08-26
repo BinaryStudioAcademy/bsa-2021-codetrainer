@@ -22,8 +22,9 @@ import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
 import TaskTrain from 'containers/task-train';
 import { Redirect, Route } from 'react-router-dom';
+import { TaskPageContainer } from 'containers/task';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -101,6 +102,13 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
+			<PrivateRoute
+				exact
+				path={ROUTES.TaskInfo + '/:id'}
+				component={TaskPageContainer}
+				needHeader={true}
+				needSideBar={true}
+			/>
 			<Route path={ROUTES.NotFound} component={NotFound} />
 			<Route path={ROUTES.Example} component={Example} />
 			<Redirect from="*" to={ROUTES.NotFound} />

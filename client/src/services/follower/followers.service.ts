@@ -20,13 +20,13 @@ export const getFollowingsByUserId = async (id: string): Promise<Record<string, 
 };
 
 export const getCommunityByUserId = async (id: string): Promise<Array<any>> => {
-	const {community: userCommunity} = await http.callWebApi({
+	const { community: userCommunity } = await http.callWebApi({
 		endpoint: FollowersApiPath.ALL_COMMUNITY + id,
 		method: 'GET',
 		skipAuthorization: false,
 	});
 	console.log(userCommunity);
-	
+
 	return userCommunity;
 };
 

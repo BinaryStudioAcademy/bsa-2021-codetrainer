@@ -25,6 +25,8 @@ export const ROUTES = {
 
 	Collections: '/collections',
 
+	TaskInfo: '/challenge-info',
+
 	Community: '/followers/community',
 
 	Example: '/example',

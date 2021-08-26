@@ -12,7 +12,7 @@ export {
 	Social,
 	MainSidebar,
 	TaskInstructions,
-	TaskList
+	TaskList,
 } from './common';
 
 export type { ICreateTabsProps } from './pages';

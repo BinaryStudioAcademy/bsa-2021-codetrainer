@@ -135,7 +135,14 @@ const tasksMocks: WebApi.Entities.ITask[] = [
 		author: usersMocks[1],
 		createdAt: new Date(),
 	},
-].map((challenge) => ({ id: uniqueId('task'), status: challenge.status || TaskStatus.APPROVED, ...challenge } as any as WebApi.Entities.ITask));
+].map(
+	(challenge) =>
+		({
+			id: uniqueId('task'),
+			status: challenge.status || TaskStatus.APPROVED,
+			...challenge,
+		} as any as WebApi.Entities.ITask),
+);
 
 const solutionsMocks: WebApi.Entities.ISolution[] = [
 	{

@@ -10,12 +10,12 @@ const Challenge: React.FC<
 	IChallenge & {
 		showAddToCollection?: boolean;
 	}
-> = ({ linkToAuthor, author, stats, title, rank, tags, showAddToCollection = true }) => {
+> = ({ linkToTask, author, stats, title, rank, tags, showAddToCollection = true }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	return (
 		<div className={styles.challenge}>
-			<ChallengeHeader title={title} rank={rank} linkToAuthor={linkToAuthor} />
+			<ChallengeHeader title={title} rank={rank} linkToTask={linkToTask} />
 			<ChallengeStats stats={{ ...stats, author }} />
 			{tags && Boolean(tags.length) ? <ChallengeTagsList tags={tags} /> : null}
 			{isOpen ? <CollectionModal isOpen={isOpen} setIsOpen={setIsOpen} /> : null}

@@ -1,0 +1,13 @@
+@import 'styles/variables';
+
+.stats {
+    padding: 20px 40px;
+    .data {
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 50px;
+        grid-row-gap: 10px;
+        background-color: $white;
+    }
+}

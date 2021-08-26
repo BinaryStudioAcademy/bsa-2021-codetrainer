@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, OneToMany, JoinTable, JoinColumn, CreateDateColumn } from 'typeorm';
 import { TASK_DIFFICULTY_DEFAULT, TASK_STATUS } from '../../../common';
 import { AbstractEntity } from '../abstract';
 import { Solution } from '../solution';
@@ -57,4 +57,44 @@ export class Task extends AbstractEntity {
 	@ManyToMany(() => Tag, (tag) => tag.tasks)
 	@JoinTable()
 	tags!: Tag[];
+
+	@Column({ default: 0 })
+	savedToFavorites!: number;
+
+	@Column({ default: 100 })
+	positiveFeedback!: number;
+
+	@CreateDateColumn()
+	created!: Date;
+
+	@CreateDateColumn()
+	published!: Date;
+
+	@Column({ default: 0 })
+	usersTrained!: number;
+
+	@Column({ default: 0 })
+	skips!: number;
+
+	@Column({ default: 0 })
+	codeSubmissions!: number;
+
+	@Column({ default: 0 })
+	timesCompleted!: number;
+
+	@Column({ default: 0 })
+	stars!: number;
+
+	@Column({ default: 0 })
+	verySatisfied!: number;
+
+	@Column({ default: 0 })
+	somewhatSatisfied!: number;
+
+	@Column({ default: 0 })
+	notSatisfied!: number;
+
+	@OneToMany(() => User, (user) => user.contributions)
+	@JoinColumn()
+	contributors!: User[];
 }

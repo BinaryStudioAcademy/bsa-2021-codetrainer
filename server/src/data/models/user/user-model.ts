@@ -102,4 +102,8 @@ export class User extends BaseEntity {
 	@OneToMany(() => Follower, (follower) => follower.follower)
 	@JoinColumn()
 	following!: Follower[];
+
+	@ManyToOne(() => Task, (task) => task.contributors)
+	@JoinColumn()
+	contributions!: Task;
 }
