@@ -9,7 +9,7 @@ import searchSaga from 'containers/search-page/logic/saga';
 import taskSaga from 'containers/task-train/logic/saga';
 import headerSaga from 'containers/header/logic/saga';
 import profileSaga from 'containers/profile/logic/saga';
-import taskSaga from 'containers/task/logic/saga';
+import taskInfoSaga from 'containers/task/logic/saga';
 
 export default function* rootSaga() {
 	yield all([
@@ -23,6 +23,6 @@ export default function* rootSaga() {
 		homeSaga(),
 		taskSaga(),
 		headerSaga(),
-		taskSaga(),
+		taskInfoSaga(),
 	]);
 }

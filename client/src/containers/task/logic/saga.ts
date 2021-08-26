@@ -17,6 +17,6 @@ export function* fetchTaskWatcher() {
 	yield takeEvery(actionTypes.GET_TASK, fetchTaskWorker);
 }
 
-export default function* taskSaga() {
+export default function* taskInfoSaga() {
 	yield all([fetchTaskWatcher()]);
 }

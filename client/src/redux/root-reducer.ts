@@ -13,7 +13,7 @@ import { settingsReducer } from './../containers/setting-page/logic/reducer';
 import { taskReducer } from './../containers/task-train/logic/reducer';
 import { headerReducer } from 'containers/header/logic/reducer';
 import { themeReducer } from 'containers/theme-switcher/logic/reducer';
-import { taskReducer } from 'containers/task/logic/reducer';
+import { taskInfoReducer } from 'containers/task/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,
@@ -29,7 +29,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	task: taskReducer,
 	header: headerReducer,
 	theme: themeReducer,
-	task: taskReducer,
+	taskInfo: taskInfoReducer,
 });
 
 export default rootReducer;

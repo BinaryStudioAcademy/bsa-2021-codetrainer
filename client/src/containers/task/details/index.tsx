@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
 
 export const Details = () => {
-	const task = useSelector((state: IRootState) => state.task.task);
+	const task = useSelector((state: IRootState) => state.taskInfo.task);
 
 	if (task) {
 		return <DetailsTab task={task} />;

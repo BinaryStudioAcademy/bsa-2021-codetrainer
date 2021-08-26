@@ -21,8 +21,8 @@ export enum ActiveTabId {
 export const TaskPageContainer = () => {
 	const { id } = useParams<{ id: string }>();
 	const dispatch = useDispatch();
-	const notFound = useSelector((state: IRootState) => state.task.notFound);
-	const task = useSelector((state: IRootState) => state.task.task);
+	const notFound = useSelector((state: IRootState) => state.taskInfo.notFound);
+	const task = useSelector((state: IRootState) => state.taskInfo.task);
 
 	useEffect(() => {
 		dispatch(actions.getTask({ id }));
