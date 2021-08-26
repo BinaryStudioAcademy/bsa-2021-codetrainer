@@ -1,9 +1,10 @@
 import React, { ButtonHTMLAttributes, FC } from 'react';
 import clsx from 'clsx';
+
 import styles from './button.module.scss';
 
 const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
-	<button {...props} className={clsx(styles.button, props.className)}>
+	<button {...props} className={clsx(styles.button, props.className, { [styles.disabled]: props.disabled })}>
 		{props.children}
 	</button>
 );

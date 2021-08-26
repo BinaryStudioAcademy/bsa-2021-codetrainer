@@ -13,13 +13,14 @@ import { ROUTES } from 'constants/routes';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from 'containers/user/logic/actions';
 import LandingPageCointainer from 'containers/landing-page';
-// import Example from 'containers/example';
+import Example from 'containers/example';
 import HomePage from 'containers/home-page';
 import { Profile } from 'containers/profile';
 import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
+import TaskTrain from 'containers/task-train';
 import { Redirect, Route } from 'react-router-dom';
 import { TaskPageContainer } from 'containers/task';
 
@@ -27,6 +28,8 @@ interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
+	const theme = useAppSelector((rootState) => rootState.theme.theme);
+	document.documentElement.setAttribute('data-theme', theme);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(actions.checkRefreshToken());
@@ -52,6 +55,14 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={true}
 				needSideBar={true}
 			/>
+			<PrivateRoute
+				exact
+				path={ROUTES.TaskInstructions}
+				component={TaskPage}
+				needHeader={true}
+				needSideBar={true}
+			/>
+			<PrivateRoute exact path={ROUTES.TaskTrain} component={TaskTrain} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Users + '/:username'} component={Profile} needHeader={true} needSideBar={true} />
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
@@ -100,6 +111,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needSideBar={true}
 			/>
 			<Route path={ROUTES.NotFound} component={NotFound} />
+			<Route path={ROUTES.Example} component={Example} />
 			<Redirect from="*" to={ROUTES.NotFound} />
 		</Switch>
 	);

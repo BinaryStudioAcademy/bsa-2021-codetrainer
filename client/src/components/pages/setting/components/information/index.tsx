@@ -12,9 +12,9 @@ const SignupSchema = Yup.object().shape({
 	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
 	surname: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
 	username: Yup.string()
-		.matches(/^[a-zA-Z0-9\-]+$/, 'Use only letters, numbers and hyphens')
 		.min(3, 'Minimum length: 3')
 		.max(20, 'Maximum length: 20')
+		.matches(/^[a-zA-Z0-9]+\-?[a-zA-Z0-9]+$/, 'Use only letters, numbers and hyphens')
 		.required('Required'),
 	email: Yup.string().email('Invalid email').required('Required'),
 });

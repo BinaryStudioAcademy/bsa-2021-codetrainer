@@ -27,15 +27,6 @@ declare namespace WebApi.Entities {
 		profileUrl?: string;
 	}
 
-	export interface ITask {
-		id: string | null;
-		name?: string;
-		description?: string;
-		rank?: number;
-		status?: TaskStatus;
-		user?: IUser;
-	}
-
 	export interface ITag {
 		id: string;
 		name: string;
@@ -73,7 +64,7 @@ declare namespace WebApi.Entities {
 		code: string;
 		language: string;
 		user: IUser;
-		task: ITask;
+		task: Partial<ITask>;
 		createdAt: Date;
 		updatedAt?: Date;
 	}
@@ -108,7 +99,7 @@ declare namespace WebApi.Entities {
 	export interface ICollection {
 		id: string;
 		name: string;
-		tasks: ITask[];
+		tasks: Partial<ITask>[];
 		description?: string;
 		avatar?: string;
 		author: IUser;
@@ -118,6 +109,38 @@ declare namespace WebApi.Entities {
 	}
 
 	export type TClans = Array<IClan>;
+
+	export interface ISolution {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		status: SolutionStatus;
+		code: string;
+	}
+
+	export interface ITask {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		name: string;
+		discipline: string;
+		rank: number;
+		allowContributors: boolean;
+		description: string;
+		completeSolution: string;
+		initialSolution: string;
+		preloaded: string;
+		testCases: string;
+		exampleTestCases: string;
+		status: TaskStatus;
+		isPublished: boolean;
+		solutions: Array<{ id: string }>;
+		tags: Array<ITag>;
+		user: {
+			name: string;
+			surname: string;
+		};
+	}
 }
 
 declare namespace WebApi.Types {

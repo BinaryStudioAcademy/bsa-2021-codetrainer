@@ -68,6 +68,8 @@ const ClansList: React.FC<IClansListProps> = ({
 	setNameQuery,
 }) => {
 	const [isNameFieldOpen, setNameFieldOpen] = useState(false);
+	const [searchName, setSearchName] = useState(nameQuery);
+	const [typingTimeout, setTypingTimeout] = useState<null | ReturnType<typeof setTimeout>>(null);
 
 	const classes = useStyles();
 
@@ -87,8 +89,20 @@ const ClansList: React.FC<IClansListProps> = ({
 	};
 
 	const handleNameSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const query = e.target.value;
+		setSearchName(query);
+
 		setPage(0);
-		setNameQuery(e.target.value);
+
+		if (typingTimeout) {
+			clearTimeout(typingTimeout);
+		}
+
+		setTypingTimeout(
+			setTimeout(() => {
+				setNameQuery(query);
+			}, 500),
+		);
 	};
 
 	return (
@@ -126,7 +140,7 @@ const ClansList: React.FC<IClansListProps> = ({
 													<Search />
 													{isNameFieldOpen && (
 														<TextField
-															value={nameQuery}
+															value={searchName}
 															onChange={handleNameSearchChange}
 															type="search"
 														/>

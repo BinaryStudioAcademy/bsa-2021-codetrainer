@@ -57,19 +57,20 @@ const getISocialUsers = (users: IUser[]) => {
 			name: user.name,
 			clan: {
 				name: user.clan?.name ? user.clan?.name : 'No clan',
+				id: user.clan?.id ?? null,
 			} as WebApi.Entities.IClan,
 			honor: user.honor,
 		};
 	});
 };
 
-export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>) {
+export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>): any {
 	try {
 		yield put(actions.clearData());
 		const { user } = yield call(fetchUsersSearch, query);
 		const { followings } = yield call(getFollowingsByUserId, user.id);
 		const { followers } = yield call(getFollowersByUserId, user.id);
-		const community: string[] = yield call(getCommunityByUserId, user.id);
+		const community: IUser[] = yield call(getCommunityByUserId, user.id);
 		const tasks: any[] = yield all(
 			user.tasks.map((taskObj: any) => {
 				const task = call(getTaskById, taskObj.id);
@@ -83,20 +84,20 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		const unpublishedTasksProps = getIChallenge(unpublishedTasks, user);
 
 		let followersSocial: any[] = yield all(
-			followers.map((follower: any) => {
-				const user = call(getUserById, follower.user);
-				return user;
+			followers.map(({ user }: any) => {
+				const gotUser = call(getUserById, user.id);
+				return gotUser;
 			}),
 		);
 		let followingsSocial: any[] = yield all(
-			followings.map((following: any) => {
-				const user = call(getUserById, following.user);
+			followings.map(({ following }: any) => {
+				const user = call(getUserById, following.id);
 				return user;
 			}),
 		);
 		let communitySocial: any[] = yield all(
-			community.map((community: any) => {
-				const user = call(getUserById, community);
+			community.map((community: IUser) => {
+				const user = call(getUserById, community.id);
 				return user;
 			}),
 		);

@@ -6,12 +6,13 @@ import { TNotification } from 'typings/common/INotification';
 import Notification, { mapNotificationToProps } from '../notification';
 import styles from './header.module.scss';
 import { ReactComponent as BellIcon } from 'assets/icons/bell.svg';
+import { Rank } from 'components';
 import clsx from 'clsx';
 
 export interface IHeaderProps {
 	name: string;
 	rank: number;
-	mark: number;
+	honor: number;
 	avatar?: string;
 	listItems: Array<IListItem>;
 	notifications: TNotification[];
@@ -55,7 +56,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
 	return (
 		<div className={styles.header}>
-			<ThemeSwitcher />
+			<ThemeSwitcher className={styles.themeSwitcher} />
 			<ClickAwayListener onClickAway={() => setNotificationsVisibility(false)}>
 				<div className={styles.bell} onClick={() => setNotificationsVisibility(!isNotificationsVisible)}>
 					<BellIcon width={25} height={25} />
@@ -91,6 +92,12 @@ const Header: React.FC<IHeaderProps> = (props) => {
 					{isListVisible && (
 						<div className={clsx(styles.navigation, styles.dropdown)}>{renderList(props.listItems)}</div>
 					)}
+				</div>
+			</ClickAwayListener>
+			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
+				<div className={styles.userMarks}>
+					<Rank rank={props.rank} />
+					<Rank honor={props.honor} />
 				</div>
 			</ClickAwayListener>
 		</div>

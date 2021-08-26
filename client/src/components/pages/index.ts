@@ -17,3 +17,4 @@ export type { ICreateTabsProps } from './create-task';
 export { default as NotFound } from './not-found';
 export { Task } from './task';
 export { DetailsTab } from './task/tabs/detailsTab';
+export { default as TaskTrainPage } from './task-train';

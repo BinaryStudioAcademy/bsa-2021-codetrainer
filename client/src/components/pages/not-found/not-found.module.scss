@@ -20,14 +20,14 @@
 		}
 
 		.mainHeader {
-			color: $french-rose;
+			color: var(--pink);
 			font-family: $base-font;
 			font-size: 80px;
 			font-weight: 600;
 		}
 
 		.secondHeader {
-			color: $mine-shaft;
+			color: var(--text-color);
 			font-family: $base-font;
 			font-size: 30px;
 		}

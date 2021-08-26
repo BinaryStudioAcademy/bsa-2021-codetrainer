@@ -27,7 +27,6 @@ class RabbitConnect {
 
 	async send(data: Record<string, any>) {
 		await this.channel.assertQueue(this.queueName, { durable: true });
-		console.log('data => ', data);
 		this.channel.sendToQueue(this.queueName, Buffer.from(JSON.stringify(data)), {
 			contentType: 'application/json',
 		});

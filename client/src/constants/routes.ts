@@ -17,6 +17,7 @@ export const ROUTES = {
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
+	TaskTrain: '/task/:id/train',
 
 	Setting: '/setting',
 
@@ -27,4 +28,6 @@ export const ROUTES = {
 	TaskInfo: '/challenge-info',
 
 	Community: '/followers/community',
+
+	Example: '/example',
 };

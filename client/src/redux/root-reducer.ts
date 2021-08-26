@@ -7,9 +7,10 @@ import { clanReducer } from 'containers/clans/clan/logic/reducer';
 import { createTaskReducer } from 'containers/create-new-task/logic/reducer';
 import { authReducer } from 'containers/auth/logic/reducer';
 import { notificationReducer } from '../containers/notification/logic/reducer';
-import { homeReducer } from '../containers/home-page/logic/reducer';
+import { homeReducer } from 'containers/home-page/logic/reducer';
 import { searchReducer } from 'containers/search-page/logic/reducer';
 import { settingsReducer } from './../containers/setting-page/logic/reducer';
+import { taskReducer } from './../containers/task-train/logic/reducer';
 import { headerReducer } from 'containers/header/logic/reducer';
 import { themeReducer } from 'containers/theme-switcher/logic/reducer';
 import { taskReducer } from 'containers/task/logic/reducer';
@@ -25,6 +26,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	home: homeReducer,
 	search: searchReducer,
 	settings: settingsReducer,
+	task: taskReducer,
 	header: headerReducer,
 	theme: themeReducer,
 	task: taskReducer,

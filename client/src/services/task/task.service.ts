@@ -20,7 +20,7 @@ interface ICreateTaskBody {
 const validationSchema = Yup.object().shape({
 	name: Yup.string()
 		.min(1, 'Task name can`t be empty')
-		.max(25, 'Task name is max 25 symbols')
+		.max(250, 'Task name is max 250 symbols')
 		.required('Task name can`t be empty.'),
 	discipline: Yup.string().required('discipline can`t be empty.'),
 	rank: Yup.number()

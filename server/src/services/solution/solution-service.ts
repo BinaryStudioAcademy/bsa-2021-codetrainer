@@ -1,8 +1,16 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
-import { CODE_ERRORS, ENV } from '../../common';
+import { CODE_ERRORS, ENV, SOLUTION_STATUS } from '../../common';
 import { TokenTypes, ValidationError, verifyToken } from '../../helpers';
 import { rabbitConnect } from '../../config';
+
+interface ISolutionResult {
+	result: { success: boolean; response?: unknown; error?: Error };
+	token: string;
+	userId: string;
+	solutionId: string;
+	taskId: string;
+}
 
 export class SolutionService {
 	protected taskRepository: TTaskRepository;
@@ -76,13 +84,21 @@ export class SolutionService {
 		};
 	}
 
-	async update(user: User, solution: Solution, code: string) {
+	async update(user: User, task: Task, solution: Solution, code: string) {
 		if (user.id !== solution.user.id) {
 			throw new ValidationError(CODE_ERRORS.NOT_USER_SOLUTION);
 		}
 		const repository = getCustomRepository(this.solutionRepository);
 		await repository.updateById(solution.id, { code });
 		const updatedSolution = await repository.getByKey(solution.id, 'id');
+		const dataForRabbit = {
+			test: task.testCases,
+			code,
+			userId: user.id,
+			solutionId: solution.id,
+			taskId: task.id,
+		};
+		await rabbitConnect.send(dataForRabbit);
 		return updatedSolution;
 	}
 
@@ -92,12 +108,21 @@ export class SolutionService {
 		return solutions;
 	}
 
-	async setResult(data: { result: string; token: string }) {
-		console.info('result => ', data);
-		const { id } = verifyToken(data.token, TokenTypes.ACCESS);
+	async getUserSolution(user: User, task: Task) {
+		const repository = getCustomRepository(this.solutionRepository);
+		const solution = await repository.findOne({ user, task });
+
+		return { solution };
+	}
+
+	async setResult({ token, ...data }: ISolutionResult) {
+		const { id } = verifyToken(token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
 		}
-		return { message: 'success' };
+		const repository = getCustomRepository(this.solutionRepository);
+		const status = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
+		repository.updateById(data.solutionId, { status });
+		return data;
 	}
 }

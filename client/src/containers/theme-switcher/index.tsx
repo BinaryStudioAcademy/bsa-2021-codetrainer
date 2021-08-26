@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { setTheme } from '../theme-switcher/logic/actions';
@@ -6,9 +7,11 @@ import { ThemeType } from '../theme-switcher/logic/models';
 import styles from './theme-switcher.module.scss';
 import { ChangeTheme } from 'components/basic/change-theme';
 
-interface IThemeSwitcher {}
+interface IThemeSwitcher {
+	className?: string;
+}
 
-export const ThemeSwitcher: React.FC<IThemeSwitcher> = () => {
+export const ThemeSwitcher: React.FC<IThemeSwitcher> = ({ className }) => {
 	const dispatch = useDispatch();
 	const theme = useAppSelector((rootState) => rootState.theme.theme);
 	const onClickTheme = () => {
@@ -25,7 +28,7 @@ export const ThemeSwitcher: React.FC<IThemeSwitcher> = () => {
 	};
 	document.documentElement.setAttribute('data-theme', theme);
 	return (
-		<div className={styles.switch}>
+		<div className={clsx(styles.switch, className)}>
 			<ChangeTheme onClick={() => onClickTheme()} />
 		</div>
 	);

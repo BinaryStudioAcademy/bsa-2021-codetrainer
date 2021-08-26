@@ -26,7 +26,7 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 			checkSolutionIdMiddleware,
 			(req, res, next) =>
 				solutionService
-					.update(req.user, req.solution, req?.validData?.code)
+					.update(req.user, req.task, req.solution, req?.validData?.code)
 					.then((data) => res.send(data))
 					.catch(next),
 		)
@@ -40,11 +40,17 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 					.then((data) => res.send(data))
 					.catch(next),
 		)
+		.get(SolutionApiPath.USER, (req, res, next) =>
+			solutionService
+				.getUserSolution(req.user, req.task)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.get(
 			SolutionApiPath.$ID,
 			validationMiddleware([solutionIdSchema]),
 			checkSolutionIdMiddleware,
-			(req, res, _next) => res.send(req.solution),
+			(req, res, next) => res.send(req.solution),
 		);
 
 	return router;

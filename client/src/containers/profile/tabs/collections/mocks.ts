@@ -30,7 +30,7 @@ export const usersMocks: WebApi.Entities.IUser[] = [
 	},
 ].map((user) => ({ id: uniqueId('user'), ...user }));
 
-export const tasksMocks: WebApi.Entities.ITask[] = [
+export const tasksMocks: Partial<WebApi.Entities.ITask>[] = [
 	{
 		name: 'Five without numbers!',
 		rank: 9,

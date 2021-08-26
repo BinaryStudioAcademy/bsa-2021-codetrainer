@@ -32,7 +32,7 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 		const userBody: IUser | null = state.user
 			? {
 					...state.user,
-					tasks: state.user?.tasks?.concat(action.task),
+					tasks: state.user?.tasks?.concat([action.task]),
 			  }
 			: null;
 		const newState: IUserDataState = {
@@ -42,7 +42,7 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 		return newState;
 	},
 	[actionTypes.DELETE_TASK](state, action: actionTypes.TUserDeleteTask) {
-		const newTasks = state.user?.tasks?.filter((item) => item.id !== action.task.id);
+		const newTasks = state.user?.tasks?.filter((item) => item.id !== action.taskId);
 		const userBody: IUser | null = state.user
 			? {
 					...state.user,

@@ -1,0 +1,16 @@
+@import 'styles/variables';
+
+.taskStatistic {
+	margin-top: 10px;
+	display: flex;
+	gap: 36px;
+
+	&Icon {
+		margin-right: 5px;
+	}
+
+	&Category {
+		color: $oslo-grey;
+		width: 200px;
+	}
+}
