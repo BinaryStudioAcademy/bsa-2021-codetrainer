@@ -15,7 +15,7 @@ import { FullscreenLoader } from 'components';
 export enum ActiveTabId {
 	Details = 'Details',
 	Solutions = 'Solutions',
-	Disclosure = 'Disclosure',
+	Discourse = 'Discourse',
 }
 
 export const TaskPageContainer = () => {
