@@ -13,7 +13,7 @@ export type TGetNextTask = {
 };
 
 export type TSetNextTask = {
-	task: WebApi.Entities.IChallenge;
+	nextTaskId: string;
 };
 
 export type TGetTasks = {

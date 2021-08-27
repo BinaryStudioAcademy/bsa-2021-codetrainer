@@ -11,6 +11,7 @@ import { IRootState } from 'typings/root-state';
 import { Redirect } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { FullscreenLoader } from 'components';
+import historyHelper from 'helpers/history.helper';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -23,10 +24,17 @@ export const TaskPageContainer = () => {
 	const dispatch = useDispatch();
 	const notFound = useSelector((state: IRootState) => state.taskInfo.notFound);
 	const task = useSelector((state: IRootState) => state.taskInfo.task);
+	const nextTaskId = useSelector((state: IRootState) => state.taskInfo.nextTaskId);
 
 	useEffect(() => {
 		dispatch(actions.getTask({ id }));
 	}, [id]);
+
+	useEffect(() => {
+		if (nextTaskId) {
+			historyHelper.push(`${ROUTES.TaskInfo}/${nextTaskId}`);
+		}
+	}, [nextTaskId]);
 
 	const [activeTabId, setActiveTabId] = useState(ActiveTabId.Details);
 

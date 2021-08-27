@@ -54,7 +54,9 @@ export function* fetchNextTaskWorker(action: ReturnType<typeof actions.getNextTa
 		const { id } = action;
 		const tasks = yield call(fetchTasks);
 		const filteredTasks = tasks.filter((item: WebApi.Entities.IChallenge) => item.id !== id);
-		yield put(actions.setTask({ task: filteredTasks[Math.floor(Math.random() * filteredTasks.length)] }));
+		yield put(
+			actions.setNextTask({ nextTaskId: filteredTasks[Math.floor(Math.random() * filteredTasks.length)].id }),
+		);
 	} catch (error) {
 		yield put(
 			setNotificationState({
