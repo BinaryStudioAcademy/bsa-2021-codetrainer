@@ -26,7 +26,9 @@ const NextTask: React.FC<INextTaskProps> = ({
 				</div>
 
 				<div>
-					<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)}>Train</Button>
+					<Button onClick={handleTrainClick} className={clsx(ButtonClasses.red, ButtonClasses.filled)}>
+						Train
+					</Button>
 					<Button onClick={handleSkipClick} className={clsx(ButtonClasses.red, styles.skipButton)}>
 						Skip
 					</Button>
