@@ -149,8 +149,9 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 										</TableCell>
 									</TableRow>
 								) : (
-									users.map((user: WebApi.Entities.IUser) => (
+									users.map((user: WebApi.Entities.IUser, index) => (
 										<UserItem
+											position={page * itemsPerPage + index + 1}
 											user={user}
 											key={user.id}
 										/>

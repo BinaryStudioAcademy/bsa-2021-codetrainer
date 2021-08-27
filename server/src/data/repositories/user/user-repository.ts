@@ -100,15 +100,26 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
 			.leftJoinAndSelect('user.solutions', 'solution')
-			// .addSelect('ROW_NUMBER () OVER (ORDER BY user.honor) as position')
-			// .orderBy('user.honor', 'DESC')
+			.select([
+				'user.id',
+				'user.honor',
+				'user.username',
+				'user.name',
+				'user.surname',
+				'user.email',
+				'user.githubId',
+				'clan',
+				'solution.id',
+				'profileClan',
+				'task.id',
+			])
+			.orderBy('user.honor', 'DESC')
 			.where('user.name ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` })
 			.orWhere('user.surname ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` });
 
 		return {
 			count: await searchQuery.getCount(),
 			data: await searchQuery.skip(skip).take(take).getMany(),
-			// .getRawMany(),
 		};
 	}
 }

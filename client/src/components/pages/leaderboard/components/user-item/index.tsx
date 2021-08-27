@@ -5,12 +5,12 @@ import { ROUTES } from 'constants/routes';
 import { TableCell, TableRow } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const UserItem: React.FC<IUserItemProps> = ({ user }) => {
+const UserItem: React.FC<IUserItemProps> = ({ user, position }) => {
 
 	return (
 		<TableRow>
 			<TableCell>
-				{user?.position}
+				{position}
 			</TableCell>
 			<TableCell>
 				<Rank rank={user.rank ?? 0} />
