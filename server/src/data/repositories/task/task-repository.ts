@@ -12,9 +12,9 @@ const sortQuery = <T>(query: SelectQueryBuilder<T>, sorts?: TASK_ORDER_BY): Sele
 		case TASK_ORDER_BY.NAME:
 			return query.orderBy('task.name', 'ASC');
 		case TASK_ORDER_BY.EASIEST:
-			return query.orderBy('task.rank', 'ASC');
-		case TASK_ORDER_BY.HARDEST:
 			return query.orderBy('task.rank', 'DESC');
+		case TASK_ORDER_BY.HARDEST:
+			return query.orderBy('task.rank', 'ASC');
 		case TASK_ORDER_BY.NEWEST:
 			return query.orderBy('task.createdAt', 'DESC');
 		case TASK_ORDER_BY.OLDEST:
