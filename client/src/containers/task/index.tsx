@@ -16,7 +16,7 @@ import { mapDataToChallenges } from 'helpers/maps';
 export enum ActiveTabId {
 	Details = 'Details',
 	Solutions = 'Solutions',
-	Disclosure = 'Disclosure',
+	Discourse = 'Discourse',
 }
 
 export const TaskPageContainer = () => {
