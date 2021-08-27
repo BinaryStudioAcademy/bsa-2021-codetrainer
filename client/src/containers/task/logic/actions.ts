@@ -7,3 +7,4 @@ export const setNotFound = createAction<actionTypes.TSetNotFound>(actionTypes.SE
 export const getTasks = createAction<actionTypes.TGetTasks>(actionTypes.GET_TASKS);
 export const setTasks = createAction<actionTypes.TSetTasks>(actionTypes.SET_TASKS);
 export const getNextTask = createAction<actionTypes.TGetNextTask>(actionTypes.GET_NEXT_TASK);
+export const setNextTask = createAction<actionTypes.TSetNextTask>(actionTypes.SET_NEXT_TASK);
