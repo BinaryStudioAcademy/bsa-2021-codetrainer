@@ -1,19 +1,19 @@
 import React, { useState, useMemo, useCallback, ReactNode } from 'react';
 import { ProfileTabWithSidebar } from 'components';
-import { TPrivateSolutionsLoader, getCompletedSolutions, getUncompletedSolutions } from 'services/solutions.service';
+import { TTaskSolutionsLoader, getCompletedSolutions, getUncompletedSolutions } from 'services/solutions.service';
 import ProfileSkeletonList from 'components/pages/profile/profile-skeleton-list';
 import { SolutionStatus } from 'typings/common/solution';
-import { TTaskSolutions } from './mocks';
 import { TaskSolutions, TaskSolutionsSkeleton } from 'components/common';
+import { WebApi } from 'typings/webapi';
 
 type TSolutionTab = {
 	title: string;
 	value: SolutionStatus;
-	loader: TPrivateSolutionsLoader;
+	loader: TTaskSolutionsLoader;
 	empty: ReactNode;
 };
 
-const mapItemToTaskSolutions = ({ item }: { item: TTaskSolutions }) => <TaskSolutions taskSolutions={item} />;
+const mapItemToTaskSolutions = ({ item }: { item: WebApi.Entities.ITask }) => <TaskSolutions task={item} />;
 
 const solutionTabs: TSolutionTab[] = [
 	{
@@ -32,7 +32,7 @@ const solutionTabs: TSolutionTab[] = [
 
 export const ProfileSolutions: React.FC = () => {
 	const [selectedValue, setSelectedValue] = useState<SolutionStatus>(SolutionStatus.COMPLETED);
-	const [tasksSolutions, setSolutions] = useState<TTaskSolutions[] | undefined>(undefined);
+	const [tasks, setTasks] = useState<WebApi.Entities.ITask[] | undefined>(undefined);
 	const [total, setTotal] = useState<number | undefined>(undefined);
 	const [isLoaded, setLoaded] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
@@ -56,26 +56,26 @@ export const ProfileSolutions: React.FC = () => {
 		if (hasMore && !isLoaded) {
 			setLoaded(true);
 			try {
-				const skip = tasksSolutions?.length !== undefined ? tasksSolutions.length : 0;
-				const { solutions: items, total } = await loader({
+				const skip = tasks?.length !== undefined ? tasks.length : 0;
+				const { tasks: items, total } = await loader({
 					skip,
 					take: 10,
 				});
 				setHasMore(skip + 10 < total);
 				setTotal(total);
-				setSolutions([...(tasksSolutions || []), ...items]);
+				setTasks([...(tasks || []), ...items]);
 			} catch {
 				setHasMore(true);
 			}
 			setLoaded(false);
 		}
-	}, [loader, tasksSolutions, hasMore, isLoaded]);
+	}, [loader, tasks, hasMore, isLoaded]);
 
 	const changeTab = useCallback(
 		(value: string) => {
 			const tab = value as SolutionStatus;
 			if (tab !== selectedValue) {
-				setSolutions(undefined);
+				setTasks(undefined);
 				setTotal(undefined);
 				setSelectedValue(tab);
 				setHasMore(true);
@@ -93,7 +93,7 @@ export const ProfileSolutions: React.FC = () => {
 			}}
 		>
 			<ProfileSkeletonList
-				{...{ items: tasksSolutions, hasMore, empty }}
+				{...{ items: tasks, hasMore, empty }}
 				item={mapItemToTaskSolutions}
 				skeleton={TaskSolutionsSkeleton}
 				onLoadMore={loadMore}
