@@ -16,7 +16,7 @@ const UserItem: React.FC<IUserItemProps> = ({ user }) => {
 				<Rank rank={user.rank ?? 0} />
 			</TableCell>
 			<TableCell>{user.profileUrl ? <img src={user.profileUrl} /> : <span>No avatar</span>}</TableCell>
-			<TableCell><Link to={`${ROUTES.Users}/${user.id}`}>{`${user.name} ${user.surname}`}</Link></TableCell>
+			<TableCell><Link to={`${ROUTES.Users}/${user.username}`}>{`${user.name} ${user.surname}`}</Link></TableCell>
 			<TableCell>
 				<Link to={`${ROUTES.Clan}/${user?.clan?.id}`}>{user?.clan?.name}</Link>
 			</TableCell>

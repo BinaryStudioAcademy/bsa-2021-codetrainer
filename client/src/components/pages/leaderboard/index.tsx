@@ -126,9 +126,11 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 																onChange={handleNameSearchChange}
 																type="search"
 															/>
-														)}
+														)
+														}
 													</IconButton>
 												</ClickAwayListener>
+												{!isNameFieldOpen && <strong>{label}</strong>}
 											</TableCell>
 										)
 											: (
