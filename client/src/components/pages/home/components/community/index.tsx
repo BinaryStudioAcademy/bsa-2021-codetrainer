@@ -7,7 +7,7 @@ import { ButtonClasses } from 'components/basic/button';
 import { ICommunityProps } from './interface';
 import { ClanModal } from 'components/modals';
 
-const Community: React.FC<ICommunityProps> = ({ users }) => {
+const Community: React.FC<ICommunityProps> = ({ users, isInClan }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 	const openModal = () => {
 		setIsOpen(true);
@@ -51,11 +51,13 @@ const Community: React.FC<ICommunityProps> = ({ users }) => {
 						))}
 					</div>
 				</div>
-				<div className={styles.buttonsContainer}>
-					<Button onClick={openModal} className={clsx(ButtonClasses.red, styles.createButton)}>
-						Create New Clan
-					</Button>
-				</div>
+				{!isInClan && (
+					<div className={styles.buttonsContainer}>
+						<Button onClick={openModal} className={clsx(ButtonClasses.red, styles.createButton)}>
+							Create New Clan
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

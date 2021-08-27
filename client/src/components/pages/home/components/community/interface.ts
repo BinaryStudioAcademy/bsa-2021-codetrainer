@@ -11,5 +11,6 @@ export interface IUser {
 }
 
 export interface ICommunityProps {
+	isInClan: boolean;
 	users: IUser[];
 }
