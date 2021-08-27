@@ -1,3 +1,5 @@
+import { WebApi } from 'typings/webapi';
+
 export interface ISearchState {
 	isLoading: boolean;
 	errors: Record<string, { msg: string }[]> | string | null;
@@ -22,18 +24,7 @@ export interface ISearchState {
 		ranks?: {
 			rank: number;
 		}[];
-		tasks: {
-			id: string;
-			name: string;
-			status: string;
-			tags: { name: string }[];
-			rank: number;
-			user: {
-				username: string;
-				name: string;
-				surname: string;
-			};
-		}[];
+		tasks: WebApi.Entities.IChallenge[];
 	} | null;
 }
 

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { FormInput, FormSelect } from 'components';
 import { ClickableRank } from 'components/basic/rank/clickable-rank';
 import styles from './search-task.module.scss';
-import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task';
+import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task/task-filter';
 import { Button, Checkbox } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import clsx from 'clsx';

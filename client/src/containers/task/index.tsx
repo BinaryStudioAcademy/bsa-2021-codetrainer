@@ -11,6 +11,7 @@ import { IRootState } from 'typings/root-state';
 import { Redirect } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { FullscreenLoader } from 'components';
+import { mapDataToChallenges } from 'helpers/maps';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -61,23 +62,7 @@ export const TaskPageContainer = () => {
 	}
 
 	if (task) {
-		const taskProps = {
-			id: task.id,
-			author: {
-				firstName: task.user?.name || '',
-				lastName: task.user?.surname || '',
-				link: `${ROUTES.Users}/${task.user?.username}`,
-			},
-			linkToTask: `${ROUTES.TaskInfo}/${task.id}`,
-			title: task.name,
-			rank: task.rank,
-			stats: {
-				favoriteSaves: task.savedToFavorites,
-				positiveFeedback: task.positiveFeedback,
-			},
-			tags: task?.tags?.map((item) => item.name),
-		};
-
+		const taskProps = mapDataToChallenges(task);
 		return (
 			<Task
 				task={taskProps}

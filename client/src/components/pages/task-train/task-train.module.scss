@@ -1,35 +1,50 @@
 @import 'styles/variables';
 
 .taskContainer {
-	margin-top: 42px;
-	margin-bottom: 42px;
-	width: 70vw;
-	display: grid;
-	grid-template-columns: 40% 60%;
-	gap: 50px;
+	margin: 42px 0;
+	width: calc(100vw - 255px);
+	padding: 0 40px 0;
+	display: flex;
 }
 
 .taskInstructions {
+	&Container {
+		width: 38%;
+	}
+
+	&Content {
+		max-height: 100%;
+	}
+
 	&Header {
 		color: $mine-shaft;
 		margin-bottom: 44px;
 	}
 
 	&Title {
-		font: 600 18px $base-font;
+		margin: 0;
+		font: $name-font;
+	}
+}
+
+.taskWorkspace {
+	&Container {
+		width: 62%;
+		padding-left: 40px;
 	}
 }
 
 .taskPanel {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	align-items: center;
 	gap: 10px;
 
 	&Left,
 	&Right {
-		flex-wrap: wrap;
 		display: flex;
+		flex-wrap: nowrap;
 		gap: 10px;
 	}
 }
@@ -47,8 +62,8 @@
 
 .taskSolution,
 .taskTests {
-	height: 200px;
-	margin-bottom: 50px;
+	height: 210px;
+	margin-bottom: 35px;
 }
 
 .taskLanguageSelect {

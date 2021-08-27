@@ -7,53 +7,46 @@ import {
 	uncompletedSolutionsMocks,
 } from 'containers/profile/tabs/solutions/mocks';
 import { TLoader } from 'typings/common/loader';
+import { TypeTest } from 'constants/task';
 
-export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ITask | Error> => {
-	try {
-		const { solution } = await http.callWebApi({
-			method: HttpMethods.GET,
-			endpoint: `${ApiRoutes.TASKS}${taskId}/train/user`,
-		});
-
-		return solution;
-	} catch (error) {
-		return error;
-	}
-};
-
-export const submitSolution = async ({ taskId, code }: { code: string; taskId: string }): Promise<unknown | Error> => {
-	try {
-		const response = await http.callWebApi({
-			method: HttpMethods.POST,
-			endpoint: `${ApiRoutes.TASKS}${taskId}/train`,
-			body: { code },
-		});
-
-		return response;
-	} catch (error) {
-		return error;
-	}
-};
-
-export const editSolution = async ({
-	solutionId,
-	taskId,
-	code,
-}: {
-	solutionId: string;
+interface ISubmitSolution {
 	code: string;
 	taskId: string;
-}): Promise<unknown | Error> => {
+	testCases: string;
+	typeTest: TypeTest;
+}
+
+interface IEditSolution extends ISubmitSolution {
+	solutionId: string;
+}
+
+const callApi = async (method: HttpMethods, endpoint: string, body?: Record<string, unknown>): Promise<any> => {
 	try {
 		const response = await http.callWebApi({
-			method: HttpMethods.PUT,
-			endpoint: `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`,
-			body: { code },
+			method,
+			endpoint,
+			body,
 		});
 		return response;
 	} catch (error) {
 		return error;
 	}
+};
+
+export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ISolution | Error> => {
+	return await callApi(HttpMethods.GET, `${ApiRoutes.TASKS}${taskId}/train/user`);
+};
+
+export const submitSolution = async ({ taskId, ...body }: ISubmitSolution): Promise<unknown | Error> => {
+	return await callApi(HttpMethods.POST, `${ApiRoutes.TASKS}${taskId}/train`, { ...body });
+};
+
+export const editSolution = async ({ solutionId, taskId, ...body }: IEditSolution): Promise<unknown | Error> => {
+	return await callApi(HttpMethods.PUT, `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`, { ...body });
+};
+
+export const patchSolution = async ({ taskId, solutionId, ...body }: Partial<IEditSolution>) => {
+	return await callApi(HttpMethods.PATCH, `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`, { ...body });
 };
 
 export interface TSolutionsRequestArgs {

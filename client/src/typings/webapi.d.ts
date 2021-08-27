@@ -44,9 +44,9 @@ declare namespace WebApi.Entities {
 		savedToFavorites: number;
 		positiveFeedback: number;
 		user: IUser | null;
-		exampleTestCases?: string;
-		created: Date;
+		createdAt: Date;
 		published: Date;
+		preloaded: string;
 		usersTrained: number;
 		skips: number;
 		codeSubmissions: number;
@@ -67,6 +67,7 @@ declare namespace WebApi.Entities {
 		task: Partial<ITask>;
 		createdAt: Date;
 		updatedAt?: Date;
+		testCases?: string;
 	}
 
 	export interface IMember {
@@ -139,6 +140,7 @@ declare namespace WebApi.Entities {
 		user: {
 			name: string;
 			surname: string;
+			username: string;
 		};
 	}
 }

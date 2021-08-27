@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, ManyToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '../abstract';
 import { Task } from '../task';
 import { User } from '../user';
@@ -11,6 +11,9 @@ export class Solution extends AbstractEntity {
 
 	@Column({ type: 'text', default: '' })
 	code!: string;
+
+	@Column({ type: 'text', default: '' })
+	testCases!: string;
 
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;

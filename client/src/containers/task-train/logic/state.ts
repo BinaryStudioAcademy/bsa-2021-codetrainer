@@ -1,21 +1,26 @@
+import { TypeTest } from 'constants/task';
 import { WebApi } from 'typings/webapi';
 
-export interface IResult {
-	error?: string;
-	response?: {
-		stats: {
-			failure: number;
-			duration: number;
+export interface ITest {
+	result: {
+		success?: boolean;
+		error?: string;
+		response?: {
+			stats: {
+				failure: number;
+				duration: number;
+			};
 		};
 	};
+	typeTest: TypeTest;
 }
 
 export interface ITaskState {
-	task: WebApi.Entities.ITask | null;
+	task: WebApi.Entities.IChallenge | null;
 	solution: WebApi.Entities.ISolution | null;
+	errors: unknown | null;
 	hasFetched: boolean;
-	result: IResult | null;
-	success: boolean;
+	test: ITest | null;
 	activeTab: number;
 }
 
@@ -23,7 +28,7 @@ export const initialState: ITaskState = {
 	task: null,
 	solution: null,
 	hasFetched: false,
-	result: null,
-	success: false,
+	errors: null,
+	test: null,
 	activeTab: 0,
 };

@@ -1,44 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 import { Button, Rank, TagList } from 'components';
-import Tabs from '../../common/tabs';
-import TaskStatistic from './components/task-statistic';
-import CodeEditor from '../../common/code-editor';
-import styles from './task-train.module.scss';
 import { Select } from 'components/basic';
-import { useState } from 'react';
 import { WebApi } from 'typings/webapi';
 import { Markdown } from 'components/pages';
-import { useEffect } from 'react';
+import { ROUTES } from 'constants/routes';
+import { LanguageVersion, TypeTest } from 'constants/task';
+import TaskStatistic from 'components/common/challenge/challenge-stats';
+import { ResetModal } from './components/reset-modal';
+import CodeEditor from '../../common/code-editor';
+import { SolutionStatus } from 'typings/common/solution';
+import Tabs from '../../common/tabs';
+
+import styles from './task-train.module.scss';
 
 interface ITaskTrainPageProps {
-	task: WebApi.Entities.ITask;
+	task: WebApi.Entities.IChallenge;
 	solution: WebApi.Entities.ISolution | null;
 	result: string;
 	success: boolean;
 	activeTab: number;
 	onChangeTab: (tab: number) => void;
-	onSubmit: (code: string) => void;
+	onSubmit: (code: string, test: string, type: TypeTest) => void;
+	onReset: (reset: boolean) => void;
+	onPatch: (type: SolutionStatus) => void;
 }
 
-const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({
-	task,
-	solution,
-	result,
-	success,
-	activeTab,
-	onChangeTab,
-	onSubmit,
-}) => {
-	const [code, setCode] = useState<string>(task.preloaded || solution?.code || '');
-	const [languageVersion, setLanguageVersion] = useState<{ title: string; id: string | null }>({
-		title: 'Option 1',
-		id: '1',
-	});
-
-	const onReset = () => {
-		setCode(task.preloaded || solution?.code || '');
-	};
+const TaskTrainPage: React.FC<ITaskTrainPageProps> = (props) => {
+	const { task, solution, result, success, activeTab, onChangeTab, onSubmit, onReset, onPatch } = props;
+	const [code, setCode] = useState<string>(solution?.code || task.preloaded || '');
+	const [testCase, setTestCase] = useState<string>(solution?.testCases || task.exampleTestCases || '');
+	const [modalResetOpen, setModalResetOpen] = useState<boolean>(false);
+	const [languageVersion, setLanguageVersion] = useState<{ title: string; id: string | null }>(LanguageVersion[0]);
 
 	useEffect(() => {
 		setCode((state) => solution?.code || state);
@@ -51,89 +45,104 @@ const TaskTrainPage: React.FC<ITaskTrainPageProps> = ({
 					<Rank rank={task.rank} />
 					<h1 className={styles.taskInstructionsTitle}>{task.name}</h1>
 				</div>
-				<div className="taskInstructions">
-					<Tabs
-						tabs={[
-							{
-								name: 'Instruction',
-								content: (
-									<div>
-										<Markdown text={task.description} />
-										<TagList tags={task.tags.map((tag) => tag.name)} />
-									</div>
-								),
+				<div className={styles.taskInstructionsContent}>
+					<div className="taskInstructions">
+						<Tabs
+							tabs={[
+								{
+									name: 'Instruction',
+									content: (
+										<div>
+											<Markdown text={task.description} />
+											<TagList tags={task.tags.map((tag) => tag.name)} />
+										</div>
+									),
+								},
+								{
+									name: 'Output',
+									content: <Markdown text={result} />,
+								},
+							]}
+							activeTabIndex={activeTab}
+							onChange={onChangeTab}
+						/>
+					</div>
+					<TaskStatistic
+						stats={{
+							favoriteSaves: task.savedToFavorites,
+							positiveFeedback: task.positiveFeedback,
+							author: {
+								firstName: task?.user?.name || '',
+								lastName: task?.user?.surname || '',
+								link: `${ROUTES.Users}/${task.user?.username}`,
 							},
-							{
-								name: 'Output',
-								content: (
-									<div>
-										{Boolean(result.length) ? <Markdown text={result} /> : null}
-										<TagList tags={task.tags.map((tag) => tag.name)} />
-									</div>
-								),
-							},
-						]}
-						activeTabIndex={activeTab}
-						onChange={onChangeTab}
+						}}
 					/>
 				</div>
-				<TaskStatistic
-					statistic={{
-						favourites: 1,
-						positiveFeedback: 1,
-						author: {
-							name: task.user?.name,
-							surname: task.user?.surname,
-						},
-					}}
-				/>
 			</div>
-			<div className="taskWorkspace">
+			<div className={styles.taskWorkspaceContainer}>
 				<div>
 					<span>Select language version:</span>
 					<div className={styles.taskLanguageSelect}>
 						<Select
 							activeValue={languageVersion}
 							onChange={(value) => setLanguageVersion(value)}
-							values={[
-								{ title: 'Option 1', id: '1' },
-								{ title: 'Option 2', id: '2' },
-							]}
+							values={LanguageVersion}
 						/>
 					</div>
 				</div>
 				<div className={styles.taskSolution}>
-					<CodeEditor
-						title="Solution"
-						code={code}
-						onChange={(value: string) => {
-							setCode(value);
-						}}
-					/>
+					<CodeEditor title="Solution" code={code} onChange={(value: string) => setCode(value)} />
 				</div>
 				<div className={styles.taskTests}>
-					<CodeEditor title="Tests" code={task.exampleTestCases} />
+					<CodeEditor title="Tests" code={testCase} onChange={(value: string) => setTestCase(value)} />
 				</div>
 				<div className={styles.taskPanel}>
 					<div className={styles.taskPanelLeft}>
-						<Button className={ButtonClasses.blue}>Skip</Button>
-						<Button className={ButtonClasses.blue}>Unlock solution</Button>
+						<Button
+							className={ButtonClasses.blue}
+							disabled={solution?.status === SolutionStatus.UNLOCKED}
+							onClick={() => onPatch(SolutionStatus.SKIPPED)}
+						>
+							Skip
+						</Button>
+						<Button
+							className={ButtonClasses.blue}
+							disabled={solution?.status === SolutionStatus.UNLOCKED}
+							onClick={() => onPatch(SolutionStatus.UNLOCKED)}
+						>
+							Unlock solution
+						</Button>
 						<Button className={ButtonClasses.blue}>Discuss</Button>
-						<Button className={ButtonClasses.blue} onClick={onReset}>
+						<Button className={ButtonClasses.blue} onClick={() => setModalResetOpen(true)}>
 							Reset
 						</Button>
 					</div>
-
 					<div className={styles.taskPanelRight}>
-						<Button className={ButtonClasses.red} disabled={success} onClick={() => onSubmit(code)}>
-							Attempt
-						</Button>
-						<Button className={ButtonClasses.red} disabled={success}>
+						<Button
+							className={ButtonClasses.red}
+							disabled={success}
+							onClick={() => onSubmit(code, testCase, TypeTest.TEST_SOLUTION)}
+						>
 							Test
+						</Button>
+						<Button
+							className={clsx(ButtonClasses.red, ButtonClasses.filled)}
+							disabled={success}
+							onClick={() => onSubmit(code, testCase, TypeTest.TEST_SOLUTION_ATTEMPT)}
+						>
+							Attempt
 						</Button>
 					</div>
 				</div>
 			</div>
+			{modalResetOpen && (
+				<ResetModal
+					isOpen={modalResetOpen}
+					setIsOpen={(isOpen: boolean) => setModalResetOpen(isOpen)}
+					onClick={onReset}
+				/>
+			)}
 		</div>
 	);
 };

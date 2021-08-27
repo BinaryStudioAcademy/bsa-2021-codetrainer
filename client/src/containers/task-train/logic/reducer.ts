@@ -7,6 +7,7 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 		return {
 			...state,
 			hasFetched: false,
+			errors: null,
 		};
 	},
 	[actionTypes.END_LOADING](state, action) {
@@ -27,18 +28,23 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 			solution,
 		};
 	},
-	[actionTypes.SET_RESULT](state, { result, success }: actionTypes.ISetResult) {
+	[actionTypes.SET_TEST](state, { test }: actionTypes.ISetTest) {
 		return {
 			...state,
 			hasFetched: true,
-			result,
-			success,
+			test,
 		};
 	},
 	[actionTypes.SET_ACTIVE_TAB](state, { tab }: actionTypes.ISetActiveTAb) {
 		return {
 			...state,
 			activeTab: tab,
+		};
+	},
+	[actionTypes.ERRORS](state, { errors }: actionTypes.IErrors) {
+		return {
+			...state,
+			errors,
 		};
 	},
 });

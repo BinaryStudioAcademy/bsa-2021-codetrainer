@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import styles from './modal.module.scss';
 import { modalStyles } from './config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+
+import styles from './modal.module.scss';
 
 interface IModalProps {
 	isOpen: boolean;
@@ -23,7 +24,13 @@ export const Modal: React.FC<IModalProps> = (props) => {
 	ReactModal.setAppElement('#root');
 
 	return (
-		<ReactModal shouldFocusAfterRender={true} isOpen={props.isOpen} style={modalStyles} {...props.modalProps}>
+		<ReactModal
+			shouldFocusAfterRender={true}
+			overlayClassName={styles.overlay}
+			isOpen={props.isOpen}
+			style={modalStyles}
+			{...props.modalProps}
+		>
 			<div className={styles.modalContent}>
 				<div className={styles.header}>
 					<h3 className={styles.title}>{title}</h3>

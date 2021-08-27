@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { SolutionApiPath } from '../../../common';
 import { validationMiddleware, checkSolutionIdMiddleware, solutionIdSchema, solutionSchema } from '../../../middleware';
+import { solutionPatchSchema } from '../../../middleware/validation/solution-validation';
 import { SolutionService } from '../../../services';
 
 export const initSolution = (appRouter: typeof Router, services: { solution: SolutionService }) => {
@@ -16,7 +17,7 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 		)
 		.post(SolutionApiPath.ROOT, validationMiddleware([solutionSchema]), (req, res, next) =>
 			solutionService
-				.create(req.user, req.task, req?.validData?.code)
+				.create({ user: req.user, task: req.task, ...req.validData })
 				.then((data) => res.send(data))
 				.catch(next),
 		)
@@ -26,7 +27,17 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 			checkSolutionIdMiddleware,
 			(req, res, next) =>
 				solutionService
-					.update(req.user, req.task, req.solution, req?.validData?.code)
+					.update({ user: req.user, task: req.task, solution: req.solution, ...req.validData })
+					.then((data) => res.send(data))
+					.catch(next),
+		)
+		.patch(
+			SolutionApiPath.$ID,
+			validationMiddleware([solutionIdSchema, solutionPatchSchema]),
+			checkSolutionIdMiddleware,
+			(req, res, next) =>
+				solutionService
+					.patch({ user: req.user, task: req.task, solution: req.solution, ...req.validData })
 					.then((data) => res.send(data))
 					.catch(next),
 		)

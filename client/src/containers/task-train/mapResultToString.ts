@@ -1,9 +1,9 @@
-import { IResult } from './logic/state';
+import { ITest } from './logic/state';
 
-export const mapResultToString = ({ response, error }: IResult): string => {
-	const result = Object.entries(response?.stats || {}).reduce(
+export const mapResultToString = (result: ITest['result']): string => {
+	const str = Object.entries(result?.response?.stats || {}).reduce(
 		(str, [key, value]) => str + `* ${key}: ${value}\n`,
 		'',
 	);
-	return response ? result : error || '';
+	return result?.response ? str : result?.error || '';
 };
