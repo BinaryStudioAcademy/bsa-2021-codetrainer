@@ -36,13 +36,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 					</div>
 					created{' '}
 					{author.firstName || author.lastName ? (
-						<Link
-							onClick={() => {
-								debugger;
-							}}
-							to={author.link}
-							className={styles.challengeStatsItemLink}
-						>
+						<Link to={author.link} className={styles.challengeStatsItemLink}>
 							{author.firstName} {author.lastName}
 						</Link>
 					) : (
