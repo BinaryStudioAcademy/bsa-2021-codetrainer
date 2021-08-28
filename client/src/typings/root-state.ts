@@ -12,12 +12,14 @@ import { ISettingsState } from '../containers/setting-page/logic/state';
 import { ITaskState } from '../containers/task-train/logic/state';
 import { IHeaderState } from 'containers/header/logic/state';
 import { ITaskInfoState } from 'containers/task/logic/state';
+import { ILeaderBoardState } from 'containers/leaderboard/logic/state';
 
 export interface IRootState {
 	notification: INotificationState;
 	profile: IProfileState;
 	clans: IClansState;
 	clan: IClanState;
+	leaderBoard: ILeaderBoardState;
 	createTask: ICreateTaskState;
 	example: IExampleState;
 	auth: IAuthState;

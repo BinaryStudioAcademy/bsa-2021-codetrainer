@@ -25,6 +25,7 @@ declare namespace WebApi.Entities {
 		};
 		githubId?: string;
 		profileUrl?: string;
+		position?: number;
 	}
 
 	export interface ITag {

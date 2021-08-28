@@ -5,4 +5,5 @@ export const UsersApiPath = {
 	DELETE: '/:id',
 	UPDATE_PASSWORD: '/:id/password',
 	SEARCH: '/search',
+	LEADERBOARD: '/leaderboard',
 };
