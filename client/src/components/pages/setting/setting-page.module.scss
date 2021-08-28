@@ -9,7 +9,7 @@
 	grid-auto-flow: row;
 	grid-gap: 20px;
 
-	> * {
+	> *:not(.gridContainer) {
 		background: var(--container-color);
 		padding: 30px 22px;
 		border-radius: 7px;
@@ -38,8 +38,11 @@
 }
 
 .gridContainer {
+	// display: flex;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-content: space-between;
+	grid-template-columns: 480px 1fr;
 	grid-gap: 20px;
+	> * {
+		background: var(--container-color);
+	}
 }
