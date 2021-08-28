@@ -60,7 +60,7 @@ export type TTaskSolutionsLoader = TLoader<
 export const getCompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
 	http.callWebApi({
 		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: 'GET',
+		method: HttpMethods.GET,
 		query: {
 			status: SolutionStatus.COMPLETED,
 			skip,
@@ -71,7 +71,7 @@ export const getCompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }
 export const getUncompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
 	http.callWebApi({
 		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: 'GET',
+		method: HttpMethods.GET,
 		query: {
 			status: SolutionStatus.NOT_COMPLETED,
 			skip,
