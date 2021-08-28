@@ -135,7 +135,7 @@ declare namespace WebApi.Entities {
 		exampleTestCases: string;
 		status: TaskStatus;
 		isPublished: boolean;
-		solutions: Array<{ id: string }>;
+		solutions: WebApi.Entities.ISolution[];
 		tags: Array<ITag>;
 		user: {
 			name: string;
