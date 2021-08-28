@@ -29,8 +29,8 @@ export const ProfileBio = ({
 	score,
 }: IProfileBioProps) => {
 	const gitHubLink = github ? (
-		<a href={github.profileUrl} className={styles.link}>
-			{github.profileUrl}
+		<a href={github.url} target="_blank" rel="nofollow noreferrer" className={styles.link}>
+			{github.login}
 		</a>
 	) : (
 		'Github account not connected'
