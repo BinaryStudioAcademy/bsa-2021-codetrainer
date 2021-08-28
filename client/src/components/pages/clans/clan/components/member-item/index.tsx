@@ -3,6 +3,8 @@ import { Rank } from 'components';
 import styles from './member-item.module.scss';
 import { IMemberItemProps } from './types';
 import { getFullDate } from 'helpers/date.helper';
+import { ROUTES } from 'constants/routes';
+import { Link } from 'react-router-dom';
 
 const MemberItem: React.FC<IMemberItemProps> = ({ member }) => {
 	return (
@@ -12,7 +14,7 @@ const MemberItem: React.FC<IMemberItemProps> = ({ member }) => {
 			</td>
 			<td>{member.avatar ? <img src={member.avatar} alt="Avatar" /> : <span>No avatar</span>}</td>
 			<td>
-				{member.name} {member.surname}
+				<Link to={`${ROUTES.Users}/${member.username}`}>{member.name} {member.surname}</Link>
 			</td>
 			<td>
 				{getFullDate(member.createdAt)}
