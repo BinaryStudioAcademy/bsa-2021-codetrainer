@@ -81,6 +81,7 @@ export class UserRepository extends AbstractRepository<User> {
 				'user.id',
 				'user.createdAt',
 				'user.lastVisit',
+				'user.avatar',
 				'user.username',
 				'user.name',
 				'user.surname',
