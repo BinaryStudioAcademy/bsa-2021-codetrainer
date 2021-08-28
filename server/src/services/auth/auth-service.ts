@@ -49,11 +49,11 @@ export class AuthService {
 			if (!user) {
 				throw new ValidationError(CODE_ERRORS.TOKEN_VERIFY);
 			}
-			const updatedUser = await repository.updateById(id, { lastVisit: new Date() });
+			await repository.updateById(id, { lastVisit: new Date() });
 			return {
 				token: createToken({ id }, TokenTypes.ACCESS),
 				refreshToken: createToken({ id }, TokenTypes.REFRESH),
-				user: updatedUser,
+				user: await repository.getById(id),
 			};
 		} catch (error) {
 			const { name } = error;

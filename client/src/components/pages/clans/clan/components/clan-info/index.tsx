@@ -1,12 +1,12 @@
 import React from 'react';
 import { Rank, Button } from 'components';
-import { getMonthName } from 'helpers/date';
 import MemberRoles from 'common/enum/app/clans/member-roles';
 import { WebApi } from 'typings/webapi';
 import { ButtonClasses } from 'components/basic/button';
 import { IClanInfoProps } from './types';
 import styles from './clan-info.module.scss';
 import clsx from 'clsx';
+import { getFullDate } from 'helpers/date.helper';
 
 const ClanInfo: React.FC<IClanInfoProps> = ({ clan, isOwnClan, leaveClan, joinClan, handleInviteClick }) => {
 	const clanAdmin = clan.members.find(
@@ -25,7 +25,7 @@ const ClanInfo: React.FC<IClanInfoProps> = ({ clan, isOwnClan, leaveClan, joinCl
 				<Rank rank={clan.rank} />
 				<Rank honor={clan.honor} />
 				<span>
-					{getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
+					{getFullDate(clan.createdAt)}
 				</span>
 				<span>
 					Admin: {clanAdmin?.name} {clanAdmin?.surname}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Rank } from 'components';
-import { getMonthName } from 'helpers/date';
 import styles from './member-item.module.scss';
 import { IMemberItemProps } from './types';
+import { getFullDate } from 'helpers/date.helper';
 
 const MemberItem: React.FC<IMemberItemProps> = ({ member }) => {
 	return (
@@ -15,7 +15,7 @@ const MemberItem: React.FC<IMemberItemProps> = ({ member }) => {
 				{member.name} {member.surname}
 			</td>
 			<td>
-				{getMonthName(member.createdAt)} {member.createdAt.getFullYear()}
+				{getFullDate(member.createdAt)}
 			</td>
 			<td>{member.honor}</td>
 		</tr>

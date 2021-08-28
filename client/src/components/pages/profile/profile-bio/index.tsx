@@ -4,7 +4,7 @@ import { Avatar, Label, List, Rank } from 'components/basic';
 import { IUser } from 'typings/common/IUser';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
-import { getMonthName } from 'helpers/date';
+import { getFullDate } from 'helpers/date.helper';
 
 export type IProfileBioProps = IUser & {
 	followingQuantity?: number;
@@ -41,8 +41,8 @@ export const ProfileBio = ({
 		{ name: 'Clan', value: clan?.id ? <Link to={`${ROUTES.Clan}/${clan.id}`}>{clan?.name}</Link> : 'No clan' },
 	];
 	const listItems2 = [
-		{ name: 'Member since', value: createdAt && `${new Date(createdAt).getDate()} ${getMonthName(new Date(createdAt))} ${new Date(createdAt).getFullYear()}` },
-		{ name: 'Last seen', value: lastVisit },
+		{ name: 'Member since', value: createdAt && getFullDate(new Date(createdAt)) },
+		{ name: 'Last seen', value: lastVisit && getFullDate(new Date(lastVisit)) },
 		{ name: 'Profile GitHub', value: gitHubLink },
 	];
 	const listItems3 = [
