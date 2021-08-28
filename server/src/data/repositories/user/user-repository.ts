@@ -79,6 +79,8 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
+				'user.createdAt',
+				'user.lastVisit',
 				'user.username',
 				'user.name',
 				'user.surname',
