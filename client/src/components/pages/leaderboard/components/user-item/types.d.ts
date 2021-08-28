@@ -4,3 +4,4 @@ export interface IUserItemProps {
 	position: number;
 	user: WebApi.Entities.IUser
 }
+

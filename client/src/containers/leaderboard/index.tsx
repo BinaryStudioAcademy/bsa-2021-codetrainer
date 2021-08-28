@@ -3,11 +3,6 @@ import { LeaderBoardPage } from 'components';
 import * as actions from './logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
-// import historyHelper from 'helpers/history.helper';
-// import { setNotificationState } from 'containers/notification/logic/actions';
-// import { NotificationType } from '../../notification/logic/models';
-// import { ROUTES } from 'constants/routes';
-// import { Order } from 'helpers/table-helper';
 
 const LeaderBoard: React.FC = () => {
 	const dispatch = useDispatch();
