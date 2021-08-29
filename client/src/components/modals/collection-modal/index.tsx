@@ -9,6 +9,9 @@ import { Modal } from '../';
 import { createCollection } from 'services/create-collection.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
 
 interface ICollectionModalProps {
 	isOpen: boolean;
@@ -78,11 +81,20 @@ const CreateCollectionSchema = Yup.object().shape({
 export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIsOpen }) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
 	const [isNewCollection, setIsNewCollection] = React.useState(false);
+	const dispatch = useDispatch();
 
 	const onSubmit = async (value: string, setFieldError: any) => {
 		try {
 			await createCollection(value);
 			setIsOpen(false);
+			dispatch(
+				setNotificationState({
+					state: {
+						notificationType: NotificationType.Success,
+						message: 'Collection was successfully created',
+					},
+				}),
+			);
 		} catch (e) {
 			setFieldError('createCollection', 'Something went wrong');
 		}
