@@ -1,11 +1,7 @@
+import { SolutionStatus } from 'typings/common/solution';
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
-import {
-	TTaskSolutions,
-	completedSolutionsMocks,
-	uncompletedSolutionsMocks,
-} from 'containers/profile/tabs/solutions/mocks';
 import { TLoader } from 'typings/common/loader';
 
 export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ITask | Error> => {
@@ -56,24 +52,29 @@ export const editSolution = async ({
 	}
 };
 
-export interface TSolutionsRequestArgs {
-	skip: number;
-	limit: number;
-}
-
-export type TPrivateSolutionsLoader = TLoader<
+export type TTaskSolutionsLoader = TLoader<
 	WebApi.Types.TPaginationRequest,
-	WebApi.Types.TPaginationResponse<TTaskSolutions, 'solutions'>
+	WebApi.Types.TPaginationResponse<WebApi.Entities.ITask, 'tasks'>
 >;
 
-// TODO: implement in backend and call api
-export const getCompletedSolutions: TPrivateSolutionsLoader = async ({ skip, take }) => ({
-	solutions: completedSolutionsMocks.slice(skip, skip + take),
-	total: completedSolutionsMocks.length,
-});
+export const getCompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
+	http.callWebApi({
+		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
+		method: HttpMethods.GET,
+		query: {
+			status: SolutionStatus.COMPLETED,
+			skip,
+			take,
+		},
+	});
 
-// TODO: implement in backend and call api
-export const getUncompletedSolutions: TPrivateSolutionsLoader = async ({ skip, take }) => ({
-	solutions: uncompletedSolutionsMocks.slice(skip, skip + take),
-	total: uncompletedSolutionsMocks.length,
-});
+export const getUncompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
+	http.callWebApi({
+		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
+		method: HttpMethods.GET,
+		query: {
+			status: SolutionStatus.NOT_COMPLETED,
+			skip,
+			take,
+		},
+	});

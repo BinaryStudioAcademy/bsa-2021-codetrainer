@@ -8,7 +8,9 @@ import { fetchCommunity } from '../../../services/followers.service';
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTasks>): any {
 	const { discipline, currentTask } = action;
 	const tasks = yield call(fetchTasks);
-	const filteredTasks = tasks.filter((item: ITask) => item.discipline === discipline && item.id !== currentTask);
+	const filteredTasks = tasks.filter(
+		(item: ITask) => item.discipline?.toLowerCase() === discipline.toLowerCase() && item.id !== currentTask,
+	);
 	yield put(actions.setTask({ task: filteredTasks[Math.floor(Math.random() * filteredTasks.length)] }));
 }
 

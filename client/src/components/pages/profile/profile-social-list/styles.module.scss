@@ -1,3 +1,6 @@
+@import 'styles/variables.scss';
+@import 'styles/index.scss';
+
 .socialTableWrapper {
 	table {
 		display: grid;
@@ -44,4 +47,12 @@
 		align-items: center;
 		justify-content: center;
 	}
+}
+
+.empty {
+	padding: 15px;
+	font: $fourth-title-font;
+	color: var(--text-color);
+	text-align: center;
+	width: 726px;
 }

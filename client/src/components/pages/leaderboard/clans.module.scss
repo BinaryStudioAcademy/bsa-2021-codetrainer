@@ -1,0 +1,12 @@
+@import "styles/variables";
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 20px;
+	}
+}

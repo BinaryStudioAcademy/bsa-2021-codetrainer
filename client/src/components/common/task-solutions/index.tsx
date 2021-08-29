@@ -4,7 +4,6 @@ import moment from 'moment';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';
 import { Rank } from 'components/basic';
 import BetaRank from 'components/basic/rank/beta';
-import { TTaskSolutions } from 'containers/profile/tabs/solutions/mocks';
 import { useThemeSelector } from 'hooks/useAppSelector';
 import { ThemeType } from 'containers/theme-switcher/logic/models';
 import { ROUTES } from 'constants/routes';
@@ -12,14 +11,17 @@ import { TaskStatus } from 'typings/common/task';
 import { SolutionStatus } from 'typings/common/solution';
 import styles from './task-solutions.module.scss';
 import { darkTheme, lightTheme } from './config';
+import { WebApi } from 'typings/webapi';
 
 interface ITaskSolutionsProps {
-	taskSolutions: TTaskSolutions;
+	task: WebApi.Entities.ITask;
 }
 
 function readableLanguageFormat(language: string) {
 	switch (language) {
-		case 'javascript': {
+		case 'javascript':
+		case undefined: {
+			// TODO: remove undefined
 			return 'JavaScript';
 		}
 		case 'typescript': {
@@ -31,15 +33,15 @@ function readableLanguageFormat(language: string) {
 	}
 }
 
-const TaskSolutions: FC<ITaskSolutionsProps> = ({ taskSolutions }) => {
+const TaskSolutions: FC<ITaskSolutionsProps> = ({ task: rawTask }) => {
 	const { theme } = useThemeSelector();
-	const { task, solutions } = taskSolutions;
+	const { solutions, ...task } = rawTask;
 
 	return (
 		<div className={styles.taskSolutions}>
 			<div className={styles.task}>
 				{task.status === TaskStatus.APPROVED ? <Rank rank={task.rank as number} /> : <BetaRank />}
-				<Link to={ROUTES.Home}>{task.name}</Link>
+				<Link to={`${ROUTES.TaskInfo}/${task.id}`}>{task.name}</Link>
 			</div>
 			{solutions.map((solution, index) => (
 				<div key={index} className={styles.solution}>

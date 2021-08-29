@@ -63,6 +63,9 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 						fontFamily: 'Montserrat',
 						fontWeight: 500,
 					}),
+					singleValue: () => ({
+						color: 'var(--text-color)',
+					}),
 				}}
 				menuPortalTarget={document.body}
 			/>

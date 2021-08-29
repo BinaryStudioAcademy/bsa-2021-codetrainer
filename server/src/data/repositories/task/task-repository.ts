@@ -12,9 +12,9 @@ const sortQuery = <T>(query: SelectQueryBuilder<T>, sorts?: TASK_ORDER_BY): Sele
 		case TASK_ORDER_BY.NAME:
 			return query.orderBy('task.name', 'ASC');
 		case TASK_ORDER_BY.EASIEST:
-			return query.orderBy('task.rank', 'ASC');
-		case TASK_ORDER_BY.HARDEST:
 			return query.orderBy('task.rank', 'DESC');
+		case TASK_ORDER_BY.HARDEST:
+			return query.orderBy('task.rank', 'ASC');
 		case TASK_ORDER_BY.NEWEST:
 			return query.orderBy('task.createdAt', 'DESC');
 		case TASK_ORDER_BY.OLDEST:
@@ -64,7 +64,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.leftJoinAndSelect('task.user', 'user')
 			.leftJoinAndSelect('task.tags', 'tag')
 			.leftJoinAndSelect('task.contributors', 'contributors')
-			.select(['task', 'user.name', 'user.surname', 'user.id', 'tag.id', 'tag.name', 'contributors'])
+			.select(['task', 'user', 'tag.id', 'tag.name', 'contributors'])
 			.skip(skip)
 			.take(take)
 			.getMany();

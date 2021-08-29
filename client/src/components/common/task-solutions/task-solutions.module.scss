@@ -42,6 +42,7 @@
 		pre {
 			border-radius: 5px;
 			margin: 7px 0;
+			max-height: 10em;
 		}
 
 		.actions {
@@ -61,10 +62,13 @@
 	}
 
 	&.skeleton {
+		span {
+			opacity: 0.25;
+		}
+
 		.task,
 		.actions {
 			span {
-				opacity: 0.5;
 				display: inline-block;
 				width: 50px;
 				height: 18px;
