@@ -23,10 +23,7 @@ const SignupSchema = Yup.object().shape({
 
 const Information: React.FC<IInformationProps> = (props) => {
 	const getFieldItem = (item: Omit<IFormItem, 'initialText'>) => {
-		return item.id === 'clan' ? (
-			<div className={styles.inputField}>{item.label}</div>
-		) : (
-			// <div className={styles.inputField}>{item.label}</div>
+		return (
 			<div className={styles.inputField}>
 				<Field
 					id={item.id}
