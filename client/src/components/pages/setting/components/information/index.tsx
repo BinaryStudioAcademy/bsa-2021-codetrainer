@@ -7,6 +7,8 @@ import { ButtonClasses } from 'components/basic/button';
 import List from '../list-radio';
 import { IFormItem, IInformationProps } from './interfaces';
 import styles from './information.module.scss';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
 const SignupSchema = Yup.object().shape({
 	name: Yup.string().min(2, 'Minimum length: 2').max(30, 'Maximum length: 30').required('Required'),
@@ -21,7 +23,10 @@ const SignupSchema = Yup.object().shape({
 
 const Information: React.FC<IInformationProps> = (props) => {
 	const getFieldItem = (item: Omit<IFormItem, 'initialText'>) => {
-		return (
+		return item.id === 'clan' ? (
+			<div className={styles.inputField}>{item.label}</div>
+		) : (
+			// <div className={styles.inputField}>{item.label}</div>
 			<div className={styles.inputField}>
 				<Field
 					id={item.id}
@@ -58,6 +63,16 @@ const Information: React.FC<IInformationProps> = (props) => {
 			>
 				<Form className={styles.form}>
 					{items.map((item: IFormItem) => getFieldItem(item))}
+					<div>
+						<div className={styles.label}>Clan</div>
+						<div className={styles.clanInfo}>
+							{props.clan ? (
+								<Link to={`${ROUTES.Clan}/${props.clan.id}`}>{props.clan.name}</Link>
+							) : (
+								'You are not in a clan'
+							)}
+						</div>
+					</div>
 					<div className={styles.experience}>
 						<List header="Development experience" name={props.list.name} items={props.list.items} />
 					</div>

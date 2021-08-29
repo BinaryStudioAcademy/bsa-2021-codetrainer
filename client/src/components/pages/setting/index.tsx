@@ -14,6 +14,7 @@ const Setting: React.FC<ISettingProps> = (props) => {
 				list={props.information.list}
 				formItems={props.information.formItems}
 				onSubmit={props.information.onSubmit}
+				clan={props.information.clan}
 			/>
 			<div className={styles.gridContainer}>
 				<Social {...props.social} />
