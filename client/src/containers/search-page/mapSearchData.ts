@@ -16,7 +16,7 @@ export const mapSearchData = (data: ISearchState['search']): ISearchPageProps['d
 			author: {
 				firstName: task?.user?.name || '',
 				lastName: task?.user?.surname || '',
-				link: ROUTES.Users + '/' + task?.user?.username || ROUTES.NotFound,
+				link: task?.user?.username ? ROUTES.Users + '/' + task?.user?.username : ROUTES.NotFound,
 			},
 			stats: {
 				favoriteSaves: 0,
