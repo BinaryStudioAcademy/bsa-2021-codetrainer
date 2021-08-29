@@ -10,10 +10,10 @@ interface StyledTabsProps {
 const StyledTabs = withStyles({
 	root: {
 		padding: 'none',
-		backgroundColor: 'white',
+		backgroundColor: 'var(--container-color)',
 	},
 	indicator: {
-		background: '#705FF5',
+		background: 'var(--purple)',
 	},
 })(Tabs);
 
@@ -23,16 +23,16 @@ const StyledTab = withStyles({
 		textTransform: 'none',
 		fontFamily: 'Montserrat',
 		minWidth: 72,
-		backgroundColor: 'white',
+		backgroundColor: 'var(--container-color)',
 		'&:hover': {
-			color: '#705FF5',
+			color: 'var(--purple)',
 			opacity: 1,
 		},
 		'&$selected': {
-			color: '#705FF5',
+			color: 'var(--purple)',
 		},
 		'&:focus': {
-			color: '#705FF5',
+			color: 'var(--purple)',
 		},
 	},
 })((props: StyledTabsProps) => <Tab disableRipple {...props} />);

@@ -23,7 +23,13 @@ export const Modal: React.FC<IModalProps> = (props) => {
 	ReactModal.setAppElement('#root');
 
 	return (
-		<ReactModal shouldFocusAfterRender={true} isOpen={props.isOpen} style={modalStyles} {...props.modalProps}>
+		<ReactModal
+			onRequestClose={() => props.setIsOpen(false)}
+			shouldFocusAfterRender={true}
+			isOpen={props.isOpen}
+			style={modalStyles}
+			{...props.modalProps}
+		>
 			<div className={styles.modalContent}>
 				<div className={styles.header}>
 					<h3 className={styles.title}>{title}</h3>
