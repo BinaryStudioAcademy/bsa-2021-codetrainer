@@ -41,6 +41,9 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 				placeholder={placeholder}
 				options={options}
 				styles={{
+					singleValue: () => ({
+						color: 'var(--text-color)',
+					}),
 					menu: () => ({
 						backgroundColor: 'var(--secondary-container-color)',
 						color: 'var(--text-color)',
