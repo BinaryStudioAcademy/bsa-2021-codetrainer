@@ -12,6 +12,7 @@ import { Redirect } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
 import { FullscreenLoader } from 'components';
 import historyHelper from 'helpers/history.helper';
+import { Solutions } from './solutions';
 
 export enum ActiveTabId {
 	Details = 'Details',
@@ -46,6 +47,9 @@ export const TaskPageContainer = () => {
 		switch (activeTabId) {
 			case ActiveTabId.Details: {
 				return <Details />;
+			}
+			case ActiveTabId.Solutions: {
+				return <Solutions />;
 			}
 			default: {
 				return <div>{activeTabId}</div>;

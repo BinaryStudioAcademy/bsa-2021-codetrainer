@@ -1,0 +1,47 @@
+@import 'styles/variables';
+
+.container {
+    background-color: $zircon;
+    padding: 20px;
+}
+
+.toggleBtns {
+    display: flex;
+    flex-direction: column;
+    > * {
+        width: 100%;
+        margin: 20px auto 0;
+    }
+}
+.filters {
+    > * > * {
+        margin-right: 15px;
+    }
+    .sortBy {
+        margin-left: 15px;
+    }
+}
+
+.membersSortPanel {
+	padding: 20px 0 5px;
+	background: $zircon;
+
+	&Button {
+		cursor: pointer;
+		// display: block;
+		// margin: 0 auto;
+		background: none;
+		font: $base-font;
+		border: none;
+		outline: none;
+
+		&Active {
+			// color: $french-rose;
+            border-bottom: $cornflower-blue 2px solid;
+		}
+	}
+
+	&Button:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+}
