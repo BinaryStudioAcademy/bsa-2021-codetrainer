@@ -6,6 +6,8 @@ export interface IUser {
 	username: string;
 	name: string;
 	surname?: string;
+	createdAt?: string;
+	lastVisit?: string;
 	rank: number;
 	honor: number;
 	clan?: WebApi.Entities.IClan | null;

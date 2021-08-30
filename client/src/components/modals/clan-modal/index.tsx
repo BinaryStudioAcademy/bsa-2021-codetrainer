@@ -39,13 +39,22 @@ export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
 					},
 				}),
 			);
-		}
-		try {
-			const clan = await createClan(value);
-			setIsOpen(false);
-			dispatch(userActions.setUserClan({ clan: clan }));
-		} catch (e) {
-			setFieldError('createClan', 'Something went wrong');
+		} else {
+			try {
+				const clan = await createClan(value);
+				setIsOpen(false);
+				dispatch(userActions.setUserClan({ clan: clan }));
+				dispatch(
+					setNotificationState({
+						state: {
+							notificationType: NotificationType.Success,
+							message: 'Clan was successfully created',
+						},
+					}),
+				);
+			} catch (e) {
+				setFieldError('createClan', 'Something went wrong');
+			}
 		}
 	};
 

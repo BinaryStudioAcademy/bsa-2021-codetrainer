@@ -9,9 +9,10 @@ import { IChallenge } from 'components/common/challenge/types';
 
 export interface ITaskInfoProps {
 	challengeProps: IChallenge;
+	handleSkipClick: () => void;
 }
 
-export const TaskInfo = ({ challengeProps }: ITaskInfoProps) => {
+export const TaskInfo = ({ challengeProps, handleSkipClick }: ITaskInfoProps) => {
 	const history = useHistory();
 
 	return (
@@ -24,7 +25,9 @@ export const TaskInfo = ({ challengeProps }: ITaskInfoProps) => {
 				>
 					Train
 				</Button>
-				<Button className={clsx(ButtonClasses.red, styles.skipButton)}>Skip</Button>
+				<Button onClick={handleSkipClick} className={clsx(ButtonClasses.red, styles.skipButton)}>
+					Skip
+				</Button>
 			</div>
 		</div>
 	);

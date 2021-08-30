@@ -10,6 +10,8 @@ import taskSaga from 'containers/task-train/logic/saga';
 import headerSaga from 'containers/header/logic/saga';
 import profileSaga from 'containers/profile/logic/saga';
 import taskInfoSaga from 'containers/task/logic/saga';
+import leaderBoardSaga from 'containers/leaderboard/logic/saga';
+import sidebarSaga from 'containers/private-route/logic/saga';
 
 export default function* rootSaga() {
 	yield all([
@@ -17,6 +19,7 @@ export default function* rootSaga() {
 		authSaga(),
 		clansSaga(),
 		clanSaga(),
+		leaderBoardSaga(),
 		searchSaga(),
 		settingsSaga(),
 		profileSaga(),
@@ -24,5 +27,6 @@ export default function* rootSaga() {
 		taskSaga(),
 		headerSaga(),
 		taskInfoSaga(),
+		sidebarSaga(),
 	]);
 }

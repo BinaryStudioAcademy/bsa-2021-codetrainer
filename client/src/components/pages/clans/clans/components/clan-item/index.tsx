@@ -3,12 +3,12 @@ import { Rank } from 'components';
 import { IClanItemProps } from './types';
 import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
-import { getMonthName } from 'helpers/date';
 import { ROUTES } from 'constants/routes';
 import { WebApi } from 'typings/webapi';
 import styles from './clan-item.module.scss';
 import { TableCell, TableRow } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { getFullDate } from 'helpers/date.helper';
 
 const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
 	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
@@ -37,7 +37,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 			</TableCell>
 			<TableCell>
 				<span>
-					{clan.createdAt.getDate()} {getMonthName(clan.createdAt)} {clan.createdAt.getFullYear()}
+					{getFullDate(clan.createdAt)}
 				</span>
 			</TableCell>
 			<TableCell>

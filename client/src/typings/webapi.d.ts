@@ -25,6 +25,7 @@ declare namespace WebApi.Entities {
 		};
 		githubId?: string;
 		profileUrl?: string;
+		position?: number;
 	}
 
 	export interface ITag {
@@ -71,6 +72,7 @@ declare namespace WebApi.Entities {
 
 	export interface IMember {
 		id: string;
+		username: string;
 		rank: number;
 		username: string;
 		avatar: string;
@@ -135,7 +137,7 @@ declare namespace WebApi.Entities {
 		exampleTestCases: string;
 		status: TaskStatus;
 		isPublished: boolean;
-		solutions: Array<{ id: string }>;
+		solutions: WebApi.Entities.ISolution[];
 		tags: Array<ITag>;
 		user: {
 			name: string;

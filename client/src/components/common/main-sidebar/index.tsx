@@ -1,12 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faExchangeAlt, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faExchangeAlt, faTrophy, faUsers } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../../assets/images/logo.svg';
 import styles from './main-sidebar.module.scss';
 import { ROUTES } from 'constants/routes';
 
-const MainSidebar: React.FC = () => {
+export interface IMainSideBar {
+	id?: string | null;
+}
+
+const MainSidebar = ({ id }: IMainSideBar) => {
 	return (
 		<aside className={styles.mainSidebar}>
 			<div className={styles.logotype}>
@@ -29,15 +33,21 @@ const MainSidebar: React.FC = () => {
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
-						<NavLink to={ROUTES.createTask} className={styles.navigationLink}>
+						<NavLink to={`${ROUTES.TaskInfo}/${id}/train`} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faExchangeAlt} className={styles.navigationIcon} />
 							Challenge
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
 						<NavLink to={ROUTES.Clans} className={styles.navigationLink}>
-							<FontAwesomeIcon icon={faStar} className={styles.navigationIcon} />
+							<FontAwesomeIcon icon={faUsers} className={styles.navigationIcon} />
 							Clans
+						</NavLink>
+					</li>
+					<li className={styles.navigationItem}>
+						<NavLink to={ROUTES.LeaderBoard} className={styles.navigationLink}>
+							<FontAwesomeIcon icon={faTrophy} className={styles.navigationIcon} />
+							Leaders
 						</NavLink>
 					</li>
 				</ul>
