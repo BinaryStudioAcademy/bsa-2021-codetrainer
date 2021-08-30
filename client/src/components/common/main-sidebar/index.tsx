@@ -6,7 +6,11 @@ import logo from '../../../assets/images/logo.svg';
 import styles from './main-sidebar.module.scss';
 import { ROUTES } from 'constants/routes';
 
-const MainSidebar: React.FC = () => {
+export interface IMainSideBar {
+	id?: string | null;
+}
+
+const MainSidebar = ({ id }: IMainSideBar) => {
 	return (
 		<aside className={styles.mainSidebar}>
 			<div className={styles.logotype}>
@@ -29,7 +33,7 @@ const MainSidebar: React.FC = () => {
 						</NavLink>
 					</li>
 					<li className={styles.navigationItem}>
-						<NavLink to={ROUTES.createTask} className={styles.navigationLink}>
+						<NavLink to={`${ROUTES.TaskInfo}/${id}/train`} className={styles.navigationLink}>
 							<FontAwesomeIcon icon={faExchangeAlt} className={styles.navigationIcon} />
 							Challenge
 						</NavLink>
