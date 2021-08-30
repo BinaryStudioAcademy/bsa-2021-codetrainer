@@ -37,7 +37,7 @@ declare namespace WebApi.Entities {
 		name: string;
 		discipline: string;
 		description: string;
-		exampleTestCases?: string;
+		exampleTestCases: string;
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
@@ -49,6 +49,7 @@ declare namespace WebApi.Entities {
 		preloaded: string;
 		usersTrained: number;
 		skips: number;
+		initialSolution: string;
 		codeSubmissions: number;
 		timesCompleted: number;
 		stars: number;

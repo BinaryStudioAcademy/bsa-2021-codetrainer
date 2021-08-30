@@ -25,9 +25,7 @@ export class UserRepository extends AbstractRepository<User> {
 		return this.createQueryBuilder('user')
 			.leftJoinAndSelect('user.followers', 'followers')
 			.leftJoinAndSelect('user.following', 'following')
-			.select([...this.userFields,
-				'followers', 'following'
-			])
+			.select([...this.userFields, 'followers', 'following'])
 			.getMany();
 	}
 
@@ -67,12 +65,9 @@ export class UserRepository extends AbstractRepository<User> {
 	}
 
 	getPasswordById(id: string) {
-		return this.createQueryBuilder('user')
-			.select(['user.password'])
-			.where('user.id = :id', { id })
-			.getOne();
+		return this.createQueryBuilder('user').select(['user.password']).where('user.id = :id', { id }).getOne();
 	}
-	
+
 	search(query: { username: string }) {
 		const { username } = query;
 		return this.createQueryBuilder('user')

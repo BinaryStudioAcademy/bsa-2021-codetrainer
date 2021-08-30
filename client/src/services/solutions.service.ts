@@ -13,11 +13,14 @@ interface ISubmitSolution {
 	code: string;
 	taskId: string;
 	testCases: string;
-	typeTest: TypeTest;
+	typeTest?: TypeTest;
 }
 
 interface IEditSolution extends ISubmitSolution {
 	solutionId: string;
+}
+interface IPatchSolution extends IEditSolution {
+	status?: string;
 }
 
 const callApi = async (method: HttpMethods, endpoint: string, body?: Record<string, unknown>): Promise<any> => {
@@ -45,7 +48,11 @@ export const editSolution = async ({ solutionId, taskId, ...body }: IEditSolutio
 	return await callApi(HttpMethods.PUT, `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`, { ...body });
 };
 
-export const patchSolution = async ({ taskId, solutionId, ...body }: Partial<IEditSolution>) => {
+export const patchSolution = async ({
+	taskId,
+	solutionId,
+	...body
+}: Partial<IPatchSolution>): Promise<unknown | Error> => {
 	return await callApi(HttpMethods.PATCH, `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`, { ...body });
 };
 

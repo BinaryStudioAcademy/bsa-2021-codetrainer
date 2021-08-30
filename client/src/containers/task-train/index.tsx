@@ -9,10 +9,11 @@ import { socket } from 'services/socket';
 import { SOCKET_EVENTS } from 'constants/socket-constants';
 import { TypeTest } from 'constants/task';
 import { SolutionStatus } from 'typings/common/solution';
-import { ITest } from './logic/state';
-import { mapResultToString } from './mapResultToString';
+import { ITestResult } from './logic/state';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
+import { ROUTES, TASK_ROUTES } from 'constants/routes';
+import { WebApi } from 'typings/webapi';
 
 const OUTPUT = 1;
 
@@ -21,15 +22,22 @@ const TaskTrain: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const { task, solution, hasFetched, test, activeTab, errors } = useAppSelector((state) => state.task);
+	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus } = useAppSelector(
+		(state) => state.task,
+	);
 
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
-		socket.on(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, (test: ITest) => {
-			dispatch(actions.setActiveTab({ tab: OUTPUT }));
-			dispatch(actions.setTest({ test }));
-		});
-	}, []);
+		socket.on(
+			SOCKET_EVENTS.RESULT_TEST_TO_CLIENT,
+			({ solution, ...testResult }: ITestResult & { solution: WebApi.Entities.ISolution }) => {
+				console.log('test => ', testResult);
+				dispatch(actions.setActiveTab({ tab: OUTPUT }));
+				dispatch(actions.setTestResult({ testResult }));
+				dispatch(actions.setSolution({ solution: solution ?? null }));
+			},
+		);
+	}, [taskId]);
 
 	useEffect(() => {
 		if (!Boolean(errors)) {
@@ -46,26 +54,57 @@ const TaskTrain: React.FC = () => {
 		);
 	}, [errors]);
 
-	const handleSubmit = (code: string, testCases: string, type: TypeTest) => {
+	useEffect(() => {
+		if (!changeStatus || !task || !solution?.status) {
+			return;
+		}
+		dispatch(actions.changeStatus({ changeStatus: false }));
+		if (solution.status === SolutionStatus.UNLOCKED) {
+			history.push(`${ROUTES.TaskInfo}/${task.id}${TASK_ROUTES.Solutions}`);
+			return;
+		}
+		if (Boolean(nextTaskId)) {
+			history.push(`${ROUTES.TaskInfo}/${nextTaskId}${TASK_ROUTES.Train}`);
+			return;
+		}
+		dispatch(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Error,
+					message: 'You do not have any unstarted tasks',
+					title: 'Attention',
+				},
+			}),
+		);
+		history.push(`${ROUTES.Search}`);
+	}, [solution?.status, changeStatus, task]);
+
+	const handleSubmit = (code: string, testCases: string, typeTest: TypeTest) => {
 		if (!task) {
 			return;
 		}
-		dispatch(actions.submitSolution({ taskId: task.id, typeTest: type, code, testCases }));
+		dispatch(actions.submitSolution({ taskId: task.id, typeTest, code, testCases }));
 	};
 
 	const handleReset = (reset: boolean) => {
-		console.log(reset);
-		if (!reset || !task || !solution) {
+		if (!reset || !task) {
 			return;
 		}
-		dispatch(actions.patchSolution({ code: task.preloaded, testCases: task.exampleTestCases || '' }));
+		const data = { code: task.initialSolution, testCases: task.exampleTestCases || '', taskId };
+		dispatch(actions.patchSolution(data));
 	};
 
-	const handlePatch = (status: SolutionStatus) => {
-		if (!task || !solution) {
+	const handlePatch = (code: string, testCases: string, status: SolutionStatus) => {
+		if (!task) {
 			return;
 		}
-		dispatch(actions.patchSolution({ status }));
+		const data = {
+			code: !Boolean(code?.length) ? task?.initialSolution : code,
+			testCases: !Boolean(testCases?.length) ? task?.exampleTestCases : testCases,
+			taskId,
+			status,
+		};
+		dispatch(actions.patchSolution(data));
 	};
 
 	if (!hasFetched) {
@@ -73,7 +112,7 @@ const TaskTrain: React.FC = () => {
 	}
 
 	if (hasFetched && !task) {
-		history.push('/home');
+		history.push(ROUTES.Home);
 	}
 
 	return (
@@ -82,8 +121,10 @@ const TaskTrain: React.FC = () => {
 				task={task}
 				solution={solution}
 				activeTab={activeTab}
-				result={mapResultToString(test?.result || {})}
-				success={(test?.result?.success && test?.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) || false}
+				result={testResult?.result || {}}
+				success={
+					(testResult?.result?.success && testResult?.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) || false
+				}
 				onChangeTab={(tab: number) => dispatch(actions.setActiveTab({ tab }))}
 				onSubmit={handleSubmit}
 				onReset={handleReset}

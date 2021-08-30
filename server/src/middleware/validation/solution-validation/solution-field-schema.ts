@@ -17,7 +17,6 @@ export const codeSchema: Schema[''] = {
 	errorMessage: 'Wrong code format',
 	trim: true,
 	isString: true,
-	notEmpty: true,
 };
 
 export const testCasesSchema: Schema[''] = {
@@ -25,7 +24,6 @@ export const testCasesSchema: Schema[''] = {
 	errorMessage: 'Wrong testCases format',
 	trim: true,
 	isString: true,
-	notEmpty: true,
 };
 
 export const statusSchema: Schema[''] = {

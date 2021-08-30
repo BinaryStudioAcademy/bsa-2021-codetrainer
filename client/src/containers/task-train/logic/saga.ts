@@ -7,16 +7,21 @@ import { getTask, TypeGetTask } from './selectors';
 import { WebApi } from 'typings/webapi';
 
 export function* fetchTaskWorker({ id }: ReturnType<typeof actions.fetchTask>): any {
+	yield put(actions.loadPage());
 	yield put(actions.startLoading());
 
 	const task = yield call(fetchTask, id);
-	const solution = yield call(fetchUserSolution, id);
+	const response: { solution?: WebApi.Entities.ISolution; nextTaskId: string } | Error = yield call(
+		fetchUserSolution,
+		id,
+	);
 
-	if (task instanceof Error || solution instanceof Error) {
-		yield put(actions.setErrors({ errors: task?.message || solution?.message || 'unknown error' }));
+	if (response instanceof Error || task instanceof Error) {
+		yield put(actions.setErrors({ errors: task?.message || (response as Error)?.message || 'unknown error' }));
 	} else {
 		yield put(actions.setTask({ task }));
-		yield put(actions.setSolution({ solution }));
+		yield put(actions.setSolution({ solution: response.solution || null }));
+		yield put(actions.setNextTaskId({ nextTaskId: response?.nextTaskId || null }));
 	}
 
 	yield put(actions.endLoading());
@@ -50,18 +55,24 @@ export function* submitSolutionWorker(data: ReturnType<typeof actions.submitSolu
 
 export function* patchSolutionWorker(data: ReturnType<typeof actions.patchSolution>) {
 	yield put(actions.startLoading());
-	const { solution, task }: TypeGetTask = yield select(getTask);
+	const { solution }: TypeGetTask = yield select(getTask);
 
+	let newSolution!: WebApi.Entities.ISolution;
+	if (!Boolean(solution)) {
+		newSolution = yield call({ context: submitSolution, fn: submitSolution }, data);
+	}
 	const response: WebApi.Entities.ISolution | Error = yield call(patchSolution, {
 		...data,
-		solutionId: solution?.id,
-		taskId: task?.id,
+		solutionId: solution?.id || newSolution?.id,
 	});
 
 	if (response instanceof Error) {
 		yield put(actions.setErrors({ errors: response?.message || 'unknown error' }));
 	} else {
 		yield put(actions.setSolution({ solution: response }));
+	}
+	if (Boolean(data?.status)) {
+		yield put(actions.changeStatus({ changeStatus: true }));
 	}
 	yield put(actions.endLoading());
 }

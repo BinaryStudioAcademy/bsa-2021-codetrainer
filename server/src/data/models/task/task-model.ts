@@ -27,7 +27,7 @@ export class Task extends AbstractEntity {
 	completeSolution?: string;
 
 	@Column({ type: 'text', default: '' })
-	initialSolution?: string;
+	initialSolution!: string;
 
 	@Column({ type: 'text', default: '' })
 	preloaded?: string;
@@ -52,6 +52,7 @@ export class Task extends AbstractEntity {
 	comments!: CommentTask[];
 
 	@OneToMany(() => Solution, (solution) => solution.task)
+	// @JoinColumn()
 	solutions!: Solution[];
 
 	@ManyToMany(() => Tag, (tag) => tag.tasks)

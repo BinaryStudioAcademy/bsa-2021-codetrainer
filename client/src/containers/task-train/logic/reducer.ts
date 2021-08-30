@@ -3,14 +3,24 @@ import { ITaskState, initialState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
 
 export const taskReducer = createReducer<ITaskState>(initialState, {
-	[actionTypes.START_LOADING](state, action) {
+	[actionTypes.LOAD_PAGE](state) {
+		return {
+			...state,
+			nextTaskId: null,
+			solution: null,
+			activeTab: 0,
+		};
+	},
+	[actionTypes.START_LOADING](state) {
 		return {
 			...state,
 			hasFetched: false,
+			changeStatus: false,
+			test: null,
 			errors: null,
 		};
 	},
-	[actionTypes.END_LOADING](state, action) {
+	[actionTypes.END_LOADING](state) {
 		return {
 			...state,
 			hasFetched: true,
@@ -22,17 +32,23 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 			task,
 		};
 	},
+	[actionTypes.SET_NEXT_TASK_ID](state, { nextTaskId }: actionTypes.ISetNextTaskId) {
+		return {
+			...state,
+			nextTaskId,
+		};
+	},
 	[actionTypes.SET_SOLUTION](state, { solution }: actionTypes.ISetSolutionArgs) {
 		return {
 			...state,
 			solution,
 		};
 	},
-	[actionTypes.SET_TEST](state, { test }: actionTypes.ISetTest) {
+	[actionTypes.SET_TEST_RESULT](state, { testResult }: actionTypes.ISetTestResult) {
 		return {
 			...state,
 			hasFetched: true,
-			test,
+			testResult,
 		};
 	},
 	[actionTypes.SET_ACTIVE_TAB](state, { tab }: actionTypes.ISetActiveTAb) {
@@ -45,6 +61,12 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 		return {
 			...state,
 			errors,
+		};
+	},
+	[actionTypes.CHANGE_STATUS](state, { changeStatus }: actionTypes.IChangeStatus) {
+		return {
+			...state,
+			changeStatus,
 		};
 	},
 });

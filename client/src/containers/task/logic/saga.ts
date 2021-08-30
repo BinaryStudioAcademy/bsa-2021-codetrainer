@@ -10,7 +10,7 @@ import { fetchTasks } from 'services/home-page.service';
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
 		const { id } = action;
-		const task = yield call(() => getTaskById(id));
+		const task = yield call(getTaskById, id);
 		yield put(actions.setTask({ task }));
 	} catch (error) {
 		yield put(

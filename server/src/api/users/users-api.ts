@@ -41,13 +41,12 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsersSer
 				.delete(req.params.id, res)
 				.then((data) => res.send(data))
 				.catch(next),
-		).put(
-			UsersApiPath.UPDATE_PASSWORD,
-			(req, res, next) =>
-				usersService
-					.updatePassword(req.params.id, req.body)
-					.then((data) => res.send(data))
-					.catch(next),
+		)
+		.put(UsersApiPath.UPDATE_PASSWORD, (req, res, next) =>
+			usersService
+				.updatePassword(req.params.id, req.body)
+				.then((data) => res.send(data))
+				.catch(next),
 		);
 	return router;
 };

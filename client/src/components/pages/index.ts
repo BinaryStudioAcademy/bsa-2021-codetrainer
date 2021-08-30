@@ -1,7 +1,7 @@
 export { Profile as ProfilePage } from './profile';
 export { Stats as StatsTab } from './profile/profile-info/tabs/stats';
 export { ProfileTabWithSidebar } from './profile/profile-tab-with-sidebar';
-export { CreateTabs, Markdown } from './create-task';
+export { CreateTabs } from './create-task';
 export { default as ChangePassword } from './change-password';
 export { default as ForgotPassword } from './forgot-password';
 export { default as SearchPage } from './search-page';

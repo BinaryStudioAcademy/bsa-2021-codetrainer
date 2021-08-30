@@ -14,5 +14,6 @@ export const solutionSchema = checkSchema({
 		trim: true,
 		isString: true,
 		notEmpty: true,
+		optional: true,
 	},
 });

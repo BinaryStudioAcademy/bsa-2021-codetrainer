@@ -7,6 +7,7 @@ import { ISendToRabbit, TypeTest } from '../../types/sendToRabbit';
 
 interface ISolutionResult {
 	result: { success: boolean; response?: unknown; error?: Error };
+	status: SOLUTION_STATUS;
 	token: string;
 	userId: string;
 	solutionId: string;
@@ -33,7 +34,9 @@ export class SolutionService {
 	protected userRepository: TUserRepository;
 
 	protected solutionRepository: TSolutionRepository;
+
 	protected fieldForPatch = ['status', 'code', 'testCases'];
+
 	constructor({
 		task,
 		user,
@@ -53,6 +56,7 @@ export class SolutionService {
 			test: typeTest === TypeTest.TEST_SOLUTION_ATTEMPT ? task.testCases : solution.testCases,
 			userId: user.id,
 			solutionId: solution.id,
+			status: solution.status,
 			taskId: task.id,
 			typeTest,
 			code,
@@ -61,7 +65,7 @@ export class SolutionService {
 	}
 
 	async create(data: IData) {
-		const { code, testCases, user, task } = data;
+		const { code, testCases, user, task, typeTest } = data;
 		const repository = getCustomRepository(this.solutionRepository);
 		const taskRepository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
@@ -79,7 +83,9 @@ export class SolutionService {
 			...user,
 			solutions: [...user.solutions, newSolution],
 		});
-		await this.sendToRabbit({ ...data, solution: newSolution });
+		if (typeTest) {
+			await this.sendToRabbit({ ...data, solution: newSolution });
+		}
 		return newSolution;
 	}
 
@@ -119,7 +125,7 @@ export class SolutionService {
 	}
 
 	async patch(data: ISolutionData) {
-		const { user, solution } = data;
+		const { user, solution, status } = data;
 		if (user.id !== solution.user.id) {
 			throw new ValidationError(CODE_ERRORS.NOT_USER_SOLUTION);
 		}
@@ -146,20 +152,25 @@ export class SolutionService {
 	async getUserSolution(user: User, task: Task) {
 		const repository = getCustomRepository(this.solutionRepository);
 		const solution = await repository.findOne({ user, task });
+		const useTasks = await repository.getTasksByUser(user.id);
+		const taskRepository = getCustomRepository(this.taskRepository);
+		const nextTask = await taskRepository.searchNotUseTask([...useTasks, task.id]);
+		console.log(nextTask);
 
-		return solution;
+		return { solution, nextTaskId: nextTask?.id ?? null };
 	}
 
-	async setResult({ token, ...data }: ISolutionResult) {
+	async setResult({ token, status, ...data }: ISolutionResult) {
 		const { id } = verifyToken(token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
 		}
-		if (data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
-			const repository = getCustomRepository(this.solutionRepository);
-			const status = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
-			repository.updateById(data.solutionId, { status });
+		const repository = getCustomRepository(this.solutionRepository);
+		if (status !== SOLUTION_STATUS.UNLOCKED && data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
+			const statusSolution = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
+			await repository.updateById(data.solutionId, { status: statusSolution });
 		}
-		return data;
+		const solution = await repository.getByKey(data.solutionId, 'id');
+		return { ...data, solution };
 	}
 }

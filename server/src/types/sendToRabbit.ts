@@ -1,3 +1,5 @@
+import { SOLUTION_STATUS } from '../common';
+
 export enum TypeTest {
 	TEST_TASK = 'testTask',
 	TEST_SOLUTION_ATTEMPT = 'testSolutionAttempt',
@@ -10,5 +12,6 @@ export interface ISendToRabbit {
 	test: string;
 	userId: string;
 	taskId: string;
-	solutionId?: string;
+	solutionId: string;
+	status: SOLUTION_STATUS;
 }
