@@ -36,7 +36,7 @@ const getIChallenge = (
 			author: {
 				firstName: user.name,
 				lastName: user.surname,
-				link: '/users/' + user.username,
+				username: user.username,
 			},
 			stats: {
 				favoriteSaves: 12,
