@@ -72,6 +72,7 @@ declare namespace WebApi.Entities {
 	export interface IMember {
 		id: string;
 		rank: number;
+		username: string;
 		avatar: string;
 		name: string;
 		surname: string;

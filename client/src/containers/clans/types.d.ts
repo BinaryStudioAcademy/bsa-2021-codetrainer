@@ -2,6 +2,7 @@ import { MemberRoles } from 'common/enum/app/clans';
 
 export interface IMember {
 	id: string;
+	username: string;
 	rank: number;
 	avatar: string;
 	name: string;
