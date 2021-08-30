@@ -78,7 +78,7 @@ export const TaskPageContainer = () => {
 			author: {
 				firstName: task.user?.name || '',
 				lastName: task.user?.surname || '',
-				link: `${ROUTES.Users}/${task.user?.username}`,
+				username: task.user?.username || '',
 			},
 			linkToTask: `${ROUTES.TaskInfo}/${task.id}`,
 			title: task.name,
