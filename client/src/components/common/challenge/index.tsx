@@ -19,7 +19,11 @@ const Challenge: React.FC<
 			<ChallengeStats stats={{ ...stats, author }} />
 			{tags && Boolean(tags.length) ? <ChallengeTagsList tags={tags} /> : null}
 			{isOpen ? <CollectionModal isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
-			{showAddToCollection && <a onClick={() => setIsOpen(true)}>Add to collection</a>}
+			{showAddToCollection && (
+				<a className={styles.modal} onClick={() => setIsOpen(true)}>
+					Add to collection
+				</a>
+			)}
 		</div>
 	);
 };
