@@ -15,13 +15,15 @@ export interface ISideBar {
 
 export const SideBar: React.FC<ISideBar> = ({ sideBar, onClick, activeId }) => (
 	<div className={styles.profile__tasks__root}>
-		{sideBar.map(({ id, title, count }) => (
+		{sideBar.map(({ id, title, count = 0 }) => (
 			<div
 				key={id}
 				className={clsx(styles.item, { [styles.active]: id === activeId })}
 				onClick={() => onClick(id)}
 			>
-				<span>{title}</span> {activeId === id && count !== undefined && <span>({count})</span>}
+				<span>
+					{title}({count})
+				</span>
 			</div>
 		))}
 	</div>

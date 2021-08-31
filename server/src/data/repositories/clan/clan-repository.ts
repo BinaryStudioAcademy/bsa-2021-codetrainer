@@ -16,6 +16,7 @@ export class ClanRepository extends AbstractRepository<Clan> {
 			.select([
 				'clan',
 				'member.name',
+				'member.username',
 				'member.createdAt',
 				'member.surname',
 				'member.id',

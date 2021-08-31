@@ -11,12 +11,14 @@ export const ROUTES = {
 
 	Search: '/search',
 	Users: '/users',
+	LeaderBoard: '/leaderboard',
 
 	Clans: '/clans',
 	Clan: '/clan',
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
+	TaskInfo: '/challenge-info',
 	TaskTrain: '/challenge-info/:id/train',
 
 	Setting: '/setting',
@@ -24,8 +26,6 @@ export const ROUTES = {
 	Github: '/github',
 
 	Collections: '/collections',
-
-	TaskInfo: '/challenge-info',
 
 	Community: '/followers/community',
 

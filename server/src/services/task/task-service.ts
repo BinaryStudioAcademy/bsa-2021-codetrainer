@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
+import { SOLUTION_STATUS, TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
 import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag } from '../../data';
-import { TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -102,5 +102,38 @@ export class TaskService {
 				userId: user.id,
 			})),
 		};
+	}
+
+	async getTasksWithUserSolutions({
+		userId,
+		solutionStatus,
+		skip,
+		take,
+	}: {
+		userId: string;
+		solutionStatus?: SOLUTION_STATUS;
+		skip: number;
+		take: number;
+	}): Promise<{
+		tasks: Task[];
+		total: number;
+	}> {
+		const repository = getCustomRepository(this.taskRepository);
+		const [tasks, total] = await repository
+			.createQueryBuilder('task')
+			.innerJoinAndSelect(
+				'task.solutions',
+				'solution',
+				'solution.user = :userId AND solution.task = task.id AND solution.status = :solutionStatus',
+				{
+					userId,
+					solutionStatus,
+				},
+			)
+			.orderBy('solution.createdAt', 'DESC')
+			.skip(skip)
+			.take(take)
+			.getManyAndCount();
+		return { tasks, total };
 	}
 }

@@ -14,11 +14,14 @@ import { taskReducer } from './../containers/task-train/logic/reducer';
 import { headerReducer } from 'containers/header/logic/reducer';
 import { themeReducer } from 'containers/theme-switcher/logic/reducer';
 import { taskInfoReducer } from 'containers/task/logic/reducer';
+import { leaderBoardReducer } from 'containers/leaderboard/logic/reducer';
+import { sidebarReducer } from 'containers/private-route/logic/reducer';
 
 const rootReducer: Reducer<IRootState> = combineReducers({
 	profile: profileReducer,
 	clans: clansReducer,
 	clan: clanReducer,
+	leaderBoard: leaderBoardReducer,
 	example: exampleReducer,
 	auth: authReducer,
 	createTask: createTaskReducer,
@@ -30,6 +33,7 @@ const rootReducer: Reducer<IRootState> = combineReducers({
 	header: headerReducer,
 	theme: themeReducer,
 	taskInfo: taskInfoReducer,
+	sidebar: sidebarReducer,
 });
 
 export default rootReducer;

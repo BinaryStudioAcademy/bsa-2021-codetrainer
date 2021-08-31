@@ -22,6 +22,7 @@ import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
 import { Redirect, Route } from 'react-router-dom';
 import { TaskRouting } from 'containers/task-route';
+import LeaderBoard from 'containers/leaderboard';
 
 interface IRoutingProps {}
 
@@ -63,6 +64,13 @@ const Routing: React.FC<IRoutingProps> = () => {
 			/>
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Users + '/:username'} component={Profile} needHeader={true} needSideBar={true} />
+			<PrivateRoute
+				exact
+				needHeader={true}
+				needSideBar={true}
+				path={ROUTES.LeaderBoard}
+				component={LeaderBoard}
+			/>
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute

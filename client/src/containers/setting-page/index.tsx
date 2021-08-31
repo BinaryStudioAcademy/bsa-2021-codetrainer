@@ -143,15 +143,6 @@ const SettingPageContainer: React.FC = () => {
 			type: 'text',
 		},
 		{
-			id: 'clan',
-			name: 'clan',
-			label: 'Clan',
-			placeholder: 'You are not in a clan',
-			readonly: true,
-			initialText: user?.clan?.name,
-			type: 'text',
-		},
-		{
 			id: 'skills',
 			name: 'skills',
 			label: 'Skills (comma separated)',
@@ -188,6 +179,7 @@ const SettingPageContainer: React.FC = () => {
 				list,
 				formItems,
 				onSubmit,
+				clan: user?.clan,
 			}}
 			social={{
 				github: {

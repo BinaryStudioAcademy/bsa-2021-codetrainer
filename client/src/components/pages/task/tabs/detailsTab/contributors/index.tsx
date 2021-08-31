@@ -26,7 +26,7 @@ export const Contributors = ({ contributors }: IContributorsProps) => {
 					</div>
 				</>
 			) : (
-				'No user have contributed to this task'
+				'No users have contributed to this task'
 			)}
 		</div>
 	);

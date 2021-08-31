@@ -64,7 +64,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.leftJoinAndSelect('task.user', 'user')
 			.leftJoinAndSelect('task.tags', 'tag')
 			.leftJoinAndSelect('task.contributors', 'contributors')
-			.select(['task', 'user.name', 'user.surname', 'user.id', 'tag.id', 'tag.name', 'contributors'])
+			.select(['task', 'user', 'tag.id', 'tag.name', 'contributors'])
 			.skip(skip)
 			.take(take)
 			.getMany();

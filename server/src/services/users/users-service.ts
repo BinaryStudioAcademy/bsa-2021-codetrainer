@@ -87,6 +87,13 @@ export class User {
 		}
 		return { user };
 	}
+
+	async getLeaders(query: { take: number; skip: number; nameQuery: string }) {
+		const userRepository = getCustomRepository(this.userRepository);
+		const result = await userRepository.getLeaders(query);
+
+		return result;
+	}
 }
 
 export type TUsers = InstanceType<typeof User>;
