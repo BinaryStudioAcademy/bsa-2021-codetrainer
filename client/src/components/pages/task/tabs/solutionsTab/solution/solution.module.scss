@@ -1,0 +1,24 @@
+@import 'styles/variables';
+
+.solution {
+    // border-bottom: 1px solid $light-gray;
+    padding: 20px;
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .code {
+        background-color: $white;
+        // width: 100%;
+        margin: 0 0 20px;
+        padding: 10px 30px;
+    }
+    .messages {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        width: 30px;
+    }
+}
