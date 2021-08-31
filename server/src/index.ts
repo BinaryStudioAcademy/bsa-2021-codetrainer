@@ -37,7 +37,7 @@ app.use(cookieParser());
 app.use(cookieSession(cookieConfig));
 
 app.use(passport.initialize());
-// app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
+app.use(ENV.APP.API_PATH, authorizationMiddleware(WHITE_ROUTES));
 app.use(ENV.APP.API_PATH, initApi());
 app.use(ApiPath.API_DOCS, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
