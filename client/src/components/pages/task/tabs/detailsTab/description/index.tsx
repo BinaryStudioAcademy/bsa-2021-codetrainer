@@ -1,4 +1,6 @@
+// import { Markdown } from 'components/pages/create-task';
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import styles from './description.module.scss';
 
 export interface IDescriptionProps {
@@ -12,11 +14,11 @@ export const Description = ({ description, exampleTestCases }: IDescriptionProps
 			<div className={styles.description}>
 				{description || exampleTestCases ? (
 					<>
-						<p>{description}</p>
+						<ReactMarkdown>{description}</ReactMarkdown>
 						{exampleTestCases && (
 							<>
 								<h3 className={styles.examplesHeader}>Examples</h3>
-								<code className={styles.code}>Lorem ipsum dolor sit amet,</code>
+								<code className={styles.code}>{exampleTestCases}</code>
 							</>
 						)}
 					</>
