@@ -41,14 +41,16 @@ export const SolutionsTab = ({ task }: ISolutionsTabProps) => {
 				>
 					Show challenge description
 				</Button>
-				{isDescriptionOpened && <Description />}
+				{isDescriptionOpened &&
+					(task.description ? <Description description={task.description} /> : 'No description provided')}
 				<Button
 					onClick={() => setIsTestCasesOpened(!isTestCasesOpened)}
 					className={clsx(ButtonClasses.blue, styles.skipButton)}
 				>
 					Show challenge test cases
 				</Button>
-				{isTestCasesOpened && <TestCases />}
+				{isTestCasesOpened &&
+					(task.exampleTestCases ? <TestCases testCases={task.exampleTestCases} /> : 'No examples provided')}
 			</div>
 		</div>
 	);
