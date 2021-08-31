@@ -13,7 +13,7 @@ const Header: React.FC = () => {
 	}, []);
 	const { user } = useAppSelector((state) => state.auth.userData);
 	const { notifications: unorderedNotifications } = useHeaderSelector();
-	console.log(unorderedNotifications);
+	console.log(unorderedNotifications.values());
 
 	const headerProps: IHeaderProps = {
 		name: `${user?.name} ${user?.surname}`,

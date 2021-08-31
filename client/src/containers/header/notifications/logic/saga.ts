@@ -6,12 +6,23 @@ import { getFirestore, collection, query, getDocs, limit } from 'firebase/firest
 import { app } from 'containers/app/app';
 import { NotificationTypes, TNotification } from 'typings/common/INotification';
 import { v4 as uuid } from 'uuid';
+import { doc, setDoc } from 'firebase/firestore';
 
 function* readNotification({ id }: ReturnType<typeof actions.readNotification>) {
 	const store: IRootState = yield select();
+	const firestore = getFirestore(app);
 	const notification = store.header.notifications.get(id);
+	console.log(notification);
+	console.log(id);
+
 	if (notification) {
-		// TODO: socket.io
+		yield setDoc(doc(firestore, 'notifications', id), {
+			createdAt: notification.date,
+			id: notification.id,
+			body: notification.body,
+			type: notification.type,
+			read: true,
+		});
 		yield put(
 			actions.editNotification({
 				id: notification.id,
@@ -28,12 +39,11 @@ function* fetchNotification() {
 	const result: Record<string, any>[] = yield getDocs(q);
 	result.forEach((notification) => {
 		const data = notification.data();
-
 		switch (data.type) {
 			case NotificationTypes.Common:
 				querySnapshot.push({
 					type: data.type,
-					id: uuid(),
+					id: data.id,
 					date: data.createdAt.toDate(),
 					read: data.read ?? false,
 					body: {
@@ -78,6 +88,8 @@ function* fetchNotification() {
 					read: data.read ?? false,
 					body: { rank: data.body.rank },
 				});
+				break;
+			default:
 				break;
 		}
 	});
