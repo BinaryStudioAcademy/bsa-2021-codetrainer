@@ -113,7 +113,7 @@ export const SolutionsTab = ({ task }: ISolutionsTabProps) => {
 				{solutions.map((item) => {
 					return (
 						<>
-							<Solution solution={item} key={item} />
+							<Solution solution={item} key={item} task={task} />
 							<Divider />
 						</>
 					);

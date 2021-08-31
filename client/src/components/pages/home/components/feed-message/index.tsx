@@ -25,7 +25,9 @@ interface IFeedMessageProps {
 const FeedMessage: React.FC<IFeedMessageProps> = ({ user, createdAt, body }) => {
 	return (
 		<div className={styles.messageUser}>
-			<Avatar avatar={user.imageSource} size={25} />
+			<div className={styles.avatar}>
+				<Avatar avatar={user.imageSource} size={25} />
+			</div>
 
 			<div>
 				<div className={styles.messageDataWrapper}>
