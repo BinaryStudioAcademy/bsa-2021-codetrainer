@@ -6,8 +6,13 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Description } from './description';
 import { TestCases } from './test-cases';
+import { WebApi } from 'typings/webapi';
 
-export const SolutionsTab = () => {
+export interface ISolutionsTabProps {
+	task: WebApi.Entities.IChallenge;
+}
+
+export const SolutionsTab = ({ task }: ISolutionsTabProps) => {
 	const [isDescriptionOpened, setIsDescriptionOpened] = useState(false);
 	const [isTestCasesOpened, setIsTestCasesOpened] = useState(false);
 
