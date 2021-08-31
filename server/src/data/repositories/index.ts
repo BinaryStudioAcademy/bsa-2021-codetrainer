@@ -7,6 +7,7 @@ import { CommentTaskRepository } from './comment-task';
 import { TagRepository } from './tag';
 import { SolutionRepository } from './solution';
 import { CollectionRepository } from './collection';
+import { CommunityRepository } from './community';
 
 type TUserRepository = typeof UserRepository;
 type TClanRepository = typeof ClanRepository;
@@ -19,6 +20,7 @@ type TCommentTaskRepository = typeof CommentTaskRepository;
 type TTagRepository = typeof TagRepository;
 type TSolutionRepository = typeof SolutionRepository;
 type TCollectionRepository = typeof CollectionRepository;
+type TCommunityRepository = typeof CommunityRepository;
 
 export { UserRepository, TUserRepository };
 export { ClanRepository, TClanRepository };
@@ -30,3 +32,4 @@ export { CommentTaskRepository, TCommentTaskRepository };
 export { TagRepository, TTagRepository };
 export { SolutionRepository, TSolutionRepository };
 export { CollectionRepository, TCollectionRepository };
+export { CommunityRepository, TCommunityRepository };

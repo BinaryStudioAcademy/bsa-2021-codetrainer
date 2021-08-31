@@ -10,6 +10,7 @@ import { initFollower } from './follower';
 import { initCollection } from './collection';
 import { initTest } from './test/test-api';
 import { initCommentTask } from './comment-task';
+
 import {
 	authService,
 	clanService,
@@ -52,7 +53,7 @@ export function initApi(): Router {
 	apiRouter.use(
 		ApiPath.FOLLOWERS,
 		initFollower(Router, {
-			follower: followersService
+			follower: followersService,
 		}),
 	);
 

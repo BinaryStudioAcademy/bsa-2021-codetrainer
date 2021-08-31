@@ -4,7 +4,7 @@ import {
 	getFollowersByUserId,
 	getFollowingsByUserId,
 } from './../../../services/follower/followers.service';
-import { fetchUsersSearch, getUserById } from 'services';
+import { fetchUsersSearch } from 'services';
 import { all, put, call, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
@@ -84,32 +84,9 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		const publishedTasksProps = getIChallenge(publishedTasks, user);
 		const unpublishedTasksProps = getIChallenge(unpublishedTasks, user);
 
-		let followersSocial: any[] = yield all(
-			followers.map(({ user }: any) => {
-				const gotUser = call(getUserById, user.id);
-				return gotUser;
-			}),
-		);
-		let followingsSocial: any[] = yield all(
-			followings.map(({ following }: any) => {
-				const user = call(getUserById, following.id);
-				return user;
-			}),
-		);
-		let communitySocial: any[] = yield all(
-			community.map((community: IUser) => {
-				const user = call(getUserById, community.id);
-				return user;
-			}),
-		);
-
-		followersSocial = followersSocial.map((followerUser) => followerUser.user);
-		followingsSocial = followingsSocial.map((followingUser) => followingUser.user);
-		communitySocial = communitySocial.map((communityUser) => communityUser.user);
-
-		const followersSocialProps = getISocialUsers(followersSocial);
-		const followingsSocialProps = getISocialUsers(followingsSocial);
-		const communitySocialProps = getISocialUsers(communitySocial);
+		const followersSocialProps = getISocialUsers(user.followersSocial);
+		const followingsSocialProps = getISocialUsers(user.followingsSocial);
+		const communitySocialProps = getISocialUsers(user.communitySocial);
 
 		const userDataAllFields = {
 			...user,
@@ -120,7 +97,7 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 			unpublishedTasks: unpublishedTasksProps,
 			followersSocial: followersSocialProps,
 			followingsSocial: followingsSocialProps,
-			comminitySocial: communitySocialProps,
+			communitySocial: communitySocialProps,
 		};
 		yield put(actions.searchUserSuccess({ user: userDataAllFields }));
 	} catch (error) {

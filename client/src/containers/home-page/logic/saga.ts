@@ -3,7 +3,7 @@ import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { fetchTaskComments, fetchTasks } from '../../../services/home-page.service';
 import { ITask } from '../../../components/common/next-task/interface';
-import { fetchCommunity } from '../../../services/followers.service';
+import { getCommunityByUser } from '../../../services/users.service';
 
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTasks>): any {
 	const { discipline, currentTask } = action;
@@ -29,7 +29,7 @@ export function* fetchMessagesWatcher() {
 
 export function* fetchCommunityWorker(action: ReturnType<typeof actions.getCommunity>): any {
 	const { id } = action;
-	const { community } = yield call(() => fetchCommunity(id));
+	const community = yield call(() => getCommunityByUser(id));
 	yield put(actions.setCommunity({ community }));
 }
 
