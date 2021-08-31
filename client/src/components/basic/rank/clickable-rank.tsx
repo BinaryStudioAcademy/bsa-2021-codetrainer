@@ -15,6 +15,6 @@ export const ClickableRank: React.FC<IClickableRank> = ({ rank, onChange, active
 		className={clsx(styles.rank, styles.rank__clickable, mapRankToStyle({ rank, active }))}
 		onClick={() => onChange()}
 	>
-		{rank}
+		{rank} rank
 	</span>
 );
