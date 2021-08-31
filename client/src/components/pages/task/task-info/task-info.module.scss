@@ -1,21 +1,21 @@
-@import "styles/variables";
+@import 'styles/variables';
 
 .taskInfo {
-    padding: 40px 40px 20px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    background-color: $zircon;
-    margin: 50px 0 0;
-    .buttonsBlock {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        > * {
-            margin: 10px 30px;
-        }
-        :first-child {
-            margin-top: 20px;
-        }
-    }
+	padding: 40px 40px 20px;
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	background-color: $zircon;
+	margin: 50px 0 0;
+	.buttonsBlock {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		> * {
+			margin: 10px 30px;
+		}
+		:first-child {
+			margin-top: 20px;
+		}
+	}
 }

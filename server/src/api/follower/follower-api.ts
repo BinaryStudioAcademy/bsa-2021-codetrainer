@@ -36,15 +36,12 @@ export const initFollower = (appRouter: typeof Router, services: { follower: Fol
 				.then((data) => res.send(data))
 				.catch(next);
 		})
-		.delete(
-			FollowersApiPath.ONE,
-			(req, res, next) => {
-				followerService
-					.delete(req.body)
-					.then((data) => res.send(data))
-					.catch(next);
-			},
-		);
+		.delete(FollowersApiPath.ONE, (req, res, next) => {
+			followerService
+				.delete(req.body)
+				.then((data) => res.send(data))
+				.catch(next);
+		});
 
 	return router;
 };

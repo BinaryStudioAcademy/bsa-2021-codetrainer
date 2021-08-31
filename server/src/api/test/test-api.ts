@@ -11,7 +11,11 @@ export const initTest = (appRouter: typeof Router, services: { solution: Solutio
 		solutionService
 			.setResult(req.body)
 			.then((data) => {
-				req.io.to(sockets.get(data.userId) || '').emit(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, data.result);
+				req.io.to(sockets.get(data.userId) || '').emit(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, {
+					result: data.result,
+					typeTest: data.typeTest,
+					solution: data.solution,
+				});
 				res.send({ message: 'ok' });
 			})
 			.catch(next),
