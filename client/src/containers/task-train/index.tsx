@@ -22,25 +22,23 @@ const TaskTrain: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus } = useAppSelector(
-		(state) => state.task,
-	);
+	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus, isSuccess } =
+		useAppSelector((state) => state.task);
 
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
 		socket.on(
 			SOCKET_EVENTS.RESULT_TEST_TO_CLIENT,
 			({ solution, ...testResult }: ITestResult & { solution: WebApi.Entities.ISolution }) => {
-				console.log('test => ', testResult);
 				dispatch(actions.setActiveTab({ tab: OUTPUT }));
 				dispatch(actions.setTestResult({ testResult }));
 				dispatch(actions.setSolution({ solution: solution ?? null }));
 			},
 		);
-	}, [taskId]);
+	}, []);
 
 	useEffect(() => {
-		if (!Boolean(errors)) {
+		if (!Boolean(errors) || isSuccess) {
 			return;
 		}
 		dispatch(
@@ -52,7 +50,7 @@ const TaskTrain: React.FC = () => {
 				},
 			}),
 		);
-	}, [errors]);
+	}, [errors, isSuccess]);
 
 	useEffect(() => {
 		if (!changeStatus || !task || !solution?.status) {

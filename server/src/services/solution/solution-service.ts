@@ -155,7 +155,6 @@ export class SolutionService {
 		const useTasks = await repository.getTasksByUser(user.id);
 		const taskRepository = getCustomRepository(this.taskRepository);
 		const nextTask = await taskRepository.searchNotUseTask([...useTasks, task.id]);
-		console.log(nextTask);
 
 		return { solution, nextTaskId: nextTask?.id ?? null };
 	}

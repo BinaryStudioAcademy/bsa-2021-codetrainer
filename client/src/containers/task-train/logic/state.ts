@@ -34,6 +34,7 @@ export interface ITaskState {
 	task: WebApi.Entities.IChallenge | null;
 	solution: WebApi.Entities.ISolution | null;
 	nextTaskId: string | null;
+	isSuccess: boolean;
 	changeStatus: boolean;
 	errors: unknown | null;
 	hasFetched: boolean;
@@ -45,6 +46,7 @@ export const initialState: ITaskState = {
 	task: null,
 	solution: null,
 	nextTaskId: null,
+	isSuccess: true,
 	changeStatus: false,
 	hasFetched: false,
 	errors: null,
