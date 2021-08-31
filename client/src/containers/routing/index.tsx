@@ -25,7 +25,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { TaskPageContainer } from 'containers/task';
 import LeaderBoard from 'containers/leaderboard';
 
-interface IRoutingProps { }
+interface IRoutingProps {}
 
 const Routing: React.FC<IRoutingProps> = () => {
 	const { accessToken } = useAppSelector((state) => state.auth.userData);
@@ -66,7 +66,13 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PrivateRoute exact path={ROUTES.TaskTrain} component={TaskTrain} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Users + '/:username'} component={Profile} needHeader={true} needSideBar={true} />
-			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.LeaderBoard} component={LeaderBoard} />
+			<PrivateRoute
+				exact
+				needHeader={true}
+				needSideBar={true}
+				path={ROUTES.LeaderBoard}
+				component={LeaderBoard}
+			/>
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
@@ -104,8 +110,7 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
-			<PublicRoute
-				restricted={false}
+			<PrivateRoute
 				exact
 				path={ROUTES.TaskInfo + '/:id'}
 				component={TaskPageContainer}
