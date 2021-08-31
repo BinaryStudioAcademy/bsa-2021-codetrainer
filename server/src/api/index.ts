@@ -52,7 +52,7 @@ export function initApi(): Router {
 	apiRouter.use(
 		ApiPath.FOLLOWERS,
 		initFollower(Router, {
-			follower: followersService
+			follower: followersService,
 		}),
 	);
 

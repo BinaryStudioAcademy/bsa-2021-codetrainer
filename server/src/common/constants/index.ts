@@ -8,3 +8,4 @@ export * from './cors.constants';
 export * from './errors';
 export * from './socket/events';
 export * from './order';
+export * from './ranks';

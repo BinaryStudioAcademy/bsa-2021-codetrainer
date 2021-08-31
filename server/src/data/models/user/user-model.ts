@@ -8,7 +8,7 @@ import {
 	OneToMany,
 	BaseEntity,
 	CreateDateColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
 } from 'typeorm';
 import { ProfileClan } from './profile-clan-model';
 import { Clan } from '../clan';
@@ -55,7 +55,7 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 100, nullable: true })
 	password?: string;
 
-	@Column({ type: 'int', default: 9 })
+	@Column({ type: 'int', default: 0 })
 	rank!: number;
 
 	@Column({ type: 'int', default: 0 })

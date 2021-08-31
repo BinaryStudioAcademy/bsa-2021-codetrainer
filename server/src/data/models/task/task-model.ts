@@ -15,7 +15,7 @@ export class Task extends AbstractEntity {
 	discipline?: string;
 
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
-	rank?: number;
+	rank!: number;
 
 	@Column({ type: 'bool', default: false, width: 1 })
 	allowContributors?: boolean;

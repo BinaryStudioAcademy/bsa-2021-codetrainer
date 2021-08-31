@@ -10,8 +10,10 @@ export const initTest = (appRouter: typeof Router, services: { solution: Solutio
 	router.post(TestApiPath.RESULT, (req, res, next) =>
 		solutionService
 			.setResult(req.body)
-			.then((data) => {
-				req.io.to(sockets.get(data.userId) || '').emit(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, data.result);
+			.then(({ userId, user, result }) => {
+				req.io
+					.to(sockets.get(userId) || '')
+					.emit(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, { resultTest: result, user });
 				res.send({ message: 'ok' });
 			})
 			.catch(next),

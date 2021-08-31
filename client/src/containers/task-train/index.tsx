@@ -4,11 +4,13 @@ import { TaskTrainPage } from 'components/pages';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
+import * as actionsUser from '../user/logic/actions';
 import { FullscreenLoader } from 'components';
 import { socket } from 'services/socket';
 import { SOCKET_EVENTS } from 'constants/socket-constants';
 import { IResult } from './logic/state';
 import { mapResultToString } from './mapResultToString';
+import { IUser } from 'typings/common/IUser';
 
 const OUTPUT = 1;
 
@@ -22,10 +24,20 @@ const TaskTrain = () => {
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
 		dispatch(actions.fetchSolution({ taskId }));
-		socket.on(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, ({ success, ...result }: IResult & { success: boolean }) => {
-			dispatch(actions.setActiveTab({ tab: OUTPUT }));
-			dispatch(actions.setResult({ result, success }));
-		});
+		socket.on(
+			SOCKET_EVENTS.RESULT_TEST_TO_CLIENT,
+			({
+				resultTest: { success, ...result },
+				user,
+			}: {
+				user: IUser;
+				resultTest: IResult & { success: boolean };
+			}) => {
+				dispatch(actions.setActiveTab({ tab: OUTPUT }));
+				dispatch(actions.setResult({ result, success }));
+				dispatch(actionsUser.setUser({ user }));
+			},
+		);
 	}, []);
 
 	const onSubmit = (code: string) => {
@@ -50,7 +62,7 @@ const TaskTrain = () => {
 				task={task}
 				solution={solution}
 				activeTab={activeTab}
-				result={mapResultToString(result || {})}
+				result={mapResultToString(result ?? {})}
 				success={success}
 				onChangeTab={(tab: number) => dispatch(actions.setActiveTab({ tab }))}
 				onSubmit={onSubmit}

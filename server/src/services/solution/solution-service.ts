@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
 import { CODE_ERRORS, ENV, SOLUTION_STATUS } from '../../common';
-import { TokenTypes, ValidationError, verifyToken } from '../../helpers';
+import { CalculateRank, TokenTypes, ValidationError, verifyToken } from '../../helpers';
 import { rabbitConnect } from '../../config';
 
 interface ISolutionResult {
@@ -121,8 +121,20 @@ export class SolutionService {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
 		}
 		const repository = getCustomRepository(this.solutionRepository);
+		const userRepository = getCustomRepository(this.userRepository);
+		const taskRepository = getCustomRepository(this.taskRepository);
 		const status = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
-		repository.updateById(data.solutionId, { status });
-		return data;
+
+		let newUser!: User | undefined;
+
+		const task = await taskRepository.getById(data.taskId);
+		const user = await userRepository.getById(data.userId);
+		if (user && task) {
+			const userData = CalculateRank.approved(user, task.rank);
+			await userRepository.updateById(user.id, userData);
+			newUser = await userRepository.getById(user.id);
+		}
+		const solution = await repository.updateById(data.solutionId, { status });
+		return { user: newUser, ...data };
 	}
 }

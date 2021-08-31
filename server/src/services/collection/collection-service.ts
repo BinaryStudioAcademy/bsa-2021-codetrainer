@@ -19,13 +19,13 @@ export class CollectionService {
 		return collection;
 	}
 
-	async getAuthoredCollections({ authorId, skip, take }: { authorId: string, skip: number, take: number }) {
+	async getAuthoredCollections({ authorId, skip, take }: { authorId: string; skip: number; take: number }) {
 		const repository = getCustomRepository(this.collectionRepository);
 		const [collections, total] = await repository.findAndCount({
 			relations: ['author', 'tasks'],
 			where: {
-				author : {
-					id: authorId
+				author: {
+					id: authorId,
 				},
 			},
 			order: {
@@ -40,16 +40,17 @@ export class CollectionService {
 		};
 	}
 
-	async getFollowedCollections({ followerId, skip, take }: { followerId: string, skip: number, take: number }) {
+	async getFollowedCollections({ followerId, skip, take }: { followerId: string; skip: number; take: number }) {
 		const repository = getCustomRepository(this.collectionRepository);
-		const [collections, total] = await repository.createQueryBuilder('collection')
+		const [collections, total] = await repository
+			.createQueryBuilder('collection')
 			.innerJoin('collection.followers', 'follower', 'follower.id = :followerId', { followerId })
 			.leftJoinAndSelect('collection.author', 'author')
 			.leftJoinAndSelect('collection.tasks', 'tasks')
 			.orderBy('collection.createdAt', 'DESC')
 			.skip(skip)
 			.take(take)
-			.getManyAndCount()
+			.getManyAndCount();
 		return {
 			collections,
 			total,
