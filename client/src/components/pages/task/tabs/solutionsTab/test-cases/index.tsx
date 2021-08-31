@@ -7,7 +7,7 @@ export interface ITestCasesProps {
 export const TestCases = ({ testCases }: ITestCasesProps) => {
 	return (
 		<div className={styles.container}>
-			<code>{testCases}</code>
+			<code className={styles.code}>{testCases}</code>
 		</div>
 	);
 };
