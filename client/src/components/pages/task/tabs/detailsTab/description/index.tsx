@@ -1,4 +1,3 @@
-// import { Markdown } from 'components/pages/create-task';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from './description.module.scss';
