@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { FormInput, FormSelect } from 'components';
 import { ClickableRank } from 'components/basic/rank/clickable-rank';
 import styles from './search-task.module.scss';
-import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task';
+import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task/task-filter';
 import { Button, Checkbox } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import clsx from 'clsx';
@@ -92,14 +92,16 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 
 					<h6 className={styles.header}>Difficulty</h6>
 					<div className={styles.rankContainer}>
-						{ranks.map((rank) => (
-							<ClickableRank
-								key={rank.toString()}
-								rank={rank}
-								active={filter?.rank === rank}
-								onChange={() => handleChangeRank(rank)}
-							/>
-						))}
+						{ranks
+							.sort((a, b) => b - a)
+							.map((rank) => (
+								<ClickableRank
+									key={rank.toString()}
+									rank={rank}
+									active={filter?.rank === rank}
+									onChange={() => handleChangeRank(rank)}
+								/>
+							))}
 					</div>
 					<div id="checkbox-group">
 						<h6 className={styles.header}>Tags</h6>

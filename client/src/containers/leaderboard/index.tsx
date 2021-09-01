@@ -27,7 +27,6 @@ const LeaderBoard: React.FC = () => {
 		dispatch(actions.setItemsPerPage({ itemsPerPage }));
 	};
 
-
 	return (
 		<div>
 			<LeaderBoardPage
