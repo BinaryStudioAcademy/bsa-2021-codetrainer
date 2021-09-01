@@ -16,6 +16,14 @@ export const CODE_ERRORS = {
 		message: `Tag name: ${name} is already taken.`,
 		status: HttpCodes.BAD_REQUEST,
 	}),
+	NOT_FOLLOWING: {
+		message: `User is not followed to unfollow`,
+		status: HttpCodes.BAD_REQUEST,
+	},
+	ALREADY_FOLLOWING: {
+		message: `User is already followed`,
+		status: HttpCodes.BAD_REQUEST,
+	},
 	EMAIL_NOT_EXIST: (email: string) => ({
 		message: `User with email: ${email}, not exist!`,
 		status: HttpCodes.NOT_FOUND,
