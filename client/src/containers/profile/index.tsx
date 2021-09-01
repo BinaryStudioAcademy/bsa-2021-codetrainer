@@ -128,7 +128,7 @@ export const Profile = (props: RouteComponentProps) => {
 		},
 		{
 			title: 'Not published',
-			id: 'notPublished',
+			id: 'not published',
 			tasks: unpublishedTasks,
 		},
 	];
