@@ -5,15 +5,22 @@ import { Header as HeaderComponent } from 'components';
 import { useAppSelector, useHeaderSelector } from 'hooks/useAppSelector';
 import { IHeaderProps } from 'components/common/header/index';
 import { getListItems } from './items-dropdown';
+import { collection, getFirestore, onSnapshot, query, where } from '@firebase/firestore';
+import { app } from 'containers/app/app';
 
 const Header: React.FC = () => {
 	const dispatch = useDispatch();
+	const { user } = useAppSelector((state) => state.auth.userData);
+	const firestore = getFirestore(app);
+	const q = query(collection(firestore, 'notifications'), where('userId', '==', user?.id));
 	useEffect(() => {
 		dispatch(notificationsActions.fetchNotification());
+		onSnapshot(q, (querySnapshot) => {
+			dispatch(notificationsActions.fetchNotification());
+		});
 	}, []);
-	const { user } = useAppSelector((state) => state.auth.userData);
+
 	const { notifications: unorderedNotifications } = useHeaderSelector();
-	console.log(unorderedNotifications.values());
 
 	const headerProps: IHeaderProps = {
 		name: `${user?.name} ${user?.surname}`,

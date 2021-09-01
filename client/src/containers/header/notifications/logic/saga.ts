@@ -2,18 +2,16 @@ import { all, put, select, takeEvery } from 'redux-saga/effects';
 import { IRootState } from 'typings/root-state';
 import * as actions from './actions';
 import { NotificationsActionTypes } from './action-types';
-import { getFirestore, collection, query, getDocs, limit } from 'firebase/firestore';
+import { getFirestore, collection, query, getDocs, limit, orderBy } from 'firebase/firestore';
 import { app } from 'containers/app/app';
 import { NotificationTypes, TNotification } from 'typings/common/INotification';
+import { doc, setDoc, where } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
-import { doc, setDoc } from 'firebase/firestore';
-
 function* readNotification({ id }: ReturnType<typeof actions.readNotification>) {
 	const store: IRootState = yield select();
 	const firestore = getFirestore(app);
 	const notification = store.header.notifications.get(id);
-	console.log(notification);
-	console.log(id);
+	const userId = store.auth.userData.user?.id;
 
 	if (notification) {
 		yield setDoc(doc(firestore, 'notifications', id), {
@@ -22,6 +20,7 @@ function* readNotification({ id }: ReturnType<typeof actions.readNotification>) 
 			body: notification.body,
 			type: notification.type,
 			read: true,
+			userId,
 		});
 		yield put(
 			actions.editNotification({
@@ -34,7 +33,18 @@ function* readNotification({ id }: ReturnType<typeof actions.readNotification>) 
 
 function* fetchNotification() {
 	const firestore = getFirestore(app);
-	const q = query(collection(firestore, 'notifications'), limit(10));
+	const store: IRootState = yield select();
+	const userId = store.auth.userData.user?.id;
+	console.log(userId);
+
+	const q = query(
+		collection(firestore, 'notifications'),
+		where('userId', '==', userId),
+		orderBy('createdAt'),
+		limit(10),
+	);
+	console.log(uuid());
+
 	const querySnapshot: TNotification[] = [];
 	const result: Record<string, any>[] = yield getDocs(q);
 	result.forEach((notification) => {
@@ -54,7 +64,7 @@ function* fetchNotification() {
 			case NotificationTypes.Follower:
 				querySnapshot.push({
 					type: data.type,
-					id: uuid(),
+					id: data.id,
 					date: data.createdAt.toDate(),
 					read: data.read ?? false,
 					body: {
@@ -65,7 +75,7 @@ function* fetchNotification() {
 			case NotificationTypes.HonorUnlocks:
 				querySnapshot.push({
 					type: data.type,
-					id: uuid(),
+					id: data.id,
 					date: data.createdAt.toDate(),
 					read: data.read ?? false,
 					body: data.body.unlocked,
@@ -74,7 +84,7 @@ function* fetchNotification() {
 			case NotificationTypes.JoinClan:
 				querySnapshot.push({
 					type: data.type,
-					id: uuid(),
+					id: data.id,
 					date: data.createdAt.toDate(),
 					read: data.read ?? false,
 					body: { clan: data.body.clan },
@@ -83,7 +93,7 @@ function* fetchNotification() {
 			case NotificationTypes.RankUp:
 				querySnapshot.push({
 					type: data.type,
-					id: uuid(),
+					id: data.id,
 					date: data.createdAt.toDate(),
 					read: data.read ?? false,
 					body: { rank: data.body.rank },
@@ -93,6 +103,8 @@ function* fetchNotification() {
 				break;
 		}
 	});
+	console.log(querySnapshot);
+
 	try {
 		yield put(
 			actions.setNotifications({
