@@ -30,9 +30,6 @@ export class Task extends AbstractEntity {
 	initialSolution!: string;
 
 	@Column({ type: 'text', default: '' })
-	preloaded?: string;
-
-	@Column({ type: 'text', default: '' })
 	testCases!: string;
 
 	@Column({ type: 'text', default: '' })
