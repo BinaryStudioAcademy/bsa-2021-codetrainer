@@ -13,8 +13,10 @@ export const Details = () => {
 	const similarTasks = useSelector((state: IRootState) => state.taskInfo.similarTasks);
 
 	useEffect(() => {
-		dispatch(actions.getTasks());
-	}, []);
+		if (task) {
+			dispatch(actions.getTasks({ rank: task.rank, id: task.id }));
+		}
+	}, [task]);
 
 	const tasks = similarTasks?.map((task) => {
 		return {

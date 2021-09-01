@@ -1,54 +1,30 @@
+import { SolutionStatus } from 'typings/common/solution';
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
-import {
-	TTaskSolutions,
-	completedSolutionsMocks,
-	uncompletedSolutionsMocks,
-} from 'containers/profile/tabs/solutions/mocks';
 import { TLoader } from 'typings/common/loader';
+import { TypeTest } from 'constants/task';
 
-export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ITask | Error> => {
-	try {
-		const { solution } = await http.callWebApi({
-			method: HttpMethods.GET,
-			endpoint: `${ApiRoutes.TASKS}${taskId}/train/user`,
-		});
-
-		return solution;
-	} catch (error) {
-		return error;
-	}
-};
-
-export const submitSolution = async ({ taskId, code }: { code: string; taskId: string }): Promise<unknown | Error> => {
-	try {
-		const response = await http.callWebApi({
-			method: HttpMethods.POST,
-			endpoint: `${ApiRoutes.TASKS}${taskId}/train`,
-			body: { code },
-		});
-
-		return response;
-	} catch (error) {
-		return error;
-	}
-};
-
-export const editSolution = async ({
-	solutionId,
-	taskId,
-	code,
-}: {
-	solutionId: string;
+interface ISubmitSolution {
 	code: string;
 	taskId: string;
-}): Promise<unknown | Error> => {
+	testCases: string;
+	typeTest?: TypeTest;
+}
+
+interface IEditSolution extends ISubmitSolution {
+	solutionId: string;
+}
+interface IPatchSolution extends IEditSolution {
+	status?: string;
+}
+
+const callApi = async (method: HttpMethods, endpoint: string, body?: Record<string, unknown>): Promise<any> => {
 	try {
 		const response = await http.callWebApi({
-			method: HttpMethods.PUT,
-			endpoint: `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`,
-			body: { code },
+			method,
+			endpoint,
+			body,
 		});
 		return response;
 	} catch (error) {
@@ -56,24 +32,49 @@ export const editSolution = async ({
 	}
 };
 
-export interface TSolutionsRequestArgs {
-	skip: number;
-	limit: number;
-}
+export const fetchUserSolution = async (taskId: string): Promise<WebApi.Entities.ISolution | Error> => {
+	return await callApi(HttpMethods.GET, `${ApiRoutes.TASKS}${taskId}/train/user`);
+};
 
-export type TPrivateSolutionsLoader = TLoader<
+export const submitSolution = async ({ taskId, ...body }: ISubmitSolution): Promise<unknown | Error> => {
+	return await callApi(HttpMethods.POST, `${ApiRoutes.TASKS}${taskId}/train`, { ...body });
+};
+
+export const editSolution = async ({ solutionId, taskId, ...body }: IEditSolution): Promise<unknown | Error> => {
+	return await callApi(HttpMethods.PUT, `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`, { ...body });
+};
+
+export const patchSolution = async ({
+	taskId,
+	solutionId,
+	...body
+}: Partial<IPatchSolution>): Promise<unknown | Error> => {
+	return await callApi(HttpMethods.PATCH, `${ApiRoutes.TASKS}${taskId}/train/${solutionId}`, { ...body });
+};
+
+export type TTaskSolutionsLoader = TLoader<
 	WebApi.Types.TPaginationRequest,
-	WebApi.Types.TPaginationResponse<TTaskSolutions, 'solutions'>
+	WebApi.Types.TPaginationResponse<WebApi.Entities.ITask, 'tasks'>
 >;
 
-// TODO: implement in backend and call api
-export const getCompletedSolutions: TPrivateSolutionsLoader = async ({ skip, take }) => ({
-	solutions: completedSolutionsMocks.slice(skip, skip + take),
-	total: completedSolutionsMocks.length,
-});
+export const getCompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
+	http.callWebApi({
+		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
+		method: HttpMethods.GET,
+		query: {
+			status: SolutionStatus.COMPLETED,
+			skip,
+			take,
+		},
+	});
 
-// TODO: implement in backend and call api
-export const getUncompletedSolutions: TPrivateSolutionsLoader = async ({ skip, take }) => ({
-	solutions: uncompletedSolutionsMocks.slice(skip, skip + take),
-	total: uncompletedSolutionsMocks.length,
-});
+export const getUncompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
+	http.callWebApi({
+		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
+		method: HttpMethods.GET,
+		query: {
+			status: SolutionStatus.NOT_COMPLETED,
+			skip,
+			take,
+		},
+	});

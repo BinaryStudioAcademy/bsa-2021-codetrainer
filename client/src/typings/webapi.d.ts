@@ -25,6 +25,7 @@ declare namespace WebApi.Entities {
 		};
 		githubId?: string;
 		profileUrl?: string;
+		position?: number;
 	}
 
 	export interface ITag {
@@ -37,18 +38,19 @@ declare namespace WebApi.Entities {
 		name: string;
 		discipline: string;
 		description: string;
-		exampleTestCases?: string;
+		exampleTestCases: string;
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
 		savedToFavorites: number;
 		positiveFeedback: number;
 		user: IUser | null;
-		exampleTestCases?: string;
-		created: Date;
+		createdAt: Date;
 		published: Date;
+		preloaded: string;
 		usersTrained: number;
 		skips: number;
+		initialSolution: string;
 		codeSubmissions: number;
 		timesCompleted: number;
 		stars: number;
@@ -67,11 +69,14 @@ declare namespace WebApi.Entities {
 		task: Partial<ITask>;
 		createdAt: Date;
 		updatedAt?: Date;
+		testCases?: string;
 	}
 
 	export interface IMember {
 		id: string;
+		username: string;
 		rank: number;
+		username: string;
 		avatar: string;
 		name: string;
 		surname: string;
@@ -134,11 +139,12 @@ declare namespace WebApi.Entities {
 		exampleTestCases: string;
 		status: TaskStatus;
 		isPublished: boolean;
-		solutions: Array<{ id: string }>;
+		solutions: WebApi.Entities.ISolution[];
 		tags: Array<ITag>;
 		user: {
 			name: string;
 			surname: string;
+			username: string;
 		};
 	}
 }

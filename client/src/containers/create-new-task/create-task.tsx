@@ -38,6 +38,8 @@ const TestTabs = {
 
 export const CreateTask = (props: ICreateTaskProps) => {
 	const dispatch = useDispatch();
+	const [isEditing, setIsEditing] = useState(false);
+
 	const createErrorMessage = (message: string) => {
 		dispatch(
 			setNotificationState({
@@ -82,14 +84,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			title: 'New challenge',
 		},
 	]);
-	useEffect(() => {
-		getYourChallengeValues().then((result) =>
-			setYourChallengeValues(result ? [{ id: '0', title: 'New challenge' }, ...result] : null),
-		);
-		if (taskId) {
-			handleTaskChange(taskId);
-		}
-	}, []);
+
 	//settings block
 	const [taskName, setTaskName] = useState('');
 	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
@@ -303,6 +298,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			} else {
 				setYourChallengeValues(null);
 			}
+			setIsEditing(true);
 			dispatch(
 				setNotificationState({
 					state: {
@@ -361,6 +357,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					title: 'Switch challenge',
 				});
 				resetAllFields();
+				setIsEditing(false);
 				dispatch(setTask({ taskId: null }));
 			}
 		}
@@ -390,6 +387,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 				};
 				const requestResult = await updateTask(requestBody, thisTaskId);
 				if (!requestResult.error) {
+					setIsEditing(false);
 					dispatch(
 						setNotificationState({
 							state: {
@@ -487,6 +485,16 @@ describe("twoOldestAges", function() {
 				break;
 		}
 	};
+
+	useEffect(() => {
+		resetAllFields();
+		getYourChallengeValues().then((result) =>
+			setYourChallengeValues(result ? [{ id: '0', title: 'New challenge' }, ...result] : null),
+		);
+		if (taskId && isEditing) {
+			handleTaskChange(taskId);
+		}
+	}, []);
 	return (
 		<>
 			<div className={styles.createTaskBlock}>

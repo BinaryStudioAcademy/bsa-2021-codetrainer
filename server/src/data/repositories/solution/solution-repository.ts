@@ -20,4 +20,15 @@ export class SolutionRepository extends AbstractRepository<Solution> {
 	updateById(id: string, data: Partial<Solution>) {
 		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
+
+	async getTasksByUser(userId: string) {
+		const solutions = await this.createQueryBuilder('solution')
+			.leftJoinAndSelect('solution.user', 'user')
+			.leftJoinAndSelect('solution.task', 'task')
+			.select(['solution.id', 'task.id'])
+			.where('user.id = :userId', { userId })
+			.getMany();
+
+		return solutions.map(({ task: { id } }) => id);
+	}
 }

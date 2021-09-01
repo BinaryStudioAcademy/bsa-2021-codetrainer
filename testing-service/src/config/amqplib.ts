@@ -1,12 +1,14 @@
 import { Channel, connect, Connection, ConsumeMessage } from 'amqplib';
+import { TypeTest } from '../common/constants';
 import { ENV } from '../common/env-enum';
 import { sendTestResult } from '../helpers/call-api';
 import { runTest } from '../helpers/run-test';
-import { sendToServer } from './amqp-mocks';
 
 interface IMessageConsume {
+	typeTest: TypeTest;
 	taskId: string;
 	solutionId: string;
+	status: string;
 	code: string;
 	test: string;
 	userId: string;
@@ -54,13 +56,7 @@ class RabbitConnect {
 		const result = await this.handler(parseMessage);
 
 		this.channel.ack(message);
-		const { taskId, solutionId, userId } = parseMessage;
-		sendTestResult({
-			result,
-			userId,
-			taskId,
-			solutionId,
-		});
+		sendTestResult({ ...parseMessage, result });
 	}
 
 	private async handler({ code, test }: { code: string; test: string }) {

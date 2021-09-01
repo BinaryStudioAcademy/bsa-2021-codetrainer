@@ -2,11 +2,6 @@ import React from 'react';
 import { Tabs, Tab } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-interface StyledTabsProps {
-	label: string;
-	onClick: () => void;
-}
-
 const StyledTabs = withStyles({
 	root: {
 		padding: 'none',
@@ -28,46 +23,30 @@ const StyledTab = withStyles({
 			color: '#705FF5',
 			opacity: 1,
 		},
-		'&$selected': {
+		'&:selected': {
 			color: '#705FF5',
 		},
 		'&:focus': {
 			color: '#705FF5',
 		},
 	},
-})((props: StyledTabsProps) => <Tab disableRipple {...props} />);
-
-export interface ITabItem {
-	tab: string;
-	onClick: () => React.ReactChild;
-}
+})((props: { label: string }) => <Tab disableRipple {...props} />);
 
 export interface ITabsRouterProps {
-	tabItems: ITabItem[];
-	activeTabId: string;
+	tabItems: { name: string; id: number }[];
+	activeTabId: number;
+	onChange: (tab: number) => void;
 }
 
-export const TabsRouter = ({ tabItems, activeTabId }: ITabsRouterProps) => {
-	const [value, setValue] = React.useState(0);
-
-	const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
-		setValue(newValue);
+export const TabsRouter = ({ tabItems, activeTabId, onChange }: ITabsRouterProps) => {
+	const handleChange = (_: React.ChangeEvent<any>, newValue: number) => {
+		onChange(newValue);
 	};
 	return (
-		<StyledTabs value={value} onChange={handleChange}>
-			{tabItems.map((tabItem) => {
-				return (
-					<StyledTab
-						key={`${tabItem.tab}`}
-						label={tabItem.tab}
-						onClick={() => {
-							if (tabItem.tab !== activeTabId) {
-								tabItem.onClick();
-							}
-						}}
-					/>
-				);
-			})}
+		<StyledTabs value={activeTabId} onChange={handleChange}>
+			{tabItems.map(({ name, id }) => (
+				<StyledTab key={id.toString()} label={name} />
+			))}
 		</StyledTabs>
 	);
 };

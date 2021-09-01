@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { FormInput, FormSelect } from 'components';
 import { ClickableRank } from 'components/basic/rank/clickable-rank';
 import styles from './search-task.module.scss';
-import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task';
+import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task/task-filter';
 import { Button, Checkbox } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import clsx from 'clsx';
@@ -39,7 +39,7 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 	return (
 		<>
 			<Box mb={2}>
-				<h4>Search Challenge</h4>
+				<h4 className={styles.header}>Search Challenge</h4>
 			</Box>
 			<Formik
 				initialValues={{
@@ -51,27 +51,60 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 				onSubmit={(values) => handleSubmit(values)}
 			>
 				<Form>
-					<Field id="query" name="query" placeholder="Search..." type="text" component={FormInput} />
-					<label htmlFor="sort">Sort By</label>
-					<Field id="sortBy" name="sort" options={TASK_SORT_BY_OPTIONS} component={FormSelect} />
-					<label htmlFor="status">Status</label>
-					<Field id="status" name="status" options={TASK_STATUS_OPTIONS} component={FormSelect} />
-					<label htmlFor="progress">Progress</label>
-					<Field id="progress" name="progress" options={TASK_PROGRESS_OPTIONS} component={FormSelect} />
+					<Field
+						classname={styles.input}
+						id="query"
+						name="query"
+						placeholder="Search..."
+						type="text"
+						component={FormInput}
+					/>
+					<label className={styles.label} htmlFor="sort">
+						Sort By
+					</label>
+					<Field
+						classname={styles.input}
+						id="sortBy"
+						name="sort"
+						options={TASK_SORT_BY_OPTIONS}
+						component={FormSelect}
+					/>
+					<label className={styles.label} htmlFor="status">
+						Status
+					</label>
+					<Field
+						classname={styles.input}
+						id="status"
+						name="status"
+						options={TASK_STATUS_OPTIONS}
+						component={FormSelect}
+					/>
+					<label className={styles.label} htmlFor="progress">
+						Progress
+					</label>
+					<Field
+						classname={styles.input}
+						id="progress"
+						name="progress"
+						options={TASK_PROGRESS_OPTIONS}
+						component={FormSelect}
+					/>
 
-					<h6>Difficulty</h6>
+					<h6 className={styles.header}>Difficulty</h6>
 					<div className={styles.rankContainer}>
-						{ranks.map((rank) => (
-							<ClickableRank
-								key={rank.toString()}
-								rank={rank}
-								active={filter?.rank === rank}
-								onChange={() => handleChangeRank(rank)}
-							/>
-						))}
+						{ranks
+							.sort((a, b) => b - a)
+							.map((rank) => (
+								<ClickableRank
+									key={rank.toString()}
+									rank={rank}
+									active={filter?.rank === rank}
+									onChange={() => handleChangeRank(rank)}
+								/>
+							))}
 					</div>
 					<div id="checkbox-group">
-						<h6>Tags</h6>
+						<h6 className={styles.header}>Tags</h6>
 					</div>
 					<div role="group" aria-labelledby="checkbox-group" className={styles.checkboxContainer}>
 						{tags.length

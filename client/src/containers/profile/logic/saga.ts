@@ -11,6 +11,7 @@ import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
 import { IUser } from 'typings/common/IUser';
 import { ROUTES } from 'constants/routes';
+import { mapUserResponseToUser } from 'helpers/user.helper';
 
 const getIChallenge = (
 	tasks: Array<{
@@ -68,7 +69,8 @@ const getISocialUsers = (users: IUser[]) => {
 export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser>): any {
 	try {
 		yield put(actions.clearData());
-		const { user } = yield call(fetchUsersSearch, query);
+		const { user: res } = yield call(fetchUsersSearch, query);
+		const user = yield call(mapUserResponseToUser, res);
 		const { followings } = yield call(getFollowingsByUserId, user.id);
 		const { followers } = yield call(getFollowersByUserId, user.id);
 		const community: IUser[] = yield call(getCommunityByUserId, user.id);

@@ -12,6 +12,7 @@ const Community: React.FC<ICommunityProps> = ({ users, isInClan }) => {
 	const openModal = () => {
 		setIsOpen(true);
 	};
+
 	return (
 		<div className={styles.community}>
 			<ClanModal isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -22,35 +23,26 @@ const Community: React.FC<ICommunityProps> = ({ users, isInClan }) => {
 					a community with other warriors by following each other or inviting new warriors to join.
 				</p>
 
-				<div className={styles.communityTableHeader}>
-					<h5 className={styles.communityColumnTitle}>User</h5>
-					<h5 className={styles.communityColumnTitle}>Clan</h5>
-					<h5 className={styles.communityColumnTitle}>Honor</h5>
-				</div>
-
-				<div className={styles.communityTableBody}>
-					<div className={styles.communityColumn}>
+				<table className={styles.communityUsers}>
+					<tbody>
+						<tr>
+							<td className={styles.communityUser}>
+								<span className={styles.communityColumnTitle}>User</span>
+							</td>
+							<td></td>
+							<td></td>
+							<td className={styles.communityClan}>
+								<span className={styles.communityColumnTitle}>Clan</span>
+							</td>
+							<td className={styles.communityHonor}>
+								<span className={styles.communityColumnTitle}>Honor</span>
+							</td>
+						</tr>
 						{users.map((user) => (
-							<CommunityUser key={user.id} {...user} />
+							<CommunityUser user={user} key={user.id} />
 						))}
-					</div>
-
-					<div className={styles.communityColumn}>
-						{users.map((user) => (
-							<p key={user.id} className={styles.columnText}>
-								{user.clan?.name}
-							</p>
-						))}
-					</div>
-
-					<div className={styles.communityColumn}>
-						{users.map((user) => (
-							<p key={user.id} className={styles.columnText}>
-								{user.honor}
-							</p>
-						))}
-					</div>
-				</div>
+					</tbody>
+				</table>
 				{!isInClan && (
 					<div className={styles.buttonsContainer}>
 						<Button onClick={openModal} className={clsx(ButtonClasses.red, styles.createButton)}>

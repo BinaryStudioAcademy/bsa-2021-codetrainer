@@ -20,9 +20,9 @@ import { UserAccessToken } from 'containers/user/logic/state';
 import { SearchPage } from 'containers/search-page';
 import PrivateRoute from 'containers/private-route';
 import Github from 'containers/github';
-import TaskTrain from 'containers/task-train';
 import { Redirect, Route } from 'react-router-dom';
-import { TaskPageContainer } from 'containers/task';
+import { TaskRouting } from 'containers/task-route';
+import LeaderBoard from 'containers/leaderboard';
 
 interface IRoutingProps {}
 
@@ -62,9 +62,15 @@ const Routing: React.FC<IRoutingProps> = () => {
 				needHeader={true}
 				needSideBar={true}
 			/>
-			<PrivateRoute exact path={ROUTES.TaskTrain} component={TaskTrain} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.TaskInstructions} component={TaskPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Users + '/:username'} component={Profile} needHeader={true} needSideBar={true} />
+			<PrivateRoute
+				exact
+				needHeader={true}
+				needSideBar={true}
+				path={ROUTES.LeaderBoard}
+				component={LeaderBoard}
+			/>
 			<PrivateRoute exact path={ROUTES.Search} component={SearchPage} needHeader={true} needSideBar={true} />
 			<PrivateRoute path={ROUTES.Setting} component={SettingPage} needHeader={true} needSideBar={true} />
 			<PublicRoute
@@ -102,11 +108,10 @@ const Routing: React.FC<IRoutingProps> = () => {
 			<PublicRoute restricted={false} path={ROUTES.Github + '/:endpoint'} component={Github} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clans} component={Clans} />
 			<PrivateRoute exact needHeader={true} needSideBar={true} path={ROUTES.Clan + '/:id'} component={Clan} />
-			<PublicRoute
-				restricted={false}
-				exact
+			<PrivateRoute
+				strict
 				path={ROUTES.TaskInfo + '/:id'}
-				component={TaskPageContainer}
+				component={TaskRouting}
 				needHeader={true}
 				needSideBar={true}
 			/>
