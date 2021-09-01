@@ -1,0 +1,34 @@
+@import 'styles/variables';
+@import '../../variables.scss';
+
+.taskInstructions {
+	&Container {
+		width: 38%;
+	}
+
+	&Content {
+		max-height: 100%;
+	}
+
+	&Header {
+		color: var(--text-color);
+		margin-bottom: 44px;
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+
+			&:not(:last-child) {
+				margin-right: 20px;
+			}
+		}
+	}
+
+	&Title {
+		margin: 0;
+		font: $name-font;
+	}
+}
+
+.markdown {
+	height: $height-result;
+}

@@ -4,6 +4,7 @@ import styles from './challenge-stats.module.scss';
 import { IChallengeStats } from '../types';
 import { faStar, faChartBar, faUser } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ROUTES } from 'constants/routes';
 
 const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 	stats: { favoriteSaves, positiveFeedback, author },
@@ -36,7 +37,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 					</div>
 					created{' '}
 					{author.firstName || author.lastName ? (
-						<Link to={author.link} className={styles.challengeStatsItemLink}>
+						<Link to={`${ROUTES.Users}/${author.username}`} className={styles.challengeStatsItemLink}>
 							{author.firstName} {author.lastName}
 						</Link>
 					) : (

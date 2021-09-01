@@ -16,6 +16,14 @@ export const CODE_ERRORS = {
 		message: `Tag name: ${name} is already taken.`,
 		status: HttpCodes.BAD_REQUEST,
 	}),
+	NOT_FOLLOWING: {
+		message: `User is not followed to unfollow`,
+		status: HttpCodes.BAD_REQUEST,
+	},
+	ALREADY_FOLLOWING: {
+		message: `User is already followed`,
+		status: HttpCodes.BAD_REQUEST,
+	},
 	EMAIL_NOT_EXIST: (email: string) => ({
 		message: `User with email: ${email}, not exist!`,
 		status: HttpCodes.NOT_FOUND,
@@ -35,6 +43,8 @@ export const CODE_ERRORS = {
 	USER_NOT_EXIST: { message: `User not exist!`, status: HttpCodes.NOT_FOUND },
 	NOT_USER_SOLUTION: { message: "not this user's solution", status: HttpCodes.BAD_REQUEST },
 	SOLUTION_STATUS_WRONG: { message: 'solution status wrong', status: HttpCodes.BAD_REQUEST },
+	SOLUTION_TYPE_WRONG: { message: 'solution type wrong', status: HttpCodes.BAD_REQUEST },
+	SOLUTION_STATUS_UNLOCKED: { message: 'solution is unlocked', status: HttpCodes.BAD_REQUEST },
 	TESTING_NAME_INCORRECT: { message: 'testing name incorrect', status: HttpCodes.BAD_REQUEST },
 	USERNAME_NOT_EXIST: (username: string) => ({
 		message: `User ${username} does not exist.`,

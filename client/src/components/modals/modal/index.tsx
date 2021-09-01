@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import styles from './modal.module.scss';
 import { modalStyles } from './config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+
+import styles from './modal.module.scss';
 
 interface IModalProps {
 	isOpen: boolean;
@@ -24,8 +25,8 @@ export const Modal: React.FC<IModalProps> = (props) => {
 
 	return (
 		<ReactModal
-			onRequestClose={() => props.setIsOpen(false)}
 			shouldFocusAfterRender={true}
+			overlayClassName={styles.overlay}
 			isOpen={props.isOpen}
 			style={modalStyles}
 			{...props.modalProps}

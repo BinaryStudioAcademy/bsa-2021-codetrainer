@@ -22,6 +22,7 @@ export const Profile = (props: RouteComponentProps) => {
 	);
 
 	const { isLoading, error, userData } = useAppSelector((state) => state.profile);
+	const { user } = useAppSelector((state) => state.auth.userData);
 	const visitor = useUserSelector();
 
 	const { username } = useParams<{ username: string }>();
@@ -194,12 +195,23 @@ export const Profile = (props: RouteComponentProps) => {
 			});
 	}, [setActiveTab, username, visitor]);
 
+	const followHandler = (id: string) => {
+		dispatch(actions.followUser({ id }));
+	};
+
+	const unfollowHandler = (id: string) => {
+		dispatch(actions.unfollowUser({ id }));
+	};
+
 	return isLoading ? (
 		<FullscreenLoader />
 	) : (
 		<ProfilePage
 			error={error}
 			userInfo={userData}
+			currentUser={user}
+			followHandler={followHandler}
+			unfollowHandler={unfollowHandler}
 			profileInfoProps={{
 				getTabContent,
 				profileRouteProps: {
