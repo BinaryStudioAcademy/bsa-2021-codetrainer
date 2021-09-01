@@ -3,6 +3,6 @@
 .listItem {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid $mine-shaft;
+	border-bottom: 1px solid var(--text-color);
 	margin: 10px 0;
 }

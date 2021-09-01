@@ -17,7 +17,7 @@ $height-editor: 210px;
 		height: $height-title;
 		box-sizing: border-box;
 		font: $name-font;
-		background-color: #f0f3f9;
+		background-color: var(--secondary-container-color);
 		& > p {
 			margin: 0;
 		}

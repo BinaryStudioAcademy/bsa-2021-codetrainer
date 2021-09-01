@@ -30,6 +30,7 @@ const useStyles = makeStyles(() =>
 		paper: {
 			width: '100%',
 			marginBottom: '20px',
+			background: 'var(--container-color)',
 		},
 		table: {
 			width: 800,

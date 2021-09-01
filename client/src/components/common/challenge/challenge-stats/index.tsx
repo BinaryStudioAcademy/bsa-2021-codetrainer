@@ -15,7 +15,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<div className={styles.challengeStatsItemIcon}>
-						<FontAwesomeIcon icon={faStar} size="lg" color="rgba(40, 40, 40, 0.5)" />
+						<FontAwesomeIcon icon={faStar} size="lg" color="var(--text-color)" />
 					</div>
 					{favoriteSaves} saved to favorites
 				</div>
@@ -24,7 +24,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<div className={styles.challengeStatsItemIcon}>
-						<FontAwesomeIcon icon={faChartBar} size="lg" color="rgba(40, 40, 40, 0.5)" />
+						<FontAwesomeIcon icon={faChartBar} size="lg" color="var(--text-color)" />
 					</div>
 					{positiveFeedback}% positive feedback
 				</div>
@@ -33,7 +33,7 @@ const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
 				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
 					<div className={styles.challengeStatsItemIcon}>
-						<FontAwesomeIcon icon={faUser} size="lg" color="rgba(40, 40, 40, 0.5)" />
+						<FontAwesomeIcon icon={faUser} size="lg" color="var(--text-color)" />
 					</div>
 					created{' '}
 					{author.firstName || author.lastName ? (
