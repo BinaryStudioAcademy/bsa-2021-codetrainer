@@ -1,46 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Ace, config } from 'ace-builds';
 import AceEditor from 'react-ace';
-import styles from './code-editor.module.scss';
+import { CreateCodeData } from 'common';
 
-interface ICodeEditorProps {
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/theme-tomorrow';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/ext-beautify';
+
+config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/');
+
+export interface ICodeEditor {
+	onChange: (text: string) => void;
 	code?: string;
-	title?: string;
-	onChange?: (value: string) => void;
+	editable?: boolean;
 }
 
-const CodeEditor: React.FC<ICodeEditorProps> = ({ title, code, ...props }) => {
+export const CodeEditor: React.FC<ICodeEditor> = ({ onChange, code, editable }) => {
+	const [editor, setEditor] = useState<Ace.Editor | null>(null);
+	const handleChange = (newValue: string) => {
+		onChange(newValue);
+	};
+
+	const handleLoadEditor = (editorInstance: Ace.Editor) => {
+		setEditor(editorInstance);
+	};
+
+	const handleFocus = () => {
+		if (!editor) {
+			return;
+		}
+		editor.resize();
+	};
+
 	return (
-		<div className={styles.codeEditor}>
-			{title && (
-				<p className={styles.codeEditorTitle}>
-					<strong>{title}</strong>
-				</p>
-			)}
-			<AceEditor
-				placeholder="Enter your code..."
-				mode="javascript"
-				theme="tomorrow"
-				fontSize={14}
-				showPrintMargin={true}
-				showGutter={true}
-				highlightActiveLine={true}
-				value={code || ''}
-				height="inherit"
-				width="95%"
-				setOptions={{
-					useWorker: false,
-					enableBasicAutocompletion: false,
-					enableLiveAutocompletion: false,
-					enableSnippets: false,
-					showLineNumbers: true,
-					tabSize: 2,
-				}}
-				wrapEnabled={true}
-				editorProps={{ $blockScrolling: true }}
-				{...props}
-			/>
-		</div>
+		<AceEditor
+			onFocus={handleFocus}
+			style={{
+				height: '330px',
+				width: '100%',
+				background: 'var(--secondary-container-color)',
+			}}
+			readOnly={!Boolean(editable)}
+			onLoad={handleLoadEditor}
+			placeholder={CreateCodeData.PLACE_HOLDER}
+			mode={CreateCodeData.MODE}
+			theme={CreateCodeData.THEME}
+			name={CreateCodeData.NAME}
+			onChange={handleChange}
+			fontSize={CreateCodeData.FONT_SIZE}
+			showPrintMargin={CreateCodeData.SHOW_PRINT_MARGIN}
+			showGutter={CreateCodeData.SHOW_GUTTER}
+			highlightActiveLine={CreateCodeData.HIGHLIGH_ACTIVE_LINE}
+			value={code}
+			wrapEnabled={CreateCodeData.WRAP_ENABLED}
+			setOptions={{
+				highlightGutterLine: CreateCodeData.HIGHLIGH_GUTTER_LINE,
+				enableBasicAutocompletion: CreateCodeData.ENABLE_BASIC_AUTOCOMPLETION,
+				enableLiveAutocompletion: CreateCodeData.ENABLE_LIVE_AUTOCOMPLETION,
+				enableSnippets: CreateCodeData.ENABLE_SNIPPETS,
+				showLineNumbers: CreateCodeData.SHOW_LINE_NUMBER,
+				useWorker: CreateCodeData.USE_WORKER,
+				tabSize: CreateCodeData.TAB_SIZE,
+			}}
+		/>
 	);
 };
-
-export default CodeEditor;

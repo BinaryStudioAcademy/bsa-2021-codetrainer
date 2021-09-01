@@ -12,3 +12,4 @@ export { default as Option } from './option';
 export { default as Select } from './select';
 export { default as Tag } from './tag';
 export { default as TagList } from './tag-list';
+export { TreeView } from './tree-view';

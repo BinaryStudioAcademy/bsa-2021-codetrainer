@@ -1,0 +1,33 @@
+@import '../../variables.scss';
+
+@function color($color) {
+	$result: 1px solid $color;
+	@return $result;
+}
+
+.result {
+	height: $height-result;
+	box-sizing: border-box;
+	padding: 5px;
+	overflow: auto;
+	&_border_success {
+		border: color($result-success);
+	}
+	&_border_error {
+		border: color($result-error);
+	}
+	&_header {
+		margin-bottom: 5px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid #d7d1d1;
+	}
+	&_color_error {
+		color: $result-error;
+	}
+	&_color_success {
+		color: $result-success;
+	}
+	&_bold {
+		font-weight: bold;
+	}
+}

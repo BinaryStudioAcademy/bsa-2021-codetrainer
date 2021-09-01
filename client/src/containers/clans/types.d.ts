@@ -3,6 +3,7 @@ import { WebApi } from 'typings/webapi';
 
 export interface IMember {
 	id: string;
+	username: string;
 	rank: number;
 	avatar: string;
 	name: string;

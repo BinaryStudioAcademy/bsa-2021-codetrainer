@@ -1,7 +1,7 @@
 import React from 'react';
 import { TaskTabTypes } from 'common';
+import { CodeEditor } from 'components';
 import { CreateText } from './create-text';
-import { CreateCode } from './create-code';
 import { Markdown } from './markdown';
 
 interface IProps {
@@ -27,7 +27,7 @@ export const TabContent: React.FC<IProps> = ({ tab, onChange }) => {
 		case TaskTabTypes.PREVIEW:
 			return <Markdown />;
 		case TaskTabTypes.CODE:
-			return <CreateCode onChange={handleChange} editable={tab.editable} value={tab.text} />;
+			return <CodeEditor onChange={handleChange} editable={tab.editable} code={tab.text} />;
 		default:
 			return null;
 	}

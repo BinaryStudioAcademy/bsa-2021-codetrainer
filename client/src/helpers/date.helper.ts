@@ -5,5 +5,5 @@ export const getMonthName = (date: Date) => {
 };
 
 export const getFullDate = (date: Date) => {
-	return `${date.getDate()} ${getMonthName(date)} ${date.getFullYear()}`
-}
+	return `${date.getDate()} ${getMonthName(date)} ${date.getFullYear()}`;
+};

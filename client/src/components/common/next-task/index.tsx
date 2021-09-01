@@ -38,6 +38,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 			<div className={styles.taskContainer}>
 				{task ? (
 					<TaskDescription
+						id={task.id}
 						rank={task.rank}
 						name={task.name}
 						description={task.description}
