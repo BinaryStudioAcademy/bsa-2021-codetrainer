@@ -49,7 +49,6 @@ declare namespace WebApi.Entities {
 		user: IUser | null;
 		createdAt: Date;
 		published: Date;
-		preloaded: string;
 		usersTrained: number;
 		skips: number;
 		initialSolution: string;
@@ -136,7 +135,6 @@ declare namespace WebApi.Entities {
 		description: string;
 		completeSolution: string;
 		initialSolution: string;
-		preloaded: string;
 		testCases: string;
 		exampleTestCases: string;
 		status: TaskStatus;
