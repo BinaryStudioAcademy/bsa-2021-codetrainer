@@ -507,7 +507,6 @@ describe("twoOldestAges", function() {
 		values: rankValues,
 		onChange: (value) => {
 			setRank(value.title);
-			console.log(rank);
 		},
 	};
 	return (
