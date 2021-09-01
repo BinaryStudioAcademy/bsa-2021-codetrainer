@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
-import Express from 'express';
 import { TFollowerRepository, TUserRepository, Follower, User } from '../../data';
+import { ValidationError } from '../../helpers';
+import { CODE_ERRORS } from '../../common';
 
 export class FollowersService {
 	protected followerRepository: TFollowerRepository;
@@ -55,27 +56,53 @@ export class FollowersService {
 		};
 	}
 
-	async create(data: { following: string; follower: string }, res: Express.Response) {
+	async follow(follower: User, followingId: string) {
 		const repository = getCustomRepository(this.followerRepository);
 		const userRepository = getCustomRepository(this.userRepository);
 
-		const following = await userRepository.getById(data.following);
-		const follower = await userRepository.getById(data.follower);
+		const existingFollowing = await userRepository.getById(followingId);
 
-		if (!following || !follower) {
-			res.status(404);
+		if (!existingFollowing) {
+			throw new ValidationError(CODE_ERRORS.USER_NOT_EXIST);
+		}
 
-			return { message: 'User not found' };
+		const followers = (await repository.getFollowers(followingId)).map((person) => person.follower);
+		const exisitingFollower = followers.find((person) => person.id === follower.id);
+
+		if (exisitingFollower) {
+			throw new ValidationError(CODE_ERRORS.ALREADY_FOLLOWING);
 		}
 
 		const newFollower = {
-			following,
+			following: existingFollowing,
 			follower,
 		};
 
-		return {
-			follower: await repository.post(newFollower),
-		};
+		await repository.post(newFollower);
+
+		return { followers: await repository.getFollowers(followingId) };
+	}
+
+	async unfollow(follower: User, followingId: string) {
+		const repository = getCustomRepository(this.followerRepository);
+		const userRepository = getCustomRepository(this.userRepository);
+
+		const existingFollowing = await userRepository.getById(followingId);
+
+		if (!existingFollowing) {
+			throw new ValidationError(CODE_ERRORS.USER_NOT_EXIST);
+		}
+
+		const followers = (await repository.getFollowers(followingId)).map((person) => person.follower);
+		const exisitingFollower = followers.find((person) => person.id === follower.id);
+
+		if (!exisitingFollower) {
+			throw new ValidationError(CODE_ERRORS.NOT_FOLLOWING);
+		}
+
+		await repository.delete({ follower: { id: follower.id }, following: { id: followingId } });
+
+		return { followers: await repository.getFollowers(followingId) };
 	}
 
 	async delete(data: { id: string }) {

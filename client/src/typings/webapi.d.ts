@@ -26,6 +26,8 @@ declare namespace WebApi.Entities {
 		githubId?: string;
 		profileUrl?: string;
 		position?: number;
+		following: any[];
+		followers: any[];
 	}
 
 	export interface ITag {
