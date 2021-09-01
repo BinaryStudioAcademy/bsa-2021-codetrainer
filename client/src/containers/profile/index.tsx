@@ -123,12 +123,14 @@ export const Profile = (props: RouteComponentProps) => {
 	const profileTasks = [
 		{
 			title: 'Published',
+			empty: "You don't have any published tasks yet.",
 			id: 'published',
 			tasks: publishedTasks,
 		},
 		{
 			title: 'Not published',
-			id: 'not published',
+			empty: "You don't have any not published tasks yet.",
+			id: 'notPublished',
 			tasks: unpublishedTasks,
 		},
 	];
