@@ -5,14 +5,15 @@ import ForumIcon from '@material-ui/icons/Forum';
 import { useState } from 'react';
 import FeedMessage from 'components/pages/home/components/feed-message';
 import { WebApi } from 'typings/webapi';
+import { ROUTES } from 'constants/routes';
+import { Link } from 'react-router-dom';
 // import { Divider } from '@material-ui/core';
 
 export interface ISolutionProps {
-	solution: string;
-	task: WebApi.Entities.IChallenge;
+	solution: WebApi.Entities.ISolution;
 }
 
-export const Solution = ({ solution, task }: ISolutionProps) => {
+export const Solution = ({ solution }: ISolutionProps) => {
 	const [isFeedOpened, setFeedOpened] = useState(false);
 	const user = {
 		id: 'fdsalfa',
@@ -28,11 +29,15 @@ export const Solution = ({ solution, task }: ISolutionProps) => {
 	return (
 		<div className={styles.solution}>
 			<div className={styles.header}>
-				{<PeopleIcon />}
-				<h3>User 4321421</h3>
+				<PeopleIcon />
+				<Link to={`${ROUTES.Users}/${solution.user.username}`}>
+					<h3>
+						{solution.user.name} {solution.user.surname}
+					</h3>
+				</Link>
 			</div>
 			<div className={styles.code}>
-				<code>{solution}</code>
+				<code>{solution.code}</code>
 			</div>
 			<div className={styles.footer}>
 				<div onClick={() => setFeedOpened(!isFeedOpened)} className={styles.messagesBtn}>
@@ -42,10 +47,12 @@ export const Solution = ({ solution, task }: ISolutionProps) => {
 			</div>
 			{isFeedOpened && (
 				<div className={styles.messages}>
-					{['fewjfoewaj okjhlhjkhlkh ', 'fdskajf;sa', 'fdsja;lfdjsa'].map((item) => {
-						return (
-							<FeedMessage id={item} key={item} user={user} task={task} body={item} createdAt={item} />
-						);
+					{[
+						'fewjfoewaj oeiwhfoiey ofpey afydsiao foiyf ewqy yewqyfeoq yoewyq ogyeoq ygoewqy owyq y gqg ieyfgepqy feywqo fyqf ew yeowq ypoy ewqyr ewqypoewq yeqy ewqpyew qyoewqy owqy wepq ',
+						'fdskajf;sa',
+						'fdsja;lfdjsa',
+					].map((item) => {
+						return <FeedMessage id={item} key={item} user={user} body={item} createdAt={item} />;
 					})}
 				</div>
 			)}

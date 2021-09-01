@@ -29,12 +29,6 @@ export const SolutionsTab = ({ task }: ISolutionsTabProps) => {
 	const [isTestCasesOpened, setIsTestCasesOpened] = useState(false);
 	const [activeShowMe, setActiveShowMe] = useState(ShowMe.AllSolutions);
 	const [activeSortBy, setActiveSortBy] = useState(SortBy.Newest);
-	const solutions = [
-		'fdsafdsafds',
-		'lorem ipsum',
-		'fkdsa ifundafa',
-		' jfldanu oieuafysdaoifnyceopoyfo ofiy y3tf ewwa',
-	];
 
 	return (
 		<div className={styles.container}>
@@ -110,10 +104,10 @@ export const SolutionsTab = ({ task }: ISolutionsTabProps) => {
 			</div>
 
 			<div className={styles.solutions}>
-				{solutions.map((item) => {
+				{task.solutions.map((item) => {
 					return (
 						<>
-							<Solution solution={item} key={item} task={task} />
+							<Solution solution={item} key={item.id} />
 							<Divider />
 						</>
 					);

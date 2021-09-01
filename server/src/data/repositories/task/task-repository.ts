@@ -77,10 +77,11 @@ export class TaskRepository extends AbstractRepository<Task> {
 	getById(id: string) {
 		return this.createQueryBuilder('task')
 			.leftJoinAndSelect('task.solutions', 'solution')
+			.leftJoinAndSelect('solution.user', 'solution_user')
 			.leftJoinAndSelect('task.tags', 'tag')
 			.leftJoinAndSelect('task.user', 'user')
 			.leftJoinAndSelect('task.contributors', 'contributors')
-			.select(['task', 'solution.id', 'tag.id', 'tag.name', 'user', 'contributors'])
+			.select(['task', 'solution', 'solution_user', 'tag.id', 'tag.name', 'user', 'contributors'])
 			.where('task.id = :id', { id })
 			.getOne();
 	}

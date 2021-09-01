@@ -14,10 +14,6 @@ interface IFeedMessageProps {
 			name: string;
 		};
 	};
-	task: {
-		id: string;
-		name: string;
-	};
 	body: string;
 	createdAt: string;
 }
