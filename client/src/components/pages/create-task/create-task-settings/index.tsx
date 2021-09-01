@@ -71,6 +71,7 @@ export const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = ({
 					<InfoPopover iconType={'help'}>Choose the language version the task will work for.</InfoPopover>
 				</label>
 				<Select
+					className={styles.languageVersionSelect}
 					values={selectProps.values}
 					activeValue={selectProps.activeValue}
 					onChange={selectProps.onChange}

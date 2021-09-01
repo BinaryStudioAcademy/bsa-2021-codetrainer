@@ -22,7 +22,12 @@ const NextTask: React.FC<INextTaskProps> = ({
 
 				<div className={styles.focusWrapper}>
 					<p className={styles.focusTitle}>Choose Today’s Focus</p>
-					<Select values={focusValues} activeValue={activeFocusValue} onChange={setActiveFocusValue} />
+					<Select
+						values={focusValues}
+						activeValue={activeFocusValue}
+						onChange={setActiveFocusValue}
+						className={styles.focusSelect}
+					/>
 				</div>
 
 				<div>
