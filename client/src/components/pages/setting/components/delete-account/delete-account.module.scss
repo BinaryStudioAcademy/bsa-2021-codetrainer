@@ -1,5 +1,9 @@
 @use 'styles/variables.scss' as var;
 
+.deleteContainer {
+	margin-bottom: 30px;
+}
+
 .header {
 	margin: 0 0 10px;
 	font-size: 18px;
@@ -26,7 +30,7 @@
 		font: var.$fifth-title-font;
 		font-weight: 600;
 	}
-	
+
 	.confirmButtonWrapper {
 		margin-top: 10px;
 		display: flex;

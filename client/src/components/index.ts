@@ -1,4 +1,4 @@
-export { Avatar, Label, Rank, PublicRoute, Notification, Button, TagList } from './basic';
+export { Avatar, Label, Rank, PublicRoute, Notification, Button, TagList, TreeView } from './basic';
 
 export {
 	Example,
@@ -13,6 +13,9 @@ export {
 	MainSidebar,
 	TaskInstructions,
 	TaskList,
+	Markdown,
+	Tabs,
+	CodeEditor,
 } from './common';
 
 export type { ICreateTabsProps } from './pages';
@@ -34,6 +37,7 @@ export {
 	CreateTaskSettings,
 	SettingPage,
 	NotFound,
+	LeaderBoardPage,
 } from './pages';
 
 export { Modal } from './modals';

@@ -28,7 +28,6 @@ export interface ICreateTaskProps {}
 const CodeTabs = {
 	COMPLETE_SOLUTION: 0,
 	INITIAL_SOLUTION: 1,
-	preloaded: 2,
 };
 
 const TestTabs = {
@@ -38,6 +37,8 @@ const TestTabs = {
 
 export const CreateTask = (props: ICreateTaskProps) => {
 	const dispatch = useDispatch();
+	const [isEditing, setIsEditing] = useState(false);
+
 	const createErrorMessage = (message: string) => {
 		dispatch(
 			setNotificationState({
@@ -82,14 +83,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			title: 'New challenge',
 		},
 	]);
-	useEffect(() => {
-		getYourChallengeValues().then((result) =>
-			setYourChallengeValues(result ? [{ id: '0', title: 'New challenge' }, ...result] : null),
-		);
-		if (taskId) {
-			handleTaskChange(taskId);
-		}
-	}, []);
+
 	//settings block
 	const [taskName, setTaskName] = useState('');
 	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
@@ -147,7 +141,6 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const [codeTab, setCodeTab] = useState(0);
 	const [completeSolution, setCompleteSolution] = useState('');
 	const [initialSolution, setInitialSolution] = useState('');
-	const [preloaded, setPreloaded] = useState('');
 	const tabsCode: ICreateTabsProps = {
 		selectedTab: codeTab,
 		tabs: [
@@ -169,21 +162,11 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			},
 			{
 				header: {
-					title: 'Preloaded',
-				},
-				type: TaskTabTypes.CODE,
-				editable: true,
-				text: preloaded,
-			},
-			{
-				header: {
 					title: 'Help',
 				},
 				type: TaskTabTypes.MARKDOWN,
 				markdownContent: `### In "Complete Solution" you should solve your own task
-### In "Initial Soultion" write code that will be given to the user at the start
-### "Preloaded" is optional here. This is code that will be loaded before the solution code within the execution path.
-This allows you to setup code that can be used by the warrior's solution, but not directly edited within the solution code.`,
+### In "Initial Soultion" write code that will be given to the user at the start`,
 			},
 		],
 		onChange: (text) => {
@@ -193,9 +176,6 @@ This allows you to setup code that can be used by the warrior's solution, but no
 					break;
 				case CodeTabs.INITIAL_SOLUTION:
 					setInitialSolution(text);
-					break;
-				case CodeTabs.preloaded:
-					setPreloaded(text);
 					break;
 			}
 		},
@@ -261,7 +241,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			initialSolution,
 			testCases,
 			exampleTestCases,
-			preloaded,
 		};
 		let task: { error: any; message: string } & WebApi.Entities.ITask;
 		if (!taskId) {
@@ -303,6 +282,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			} else {
 				setYourChallengeValues(null);
 			}
+			setIsEditing(true);
 			dispatch(
 				setNotificationState({
 					state: {
@@ -332,7 +312,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		setTextDescription('');
 		setCompleteSolution('');
 		setInitialSolution('');
-		setPreloaded('');
 		setTestCases('');
 		setExampleTestCases('');
 	};
@@ -361,6 +340,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					title: 'Switch challenge',
 				});
 				resetAllFields();
+				setIsEditing(false);
 				dispatch(setTask({ taskId: null }));
 			}
 		}
@@ -386,10 +366,10 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					testCases,
 					exampleTestCases,
 					isPublished: true,
-					preloaded,
 				};
 				const requestResult = await updateTask(requestBody, thisTaskId);
 				if (!requestResult.error) {
+					setIsEditing(false);
 					dispatch(
 						setNotificationState({
 							state: {
@@ -427,7 +407,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 function twoOldestAges(ages){
 				
 }`);
-		setPreloaded('');
 		setTestCases(`const chai = require("chai");
 const assert = chai.assert;
 chai.config.truncateThreshold = 0;
@@ -463,7 +442,6 @@ describe("twoOldestAges", function() {
 			setTextDescription(task.description);
 			setCompleteSolution(task.completeSolution);
 			setInitialSolution(task.initialSolution);
-			setPreloaded(task.preloaded);
 			setTestCases(task.testCases);
 			setExampleTestCases(task.exampleTestCases);
 		}
@@ -487,6 +465,16 @@ describe("twoOldestAges", function() {
 				break;
 		}
 	};
+
+	useEffect(() => {
+		resetAllFields();
+		getYourChallengeValues().then((result) =>
+			setYourChallengeValues(result ? [{ id: '0', title: 'New challenge' }, ...result] : null),
+		);
+		if (taskId && isEditing) {
+			handleTaskChange(taskId);
+		}
+	}, []);
 	return (
 		<>
 			<div className={styles.createTaskBlock}>

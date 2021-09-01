@@ -7,6 +7,7 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 		return {
 			...state,
 			task: action.task,
+			nextTaskId: null,
 		};
 	},
 	[actionTypes.SET_NOT_FOUND](state, action: actionTypes.TSetNotFound) {
@@ -19,6 +20,12 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 		return {
 			...state,
 			similarTasks: action.similarTasks,
+		};
+	},
+	[actionTypes.SET_NEXT_TASK](state, action: actionTypes.TSetNextTask) {
+		return {
+			...state,
+			nextTaskId: action.nextTaskId,
 		};
 	},
 });

@@ -11,12 +11,14 @@ export const ROUTES = {
 
 	Search: '/search',
 	Users: '/users',
+	LeaderBoard: '/leaderboard',
 
 	Clans: '/clans',
 	Clan: '/clan',
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
+	TaskInfo: '/challenge-info',
 	TaskTrain: '/challenge-info/:id/train',
 
 	Setting: '/setting',
@@ -25,9 +27,14 @@ export const ROUTES = {
 
 	Collections: '/collections',
 
-	TaskInfo: '/challenge-info',
-
 	Community: '/followers/community',
 
 	Example: '/example',
+};
+
+export const TASK_ROUTES: Record<string, string> = {
+	Train: '/train',
+	Tab: '/:tab',
+	Solutions: '/solutions',
+	Discourse: '/discourse',
 };

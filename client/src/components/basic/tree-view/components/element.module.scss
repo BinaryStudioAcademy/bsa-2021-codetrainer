@@ -1,0 +1,17 @@
+.tree_view {
+	&_header {
+		display: flex;
+		align-items: center;
+		padding-bottom: 5px;
+	}
+	&_arrow {
+		cursor: pointer;
+	}
+	&_content {
+		box-sizing: border-box;
+		padding-left: 24px;
+		& > *:not(:last-child) {
+			margin-bottom: 5px;
+		}
+	}
+}

@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { TaskApiPath } from '../../common';
+import { SOLUTION_STATUS, TaskApiPath } from '../../common';
 import {
 	taskIdSchema,
 	taskSchema,
 	validationMiddleware,
 	checkTaskIdMiddleware,
 	taskSearchSchema,
+	taskWithSolutionsSchema,
 } from '../../middleware';
 import { TaskService } from '../../services';
 
@@ -26,6 +27,17 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 		.get(TaskApiPath.ROOT, (req, res, next) =>
 			taskService
 				.getTasks(req.validData || {})
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.get(TaskApiPath.USER_SOLUTIONS, validationMiddleware([taskWithSolutionsSchema]), (req, res, next) =>
+			taskService
+				.getTasksWithUserSolutions({
+					userId: req.user.id,
+					solutionStatus: req.query.status as SOLUTION_STATUS,
+					skip: Number(req.query.skip) || 0,
+					take: Number(req.query.take) || 10,
+				})
 				.then((data) => res.send(data))
 				.catch(next),
 		)

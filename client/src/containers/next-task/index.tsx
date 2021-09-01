@@ -10,6 +10,8 @@ import { FocusKeys } from 'constants/FocusKeys';
 import { useDispatch } from 'react-redux';
 import { getTasks } from '../home-page/logic/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import historyHelper from 'helpers/history.helper';
+import { ROUTES } from 'constants/routes';
 
 const icons = {
 	Fundamentals: fundamentalsIcon,
@@ -52,7 +54,10 @@ const NextTaskContainer = () => {
 	}, [activeFocusValue.title]);
 
 	const handleTrainClick = () => {
-		console.log('train click');
+		if (task) {
+			const path = `${ROUTES.TaskInfo}/${task?.id}/train`;
+			historyHelper.push(path);
+		}
 	};
 
 	const handleSkipClick = () => {

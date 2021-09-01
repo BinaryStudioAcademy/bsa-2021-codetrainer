@@ -6,6 +6,8 @@ import { User } from '../../models';
 export class UserRepository extends AbstractRepository<User> {
 	userFields = [
 		'user.id',
+		'user.rank',
+		'user.honor',
 		'user.name',
 		'user.surname',
 		'user.username',
@@ -25,9 +27,7 @@ export class UserRepository extends AbstractRepository<User> {
 		return this.createQueryBuilder('user')
 			.leftJoinAndSelect('user.followers', 'followers')
 			.leftJoinAndSelect('user.following', 'following')
-			.select([...this.userFields,
-				'followers', 'following'
-			])
+			.select([...this.userFields, 'followers', 'following'])
 			.getMany();
 	}
 
@@ -45,7 +45,21 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
 			.leftJoinAndSelect('user.solutions', 'solution')
-			.select([...this.userFields, 'clan', 'solution.id', 'profileClan', 'task.id'])
+			.leftJoinAndSelect('user.followers', 'followers')
+			.leftJoinAndSelect('user.following', 'following')
+			.leftJoinAndSelect('following.following', 'following_user')
+			.leftJoinAndSelect('followers.follower', 'follower_user')
+			.select([
+				...this.userFields,
+				'clan',
+				'solution.id',
+				'profileClan',
+				'task.id',
+				'followers.id',
+				'following.id',
+				'follower_user',
+				'following_user',
+			])
 			.where('user.id = :id', { id })
 			.getOne();
 	}
@@ -67,12 +81,9 @@ export class UserRepository extends AbstractRepository<User> {
 	}
 
 	getPasswordById(id: string) {
-		return this.createQueryBuilder('user')
-			.select(['user.password'])
-			.where('user.id = :id', { id })
-			.getOne();
+		return this.createQueryBuilder('user').select(['user.password']).where('user.id = :id', { id }).getOne();
 	}
-	
+
 	search(query: { username: string }) {
 		const { username } = query;
 		return this.createQueryBuilder('user')
@@ -82,6 +93,9 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
+				'user.createdAt',
+				'user.lastVisit',
+				'user.avatar',
 				'user.username',
 				'user.name',
 				'user.surname',
@@ -94,5 +108,35 @@ export class UserRepository extends AbstractRepository<User> {
 			])
 			.where('user.username = :username', { username })
 			.getOne();
+	}
+
+	async getLeaders(query: { skip: number; take: number; nameQuery?: string }) {
+		const { nameQuery = '', take, skip } = query;
+		const searchQuery = this.createQueryBuilder('user')
+			.leftJoinAndSelect('user.profileClan', 'profileClan')
+			.leftJoinAndSelect('user.clan', 'clan')
+			.leftJoinAndSelect('user.tasks', 'task')
+			.leftJoinAndSelect('user.solutions', 'solution')
+			.select([
+				'user.id',
+				'user.honor',
+				'user.username',
+				'user.name',
+				'user.surname',
+				'user.email',
+				'user.githubId',
+				'clan',
+				'solution.id',
+				'profileClan',
+				'task.id',
+			])
+			.orderBy('user.honor', 'DESC')
+			.where('user.name ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` })
+			.orWhere('user.surname ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` });
+
+		return {
+			count: await searchQuery.getCount(),
+			data: await searchQuery.skip(skip).take(take).getMany(),
+		};
 	}
 }

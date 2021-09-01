@@ -1,7 +1,9 @@
 import { MemberRoles } from 'common/enum/app/clans';
+import { WebApi } from 'typings/webapi';
 
 export interface IMember {
 	id: string;
+	username: string;
 	rank: number;
 	avatar: string;
 	name: string;
@@ -24,7 +26,7 @@ export interface IClan {
 	maxMembers: number;
 	numberOfMembers: number;
 	createdAt: Date;
-	members: Array<IMember>;
+	members: WebApi.Entities.IMember[];
 }
 
 export type TClans = Array<IClan>;

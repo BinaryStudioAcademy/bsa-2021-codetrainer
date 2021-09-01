@@ -1,9 +1,11 @@
+import { IClan } from 'containers/clans/types';
 import { IListItem } from '../list-radio/interfaces';
 
 export interface IInformationProps {
 	list: IList;
 	formItems: Array<IFormItem>;
 	onSubmit: (form: any) => void;
+	clan?: IClan | null;
 }
 
 interface IList {

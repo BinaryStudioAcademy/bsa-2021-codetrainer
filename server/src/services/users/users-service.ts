@@ -38,8 +38,8 @@ export class User {
 			}
 		}
 
-		if(user?.username !== body.username) {
-			if(await repository.exists({ username: body.username })) {
+		if (user?.username !== body.username) {
+			if (await repository.exists({ username: body.username })) {
 				throw new ValidationError(CODE_ERRORS.USERNAME_ALREDY_EXIST);
 			}
 		}
@@ -62,20 +62,20 @@ export class User {
 		return { delete: isDeleted };
 	}
 
-	async updatePassword(id: string, body: UserType & {newPassword: string}) {
+	async updatePassword(id: string, body: UserType & { newPassword: string }) {
 		const repository = getCustomRepository(this.userRepository);
 		const user = await repository.getPasswordById(id);
 
-		if(body.password && !(await cryptCompare(body.password, user?.password))) {
+		if (body.password && !(await cryptCompare(body.password, user?.password))) {
 			throw new ValidationError(CODE_ERRORS.PASSWORD_NOT_MATCH);
 		}
 
 		await repository.updateById(id, {
-			password: await encrypt(body.newPassword)
+			password: await encrypt(body.newPassword),
 		});
 
 		return {
-			passwordChanged: true
+			passwordChanged: true,
 		};
 	}
 
@@ -86,6 +86,13 @@ export class User {
 			throw new ValidationError(CODE_ERRORS.USERNAME_NOT_EXIST(query.username));
 		}
 		return { user };
+	}
+
+	async getLeaders(query: { take: number; skip: number; nameQuery: string }) {
+		const userRepository = getCustomRepository(this.userRepository);
+		const result = await userRepository.getLeaders(query);
+
+		return result;
 	}
 }
 

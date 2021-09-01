@@ -1,5 +1,5 @@
 import { checkSchema } from 'express-validator';
-import { CODE_ERRORS, SEARCH_PROGRESS, TASK_ORDER_BY, TASK_QUERY_SEPARATOR, TASK_STATUS } from '../../../common';
+import { CODE_ERRORS, SEARCH_PROGRESS, TASK_ORDER_BY, TASK_STATUS } from '../../../common';
 import { ValidationError } from '../../../helpers';
 import { tagsValidation } from './task-tags-validation';
 

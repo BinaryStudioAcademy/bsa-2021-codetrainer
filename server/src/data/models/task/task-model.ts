@@ -27,13 +27,10 @@ export class Task extends AbstractEntity {
 	completeSolution?: string;
 
 	@Column({ type: 'text', default: '' })
-	initialSolution?: string;
+	initialSolution!: string;
 
 	@Column({ type: 'text', default: '' })
-	preloaded?: string;
-
-	@Column({ type: 'text', default: '' })
-	testCases?: string;
+	testCases!: string;
 
 	@Column({ type: 'text', default: '' })
 	exampleTestCases?: string;
@@ -52,6 +49,7 @@ export class Task extends AbstractEntity {
 	comments!: CommentTask[];
 
 	@OneToMany(() => Solution, (solution) => solution.task)
+	// @JoinColumn()
 	solutions!: Solution[];
 
 	@ManyToMany(() => Tag, (tag) => tag.tasks)
@@ -63,9 +61,6 @@ export class Task extends AbstractEntity {
 
 	@Column({ default: 100 })
 	positiveFeedback!: number;
-
-	@CreateDateColumn()
-	created!: Date;
 
 	@CreateDateColumn()
 	published!: Date;

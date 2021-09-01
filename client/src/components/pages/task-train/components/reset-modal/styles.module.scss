@@ -1,0 +1,7 @@
+.modalResetButtons {
+	display: flex;
+	justify-content: flex-end;
+	& > *:first-child {
+		margin-right: 15px;
+	}
+}

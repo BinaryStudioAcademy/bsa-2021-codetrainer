@@ -77,13 +77,6 @@ export const taskSchema = checkSchema({
 		optional: true,
 		notEmpty: true,
 	},
-	preloaded: {
-		in: 'body',
-		errorMessage: 'Wrong preloaded format',
-		trim: true,
-		isString: true,
-		optional: true,
-	},
 	testCases: {
 		in: 'body',
 		errorMessage: 'Wrong test cases format',

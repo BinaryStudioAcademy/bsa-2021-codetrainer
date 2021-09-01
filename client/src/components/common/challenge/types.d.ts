@@ -4,7 +4,7 @@ export interface IChallengeStats {
 	author: {
 		firstName: string;
 		lastName: string;
-		link: string;
+		username: string;
 	};
 }
 
@@ -19,7 +19,7 @@ export interface IChallenge {
 	author: {
 		firstName: string;
 		lastName: string;
-		link: string;
+		username: string;
 	};
 	linkToTask: string;
 	title: string;
