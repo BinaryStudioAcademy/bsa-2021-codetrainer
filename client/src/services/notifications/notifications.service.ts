@@ -4,6 +4,7 @@ import { TNotification } from 'typings/common/INotification';
 
 export const addNotification = async (notification: TNotification, userId: string = '123') => {
 	const firestore = getFirestore(app);
+
 	await setDoc(doc(firestore, 'notifications', notification.id), {
 		createdAt: notification.date,
 		id: notification.id,

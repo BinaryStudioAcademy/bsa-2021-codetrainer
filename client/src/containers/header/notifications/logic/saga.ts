@@ -6,7 +6,6 @@ import { getFirestore, collection, query, getDocs, limit, orderBy } from 'fireba
 import { app } from 'containers/app/app';
 import { NotificationTypes, TNotification } from 'typings/common/INotification';
 import { doc, setDoc, where } from 'firebase/firestore';
-import { v4 as uuid } from 'uuid';
 function* readNotification({ id }: ReturnType<typeof actions.readNotification>) {
 	const store: IRootState = yield select();
 	const firestore = getFirestore(app);
@@ -35,18 +34,15 @@ function* fetchNotification() {
 	const firestore = getFirestore(app);
 	const store: IRootState = yield select();
 	const userId = store.auth.userData.user?.id;
-	console.log(userId);
-
 	const q = query(
 		collection(firestore, 'notifications'),
 		where('userId', '==', userId),
 		orderBy('createdAt'),
 		limit(10),
 	);
-	console.log(uuid());
-
 	const querySnapshot: TNotification[] = [];
 	const result: Record<string, any>[] = yield getDocs(q);
+	store.header.notifications.clear();
 	result.forEach((notification) => {
 		const data = notification.data();
 		switch (data.type) {
@@ -103,8 +99,9 @@ function* fetchNotification() {
 				break;
 		}
 	});
-	console.log(querySnapshot);
-
+	querySnapshot.forEach((item) => {
+		store.header.notifications.set(item.id, item);
+	});
 	try {
 		yield put(
 			actions.setNotifications({

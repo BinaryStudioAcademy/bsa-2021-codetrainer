@@ -8,12 +8,12 @@ import { NotificationContainer } from '../notification';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyA8hTXhq8wzWikJrcHjmiXdd7BmlKbzvoE',
-	authDomain: 'codetr.firebaseapp.com',
-	projectId: 'codetr',
-	storageBucket: 'codetr.appspot.com',
-	messagingSenderId: '357129737103',
-	appId: '1:357129737103:web:ada61c15b35d5252ff71fa',
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+	projectId: process.env.REACT_APP_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+	appId: process.env.REACT_APP_APP_ID,
 };
 export const app = initializeApp(firebaseConfig);
 

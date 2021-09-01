@@ -13,14 +13,13 @@ const Header: React.FC = () => {
 	const { user } = useAppSelector((state) => state.auth.userData);
 	const firestore = getFirestore(app);
 	const q = query(collection(firestore, 'notifications'), where('userId', '==', user?.id));
+	const { notifications: unorderedNotifications } = useHeaderSelector();
 	useEffect(() => {
 		dispatch(notificationsActions.fetchNotification());
 		onSnapshot(q, (querySnapshot) => {
 			dispatch(notificationsActions.fetchNotification());
 		});
 	}, []);
-
-	const { notifications: unorderedNotifications } = useHeaderSelector();
 
 	const headerProps: IHeaderProps = {
 		name: `${user?.name} ${user?.surname}`,
