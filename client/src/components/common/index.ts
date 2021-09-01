@@ -16,3 +16,6 @@ export { default as Notification } from './notification';
 export { TaskList } from './task-list';
 export * from './collection';
 export * from './task-solutions';
+export * from './markdown';
+export { default as Tabs } from './tabs';
+export * from './code-editor';

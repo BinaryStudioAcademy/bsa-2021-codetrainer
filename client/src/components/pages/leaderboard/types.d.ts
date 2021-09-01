@@ -1,9 +1,8 @@
 import { WebApi } from 'typings/webapi';
 
-
 export interface ILeaderBoardProps {
 	isLoading: boolean;
-	users: WebApi.Entities.IUser[]
+	users: WebApi.Entities.IUser[];
 	setNameQuery: (nameQuery: string) => void;
 	nameQuery: string;
 	page: number;

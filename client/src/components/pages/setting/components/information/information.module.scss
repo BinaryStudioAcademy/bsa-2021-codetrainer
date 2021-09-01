@@ -62,3 +62,16 @@
 		margin: 0 5px;
 	}
 }
+
+.label {
+	display: block;
+	font: var.$progress-bar-font;
+	line-height: 15px;
+	color: var(--text-color);
+	margin-bottom: 5px;
+}
+
+.clanInfo {
+	margin-top: 15px;
+	font: var.$base-font;
+}

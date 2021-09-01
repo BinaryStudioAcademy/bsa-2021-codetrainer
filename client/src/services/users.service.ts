@@ -21,7 +21,6 @@ export const fetchUsersSearch = async (query: Record<string, any>): Promise<Reco
 	return search;
 };
 
-
 export const fetchUserLeaders = async ({
 	page,
 	itemsPerPage,
@@ -47,7 +46,6 @@ export const fetchUserLeaders = async ({
 		return error;
 	}
 };
-
 
 export const getUserById = async (id: string) => {
 	const result = await http.callWebApi({

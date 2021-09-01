@@ -13,7 +13,7 @@ export const Stats = ({ task }: IStatsProps) => {
 		<div className={styles.stats}>
 			<h3>Stats</h3>
 			<div className={styles.data}>
-				<Item item="Created" value={moment(task.created).format('MMM Do YY')} />
+				<Item item="Created" value={moment(task.createdAt).format('MMM Do YY')} />
 				<Item item="Total stars" value={task.stars} />
 				<Item item="Published" value={moment(task.published).format('MMM Do YY')} />
 				<Item item="% of votes with a positive feedback rating" value={task.positiveFeedback} />
