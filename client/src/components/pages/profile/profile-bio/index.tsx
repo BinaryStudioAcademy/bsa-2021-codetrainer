@@ -45,7 +45,7 @@ export const ProfileBio: React.FC<IProfileBioProps> = ({
 			{github.login}
 		</a>
 	) : (
-		'Github account not connected'
+		'Not linked'
 	);
 
 	const listItems1 = [
