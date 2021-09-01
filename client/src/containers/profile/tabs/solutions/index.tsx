@@ -20,13 +20,13 @@ const solutionTabs: TSolutionTab[] = [
 		title: 'Completed',
 		value: SolutionStatus.COMPLETED,
 		loader: getCompletedSolutions,
-		empty: "You don't have completed solutions yet",
+		empty: "User doesn't have completed solutions yet.",
 	},
 	{
 		title: 'Uncompleted',
 		value: SolutionStatus.NOT_COMPLETED,
 		loader: getUncompletedSolutions,
-		empty: "You don't have uncompleted solutions yet",
+		empty: "User doesn't have uncompleted solutions yet.",
 	},
 ];
 

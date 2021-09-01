@@ -26,13 +26,13 @@ const collectionsTabs: TCollectionsTab[] = [
 		title: 'Authored',
 		value: CollectionsTabValues.Authored,
 		loader: getAuthoredCollections,
-		empty: 'There are no items to show',
+		empty: 'There are no items to show.',
 	},
 	{
 		title: 'Followed',
 		value: CollectionsTabValues.Followed,
 		loader: getFollowedCollections,
-		empty: 'You have not started to follow any collection yet',
+		empty: "User doesn't follow any collections yet.",
 	},
 ];
 
