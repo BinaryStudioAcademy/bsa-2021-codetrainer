@@ -76,6 +76,7 @@ declare namespace WebApi.Entities {
 		id: string;
 		username: string;
 		rank: number;
+		username: string;
 		avatar: string;
 		name: string;
 		surname: string;

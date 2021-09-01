@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 .community {
 	border-radius: 10px;
 	margin-bottom: 40px;
@@ -31,44 +33,22 @@
 	font-weight: 400;
 }
 
-.communityTableHeader {
-	display: flex;
-	justify-content: space-between;
+.communityUsers {
+	width: 100%;
+}
+
+.community {
+	&Clan {
+		width: 30%;
+	}
+
+	&Honor {
+		width: 30%;
+	}
 }
 
 .communityColumnTitle {
-	display: block;
-	width: 100%;
-}
-
-.communityTableBody {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 25px;
-	max-height: 150px;
-	overflow-y: auto;
-	padding-bottom: 10px;
-}
-
-.communityColumn {
-	width: 100%;
-}
-
-.communityColumn h5 {
-	margin: 0 0 12px;
-
-	font-size: 16px;
-	font-weight: 500;
-}
-
-.columnText {
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px;
-	height: 27px;
-
-	font-size: 14px;
-	font-weight: 400;
+	font: 500 16px $base-font-family;
 }
 
 .userRow {
