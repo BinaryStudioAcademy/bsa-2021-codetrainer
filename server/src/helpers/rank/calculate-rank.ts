@@ -1,5 +1,6 @@
-import { betaTaskScore, userRankToTaskRank, taskScore, userRankScore, countOfRanks } from '../../common';
-import { User } from '../../data';
+import { getCustomRepository } from 'typeorm';
+import { UserRepository, TaskRepository, User } from '../../data';
+import { betaTaskScore, userRankToTaskRank, taskScore, userRankScore, countOfRanks, TASK_STATUS } from '../../common';
 
 export class CalculateRank {
 	private static getExtraPercent(userRank: number, taskRank: number): number {
@@ -31,12 +32,24 @@ export class CalculateRank {
 		);
 	}
 
-	static approved(user: User, taskRank: number): { rank: number; honor: number } {
+	static async check(userId: string, taskId: string) {
+		const userRepository = getCustomRepository(UserRepository);
+		const taskRepository = getCustomRepository(TaskRepository);
+		const user = await userRepository.getById(userId);
+		const task = await taskRepository.getById(taskId);
+		if (!user || !task) {
+			return;
+		}
+		const userData = CalculateRank[task.status](user, task.rank);
+		await userRepository.updateById(user.id, userData);
+	}
+
+	private static approved(user: User, taskRank: number): { rank: number; honor: number } {
 		const extraPercent = CalculateRank.getExtraPercent(user.rank, taskRank);
 		return CalculateRank.getUserData(user, taskScore[taskRank], extraPercent / 100 + 1);
 	}
 
-	static beta(user: User): { rank: number; honor: number } {
+	private static beta(user: User): { rank: number; honor: number } {
 		return CalculateRank.getUserData(user, betaTaskScore);
 	}
 }

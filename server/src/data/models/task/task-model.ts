@@ -27,13 +27,13 @@ export class Task extends AbstractEntity {
 	completeSolution?: string;
 
 	@Column({ type: 'text', default: '' })
-	initialSolution?: string;
+	initialSolution!: string;
 
 	@Column({ type: 'text', default: '' })
 	preloaded?: string;
 
 	@Column({ type: 'text', default: '' })
-	testCases?: string;
+	testCases!: string;
 
 	@Column({ type: 'text', default: '' })
 	exampleTestCases?: string;
@@ -63,9 +63,6 @@ export class Task extends AbstractEntity {
 
 	@Column({ default: 100 })
 	positiveFeedback!: number;
-
-	@CreateDateColumn()
-	created!: Date;
 
 	@CreateDateColumn()
 	published!: Date;

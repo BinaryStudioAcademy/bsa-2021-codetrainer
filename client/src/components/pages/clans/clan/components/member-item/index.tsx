@@ -14,11 +14,11 @@ const MemberItem: React.FC<IMemberItemProps> = ({ member }) => {
 			</td>
 			<td>{member.avatar ? <img src={member.avatar} alt="Avatar" /> : <span>No avatar</span>}</td>
 			<td>
-				<Link to={`${ROUTES.Users}/${member.username}`}>{member.name} {member.surname}</Link>
+				<Link to={`${ROUTES.Users}/${member.username}`}>
+					{member.name} {member.surname}
+				</Link>
 			</td>
-			<td>
-				{getFullDate(member.createdAt)}
-			</td>
+			<td>{getFullDate(member.createdAt)}</td>
 			<td>{member.honor}</td>
 		</tr>
 	);

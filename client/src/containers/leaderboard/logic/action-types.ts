@@ -16,7 +16,6 @@ export interface IAddUsersArgs {
 	count: number;
 }
 
-
 export interface IAddErrorArgs {
 	error: string;
 }

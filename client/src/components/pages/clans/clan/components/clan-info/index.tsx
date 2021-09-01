@@ -24,9 +24,7 @@ const ClanInfo: React.FC<IClanInfoProps> = ({ clan, isOwnClan, leaveClan, joinCl
 				<span>{clan.name}</span>
 				<Rank rank={clan.rank} />
 				<Rank honor={clan.honor} />
-				<span>
-					{getFullDate(clan.createdAt)}
-				</span>
+				<span>{getFullDate(clan.createdAt)}</span>
 				<span>
 					Admin: {clanAdmin?.name} {clanAdmin?.surname}
 				</span>

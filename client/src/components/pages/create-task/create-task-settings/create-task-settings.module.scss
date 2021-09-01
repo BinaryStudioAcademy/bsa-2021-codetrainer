@@ -3,16 +3,13 @@
 .createTaskSettings {
 	padding: 20px;
 	color: var(--text-color);
+	.disciplineItems {
+		display: flex;
+		margin-bottom: 20px;
+	}
 	form {
 		.disciplinesHeading {
 			font: $tub-font;
-		}
-		.radioList {
-			display: flex;
-			gap: 20px;
-			input {
-				display: none;
-			}
 		}
 		input {
 			width: 100%;
@@ -40,6 +37,4 @@
 	font-size: 14px;
 	display: flex;
 	align-items: flex-end;
-}
-.switchLabel {
 }
