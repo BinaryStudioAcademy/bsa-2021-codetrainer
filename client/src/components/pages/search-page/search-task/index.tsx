@@ -92,14 +92,16 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 
 					<h6 className={styles.header}>Difficulty</h6>
 					<div className={styles.rankContainer}>
-						{ranks.map((rank) => (
-							<ClickableRank
-								key={rank.toString()}
-								rank={rank}
-								active={filter?.rank === rank}
-								onChange={() => handleChangeRank(rank)}
-							/>
-						))}
+						{ranks
+							.sort((a, b) => b - a)
+							.map((rank) => (
+								<ClickableRank
+									key={rank.toString()}
+									rank={rank}
+									active={filter?.rank === rank}
+									onChange={() => handleChangeRank(rank)}
+								/>
+							))}
 					</div>
 					<div id="checkbox-group">
 						<h6 className={styles.header}>Tags</h6>
