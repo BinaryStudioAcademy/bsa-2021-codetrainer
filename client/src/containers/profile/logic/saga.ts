@@ -5,13 +5,15 @@ import {
 	getFollowingsByUserId,
 } from './../../../services/follower/followers.service';
 import { fetchUsersSearch, getUserById } from 'services';
-import { all, put, call, takeLatest } from 'redux-saga/effects';
+import { all, put, call, takeLatest, select, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
+import * as userActions from '../../user/logic/actions';
 import { getTaskById } from 'services/task/task.service';
 import { IUser } from 'typings/common/IUser';
 import { ROUTES } from 'constants/routes';
 import { mapUserResponseToUser } from 'helpers/user.helper';
+import { followUser, unfollowUser } from 'services/followers.service';
 
 const getIChallenge = (
 	tasks: Array<{
@@ -134,6 +136,38 @@ function* watchFetchSearch() {
 	yield takeLatest(actionTypes.SEARCH_USER_FETCH, fetchUserSearch);
 }
 
+function* followUserWorker({ id }: ReturnType<typeof actions.followUser>): any {
+	try {
+		const followingUser = yield call(followUser, id);
+		yield put(actions.updateProfile({ user: followingUser }));
+
+		const currentUser = yield select((state) => state.auth.userData.user);
+		const updatedUser = yield call(getUserById, currentUser.id);
+
+		yield put(userActions.setUser(updatedUser));
+	} catch (error) {}
+}
+
+function* followUserWatcher() {
+	yield takeEvery(actionTypes.FOLLOW_USER, followUserWorker);
+}
+
+function* unfollowUserWorker({ id }: ReturnType<typeof actions.unfollowUser>): any {
+	try {
+		const unfollowedUser = yield call(unfollowUser, id);
+		yield put(actions.updateProfile({ user: unfollowedUser }));
+
+		const currentUser = yield select((state) => state.auth.userData.user);
+		const updatedUser = yield call(getUserById, currentUser.id);
+
+		yield put(userActions.setUser(updatedUser));
+	} catch (error) {}
+}
+
+function* unfollowUserWatcher() {
+	yield takeEvery(actionTypes.UNFOLLOW_USER, unfollowUserWorker);
+}
+
 export default function* SearchSaga() {
-	yield all([watchFetchSearch()]);
+	yield all([watchFetchSearch(), followUserWatcher(), unfollowUserWatcher()]);
 }
