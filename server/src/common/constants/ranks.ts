@@ -21,17 +21,13 @@ export const userRankScore: Record<string, number> = {
 	1: 35760,
 };
 export const countOfRanks = 9;
-export const userRankToTaskRank: Record<string, Record<number, number>> = {
-	plus: {
-		2: 30,
-		1: 12,
-	},
-	zero: { 0: 5 },
-	minus: {
-		1: 1.7,
-		2: 0.3,
-		3: 0.09,
-	},
+export const userRankToTaskRank: Record<string, number> = {
+	2: 30,
+	1: 12,
+	0: 5,
+	'-1': 1.7,
+	'-2': 0.3,
+	'-3': 0.09,
 };
 
 export const betaTaskScore = 2;

@@ -4,17 +4,12 @@ import { User } from '../../data';
 export class CalculateRank {
 	private static getExtraPercent(userRank: number, taskRank: number): number {
 		let rankDifferent = userRank - taskRank;
-		let userRankToTaskRankKey!: string;
-		if (rankDifferent === 0) {
-			userRankToTaskRankKey = 'zero';
-		} else if (rankDifferent > 0) {
-			userRankToTaskRankKey = 'plus';
-		} else {
-			userRankToTaskRankKey = 'minus';
+		if (rankDifferent > 2) {
+			rankDifferent = 2;
+		} else if (rankDifferent < -3) {
+			rankDifferent = -3;
 		}
-		rankDifferent = rankDifferent > 2 ? 2 : rankDifferent;
-		rankDifferent = rankDifferent < -3 ? 3 : rankDifferent;
-		return userRankToTaskRank[userRankToTaskRankKey][rankDifferent];
+		return userRankToTaskRank[rankDifferent];
 	}
 
 	private static getUserData(user: User, taskPoint: number, extraPercent: number = 1) {
