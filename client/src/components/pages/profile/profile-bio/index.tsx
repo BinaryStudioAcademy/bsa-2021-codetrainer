@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile-bio.module.scss';
-import { Avatar, Label, List, Rank, Button } from 'components/basic';
+import { Avatar, List, Rank, Button } from 'components/basic';
 import { IUser } from 'typings/common/IUser';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
@@ -69,7 +69,7 @@ export const ProfileBio: React.FC<IProfileBioProps> = ({
 				{avatar ? <Avatar avatar={avatar} size={57} /> : <Avatar size={57} />}
 				<h5 className={styles.name}>{`${name} ${surname}`}</h5>
 				<Rank rank={rank ? rank : 9} />
-				<Label label={score ? score : 0} color="#EC4179" />
+				<Rank honor={score ? score : 0} />
 			</div>
 			<div className={styles.fields}>
 				<List items={listItems1} />
