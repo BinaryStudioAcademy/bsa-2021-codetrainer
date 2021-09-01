@@ -1,9 +1,8 @@
-import { getCustomRepository } from 'typeorm';
-import { UserRepository, TaskRepository, User } from '../../data';
-import { betaTaskScore, userRankToTaskRank, taskScore, userRankScore, countOfRanks, TASK_STATUS } from '../../common';
+import { User, Task } from '../../data';
+import { betaTaskScore, userRankToTaskRank, taskScore, userRankScore, countOfRanks } from '../../common';
 
-export class CalculateRank {
-	private static getExtraPercent(userRank: number, taskRank: number): number {
+class CalculateRank {
+	private getExtraPercent(userRank: number, taskRank: number): number {
 		let rankDifferent = userRank - taskRank;
 		if (rankDifferent > 2) {
 			rankDifferent = 2;
@@ -13,7 +12,7 @@ export class CalculateRank {
 		return userRankToTaskRank[rankDifferent];
 	}
 
-	private static getUserData(user: User, taskPoint: number, extraPercent: number = 1) {
+	private getUserData(user: User, taskPoint: number, extraPercent: number = 1) {
 		const rankScore = Object.values(userRankScore).sort((a, b) => a - b);
 		const getUserPoint = Math.round(taskPoint * extraPercent);
 		const userTotalHonor =
@@ -32,24 +31,21 @@ export class CalculateRank {
 		);
 	}
 
-	static async check(userId: string, taskId: string) {
-		const userRepository = getCustomRepository(UserRepository);
-		const taskRepository = getCustomRepository(TaskRepository);
-		const user = await userRepository.getById(userId);
-		const task = await taskRepository.getById(taskId);
+	check({ user, task }: { user?: User; task?: Task }) {
 		if (!user || !task) {
-			return;
+			return {};
 		}
-		const userData = CalculateRank[task.status](user, task.rank);
-		await userRepository.updateById(user.id, userData);
+		return this[task.status](user, task.rank);
 	}
 
-	private static approved(user: User, taskRank: number): { rank: number; honor: number } {
-		const extraPercent = CalculateRank.getExtraPercent(user.rank, taskRank);
-		return CalculateRank.getUserData(user, taskScore[taskRank], extraPercent / 100 + 1);
+	private approved(user: User, taskRank: number): { rank: number; honor: number } {
+		const extraPercent = this.getExtraPercent(user.rank, taskRank);
+		return this.getUserData(user, taskScore[taskRank], extraPercent / 100 + 1);
 	}
 
-	private static beta(user: User): { rank: number; honor: number } {
-		return CalculateRank.getUserData(user, betaTaskScore);
+	private beta(user: User): { rank: number; honor: number } {
+		return this.getUserData(user, betaTaskScore);
 	}
 }
+
+export const calculateRank = new CalculateRank();

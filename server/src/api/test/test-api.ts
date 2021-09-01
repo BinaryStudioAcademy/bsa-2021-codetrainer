@@ -10,7 +10,7 @@ export const initTest = (appRouter: typeof Router, services: { solution: Solutio
 	router.post(TestApiPath.RESULT, (req, res, next) =>
 		solutionService
 			.setResult(req.body)
-			.then(({ result, typeTest, solution, user, userId }) => {
+			.then(async ({ result, typeTest, solution, user, userId }) => {
 				req.io.to(sockets.get(userId) || '').emit(SOCKET_EVENTS.RESULT_TEST_TO_CLIENT, {
 					result,
 					typeTest,

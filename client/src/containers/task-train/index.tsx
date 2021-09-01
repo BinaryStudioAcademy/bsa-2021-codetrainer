@@ -23,9 +23,9 @@ const TaskTrain: React.FC = () => {
 	const { id: taskId }: { id: string } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
-
+	const stateTaskTrain = useAppSelector((state) => state.task);
 	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus, isSuccess } =
-		useAppSelector((state) => state.task);
+		stateTaskTrain;
 
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
@@ -127,9 +127,6 @@ const TaskTrain: React.FC = () => {
 				solution={solution}
 				activeTab={activeTab}
 				result={testResult?.result || {}}
-				success={
-					(testResult?.result?.success && testResult?.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) || false
-				}
 				onChangeTab={(tab: number) => dispatch(actions.setActiveTab({ tab }))}
 				onSubmit={handleSubmit}
 				onReset={handleReset}

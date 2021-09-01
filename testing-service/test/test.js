@@ -1,7 +1,5 @@
 const assert = require('assert');
-<<<<<<< HEAD
-asds
-=======
+function test(a, b) {
+  /// you solution
+}
 asd
-asd
->>>>>>> develop
