@@ -22,6 +22,7 @@ import { addTask, deleteTaskRedux } from 'containers/user/logic/actions';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { WebApi } from 'typings/webapi';
 import { useEffect } from 'react';
+import { NUMBER_OF_RANKS } from 'enum/ranks';
 
 export interface ICreateTaskProps {}
 
@@ -495,46 +496,15 @@ describe("twoOldestAges", function() {
 			handleTaskChange(taskId);
 		}
 	}, []);
-
+	const rankValues: ISelectValue[] = [];
+	for (let i = 0; i < NUMBER_OF_RANKS; i++) {
+		rankValues.push({
+			id: i.toString(),
+			title: i.toString(),
+		});
+	}
 	const rankSelectProps: ISelectProps = {
-		values: [
-			{
-				id: '1',
-				title: '1',
-			},
-			{
-				id: '2',
-				title: '2',
-			},
-			{
-				id: '3',
-				title: '3',
-			},
-			{
-				id: '4',
-				title: '4',
-			},
-			{
-				id: '5',
-				title: '5',
-			},
-			{
-				id: '6',
-				title: '6',
-			},
-			{
-				id: '7',
-				title: '7',
-			},
-			{
-				id: '8',
-				title: '8',
-			},
-			{
-				id: '9',
-				title: '9',
-			},
-		],
+		values: rankValues,
 		onChange: (value) => {
 			setRank(value.title);
 			console.log(rank);
