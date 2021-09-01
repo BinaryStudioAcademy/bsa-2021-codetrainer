@@ -1,0 +1,31 @@
+@import 'styles/variables.scss';
+
+@mixin element-color($color) {
+	color: $color;
+	svg path {
+		fill: $color;
+	}
+}
+
+.element {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+	@include element-color(var(--text-color));
+	&:not(:last-child) {
+		margin-right: 40px;
+	}
+	.text {
+		font: $menu-font;
+		font-size: 15px;
+		margin-top: 15px;
+	}
+	&Active,
+	&:hover {
+		@include element-color(var(--purple));
+	}
+	&Active {
+		cursor: auto;
+	}
+}

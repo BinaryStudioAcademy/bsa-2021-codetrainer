@@ -1,13 +1,13 @@
 import React, { ChangeEvent } from 'react';
-import { Classes, RadioGroup } from '@blueprintjs/core';
-import RadioItem from '../radio-item';
-import { InfoPopover, Select, Switch } from 'components/basic';
-import styles from './create-task-settings.module.scss';
-import './create-task-settings.scss';
-import { Discipline, IDisciplineItem } from 'containers/create-new-task/logic/models';
-import { ISelectProps } from 'components/basic/select/interface';
 import clsx from 'clsx';
 import { FormControlLabel, FormGroup } from '@material-ui/core';
+import { InfoPopover, Select, Switch } from 'components/basic';
+import { Discipline, IDisciplineItem } from 'containers/create-new-task/logic/models';
+import { ISelectProps } from 'components/basic/select/interface';
+import DisciplineElement from '../discipline-element';
+
+import './create-task-settings.scss';
+import styles from './create-task-settings.module.scss';
 
 interface ICreateTaskSettingsProps {
 	disciplineItems: IDisciplineItem[];
@@ -24,7 +24,7 @@ interface ICreateTaskSettingsProps {
 	setTags: (value: string) => void;
 }
 
-export const CreateTaskSettings = ({
+export const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = ({
 	disciplineItems,
 	onChangeDiscipline,
 	chosenDiscipline,
@@ -37,7 +37,7 @@ export const CreateTaskSettings = ({
 	setRank,
 	tags,
 	setTags,
-}: ICreateTaskSettingsProps) => {
+}) => {
 	return (
 		<div className={styles.createTaskSettings}>
 			<h2 className={clsx('heading', styles.heading)}>Create a New Challenge</h2>
@@ -46,7 +46,6 @@ export const CreateTaskSettings = ({
 					Name
 				</label>
 				<input
-					className={Classes.INPUT}
 					id="task-name"
 					placeholder="Enter Challenge Name"
 					value={taskName}
@@ -54,23 +53,19 @@ export const CreateTaskSettings = ({
 				/>
 
 				<h3 className={styles.disciplinesHeading}>Disciplines</h3>
-				<RadioGroup
-					name="discipline"
-					onChange={(event) => onChangeDiscipline(event.currentTarget.value as Discipline)}
-					className={styles.radioList}
-					selectedValue={chosenDiscipline}
-				>
-					{disciplineItems.map((item, index) => {
+				<div className={styles.disciplineItems}>
+					{disciplineItems.map((item) => {
 						return (
-							<RadioItem
-								value={item.value}
+							<DisciplineElement
+								onClick={() => onChangeDiscipline(item.value)}
+								active={item.value === chosenDiscipline}
 								icon={<item.iconFC width={25} height={25} />}
 								text={item.label}
 								key={item.value}
 							/>
 						);
 					})}
-				</RadioGroup>
+				</div>
 				<label className={styles.label}>
 					Language version
 					<InfoPopover iconType={'help'}>Choose the language version the task will work for.</InfoPopover>
@@ -87,7 +82,6 @@ export const CreateTaskSettings = ({
 					</InfoPopover>
 				</label>
 				<input
-					className={Classes.INPUT}
 					id="estimated-rank"
 					placeholder="Enter Estimated Rank"
 					value={rank}
@@ -98,7 +92,6 @@ export const CreateTaskSettings = ({
 					Tags
 				</label>
 				<input
-					className={Classes.INPUT}
 					id="tags"
 					placeholder="Enter Tags (separated by comma)"
 					value={tags}
