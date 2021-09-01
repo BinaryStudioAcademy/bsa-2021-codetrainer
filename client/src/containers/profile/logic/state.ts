@@ -19,7 +19,7 @@ export interface IProfileState {
 				unpublishedTasks?: IChallenge[];
 				followersSocial?: IUser[];
 				followingsSocial?: IUser[];
-				comminitySocial?: IUser[];
+				communitySocial?: IUser[];
 		  })
 		| null;
 }

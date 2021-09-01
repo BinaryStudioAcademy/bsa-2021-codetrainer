@@ -18,7 +18,6 @@ export class UserRepository extends AbstractRepository<User> {
 		'user.lastVisit',
 		'user.skills',
 		'user.devLevel',
-		'user.social',
 		'user.email',
 		'user.githubId',
 	];

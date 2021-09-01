@@ -6,4 +6,5 @@ export const UsersApiPath = {
 	UPDATE_PASSWORD: '/:id/password',
 	SEARCH: '/search',
 	LEADERBOARD: '/leaderboard',
+	$ID_COMMUNITY: '/:id/community',
 };

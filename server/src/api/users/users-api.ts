@@ -32,6 +32,13 @@ export const initUsers = (appRouter: typeof Router, services: { users: TUsersSer
 				.then((data) => res.send(data))
 				.catch(next),
 		)
+
+		.get(UsersApiPath.$ID_COMMUNITY, (req, res, next) =>
+			usersService
+				.getCommunityByUser(req.params.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.put(
 			UsersApiPath.UPDATE,
 			userValidationMiddleware(SchemasUserDataValidation.userFieldsSchema, REQ_TYPE.BODY),

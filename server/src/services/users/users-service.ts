@@ -3,13 +3,27 @@ import { getCustomRepository } from 'typeorm';
 import { User as UserType } from '../../data/models';
 import { ValidationError, cryptCompare, encrypt } from '../../helpers';
 import { CODE_ERRORS } from '../../common';
-import { TUserRepository, User as UserEntity } from '../../data';
+import { TCommunityRepository, TFollowerRepository, TUserRepository, User as UserEntity } from '../../data';
 
 export class User {
 	protected userRepository: TUserRepository;
 
-	constructor({ user }: { user: TUserRepository }) {
+	protected communityRepository: TCommunityRepository;
+
+	protected followerRepository: TFollowerRepository;
+
+	constructor({
+		user,
+		community,
+		follower,
+	}: {
+		user: TUserRepository;
+		community: TCommunityRepository;
+		follower: TFollowerRepository;
+	}) {
 		this.userRepository = user;
+		this.communityRepository = community;
+		this.followerRepository = follower;
 	}
 
 	async getAllUsers() {
@@ -81,11 +95,25 @@ export class User {
 
 	async search(query: { username: string }) {
 		const userRepository = getCustomRepository(this.userRepository);
+		const communityRepository = getCustomRepository(this.communityRepository);
+		const followerRepository = getCustomRepository(this.followerRepository);
+
 		const user = await userRepository.search(query);
+		const community = await communityRepository.getCommunityByUser(user?.id || '');
+		const following = await followerRepository.getFollowing(user?.id || '');
+		const followers = await followerRepository.getFollowers(user?.id || '');
+
+		const result = {
+			...user,
+			communitySocial: community,
+			followingsSocial: following,
+			followersSocial: followers,
+		};
+
 		if (!user) {
 			throw new ValidationError(CODE_ERRORS.USERNAME_NOT_EXIST(query.username));
 		}
-		return { user };
+		return { user: result };
 	}
 
 	async getLeaders(query: { take: number; skip: number; nameQuery: string }) {
@@ -93,6 +121,13 @@ export class User {
 		const result = await userRepository.getLeaders(query);
 
 		return result;
+	}
+
+	async getCommunityByUser(userId: string) {
+		const communityRepository = getCustomRepository(this.communityRepository);
+		const community = await communityRepository.getCommunityByUser(userId);
+
+		return community;
 	}
 }
 

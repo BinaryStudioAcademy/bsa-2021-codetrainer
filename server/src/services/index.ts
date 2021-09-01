@@ -11,6 +11,7 @@ import {
 	FollowerRepository,
 	CollectionRepository,
 	CommentTaskRepository,
+	CommunityRepository,
 } from '../data';
 import { AuthService } from './auth';
 import { ClanService } from './clan';
@@ -24,7 +25,7 @@ import { CollectionService } from './collection/collection-service';
 
 const authService = new AuthService({ user: UserRepository });
 
-const users = new User({ user: UserRepository });
+const users = new User({ user: UserRepository, community: CommunityRepository, follower: FollowerRepository });
 type TUsersService = InstanceType<typeof User>;
 
 export { users, TUsersService };

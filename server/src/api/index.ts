@@ -10,6 +10,7 @@ import { initFollower } from './follower';
 import { initCollection } from './collection';
 import { initTest } from './test/test-api';
 import { initCommentTask } from './comment-task';
+
 import {
 	authService,
 	clanService,

@@ -134,7 +134,7 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const followersSocial = userData?.followersSocial;
 	const followingsSocial = userData?.followingsSocial;
-	const comminitySocial = userData?.comminitySocial;
+	const communitySocial = userData?.communitySocial;
 
 	const social = [
 		{
@@ -153,7 +153,7 @@ export const Profile = (props: RouteComponentProps) => {
 			title: 'Community',
 			id: 'community',
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			users: comminitySocial!,
+			users: communitySocial!,
 		},
 	];
 

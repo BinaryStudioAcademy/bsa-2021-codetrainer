@@ -55,3 +55,12 @@ export const getUserById = async (id: string) => {
 	});
 	return result;
 };
+
+export const getCommunityByUser = async (id: string) => {
+	const result = await http.callWebApi({
+		endpoint: `/users/${id}/community`,
+		method: 'GET',
+		skipAuthorization: false,
+	});
+	return result;
+}

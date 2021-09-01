@@ -6,3 +6,4 @@ export { CommentTask } from './comment-task';
 export { Tag } from './tag';
 export { Solution } from './solution';
 export { Collection } from './collection';
+export { Community } from './community';
