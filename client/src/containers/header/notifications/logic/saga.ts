@@ -45,13 +45,16 @@ function* fetchNotification() {
 	store.header.notifications.clear();
 	result.forEach((notification) => {
 		const data = notification.data();
+		const initialNotification = {
+			type: data.type,
+			id: data.id,
+			date: data.createdAt.toDate(),
+			read: data.read ?? false,
+		};
 		switch (data.type) {
 			case NotificationTypes.Common:
 				querySnapshot.push({
-					type: data.type,
-					id: data.id,
-					date: data.createdAt.toDate(),
-					read: data.read ?? false,
+					...initialNotification,
 					body: {
 						message: data.body.message,
 					},
@@ -59,10 +62,7 @@ function* fetchNotification() {
 				break;
 			case NotificationTypes.Follower:
 				querySnapshot.push({
-					type: data.type,
-					id: data.id,
-					date: data.createdAt.toDate(),
-					read: data.read ?? false,
+					...initialNotification,
 					body: {
 						follower: data.body.follower,
 					},
@@ -70,32 +70,29 @@ function* fetchNotification() {
 				break;
 			case NotificationTypes.HonorUnlocks:
 				querySnapshot.push({
-					type: data.type,
-					id: data.id,
-					date: data.createdAt.toDate(),
-					read: data.read ?? false,
+					...initialNotification,
 					body: data.body.unlocked,
 				});
 				break;
 			case NotificationTypes.JoinClan:
 				querySnapshot.push({
-					type: data.type,
-					id: data.id,
-					date: data.createdAt.toDate(),
-					read: data.read ?? false,
+					...initialNotification,
 					body: { clan: data.body.clan },
 				});
 				break;
 			case NotificationTypes.RankUp:
 				querySnapshot.push({
-					type: data.type,
-					id: data.id,
-					date: data.createdAt.toDate(),
-					read: data.read ?? false,
+					...initialNotification,
 					body: { rank: data.body.rank },
 				});
 				break;
 			default:
+				querySnapshot.push({
+					...initialNotification,
+					body: {
+						message: data.body.message,
+					},
+				});
 				break;
 		}
 	});
