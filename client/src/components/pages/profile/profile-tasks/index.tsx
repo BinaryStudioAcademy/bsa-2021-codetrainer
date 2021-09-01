@@ -27,7 +27,7 @@ export const Tasks: React.FC<IProfileTasks> = ({ tasks, showAddToCollection, emp
 					className={clsx(ButtonClasses.red, styles.button)}
 					onClick={() => historyHelper.push(ROUTES.createTask)}
 				>
-					Create new task
+					Create new challenge
 				</Button>
 			</>
 		)}

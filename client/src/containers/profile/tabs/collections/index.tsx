@@ -26,7 +26,7 @@ const collectionsTabs: TCollectionsTab[] = [
 		title: 'Authored',
 		value: CollectionsTabValues.Authored,
 		loader: getAuthoredCollections,
-		empty: 'There are no items to show.',
+		empty: "User doesn't have any collections yet.",
 	},
 	{
 		title: 'Followed',
