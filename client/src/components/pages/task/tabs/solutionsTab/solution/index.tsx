@@ -42,16 +42,11 @@ export const Solution = ({ solution, task }: ISolutionProps) => {
 			</div>
 			{isFeedOpened && (
 				<div className={styles.messages}>
-					{[
-						'fewjfoewaj oeiwhfoiey ofpey afydsiao foiyf ewqy yewqyfeoq yoewyq ogyeoq ygoewqy owyq y gqg ieyfgepqy feywqo fyqf ew yeowq ypoy ewqyr ewqypoewq yeqy ewqpyew qyoewqy owqy wepq ',
-						'fdskajf;sa',
-						'fdsja;lfdjsa',
-					].map((item) => {
+					{['fewjfoewaj okjhlhjkhlkh ', 'fdskajf;sa', 'fdsja;lfdjsa'].map((item) => {
 						return (
 							<FeedMessage id={item} key={item} user={user} task={task} body={item} createdAt={item} />
 						);
 					})}
-					messages
 				</div>
 			)}
 		</div>
