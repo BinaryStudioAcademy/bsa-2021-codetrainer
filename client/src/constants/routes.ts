@@ -28,6 +28,7 @@ export const ROUTES = {
 	Collections: '/collections',
 
 	Community: '/followers/community',
+	Following: '/followers/following',
 
 	Example: '/example',
 };

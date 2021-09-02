@@ -7,7 +7,6 @@ import FeedMessage from 'components/pages/home/components/feed-message';
 import { WebApi } from 'typings/webapi';
 import { ROUTES } from 'constants/routes';
 import { Link } from 'react-router-dom';
-// import { Divider } from '@material-ui/core';
 
 export interface ISolutionProps {
 	solution: WebApi.Entities.ISolution;
@@ -48,11 +47,19 @@ export const Solution = ({ solution }: ISolutionProps) => {
 			{isFeedOpened && (
 				<div className={styles.messages}>
 					{[
-						'fewjfoewaj oeiwhfoiey ofpey afydsiao foiyf ewqy yewqyfeoq yoewyq ogyeoq ygoewqy owyq y gqg ieyfgepqy feywqo fyqf ew yeowq ypoy ewqyr ewqypoewq yeqy ewqpyew qyoewqy owqy wepq ',
-						'fdskajf;sa',
-						'fdsja;lfdjsa',
+						'Awesome solution! ',
+						'So clean, readable and clever. Brilliant.',
+						"Oh wow, I didn't think to solve the null issue like this. Awesome solution, thanks for teaching me something new.",
 					].map((item) => {
-						return <FeedMessage id={item} key={item} user={user} body={item} createdAt={item} />;
+						return (
+							<FeedMessage
+								id={item}
+								key={item}
+								user={user}
+								body={item}
+								createdAt={String(solution.createdAt)}
+							/>
+						);
 					})}
 				</div>
 			)}

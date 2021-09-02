@@ -9,3 +9,12 @@ export const fetchCommunity = async (id: string): Promise<Record<string, any>> =
 
 	return community;
 };
+
+export const fetchFollowing = async (id: string): Promise<Record<string, any>> => {
+	const { followings } = await http.callWebApi({
+		method: 'GET',
+		endpoint: `${ROUTES.Following}/${id}`,
+	});
+
+	return followings;
+};

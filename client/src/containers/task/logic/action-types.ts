@@ -7,6 +7,16 @@ export const GET_TASKS = 'TASK:GET_TASKS';
 export const SET_TASKS = 'TASK:SET_TASKS';
 export const GET_NEXT_TASK = 'TASK:GET_NEXT_TASK';
 export const SET_NEXT_TASK = 'TASK:SET_NEXT_TASK';
+export const GET_FOLLOWING = 'TASK:GET_FOLLOWING';
+export const SET_FOLLOWING = 'TASK:SET_FOLLOWING';
+
+export type TGetFollowing = {
+	id?: string;
+};
+
+export type TSetFollowing = {
+	following: WebApi.Entities.IUser[];
+};
 
 export type TGetNextTask = {
 	id?: string;
