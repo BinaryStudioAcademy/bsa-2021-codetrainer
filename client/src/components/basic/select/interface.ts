@@ -8,6 +8,7 @@ export interface ISelectValue {
 }
 
 export interface ISelectProps {
+	className?: string;
 	values: ISelectValue[];
 	activeValue?: ISelectValue;
 	onChange?: (value: ISelectValue) => void;

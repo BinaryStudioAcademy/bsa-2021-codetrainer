@@ -5,7 +5,7 @@ import { Option } from '..';
 import { ISelectProps, ISelectValue } from './interface';
 import clsx from 'clsx';
 
-const Select = ({ values, activeValue, onChange, isButtonBlockSelect }: ISelectProps) => {
+const Select = ({ values, activeValue, onChange, isButtonBlockSelect, className }: ISelectProps) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
 	const listStyles = clsx(styles.optionsList, { [styles.optionsActive]: optionsListActive });
 	const handleChange = (value: ISelectValue) => {
@@ -18,7 +18,7 @@ const Select = ({ values, activeValue, onChange, isButtonBlockSelect }: ISelectP
 
 	return (
 		<ClickAwayListener onClickAway={() => setOptionsListActive(false)}>
-			<div className={wrapperClass}>
+			<div className={clsx(wrapperClass, className)}>
 				<h5 className={styles.select} onClick={() => setOptionsListActive(!optionsListActive)}>
 					{activeValue?.icon && <img src={activeValue?.icon} alt="icon" />}
 					<span>{activeValue?.title}</span>
