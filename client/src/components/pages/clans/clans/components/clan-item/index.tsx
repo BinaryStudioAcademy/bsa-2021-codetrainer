@@ -9,6 +9,7 @@ import styles from './clan-item.module.scss';
 import { TableCell, TableRow } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { getFullDate } from 'helpers/date.helper';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 
 const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
 	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
@@ -23,27 +24,45 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 		joinClan(clan.id);
 	};
 
+	const StyledTableCell = withStyles(() =>
+		createStyles({
+			head: {
+				backgroundColor: 'var(--pink)',
+			},
+			body: {
+				color: 'var(--text-color)',
+				fontSize: 14,
+			},
+		}),
+	)(TableCell);
+
+	const StyledTableRow = withStyles(() =>
+		createStyles({
+			root: {
+				backgroundColor: 'var(--container-color)',
+			},
+		}),
+	)(TableRow);
+
 	return (
-		<TableRow className={styles.clanRow}>
-			<TableCell>
+		<StyledTableRow className={styles.clanRow}>
+			<StyledTableCell>
 				<Rank rank={clan.rank ?? 0} />
-			</TableCell>
-			<TableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</TableCell>
-			<TableCell>
+			</StyledTableCell>
+			<StyledTableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</StyledTableCell>
+			<StyledTableCell>
 				<Link to={`${ROUTES.Clan}/${clan?.id}`}>{clan.name}</Link>
-			</TableCell>
-			<TableCell>
+			</StyledTableCell>
+			<StyledTableCell>
 				<span>{clan.numberOfMembers}</span>
-			</TableCell>
-			<TableCell>
-				<span>
-					{getFullDate(clan.createdAt)}
-				</span>
-			</TableCell>
-			<TableCell>
+			</StyledTableCell>
+			<StyledTableCell>
+				<span>{getFullDate(clan.createdAt)}</span>
+			</StyledTableCell>
+			<StyledTableCell>
 				<span>{clan.honor}</span>
-			</TableCell>
-			<TableCell>
+			</StyledTableCell>
+			<StyledTableCell>
 				{currentUserMember ? (
 					<Button className={ButtonClasses.red} onClick={leaveClanHandler}>
 						Leave
@@ -53,8 +72,8 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 						Join
 					</Button>
 				)}
-			</TableCell>
-		</TableRow>
+			</StyledTableCell>
+		</StyledTableRow>
 	);
 };
 

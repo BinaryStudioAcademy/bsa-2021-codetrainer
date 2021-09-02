@@ -32,3 +32,10 @@ export const ROUTES = {
 
 	Example: '/example',
 };
+
+export const TASK_ROUTES: Record<string, string> = {
+	Train: '/train',
+	Tab: '/:tab',
+	Solutions: '/solutions',
+	Discourse: '/discourse',
+};

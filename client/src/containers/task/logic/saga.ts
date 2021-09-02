@@ -11,7 +11,7 @@ import { fetchFollowing } from 'services/followers.service';
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
 		const { id } = action;
-		const task = yield call(() => getTaskById(id));
+		const task = yield call(getTaskById, id);
 		yield put(actions.setTask({ task }));
 	} catch (error) {
 		yield put(

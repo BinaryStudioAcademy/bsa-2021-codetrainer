@@ -1,7 +1,6 @@
 @import 'styles/variables';
 
 .detailsTab > div {
-    background-color: $zircon;
-    margin: 0 0 50px 0;
+	background-color: var(--container-color);
+	margin: 0 0 50px 0;
 }
-

@@ -1,6 +1,6 @@
-import { EntityRepository, SelectQueryBuilder, ObjectLiteral } from 'typeorm';
+import { EntityRepository, SelectQueryBuilder, ObjectLiteral, IsNull, getRepository } from 'typeorm';
 import { AbstractRepository } from '../abstract';
-import { Task } from '../../models';
+import { Solution, Task } from '../../models';
 import { TASK_ORDER_BY, SEARCH_KEYS } from '../../../common';
 
 type IWhere = {
@@ -88,6 +88,15 @@ export class TaskRepository extends AbstractRepository<Task> {
 
 	getRanks() {
 		return this.createQueryBuilder('task').select('rank').distinct(true).getRawMany();
+	}
+
+	async searchNotUseTask(taskIds: Array<string>) {
+		return this.createQueryBuilder('task')
+			.select(['task.id'])
+			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.orderBy('RANDOM()')
+			.limit(1)
+			.getOne();
 	}
 
 	async search(query: { where?: IWhere; sort?: TASK_ORDER_BY; userId: string; skip: number; take: number }) {

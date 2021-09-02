@@ -30,6 +30,7 @@ const useStyles = makeStyles(() =>
 		paper: {
 			width: '100%',
 			marginBottom: '20px',
+			background: 'var(--container-color)',
 		},
 		table: {
 			width: 800,
@@ -59,7 +60,6 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 	itemsPerPage,
 	setItemsPerPage,
 }) => {
-
 	const [isNameFieldOpen, setNameFieldOpen] = useState(false);
 	const [searchName, setSearchName] = useState(nameQuery);
 	const [typingTimeout, setTypingTimeout] = useState<null | ReturnType<typeof setTimeout>>(null);
@@ -126,18 +126,16 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 																onChange={handleNameSearchChange}
 																type="search"
 															/>
-														)
-														}
+														)}
 													</IconButton>
 												</ClickAwayListener>
 												{!isNameFieldOpen && <strong>{label}</strong>}
 											</TableCell>
-										)
-											: (
-												<TableCell component="th" key={id} style={style}>
-													<strong>{label}</strong>
-												</TableCell>
-											)
+										) : (
+											<TableCell component="th" key={id} style={style}>
+												<strong>{label}</strong>
+											</TableCell>
+										),
 									)}
 								</TableRow>
 							</TableHead>
@@ -170,7 +168,6 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 						onRowsPerPageChange={handleChangeRowsPerPage}
 					/>
 				</Paper>
-
 			</div>
 		</>
 	);

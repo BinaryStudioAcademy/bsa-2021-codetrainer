@@ -1,9 +1,10 @@
-@import "styles/variables";
+@import 'styles/variables';
 
 .clanInfo {
-	background: $zircon;
+	background: var(--container-color);
 	margin-bottom: 20px;
 	min-width: 800px;
+	border-radius: 5px;
 
 	&Avatar {
 		max-height: 500px;

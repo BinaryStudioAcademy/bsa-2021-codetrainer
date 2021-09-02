@@ -1,14 +1,14 @@
 import { WebApi } from '../../../typings/webapi';
 
-export const GET_TASK = 'TASK:GET_TASK';
-export const SET_TASK = 'TASK:SET_TASK';
-export const SET_NOT_FOUND = 'TASK:SET_NOT_FOUND';
-export const GET_TASKS = 'TASK:GET_TASKS';
-export const SET_TASKS = 'TASK:SET_TASKS';
-export const GET_NEXT_TASK = 'TASK:GET_NEXT_TASK';
-export const SET_NEXT_TASK = 'TASK:SET_NEXT_TASK';
-export const GET_FOLLOWING = 'TASK:GET_FOLLOWING';
-export const SET_FOLLOWING = 'TASK:SET_FOLLOWING';
+export const GET_TASK = 'CHALLENGE:GET_TASK';
+export const SET_TASK = 'CHALLENGE:SET_TASK';
+export const SET_NOT_FOUND = 'CHALLENGE:SET_NOT_FOUND';
+export const GET_TASKS = 'CHALLENGE:GET_TASKS';
+export const SET_TASKS = 'CHALLENGE:SET_TASKS';
+export const GET_NEXT_TASK = 'CHALLENGE:GET_NEXT_TASK';
+export const SET_NEXT_TASK = 'CHALLENGE:SET_NEXT_TASK';
+export const GET_FOLLOWING = 'CHALLENGE:GET_FOLLOWING';
+export const SET_FOLLOWING = 'CHALLENGE:SET_FOLLOWING';
 
 export type TGetFollowing = {
 	id?: string;

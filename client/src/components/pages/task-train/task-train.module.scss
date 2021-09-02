@@ -1,54 +1,35 @@
 @import 'styles/variables';
 
 .taskContainer {
-	margin-top: 42px;
-	margin-bottom: 42px;
-	width: 70vw;
-	display: grid;
-	grid-template-columns: 40% 60%;
-	gap: 50px;
+	width: calc(100vw - 255px);
+	height: calc(100vh - 91px);
+	padding: 42px 40px;
+	display: flex;
 }
 
-.taskInstructions {
-	&Header {
-		color: $mine-shaft;
-		margin-bottom: 44px;
-	}
-
-	&Title {
-		font: 600 18px $base-font;
+.taskWorkspace {
+	&Container {
+		width: 62%;
+		padding-left: 40px;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 }
 
 .taskPanel {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	align-items: center;
 	gap: 10px;
 
 	&Left,
 	&Right {
-		flex-wrap: wrap;
 		display: flex;
+		flex-wrap: nowrap;
 		gap: 10px;
 	}
-}
-
-.taskInstructionsHeader {
-	& > * {
-		display: inline-block;
-		vertical-align: middle;
-
-		&:not(:last-child) {
-			margin-right: 20px;
-		}
-	}
-}
-
-.taskSolution,
-.taskTests {
-	height: 200px;
-	margin-bottom: 50px;
 }
 
 .taskLanguageSelect {

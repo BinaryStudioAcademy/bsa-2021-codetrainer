@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 .taskTitleWrapper {
 	display: flex;
 	align-items: center;
@@ -5,9 +7,15 @@
 
 .taskTitle {
 	margin: 0 0 0 14px;
-
+	text-decoration: none;
+	color: #000;
 	font-size: 16px;
 	font-weight: 600;
+
+	&:hover {
+		color: $cornflower-blue;
+		text-decoration: underline;
+	}
 }
 
 .iframe {

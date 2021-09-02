@@ -41,6 +41,9 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 				placeholder={placeholder}
 				options={options}
 				styles={{
+					singleValue: () => ({
+						color: 'var(--text-color)',
+					}),
 					menu: () => ({
 						backgroundColor: 'var(--secondary-container-color)',
 						color: 'var(--text-color)',
@@ -59,9 +62,6 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 						borderRadius: '7px',
 						fontFamily: 'Montserrat',
 						fontWeight: 500,
-					}),
-					singleValue: () => ({
-						color: 'var(--text-color)',
 					}),
 				}}
 				menuPortalTarget={document.body}

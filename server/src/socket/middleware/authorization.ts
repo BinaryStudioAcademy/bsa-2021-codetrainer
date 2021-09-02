@@ -20,6 +20,6 @@ export const authorization = async (socket: Socket, next: (err?: ExtendedError) 
 			next();
 		}
 	} catch (e) {
-		next(new ValidationError(CODE_ERRORS.SOCKET_AUTHORIZATION_ERROR))
+		next(new ValidationError(CODE_ERRORS.SOCKET_AUTHORIZATION_ERROR));
 	}
 };

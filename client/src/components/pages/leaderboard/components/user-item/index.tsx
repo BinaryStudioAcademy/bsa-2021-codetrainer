@@ -4,26 +4,48 @@ import { IUserItemProps } from './types';
 import { ROUTES } from 'constants/routes';
 import { TableCell, TableRow } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 
 const UserItem: React.FC<IUserItemProps> = ({ user, position }) => {
+	const StyledTableCell = withStyles(() =>
+		createStyles({
+			head: {
+				backgroundColor: 'var(--pink)',
+			},
+			body: {
+				color: 'var(--text-color)',
+				fontSize: 14,
+			},
+		}),
+	)(TableCell);
+
+	const StyledTableRow = withStyles(() =>
+		createStyles({
+			root: {
+				backgroundColor: 'var(--container-color)',
+			},
+		}),
+	)(TableRow);
 
 	return (
-		<TableRow>
-			<TableCell>
-				{position}
-			</TableCell>
-			<TableCell>
+		<StyledTableRow>
+			<StyledTableCell>{position}</StyledTableCell>
+			<StyledTableCell>
 				<Rank rank={user.rank ?? 0} />
-			</TableCell>
-			<TableCell>{user.profileUrl ? <img src={user.profileUrl} /> : <span>No avatar</span>}</TableCell>
-			<TableCell><Link to={`${ROUTES.Users}/${user.username}`}>{`${user.name} ${user.surname}`}</Link></TableCell>
-			<TableCell>
+			</StyledTableCell>
+			<StyledTableCell>
+				{user.profileUrl ? <img src={user.profileUrl} /> : <span>No avatar</span>}
+			</StyledTableCell>
+			<StyledTableCell>
+				<Link to={`${ROUTES.Users}/${user.username}`}>{`${user.name} ${user.surname}`}</Link>
+			</StyledTableCell>
+			<StyledTableCell>
 				<Link to={`${ROUTES.Clan}/${user?.clan?.id}`}>{user?.clan?.name}</Link>
-			</TableCell>
-			<TableCell>
+			</StyledTableCell>
+			<StyledTableCell>
 				<span>{user.honor}</span>
-			</TableCell>
-		</TableRow>
+			</StyledTableCell>
+		</StyledTableRow>
 	);
 };
 

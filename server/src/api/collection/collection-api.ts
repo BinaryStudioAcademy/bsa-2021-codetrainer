@@ -21,7 +21,7 @@ export const initCollection = (appRouter: typeof Router, services: { collection:
 					take: Number(req.query.take) || 10,
 				})
 				.then((data) => res.send(data))
-				.catch(next)
+				.catch(next),
 		)
 		.get(CollectionsApiPath.FOLLOWED, (req, res, next) =>
 			collectionService
