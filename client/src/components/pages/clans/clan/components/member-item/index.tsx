@@ -7,10 +7,15 @@ import { ROUTES } from 'constants/routes';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
+import ClearIcon from '@material-ui/icons/Clear';
 
-const MemberItem: React.FC<IMemberItemProps> = ({ member, viewerRole, handleAddAdmin }) => {
-	console.log(member);
-
+const MemberItem: React.FC<IMemberItemProps> = ({
+	member,
+	viewerRole,
+	viewerId,
+	handleAddAdmin,
+	handleDeleteMember,
+}) => {
 	return (
 		<tr className={styles.memberItem}>
 			<td>
@@ -33,6 +38,11 @@ const MemberItem: React.FC<IMemberItemProps> = ({ member, viewerRole, handleAddA
 			</td>
 			<td>{getFullDate(member.createdAt)}</td>
 			<td>{member.honor}</td>
+			{viewerRole === 'admin' && member.id !== viewerId ? (
+				<td onClick={() => handleDeleteMember(member.id)}>
+					<ClearIcon />
+				</td>
+			) : null}
 		</tr>
 	);
 };

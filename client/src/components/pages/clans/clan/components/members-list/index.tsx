@@ -4,7 +4,13 @@ import MemberItem from '../member-item';
 import style from './members-list.module.scss';
 import { IMembersListProps } from './types';
 
-const MemberList: React.FC<IMembersListProps> = ({ members, viewerRole, handleAddAdmin }) => {
+const MemberList: React.FC<IMembersListProps> = ({
+	members,
+	viewerRole,
+	handleAddAdmin,
+	viewerId,
+	handleDeleteMember,
+}) => {
 	return (
 		<div className={style.membersList}>
 			<table className={style.membersListTable}>
@@ -15,6 +21,8 @@ const MemberList: React.FC<IMembersListProps> = ({ members, viewerRole, handleAd
 							key={member.id}
 							viewerRole={viewerRole}
 							handleAddAdmin={handleAddAdmin}
+							viewerId={viewerId}
+							handleDeleteMember={handleDeleteMember}
 						/>
 					))}
 				</tbody>

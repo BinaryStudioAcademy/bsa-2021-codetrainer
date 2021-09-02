@@ -30,6 +30,7 @@ const ClanPage: React.FC<IClanProps> = ({
 	isInvitationOpen,
 	setIsInvitationOpen,
 	handleAddAdmin,
+	handleDeleteMember,
 }) => {
 	const inviteModalElements = (
 		<div>
@@ -104,6 +105,8 @@ const ClanPage: React.FC<IClanProps> = ({
 							members={clan.members}
 							viewerRole={user?.profileClan?.role as TRole}
 							handleAddAdmin={handleAddAdmin}
+							viewerId={user?.id as string}
+							handleDeleteMember={handleDeleteMember}
 						/>
 					</section>
 				) : (

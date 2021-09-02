@@ -75,6 +75,9 @@ const Clan: React.FC = () => {
 	const handleAddAdmin = (id: string) => {
 		makeUserAdmin(id);
 	};
+	const handleDeleteMember = (id: string) => {
+		deleteMember(id);
+	};
 	return (
 		clan && (
 			<ClanPage
@@ -96,6 +99,7 @@ const Clan: React.FC = () => {
 				isInvitationOpen={isInvitationOpen}
 				setIsInvitationOpen={setIsInvitationOpen}
 				handleAddAdmin={handleAddAdmin}
+				handleDeleteMember={handleDeleteMember}
 			/>
 		)
 	);
