@@ -8,7 +8,6 @@ import styles from './instruction.module.scss';
 interface IInstructionProps {
 	task: WebApi.Entities.IChallenge;
 	result: JSX.Element;
-	success: boolean;
 	activeTab: number;
 	onChangeTab: (tab: number) => void;
 }
