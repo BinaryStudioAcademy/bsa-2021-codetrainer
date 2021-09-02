@@ -4,4 +4,10 @@
 .selectWrapper {
 	margin-bottom: 10px;
 	color: var(--text-color);
+
+	.label {
+		display: block;
+		font: $minor-font;
+		margin-bottom: 5px;
+	}
 }

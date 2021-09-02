@@ -7,7 +7,7 @@ interface IFormSelectProps extends FieldProps {
 	id: string;
 	label?: string;
 	placeholder: string;
-	options: { value: string; name: string }[];
+	options: { value: string; name: string, label?: string }[];
 }
 
 const FormSelect: React.FC<IFormSelectProps> = ({
@@ -41,6 +41,10 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 				placeholder={placeholder}
 				options={options}
 				styles={{
+					menuPortal: (base) => ({
+						...base,
+						zIndex: 10000,
+					}),
 					singleValue: () => ({
 						color: 'var(--text-color)',
 					}),
@@ -48,7 +52,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 						backgroundColor: 'var(--secondary-container-color)',
 						color: 'var(--text-color)',
 						fontFamily: 'Montserrat',
-						fontWeight: 500,
+						fontSize: 14,
+						fontWeight: 400,
 					}),
 					indicatorSeparator: () => ({
 						display: 'none',
@@ -61,8 +66,12 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 						padding: '4px 8px',
 						borderRadius: '7px',
 						fontFamily: 'Montserrat',
-						fontWeight: 500,
+						fontSize: 14,
+						fontWeight: 400,
 					}),
+					option: (styles) => ({
+						...styles,
+					})
 				}}
 				menuPortalTarget={document.body}
 			/>
