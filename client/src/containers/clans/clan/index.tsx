@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { ClanPage } from 'components';
 import * as actions from './logic/actions';
 import * as clansActions from './../clans/logic/actions';
+import * as clanActions from './../clan/logic/actions';
 import * as userActions from '../../user/logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
@@ -72,11 +73,13 @@ const Clan: React.FC = () => {
 	const [isInvitationOpen, setIsInvitationOpen] = useState(false);
 	const [modalShown, setModalShown] = useState(false);
 
-	const handleAddAdmin = (id: string) => {
-		makeUserAdmin(id);
+	const handleAddAdmin = async (id: string) => {
+		await makeUserAdmin(id);
+		// dispatch(actions.clearClan());
+		// dispatch(actions.fetchClan({ id }));
 	};
-	const handleDeleteMember = (id: string) => {
-		deleteMember(id);
+	const handleDeleteMember = async (id: string) => {
+		dispatch(clanActions.deleteMember({ id }));
 	};
 	return (
 		clan && (

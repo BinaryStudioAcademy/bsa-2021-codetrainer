@@ -11,7 +11,6 @@ export const ADD_ERROR = 'CLANS:ADD_ERROR';
 export const JOIN_CLAN = 'CLANS:JOIN_CLAN';
 export const LEAVE_CLAN = 'CLANS:LEAVE_CLAN';
 export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
-
 export const SET_ORDER_BY = 'CLANS:SET_ORDER_BY';
 export const SET_ORDER = 'CLANS:SET_ORDER';
 export const SET_NAME_QUERY = 'CLANS:SET_NAME_QUERY';

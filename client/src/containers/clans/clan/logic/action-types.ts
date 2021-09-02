@@ -9,7 +9,11 @@ export const ADD_ERROR = 'CLAN:ADD_ERROR';
 export const LEAVE_CLAN = 'CLAN:LEAVE_CLAN';
 export const SORT_MEMBERS_BY_TIME = 'CLAN:SORT_MEMBERS_BY_TIME';
 export const SORT_MEMBERS_BY_RANK = 'CLAN:SORT_MEMBERS_BY_RANK';
+export const DELETE_MEMBER = 'CLANS:DELETE_MEMBER';
 
+export interface IDeleteMember {
+	id: string;
+}
 export interface IFetchClanArgs {
 	id: string;
 }

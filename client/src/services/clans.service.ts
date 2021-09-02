@@ -2,7 +2,7 @@ import { HttpMethods } from 'constants/services';
 import { ClansOrderByOptions } from 'containers/clans/clans/logic/state';
 import { ClanApiPath } from 'enum/api/clan-api.path';
 import { Order } from 'helpers/table-helper';
-import { http } from 'services';
+import { getUserById, http } from 'services';
 import { WebApi } from 'typings/webapi';
 
 export interface TFetchClansArgs {
@@ -98,5 +98,28 @@ export const deleteClan = async () => {
 		endpoint: ClanApiPath.ROOT,
 		skipAuthorization: false,
 	});
-	console.log(result);
+	return result;
+};
+
+export const makeUserLeaveClan = async (userId: string) => {
+	const { user } = await getUserById(userId);
+
+	const clanId = user.clan.id;
+
+	if (!clanId) {
+		return {
+			error: true,
+			message: 'Not in clan',
+		};
+	}
+
+	const result = await http.callWebApi({
+		method: HttpMethods.PATCH,
+		endpoint: ClanApiPath.ROOT + clanId + '/' + ClanApiPath.LEAVE,
+		skipAuthorization: false,
+		body: {
+			user,
+		},
+	});
+	return result;
 };

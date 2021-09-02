@@ -1,4 +1,4 @@
-import { fetchClan, toggleClanMember } from 'services/clans.service';
+import { fetchClan, makeUserLeaveClan, toggleClanMember } from 'services/clans.service';
 import { all, put, call, select, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
@@ -51,8 +51,27 @@ export function* leaveClanWorker(action: ReturnType<typeof actions.leaveClan>): 
 	yield put(actions.endLoading());
 }
 
+export function* deleteMemberWorker({ id }: ReturnType<typeof actions.deleteMember>): any {
+	yield put(actions.startLoading());
+
+	const { clan } = yield call(makeUserLeaveClan, id);
+	yield put(actions.clearClan());
+
+	yield put(
+		actions.setClan({
+			clan: {
+				...clan,
+				createdAt: new Date(clan.createdAt),
+			},
+		}),
+	);
+
+	yield put(actions.endLoading());
+}
+
 export function* leaveClanWatcher() {
 	yield takeEvery(actionTypes.LEAVE_CLAN, leaveClanWorker);
+	yield takeEvery(actionTypes.DELETE_MEMBER, deleteMemberWorker);
 }
 
 export default function* clanSaga() {

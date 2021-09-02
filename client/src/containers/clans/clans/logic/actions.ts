@@ -11,7 +11,6 @@ export const addError = createAction<actionTypes.IAddErrorArgs>(actionTypes.ADD_
 export const joinClan = createAction<actionTypes.IJoinClanArgs>(actionTypes.JOIN_CLAN);
 export const leaveClan = createAction<actionTypes.ILeaveClanArgs>(actionTypes.LEAVE_CLAN);
 export const updateClan = createAction<actionTypes.IUpdateClanArgs>(actionTypes.UPDATE_CLAN);
-
 export const setOrderBy = createAction<actionTypes.ISetOrderByArgs>(actionTypes.SET_ORDER_BY);
 export const setOrder = createAction<actionTypes.ISetOrderArgs>(actionTypes.SET_ORDER);
 export const setNameQuery = createAction<actionTypes.ISetNameQueryArgs>(actionTypes.SET_NAME_QUERY);

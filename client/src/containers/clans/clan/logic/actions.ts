@@ -10,3 +10,4 @@ export const addError = createAction<actionTypes.IAddErrorArgs>(actionTypes.ADD_
 export const leaveClan = createAction<void>(actionTypes.LEAVE_CLAN);
 export const sortClanMemberByTime = createAction<void>(actionTypes.SORT_MEMBERS_BY_TIME);
 export const sortClanMemberByRank = createAction<void>(actionTypes.SORT_MEMBERS_BY_RANK);
+export const deleteMember = createAction<actionTypes.IDeleteMember>(actionTypes.DELETE_MEMBER);
