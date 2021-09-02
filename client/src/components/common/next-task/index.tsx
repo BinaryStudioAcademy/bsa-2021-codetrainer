@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Select, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
-import { Spinner, TaskDescription } from 'components/common';
+import { TaskDescription } from 'components/common';
 import { INextTaskProps } from './interface';
 
 import styles from './nextTask.module.scss';
@@ -47,7 +47,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 						tags={task.tags?.map((item) => item.name)}
 					/>
 				) : (
-					<Spinner />
+					'Sorry, there is not any challenge yet.'
 				)}
 			</div>
 		</article>
