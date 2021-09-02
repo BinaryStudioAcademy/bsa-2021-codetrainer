@@ -5,9 +5,10 @@ $height-editor: 210px;
 
 .taskCode {
 	position: relative;
+	flex-grow: 1;
 	&Editor {
 		padding-bottom: 35px;
-		height: 255px;
+		height: 50%;
 	}
 	&Title {
 		position: relative;
@@ -17,7 +18,7 @@ $height-editor: 210px;
 		height: $height-title;
 		box-sizing: border-box;
 		font: $name-font;
-		background-color: #f0f3f9;
+		background-color: var(--secondary-container-color);
 		& > p {
 			margin: 0;
 		}

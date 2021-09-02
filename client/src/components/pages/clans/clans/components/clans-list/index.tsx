@@ -30,10 +30,12 @@ const useStyles = makeStyles(() =>
 		},
 		paper: {
 			width: '100%',
+			background: 'var(--container-color)',
 			marginBottom: '20px',
 		},
 		table: {
 			width: 800,
+			color: 'red',
 		},
 		visuallyHidden: {
 			border: 0,

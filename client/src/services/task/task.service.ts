@@ -14,7 +14,6 @@ interface ICreateTaskBody {
 	testCases?: string;
 	exampleTestCases?: string;
 	isPublished?: boolean;
-	preloaded?: string;
 }
 
 const validationSchema = Yup.object().shape({
@@ -37,7 +36,6 @@ const validationSchema = Yup.object().shape({
 		.min(1, 'exampleTestCases can`t be empty.')
 		.required('exampleTestCases can`t be empty.'),
 	isPublished: Yup.boolean(),
-	preloaded: Yup.string(),
 });
 
 export const createTask = async (requestBody: ICreateTaskBody) => {

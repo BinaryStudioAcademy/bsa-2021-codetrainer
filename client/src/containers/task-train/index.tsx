@@ -42,7 +42,7 @@ const TaskTrain: React.FC = () => {
 				dispatch(actionsUser.setUser({ user }));
 			},
 		);
-	}, []);
+	}, [taskId]);
 
 	useEffect(() => {
 		if (!Boolean(errors) || isSuccess) {

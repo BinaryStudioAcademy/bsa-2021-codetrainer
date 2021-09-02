@@ -11,7 +11,7 @@
 	}
 
 	&Header {
-		color: $mine-shaft;
+		color: var(--text-color);
 		margin-bottom: 44px;
 		& > * {
 			display: inline-block;
