@@ -21,7 +21,7 @@ export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunit
 	const [invited, setInvited] = useState(false);
 	return (
 		<div className={styles.communityMember}>
-			<Avatar size={20} avatar={avatar ? avatar : undefined} />
+			<Avatar size={40} avatar={avatar} />
 			<p>{name + ' ' + surname}</p>
 			<p>{username ? username : 'No username'}</p>
 			{!invited ? (

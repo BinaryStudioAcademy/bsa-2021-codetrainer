@@ -34,4 +34,10 @@ export class Clan extends BaseEntity {
 
 	@OneToMany(() => User, (user) => user.clan)
 	members!: User[];
+
+	@Column({ type: 'varchar', length: 500, nullable: true })
+	avatar?: string;
+
+	@Column({ type: 'varchar', length: 500, nullable: true })
+	cover?: string;
 }

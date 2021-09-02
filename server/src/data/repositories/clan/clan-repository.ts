@@ -23,8 +23,10 @@ export class ClanRepository extends AbstractRepository<Clan> {
 				'member.id',
 				'member.honor',
 				'member.rank',
+				'member.avatar',
 				'profileClan.role',
 				'profileClan.status',
+				'profileClan.joinedAt',
 			])
 			.where('clan.id = :id', { id })
 			.getOne();

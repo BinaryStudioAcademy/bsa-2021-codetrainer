@@ -60,7 +60,7 @@ export const notificationMocks: TNotification[] = [
 			follower: {
 				id: '1',
 				username: 'Creeper',
-				profileUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/10/Userbox_creeper.svg',
+				avatar: 'https://upload.wikimedia.org/wikipedia/commons/1/10/Userbox_creeper.svg',
 			} as WebApi.Entities.IUser,
 		},
 		read: false,
