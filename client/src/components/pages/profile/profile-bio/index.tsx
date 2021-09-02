@@ -12,7 +12,6 @@ export type IProfileBioProps = {
 		followingQuantity?: number;
 		followersQuantity?: number;
 		communityQuantity?: number;
-		score?: number;
 	};
 	currentUser: IUser | null;
 	followHandler: (id: string) => void;
@@ -37,7 +36,7 @@ export const ProfileBio: React.FC<IProfileBioProps> = ({
 		followersQuantity,
 		communityQuantity,
 		rank,
-		score,
+		honor,
 	},
 }) => {
 	const gitHubLink = github ? (
@@ -69,7 +68,7 @@ export const ProfileBio: React.FC<IProfileBioProps> = ({
 				{avatar ? <Avatar avatar={avatar} size={57} /> : <Avatar size={57} />}
 				<h5 className={styles.name}>{`${name} ${surname}`}</h5>
 				<Rank rank={rank ? rank : 9} />
-				<Rank honor={score ? score : 0} />
+				<Rank honor={honor ? honor : 0} />
 			</div>
 			<div className={styles.fields}>
 				<List items={listItems1} />
