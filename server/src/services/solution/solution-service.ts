@@ -173,7 +173,7 @@ export class SolutionService {
 		let user = await userRepository.getById(data.userId);
 		if (status !== SOLUTION_STATUS.UNLOCKED && data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
 			const statusSolution = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
-			const userData = calculateRank.check({ user, task });
+			const userData = calculateRank.check({ user, task, status: statusSolution });
 			await repository.updateById(data.solutionId, { status: statusSolution });
 			await userRepository.updateById(data.userId, userData);
 			user = await userRepository.getById(data.userId);
