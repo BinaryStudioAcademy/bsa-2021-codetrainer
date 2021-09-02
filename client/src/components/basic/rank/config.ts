@@ -5,7 +5,7 @@ export const rankDifficulty = {
 };
 
 export const honorDifficulty = {
-	EASY: 10,
-	MEDIUM: 20,
-	HARD: 30,
+	EASY: 0,
+	MEDIUM: 230,
+	HARD: 4830,
 };

@@ -18,10 +18,10 @@ export function mapHonorToStyle({ honor, active }: { honor?: number; active?: bo
 	if (!honor) {
 		return styles.honor;
 	}
-	if (honorDifficulty.HARD > honor) {
+	if (honorDifficulty.HARD >= honor) {
 		return styles[active ? 'active_hard' : 'hard'];
 	}
-	if (honorDifficulty.MEDIUM > honor) {
+	if (honorDifficulty.MEDIUM >= honor) {
 		return styles[active ? 'active_medium' : 'medium'];
 	}
 	return styles[active ? 'active_easy' : 'easy'];
