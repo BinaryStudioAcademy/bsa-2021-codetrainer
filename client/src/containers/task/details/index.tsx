@@ -25,7 +25,7 @@ export const Details = () => {
 			author: {
 				firstName: task?.user?.name || '',
 				lastName: task?.user?.surname || '',
-				link: `${ROUTES.Users}/${task?.user?.username}`,
+				username: task?.user?.username || '',
 			},
 			stats: {
 				favoriteSaves: task.savedToFavorites,

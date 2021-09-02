@@ -1,0 +1,61 @@
+@import 'styles/variables';
+
+.container {
+    background-color: $zircon;
+    padding: 20px;
+	margin-bottom: 30px;
+}
+
+.label {
+	font-weight: 500;
+}
+
+.toggleBtns {
+    display: flex;
+    flex-direction: column;
+    > * {
+        width: 100%;
+        margin: 20px auto 0;
+    }
+}
+.filters {
+	> * {
+		margin-bottom: 5px;
+		height: 40px;
+		> * {
+			margin-right: 15px;
+			padding-bottom: 5px;
+		}
+	}
+    .sortBy {
+        margin-left: 15px;
+    }
+}
+
+.membersSortPanel {
+	padding: 20px 0 5px;
+	background: $zircon;
+
+	&Button {
+		cursor: pointer;
+		background: none;
+		font: $base-font;
+		border: none;
+		outline: none;
+
+		&Active {
+			color: $cornflower-blue;
+            border-bottom: $cornflower-blue 2px solid;
+		}
+	}
+
+	&Button:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+}
+
+.noInfoProvided {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+}

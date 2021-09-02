@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { TaskTrainPage } from 'components/pages';
 import { useAppSelector } from 'hooks/useAppSelector';
-import * as actions from './logic/actions';
 import { FullscreenLoader } from 'components';
 import { socket } from 'services/socket';
 import { SOCKET_EVENTS } from 'constants/socket-constants';
@@ -13,7 +12,10 @@ import { ITestResult } from './logic/state';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 import { ROUTES, TASK_ROUTES } from 'constants/routes';
+import { IUser } from 'typings/common/IUser';
 import { WebApi } from 'typings/webapi';
+import * as actions from './logic/actions';
+import * as actionsUser from '../user/logic/actions';
 
 const OUTPUT = 1;
 
@@ -21,21 +23,26 @@ const TaskTrain: React.FC = () => {
 	const { id: taskId }: { id: string } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
-
+	const stateTaskTrain = useAppSelector((state) => state.task);
 	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus, isSuccess } =
-		useAppSelector((state) => state.task);
+		stateTaskTrain;
 
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
 		socket.on(
 			SOCKET_EVENTS.RESULT_TEST_TO_CLIENT,
-			({ solution, ...testResult }: ITestResult & { solution: WebApi.Entities.ISolution }) => {
+			({
+				solution,
+				user,
+				...testResult
+			}: ITestResult & { solution: WebApi.Entities.ISolution } & { user: IUser }) => {
 				dispatch(actions.setActiveTab({ tab: OUTPUT }));
 				dispatch(actions.setTestResult({ testResult }));
 				dispatch(actions.setSolution({ solution: solution ?? null }));
+				dispatch(actionsUser.setUser({ user }));
 			},
 		);
-	}, []);
+	}, [taskId]);
 
 	useEffect(() => {
 		if (!Boolean(errors) || isSuccess) {
@@ -120,9 +127,6 @@ const TaskTrain: React.FC = () => {
 				solution={solution}
 				activeTab={activeTab}
 				result={testResult?.result || {}}
-				success={
-					(testResult?.result?.success && testResult?.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) || false
-				}
 				onChangeTab={(tab: number) => dispatch(actions.setActiveTab({ tab }))}
 				onSubmit={handleSubmit}
 				onReset={handleReset}

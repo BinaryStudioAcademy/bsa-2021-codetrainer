@@ -1,7 +1,6 @@
 import React from 'react';
 import { Rank, Tabs, Markdown, TagList } from 'components';
 import { WebApi } from 'typings/webapi';
-import { ROUTES } from 'constants/routes';
 import TaskStatistic from 'components/common/challenge/challenge-stats';
 
 import styles from './instruction.module.scss';
@@ -9,7 +8,6 @@ import styles from './instruction.module.scss';
 interface IInstructionProps {
 	task: WebApi.Entities.IChallenge;
 	result: JSX.Element;
-	success: boolean;
 	activeTab: number;
 	onChangeTab: (tab: number) => void;
 }
@@ -50,7 +48,7 @@ export const Instruction: React.FC<IInstructionProps> = ({ task, result, activeT
 						author: {
 							firstName: task?.user?.name || '',
 							lastName: task?.user?.surname || '',
-							link: `${ROUTES.Users}/${task.user?.username}`,
+							username: task.user?.username || '',
 						},
 					}}
 				/>

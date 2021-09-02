@@ -15,7 +15,7 @@ export class Task extends AbstractEntity {
 	discipline?: string;
 
 	@Column({ type: 'int', default: TASK_DIFFICULTY_DEFAULT })
-	rank?: number;
+	rank!: number;
 
 	@Column({ type: 'bool', default: false, width: 1 })
 	allowContributors?: boolean;
@@ -28,9 +28,6 @@ export class Task extends AbstractEntity {
 
 	@Column({ type: 'text', default: '' })
 	initialSolution!: string;
-
-	@Column({ type: 'text', default: '' })
-	preloaded?: string;
 
 	@Column({ type: 'text', default: '' })
 	testCases!: string;
@@ -52,7 +49,6 @@ export class Task extends AbstractEntity {
 	comments!: CommentTask[];
 
 	@OneToMany(() => Solution, (solution) => solution.task)
-	// @JoinColumn()
 	solutions!: Solution[];
 
 	@ManyToMany(() => Tag, (tag) => tag.tasks)

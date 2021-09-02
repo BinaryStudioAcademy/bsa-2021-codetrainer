@@ -22,6 +22,7 @@ interface ICreateTaskSettingsProps {
 	setRank: (value: string) => void;
 	tags: string;
 	setTags: (value: string) => void;
+	rankSelectProps: ISelectProps;
 }
 
 export const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = ({
@@ -33,10 +34,9 @@ export const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = ({
 	selectProps,
 	taskName,
 	setTaskName,
-	rank,
-	setRank,
 	tags,
 	setTags,
+	rankSelectProps,
 }) => {
 	return (
 		<div className={styles.createTaskSettings}>
@@ -71,23 +71,22 @@ export const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = ({
 					<InfoPopover iconType={'help'}>Choose the language version the task will work for.</InfoPopover>
 				</label>
 				<Select
+					className={styles.languageVersionSelect}
 					values={selectProps.values}
 					activeValue={selectProps.activeValue}
 					onChange={selectProps.onChange}
 				/>
-				<label className={styles.label} htmlFor="estimated-rank">
+				<label className={styles.label}>
 					Estimated Rank
 					<InfoPopover iconType={'help'}>
 						Choose the rank you are expecting this task to be ranked as.
 					</InfoPopover>
 				</label>
-				<input
-					id="estimated-rank"
-					placeholder="Enter Estimated Rank"
-					value={rank}
-					onChange={(newRank: ChangeEvent<HTMLInputElement>) => setRank(newRank.target.value)}
+				<Select
+					values={rankSelectProps.values}
+					activeValue={rankSelectProps.activeValue}
+					onChange={rankSelectProps.onChange}
 				/>
-
 				<label className={styles.label} htmlFor="tags">
 					Tags
 				</label>
@@ -97,7 +96,6 @@ export const CreateTaskSettings: React.FC<ICreateTaskSettingsProps> = ({
 					value={tags}
 					onChange={(newRank: ChangeEvent<HTMLInputElement>) => setTags(newRank.target.value)}
 				/>
-
 				<FormGroup>
 					<FormControlLabel
 						value="bottom"

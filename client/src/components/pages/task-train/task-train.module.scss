@@ -11,6 +11,9 @@
 	&Container {
 		width: 62%;
 		padding-left: 40px;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 }
 
@@ -32,4 +35,9 @@
 .taskLanguageSelect {
 	margin-top: 10px;
 	width: 300px;
+
+	h5,
+	ul li span {
+		color: #000;
+	}
 }

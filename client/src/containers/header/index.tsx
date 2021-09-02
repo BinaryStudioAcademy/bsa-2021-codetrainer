@@ -25,7 +25,7 @@ const Header: React.FC = () => {
 		name: `${user?.name} ${user?.surname}`,
 		rank: user?.rank || 0,
 		notifications: Array.from(unorderedNotifications?.values()).sort((a, b) => +b.date - +a.date),
-		honor: user?.honor || 0,
+		honor: user?.honor ?? 0,
 		listItems: getListItems(),
 		onReadNotification: (id) => dispatch(notificationsActions.readNotification({ id })),
 		avatar: user?.avatar,

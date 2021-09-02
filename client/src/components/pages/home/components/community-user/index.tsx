@@ -1,22 +1,47 @@
 import React from 'react';
+import { IUser } from '../community/interface';
+import { Rank, Avatar } from 'components';
+import { useHistory } from 'react-router';
 import styles from './community-user.module.scss';
-// import defaultUserPhoto from 'assets/icons/user.svg';
-import { Avatar, Rank } from 'components/basic';
+import { ROUTES } from 'constants/routes';
 
 interface ICommunityUserProps {
-	rank: number;
-	imageSource?: string;
-	name: string;
+	user: IUser;
 }
 
-const CommunityUser: React.FC<ICommunityUserProps> = ({ imageSource, name, rank }) => {
+const CommunityMember: React.FC<ICommunityUserProps> = ({ user }) => {
+	const isClanMember = Boolean(user.clan);
+	const history = useHistory();
+
+	const goToUserProfile = () => {
+		history.push(`${ROUTES.Users}/${user.username}`);
+	};
+
 	return (
-		<div className={styles.userRow}>
-			<Rank rank={rank} />
-			<Avatar avatar={imageSource} size={25} />
-			<div className={styles.name}>{name}</div>
-		</div>
+		<tr className={styles.communityUser} onClick={goToUserProfile}>
+			<td>
+				<Rank rank={user.rank} />
+			</td>
+			<td>
+				<Avatar avatar={user.imageSource} size={50} />
+			</td>
+			<td>{user.name}</td>
+			<td
+				onClick={(event: React.MouseEvent<HTMLTableDataCellElement>) => {
+					event.stopPropagation();
+
+					if (isClanMember) {
+						history.push(`${ROUTES.Clans}/${user.clan?.id}`);
+					} else {
+						goToUserProfile();
+					}
+				}}
+			>
+				{isClanMember ? user.clan?.name : 'Not in clan'}
+			</td>
+			<td>{user.honor}</td>
+		</tr>
 	);
 };
 
-export default CommunityUser;
+export default CommunityMember;

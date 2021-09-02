@@ -6,7 +6,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 42px;
-	background: $zircon;
+	background: var(--container-color);
 
 	&Item {
 		font: $tub-font;
@@ -24,7 +24,7 @@
 .tabsContent {
 	border-radius: 0 0 15px 15px;
 	padding: 26px 24px;
-	background: $zircon;
+	background: var(--container-color);
 
 	div p,
 	p {

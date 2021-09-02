@@ -10,7 +10,7 @@ import { ButtonClasses } from 'components/basic/button';
 import { Discipline, IDisciplineItem } from './logic/models';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from './mock';
 import { findDisciplineItem } from './create-task-settings/create-task-settings';
-import { ISelectValue } from 'components/basic/select/interface';
+import { ISelectProps, ISelectValue } from 'components/basic/select/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationType } from 'containers/notification/logic/models';
 import { setNotificationState } from 'containers/notification/logic/actions';
@@ -22,13 +22,13 @@ import { addTask, deleteTaskRedux } from 'containers/user/logic/actions';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { WebApi } from 'typings/webapi';
 import { useEffect } from 'react';
+import { NUMBER_OF_RANKS } from 'enum/ranks';
 
 export interface ICreateTaskProps {}
 
 const CodeTabs = {
 	COMPLETE_SOLUTION: 0,
 	INITIAL_SOLUTION: 1,
-	preloaded: 2,
 };
 
 const TestTabs = {
@@ -38,6 +38,8 @@ const TestTabs = {
 
 export const CreateTask = (props: ICreateTaskProps) => {
 	const dispatch = useDispatch();
+	const [isEditing, setIsEditing] = useState(false);
+
 	const createErrorMessage = (message: string) => {
 		dispatch(
 			setNotificationState({
@@ -82,14 +84,7 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			title: 'New challenge',
 		},
 	]);
-	useEffect(() => {
-		getYourChallengeValues().then((result) =>
-			setYourChallengeValues(result ? [{ id: '0', title: 'New challenge' }, ...result] : null),
-		);
-		if (taskId) {
-			handleTaskChange(taskId);
-		}
-	}, []);
+
 	//settings block
 	const [taskName, setTaskName] = useState('');
 	const [chosenDiscipline, setDiscipline] = useState<IDisciplineItem>(DISCIPLINE_ITEMS[0]);
@@ -147,7 +142,6 @@ export const CreateTask = (props: ICreateTaskProps) => {
 	const [codeTab, setCodeTab] = useState(0);
 	const [completeSolution, setCompleteSolution] = useState('');
 	const [initialSolution, setInitialSolution] = useState('');
-	const [preloaded, setPreloaded] = useState('');
 	const tabsCode: ICreateTabsProps = {
 		selectedTab: codeTab,
 		tabs: [
@@ -169,21 +163,11 @@ export const CreateTask = (props: ICreateTaskProps) => {
 			},
 			{
 				header: {
-					title: 'Preloaded',
-				},
-				type: TaskTabTypes.CODE,
-				editable: true,
-				text: preloaded,
-			},
-			{
-				header: {
 					title: 'Help',
 				},
 				type: TaskTabTypes.MARKDOWN,
 				markdownContent: `### In "Complete Solution" you should solve your own task
-### In "Initial Soultion" write code that will be given to the user at the start
-### "Preloaded" is optional here. This is code that will be loaded before the solution code within the execution path.
-This allows you to setup code that can be used by the warrior's solution, but not directly edited within the solution code.`,
+### In "Initial Soultion" write code that will be given to the user at the start`,
 			},
 		],
 		onChange: (text) => {
@@ -193,9 +177,6 @@ This allows you to setup code that can be used by the warrior's solution, but no
 					break;
 				case CodeTabs.INITIAL_SOLUTION:
 					setInitialSolution(text);
-					break;
-				case CodeTabs.preloaded:
-					setPreloaded(text);
 					break;
 			}
 		},
@@ -261,7 +242,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			initialSolution,
 			testCases,
 			exampleTestCases,
-			preloaded,
 		};
 		let task: { error: any; message: string } & WebApi.Entities.ITask;
 		if (!taskId) {
@@ -303,6 +283,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 			} else {
 				setYourChallengeValues(null);
 			}
+			setIsEditing(true);
 			dispatch(
 				setNotificationState({
 					state: {
@@ -332,7 +313,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		setTextDescription('');
 		setCompleteSolution('');
 		setInitialSolution('');
-		setPreloaded('');
 		setTestCases('');
 		setExampleTestCases('');
 	};
@@ -361,6 +341,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					title: 'Switch challenge',
 				});
 				resetAllFields();
+				setIsEditing(false);
 				dispatch(setTask({ taskId: null }));
 			}
 		}
@@ -386,10 +367,10 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 					testCases,
 					exampleTestCases,
 					isPublished: true,
-					preloaded,
 				};
 				const requestResult = await updateTask(requestBody, thisTaskId);
 				if (!requestResult.error) {
+					setIsEditing(false);
 					dispatch(
 						setNotificationState({
 							state: {
@@ -427,7 +408,6 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 function twoOldestAges(ages){
 				
 }`);
-		setPreloaded('');
 		setTestCases(`const chai = require("chai");
 const assert = chai.assert;
 chai.config.truncateThreshold = 0;
@@ -463,7 +443,6 @@ describe("twoOldestAges", function() {
 			setTextDescription(task.description);
 			setCompleteSolution(task.completeSolution);
 			setInitialSolution(task.initialSolution);
-			setPreloaded(task.preloaded);
 			setTestCases(task.testCases);
 			setExampleTestCases(task.exampleTestCases);
 		}
@@ -487,6 +466,29 @@ describe("twoOldestAges", function() {
 				break;
 		}
 	};
+
+	useEffect(() => {
+		resetAllFields();
+		getYourChallengeValues().then((result) =>
+			setYourChallengeValues(result ? [{ id: '0', title: 'New challenge' }, ...result] : null),
+		);
+		if (taskId && isEditing) {
+			handleTaskChange(taskId);
+		}
+	}, []);
+	const rankValues: ISelectValue[] = [];
+	for (let i = 0; i < NUMBER_OF_RANKS; i++) {
+		rankValues.push({
+			id: i.toString(),
+			title: i.toString(),
+		});
+	}
+	const rankSelectProps: ISelectProps = {
+		values: rankValues,
+		onChange: (value) => {
+			setRank(value.title);
+		},
+	};
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -503,6 +505,7 @@ describe("twoOldestAges", function() {
 					setRank={setRank}
 					tags={tags}
 					setTags={setTags}
+					rankSelectProps={rankSelectProps}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
 					<ButtonsBlock

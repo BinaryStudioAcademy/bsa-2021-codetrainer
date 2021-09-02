@@ -25,6 +25,17 @@
 				font: $progress-bar-font;
 				font-size: 14px;
 			}
+			&:focus {
+				outline: none;
+				color: var(--text-color);
+			}
+		}
+	}
+
+	.languageVersionSelect {
+		ul li span,
+		h5 {
+			color: #000;
 		}
 	}
 }

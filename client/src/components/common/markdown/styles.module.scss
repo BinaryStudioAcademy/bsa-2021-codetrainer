@@ -17,8 +17,8 @@
 		overflow: auto;
 		font-size: 85%;
 		line-height: 1.45;
-		background-color: #f6f8fa;
-		border-radius: 3px;
+		background-color: var(--secondary-container-color);
+		border-radius: 5px;
 		& code {
 			display: inline;
 			padding: 0;

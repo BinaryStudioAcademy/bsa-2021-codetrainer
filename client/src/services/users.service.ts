@@ -49,7 +49,7 @@ export const fetchUserLeaders = async ({
 
 export const getUserById = async (id: string) => {
 	const result = await http.callWebApi({
-		endpoint: '/users/' + id,
+		endpoint: 'users/' + id,
 		method: 'GET',
 		skipAuthorization: false,
 	});

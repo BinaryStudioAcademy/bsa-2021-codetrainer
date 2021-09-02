@@ -6,6 +6,7 @@ import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
 import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
+import { fetchFollowing } from 'services/followers.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
@@ -70,6 +71,32 @@ export function* fetchNextTaskWatcher() {
 	yield takeEvery(actionTypes.GET_NEXT_TASK, fetchNextTaskWorker);
 }
 
+export function* fetchFollowingWorker(action: ReturnType<typeof actions.getFollowing>): any {
+	try {
+		const { id } = action;
+		if (id) {
+			const following = yield call(() => fetchFollowing(id));
+			const result = [];
+			for (const user of following) {
+				result.push(user.following);
+			}
+
+			yield put(actions.setFollowing({ following: result }));
+		}
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: 'Something went wrong',
+			},
+		});
+	}
+}
+
+export function* fetchFollowingWatcher() {
+	yield takeEvery(actionTypes.GET_FOLLOWING, fetchFollowingWorker);
+}
+
 export default function* taskInfoSaga() {
-	yield all([fetchTaskWatcher(), fetchTasksWatcher(), fetchNextTaskWatcher()]);
+	yield all([fetchTaskWatcher(), fetchTasksWatcher(), fetchNextTaskWatcher(), fetchFollowingWatcher()]);
 }

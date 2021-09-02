@@ -1,10 +1,9 @@
 import * as fs from 'fs';
 import { spawn } from 'child_process';
-import { getPath } from './path';
-import { IMPORT } from '../common/constants';
+import { getPath, pathTestFile } from './path';
 
 const saveFile = (solution: string, test: string) => {
-	fs.writeFile('test/test.js', `${IMPORT}\n${solution}\n${test}`, (err) => {
+	fs.writeFile(pathTestFile, `${solution}\n${test}`, (err) => {
 		console.info('error save => ', err);
 	});
 };
@@ -28,10 +27,12 @@ export const runTest = (solution: string, test: string) => {
 			} catch (e) {
 				parseResponse = { error: response };
 			} finally {
+				saveFile('', '');
 				resolve({ success: code === 0, ...parseResponse });
 			}
 		});
 		docker.on('error', (error) => {
+			saveFile('', '');
 			resolve({ success: false, error: error.message });
 		});
 	});
