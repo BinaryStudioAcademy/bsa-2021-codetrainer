@@ -8,12 +8,6 @@ const saveFile = (solution: string, test: string) => {
 	});
 };
 
-const deleteFile = () => {
-	fs.unlink(pathTestFile, (err) => {
-		console.log('error delete => ', err);
-	});
-};
-
 export const runTest = (solution: string, test: string) => {
 	saveFile(solution, test);
 	return new Promise((resolve) => {
@@ -33,12 +27,12 @@ export const runTest = (solution: string, test: string) => {
 			} catch (e) {
 				parseResponse = { error: response };
 			} finally {
-				deleteFile();
+				saveFile('', '');
 				resolve({ success: code === 0, ...parseResponse });
 			}
 		});
 		docker.on('error', (error) => {
-			deleteFile();
+			saveFile('', '');
 			resolve({ success: false, error: error.message });
 		});
 	});
