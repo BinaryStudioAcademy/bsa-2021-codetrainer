@@ -1,12 +1,19 @@
 import { getCustomRepository } from 'typeorm';
 import { Solution, TSolutionRepository, User, TUserRepository, Task, TTaskRepository } from '../../data';
 import { CODE_ERRORS, ENV, SOLUTION_STATUS } from '../../common';
-import { calculateRank, TokenTypes, ValidationError, verifyToken, fromEntries } from '../../helpers';
+import {
+	calculateRank,
+	TokenTypes,
+	ValidationError,
+	verifyToken,
+	fromEntries,
+	checkStatusSolution,
+} from '../../helpers';
 import { rabbitConnect } from '../../config';
 import { ISendToRabbit, TypeTest } from '../../types/sendToRabbit';
 
 export interface ISolutionResult {
-	result: { success: boolean; response?: unknown; error?: Error };
+	result: { success: boolean; response?: { failure: Array<unknown>; passes: Array<unknown> }; error?: Error };
 	status: SOLUTION_STATUS;
 	token: string;
 	userId: string;
@@ -172,7 +179,7 @@ export class SolutionService {
 		const task = await taskRepository.getById(data.taskId);
 		let user = await userRepository.getById(data.userId);
 		if (status !== SOLUTION_STATUS.UNLOCKED && data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
-			const statusSolution = data.result.success ? SOLUTION_STATUS.COMPLETED : SOLUTION_STATUS.NOT_COMPLETED;
+			const statusSolution = checkStatusSolution(data.result.response);
 			const userData = calculateRank.check({ user, task, status: statusSolution });
 			await repository.updateById(data.solutionId, { status: statusSolution });
 			await userRepository.updateById(data.userId, userData);
