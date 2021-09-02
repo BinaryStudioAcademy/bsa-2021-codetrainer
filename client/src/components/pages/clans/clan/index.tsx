@@ -9,6 +9,8 @@ import clsx from 'clsx';
 import { ButtonClasses } from 'components/basic/button';
 import { Modal } from 'components/modals';
 import { CommunityMember } from './components/community-member';
+import { TRole } from './components/member-item/types';
+import { makeUserAdmin } from 'services';
 
 const ClanPage: React.FC<IClanProps> = ({
 	isOwnClan,
@@ -70,6 +72,9 @@ const ClanPage: React.FC<IClanProps> = ({
 			</div>
 		</div>
 	);
+	const handleAddAdmin = (id: string) => {
+		makeUserAdmin(id);
+	};
 	return (
 		<>
 			<Modal
@@ -99,7 +104,11 @@ const ClanPage: React.FC<IClanProps> = ({
 				{clan.members.length ? (
 					<section className={styles.membersSection}>
 						<MembersSortPanel sortByRank={sortByRank} sortByTime={sortByTime} currentSort={currentSort} />
-						<MembersList members={clan.members} />
+						<MembersList
+							members={clan.members}
+							viewerRole={user?.profileClan?.role as TRole}
+							handleAddAdmin={handleAddAdmin}
+						/>
 					</section>
 				) : (
 					<div>This Clan has no members</div>

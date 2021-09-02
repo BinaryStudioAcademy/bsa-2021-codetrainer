@@ -10,7 +10,7 @@ import { getFullDate } from 'helpers/date.helper';
 
 const ClanInfo: React.FC<IClanInfoProps> = ({ clan, isOwnClan, leaveClan, joinClan, handleInviteClick }) => {
 	const clanAdmin = clan.members.find(
-		(member: WebApi.Entities.IMember) => member.profileClan.role === MemberRoles.ADMIN,
+		(member: WebApi.Entities.IMember) => member.profileClan?.role === MemberRoles.ADMIN,
 	);
 
 	return (
