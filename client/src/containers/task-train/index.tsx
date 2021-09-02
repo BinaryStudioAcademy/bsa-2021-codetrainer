@@ -35,7 +35,7 @@ const TaskTrain: React.FC = () => {
 				dispatch(actions.setSolution({ solution: solution ?? null }));
 			},
 		);
-	}, []);
+	}, [taskId]);
 
 	useEffect(() => {
 		if (!Boolean(errors) || isSuccess) {
