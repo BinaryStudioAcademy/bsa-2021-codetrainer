@@ -8,3 +8,5 @@ export const getTasks = createAction<actionTypes.TGetTasks>(actionTypes.GET_TASK
 export const setTasks = createAction<actionTypes.TSetTasks>(actionTypes.SET_TASKS);
 export const getNextTask = createAction<actionTypes.TGetNextTask>(actionTypes.GET_NEXT_TASK);
 export const setNextTask = createAction<actionTypes.TSetNextTask>(actionTypes.SET_NEXT_TASK);
+export const getFollowing = createAction<actionTypes.TGetFollowing>(actionTypes.GET_FOLLOWING);
+export const setFollowing = createAction<actionTypes.TSetFollowing>(actionTypes.SET_FOLLOWING);

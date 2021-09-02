@@ -5,6 +5,7 @@ export interface ITaskInfoState {
 	notFound: boolean;
 	similarTasks: WebApi.Entities.IChallenge[] | null;
 	nextTaskId: string | null;
+	following: WebApi.Entities.IUser[] | null;
 }
 
 export const initialState: ITaskInfoState = {
@@ -12,4 +13,5 @@ export const initialState: ITaskInfoState = {
 	notFound: false,
 	similarTasks: null,
 	nextTaskId: null,
+	following: null,
 };

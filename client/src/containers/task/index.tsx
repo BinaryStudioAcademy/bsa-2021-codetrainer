@@ -9,6 +9,7 @@ import { mapDataToChallenges } from 'helpers/maps';
 import { Details } from './details';
 import * as actions from './logic/actions';
 import historyHelper from 'helpers/history.helper';
+import { Solutions } from './solutions';
 
 export const Tabs: Record<string, { id: number; name: string }> = {
 	details: { id: 0, name: 'Details' },
@@ -50,6 +51,9 @@ export const TaskPageContainer = () => {
 		switch (activeTabId) {
 			case Tabs.details.id: {
 				return <Details />;
+			}
+			case Tabs.solutions.id: {
+				return <Solutions />;
 			}
 			default: {
 				return <div>{activeTabId}</div>;
