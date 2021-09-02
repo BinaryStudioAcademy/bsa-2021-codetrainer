@@ -1,5 +1,5 @@
+import { Markdown } from 'components/common';
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import styles from './description.module.scss';
 
 export interface IDescriptionProps {
@@ -13,7 +13,7 @@ export const Description = ({ description, exampleTestCases }: IDescriptionProps
 			<div className={styles.description}>
 				{description || exampleTestCases ? (
 					<>
-						<ReactMarkdown>{description}</ReactMarkdown>
+						<Markdown text={description} />
 						{exampleTestCases && (
 							<>
 								<h3 className={styles.examplesHeader}>Examples</h3>

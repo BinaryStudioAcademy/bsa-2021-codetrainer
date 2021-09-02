@@ -52,7 +52,7 @@ export const TaskPageContainer = () => {
 			case Tabs.details.id: {
 				return <Details />;
 			}
-			case ActiveTabId.Solutions: {
+			case Tabs.solutions.id: {
 				return <Solutions />;
 			}
 			default: {
