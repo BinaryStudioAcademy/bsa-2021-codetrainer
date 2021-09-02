@@ -7,6 +7,7 @@ interface IFormSelectProps extends FieldProps {
 	id: string;
 	label?: string;
 	placeholder: string;
+	readonly?: boolean;
 	options: { value: string; name: string, label?: string }[];
 }
 
@@ -15,6 +16,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 	label,
 	placeholder,
 	options,
+	readonly = false,
 	field: { name, value },
 	form: { setFieldValue },
 }) => {
@@ -40,6 +42,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 				onChange={onChange}
 				placeholder={placeholder}
 				options={options}
+				isDisabled={readonly}
 				styles={{
 					menuPortal: (base) => ({
 						...base,
@@ -68,6 +71,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 						fontFamily: 'Montserrat',
 						fontSize: 14,
 						fontWeight: 400,
+						height: 47,
 					}),
 					option: (styles) => ({
 						...styles,
