@@ -45,7 +45,21 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
 			.leftJoinAndSelect('user.solutions', 'solution')
-			.select([...this.userFields, 'clan', 'solution.id', 'profileClan', 'task.id'])
+			.leftJoinAndSelect('user.followers', 'followers')
+			.leftJoinAndSelect('user.following', 'following')
+			.leftJoinAndSelect('following.following', 'following_user')
+			.leftJoinAndSelect('followers.follower', 'follower_user')
+			.select([
+				...this.userFields,
+				'clan',
+				'solution.id',
+				'profileClan',
+				'task.id',
+				'followers.id',
+				'following.id',
+				'follower_user',
+				'following_user',
+			])
 			.where('user.id = :id', { id })
 			.getOne();
 	}

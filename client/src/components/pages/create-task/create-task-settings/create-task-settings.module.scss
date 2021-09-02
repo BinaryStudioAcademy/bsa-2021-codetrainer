@@ -25,6 +25,10 @@
 				font: $progress-bar-font;
 				font-size: 14px;
 			}
+			&:focus {
+				outline: none;
+				color: var(--text-color);
+			}
 		}
 	}
 }

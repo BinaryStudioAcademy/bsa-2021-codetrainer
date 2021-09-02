@@ -12,6 +12,7 @@ const HomePageContainer: React.FC = () => {
 	const dispatch = useDispatch();
 	const community = useSelector((rootState: IRootState) => rootState.home.state.community);
 	const user = useSelector((rootState: IRootState) => rootState.auth.userData.user);
+	const userClan = useSelector((rootState: IRootState) => rootState.auth.userData.user?.profileClan);
 
 	if (!user) {
 		return <Redirect from="/home" to={ROUTES.NotFound} />;
@@ -44,6 +45,7 @@ const HomePageContainer: React.FC = () => {
 				users={users}
 				nextTaskContent={<NextTaskContainer />}
 				feedContent={<FeedContainer />}
+				isInClan={Boolean(userClan)}
 			/>
 		</>
 	);
