@@ -10,7 +10,6 @@ import { ButtonClasses } from 'components/basic/button';
 import { Modal } from 'components/modals';
 import { CommunityMember } from './components/community-member';
 import { TRole } from './components/member-item/types';
-import { makeUserAdmin } from 'services';
 
 const ClanPage: React.FC<IClanProps> = ({
 	isOwnClan,
@@ -30,9 +29,8 @@ const ClanPage: React.FC<IClanProps> = ({
 	handleInvitationSend,
 	isInvitationOpen,
 	setIsInvitationOpen,
+	handleAddAdmin,
 }) => {
-	console.log(community);
-
 	const inviteModalElements = (
 		<div>
 			{modalLoading ? (
@@ -72,9 +70,7 @@ const ClanPage: React.FC<IClanProps> = ({
 			</div>
 		</div>
 	);
-	const handleAddAdmin = (id: string) => {
-		makeUserAdmin(id);
-	};
+
 	return (
 		<>
 			<Modal

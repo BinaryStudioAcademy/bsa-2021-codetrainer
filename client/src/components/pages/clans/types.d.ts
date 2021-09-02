@@ -46,4 +46,5 @@ export interface IClanProps {
 	handleInvitationSend: (from: any, to: any) => void;
 	isInvitationOpen: boolean;
 	setIsInvitationOpen: (value: boolean) => void;
+	handleAddAdmin: (id: string) => void;
 }

@@ -12,6 +12,7 @@ import { deleteClan } from 'services/clans.service';
 import { useUserSelector } from 'hooks/useAppSelector';
 import { IUser } from 'typings/common/IUser';
 import { useParams } from 'react-router-dom';
+import { makeUserAdmin } from 'services';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
@@ -70,6 +71,10 @@ const Clan: React.FC = () => {
 	const [community, setCommunity] = useState<any[]>([]);
 	const [isInvitationOpen, setIsInvitationOpen] = useState(false);
 	const [modalShown, setModalShown] = useState(false);
+
+	const handleAddAdmin = (id: string) => {
+		makeUserAdmin(id);
+	};
 	return (
 		clan && (
 			<ClanPage
@@ -90,6 +95,7 @@ const Clan: React.FC = () => {
 				handleInvitationSend={handleInvitationSend}
 				isInvitationOpen={isInvitationOpen}
 				setIsInvitationOpen={setIsInvitationOpen}
+				handleAddAdmin={handleAddAdmin}
 			/>
 		)
 	);

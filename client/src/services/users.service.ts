@@ -1,4 +1,3 @@
-import { MemberRoles } from 'common/enum/app/clans';
 import { HttpMethods } from 'constants/services';
 import { UsersApiPath } from 'enum/api/users-api.path';
 import { Order } from 'helpers/table-helper';
@@ -58,15 +57,13 @@ export const getUserById = async (id: string) => {
 };
 
 export const makeUserAdmin = async (id: string) => {
-	const result = await http.callWebApi({
-		endpoint: 'users/' + id + '/admin',
-		method: HttpMethods.PUT,
+	const { user } = await http.callWebApi({
+		endpoint: 'users/' + id,
+		method: HttpMethods.GET,
 		skipAuthorization: false,
-		body: {
-			newRole: MemberRoles.ADMIN,
-		},
 	});
-	console.log(result);
-
-	return result;
+	const {
+		profileClan: { id: profileClanId },
+	} = user;
+	console.log(profileClanId);
 };
