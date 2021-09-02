@@ -21,6 +21,7 @@ import { CommentTaskService } from './comment-task';
 import { TagService } from './tag/tag-service';
 import { SolutionService } from './solution/solution-service';
 import { CollectionService } from './collection/collection-service';
+import { ProfileClanService } from './profile-clan';
 
 const authService = new AuthService({ user: UserRepository });
 
@@ -44,6 +45,8 @@ const solutionService = new SolutionService({
 });
 const collectionService = new CollectionService({ collection: CollectionRepository, user: UserRepository });
 
+const profileClanService = new ProfileClanService({ user: UserRepository, profileClan: ProfileClanRepository });
+
 export { authService, AuthService };
 export { clanService, ClanService };
 export { imagesService, ImagesService };
@@ -54,3 +57,4 @@ export { commentTaskService, CommentTaskService };
 export { tagService, TagService };
 export { solutionService, SolutionService };
 export { collectionService, CollectionService };
+export { profileClanService, ProfileClanService };

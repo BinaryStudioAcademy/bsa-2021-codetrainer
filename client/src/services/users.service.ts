@@ -62,8 +62,13 @@ export const makeUserAdmin = async (id: string) => {
 		method: HttpMethods.GET,
 		skipAuthorization: false,
 	});
-	const {
-		profileClan: { id: profileClanId },
-	} = user;
-	console.log(profileClanId);
+	const result = await http.callWebApi({
+		endpoint: 'profile-clan/' + user.profileClan.id,
+		method: HttpMethods.PUT,
+		skipAuthorization: false,
+		body: {
+			role: 'admin',
+		},
+	});
+	return result;
 };

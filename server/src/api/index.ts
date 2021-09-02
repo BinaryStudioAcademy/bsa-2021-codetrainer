@@ -20,8 +20,10 @@ import {
 	collectionService,
 	commentTaskService,
 	solutionService,
+	profileClanService
 } from '../services';
 import { initMailerApi } from './mailer';
+import { initProfileClan } from './profile-clan';
 
 export function initApi(): Router {
 	const apiRouter = Router();
@@ -78,6 +80,8 @@ export function initApi(): Router {
 	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
 
 	apiRouter.use(ApiPath.MAILER, initMailerApi(Router));
+
+	apiRouter.use(ApiPath.PROFILE_CLAN, initProfileClan(Router, {profileClan: profileClanService}));
 
 	return apiRouter;
 }
