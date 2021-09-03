@@ -41,6 +41,12 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 				.then((data) => res.send(data))
 				.catch(next),
 		)
+		.get(TaskApiPath.NEXT_TASK, validationMiddleware([taskIdSchema]), checkTaskIdMiddleware, (req, res, next) =>
+			taskService
+				.getNextTask(req.user.id, req.task.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
 		.put(
 			TaskApiPath.$ID,
 			validationMiddleware([taskIdSchema, taskSchema]),

@@ -1,6 +1,23 @@
 import { getCustomRepository } from 'typeorm';
 import { SOLUTION_STATUS, TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
-import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag } from '../../data';
+import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag, TSolutionRepository } from '../../data';
+
+interface IConstructor {
+	task: TTaskRepository;
+	user: TUserRepository;
+	tag: TTagRepository;
+	solution: TSolutionRepository;
+}
+
+interface ISearch {
+	query?: string;
+	sort?: TASK_ORDER_BY;
+	status?: string;
+	progress?: string;
+	rank?: number;
+	tags?: string;
+	page: number;
+}
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -9,10 +26,13 @@ export class TaskService {
 
 	protected tagRepository: TTagRepository;
 
-	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
+	protected solutionRepository: TSolutionRepository;
+
+	constructor({ task, user, tag, solution }: IConstructor) {
 		this.taskRepository = task;
 		this.userRepository = user;
 		this.tagRepository = tag;
+		this.solutionRepository = solution;
 	}
 
 	async getTags(tags: string[] = []) {
@@ -76,18 +96,7 @@ export class TaskService {
 		return tasks;
 	}
 
-	async search(
-		queryFilter: {
-			query?: string;
-			sort?: TASK_ORDER_BY;
-			status?: string;
-			progress?: string;
-			rank?: number;
-			tags?: string;
-			page: number;
-		},
-		user: User,
-	) {
+	async search(queryFilter: ISearch, user: User) {
 		const { sort, page, ...where } = queryFilter;
 		const repository = getCustomRepository(this.taskRepository);
 		const tagRepository = getCustomRepository(this.tagRepository);
@@ -135,5 +144,13 @@ export class TaskService {
 			.take(take)
 			.getManyAndCount();
 		return { tasks, total };
+	}
+
+	async getNextTask(userId: string, taskId: string) {
+		const repository = getCustomRepository(this.taskRepository);
+		const solutionRepository = getCustomRepository(this.solutionRepository);
+		const useTasks = await solutionRepository.getTasksByUser(userId);
+		const nextTask = await repository.searchNotUseTask([...useTasks, taskId]);
+		return { nextTask: nextTask ?? null };
 	}
 }
