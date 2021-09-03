@@ -146,11 +146,11 @@ export class TaskService {
 		return { tasks, total };
 	}
 
-	async getNextTask(userId: string, taskId: string) {
+	async getNextTask(userId: string) {
 		const repository = getCustomRepository(this.taskRepository);
 		const solutionRepository = getCustomRepository(this.solutionRepository);
 		const useTasks = await solutionRepository.getTasksByUser(userId);
-		const nextTask = await repository.searchNotUseTask([...useTasks, taskId]);
+		const nextTask = await repository.searchNotUseTask(useTasks);
 		return { nextTask: nextTask ?? null };
 	}
 }

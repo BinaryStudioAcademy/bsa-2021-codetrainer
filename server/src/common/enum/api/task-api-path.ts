@@ -3,6 +3,6 @@ export const TaskApiPath = {
 	$ID: '/:id',
 	SEARCH: '/search',
 	TRAIN: '/:id/train',
-	NEXT_TASK: '/:id/next',
+	NEXT_TASK: '/next',
 	USER_SOLUTIONS: '/search/user-solutions',
 };
