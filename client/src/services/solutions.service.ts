@@ -1,4 +1,3 @@
-import { SolutionStatus } from 'typings/common/solution';
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
@@ -68,50 +67,3 @@ export const getUserSolutions: TTaskSolutionsLoader = async ({ skip, take, statu
 			take,
 		},
 	});
-
-export const getCompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
-	http.callWebApi({
-		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: HttpMethods.GET,
-		query: {
-			status: SolutionStatus.COMPLETED,
-			skip,
-			take,
-		},
-	});
-
-export const getUncompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
-	http.callWebApi({
-		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: HttpMethods.GET,
-		query: {
-			status: SolutionStatus.NOT_COMPLETED,
-			skip,
-			take,
-		},
-	});
-
-export const getSkippedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
-	http.callWebApi({
-		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: HttpMethods.GET,
-		query: {
-			status: SolutionStatus.SKIPPED,
-			skip,
-			take,
-		},
-	});
-
-export const getUnlockedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
-	http.callWebApi({
-		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: HttpMethods.GET,
-		query: {
-			status: SolutionStatus.UNLOCKED,
-			skip,
-			take,
-		},
-	});
-
-export const getUserSolutionsCount: () => Promise<{ [key in SolutionStatus]: string }> = async () =>
-	http.callWebApi({ endpoint: TaskApiPath.USER_SOLUTIONS_COUNT, method: HttpMethods.GET });
