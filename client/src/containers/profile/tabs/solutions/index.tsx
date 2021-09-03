@@ -44,35 +44,6 @@ export const ProfileSolutions: React.FC = () => {
 	const [isLoaded, setLoaded] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
-	// useEffect(() => {
-	// 	let isMounted = true;
-	// 	const loadSolutionCount = async () => {
-	// 		setLoaded(true);
-	// 		try {
-	// 			const solutionsCount = await getUserSolutionsCount();
-	// 			if (isMounted) {
-	// 				const counts: { [key in SolutionStatus]: number } = solutionTabs
-	// 					.map(({ value }) => [value, Number(solutionsCount?.[value] ?? 0)])
-	// 					.reduce(
-	// 						(prev, [key, value]) => ({ ...prev, [key]: value }),
-	// 						{} as { [key in SolutionStatus]: number },
-	// 					);
-	// 				setCount(counts);
-	// 				setHasMore(Boolean(total[SolutionStatus.COMPLETED]));
-	// 			}
-	// 		} finally {
-	// 			if (isMounted) {
-	// 				setLoaded(false);
-	// 				await loadMore();
-	// 			}
-	// 		}
-	// 	};
-	// 	loadSolutionCount();
-	// 	return () => {
-	// 		isMounted = false;
-	// 	};
-	// }, []);
-
 	const { empty } = useMemo(
 		() => solutionTabs.find((tab) => tab.value === selectedValue) as TSolutionTab,
 		[selectedValue],

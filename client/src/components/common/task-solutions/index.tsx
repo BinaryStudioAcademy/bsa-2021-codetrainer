@@ -56,11 +56,11 @@ const TaskSolutions: FC<ITaskSolutionsProps> = ({ task: rawTask }) => {
 						<span className={styles.time}>{moment(solution.createdAt).fromNow()}</span>
 						{solution.status === SolutionStatus.COMPLETED ? (
 							<>
-								<Link to={ROUTES.Home}>Refactor</Link>
-								<Link to={ROUTES.Home}>Discuss</Link>
+								<Link to={`${ROUTES.TaskInfo}/${task.id}/train`}>Refactor</Link>
+								<Link to={`${ROUTES.TaskInfo}/${task.id}/discourse`}>Discuss</Link>
 							</>
 						) : (
-							<Link to={ROUTES.Home}>Complete</Link>
+							<Link to={`${ROUTES.TaskInfo}/${task.id}/train`}>Complete</Link>
 						)}
 					</div>
 				</div>
