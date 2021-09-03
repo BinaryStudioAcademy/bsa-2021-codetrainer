@@ -7,6 +7,7 @@ export interface IUser {
 	rank: number;
 	imageSource?: string;
 	name: string;
+	surname?: string;
 	clan?: IClan | null;
 	honor: number;
 }
