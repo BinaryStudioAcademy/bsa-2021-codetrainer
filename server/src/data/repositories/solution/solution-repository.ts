@@ -21,6 +21,15 @@ export class SolutionRepository extends AbstractRepository<Solution> {
 		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
 	}
 
+	getByTaskAndByUser(userId: string, taskId: string): Promise<Solution | undefined> {
+		return this.createQueryBuilder('solution')
+			.innerJoin('solution.user', 'user')
+			.innerJoin('solution.task', 'task')
+			.where('user.id = :userId', { userId })
+			.andWhere('task.id = :taskId', { taskId })
+			.getOne();
+	}
+
 	async getTasksByUser(userId: string) {
 		const solutions = await this.createQueryBuilder('solution')
 			.leftJoinAndSelect('solution.user', 'user')

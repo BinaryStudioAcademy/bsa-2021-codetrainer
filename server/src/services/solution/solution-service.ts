@@ -12,6 +12,12 @@ import {
 import { rabbitConnect } from '../../config';
 import { ISendToRabbit, TypeTest } from '../../types/sendToRabbit';
 
+interface IConstructor {
+	task: TTaskRepository;
+	user: TUserRepository;
+	solution: TSolutionRepository;
+}
+
 export interface ISolutionResult {
 	result: { success: boolean; response?: { failure: Array<unknown>; passes: Array<unknown> }; error?: Error };
 	status: SOLUTION_STATUS;
@@ -22,7 +28,7 @@ export interface ISolutionResult {
 	typeTest: TypeTest;
 }
 
-interface IData {
+interface ICreateSolution {
 	user: User;
 	task: Task;
 	code: string;
@@ -31,7 +37,7 @@ interface IData {
 	status?: SOLUTION_STATUS;
 }
 
-interface ISolutionData extends IData {
+interface ISolutionData extends ICreateSolution {
 	solution: Solution;
 }
 
@@ -44,15 +50,7 @@ export class SolutionService {
 
 	protected fieldForPatch = ['status', 'code', 'testCases'];
 
-	constructor({
-		task,
-		user,
-		solution,
-	}: {
-		task: TTaskRepository;
-		user: TUserRepository;
-		solution: TSolutionRepository;
-	}) {
+	constructor({ task, user, solution }: IConstructor) {
 		this.taskRepository = task;
 		this.userRepository = user;
 		this.solutionRepository = solution;
@@ -71,11 +69,15 @@ export class SolutionService {
 		await rabbitConnect.send(dataForRabbit);
 	}
 
-	async create(data: IData) {
+	async create(data: ICreateSolution) {
 		const { code, testCases, user, task, typeTest } = data;
 		const repository = getCustomRepository(this.solutionRepository);
 		const taskRepository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
+		const solution = repository.getByTaskAndByUser(user.id, task.id);
+		if (Boolean(solution)) {
+			throw new ValidationError(CODE_ERRORS.SOLUTION_THIS_USER);
+		}
 		const newSolution = await repository.save({
 			testCases,
 			code,
@@ -125,7 +127,7 @@ export class SolutionService {
 			throw new ValidationError(CODE_ERRORS.NOT_USER_SOLUTION);
 		}
 		const repository = getCustomRepository(this.solutionRepository);
-		await repository.updateById(solution.id, { code, status: solution.status, testCases });
+		await repository.updateById(solution.id, { code, testCases });
 		const updatedSolution = await repository.getByKey(solution.id, 'id');
 		await this.sendToRabbit({ ...data, solution: updatedSolution || solution });
 		return updatedSolution;
@@ -160,7 +162,7 @@ export class SolutionService {
 
 	async getUserSolution(user: User, task: Task) {
 		const repository = getCustomRepository(this.solutionRepository);
-		const solution = await repository.findOne({ user, task });
+		const solution = await repository.getByTaskAndByUser(user.id, task.id);
 		const useTasks = await repository.getTasksByUser(user.id);
 		const taskRepository = getCustomRepository(this.taskRepository);
 		const nextTask = await taskRepository.searchNotUseTask([...useTasks, task.id]);
