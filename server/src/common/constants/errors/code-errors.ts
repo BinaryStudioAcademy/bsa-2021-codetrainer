@@ -28,11 +28,11 @@ export const CODE_ERRORS = {
 		message: `User with email: ${email}, not exist!`,
 		status: HttpCodes.NOT_FOUND,
 	}),
-	EMAIL_ALREDY_EXIST: {
+	EMAIL_ALREADY_EXIST: {
 		message: `Email is already taken.`,
 		status: HttpCodes.BAD_REQUEST,
 	},
-	USERNAME_ALREDY_EXIST: {
+	USERNAME_ALREADY_EXIST: {
 		message: `Username is already taken.`,
 		status: HttpCodes.BAD_REQUEST,
 	},
