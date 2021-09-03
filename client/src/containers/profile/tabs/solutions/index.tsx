@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, ReactNode } from 'react';
 import { ProfileTabWithSidebar } from 'components';
-import { TTaskSolutionsLoader, getCompletedSolutions, getUncompletedSolutions } from 'services/solutions.service';
+import { getUserSolutions } from 'services/solutions.service';
 import ProfileSkeletonList from 'components/pages/profile/profile-skeleton-list';
 import { SolutionStatus } from 'typings/common/solution';
 import { TaskSolutions, TaskSolutionsSkeleton } from 'components/common';
@@ -9,7 +9,6 @@ import { WebApi } from 'typings/webapi';
 type TSolutionTab = {
 	title: string;
 	value: SolutionStatus;
-	loader: TTaskSolutionsLoader;
 	empty: ReactNode;
 };
 
@@ -19,25 +18,62 @@ const solutionTabs: TSolutionTab[] = [
 	{
 		title: 'Completed',
 		value: SolutionStatus.COMPLETED,
-		loader: getCompletedSolutions,
 		empty: "User doesn't have completed solutions yet.",
 	},
 	{
 		title: 'Uncompleted',
 		value: SolutionStatus.NOT_COMPLETED,
-		loader: getUncompletedSolutions,
 		empty: "User doesn't have uncompleted solutions yet.",
+	},
+	{
+		title: 'Skipped',
+		value: SolutionStatus.SKIPPED,
+		empty: "User doesn't have skipped solutions yet.",
+	},
+	{
+		title: 'Unlocked',
+		value: SolutionStatus.UNLOCKED,
+		empty: "User doesn't have unlocked solutions yet.",
 	},
 ];
 
 export const ProfileSolutions: React.FC = () => {
 	const [selectedValue, setSelectedValue] = useState<SolutionStatus>(SolutionStatus.COMPLETED);
-	const [tasks, setTasks] = useState<WebApi.Entities.ITask[] | undefined>(undefined);
-	const [total, setTotal] = useState<number | undefined>(undefined);
+	const [tasks, setTasks] = useState<WebApi.Entities.ITask[]>([]);
+	const [solutionsCount, setSolutionsCount] = useState<{ [key in SolutionStatus]?: string }>({});
 	const [isLoaded, setLoaded] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
-	const { loader, empty } = useMemo(
+	// useEffect(() => {
+	// 	let isMounted = true;
+	// 	const loadSolutionCount = async () => {
+	// 		setLoaded(true);
+	// 		try {
+	// 			const solutionsCount = await getUserSolutionsCount();
+	// 			if (isMounted) {
+	// 				const counts: { [key in SolutionStatus]: number } = solutionTabs
+	// 					.map(({ value }) => [value, Number(solutionsCount?.[value] ?? 0)])
+	// 					.reduce(
+	// 						(prev, [key, value]) => ({ ...prev, [key]: value }),
+	// 						{} as { [key in SolutionStatus]: number },
+	// 					);
+	// 				setCount(counts);
+	// 				setHasMore(Boolean(total[SolutionStatus.COMPLETED]));
+	// 			}
+	// 		} finally {
+	// 			if (isMounted) {
+	// 				setLoaded(false);
+	// 				await loadMore();
+	// 			}
+	// 		}
+	// 	};
+	// 	loadSolutionCount();
+	// 	return () => {
+	// 		isMounted = false;
+	// 	};
+	// }, []);
+
+	const { empty } = useMemo(
 		() => solutionTabs.find((tab) => tab.value === selectedValue) as TSolutionTab,
 		[selectedValue],
 	);
@@ -47,9 +83,9 @@ export const ProfileSolutions: React.FC = () => {
 			solutionTabs.map((tab) => ({
 				...tab,
 				id: tab.value,
-				count: tab.value === selectedValue ? total : undefined,
+				count: Number(solutionsCount?.[tab.value] ?? 0),
 			})),
-		[selectedValue, total],
+		[solutionsCount],
 	);
 
 	const loadMore = useCallback(async () => {
@@ -57,31 +93,31 @@ export const ProfileSolutions: React.FC = () => {
 			setLoaded(true);
 			try {
 				const skip = tasks?.length !== undefined ? tasks.length : 0;
-				const { tasks: items, total } = await loader({
+				const { tasks: items, count } = await getUserSolutions({
 					skip,
 					take: 10,
+					status: selectedValue,
 				});
-				setHasMore(skip + 10 < total);
-				setTotal(total);
+				setSolutionsCount(count || {});
+				setHasMore(skip + 10 < Number(count?.[selectedValue] ?? 0));
 				setTasks([...(tasks || []), ...items]);
 			} catch {
-				setHasMore(true);
+				setHasMore(Boolean(solutionsCount?.[selectedValue]));
 			}
 			setLoaded(false);
 		}
-	}, [loader, tasks, hasMore, isLoaded]);
+	}, [tasks, hasMore, isLoaded]);
 
 	const changeTab = useCallback(
 		(value: string) => {
 			const tab = value as SolutionStatus;
 			if (tab !== selectedValue) {
-				setTasks(undefined);
-				setTotal(undefined);
+				setTasks([]);
 				setSelectedValue(tab);
-				setHasMore(true);
+				setHasMore(Boolean(solutionsCount?.[tab]));
 			}
 		},
-		[selectedValue],
+		[selectedValue, solutionsCount],
 	);
 
 	return (
