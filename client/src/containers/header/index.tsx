@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 	const dispatch = useDispatch();
 	const { user } = useAppSelector((state) => state.auth.userData);
 	const firestore = getFirestore(app);
-	const q = query(collection(firestore, 'notifications'), where('userId', '==', user?.id));
+	const q = query(collection(firestore, 'notifications'), where('userId', '==', user?.id ?? ''));
 	const { notifications: unorderedNotifications } = useHeaderSelector();
 	useEffect(() => {
 		dispatch(notificationsActions.fetchNotification());
