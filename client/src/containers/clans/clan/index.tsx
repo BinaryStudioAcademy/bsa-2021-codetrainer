@@ -12,6 +12,12 @@ import { deleteClan } from 'services/clans.service';
 import { useUserSelector } from 'hooks/useAppSelector';
 import { IUser } from 'typings/common/IUser';
 import { useParams } from 'react-router-dom';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
+import { addNotification } from 'services/notifications/notifications.service';
+import { v4 as uuid } from 'uuid';
+import { NotificationTypes } from 'typings/common/INotification';
+import { WebApi } from 'typings/webapi';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
@@ -64,6 +70,35 @@ const Clan: React.FC = () => {
 		}
 	};
 	const handleInvitationSend = (fromUser: any, toUser: any) => {
+		dispatch(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Success,
+					message: 'Invitation was sent to ' + toUser.username,
+				},
+			}),
+		);
+		addNotification(
+			{
+				id: uuid(),
+				date: new Date(),
+				type: NotificationTypes.InviteToClan,
+				body: {
+					clan: {
+						id: fromUser.clan.id ?? '',
+						name: fromUser.clan.name ?? '',
+						avatar:
+							fromUser.clan.avatar ??
+							'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg',
+					} as WebApi.Entities.IClan,
+					inviter: {
+						username: fromUser.username ?? '',
+					} as WebApi.Entities.IUser,
+				},
+				read: false,
+			},
+			toUser.id,
+		);
 		sendIntitationLetter(fromUser, toUser);
 	};
 	const [modalLoading, setModalLoading] = useState(false);

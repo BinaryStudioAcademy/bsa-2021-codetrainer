@@ -44,6 +44,35 @@ export const notificationMocks: TNotification[] = [
 		read: false,
 	},
 	{
+		id: '4',
+		date: moment().subtract(3, 'minutes').subtract(36, 'seconds').toDate(),
+		type: NotificationTypes.LeaveClan,
+		body: {
+			clan: {
+				id: '1',
+				name: 'Religion of wall-nut',
+				avatar: 'https://i.pinimg.com/originals/86/4e/fd/864efdc14f6aecbc01b4c98928fcc629.png',
+			} as WebApi.Entities.IClan,
+		},
+		read: false,
+	},
+	{
+		id: '4',
+		date: moment().subtract(3, 'minutes').subtract(36, 'seconds').toDate(),
+		type: NotificationTypes.InviteToClan,
+		body: {
+			clan: {
+				id: '1',
+				name: 'Religion of wall-nut',
+				avatar: 'https://i.pinimg.com/originals/86/4e/fd/864efdc14f6aecbc01b4c98928fcc629.png',
+			} as WebApi.Entities.IClan,
+			inviter: {
+				username: 'Alex',
+			} as WebApi.Entities.IUser,
+		},
+		read: false,
+	},
+	{
 		id: '5',
 		date: moment().subtract(13, 'seconds').toDate(),
 		type: NotificationTypes.RankUp,

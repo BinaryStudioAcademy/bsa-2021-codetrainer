@@ -46,6 +46,27 @@ export function mapNotificationToProps(notification: TNotification): INotificati
 				read,
 			};
 		}
+		case NotificationTypes.LeaveClan: {
+			const { name, avatar } = notification.body.clan;
+			return {
+				children: `You left ${name}! Find new friends!`,
+				icon: <img src={avatar} width={50} height={50} />,
+				link: ROUTES.Clans,
+				date,
+				read,
+			};
+		}
+		case NotificationTypes.InviteToClan: {
+			const { id, name, avatar } = notification.body.clan;
+			const { username } = notification.body.inviter;
+			return {
+				children: `You were invited to ${name} by your friend ${username}`,
+				icon: <img src={avatar} width={50} height={50} />,
+				link: ROUTES.Clan + `/${id}`,
+				date,
+				read,
+			};
+		}
 		default: {
 			return {
 				children: notification.body.message,

@@ -6,6 +6,8 @@ export enum NotificationTypes {
 	JoinClan = 'JOIN_CLAN',
 	HonorUnlocks = 'HONOR_UNLOCKS',
 	Follower = 'FOLLOWER',
+	InviteToClan = 'INVITE_CLAN',
+	LeaveClan = 'LEAVE_CLAN',
 }
 
 type TCommonNotificationBody = {
@@ -29,6 +31,15 @@ type TFollowerBody = {
 	follower: WebApi.Entities.IUser;
 };
 
+type TInviteToClanBody = {
+	clan: WebApi.Entities.IClan;
+	inviter: WebApi.Entities.IUser;
+};
+
+type TLeaveClanBody = {
+	clan: WebApi.Entities.IClan;
+};
+
 export type TNotification = { id: string; date: Date; read: boolean } & (
 	| {
 			type?: NotificationTypes.Common;
@@ -49,5 +60,13 @@ export type TNotification = { id: string; date: Date; read: boolean } & (
 	| {
 			type: NotificationTypes.Follower;
 			body: TFollowerBody;
+	  }
+	| {
+			type: NotificationTypes.InviteToClan;
+			body: TInviteToClanBody;
+	  }
+	| {
+			type: NotificationTypes.LeaveClan;
+			body: TLeaveClanBody;
 	  }
 );
