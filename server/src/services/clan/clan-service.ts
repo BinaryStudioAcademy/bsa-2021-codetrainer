@@ -78,10 +78,10 @@ export class ClanService {
 		};
 	}
 
-	async update(clan: Clan, data: Clan) {
+	async update(id: string, data: Clan) {
 		const repository = getCustomRepository(this.clanRepository);
-		await repository.updateById(clan.id, data);
-		const newClan = await repository.getById(clan.id);
+		await repository.updateById(id, data);
+		const newClan = await this.getClan(id);
 		return newClan;
 	}
 
@@ -174,8 +174,6 @@ export class ClanService {
 		await repository.updateById(id, {
 			numberOfMembers: clan.numberOfMembers - 1,
 		});
-
-		console.log(await this.getClan(id));
 	}
 
 	async toggleMember(user: User, id: string) {

@@ -1,26 +1,43 @@
 @import 'styles/variables';
 
 .clanInfo {
+	$border-radius: 5px;
 	background: var(--container-color);
-	margin-bottom: 20px;
 	min-width: 800px;
-	border-radius: 5px;
+	border-radius: $border-radius;
 
-	&Avatar {
-		max-height: 500px;
+	&Name {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font: $name-font;
+	}
 
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
+	&Details {
+		display: flex;
+		justify-content: flex-start;
+		align-items: stretch;
+		gap: 25px;
+	}
+
+	&List {
+		flex-shrink: 0;
 	}
 
 	&Description {
-		padding: 20px;
-		width: 100%;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
+		flex-basis: 100%;
+		background-color: var(--secondary-container-color);
+		height: 150px;
+	}
+
+	&Wrapper {
+		padding: 10px 15px;
+	}
+
+	&Cover {
+		img {
+			max-width: 100%;
+			border-radius: $border-radius $border-radius 0 0;
+		}
 	}
 }

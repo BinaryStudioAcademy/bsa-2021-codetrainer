@@ -17,6 +17,9 @@ export class Clan extends BaseEntity {
 	@Column({ type: 'varchar', length: 50, unique: true })
 	name!: string;
 
+	@Column({ type: 'varchar', length: 3000, nullable: true })
+	description?: string;
+
 	@Column({ type: 'boolean', default: true })
 	isPublic!: boolean;
 

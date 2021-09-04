@@ -1,5 +1,5 @@
-import { WebApi } from 'typings/webapi';
+import { IMemberWithPosition } from '../../types';
 
 export interface IMemberItemProps {
-	member: WebApi.Entities.IMember;
+	member: IMemberWithPosition;
 }

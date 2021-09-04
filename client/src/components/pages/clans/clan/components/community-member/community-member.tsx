@@ -3,15 +3,11 @@ import { Avatar, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import React from 'react';
 import { useState } from 'react';
+import { WebApi } from 'typings/webapi';
 import styles from './community-member.module.scss';
 
 interface ICommunityMemberProps {
-	user: {
-		avatar: string;
-		name: string;
-		surname: string;
-		username: string;
-	};
+	user: WebApi.Entities.IUser;
 	fromUser: any;
 	handleInviteClick: (fromUser: any, toUser: any) => void;
 }
