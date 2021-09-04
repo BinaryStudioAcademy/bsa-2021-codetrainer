@@ -1,114 +1,212 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import ImageUpload from './components/image-upload';
-import { FormInput } from 'components';
-import { Button } from '../../basic';
+import clsx from 'clsx';
+import { FormInput, FormImage, FormNumber, FormMarkdown, FormSelect, Modal, Spinner } from 'components';
+import Button, { ButtonClasses } from 'components/basic/button';
 import styles from './clan-modal.module.scss';
-import { Modal } from '../';
-import { createClan } from 'services/create-clan.service';
-import { useDispatch } from 'react-redux';
-import * as userActions from 'containers/user/logic/actions';
-import { useUserSelector } from 'hooks/useAppSelector';
-import { setNotificationState } from 'containers/notification/logic/actions';
-import { NotificationType } from 'containers/notification/logic/models';
+import ClanCover from './clan-cover';
+import ConfirmModal from '../confirm-modal';
+
+const clanTypes = [
+	{
+		name: 'Public',
+		label: 'Public',
+		value: 'public',
+	},
+	{
+		name: 'Private',
+		label: 'Private',
+		value: 'private',
+	},
+];
+
+export enum ClanModalType {
+	CREATE = 'create',
+	EDIT = 'edit',
+}
+
+export interface IClanForm {
+	name?: string;
+	description?: string;
+	maxMembers?: number;
+	type?: 'private' | 'public';
+	avatar?: string | null;
+	cover?: string | null;
+}
 
 interface IClanModalProps {
 	isOpen: boolean;
 	setIsOpen: (isOpen: boolean) => void;
+	type?: ClanModalType;
+	isLoading?: boolean;
+	initial?: IClanForm;
+	onSubmit?: (clan: IClanForm) => void;
+	onDelete?: () => void;
 }
 
-const CreateClanSchema = Yup.object().shape({
-	createClan: Yup.string()
-		.min(2, 'Your input is too short')
-		.max(30, 'Your input is too long')
-		.required("Input field can't be empty"),
+const ClanSchema = Yup.object().shape({
+	name: Yup.string()
+		.min(2, 'Name is too short')
+		.max(30, 'Name is too long')
+		.required('Required'),
+	description: Yup.string()
+		.max(3000, 'Description is too long'),
 });
 
-export const ClanModal: React.FC<IClanModalProps> = ({ isOpen, setIsOpen }) => {
-	const [isPrompt, setIsPrompt] = React.useState(false);
-	const dispatch = useDispatch();
-	const user = useUserSelector();
-	const onSubmit = async (value: string, setFieldError: any) => {
-		if (user?.clan !== null) {
-			dispatch(
-				setNotificationState({
-					state: {
-						notificationType: NotificationType.Error,
-						message: 'Leave the clan to create a new one first.',
-					},
-				}),
-			);
-		} else {
-			try {
-				const clan = await createClan(value);
-				setIsOpen(false);
-				dispatch(userActions.setUserClan({ clan: clan }));
-				dispatch(
-					setNotificationState({
-						state: {
-							notificationType: NotificationType.Success,
-							message: 'Clan was successfully created',
-						},
-					}),
-				);
-			} catch (e) {
-				setFieldError('createClan', 'Something went wrong');
-			}
-		}
-	};
+export const ClanModal: React.FC<IClanModalProps> = ({
+	isOpen,
+	setIsOpen,
+	type = ClanModalType.CREATE,
+	initial = {
+		maxMembers: 20,
+	},
+	isLoading = false,
+	onSubmit = () => {},
+	onDelete = () => {},
+}: IClanModalProps) => {
+	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 
-	const prompt = (validateField: (field: string) => Promise<string>) => (
-		<div className={styles.prompt}>
-			<p>Are you sure?</p>
-			<Button type="submit" onClick={() => validateField('createClan')}>
-				Submit
-			</Button>
-			<Button onClick={() => setIsPrompt(false)}>Cancel</Button>
-		</div>
-	);
-
-	const element = (
+	const element = useMemo(() => (
 		<div className={styles.container}>
-			<div className={styles.pictures}>
-				<ImageUpload label="Set clan cover" />
-				<ImageUpload label="Set clan icon" />
-			</div>
-			<div>
-				<Formik
-					initialValues={{ createClan: '' }}
-					validationSchema={CreateClanSchema}
-					onSubmit={(values, { setFieldError }) => onSubmit(values.createClan, setFieldError)}
-				>
-					{({ validateField }) => (
-						<Form className={styles.form}>
-							<label htmlFor="createClan">
-								<span>*</span> Create clan
-							</label>
-							<div className={styles.formInput}>
-								<Field id="createClan" name="createClan" type="text" component={FormInput} />
+			<Formik
+				initialValues={initial}
+				validationSchema={ClanSchema}
+				onSubmit={onSubmit}
+			>
+				<Form className={styles.form}>
+					<div className={styles.fields}>	
+						<Field
+							id="name"
+							name="name"
+							label="Name"
+							placeholder="Enter name"
+							type="text"
+							readonly={isLoading}
+							component={FormInput}
+						/>
+						<div className={styles.settings}>
+							<div className={styles.main}>
+								<Field
+									id="type"
+									name="type"
+									label="Type"
+									options={clanTypes}
+									value={initial.type}
+									readonly={isLoading}
+									component={FormSelect}
+								/>
 							</div>
-							{isPrompt ? (
-								prompt(validateField as (field: string) => Promise<string>)
-							) : (
-								<Button style={{ marginTop: '26px' }} onClick={() => setIsPrompt(true)}>
-									Create Clan
+							<Field
+								id="max-members"
+								name="maxMembers"
+								label="Max members"
+								placeholder="Max count of members"
+								type="number"
+								min={1}
+								max={50}
+								step={1}
+								readonly={isLoading}
+								component={FormNumber}
+							/>
+						</div>
+						<Field
+							id="description"
+							name="description"
+							label="Description"
+							title="Description"
+							placeholder="Enter description"
+							type="text"
+							readonly={isLoading}
+							component={FormMarkdown}
+						/>
+					</div>
+					<div className={styles.images}>
+						<Field
+							id="avatar"
+							name="avatar"
+							title="Select an avatar"
+							type="image"
+							imageProps={{
+								width: 80,
+								height: 80,
+							}}
+							readonly={isLoading}
+							component={FormImage}
+						/>
+						<Field
+							id="cover"
+							name="cover"
+							title="Select a cover"
+							type="image"
+							imageComponent={ClanCover}
+							readonly={isLoading}
+							component={FormImage}
+						/>
+					</div>
+					<div className={styles.buttons}>
+						<Button
+							type="submit"
+							className={clsx(ButtonClasses.red, ButtonClasses.filled)}
+							disabled={isLoading}
+						>
+							{type === ClanModalType.CREATE ? 'Create' : 'Edit' }
+						</Button>
+						{
+							isLoading && (
+								<div>
+									<Spinner size="40px" />
+								</div>
+							)
+						}
+						{
+							type === ClanModalType.EDIT && (
+								<Button
+									type="button"
+									onClick={() => setIsDeleteOpen(true)}
+									className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.delete)}
+									disabled={isLoading}
+								>
+									Delete
 								</Button>
-							)}
-						</Form>
-					)}
-				</Formik>
-			</div>
+							)
+						}
+					</div>
+				</Form>
+			</Formik>
 		</div>
-	);
+	), [initial]);
 
 	return (
-		<div>
+		<>
 			<Modal
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
-				elements={{ title: 'NEW CLAN', showCloseButton: true, body: element }}
+				elements={{
+					title: type === ClanModalType.CREATE ? 'Create clan' : 'Edit clan',
+					showCloseButton: true,
+					body: element
+				}}
 			/>
-		</div>
+			<ConfirmModal
+				isOpen={isDeleteOpen}
+				setIsOpen={setIsDeleteOpen}
+				onConfirm={(confirm) => {
+					setIsDeleteOpen(false);
+					if (confirm) {
+						onDelete();
+					}
+				}}
+				confirm="Delete"
+				elements={{
+					title: `Do you really want to delete the ${initial.name}?`,
+					body: (
+						<>
+							It will be impossible to undo a deletion of the clan. <b>Still delete it?</b>
+						</>
+					),
+				}}
+			/>
+		</>
 	);
 };
