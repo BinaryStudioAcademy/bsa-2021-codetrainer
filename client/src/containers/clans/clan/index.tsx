@@ -45,8 +45,6 @@ const Clan: React.FC = () => {
 
 	const joinClan = () => {
 		dispatch(clansActions.joinClan({ id }));
-		dispatch(actions.clearClan());
-		dispatch(actions.fetchClan({ id }));
 	};
 
 	const handleDeleteClan = async () => {
