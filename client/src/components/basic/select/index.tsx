@@ -5,7 +5,7 @@ import { Option } from '..';
 import { ISelectProps, ISelectValue } from './interface';
 import clsx from 'clsx';
 
-const Select = ({ values, activeValue, onChange, isButtonBlockSelect, className }: ISelectProps) => {
+const Select = ({ values, activeValue, onChange, className }: ISelectProps) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
 	const listStyles = clsx(styles.optionsList, { [styles.optionsActive]: optionsListActive });
 	const handleChange = (value: ISelectValue) => {
