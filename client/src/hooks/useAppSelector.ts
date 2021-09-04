@@ -9,3 +9,4 @@ export const useSignUpSelector = () => useAppSelector((store) => store.auth.sign
 export const useSettingsSelector = () => useAppSelector((store) => store.settings);
 export const useHeaderSelector = () => useAppSelector((store) => store.header);
 export const useThemeSelector = () => useAppSelector((store) => store.theme);
+export const useClanSelector = () => useAppSelector((store) => store.clan);
