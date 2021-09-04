@@ -2,9 +2,9 @@
 
 .membersSortPanel {
 	padding: 20px;
-	background: $zircon;
-	width: 165px;
+	background: var(--container-color);
 	&Button {
+		color: var(--text-color);
 		cursor: pointer;
 		display: block;
 		margin: 0 auto;

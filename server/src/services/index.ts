@@ -26,6 +26,7 @@ import { ProfileClanService } from './profile-clan';
 const authService = new AuthService({ user: UserRepository });
 
 const users = new User({ user: UserRepository });
+
 type TUsersService = InstanceType<typeof User>;
 
 export { users, TUsersService };

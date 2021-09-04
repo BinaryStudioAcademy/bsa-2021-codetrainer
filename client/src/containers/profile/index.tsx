@@ -123,11 +123,13 @@ export const Profile = (props: RouteComponentProps) => {
 	const profileTasks = [
 		{
 			title: 'Published',
+			empty: "User doesn't have any published challenges yet.",
 			id: 'published',
 			tasks: publishedTasks,
 		},
 		{
 			title: 'Not published',
+			empty: "User doesn't have any created Beta challenges yet.",
 			id: 'notPublished',
 			tasks: unpublishedTasks,
 		},

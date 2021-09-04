@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Select, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
-import { Spinner, TaskDescription } from 'components/common';
+import { TaskDescription } from 'components/common';
 import { INextTaskProps } from './interface';
 
 import styles from './nextTask.module.scss';
@@ -22,7 +22,12 @@ const NextTask: React.FC<INextTaskProps> = ({
 
 				<div className={styles.focusWrapper}>
 					<p className={styles.focusTitle}>Choose Today’s Focus</p>
-					<Select values={focusValues} activeValue={activeFocusValue} onChange={setActiveFocusValue} />
+					<Select
+						values={focusValues}
+						activeValue={activeFocusValue}
+						onChange={setActiveFocusValue}
+						className={styles.focusSelect}
+					/>
 				</div>
 
 				<div>
@@ -47,7 +52,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 						tags={task.tags?.map((item) => item.name)}
 					/>
 				) : (
-					<Spinner />
+					'Sorry, there is not any challenge yet.'
 				)}
 			</div>
 		</article>

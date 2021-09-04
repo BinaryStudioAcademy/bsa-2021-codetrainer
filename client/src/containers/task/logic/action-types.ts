@@ -7,6 +7,16 @@ export const GET_TASKS = 'CHALLENGE:GET_TASKS';
 export const SET_TASKS = 'CHALLENGE:SET_TASKS';
 export const GET_NEXT_TASK = 'CHALLENGE:GET_NEXT_TASK';
 export const SET_NEXT_TASK = 'CHALLENGE:SET_NEXT_TASK';
+export const GET_FOLLOWING = 'CHALLENGE:GET_FOLLOWING';
+export const SET_FOLLOWING = 'CHALLENGE:SET_FOLLOWING';
+
+export type TGetFollowing = {
+	id?: string;
+};
+
+export type TSetFollowing = {
+	following: WebApi.Entities.IUser[];
+};
 
 export type TGetNextTask = {
 	id?: string;

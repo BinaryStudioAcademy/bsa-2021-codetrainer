@@ -2,15 +2,14 @@
 
 .challenge {
 	padding: 25px;
-	background-color: $white;
-	border-radius: 4px;
+	background-color: var(--secondary-container-color);
+	border-radius: 6px;
 	margin-bottom: 20px;
 }
 
 .modal {
 	display: inline-block;
 	margin-top: 10px;
-	margin-left: 20px;
 }
 
 .modal:hover {

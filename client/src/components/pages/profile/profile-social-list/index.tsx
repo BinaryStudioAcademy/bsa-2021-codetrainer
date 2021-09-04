@@ -44,7 +44,7 @@ export const ProfileSocialList: React.FC<IProfileSocialList> = ({ items, infoTyp
 				</tbody>
 			</table>
 		) : (
-			<div className={styles.empty}>You dont have any {infoType} yet.</div>
+			<div className={styles.empty}>User doesn&#39;t have any {infoType} yet.</div>
 		)}
 	</div>
 );

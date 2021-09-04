@@ -34,3 +34,5 @@ export const getNextRank = (rank: number) => {
 			return 'TO_EIGHT';
 	}
 };
+
+export const NUMBER_OF_RANKS = 9;
