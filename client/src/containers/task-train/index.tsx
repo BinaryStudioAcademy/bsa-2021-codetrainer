@@ -24,8 +24,7 @@ const TaskTrain: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const stateTaskTrain = useAppSelector((state) => state.task);
-	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus, isSuccess } =
-		stateTaskTrain;
+	const { task, solution, hasFetched, testResult, activeTab, errors, nextTaskId, changeStatus } = stateTaskTrain;
 
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
@@ -45,7 +44,7 @@ const TaskTrain: React.FC = () => {
 	}, [taskId]);
 
 	useEffect(() => {
-		if (!Boolean(errors) || isSuccess) {
+		if (!Boolean(errors)) {
 			return;
 		}
 		dispatch(
@@ -57,7 +56,8 @@ const TaskTrain: React.FC = () => {
 				},
 			}),
 		);
-	}, [errors, isSuccess]);
+		dispatch(actions.setErrors({ errors: null }));
+	}, [errors]);
 
 	useEffect(() => {
 		if (!changeStatus || !task || !solution?.status) {

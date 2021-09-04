@@ -62,6 +62,7 @@ export const ButtonsBlock = ({
 					<label className="label">Your challenge</label>
 					{yourChallengeValues ? (
 						<Select
+							className={styles.yourChallengeSelect}
 							values={yourChallengeValues}
 							activeValue={challengeActiveValue}
 							onChange={(newValue: ISelectValue) => {

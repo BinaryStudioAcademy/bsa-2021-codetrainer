@@ -15,7 +15,6 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 		return {
 			...state,
 			hasFetched: false,
-			isSuccess: true,
 			changeStatus: false,
 			test: null,
 			errors: null,
@@ -62,7 +61,6 @@ export const taskReducer = createReducer<ITaskState>(initialState, {
 		return {
 			...state,
 			errors,
-			isSuccess: false,
 		};
 	},
 	[actionTypes.CHANGE_STATUS](state, { changeStatus }: actionTypes.IChangeStatus) {

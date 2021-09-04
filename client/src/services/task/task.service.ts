@@ -23,9 +23,9 @@ const validationSchema = Yup.object().shape({
 		.required('Task name can`t be empty.'),
 	discipline: Yup.string().required('discipline can`t be empty.'),
 	rank: Yup.number()
-		.min(1, 'Rank must be a number from 1 to 8.')
-		.max(8, 'Rank must be a number from 1 to 8.')
-		.required('Rank must be a number from 1 to 8.'),
+		.min(1, 'Rank must be a number from 1 to 9.')
+		.max(9, 'Rank must be a number from 1 to 9.')
+		.required('Rank must be a number from 1 to 9.'),
 	allowContributors: Yup.boolean().required('allowContributors name can`t be empty.'),
 	tags: Yup.string(),
 	description: Yup.string().min(1, 'description can`t be empty.').required('Task name can`t be empty.'),

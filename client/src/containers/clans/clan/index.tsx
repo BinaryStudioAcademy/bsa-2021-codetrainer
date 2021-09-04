@@ -136,7 +136,6 @@ const Clan: React.FC = () => {
 			);
 		}
 	}
-
 };
 
 export default Clan;

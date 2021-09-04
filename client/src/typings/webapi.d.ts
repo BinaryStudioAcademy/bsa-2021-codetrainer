@@ -71,6 +71,7 @@ declare namespace WebApi.Entities {
 		somewhatSatisfied: number;
 		notSatisfied: number;
 		contributors: IUser[];
+		solutions: ISolution[];
 	}
 
 	export interface ISolution extends IBaseEntity {

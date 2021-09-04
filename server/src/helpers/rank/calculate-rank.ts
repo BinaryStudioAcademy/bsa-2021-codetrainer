@@ -1,5 +1,12 @@
 import { User, Task } from '../../data';
-import { betaTaskScore, userRankToTaskRank, taskScore, userRankScore, countOfRanks } from '../../common';
+import {
+	betaTaskScore,
+	userRankToTaskRank,
+	taskScore,
+	userRankScore,
+	countOfRanks,
+	SOLUTION_STATUS,
+} from '../../common';
 
 class CalculateRank {
 	private getExtraPercent(userRank: number, taskRank: number): number {
@@ -31,8 +38,8 @@ class CalculateRank {
 		);
 	}
 
-	check({ user, task }: { user?: User; task?: Task }) {
-		if (!user || !task) {
+	check({ user, task, status }: { user?: User; task?: Task; status: SOLUTION_STATUS }) {
+		if (!user || !task || status !== SOLUTION_STATUS.COMPLETED) {
 			return {};
 		}
 		return this[task.status](user, task.rank);

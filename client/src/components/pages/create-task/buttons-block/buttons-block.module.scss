@@ -12,7 +12,15 @@
 	label.noMargin {
 		margin-bottom: 0 !important;
 	}
+
+	.yourChallengeSelect {
+		ul li span,
+		h5 {
+			color: var(--text-color);
+		}
+	}
 }
+
 .button {
 	height: 45px;
 	margin-top: 8px;
