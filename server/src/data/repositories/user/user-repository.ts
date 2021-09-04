@@ -105,6 +105,8 @@ export class UserRepository extends AbstractRepository<User> {
 				'solution.id',
 				'profileClan',
 				'task.id',
+				'user.rank',
+				'user.honor',
 			])
 			.where('user.username = :username', { username })
 			.getOne();
