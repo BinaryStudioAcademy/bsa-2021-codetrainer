@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { ClanPage } from 'components';
+import { ClanPage, Spinner } from 'components';
 import * as actions from './logic/actions';
 import * as clansActions from './../clans/logic/actions';
 import * as userActions from '../../user/logic/actions';
@@ -20,7 +20,7 @@ const Clan: React.FC = () => {
 	const currentSort = useSelector((state: IRootState) => state.clan.options.sortBY);
 	const user: IUser | null = useUserSelector();
 	const clan = useSelector((state: IRootState) => state.clan.data);
-
+	const { isLoading } = useSelector((state: IRootState) => state.clan);
 	const { id } = useParams<{ id: string }>();
 
 	useEffect(() => {
@@ -46,6 +46,8 @@ const Clan: React.FC = () => {
 
 	const joinClan = (id: string) => {
 		dispatch(clansActions.joinClan({ id }));
+		dispatch(actions.clearClan());
+		dispatch(actions.fetchClan({ id }));
 	};
 
 	const handleDeleteClan = async () => {
@@ -70,7 +72,9 @@ const Clan: React.FC = () => {
 	const [community, setCommunity] = useState<any[]>([]);
 	const [isInvitationOpen, setIsInvitationOpen] = useState(false);
 	const [modalShown, setModalShown] = useState(false);
-	return (
+	return isLoading ? (
+		<Spinner />
+	) : (
 		clan && (
 			<ClanPage
 				clan={clan}
