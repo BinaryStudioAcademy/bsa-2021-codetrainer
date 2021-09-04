@@ -71,8 +71,6 @@ const ClanPage: React.FC<IClanProps> = ({
 			</div>
 		</div>
 	);
-	console.log(clan);
-
 	return (
 		<>
 			<Modal

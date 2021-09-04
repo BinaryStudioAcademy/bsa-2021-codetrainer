@@ -139,6 +139,7 @@ export class ClanService {
 		});
 
 		await userRepository.updateById(user.id, { profileClan });
+
 		await repository.addMember(id, user.id);
 		await repository.updateById(id, {
 			numberOfMembers: clan.numberOfMembers + 1,
@@ -183,7 +184,6 @@ export class ClanService {
 	async toggleMember(user: User, id: string) {
 		const userRepository = getCustomRepository(this.userRepository);
 		const clan = await this.getClan(id);
-
 		if (!clan) {
 			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));
 		}

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { ClanPage } from 'components';
 import * as actions from './logic/actions';
-import * as clansActions from './../clans/logic/actions';
-import * as clanActions from './../clan/logic/actions';
+import * as clansActions from '../clans/logic/actions';
 import * as userActions from '../../user/logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'typings/root-state';
@@ -13,7 +12,6 @@ import { deleteClan } from 'services/clans.service';
 import { useUserSelector } from 'hooks/useAppSelector';
 import { IUser } from 'typings/common/IUser';
 import { useParams } from 'react-router-dom';
-import { makeUserAdmin } from 'services';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
@@ -22,7 +20,6 @@ const Clan: React.FC = () => {
 	const currentSort = useSelector((state: IRootState) => state.clan.options.sortBY);
 	const user: IUser | null = useUserSelector();
 	const clan = useSelector((state: IRootState) => state.clan.data);
-
 	const { id } = useParams<{ id: string }>();
 
 	useEffect(() => {
@@ -46,8 +43,10 @@ const Clan: React.FC = () => {
 		dispatch(actions.leaveClan());
 	};
 
-	const joinClan = (id: string) => {
+	const joinClan = () => {
 		dispatch(clansActions.joinClan({ id }));
+		dispatch(actions.clearClan());
+		dispatch(actions.fetchClan({ id }));
 	};
 
 	const handleDeleteClan = async () => {
@@ -74,12 +73,10 @@ const Clan: React.FC = () => {
 	const [modalShown, setModalShown] = useState(false);
 
 	const handleAddAdmin = async (id: string) => {
-		await makeUserAdmin(id);
-		// dispatch(actions.clearClan());
-		// dispatch(actions.fetchClan({ id }));
+		dispatch(actions.makeAdmin({ userId: id }));
 	};
 	const handleDeleteMember = async (id: string) => {
-		dispatch(clanActions.deleteMember({ id }));
+		dispatch(actions.deleteMember({ id }));
 	};
 	return (
 		clan && (

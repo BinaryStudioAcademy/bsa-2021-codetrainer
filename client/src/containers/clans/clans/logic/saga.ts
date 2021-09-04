@@ -38,6 +38,7 @@ export function* toggleMemberWorker({ id }: ReturnType<typeof actions.joinClan>)
 	yield put(actions.startLoading());
 
 	const response = yield call(toggleClanMember, id);
+	console.log(response);
 
 	if (response instanceof Error) {
 		yield put(actions.addError({ error: response.message }));
