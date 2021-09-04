@@ -425,7 +425,7 @@ describe("twoOldestAges", function() {
 		setExampleTestCases('');
 	};
 	const handlePreviewClick = (taskId: string | null) => {
-		historyHelper.push(taskId ? '/task/' + taskId : '');
+		historyHelper.push(taskId ? ROUTES.TaskInfo + '/' + taskId + TASK_ROUTES.Train : '');
 	};
 	const handleTaskChange = async (taskId: string | null) => {
 		if (taskId) {
