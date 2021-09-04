@@ -13,8 +13,8 @@ interface ICreateSettingsProps {
 	setLanguage: (value: ISelectValue) => void;
 	taskName: string;
 	setTaskName: (value: string) => void;
-	rank: string;
-	setRank: (value: string) => void;
+	rank: ISelectValue;
+	setRank: (value: ISelectValue) => void;
 	tags: string;
 	setTags: (value: string) => void;
 	rankSelectProps: ISelectProps;

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { FormControlLabel, FormGroup } from '@material-ui/core';
 import { InfoPopover, Select, Switch } from 'components/basic';
 import { Discipline, IDisciplineItem } from 'containers/create-new-task/logic/models';
-import { ISelectProps } from 'components/basic/select/interface';
+import { ISelectProps, ISelectValue } from 'components/basic/select/interface';
 import DisciplineElement from '../discipline-element';
 
 import './create-task-settings.scss';
@@ -18,8 +18,8 @@ interface ICreateTaskSettingsProps {
 	selectProps: ISelectProps;
 	taskName: string;
 	setTaskName: (value: string) => void;
-	rank: string;
-	setRank: (value: string) => void;
+	rank: ISelectValue;
+	setRank: (value: ISelectValue) => void;
 	tags: string;
 	setTags: (value: string) => void;
 	rankSelectProps: ISelectProps;

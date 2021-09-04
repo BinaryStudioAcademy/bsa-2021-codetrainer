@@ -93,7 +93,23 @@ export const CreateTask = (props: ICreateTaskProps) => {
 		setDiscipline(foundDisciplineItem);
 	};
 	const [language, setLanguage] = useState<ISelectValue>(SELECT_PROPS.values[0]);
-	const [rank, setRank] = useState('');
+	const rankValues: ISelectValue[] = [];
+	for (let i = 1; i < NUMBER_OF_RANKS + 1; i++) {
+		rankValues.push({
+			id: i.toString(),
+			title: i.toString(),
+		});
+	}
+	const [rank, setRank] = useState(rankValues[0]);
+
+	const rankSelectProps: ISelectProps = {
+		values: rankValues,
+		onChange: (value) => {
+			setRank(value);
+		},
+		activeValue: rank,
+	};
+
 	const [tags, setTags] = useState('');
 	const [isSelectedSwitch, setSelectedSwitch] = useState(false);
 	const onSwitchClick = (newSwitchState: boolean) => {
@@ -307,7 +323,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		setTaskName('');
 		setDiscipline(DISCIPLINE_ITEMS[0]);
 		setLanguage(SELECT_PROPS.values[0]);
-		setRank('');
+		setRank(rankValues[rankValues.length - 1]);
 		setSelectedSwitch(false);
 		setTags('');
 		setTextDescription('');
@@ -476,19 +492,7 @@ describe("twoOldestAges", function() {
 			handleTaskChange(taskId);
 		}
 	}, []);
-	const rankValues: ISelectValue[] = [];
-	for (let i = 0; i < NUMBER_OF_RANKS; i++) {
-		rankValues.push({
-			id: i.toString(),
-			title: i.toString(),
-		});
-	}
-	const rankSelectProps: ISelectProps = {
-		values: rankValues,
-		onChange: (value) => {
-			setRank(value.title);
-		},
-	};
+
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
