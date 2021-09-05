@@ -221,7 +221,7 @@ export const Profile = (props: RouteComponentProps) => {
 						id: user?.id,
 						username: user.username ?? '',
 						profileUrl: avatar,
-					} as WebApi.Entities.IUser,
+					} as unknown as WebApi.Entities.IUser,
 				},
 			},
 			userData.id,
