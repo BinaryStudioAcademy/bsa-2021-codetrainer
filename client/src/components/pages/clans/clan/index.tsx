@@ -29,8 +29,6 @@ const ClanPage: React.FC<IClanProps> = ({
 	isInvitationOpen,
 	setIsInvitationOpen,
 }) => {
-	console.log(community);
-
 	const inviteModalElements = (
 		<div>
 			{modalLoading ? (

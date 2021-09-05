@@ -86,8 +86,6 @@ export const updateTask = async (requestBody: ICreateTaskBody, taskId: string) =
 		};
 	}
 	if (validationStatus) {
-		console.log(requestBody);
-
 		const res = await http.callWebApi({
 			method: 'PUT',
 			endpoint: 'tasks/' + taskId,

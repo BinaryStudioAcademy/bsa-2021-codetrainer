@@ -204,7 +204,6 @@ export const Profile = (props: RouteComponentProps) => {
 	const unfollowHandler = (id: string) => {
 		dispatch(actions.unfollowUser({ id }));
 	};
-	console.log('user data, ', userData);
 
 	return isLoading ? (
 		<FullscreenLoader />

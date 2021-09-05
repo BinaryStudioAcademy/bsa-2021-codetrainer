@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, ReactNode } from 'react';
+import React, { useState, useMemo, useCallback, ReactNode, useEffect } from 'react';
 import { ProfileTabWithSidebar } from 'components';
 import { getAuthoredCollections, getFollowedCollections, TUserCollectionsLoader } from 'services/collections.service';
 import { WebApi } from 'typings/webapi';
@@ -37,6 +37,17 @@ const collectionsTabs: TCollectionsTab[] = [
 ];
 
 export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => {
+	const [authoredQuantity, setAuthoredQuantity] = useState(0);
+	const [followedQuantity, setFollowedQuantity] = useState(0);
+
+	useEffect(() => {
+		getAuthoredCollections({ userId, skip: 0, take: 10 }).then(({ collections }) =>
+			setAuthoredQuantity(collections.length),
+		);
+		getFollowedCollections({ userId, skip: 0, take: 10 }).then(({ collections }) =>
+			setFollowedQuantity(collections.length),
+		);
+	}, []);
 	const [selectedValue, setSelectedValue] = useState<CollectionsTabValues>(collectionsTabs[0].value);
 	const [collections, setCollections] = useState<WebApi.Entities.ICollection[] | undefined>(undefined);
 	const [total, setTotal] = useState<number | undefined>(undefined);
@@ -53,7 +64,7 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 			collectionsTabs.map((tab) => ({
 				...tab,
 				id: tab.value,
-				count: tab.value === selectedValue ? total : undefined,
+				count: tab.value === CollectionsTabValues.Authored ? authoredQuantity : followedQuantity,
 			})),
 		[selectedValue, total],
 	);

@@ -25,7 +25,6 @@ export const getCommunityByUserId = async (id: string): Promise<Array<any>> => {
 		method: 'GET',
 		skipAuthorization: false,
 	});
-	console.log(userCommunity);
 
 	return userCommunity;
 };

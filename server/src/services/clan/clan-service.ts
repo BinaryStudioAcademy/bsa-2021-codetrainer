@@ -174,8 +174,6 @@ export class ClanService {
 		await repository.updateById(id, {
 			numberOfMembers: clan.numberOfMembers - 1,
 		});
-
-		console.log(await this.getClan(id));
 	}
 
 	async toggleMember(user: User, id: string) {
