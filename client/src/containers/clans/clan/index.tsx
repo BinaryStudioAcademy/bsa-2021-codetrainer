@@ -81,8 +81,8 @@ const Clan: React.FC = () => {
 	);
 
 	const onInvite = useCallback(
-		async (toUserId: string) => {
-			sendIntitationLetter({ id: user.id }, { id: toUserId });
+		async (toUser: WebApi.Entities.IUser) => {
+			sendIntitationLetter(user, toUser);
 		},
 		[user],
 	);

@@ -40,10 +40,10 @@ export interface IClanProps {
 		onDelete: () => void;
 	};
 	invitation: {
-		onInvite: (id: string) => void;
+		onInvite: (user: WebApi.Entities.IUser) => void;
 		handleInviteClick: () => void;
 		community: any[];
-	}
+	};
 	modals: {
 		isInvitationOpen: boolean;
 		isEditOpen: boolean;
@@ -53,5 +53,5 @@ export interface IClanProps {
 		setIsInvitationOpen: (value: boolean) => void;
 		setIsEditOpen: (value: boolean) => void;
 		setIsLeaveOpen: (value: boolean) => void;
-	}
+	};
 }

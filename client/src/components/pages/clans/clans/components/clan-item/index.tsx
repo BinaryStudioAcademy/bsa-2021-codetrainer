@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import { Rank } from 'components';
 import { IClanItemProps } from './types';
-import { Button } from 'components/basic';
+import { Avatar, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import { ROUTES } from 'constants/routes';
 import { WebApi } from 'typings/webapi';
@@ -49,7 +49,9 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 			<StyledTableCell>
 				<Rank rank={clan.rank ?? 0} />
 			</StyledTableCell>
-			<StyledTableCell>{clan.avatar ? <img src={clan.avatar} /> : <span>No avatar</span>}</StyledTableCell>
+			<StyledTableCell>
+				<Avatar avatar={clan.avatar} size={40} />
+			</StyledTableCell>
 			<StyledTableCell>
 				<Link to={`${ROUTES.Clan}/${clan?.id}`}>{clan.name}</Link>
 			</StyledTableCell>
