@@ -147,6 +147,17 @@ declare namespace WebApi.Entities {
 			surname: string;
 			username: string;
 		};
+		comments: Array<ICommentTask>;
+	}
+
+	export interface ICommentTask {
+		id: string;
+		task: ITask;
+		user: IUser;
+		body: string;
+		createdAt: Date;
+		updatedAt: Date;
+		isLike: boolean;
 	}
 }
 
