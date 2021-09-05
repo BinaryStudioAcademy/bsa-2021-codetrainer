@@ -50,6 +50,7 @@ export const CODE_ERRORS = {
 		message: `User ${username} does not exist.`,
 		status: HttpCodes.NOT_FOUND,
 	}),
+	USER_NOT_AUTHOR: { message: 'User is not author of comment', status: HttpCodes.BAD_REQUEST },
 	USER_NO_CLAN: { message: 'User doesn`t have a clan', status: HttpCodes.NOT_FOUND },
 	SOCKET_AUTHORIZATION_ERROR: { message: 'Token Error', status: HttpCodes.BAD_REQUEST },
 };
