@@ -73,6 +73,7 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		yield put(actions.clearData());
 		const { user: res } = yield call(fetchUsersSearch, query);
 		const user = yield call(mapUserResponseToUser, res);
+
 		const { followings } = yield call(getFollowingsByUserId, user.id);
 		const { followers } = yield call(getFollowersByUserId, user.id);
 		const community: IUser[] = yield call(getCommunityByUserId, user.id);

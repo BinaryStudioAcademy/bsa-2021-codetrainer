@@ -25,6 +25,8 @@ declare namespace WebApi.Entities {
 		};
 		githubId?: string;
 		profileUrl?: string;
+		avatar?: string;
+
 		position?: number;
 		following: any[];
 		followers: any[];
@@ -154,11 +156,13 @@ declare namespace WebApi.Types {
 	type TPaginationResponse<T, N extends string> = {
 		[_ in N]: T[];
 	} & {
-		total: number;
+		total?: number;
+		count?: { [key in SolutionStatus]?: string };
 	};
 
 	type TPaginationRequest = {
 		skip: number;
 		take: number;
+		status?: SolutionStatus;
 	};
 }

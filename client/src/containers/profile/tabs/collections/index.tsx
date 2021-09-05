@@ -68,7 +68,7 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 					skip,
 					take: 10,
 				});
-				setHasMore(skip + 10 < total);
+				setHasMore(skip + 10 < (total || 0));
 				setTotal(total);
 				setCollections([...(collections || []), ...items]);
 			} catch (e) {

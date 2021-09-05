@@ -10,6 +10,7 @@ import { initFollower } from './follower';
 import { initCollection } from './collection';
 import { initTest } from './test/test-api';
 import { initCommentTask } from './comment-task';
+import { initCommentSolution } from './comment-solution';
 import {
 	authService,
 	clanService,
@@ -20,6 +21,7 @@ import {
 	collectionService,
 	commentTaskService,
 	solutionService,
+	commentSolutionService,
 } from '../services';
 import { initMailerApi } from './mailer';
 
@@ -78,6 +80,8 @@ export function initApi(): Router {
 	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
 
 	apiRouter.use(ApiPath.MAILER, initMailerApi(Router));
+
+	apiRouter.use(ApiPath.COMMENT_SOLUTION, initCommentSolution(Router, { commentSolution: commentSolutionService }));
 
 	return apiRouter;
 }

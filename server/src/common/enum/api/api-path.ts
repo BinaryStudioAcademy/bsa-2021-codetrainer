@@ -11,4 +11,5 @@ export const ApiPath = {
 	TESTS: '/tests',
 	COMMENT_TASK: '/comment-task',
 	MAILER: '/mailer',
+	COMMENT_SOLUTION: '/comment-solution',
 };

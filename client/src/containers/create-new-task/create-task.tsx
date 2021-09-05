@@ -23,6 +23,7 @@ import { useAppSelector } from 'hooks/useAppSelector';
 import { WebApi } from 'typings/webapi';
 import { useEffect } from 'react';
 import { NUMBER_OF_RANKS } from 'enum/ranks';
+import { ROUTES, TASK_ROUTES } from 'constants/routes';
 
 export interface ICreateTaskProps {}
 
@@ -424,7 +425,7 @@ describe("twoOldestAges", function() {
 		setExampleTestCases('');
 	};
 	const handlePreviewClick = (taskId: string | null) => {
-		historyHelper.push(taskId ? '/task/' + taskId : '');
+		historyHelper.push(taskId ? ROUTES.TaskInfo + '/' + taskId + TASK_ROUTES.Train : '');
 	};
 	const handleTaskChange = async (taskId: string | null) => {
 		if (taskId) {
@@ -450,19 +451,16 @@ describe("twoOldestAges", function() {
 	const handleGoToChange = (taskId: string | null, actionId: string | null) => {
 		switch (actionId) {
 			case '1':
-				historyHelper.push(taskId ? '/task/' + taskId : '');
+				historyHelper.push(taskId ? ROUTES.TaskInfo + '/' + taskId : '');
 				break;
 			case '2':
-				historyHelper.push(taskId ? '/task/' + taskId : '');
+				historyHelper.push(taskId ? ROUTES.TaskInfo + '/' + taskId + TASK_ROUTES.Discourse : '');
 				break;
 			case '3':
-				historyHelper.push(taskId ? '/task/' + taskId : '');
+				historyHelper.push(taskId ? ROUTES.TaskInfo + '/' + taskId + TASK_ROUTES.Solutions : '');
 				break;
 			case '4':
-				historyHelper.push(taskId ? '/task/' + taskId : '');
-				break;
-			case '5':
-				historyHelper.push(taskId ? '/task/' + taskId + '/train' : '');
+				historyHelper.push(taskId ? ROUTES.TaskInfo + '/' + taskId + TASK_ROUTES.Train : '');
 				break;
 		}
 	};
