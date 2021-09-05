@@ -14,6 +14,7 @@ export const Solutions = () => {
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 	const following = useSelector((state: IRootState) => state.taskInfo.following);
 	const userSolution = useSelector((state: IRootState) => state.taskInfo.userSolution);
+	const isLoading = useSelector((state: IRootState) => state.taskInfo.isLoading);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -57,7 +58,23 @@ export const Solutions = () => {
 		[following, task],
 	);
 
-	if (task && user) {
+	const unlockSolution = () => {
+		if (!task) {
+			return;
+		}
+		const data = {
+			code: task.initialSolution,
+			testCases: task.exampleTestCases,
+			taskId: task.id,
+			solutionId: userSolution.solution?.id,
+			status: SolutionStatus.UNLOCKED,
+		};
+
+		dispatch(actions.unlockSolution(data));
+		dispatch(actions.getUserSolution({ taskId: task.id }));
+	};
+
+	if (task && user && userSolution && !isLoading) {
 		return (
 			<SolutionsTab
 				task={task}
@@ -68,7 +85,8 @@ export const Solutions = () => {
 					userSolution?.solution?.status !== SolutionStatus.COMPLETED &&
 					userSolution?.solution?.status !== SolutionStatus.UNLOCKED
 				}
-				unlockSolutions={() => {}}
+				unlockSolutions={unlockSolution}
+				solutions={task.solutions.filter((item) => item.status === SolutionStatus.COMPLETED)}
 			/>
 		);
 	}

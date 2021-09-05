@@ -43,4 +43,10 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			},
 		};
 	},
+	[actionTypes.SET_IS_LOADING](state, action: actionTypes.TSetIsLoading) {
+		return {
+			...state,
+			isLoading: action.isLoading,
+		};
+	},
 });

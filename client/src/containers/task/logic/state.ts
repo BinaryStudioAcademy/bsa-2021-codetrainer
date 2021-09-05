@@ -10,6 +10,7 @@ export interface ITaskInfoState {
 		nextTaskId: string | null;
 		solution?: WebApi.Entities.ISolution | null;
 	};
+	isLoading: boolean;
 }
 
 export const initialState: ITaskInfoState = {
@@ -22,4 +23,5 @@ export const initialState: ITaskInfoState = {
 		nextTaskId: null,
 		solution: null,
 	},
+	isLoading: false,
 };

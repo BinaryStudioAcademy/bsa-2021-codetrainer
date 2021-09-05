@@ -12,3 +12,5 @@ export const getFollowing = createAction<actionTypes.TGetFollowing>(actionTypes.
 export const setFollowing = createAction<actionTypes.TSetFollowing>(actionTypes.SET_FOLLOWING);
 export const getUserSolution = createAction<actionTypes.TGetUserSolution>(actionTypes.GET_USER_SOLUTION);
 export const setUserSolution = createAction<actionTypes.TSetUserSolution>(actionTypes.SET_USER_SOLUTION);
+export const unlockSolution = createAction<actionTypes.TUnlockSolution>(actionTypes.UNLOCK_SOLUTION);
+export const setIsLoading = createAction<actionTypes.TSetIsLoading>(actionTypes.SET_IS_LOADING);

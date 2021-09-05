@@ -1,4 +1,5 @@
 import { WebApi } from '../../../typings/webapi';
+import { SolutionStatus } from 'typings/common/solution';
 
 export const GET_TASK = 'CHALLENGE:GET_TASK';
 export const SET_TASK = 'CHALLENGE:SET_TASK';
@@ -11,6 +12,20 @@ export const GET_FOLLOWING = 'CHALLENGE:GET_FOLLOWING';
 export const SET_FOLLOWING = 'CHALLENGE:SET_FOLLOWING';
 export const GET_USER_SOLUTION = 'CHALLENGE:GET_USER_SOLUTION';
 export const SET_USER_SOLUTION = 'CHALLENGE:SET_USER_SOLUTION';
+export const UNLOCK_SOLUTION = 'CHALLENGE:UNLOCK_SOLUTION';
+export const SET_IS_LOADING = 'CHALLENGE:SET_IS_LOADING';
+
+export type TSetIsLoading = {
+	isLoading: boolean;
+};
+
+export type TUnlockSolution = {
+	taskId: string;
+	code: string;
+	testCases: string;
+	status?: SolutionStatus;
+	solutionId?: string;
+};
 
 export type TGetUserSolution = {
 	taskId?: string;

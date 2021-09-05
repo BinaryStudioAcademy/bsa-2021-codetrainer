@@ -7,7 +7,7 @@ import { NotificationType } from 'containers/notification/logic/models';
 import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
-import { fetchUserSolution } from 'services/solutions.service';
+import { fetchUserSolution, patchSolution, submitSolution } from 'services/solutions.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
@@ -100,12 +100,14 @@ export function* fetchFollowingWatcher() {
 
 export function* fetchUserSolutionWorker(action: ReturnType<typeof actions.getUserSolution>): any {
 	try {
+		yield put(actions.setIsLoading({ isLoading: true }));
 		const { taskId } = action;
 		if (taskId) {
 			const userSolution = yield call(() => fetchUserSolution(taskId));
 			console.log(userSolution);
 			yield put(actions.setUserSolution(userSolution));
 		}
+		yield put(actions.setIsLoading({ isLoading: false }));
 	} catch (error) {
 		setNotificationState({
 			state: {
@@ -120,6 +122,35 @@ export function* fetchUserSolutionWatcher() {
 	yield takeEvery(actionTypes.GET_USER_SOLUTION, fetchUserSolutionWorker);
 }
 
+export function* unlockSolutionWorker(action: ReturnType<typeof actions.unlockSolution>): any {
+	try {
+		if (!action.solutionId) {
+			console.log('action', action);
+			// const solution = yield submitSolution(action);
+			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
+			yield call(() =>
+				patchSolution({
+					...action,
+					solutionId: solution.id,
+				}),
+			);
+		} else {
+			yield call(() => patchSolution(action));
+		}
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: 'Cannot unlock solution',
+			},
+		});
+	}
+}
+
+export function* unlockSolutionWatcher() {
+	yield takeEvery(actionTypes.UNLOCK_SOLUTION, unlockSolutionWorker);
+}
+
 export default function* taskInfoSaga() {
 	yield all([
 		fetchTaskWatcher(),
@@ -127,5 +158,6 @@ export default function* taskInfoSaga() {
 		fetchNextTaskWatcher(),
 		fetchFollowingWatcher(),
 		fetchUserSolutionWatcher(),
+		unlockSolutionWatcher(),
 	]);
 }
