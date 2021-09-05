@@ -8,7 +8,7 @@ declare namespace WebApi.Entities {
 		name?: string;
 		email?: string;
 	}
-	
+
 	interface IBaseEntity {
 		id: string;
 		createdAt: Date;
@@ -31,7 +31,7 @@ declare namespace WebApi.Entities {
 		clan?: IClan | null;
 		rank: number;
 		honor: number;
-		profileClan?: IClanProfile
+		profileClan?: IClanProfile;
 		githubId?: string;
 		avatar?: string;
 		position?: number;
@@ -140,11 +140,13 @@ declare namespace WebApi.Types {
 	type TPaginationResponse<T, N extends string> = {
 		[_ in N]: T[];
 	} & {
-		total: number;
+		total?: number;
+		count?: { [key in SolutionStatus]?: string };
 	};
 
 	type TPaginationRequest = {
 		skip: number;
 		take: number;
+		status?: SolutionStatus;
 	};
 }

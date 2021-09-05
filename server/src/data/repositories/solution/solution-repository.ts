@@ -1,4 +1,5 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository } from 'typeorm';
+import { SOLUTION_STATUS } from '../../../common';
 import { Solution } from '../../models';
 import { AbstractRepository } from '../abstract';
 
@@ -12,9 +13,19 @@ export class SolutionRepository extends AbstractRepository<Solution> {
 		return this.createQueryBuilder('solution')
 			.leftJoinAndSelect('solution.task', 'task')
 			.leftJoinAndSelect('solution.user', 'user')
-			.select(['solution', 'task.id', 'user.id'])
+			.leftJoinAndSelect('solution.commentSolutions', 'commentSolutions')
+			.select(['solution', 'task.id', 'user.id', 'commentSolutions.id'])
 			.where(`solution.${key} = :value`, { value })
 			.getOne();
+	}
+
+	getUserCountSolutionsByStatus(userId: string): Promise<Array<{ status: SOLUTION_STATUS; count: string }>> {
+		return this.createQueryBuilder('solution')
+			.innerJoin('solution.user', 'user', 'user.id = :userId', { userId })
+			.select(['solution.status AS status'])
+			.addSelect('Count(solution)', 'count')
+			.groupBy('solution.status')
+			.getRawMany();
 	}
 
 	updateById(id: string, data: Partial<Solution>) {
