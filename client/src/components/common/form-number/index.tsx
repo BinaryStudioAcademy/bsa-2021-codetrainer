@@ -16,13 +16,13 @@ interface IFormNumberProps extends FieldProps {
 const FormNumber: FC<IFormNumberProps> = ({
 	id,
 	label,
-	min,
-	max,
+	min = -Infinity,
+	max = Infinity,
 	step,
 	placeholder,
 	readonly = false,
-	field: { name, value, onChange },
-	form: { errors, touched },
+	field: { name, value },
+	form: { errors, touched, setFieldValue },
 }: IFormNumberProps) => {
 	const numberRef = useRef<HTMLInputElement>(null);
 	const error = getIn(errors, name);
@@ -43,7 +43,7 @@ const FormNumber: FC<IFormNumberProps> = ({
 					name={name}
 					type="number"
 					value={value}
-					onChange={onChange}
+					onChange={(value) => setFieldValue(name, value)}
 					min={min}
 					max={max}
 					step={step}
@@ -55,9 +55,10 @@ const FormNumber: FC<IFormNumberProps> = ({
 				<div className={styles.stepWrapper}>
 					<button
 						type="button"
-						onClick={() =>  {
+						onClick={() => {
 							if (!readonly) {
 								numberRef.current?.stepUp();
+								setFieldValue(name, numberRef.current?.value);
 								numberRef.current?.focus();
 							}
 						}}
@@ -69,6 +70,7 @@ const FormNumber: FC<IFormNumberProps> = ({
 						onClick={() => {
 							if (!readonly) {
 								numberRef.current?.stepDown();
+								setFieldValue(name, numberRef.current?.value);
 								numberRef.current?.focus();
 							}
 						}}
