@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BaseEntity, CreateDateColumn } from 'typeorm';
 import { CLAN_MEMBER_ROLE, CLAN_MEMBER_STATUS } from '../../../common';
 import { User } from './user-model';
 
@@ -15,4 +15,7 @@ export class ProfileClan extends BaseEntity {
 
 	@OneToOne(() => User, (user) => user.profileClan, { onDelete: 'CASCADE' })
 	user!: User;
+
+	@CreateDateColumn()
+	joinedAt!: Date;
 }

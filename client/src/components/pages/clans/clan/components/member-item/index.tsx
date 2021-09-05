@@ -1,26 +1,36 @@
 import React from 'react';
 import { Rank } from 'components';
-import styles from './member-item.module.scss';
 import { IMemberItemProps } from './types';
 import { getFullDate } from 'helpers/date.helper';
 import { ROUTES } from 'constants/routes';
 import { Link } from 'react-router-dom';
+import { Avatar } from 'components/basic';
+import { TableCell, TableRow } from '@material-ui/core';
+import styles from './member-item.module.scss';
 
 const MemberItem: React.FC<IMemberItemProps> = ({ member }) => {
 	return (
-		<tr className={styles.memberItem}>
-			<td>
-				<Rank rank={member.rank} />
-			</td>
-			<td>{member.avatar ? <img src={member.avatar} alt="Avatar" /> : <span>No avatar</span>}</td>
-			<td>
-				<Link to={`${ROUTES.Users}/${member.username}`}>
+		<TableRow className={styles.memberItem}>
+			<TableCell className={styles.position}>
+				{member.position}
+			</TableCell>
+			<TableCell>
+				<Link
+					to={`${ROUTES.Users}/${member.username}`}
+					className={styles.user}
+				>
+					<Avatar avatar={member.avatar} size={50} />
 					{member.name} {member.surname}
+					<Rank rank={member.rank} />
 				</Link>
-			</td>
-			<td>{getFullDate(member.createdAt)}</td>
-			<td>{member.honor}</td>
-		</tr>
+			</TableCell>
+			<TableCell className={styles.join}>
+				{getFullDate(new Date(member.profileClan.joinedAt))}
+			</TableCell>
+			<TableCell className={styles.honor}>
+				{member.honor}
+			</TableCell>
+		</TableRow>
 	);
 };
 

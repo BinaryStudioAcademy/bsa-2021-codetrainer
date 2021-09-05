@@ -1,0 +1,9 @@
+.sortLabel {
+	display: flex !important;
+	align-items: center !important;
+
+	color: var(--text-color) !important;
+	svg {
+		fill: var(--text-color) !important;
+	}
+}

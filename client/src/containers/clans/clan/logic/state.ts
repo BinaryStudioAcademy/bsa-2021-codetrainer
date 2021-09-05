@@ -1,25 +1,26 @@
+import { ISortingStrategy } from 'components/pages/clans/clan/components/sort-label/types';
+import { MembersSortStrategy, ClanPageStatus, IMembersFilter } from './types';
 import { WebApi } from 'typings/webapi';
-
-export enum SortOptions {
-	DEFAULT = 'DEFAULT',
-	BY_RANK = 'BY_RANK',
-	BY_TIME = 'BY_TIME',
-}
+import { Order } from 'helpers/table-helper';
 
 export interface IClanState {
-	options: {
-		sortBY: SortOptions;
-	};
-	isLoading: boolean;
-	data: WebApi.Entities.IClan | null;
-	errors: Array<string>;
+	data?: WebApi.Entities.IClan;
+	error?: string;
+	status: ClanPageStatus;
+	editStatus: ClanPageStatus;
+	invitationStatus: ClanPageStatus;
+	community: WebApi.Entities.IUser[];
+	membersSort: ISortingStrategy<MembersSortStrategy>;
+	membersFilter?: IMembersFilter;
 }
 
 export const initialState: IClanState = {
-	options: {
-		sortBY: SortOptions.DEFAULT,
+	membersSort: {
+		strategy: MembersSortStrategy.HONOR,
+		order: Order.ASC,
 	},
-	data: null,
-	isLoading: true,
-	errors: [],
+	status: ClanPageStatus.LOADING,
+	editStatus: ClanPageStatus.SUCCESS,
+	invitationStatus: ClanPageStatus.SUCCESS,
+	community: [],
 };

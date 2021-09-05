@@ -57,7 +57,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 				<span>{clan.numberOfMembers}</span>
 			</StyledTableCell>
 			<StyledTableCell>
-				<span>{getFullDate(clan.createdAt)}</span>
+				<span>{getFullDate(new Date(clan.createdAt))}</span>
 			</StyledTableCell>
 			<StyledTableCell>
 				<span>{clan.honor}</span>
