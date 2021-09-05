@@ -1,28 +1,11 @@
 import { WebApi } from 'typings/webapi';
 import { IGithubProfile } from 'typings/common/IGithub';
 
-export interface IUser {
-	id: string;
-	username: string;
-	name: string;
-	surname?: string;
-	createdAt?: string;
+export interface IUser extends WebApi.Entities.IUser {
 	lastVisit?: string;
-	rank: number;
-	honor: number;
-	clan?: WebApi.Entities.IClan | null;
-	email?: string;
 	skills?: Array<string>;
 	devLevel?: string;
 	social?: Array<string>;
-	avatar?: string;
-	profileClan?: {
-		id: string;
-		role: string;
-		status: string;
-	};
-	img?: string;
-	profileUrl?: string;
 	github?: IGithubProfile;
 	tasks?: WebApi.Entities.ITask[];
 	solutions?: Array<any>;

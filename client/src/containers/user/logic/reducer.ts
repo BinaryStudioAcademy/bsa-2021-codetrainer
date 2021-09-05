@@ -15,6 +15,7 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			...state.user!,
 			clan: action.clan,
+			profileClan: action.clan ? state.user?.profileClan : undefined,
 		};
 		const newState: IUserDataState = {
 			...state,

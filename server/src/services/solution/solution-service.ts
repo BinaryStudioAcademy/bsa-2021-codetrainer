@@ -75,7 +75,7 @@ export class SolutionService {
 		const taskRepository = getCustomRepository(this.taskRepository);
 		const userRepository = getCustomRepository(this.userRepository);
 		const solution = repository.getByTaskAndByUser(user.id, task.id);
-		if (Boolean(solution)) {
+		if (solution) {
 			throw new ValidationError(CODE_ERRORS.SOLUTION_THIS_USER);
 		}
 		const newSolution = await repository.save({

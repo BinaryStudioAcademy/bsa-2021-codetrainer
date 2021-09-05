@@ -315,17 +315,17 @@ export const initClan = (appRouter: typeof Router, services: { clan: ClanService
 					.catch(next),
 		)
 		.put(
-			ClanApiPath.ROOT,
+			ClanApiPath.$ID,
 			clanAdminPermissionMiddleware,
 			dataValidationMiddleware(SchemasDataValidation.clanFieldsSchema, REQ_TYPE.BODY),
 			checkClanIdMiddleware,
 			(req, res, next) =>
 				clansService
-					.update(req.clan, req.body)
+					.update(req.params.id, req.body)
 					.then((data) => res.send(data))
 					.catch(next),
 		)
-		.patch(`${ClanApiPath.ROOT}:id`, (req, res, next) =>
+		.patch(ClanApiPath.$ID, (req, res, next) =>
 			clansService
 				.toggleMember(req.user, req.params.id)
 				.then((data) => res.send(data))

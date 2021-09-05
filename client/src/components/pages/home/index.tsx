@@ -3,14 +3,27 @@ import styles from './home-page.module.scss';
 import Community from './components/community/index';
 import { IHomeProps } from './interface';
 
-const Home: React.FC<IHomeProps> = ({ activeUser, users, nextTaskContent, feedContent, isInClan }) => {
+const Home: React.FC<IHomeProps> = ({
+	activeUser,
+	users,
+	nextTaskContent,
+	feedContent,
+	isInClan,
+	onCreateClan,
+	isCreateLoading,
+}) => {
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.userGreeting}>Hi, {activeUser?.name}!</h3>
 
 			<div className={styles.nextTaskWrapper}>{nextTaskContent}</div>
 			<div className={styles.communityWrapper}>
-				<Community users={users} isInClan={isInClan} />
+				<Community
+					users={users}
+					isInClan={isInClan}
+					onCreateClan={onCreateClan}
+					isCreateLoading={isCreateLoading}
+				/>
 			</div>
 
 			<div className={styles.feedWrapper}>{feedContent}</div>

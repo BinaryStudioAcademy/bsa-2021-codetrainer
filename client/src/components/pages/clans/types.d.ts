@@ -1,16 +1,17 @@
+import { IMembersListProps } from './clan/components/members-list/types.d';
+import { WebApi } from 'typings/webapi';
 import { SortOptions as ClansSortOptions } from 'containers/clans/clans/logic/state';
-import { SortOptions as ClanSortOptions } from 'containers/clans/clan/logic/state';
-import { TClans, IClan, IUser } from 'containers/clans/types';
-import { IUser as IUserStore } from 'typings/common/IUser';
+import { IUser } from 'containers/clans/types';
 import { ClansOrderByOptions } from 'containers/clans/clans/logic/state';
 import { Order } from 'helpers/table-helper';
+import { IClanModalForm } from './../../modals/clan-modal/index';
 
 type TSortCallback = () => void;
 
 export interface IClansProps {
 	user: IUser;
 	isLoading: boolean;
-	clans: TClans;
+	clans: WebApi.Entities.IClan[];
 	setOrder: (order: Order) => void;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
 	setNameQuery: (nameQuery: string) => void;
@@ -29,21 +30,28 @@ export interface IClansProps {
 }
 
 export interface IClanProps {
-	leaveClan: () => void;
-	joinClan: (id: string) => void;
-	clan: IClan;
-	isOwnClan: boolean;
-	sortByRank: TSortCallback;
-	sortByTime: TSortCallback;
-	currentSort: ClanSortOptions;
-	handleInviteClick: () => void;
-	user: IUserStore | null;
-	handleDeleteClan: () => void;
-	modalShown: boolean;
-	setModalShown: (value: boolean) => void;
-	modalLoading: boolean;
-	community: any[];
-	handleInvitationSend: (from: any, to: any) => void;
-	isInvitationOpen: boolean;
-	setIsInvitationOpen: (value: boolean) => void;
+	clan: WebApi.Entities.IClan;
+	visitor: WebApi.Entities.IUser;
+	members: IMembersListProps;
+	clanActions: {
+		onJoin: () => void;
+		onLeave: () => void;
+		onEdit: (form: IClanModalForm) => void;
+		onDelete: () => void;
+	};
+	invitation: {
+		onInvite: (id: string) => void;
+		handleInviteClick: () => void;
+		community: any[];
+	}
+	modals: {
+		isInvitationOpen: boolean;
+		isEditOpen: boolean;
+		isLeaveOpen: boolean;
+		isEditLoading: boolean;
+		isInvitationLoading: boolean;
+		setIsInvitationOpen: (value: boolean) => void;
+		setIsEditOpen: (value: boolean) => void;
+		setIsLeaveOpen: (value: boolean) => void;
+	}
 }

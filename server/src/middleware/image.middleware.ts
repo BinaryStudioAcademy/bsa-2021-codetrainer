@@ -7,7 +7,7 @@ export const imageMiddleware = multer({
 		if (!IMAGE_MIMETYPES.includes(file.mimetype)) {
 			callback(
 				new ValidationError({
-					status: HttpCodes.UNSUPORTED_MEDIA_TYPE,
+					status: HttpCodes.UNSUPPORTED_MEDIA_TYPE,
 					message: 'Bad mimetype',
 				}),
 			);
