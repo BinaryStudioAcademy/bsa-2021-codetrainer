@@ -6,4 +6,5 @@ export interface IClanActionsProps {
 	handleJoin: () => void;
 	handleInvitation: () => void;
 	handleEdit: () => void;
+	handleDelete: () => void;
 }

@@ -50,8 +50,10 @@ export interface IClanProps {
 		isLeaveOpen: boolean;
 		isEditLoading: boolean;
 		isInvitationLoading: boolean;
+		isDeleteOpen: boolean;
 		setIsInvitationOpen: (value: boolean) => void;
 		setIsEditOpen: (value: boolean) => void;
 		setIsLeaveOpen: (value: boolean) => void;
+		setIsDeleteOpen: (value: boolean) => void;
 	};
 }

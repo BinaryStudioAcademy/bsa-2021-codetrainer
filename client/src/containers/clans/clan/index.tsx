@@ -36,6 +36,7 @@ const Clan: React.FC = () => {
 	const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
 	const [isInvitationOpen, setIsInvitationOpen] = useState<boolean>(false);
 	const [isLeaveOpen, setIsLeaveOpen] = useState<boolean>(false);
+	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (id) {
@@ -128,6 +129,8 @@ const Clan: React.FC = () => {
 								setIsLeaveOpen,
 								isEditLoading: editStatus === ClanPageStatus.LOADING,
 								isInvitationLoading: invitationStatus === ClanPageStatus.LOADING,
+								isDeleteOpen,
+								setIsDeleteOpen,
 							}}
 						/>
 					) : (

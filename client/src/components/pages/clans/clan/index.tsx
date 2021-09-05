@@ -85,7 +85,22 @@ const ClanPage: React.FC<IClanProps> = ({ clan, visitor: user, clanActions, memb
 				confirm="Leave"
 				elements={{
 					title: `Leave the ${clan.name}`,
-					body: `Do you realy want leave the ${clan.name}?`,
+					body: `Do you realy want to leave the ${clan.name}?`,
+				}}
+			/>
+			<ConfirmModal
+				isOpen={modals.isDeleteOpen}
+				setIsOpen={modals.setIsDeleteOpen}
+				onConfirm={(confirm) => {
+					modals.setIsDeleteOpen(false);
+					if (confirm) {
+						clanActions.onDelete();
+					}
+				}}
+				confirm="Delete"
+				elements={{
+					title: `Delete the ${clan.name}`,
+					body: `Do you realy want to delete the ${clan.name}?`,
 				}}
 			/>
 			<div className={styles.container}>
@@ -98,6 +113,9 @@ const ClanPage: React.FC<IClanProps> = ({ clan, visitor: user, clanActions, memb
 					handleInvitation={() => {
 						invitation.handleInviteClick();
 						modals.setIsInvitationOpen(true);
+					}}
+					handleDelete={() => {
+						modals.setIsDeleteOpen(true);
 					}}
 				/>
 				{clan.members.length ? <MembersList {...members} /> : <div>This Clan has no members</div>}
