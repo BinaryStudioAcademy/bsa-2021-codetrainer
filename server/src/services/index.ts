@@ -23,6 +23,7 @@ import { TagService } from './tag/tag-service';
 import { SolutionService } from './solution/solution-service';
 import { CollectionService } from './collection/collection-service';
 import { CommentSolutionService } from './comment-solution';
+import { ProfileClanService } from './profile-clan';
 
 const authService = new AuthService({ user: UserRepository });
 
@@ -51,6 +52,9 @@ const solutionService = new SolutionService({
 	solution: SolutionRepository,
 });
 const collectionService = new CollectionService({ collection: CollectionRepository, user: UserRepository });
+
+const profileClanService = new ProfileClanService({ user: UserRepository, profileClan: ProfileClanRepository });
+
 const commentSolutionService = new CommentSolutionService({
 	user: UserRepository,
 	solution: SolutionRepository,
@@ -68,3 +72,4 @@ export { tagService, TagService };
 export { solutionService, SolutionService };
 export { collectionService, CollectionService };
 export { commentSolutionService, CommentSolutionService };
+export { profileClanService, ProfileClanService };

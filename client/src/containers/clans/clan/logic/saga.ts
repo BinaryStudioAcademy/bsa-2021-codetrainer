@@ -1,12 +1,12 @@
-import { getUserById } from './../../../../services/users.service';
+import { getUserById, makeUserAdmin } from './../../../../services/users.service';
 import { mapUserResponseToUser } from 'helpers/user.helper';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
 import { ClanPageStatus } from './types';
 import { getCommunityByUserId } from 'services/follower/followers.service';
-import { fetchClan, toggleClanMember, updateClan, deleteClan } from 'services/clans.service';
+import { fetchClan, toggleClanMember, updateClan, deleteClan, makeUserLeaveClan } from 'services/clans.service';
 import { createClan } from 'services/create-clan.service';
-import { all, put, call, select, takeLatest } from 'redux-saga/effects';
+import { all, put, call, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import * as userActions from 'containers/user/logic/actions';
@@ -166,6 +166,56 @@ export function* deleteClanWorker(): any {
 	}
 }
 
+export function* makeAdminWorker({ userId }: ReturnType<typeof actions.makeAdmin>): any {
+	yield put(actions.loadingStatus());
+
+	const responce = yield call(makeUserAdmin, userId);
+	if (!responce || responce.affected === 0) {
+		yield put(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Error,
+					message: 'Can not make this user an admin',
+				},
+			}),
+		);
+	}
+	const clanId = yield select((state: IRootState) => state.clan.data?.id);
+	yield put(actions.clearClan());
+	const clan = yield call(fetchClan, clanId);
+	yield put(
+		actions.setClan({
+			clan: {
+				...clan,
+				createdAt: new Date(clan.createdAt),
+			},
+		}),
+	);
+	yield put(actions.successStatus());
+}
+
+export function* deleteMemberWorker({ id }: ReturnType<typeof actions.deleteMember>): any {
+	yield put(actions.loadingStatus());
+
+	const { clan } = yield call(makeUserLeaveClan, id);
+	yield put(actions.clearClan());
+
+	yield put(
+		actions.setClan({
+			clan: {
+				...clan,
+				createdAt: new Date(clan.createdAt),
+			},
+		}),
+	);
+
+	yield put(actions.successStatus());
+}
+
+function* deleteMemberWatcher() {
+	yield takeEvery(actionTypes.DELETE_MEMBER, deleteMemberWorker);
+}
+
 function* fetchClanWatcher() {
 	yield takeLatest(actionTypes.FETCH_CLAN, fetchClanWorker);
 }
@@ -190,6 +240,10 @@ function* deleteClanWatcher() {
 	yield takeLatest(actionTypes.DELETE_CLAN, deleteClanWorker);
 }
 
+function* addAdminWatcher() {
+	yield takeEvery(actionTypes.MAKE_ADMIN, makeAdminWorker);
+}
+
 export default function* clanSaga() {
 	yield all([
 		fetchClanWatcher(),
@@ -198,5 +252,7 @@ export default function* clanSaga() {
 		toggleClanWatcher(),
 		updateClanWatcher(),
 		deleteClanWatcher(),
+		addAdminWatcher(),
+		deleteMemberWatcher(),
 	]);
 }

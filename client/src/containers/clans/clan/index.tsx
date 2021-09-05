@@ -94,6 +94,16 @@ const Clan: React.FC = () => {
 		dispatch(actions.fetchCommunity({ userId: user.id }));
 	};
 
+	const handleMakeAdmin = (userId: string) => {
+		dispatch(actions.makeAdmin({ userId }));
+	};
+
+	const handleDeleteMember = (userId: string) => {
+		console.log(userId);
+
+		dispatch(actions.deleteMember({ id: userId }));
+	};
+
 	switch (status) {
 		case ClanPageStatus.SUCCESS:
 		case ClanPageStatus.ERROR: {
@@ -116,6 +126,9 @@ const Clan: React.FC = () => {
 								filter: membersFilter,
 								setSort: (sort) => dispatch(actions.setMembersSort({ sort })),
 								setFilter: (filter) => dispatch(actions.setMembersFilter({ filter })),
+								viewer: user,
+								handleMakeAdmin,
+								handleDeleteMember,
 							}}
 							invitation={{
 								onInvite,

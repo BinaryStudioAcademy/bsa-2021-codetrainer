@@ -32,21 +32,24 @@ export class ClanService {
 		this.profileClanRepository = profileClan;
 	}
 
-	async create(user: User, {
-		name,
-		description,
-		isPublic = CLAN_IS_PUBLIC,
-		avatar,
-		cover,
-		maxMembers,
-	}: {
-		name: string,
-		description?: string,
-		isPublic: boolean,
-		avatar?: string,
-		cover?: string,
-		maxMembers: number,
-	}) {
+	async create(
+		user: User,
+		{
+			name,
+			description,
+			isPublic = CLAN_IS_PUBLIC,
+			avatar,
+			cover,
+			maxMembers,
+		}: {
+			name: string;
+			description?: string;
+			isPublic: boolean;
+			avatar?: string;
+			cover?: string;
+			maxMembers: number;
+		},
+	) {
 		if (user.profileClan) {
 			throw new ValidationError(CODE_ERRORS.IN_CLAN);
 		}
@@ -81,7 +84,7 @@ export class ClanService {
 		return {
 			clan: newClan,
 			user: newUser,
-		}
+		};
 	}
 
 	async delete(clan: Clan) {
@@ -195,6 +198,10 @@ export class ClanService {
 		await repository.updateById(id, {
 			numberOfMembers: clan.numberOfMembers - 1,
 		});
+		const updatedClan = await this.getClan(id);
+		return {
+			clan: updatedClan,
+		};
 	}
 
 	async toggleMember(user: User, id: string) {
