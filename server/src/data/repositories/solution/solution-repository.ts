@@ -13,7 +13,8 @@ export class SolutionRepository extends AbstractRepository<Solution> {
 		return this.createQueryBuilder('solution')
 			.leftJoinAndSelect('solution.task', 'task')
 			.leftJoinAndSelect('solution.user', 'user')
-			.select(['solution', 'task.id', 'user.id'])
+			.leftJoinAndSelect('solution.commentSolutions', 'commentSolutions')
+			.select(['solution', 'task.id', 'user.id', 'commentSolutions.id'])
 			.where(`solution.${key} = :value`, { value })
 			.getOne();
 	}

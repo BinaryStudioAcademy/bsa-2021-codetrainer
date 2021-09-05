@@ -1,8 +1,9 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../abstract';
 import { Task } from '../task';
 import { User } from '../user';
 import { SOLUTION_STATUS } from '../../../common';
+import { CommentSolution } from '../comment-solution';
 
 @Entity()
 export class Solution extends AbstractEntity {
@@ -20,4 +21,7 @@ export class Solution extends AbstractEntity {
 
 	@ManyToOne(() => Task, (task) => task.solutions)
 	task!: Task;
+
+	@OneToMany(() => CommentSolution, (commentSolution) => commentSolution.solution)
+	commentSolutions!: CommentSolution[];
 }
