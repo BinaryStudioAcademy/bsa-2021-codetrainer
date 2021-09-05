@@ -86,7 +86,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 			<ClickAwayListener onClickAway={() => setListVisibility(false)}>
 				<div className={styles.avatarCover}>
 					<div onClick={() => setListVisibility(!isListVisible)}>
-						<Avatar avatar={props.avatar} size={61} color="#EC4179" />
+						<Avatar avatar={props.avatar} size={61} />
 					</div>
 
 					{isListVisible && (
