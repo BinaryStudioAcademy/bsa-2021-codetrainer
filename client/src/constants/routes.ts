@@ -18,8 +18,8 @@ export const ROUTES = {
 
 	createTask: '/task/new',
 	TaskInstructions: '/task/:id',
-	TaskInfo: '/challenge-info',
-	TaskTrain: '/challenge-info/:id/train',
+	TaskInfo: '/task-info',
+	TaskTrain: '/task-info/:id/train',
 
 	Setting: '/setting',
 
