@@ -4,6 +4,7 @@ import { ClanApiPath } from 'enum/api/clan-api.path';
 import { Order } from 'helpers/table-helper';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
+import { IClanForm } from 'components/modals/clan-modal/types';
 
 export interface TFetchClansArgs {
 	page: number;
@@ -51,7 +52,7 @@ function mapResponseToClan(response: any): WebApi.Entities.IClan {
 			createdAt: new Date(member.createdAt),
 		})),
 		createdAt: new Date(response.createdAt),
-	}
+	};
 }
 
 export const fetchClan = async (id: string): Promise<WebApi.Entities.IClan | Error> => {
@@ -67,18 +68,15 @@ export const fetchClan = async (id: string): Promise<WebApi.Entities.IClan | Err
 	}
 };
 
-export const updateClan = async (
-	id: string,
-	clan: Partial<WebApi.Entities.IClan>,
-): Promise<WebApi.Entities.IClan> => {
+export const updateClan = async (id: string, clan: IClanForm): Promise<WebApi.Entities.IClan> => {
 	const response = await http.callWebApi({
 		endpoint: `${ClanApiPath.ROOT}/${id}`,
 		method: HttpMethods.PUT,
-		body: clan
+		body: clan,
 	});
 
 	return mapResponseToClan(response);
-}
+};
 
 export const toggleClanMember = async (
 	id: string,
@@ -94,7 +92,7 @@ export const toggleClanMember = async (
 		return {
 			clan: mapResponseToClan(clan),
 			user,
-		}
+		};
 	} catch (error) {
 		return error;
 	}

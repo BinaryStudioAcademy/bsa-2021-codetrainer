@@ -1,15 +1,12 @@
+import { IClanForm } from 'components/modals/clan-modal/types';
 import { http } from 'services';
 
-export const createClan = async (name: string) => {
-	const body = {
-		name: name,
-		isPublic: 'true',
-	};
+export const createClan = async (clan: IClanForm) => {
 	try {
 		const data = await http.callWebApi({
 			method: 'POST',
 			endpoint: 'clan',
-			body: body,
+			body: clan,
 		});
 		return data;
 	} catch (error) {
