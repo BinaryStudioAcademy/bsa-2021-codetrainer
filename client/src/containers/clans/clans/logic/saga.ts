@@ -6,6 +6,10 @@ import * as actions from './actions';
 import { IRootState } from 'typings/root-state';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
+import { addNotification } from 'services/notifications/notifications.service';
+import { v4 as uuid } from 'uuid';
+import { NotificationTypes } from 'typings/common/INotification';
+import { WebApi } from 'typings/webapi';
 
 export function* fetchClansWorker(action: ReturnType<typeof actions.fetchClans>): any {
 	yield put(actions.startLoading());
@@ -51,6 +55,26 @@ export function* toggleMemberWorker({ id }: ReturnType<typeof actions.joinClan>)
 		);
 	} else {
 		yield put(userActions.setUser({ user: response.user }));
+		const type = response.user.clan == null ? NotificationTypes.LeaveClan : NotificationTypes.JoinClan;
+		const body = {
+			clan: {
+				id,
+				name: response.clan?.name ?? '',
+				avatar:
+					response.clan?.avatar ??
+					'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg',
+			} as WebApi.Entities.IClan,
+		};
+		addNotification(
+			{
+				id: uuid(),
+				date: new Date(),
+				type: type,
+				read: false,
+				body,
+			},
+			response.user.id,
+		);
 		yield put(
 			actions.updateClan({
 				id: response.clan.id,

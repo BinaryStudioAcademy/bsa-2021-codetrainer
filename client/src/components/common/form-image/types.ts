@@ -6,6 +6,6 @@ export interface IFormImageProps extends FieldProps {
 	name: string;
 	title?: string;
 	readonly?: boolean;
-	imageComponent?: FC<HTMLProps<HTMLImageElement>>
+	imageComponent?: FC<HTMLProps<HTMLImageElement>>;
 	imageProps?: HTMLProps<HTMLImageElement>;
 }

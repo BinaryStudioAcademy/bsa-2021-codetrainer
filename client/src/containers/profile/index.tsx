@@ -10,6 +10,10 @@ import { RouteComponentProps, useParams } from 'react-router-dom';
 import { getNextRank, NextRankHonor } from 'enum/ranks';
 import { useAppSelector, useUserSelector } from 'hooks/useAppSelector';
 import { ProfileSolutions } from './tabs/solutions';
+import { addNotification } from 'services/notifications/notifications.service';
+import { v4 as uuid } from 'uuid';
+import { NotificationTypes } from 'typings/common/INotification';
+import { WebApi } from 'typings/webapi';
 
 export const Profile = (props: RouteComponentProps) => {
 	const { activeTab: activeTabId } = useSelector((state: IRootState) => state.profile);
@@ -199,6 +203,29 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const followHandler = (id: string) => {
 		dispatch(actions.followUser({ id }));
+		if (!user || !userData) {
+			return;
+		}
+		const avatar =
+			user.avatar?.length === 0
+				? 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
+				: user.avatar;
+		addNotification(
+			{
+				id: uuid(),
+				read: false,
+				type: NotificationTypes.Follower,
+				date: new Date(),
+				body: {
+					follower: {
+						id: user?.id,
+						username: user.username ?? '',
+						profileUrl: avatar,
+					} as unknown as WebApi.Entities.IUser,
+				},
+			},
+			userData.id,
+		);
 	};
 
 	const unfollowHandler = (id: string) => {

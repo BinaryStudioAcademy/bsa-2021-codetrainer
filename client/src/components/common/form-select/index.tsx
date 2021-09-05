@@ -8,7 +8,7 @@ interface IFormSelectProps extends FieldProps {
 	label?: string;
 	placeholder: string;
 	readonly?: boolean;
-	options: { value: string; name: string, label?: string }[];
+	options: { value: string; name: string; label?: string }[];
 }
 
 const FormSelect: React.FC<IFormSelectProps> = ({
@@ -75,7 +75,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 					}),
 					option: (styles) => ({
 						...styles,
-					})
+					}),
 				}}
 				menuPortalTarget={document.body}
 			/>

@@ -89,6 +89,18 @@ function* fetchNotification() {
 					body: { rank: data.body.rank },
 				});
 				break;
+			case NotificationTypes.LeaveClan:
+				querySnapshot.push({
+					...initialNotification,
+					body: { clan: data.body.clan },
+				});
+				break;
+			case NotificationTypes.InviteToClan:
+				querySnapshot.push({
+					...initialNotification,
+					body: { clan: data.body.clan, inviter: data.body.inviter },
+				});
+				break;
 			default:
 				querySnapshot.push({
 					...initialNotification,
