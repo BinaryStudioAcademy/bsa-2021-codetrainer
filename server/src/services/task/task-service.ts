@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { SOLUTION_STATUS, TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
-import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag } from '../../data';
+import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag, TSolutionRepository } from '../../data';
 
 export class TaskService {
 	protected taskRepository: TTaskRepository;
@@ -9,10 +9,23 @@ export class TaskService {
 
 	protected tagRepository: TTagRepository;
 
-	constructor({ task, user, tag }: { task: TTaskRepository; user: TUserRepository; tag: TTagRepository }) {
+	protected solutionRepository: TSolutionRepository;
+
+	constructor({
+		task,
+		user,
+		tag,
+		solution,
+	}: {
+		task: TTaskRepository;
+		user: TUserRepository;
+		tag: TTagRepository;
+		solution: TSolutionRepository;
+	}) {
 		this.taskRepository = task;
 		this.userRepository = user;
 		this.tagRepository = tag;
+		this.solutionRepository = solution;
 	}
 
 	async getTags(tags: string[] = []) {
@@ -116,10 +129,16 @@ export class TaskService {
 		take: number;
 	}): Promise<{
 		tasks: Task[];
-		total: number;
+		count: { [key in SOLUTION_STATUS]?: string };
 	}> {
 		const repository = getCustomRepository(this.taskRepository);
-		const [tasks, total] = await repository
+		const solutionRepository = getCustomRepository(this.solutionRepository);
+		const solutionsCount: { [key in SOLUTION_STATUS]?: string } = (
+			await solutionRepository.getUserCountSolutionsByStatus(userId)
+		).reduce((prev, { status, count }) => {
+			return { ...prev, [status]: count };
+		}, {});
+		const tasks = await repository
 			.createQueryBuilder('task')
 			.innerJoinAndSelect(
 				'task.solutions',
@@ -133,7 +152,7 @@ export class TaskService {
 			.orderBy('solution.createdAt', 'DESC')
 			.skip(skip)
 			.take(take)
-			.getManyAndCount();
-		return { tasks, total };
+			.getMany();
+		return { tasks, count: solutionsCount };
 	}
 }
