@@ -8,6 +8,7 @@ import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
 import { fetchUserSolution, patchSolution, submitSolution } from 'services/solutions.service';
+import { fetchNextTask } from 'services/tasks.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
@@ -53,12 +54,20 @@ export function* fetchTasksWatcher() {
 
 export function* fetchNextTaskWorker(action: ReturnType<typeof actions.getNextTask>): any {
 	try {
-		const { id } = action;
-		const tasks = yield call(fetchTasks);
-		const filteredTasks = tasks.filter((item: WebApi.Entities.IChallenge) => item.id !== id);
-		yield put(
-			actions.setNextTask({ nextTaskId: filteredTasks[Math.floor(Math.random() * filteredTasks.length)].id }),
-		);
+		if (action.solutionId) {
+			yield call(() => patchSolution(action));
+		} else {
+			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
+			yield call(() =>
+				patchSolution({
+					...action,
+					solutionId: solution.id,
+				}),
+			);
+			yield call(() => patchSolution(action));
+		}
+		const { nextTask } = yield call(fetchNextTask);
+		yield put(actions.setNextTask({ nextTaskId: nextTask.id }));
 	} catch (error) {
 		yield put(
 			setNotificationState({
@@ -104,7 +113,6 @@ export function* fetchUserSolutionWorker(action: ReturnType<typeof actions.getUs
 		const { taskId } = action;
 		if (taskId) {
 			const userSolution = yield call(() => fetchUserSolution(taskId));
-			console.log(userSolution);
 			yield put(actions.setUserSolution(userSolution));
 		}
 		yield put(actions.setIsLoading({ isLoading: false }));
@@ -125,8 +133,6 @@ export function* fetchUserSolutionWatcher() {
 export function* unlockSolutionWorker(action: ReturnType<typeof actions.unlockSolution>): any {
 	try {
 		if (!action.solutionId) {
-			console.log('action', action);
-			// const solution = yield submitSolution(action);
 			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
 			yield call(() =>
 				patchSolution({

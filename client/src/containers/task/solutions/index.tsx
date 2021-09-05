@@ -1,4 +1,4 @@
-import { FullscreenLoader } from 'components';
+import { FullscreenLoader, Spinner } from 'components';
 import { SolutionsTab } from 'components/pages/task/tabs/solutionsTab';
 import React from 'react';
 import { useEffect } from 'react';
@@ -21,9 +21,9 @@ export const Solutions = () => {
 		dispatch(actions.getFollowing({ id: user?.id }));
 	}, [task]);
 
-	useEffect(() => {
-		dispatch(actions.getUserSolution({ taskId: task?.id }));
-	}, [task, user]);
+	// useEffect(() => {
+	// 	dispatch(actions.getUserSolution({ taskId: task?.id }));
+	// }, [task, user]);
 
 	const filterSolutionsByFollowing = useCallback(
 		(solutions): WebApi.Entities.ISolution[] => {
@@ -74,7 +74,11 @@ export const Solutions = () => {
 		dispatch(actions.getUserSolution({ taskId: task.id }));
 	};
 
-	if (task && user && userSolution && !isLoading) {
+	if (isLoading) {
+		return <Spinner />;
+	}
+
+	if (task && user && userSolution) {
 		return (
 			<SolutionsTab
 				task={task}

@@ -45,7 +45,11 @@ export type TSetFollowing = {
 };
 
 export type TGetNextTask = {
-	id?: string;
+	taskId: string;
+	code: string;
+	testCases: string;
+	status?: SolutionStatus;
+	solutionId?: string;
 };
 
 export type TSetNextTask = {
