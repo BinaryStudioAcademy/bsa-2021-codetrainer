@@ -10,7 +10,7 @@ import { ButtonClasses } from 'components/basic/button';
 import { Discipline, IDisciplineItem } from './logic/models';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from './mock';
 import { findDisciplineItem } from './create-task-settings/create-task-settings';
-import { ISelectValue } from 'components/basic/select/interface';
+import { ISelectProps, ISelectValue } from 'components/basic/select/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotificationType } from 'containers/notification/logic/models';
 import { setNotificationState } from 'containers/notification/logic/actions';
@@ -22,6 +22,7 @@ import { addTask, deleteTaskRedux } from 'containers/user/logic/actions';
 import { useAppSelector } from 'hooks/useAppSelector';
 import { WebApi } from 'typings/webapi';
 import { useEffect } from 'react';
+import { NUMBER_OF_RANKS } from 'enum/ranks';
 
 export interface ICreateTaskProps {}
 
@@ -475,6 +476,19 @@ describe("twoOldestAges", function() {
 			handleTaskChange(taskId);
 		}
 	}, []);
+	const rankValues: ISelectValue[] = [];
+	for (let i = 0; i < NUMBER_OF_RANKS; i++) {
+		rankValues.push({
+			id: i.toString(),
+			title: i.toString(),
+		});
+	}
+	const rankSelectProps: ISelectProps = {
+		values: rankValues,
+		onChange: (value) => {
+			setRank(value.title);
+		},
+	};
 	return (
 		<>
 			<div className={styles.createTaskBlock}>
@@ -491,6 +505,7 @@ describe("twoOldestAges", function() {
 					setRank={setRank}
 					tags={tags}
 					setTags={setTags}
+					rankSelectProps={rankSelectProps}
 				/>
 				<div className={clsx(styles.taskInstructions, 'taskInstructions')}>
 					<ButtonsBlock

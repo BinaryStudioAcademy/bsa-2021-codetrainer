@@ -76,12 +76,11 @@ const SettingPageContainer: React.FC = () => {
 			try {
 				await updatePassword(data);
 			} catch (res) {
-				console.log('err', res.errors.message);
 				dispatch(
 					setNotificationState({
 						state: {
 							notificationType: NotificationType.Error,
-							message: res.errors.message,
+							message: res instanceof Error ? res?.message : 'Unknown Error',
 							title: 'Update password',
 						},
 					}),

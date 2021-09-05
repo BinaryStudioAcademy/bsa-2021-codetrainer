@@ -31,6 +31,13 @@
 			}
 		}
 	}
+
+	.languageVersionSelect {
+		ul li span,
+		h5 {
+			color: #000;
+		}
+	}
 }
 .heading {
 	font: $fourth-title-font;

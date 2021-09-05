@@ -28,11 +28,11 @@ export const CODE_ERRORS = {
 		message: `User with email: ${email}, not exist!`,
 		status: HttpCodes.NOT_FOUND,
 	}),
-	EMAIL_ALREDY_EXIST: {
+	EMAIL_ALREADY_EXIST: {
 		message: `Email is already taken.`,
 		status: HttpCodes.BAD_REQUEST,
 	},
-	USERNAME_ALREDY_EXIST: {
+	USERNAME_ALREADY_EXIST: {
 		message: `Username is already taken.`,
 		status: HttpCodes.BAD_REQUEST,
 	},
@@ -46,6 +46,7 @@ export const CODE_ERRORS = {
 	SOLUTION_STATUS_WRONG: { message: 'solution status wrong', status: HttpCodes.BAD_REQUEST },
 	SOLUTION_TYPE_WRONG: { message: 'solution type wrong', status: HttpCodes.BAD_REQUEST },
 	SOLUTION_STATUS_UNLOCKED: { message: 'solution is unlocked', status: HttpCodes.BAD_REQUEST },
+	SOLUTION_THIS_USER: { message: 'you already have a solution for this task', status: HttpCodes.BAD_REQUEST },
 	TESTING_NAME_INCORRECT: { message: 'testing name incorrect', status: HttpCodes.BAD_REQUEST },
 	USERNAME_NOT_EXIST: (username: string) => ({
 		message: `User ${username} does not exist.`,

@@ -6,6 +6,7 @@ interface IProfileTasks {
 	profileTasks: {
 		title: string;
 		id: string;
+		empty: string;
 		tasks?: IChallenge[];
 	}[];
 }
@@ -17,6 +18,7 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 		[profileTasks],
 	);
 	const tasks = profileTasks.find(({ id }) => id === activeId)?.tasks || [];
+	const empty = profileTasks.find(({ id }) => id === activeId)?.empty;
 
 	return (
 		<ProfileTabWithSidebar
@@ -26,7 +28,7 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 				onClick: (id: string) => setActiveId(id),
 			}}
 		>
-			<Tasks tasks={tasks} emptyTasks={activeId} />
+			<Tasks tasks={tasks} emptyTasks={empty} />
 		</ProfileTabWithSidebar>
 	);
 };

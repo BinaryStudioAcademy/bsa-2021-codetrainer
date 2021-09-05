@@ -57,7 +57,7 @@ const Clans: React.FC = () => {
 				setNotificationState({
 					state: {
 						notificationType: NotificationType.Error,
-						message: 'You don`t have a clan',
+						message: "You don't have a clan",
 					},
 				}),
 			);

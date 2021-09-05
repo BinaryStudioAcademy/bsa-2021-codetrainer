@@ -28,4 +28,10 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			nextTaskId: action.nextTaskId,
 		};
 	},
+	[actionTypes.SET_FOLLOWING](state, action: actionTypes.TSetFollowing) {
+		return {
+			...state,
+			following: action.following,
+		};
+	},
 });

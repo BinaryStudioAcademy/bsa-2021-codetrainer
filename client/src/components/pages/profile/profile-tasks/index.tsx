@@ -22,12 +22,12 @@ export const Tasks: React.FC<IProfileTasks> = ({ tasks, showAddToCollection, emp
 			))
 		) : (
 			<>
-				<div className={styles.empty}>You dont have any {emptyTasks} tasks yet.</div>
+				<div className={styles.empty}>{emptyTasks}</div>
 				<Button
 					className={clsx(ButtonClasses.red, styles.button)}
 					onClick={() => historyHelper.push(ROUTES.createTask)}
 				>
-					Create new task
+					Create new challenge
 				</Button>
 			</>
 		)}

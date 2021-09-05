@@ -23,7 +23,7 @@ const StyledTab = withStyles({
 			color: 'var(--purple)',
 			opacity: 1,
 		},
-		'&$selected': {
+		'&:selected': {
 			color: 'var(--purple)',
 		},
 		'&:focus': {

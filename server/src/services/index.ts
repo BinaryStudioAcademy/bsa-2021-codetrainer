@@ -38,7 +38,12 @@ const imagesService = new ImagesService(imagesRepository);
 const githubService = new GithubService({ authService, userRepository: UserRepository });
 
 const commentTaskService = new CommentTaskService({ commentTask: CommentTaskRepository });
-const taskService = new TaskService({ task: TaskRepository, user: UserRepository, tag: TagRepository });
+const taskService = new TaskService({
+	task: TaskRepository,
+	user: UserRepository,
+	tag: TagRepository,
+	solution: SolutionRepository,
+});
 const tagService = new TagService({ tag: TagRepository, task: TaskRepository });
 const solutionService = new SolutionService({
 	user: UserRepository,

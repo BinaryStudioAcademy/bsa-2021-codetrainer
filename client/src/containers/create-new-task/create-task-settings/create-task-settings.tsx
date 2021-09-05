@@ -2,7 +2,7 @@ import React from 'react';
 import { CreateTaskSettings } from 'components/pages';
 import { DISCIPLINE_ITEMS, SELECT_PROPS } from '../mock';
 import { Discipline, IDisciplineItem } from '../logic/models';
-import { ISelectValue } from 'components/basic/select/interface';
+import { ISelectProps, ISelectValue } from 'components/basic/select/interface';
 
 interface ICreateSettingsProps {
 	chosenDiscipline: IDisciplineItem;
@@ -17,6 +17,7 @@ interface ICreateSettingsProps {
 	setRank: (value: string) => void;
 	tags: string;
 	setTags: (value: string) => void;
+	rankSelectProps: ISelectProps;
 }
 
 export const CreateSettings = ({
@@ -32,6 +33,7 @@ export const CreateSettings = ({
 	setRank,
 	tags,
 	setTags,
+	rankSelectProps,
 }: ICreateSettingsProps) => {
 	return (
 		<CreateTaskSettings
@@ -53,6 +55,7 @@ export const CreateSettings = ({
 			setRank={setRank}
 			tags={tags}
 			setTags={setTags}
+			rankSelectProps={rankSelectProps}
 		/>
 	);
 };

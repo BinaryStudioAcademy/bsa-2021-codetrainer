@@ -1,9 +1,9 @@
-import { SolutionStatus } from 'typings/common/solution';
 import { ApiRoutes, HttpMethods } from 'constants/services';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
 import { TLoader } from 'typings/common/loader';
 import { TypeTest } from 'constants/task';
+import { TaskApiPath } from 'enum';
 
 interface ISubmitSolution {
 	code: string;
@@ -57,23 +57,12 @@ export type TTaskSolutionsLoader = TLoader<
 	WebApi.Types.TPaginationResponse<WebApi.Entities.ITask, 'tasks'>
 >;
 
-export const getCompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
+export const getUserSolutions: TTaskSolutionsLoader = async ({ skip, take, status }) =>
 	http.callWebApi({
-		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
+		endpoint: TaskApiPath.USER_SOLUTIONS,
 		method: HttpMethods.GET,
 		query: {
-			status: SolutionStatus.COMPLETED,
-			skip,
-			take,
-		},
-	});
-
-export const getUncompletedSolutions: TTaskSolutionsLoader = async ({ skip, take }) =>
-	http.callWebApi({
-		endpoint: `${ApiRoutes.TASKS}search/user-solutions`,
-		method: HttpMethods.GET,
-		query: {
-			status: SolutionStatus.NOT_COMPLETED,
+			status,
 			skip,
 			take,
 		},

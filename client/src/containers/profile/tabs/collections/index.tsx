@@ -26,13 +26,13 @@ const collectionsTabs: TCollectionsTab[] = [
 		title: 'Authored',
 		value: CollectionsTabValues.Authored,
 		loader: getAuthoredCollections,
-		empty: 'There are no items to show',
+		empty: "User doesn't have any collections yet.",
 	},
 	{
 		title: 'Followed',
 		value: CollectionsTabValues.Followed,
 		loader: getFollowedCollections,
-		empty: 'You have not started to follow any collection yet',
+		empty: "User doesn't follow any collections yet.",
 	},
 ];
 
@@ -68,7 +68,7 @@ export const ProfileCollections: React.FC<{ userId: string }> = ({ userId }) => 
 					skip,
 					take: 10,
 				});
-				setHasMore(skip + 10 < total);
+				setHasMore(skip + 10 < (total || 0));
 				setTotal(total);
 				setCollections([...(collections || []), ...items]);
 			} catch (e) {

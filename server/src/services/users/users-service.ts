@@ -34,18 +34,18 @@ export class User {
 
 		if (user?.email !== body.email) {
 			if (await repository.exists({ email: body.email })) {
-				throw new ValidationError(CODE_ERRORS.EMAIL_ALREDY_EXIST);
+				throw new ValidationError(CODE_ERRORS.EMAIL_ALREADY_EXIST);
 			}
 		}
 
 		if (user?.username !== body.username) {
 			if (await repository.exists({ username: body.username })) {
-				throw new ValidationError(CODE_ERRORS.USERNAME_ALREDY_EXIST);
+				throw new ValidationError(CODE_ERRORS.USERNAME_ALREADY_EXIST);
 			}
 		}
-
+		await repository.updateById(id, body);
 		return {
-			user: await repository.updateById(id, body),
+			user: await repository.getById(id),
 		};
 	}
 
