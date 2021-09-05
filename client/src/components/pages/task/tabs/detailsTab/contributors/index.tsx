@@ -19,7 +19,7 @@ export const Contributors = ({ contributors }: IContributorsProps) => {
 						{contributors.map((item) => {
 							return (
 								<Link to={`${ROUTES.Users}/${item.username}`} key={item.username}>
-									<Avatar size={60} avatar={item.profileUrl} key={item.username} />
+									<Avatar size={60} avatar={item.avatar} key={item.username} />
 								</Link>
 							);
 						})}

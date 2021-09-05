@@ -5,6 +5,7 @@ import { ROUTES } from 'constants/routes';
 import { TableCell, TableRow } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { withStyles, createStyles } from '@material-ui/core/styles';
+import { Avatar } from 'components/basic';
 
 const UserItem: React.FC<IUserItemProps> = ({ user, position }) => {
 	const StyledTableCell = withStyles(() =>
@@ -33,9 +34,7 @@ const UserItem: React.FC<IUserItemProps> = ({ user, position }) => {
 			<StyledTableCell>
 				<Rank rank={user.rank ?? 0} />
 			</StyledTableCell>
-			<StyledTableCell>
-				{user.profileUrl ? <img src={user.profileUrl} /> : <span>No avatar</span>}
-			</StyledTableCell>
+			<StyledTableCell>{user.avatar ? <Avatar avatar={user.avatar} /> : <span>No avatar</span>}</StyledTableCell>
 			<StyledTableCell>
 				<Link to={`${ROUTES.Users}/${user.username}`}>{`${user.name} ${user.surname}`}</Link>
 			</StyledTableCell>

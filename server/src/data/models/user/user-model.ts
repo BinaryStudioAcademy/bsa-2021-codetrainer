@@ -16,6 +16,7 @@ import { Task } from '../task';
 import { CommentTask } from '../comment-task';
 import { Solution } from '../solution';
 import { Follower } from '../follower';
+import { CommentSolution } from '../comment-solution';
 
 @Entity()
 export class User extends BaseEntity {
@@ -85,15 +86,15 @@ export class User extends BaseEntity {
 	@JoinColumn()
 	solutions!: Solution[];
 
-	@Column({ type: 'varchar', length: 100, nullable: true })
-	profileUrl?: string;
-
 	@Column({ type: 'varchar', length: 100, unique: true, nullable: true })
 	githubId?: string;
 
 	@OneToMany(() => CommentTask, (commentTask) => commentTask.user)
 	@JoinColumn()
-	commentTasks?: CommentTask[];
+	commentTasks!: CommentTask[];
+
+	@OneToMany(() => CommentSolution, (commentSolution) => commentSolution.user, { onDelete: 'CASCADE' })
+	commentSolutions!: CommentSolution[];
 
 	@OneToMany(() => Follower, (follower) => follower.following)
 	@JoinColumn()

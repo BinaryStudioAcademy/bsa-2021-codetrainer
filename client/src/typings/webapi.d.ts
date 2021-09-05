@@ -9,8 +9,21 @@ declare namespace WebApi.Entities {
 		email?: string;
 	}
 
-	export interface IUser {
+	interface IBaseEntity {
 		id: string;
+		createdAt: Date;
+		updatedAt?: Date;
+	}
+
+	export interface IClanProfile {
+		id: string;
+		role: string;
+		status: string;
+		user: IMember;
+		joinedAt: Date;
+	}
+
+	export interface IUser extends IBaseEntity {
 		username: string;
 		name: string;
 		surname: string;
@@ -18,20 +31,19 @@ declare namespace WebApi.Entities {
 		clan?: IClan | null;
 		rank: number;
 		honor: number;
-		profileClan?: {
-			id: string;
-			role: string;
-			status: string;
-		};
+		profileClan?: IClanProfile;
 		githubId?: string;
-		profileUrl?: string;
+		avatar?: string;
 		position?: number;
 		following: any[];
 		followers: any[];
 	}
 
-	export interface ITag {
-		id: string;
+	export interface IMember extends IUser {
+		profileClan: IClanProfile;
+	}
+
+	export interface ITag extends IBaseEntity {
 		name: string;
 	}
 
@@ -62,57 +74,35 @@ declare namespace WebApi.Entities {
 		solutions: ISolution[];
 	}
 
-	export interface ISolution {
-		id: string;
+	export interface ISolution extends IBaseEntity {
 		status: SolutionStatus;
 		code: string;
 		language: string;
 		user: IUser;
 		task: Partial<ITask>;
-		createdAt: Date;
-		updatedAt?: Date;
 		testCases?: string;
 	}
 
-	export interface IMember {
-		id: string;
-		username: string;
-		rank: number;
-		username: string;
-		avatar: string;
+	export interface IClan extends IBaseEntity {
 		name: string;
-		surname: string;
-		honor: number;
-		profileClan: {
-			role: MemberRoles;
-			status: MemberStatus;
-		};
-		createdAt: Date;
-	}
-
-	export interface IClan {
-		id: string;
-		name: string;
+		description?: string;
 		rank: number;
-		avatar: string;
+		avatar?: string;
+		cover?: string;
 		honor: number;
 		isPublic: boolean;
 		maxMembers: number;
 		numberOfMembers: number;
-		createdAt: Date;
 		members: Array<IMember>;
 	}
 
-	export interface ICollection {
-		id: string;
+	export interface ICollection extends IBaseEntity {
 		name: string;
 		tasks: Partial<ITask>[];
 		description?: string;
 		avatar?: string;
 		author: IUser;
 		followers: IUser[];
-		createdAt: Date;
-		updatedAt?: Date;
 	}
 
 	export type TClans = Array<IClan>;
@@ -140,13 +130,9 @@ declare namespace WebApi.Entities {
 		exampleTestCases: string;
 		status: TaskStatus;
 		isPublished: boolean;
-		solutions: WebApi.Entities.ISolution[];
+		solutions: ISolution[];
 		tags: Array<ITag>;
-		user: {
-			name: string;
-			surname: string;
-			username: string;
-		};
+		user: IUser;
 	}
 }
 
@@ -154,11 +140,13 @@ declare namespace WebApi.Types {
 	type TPaginationResponse<T, N extends string> = {
 		[_ in N]: T[];
 	} & {
-		total: number;
+		total?: number;
+		count?: { [key in SolutionStatus]?: string };
 	};
 
 	type TPaginationRequest = {
 		skip: number;
 		take: number;
+		status?: SolutionStatus;
 	};
 }

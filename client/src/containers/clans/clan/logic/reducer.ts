@@ -1,18 +1,24 @@
 import * as actionTypes from './action-types';
-import { IClanState, initialState, SortOptions } from './state';
+import { IClanState, initialState } from './state';
 import { createReducer } from 'helpers/create-reducer.helper';
 
 export const clanReducer = createReducer<IClanState>(initialState, {
-	[actionTypes.START_LOADING](state, action) {
+	[actionTypes.SET_STATUS](state, { status }: actionTypes.ISetStatusArgs) {
 		return {
 			...state,
-			isLoading: true,
+			status,
 		};
 	},
-	[actionTypes.END_LOADING](state, action) {
+	[actionTypes.SET_EDIT_STATUS](state, { status }: actionTypes.ISetStatusArgs) {
 		return {
 			...state,
-			isLoading: false,
+			editStatus: status,
+		};
+	},
+	[actionTypes.SET_INVITATION_STATUS](state, { status }: actionTypes.ISetStatusArgs) {
+		return {
+			...state,
+			invitationStatus: status,
 		};
 	},
 	[actionTypes.SET_CLAN](state, { clan }: actionTypes.ISetClansArgs) {
@@ -21,52 +27,28 @@ export const clanReducer = createReducer<IClanState>(initialState, {
 			data: clan,
 		};
 	},
-	[actionTypes.ADD_ERROR](state, { error }: actionTypes.IAddErrorArgs) {
+	[actionTypes.SET_COMMUNITY](state, { community }: actionTypes.ISetCommunityArgs) {
 		return {
 			...state,
-			errors: [...state.errors, error],
+			community,
 		};
 	},
-	[actionTypes.CLEAR_CLAN](state, action) {
+	[actionTypes.SET_ERROR](state, { error }: actionTypes.ISetErrorArgs) {
 		return {
 			...state,
-			data: null,
+			error,
 		};
 	},
-	[actionTypes.SORT_MEMBERS_BY_TIME](state, action) {
-		if (state.data) {
-			return {
-				...state,
-				options: {
-					...state.options,
-					sortBY: SortOptions.BY_TIME,
-				},
-				data: {
-					...state.data,
-					members: [...state.data.members].sort((a, b) =>
-						new Date(b.createdAt) > new Date(a.createdAt) ? 1 : -1,
-					),
-				},
-			};
-		}
-
-		return state;
+	[actionTypes.SET_MEMBERS_SORT](state, { sort: membersSort }: actionTypes.ISetMembersSortArgs) {
+		return {
+			...state,
+			membersSort,
+		};
 	},
-	[actionTypes.SORT_MEMBERS_BY_RANK](state, action) {
-		if (state.data) {
-			return {
-				...state,
-				options: {
-					...state.options,
-					sortBY: SortOptions.BY_RANK,
-				},
-				data: {
-					...state.data,
-					members: [...state.data.members].sort((a, b) => b.rank - a.rank),
-				},
-			};
-		}
-
-		return state;
+	[actionTypes.SET_MEMBERS_FILTER](state, { filter }: actionTypes.ISetMembersFilterArgs) {
+		return {
+			...state,
+			membersFilter: { ...state.membersFilter, ...filter },
+		};
 	},
 });

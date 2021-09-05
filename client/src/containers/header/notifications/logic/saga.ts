@@ -34,6 +34,9 @@ function* fetchNotification() {
 	const firestore = getFirestore(app);
 	const store: IRootState = yield select();
 	const userId = store.auth.userData.user?.id;
+	if (!userId) {
+		return;
+	}
 	const q = query(
 		collection(firestore, 'notifications'),
 		where('userId', '==', userId),

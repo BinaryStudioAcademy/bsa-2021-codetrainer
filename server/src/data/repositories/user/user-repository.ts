@@ -45,6 +45,7 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
 			.leftJoinAndSelect('user.solutions', 'solution')
+			.leftJoinAndSelect('user.commentSolutions', 'commentSolution')
 			.leftJoinAndSelect('user.followers', 'followers')
 			.leftJoinAndSelect('user.following', 'following')
 			.leftJoinAndSelect('following.following', 'following_user')
@@ -55,6 +56,7 @@ export class UserRepository extends AbstractRepository<User> {
 				'solution.id',
 				'profileClan',
 				'task.id',
+				'commentSolution.id',
 				'followers.id',
 				'following.id',
 				'follower_user',
@@ -105,6 +107,8 @@ export class UserRepository extends AbstractRepository<User> {
 				'solution.id',
 				'profileClan',
 				'task.id',
+				'user.rank',
+				'user.honor',
 			])
 			.where('user.username = :username', { username })
 			.getOne();

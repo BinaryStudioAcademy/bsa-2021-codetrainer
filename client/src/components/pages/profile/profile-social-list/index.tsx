@@ -23,7 +23,7 @@ export const ProfileSocialList: React.FC<IProfileSocialList> = ({ items, infoTyp
 							</td>
 							<td>
 								<Link to={ROUTES.Users + '/' + item.username}>
-									<Avatar avatar={item.img} size={30} />
+									<Avatar avatar={item.avatar} size={30} />
 								</Link>
 							</td>
 							<td>

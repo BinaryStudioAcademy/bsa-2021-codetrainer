@@ -15,6 +15,8 @@ export const validationMiddleware =
 		}
 	};
 
-export { taskSchema, taskIdSchema, taskSearchSchema, taskWithSolutionsSchema } from './task-validation';
+export { taskSchema, taskSearchSchema, taskWithSolutionsSchema } from './task-validation';
 export { resetPasswordSchema, forgotPasswordSchema } from './auth-validation';
-export { solutionIdSchema, solutionSchema } from './solution-validation';
+export { solutionIdSchema, solutionSchema, solutionPatchSchema } from './solution-validation';
+export { commentSolutionSchema } from './comment-solution-validation';
+export { idSchema } from './idSchema';

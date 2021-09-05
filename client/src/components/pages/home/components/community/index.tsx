@@ -7,7 +7,7 @@ import { ButtonClasses } from 'components/basic/button';
 import { ICommunityProps } from './interface';
 import { ClanModal } from 'components/modals';
 
-const Community: React.FC<ICommunityProps> = ({ users, isInClan }) => {
+const Community: React.FC<ICommunityProps> = ({ users, isInClan, onCreateClan, isCreateLoading }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 	const openModal = () => {
 		setIsOpen(true);
@@ -15,7 +15,7 @@ const Community: React.FC<ICommunityProps> = ({ users, isInClan }) => {
 
 	return (
 		<div className={styles.community}>
-			<ClanModal isOpen={isOpen} setIsOpen={setIsOpen} />
+			<ClanModal isOpen={isOpen} isLoading={isCreateLoading} setIsOpen={setIsOpen} onSubmit={onCreateClan} />
 			<div>
 				<h4 className={styles.communityHeader}>Community</h4>
 				<p className={styles.communityDescription}>

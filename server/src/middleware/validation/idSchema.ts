@@ -1,6 +1,6 @@
 import { checkSchema } from 'express-validator';
 
-export const taskIdSchema = checkSchema({
+export const idSchema = checkSchema({
 	id: {
 		in: 'params',
 		isUUID: true,
