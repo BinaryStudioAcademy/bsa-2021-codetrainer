@@ -34,4 +34,13 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			following: action.following,
 		};
 	},
+	[actionTypes.SET_USER_SOLUTION](state, action: actionTypes.TSetUserSolution) {
+		return {
+			...state,
+			userSolution: {
+				nextTaskId: action.nextTaskId,
+				solution: action.solution,
+			},
+		};
+	},
 });

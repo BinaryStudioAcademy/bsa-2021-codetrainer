@@ -9,6 +9,17 @@ export const GET_NEXT_TASK = 'CHALLENGE:GET_NEXT_TASK';
 export const SET_NEXT_TASK = 'CHALLENGE:SET_NEXT_TASK';
 export const GET_FOLLOWING = 'CHALLENGE:GET_FOLLOWING';
 export const SET_FOLLOWING = 'CHALLENGE:SET_FOLLOWING';
+export const GET_USER_SOLUTION = 'CHALLENGE:GET_USER_SOLUTION';
+export const SET_USER_SOLUTION = 'CHALLENGE:SET_USER_SOLUTION';
+
+export type TGetUserSolution = {
+	taskId?: string;
+};
+
+export type TSetUserSolution = {
+	nextTaskId: string;
+	solution?: WebApi.Entities.ISolution;
+};
 
 export type TGetFollowing = {
 	id?: string;

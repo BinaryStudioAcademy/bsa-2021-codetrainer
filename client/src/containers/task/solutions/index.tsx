@@ -4,6 +4,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { SolutionStatus } from 'typings/common/solution';
 import { IRootState } from 'typings/root-state';
 import { WebApi } from 'typings/webapi';
 import * as actions from './../logic/actions';
@@ -12,11 +13,16 @@ export const Solutions = () => {
 	const task = useSelector((state: IRootState) => state.taskInfo.task);
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 	const following = useSelector((state: IRootState) => state.taskInfo.following);
+	const userSolution = useSelector((state: IRootState) => state.taskInfo.userSolution);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(actions.getFollowing({ id: user?.id }));
 	}, [task]);
+
+	useEffect(() => {
+		dispatch(actions.getUserSolution({ taskId: task?.id }));
+	}, [task, user]);
 
 	const filterSolutionsByFollowing = useCallback(
 		(solutions): WebApi.Entities.ISolution[] => {
@@ -58,6 +64,11 @@ export const Solutions = () => {
 				filterSolutionsByFollowing={filterSolutionsByFollowing}
 				filterNewest={filterNewest}
 				filterOldest={filterOldest}
+				isLocked={
+					userSolution?.solution?.status !== SolutionStatus.COMPLETED &&
+					userSolution?.solution?.status !== SolutionStatus.UNLOCKED
+				}
+				unlockSolutions={() => {}}
 			/>
 		);
 	}

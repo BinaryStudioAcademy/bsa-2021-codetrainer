@@ -6,6 +6,10 @@ export interface ITaskInfoState {
 	similarTasks: WebApi.Entities.IChallenge[] | null;
 	nextTaskId: string | null;
 	following: WebApi.Entities.IUser[] | null;
+	userSolution: {
+		nextTaskId: string | null;
+		solution?: WebApi.Entities.ISolution | null;
+	};
 }
 
 export const initialState: ITaskInfoState = {
@@ -14,4 +18,8 @@ export const initialState: ITaskInfoState = {
 	similarTasks: null,
 	nextTaskId: null,
 	following: null,
+	userSolution: {
+		nextTaskId: null,
+		solution: null,
+	},
 };

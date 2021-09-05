@@ -16,6 +16,8 @@ export interface ISolutionsTabProps {
 	filterSolutionsByFollowing: (solutions: WebApi.Entities.ISolution[]) => WebApi.Entities.ISolution[];
 	filterNewest: (solutions: WebApi.Entities.ISolution[]) => WebApi.Entities.ISolution[];
 	filterOldest: (solutions: WebApi.Entities.ISolution[]) => WebApi.Entities.ISolution[];
+	isLocked?: boolean;
+	unlockSolutions: () => void;
 }
 
 export enum ShowMe {
@@ -28,7 +30,13 @@ export enum SortBy {
 	Oldest = 'Oldest',
 }
 
-export const SolutionsTab = ({ task, filterSolutionsByFollowing, filterNewest, filterOldest }: ISolutionsTabProps) => {
+export const SolutionsTab = ({
+	task,
+	filterSolutionsByFollowing,
+	filterNewest,
+	filterOldest,
+	isLocked = false,
+}: ISolutionsTabProps) => {
 	const [isDescriptionOpened, setIsDescriptionOpened] = useState(false);
 	const [isTestCasesOpened, setIsTestCasesOpened] = useState(false);
 	const [activeShowMe, setActiveShowMe] = useState(ShowMe.AllSolutions);
@@ -41,62 +49,6 @@ export const SolutionsTab = ({ task, filterSolutionsByFollowing, filterNewest, f
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.filters}>
-				<div className={styles.showMe}>
-					<span className={styles.label}>Show me:</span>
-					<button
-						onClick={() => {
-							setActiveShowMe(ShowMe.AllSolutions);
-							setSolutionsToShow(task.solutions);
-						}}
-						className={clsx(
-							activeShowMe === ShowMe.AllSolutions && styles.membersSortPanelButtonActive,
-							styles.membersSortPanelButton,
-						)}
-					>
-						{ShowMe.AllSolutions}
-					</button>
-					<button
-						onClick={() => {
-							setActiveShowMe(ShowMe.SolutionsOfFollowing);
-							setSolutionsToShow(filterSolutionsByFollowing(solutionsToShow));
-						}}
-						className={clsx(
-							activeShowMe === ShowMe.SolutionsOfFollowing && styles.membersSortPanelButtonActive,
-							styles.membersSortPanelButton,
-						)}
-					>
-						{ShowMe.SolutionsOfFollowing}
-					</button>
-				</div>
-				<div className={styles.sortBy}>
-					<span className={styles.label}>Sort by:</span>
-					<button
-						onClick={() => {
-							setActiveSortBy(SortBy.Newest);
-							setSolutionsToShow(filterNewest(solutionsToShow));
-						}}
-						className={clsx(
-							activeSortBy === SortBy.Newest && styles.membersSortPanelButtonActive,
-							styles.membersSortPanelButton,
-						)}
-					>
-						{SortBy.Newest}
-					</button>
-					<button
-						onClick={() => {
-							setActiveSortBy(SortBy.Oldest);
-							setSolutionsToShow(filterOldest(solutionsToShow));
-						}}
-						className={clsx(
-							activeSortBy === SortBy.Oldest && styles.membersSortPanelButtonActive,
-							styles.membersSortPanelButton,
-						)}
-					>
-						{SortBy.Oldest}
-					</button>
-				</div>
-			</div>
 			<div className={styles.toggleBtns}>
 				<Button
 					onClick={() => setIsDescriptionOpened(!isDescriptionOpened)}
@@ -124,16 +76,84 @@ export const SolutionsTab = ({ task, filterSolutionsByFollowing, filterNewest, f
 					))}
 			</div>
 
-			<div className={styles.solutions}>
-				{solutionsToShow.map((item) => {
-					return (
-						<>
-							<Solution solution={item} key={item.id} />
-							<Divider />
-						</>
-					);
-				})}
-			</div>
+			{!isLocked ? (
+				<>
+					<div className={styles.filters}>
+						<div className={styles.showMe}>
+							<span className={styles.label}>Show me:</span>
+							<button
+								onClick={() => {
+									setActiveShowMe(ShowMe.AllSolutions);
+									setSolutionsToShow(task.solutions);
+								}}
+								className={clsx(
+									activeShowMe === ShowMe.AllSolutions && styles.membersSortPanelButtonActive,
+									styles.membersSortPanelButton,
+								)}
+							>
+								{ShowMe.AllSolutions}
+							</button>
+							<button
+								onClick={() => {
+									setActiveShowMe(ShowMe.SolutionsOfFollowing);
+									setSolutionsToShow(filterSolutionsByFollowing(solutionsToShow));
+								}}
+								className={clsx(
+									activeShowMe === ShowMe.SolutionsOfFollowing && styles.membersSortPanelButtonActive,
+									styles.membersSortPanelButton,
+								)}
+							>
+								{ShowMe.SolutionsOfFollowing}
+							</button>
+						</div>
+						<div className={styles.sortBy}>
+							<span className={styles.label}>Sort by:</span>
+							<button
+								onClick={() => {
+									setActiveSortBy(SortBy.Newest);
+									setSolutionsToShow(filterNewest(solutionsToShow));
+								}}
+								className={clsx(
+									activeSortBy === SortBy.Newest && styles.membersSortPanelButtonActive,
+									styles.membersSortPanelButton,
+								)}
+							>
+								{SortBy.Newest}
+							</button>
+							<button
+								onClick={() => {
+									setActiveSortBy(SortBy.Oldest);
+									setSolutionsToShow(filterOldest(solutionsToShow));
+								}}
+								className={clsx(
+									activeSortBy === SortBy.Oldest && styles.membersSortPanelButtonActive,
+									styles.membersSortPanelButton,
+								)}
+							>
+								{SortBy.Oldest}
+							</button>
+						</div>
+					</div>
+
+					<div className={styles.solutions}>
+						{solutionsToShow.map((item) => {
+							return (
+								<>
+									<Solution solution={item} key={item.id} />
+									<Divider />
+								</>
+							);
+						})}
+					</div>
+				</>
+			) : (
+				<Button
+					onClick={() => {}}
+					className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.unlockSolutionBtn)}
+				>
+					Unlock Solutions
+				</Button>
+			)}
 		</div>
 	);
 };

@@ -7,6 +7,7 @@ import { NotificationType } from 'containers/notification/logic/models';
 import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
+import { fetchUserSolution } from 'services/solutions.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
@@ -97,6 +98,34 @@ export function* fetchFollowingWatcher() {
 	yield takeEvery(actionTypes.GET_FOLLOWING, fetchFollowingWorker);
 }
 
+export function* fetchUserSolutionWorker(action: ReturnType<typeof actions.getUserSolution>): any {
+	try {
+		const { taskId } = action;
+		if (taskId) {
+			const userSolution = yield call(() => fetchUserSolution(taskId));
+			console.log(userSolution);
+			yield put(actions.setUserSolution(userSolution));
+		}
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: "Cannot find user's solution",
+			},
+		});
+	}
+}
+
+export function* fetchUserSolutionWatcher() {
+	yield takeEvery(actionTypes.GET_USER_SOLUTION, fetchUserSolutionWorker);
+}
+
 export default function* taskInfoSaga() {
-	yield all([fetchTaskWatcher(), fetchTasksWatcher(), fetchNextTaskWatcher(), fetchFollowingWatcher()]);
+	yield all([
+		fetchTaskWatcher(),
+		fetchTasksWatcher(),
+		fetchNextTaskWatcher(),
+		fetchFollowingWatcher(),
+		fetchUserSolutionWatcher(),
+	]);
 }
