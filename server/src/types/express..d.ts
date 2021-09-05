@@ -1,5 +1,5 @@
 import { Server } from 'socket.io';
-import { Clan, Task, User, Solution, Collection } from '../data';
+import { Clan, Task, User, Solution, Collection, CommentSolution } from '../data';
 
 declare module 'express-serve-static-core' {
 	interface Request {
@@ -8,6 +8,7 @@ declare module 'express-serve-static-core' {
 		user: User;
 		solution: Solution;
 		collection: Collection;
+		commentSolution: CommentSolution;
 		validData: any;
 		io: Server;
 	}

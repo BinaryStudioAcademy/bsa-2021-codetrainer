@@ -1,4 +1,5 @@
-import { WebApi } from '../../../../../typings/webapi';
+import { WebApi } from 'typings/webapi';
+import { IClanForm } from 'components/modals/clan-modal/types';
 import IClan = WebApi.Entities.IClan;
 
 export interface IUser {
@@ -7,6 +8,7 @@ export interface IUser {
 	rank: number;
 	imageSource?: string;
 	name: string;
+	surname?: string;
 	clan?: IClan | null;
 	honor: number;
 }
@@ -14,4 +16,6 @@ export interface IUser {
 export interface ICommunityProps {
 	isInClan: boolean;
 	users: IUser[];
+	onCreateClan: (form: IClanForm) => void;
+	isCreateLoading: boolean;
 }

@@ -13,6 +13,15 @@ export const SearchPage: React.FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		setFilterForChangePage(filter);
+		dispatch(
+			actions.searchFetchData({
+				partialFilter: mapFilterToSearch(filter),
+			}),
+		);
+	}, []);
+
+	useEffect(() => {
 		setSearchData(mapSearchData(search));
 	}, [search]);
 

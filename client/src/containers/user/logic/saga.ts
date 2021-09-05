@@ -9,6 +9,7 @@ import * as actions from './actions';
 import { UserAccessToken, IUserDataState } from './state';
 import * as signInActions from 'containers/sign-in/logic/actions';
 import * as signUpActions from 'containers/sign-up/logic/actions';
+import { IUser } from 'typings/common/IUser';
 
 export function* fetchCheckToken() {
 	yield put(actions.setUserAccessTokenLoading({ accessToken: UserAccessToken.LOADING }));
@@ -27,8 +28,8 @@ function* fetchUserLogout() {
 function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
 	try {
 		const { user } = action;
-		yield call(updateUser, user);
-		yield put(actions.setUser({ user }));
+		const newUser: IUser = yield call(updateUser, user);
+		yield put(actions.setUser({ user: newUser }));
 		yield put(
 			setNotificationState({
 				state: {
@@ -43,7 +44,7 @@ function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
 			setNotificationState({
 				state: {
 					notificationType: NotificationType.Error,
-					message: error.errors.message,
+					message: error instanceof Error ? error?.message : 'Unknown error',
 					title: 'Update user',
 				},
 			}),

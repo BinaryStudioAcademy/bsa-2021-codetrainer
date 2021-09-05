@@ -4,6 +4,7 @@ import { ClanApiPath } from 'enum/api/clan-api.path';
 import { Order } from 'helpers/table-helper';
 import { http } from 'services';
 import { WebApi } from 'typings/webapi';
+import { IClanForm } from 'components/modals/clan-modal/types';
 
 export interface TFetchClansArgs {
 	page: number;
@@ -43,6 +44,17 @@ export const fetchClans = async ({
 	}
 };
 
+function mapResponseToClan(response: any): WebApi.Entities.IClan {
+	return {
+		...response,
+		members: response.members.map((member: WebApi.Entities.IMember) => ({
+			...member,
+			createdAt: new Date(member.createdAt),
+		})),
+		createdAt: new Date(response.createdAt),
+	};
+}
+
 export const fetchClan = async (id: string): Promise<WebApi.Entities.IClan | Error> => {
 	try {
 		const response = await http.callWebApi({
@@ -50,19 +62,20 @@ export const fetchClan = async (id: string): Promise<WebApi.Entities.IClan | Err
 			endpoint: `${ClanApiPath.ROOT}${id}`,
 		});
 
-		const clan = {
-			...response,
-			members: response.members.map((member: WebApi.Entities.IMember) => ({
-				...member,
-				createdAt: new Date(member.createdAt),
-			})),
-			createdAt: new Date(response.createdAt),
-		};
-
-		return clan;
+		return mapResponseToClan(response);
 	} catch (error) {
 		return error;
 	}
+};
+
+export const updateClan = async (id: string, clan: IClanForm): Promise<WebApi.Entities.IClan> => {
+	const response = await http.callWebApi({
+		endpoint: `${ClanApiPath.ROOT}/${id}`,
+		method: HttpMethods.PUT,
+		body: clan,
+	});
+
+	return mapResponseToClan(response);
 };
 
 export const toggleClanMember = async (
@@ -77,14 +90,7 @@ export const toggleClanMember = async (
 		const { clan, user } = response;
 
 		return {
-			clan: {
-				...clan,
-				members: clan.members.map((member: WebApi.Entities.IMember) => ({
-					...member,
-					createdAt: new Date(member.createdAt),
-				})),
-				createdAt: new Date(response.clan.createdAt),
-			},
+			clan: mapResponseToClan(clan),
 			user,
 		};
 	} catch (error) {
@@ -93,10 +99,9 @@ export const toggleClanMember = async (
 };
 
 export const deleteClan = async () => {
-	const result = await http.callWebApi({
+	await http.callWebApi({
 		method: HttpMethods.DELETE,
 		endpoint: ClanApiPath.ROOT,
 		skipAuthorization: false,
 	});
-	console.log(result);
 };

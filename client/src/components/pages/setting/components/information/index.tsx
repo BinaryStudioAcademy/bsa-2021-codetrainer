@@ -22,24 +22,6 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Information: React.FC<IInformationProps> = (props) => {
-	const getFieldItem = (item: Omit<IFormItem, 'initialText'>) => {
-		return (
-			<div className={styles.inputField}>
-				<Field
-					id={item.id}
-					name={item.name}
-					label={item.label}
-					placeholder={item.placeholder}
-					type={item.type}
-					readonly={item.readonly}
-					component={FormInput}
-					key={item.id}
-					className={styles.input}
-				/>
-			</div>
-		);
-	};
-
 	const renderFormFields = (items: Array<IFormItem>) => {
 		const fieldsValues = items.reduce((acc: any, current) => {
 			acc[current.name] = current.initialText;
@@ -59,7 +41,21 @@ const Information: React.FC<IInformationProps> = (props) => {
 				}}
 			>
 				<Form className={styles.form}>
-					{items.map((item: IFormItem) => getFieldItem(item))}
+					{items.map((item: IFormItem, index) => (
+						<div className={styles.inputField} key={index.toString()}>
+							<Field
+								id={item.id}
+								name={item.name}
+								label={item.label}
+								placeholder={item.placeholder}
+								type={item.type}
+								readonly={item.readonly}
+								component={FormInput}
+								key={item.id}
+								className={styles.input}
+							/>
+						</div>
+					))}
 					<div>
 						<div className={styles.label}>Clan</div>
 						<div className={styles.clanInfo}>

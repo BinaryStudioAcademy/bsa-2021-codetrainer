@@ -92,7 +92,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 
 	async searchNotUseTask(taskIds: Array<string>) {
 		return this.createQueryBuilder('task')
-			.select(['task.id'])
+			.select(['task'])
 			.where('task.id NOT IN (:...ids)', { ids: taskIds })
 			.orderBy('RANDOM()')
 			.limit(1)

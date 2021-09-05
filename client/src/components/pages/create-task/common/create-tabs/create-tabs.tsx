@@ -5,7 +5,6 @@ import { Header } from './header';
 import { IconTaskPageFullScreen } from 'common';
 import { TabContent } from './tab-content';
 import { ICreateTabsProps } from './types';
-import './styles.scss';
 import styles from './styles.module.scss';
 
 export const CreateTabs: React.FC<ICreateTabsProps> = ({ tabs, onChange, onSelectTab, selectedTab }) => {

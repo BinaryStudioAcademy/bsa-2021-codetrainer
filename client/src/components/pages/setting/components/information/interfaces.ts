@@ -1,11 +1,11 @@
-import { IClan } from 'containers/clans/types';
+import { WebApi } from 'typings/webapi';
 import { IListItem } from '../list-radio/interfaces';
 
 export interface IInformationProps {
 	list: IList;
 	formItems: Array<IFormItem>;
 	onSubmit: (form: any) => void;
-	clan?: IClan | null;
+	clan?: WebApi.Entities.IClan | null;
 }
 
 interface IList {

@@ -1,0 +1,27 @@
+@use 'styles/variables.scss' as var;
+
+.container {
+	width: 100%;
+
+	.inputField {
+		width: 100%;
+		& > div {
+			width: 100%;
+			& {
+				overflow: hidden;
+			}
+		}
+	}
+
+	.inputWrapper {
+		position: relative;
+	}
+
+	.error {
+		text-align: right;
+		margin-top: 2px;
+		height: 12px;
+		font-size: 12px;
+		color: var(--pink);
+	}
+}

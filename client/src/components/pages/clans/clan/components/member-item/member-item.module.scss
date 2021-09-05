@@ -1,5 +1,19 @@
+@import 'styles/variables';
+
 .memberItem {
-	td {
-		padding: 10px;
+	.position,
+	.honor {
+		text-align: center;
+		font: $sixth-title-font;
+	}
+
+	.user {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.join {
+		font: $minor-font;
 	}
 }

@@ -1,7 +1,12 @@
 import { Router } from 'express';
 import { SolutionApiPath } from '../../../common';
-import { validationMiddleware, checkSolutionIdMiddleware, solutionIdSchema, solutionSchema } from '../../../middleware';
-import { solutionPatchSchema } from '../../../middleware/validation/solution-validation';
+import {
+	validationMiddleware,
+	checkSolutionIdMiddleware,
+	solutionIdSchema,
+	solutionSchema,
+	solutionPatchSchema,
+} from '../../../middleware';
 import { SolutionService } from '../../../services';
 
 export const initSolution = (appRouter: typeof Router, services: { solution: SolutionService }) => {
@@ -61,7 +66,7 @@ export const initSolution = (appRouter: typeof Router, services: { solution: Sol
 			SolutionApiPath.$ID,
 			validationMiddleware([solutionIdSchema]),
 			checkSolutionIdMiddleware,
-			(req, res, next) => res.send(req.solution),
+			(req, res, _next) => res.send(req.solution),
 		);
 
 	return router;
