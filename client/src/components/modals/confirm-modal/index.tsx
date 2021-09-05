@@ -23,13 +23,17 @@ export const ConfirmModal: FC<IConfirmModalProps> = ({
 			...elements,
 			footer: (
 				<div className={styles.buttons}>
-					<Button onClick={() => onConfirm(true)} className={confirmClassName}>{confirm}</Button>
-					<Button onClick={() => onConfirm(false)}  className={cancelClassName}>{cancel}</Button>
+					<Button onClick={() => onConfirm(true)} className={confirmClassName}>
+						{confirm}
+					</Button>
+					<Button onClick={() => onConfirm(false)} className={cancelClassName}>
+						{cancel}
+					</Button>
 				</div>
 			),
 			showCloseButton: false,
 		}}
 	/>
-)
+);
 
 export default ConfirmModal;

@@ -43,7 +43,7 @@ export interface IClanProps {
 		onInvite: (id: string) => void;
 		handleInviteClick: () => void;
 		community: any[];
-	}
+	};
 	modals: {
 		isInvitationOpen: boolean;
 		isEditOpen: boolean;
@@ -53,5 +53,5 @@ export interface IClanProps {
 		setIsInvitationOpen: (value: boolean) => void;
 		setIsEditOpen: (value: boolean) => void;
 		setIsLeaveOpen: (value: boolean) => void;
-	}
+	};
 }

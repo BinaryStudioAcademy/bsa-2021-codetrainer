@@ -9,31 +9,40 @@ import { Markdown } from 'components/pages/create-task/common/create-tabs/markdo
 import styles from './clan-info.module.scss';
 
 const ClanInfo: React.FC<IClanInfoProps> = ({ clan }) => {
-	const clanAdmin = useMemo(() =>
-		clan.members
-			.find((member) => member.profileClan?.role === MemberRoles.ADMIN)
-	, [clan]);
+	const clanAdmin = useMemo(
+		() => clan.members.find((member) => member.profileClan?.role === MemberRoles.ADMIN),
+		[clan],
+	);
 
-	const clanList = useMemo(() => (
-		<List items={[
-			{
-				name: 'Members',
-				value: `${clan.numberOfMembers} / ${clan.maxMembers}`,
-			},
-			{
-				name: 'Admin',
-				value: <Link to={`${ROUTES.Users}/${clanAdmin?.username}`}>{clanAdmin?.name} {clanAdmin?.surname}</Link>
-			},
-			{
-				name: 'Type',
-				value: clan.isPublic ? 'Public' : 'Private',
-			},
-			{
-				name: 'Created',
-				value: getFullDate(new Date(clan.createdAt))
-			},
-		]} />
-	), [clan]);
+	const clanList = useMemo(
+		() => (
+			<List
+				items={[
+					{
+						name: 'Members',
+						value: `${clan.numberOfMembers} / ${clan.maxMembers}`,
+					},
+					{
+						name: 'Admin',
+						value: (
+							<Link to={`${ROUTES.Users}/${clanAdmin?.username}`}>
+								{clanAdmin?.name} {clanAdmin?.surname}
+							</Link>
+						),
+					},
+					{
+						name: 'Type',
+						value: clan.isPublic ? 'Public' : 'Private',
+					},
+					{
+						name: 'Created',
+						value: getFullDate(new Date(clan.createdAt)),
+					},
+				]}
+			/>
+		),
+		[clan],
+	);
 
 	return (
 		<div className={styles.clanInfo}>
@@ -50,9 +59,7 @@ const ClanInfo: React.FC<IClanInfoProps> = ({ clan }) => {
 					<Rank honor={clan.honor} />
 				</div>
 				<div className={styles.clanInfoDetails}>
-					<div className={styles.clanInfoList}>
-						{clanList}
-					</div>
+					<div className={styles.clanInfoList}>{clanList}</div>
 					<div className={styles.clanInfoDescription}>
 						<Markdown text={clan.description || 'No description provided'} />
 					</div>

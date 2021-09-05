@@ -34,9 +34,7 @@ const UserItem: React.FC<IUserItemProps> = ({ user, position }) => {
 			<StyledTableCell>
 				<Rank rank={user.rank ?? 0} />
 			</StyledTableCell>
-			<StyledTableCell>
-				{user.avatar ? <Avatar avatar={user.avatar} /> : <span>No avatar</span>}
-			</StyledTableCell>
+			<StyledTableCell>{user.avatar ? <Avatar avatar={user.avatar} /> : <span>No avatar</span>}</StyledTableCell>
 			<StyledTableCell>
 				<Link to={`${ROUTES.Users}/${user.username}`}>{`${user.name} ${user.surname}`}</Link>
 			</StyledTableCell>

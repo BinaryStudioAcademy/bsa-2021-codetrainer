@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableRow,
-} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import MemberItem from '../member-item';
 import SortLabel from '../sort-label';
 import SearchLabel from '../search-label';
@@ -14,13 +8,7 @@ import { Order } from 'helpers/table-helper';
 import { MembersSortStrategy } from 'containers/clans/clan/logic/types';
 import styles from './members-list.module.scss';
 
-const MemberList: React.FC<IMembersListProps> = ({
-	data,
-	sort,
-	filter,
-	setSort,
-	setFilter,
-}) => {
+const MemberList: React.FC<IMembersListProps> = ({ data, sort, filter, setSort, setFilter }) => {
 	return (
 		<div className={styles.members}>
 			<Table className={styles.membersTable}>
@@ -35,7 +23,7 @@ const MemberList: React.FC<IMembersListProps> = ({
 								className={styles.centered}
 							>
 								Position
-							</SortLabel>	
+							</SortLabel>
 						</TableCell>
 						<TableCell component="th">
 							<SortLabel
@@ -45,10 +33,7 @@ const MemberList: React.FC<IMembersListProps> = ({
 								setSortingStrategy={setSort}
 								className={styles.name}
 							>
-								<SearchLabel
-									value={filter?.name}
-									onChange={(name) => setFilter({ name })}
-								>
+								<SearchLabel value={filter?.name} onChange={(name) => setFilter({ name })}>
 									User
 								</SearchLabel>
 							</SortLabel>
@@ -78,7 +63,7 @@ const MemberList: React.FC<IMembersListProps> = ({
 				</TableHead>
 				<TableBody>
 					{data.map((member, index) => (
-						<MemberItem member={member} key={index}/>
+						<MemberItem member={member} key={index} />
 					))}
 				</TableBody>
 			</Table>
