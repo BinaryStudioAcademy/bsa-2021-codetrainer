@@ -18,5 +18,7 @@ export const clearError = () => setError({});
 
 export const fetchClan = createAction<actionTypes.IFetchClanArgs>(actionTypes.FETCH_CLAN);
 export const fetchCommunity = createAction<actionTypes.IFetchCommunityArgs>(actionTypes.FETCH_COMMUNITY);
+export const createClan = createAction<actionTypes.ICreateClanArgs>(actionTypes.CREATE_CLAN);
 export const updateClan = createAction<actionTypes.IUpdateClanArgs>(actionTypes.UPDATE_CLAN);
+export const deleteClan = createAction<void>(actionTypes.DELETE_CLAN);
 export const toggleClanMember = createAction<void>(actionTypes.TOGGLE_CLAN_MEMBER);

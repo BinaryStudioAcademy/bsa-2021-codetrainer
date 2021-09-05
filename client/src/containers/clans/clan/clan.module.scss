@@ -1,0 +1,7 @@
+@import 'styles/variables';
+
+.error {
+	color: var(--pink);
+	margin: 30px 0;
+	font: $fourth-title-font;
+}
