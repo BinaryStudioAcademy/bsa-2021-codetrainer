@@ -33,6 +33,8 @@ const Clan: React.FC = () => {
 	} = useClanSelector();
 	const user: WebApi.Entities.IUser = useUserSelector() as WebApi.Entities.IUser;
 
+	const communityWithoutClan: any[] = community.filter((user) => user.clan === null);
+
 	const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
 	const [isInvitationOpen, setIsInvitationOpen] = useState<boolean>(false);
 	const [isLeaveOpen, setIsLeaveOpen] = useState<boolean>(false);
@@ -118,7 +120,7 @@ const Clan: React.FC = () => {
 							invitation={{
 								onInvite,
 								handleInviteClick,
-								community,
+								community: communityWithoutClan,
 							}}
 							modals={{
 								isEditOpen,

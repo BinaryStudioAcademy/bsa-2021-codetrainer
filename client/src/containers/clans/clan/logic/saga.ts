@@ -1,3 +1,4 @@
+import { getUserById } from './../../../../services/users.service';
 import { mapUserResponseToUser } from 'helpers/user.helper';
 import { ROUTES } from 'constants/routes';
 import historyHelper from 'helpers/history.helper';
@@ -34,7 +35,9 @@ export function* fetchCommunityWorker(action: ReturnType<typeof actions.fetchCom
 		yield put(actions.setInvitationStatus({ status: ClanPageStatus.LOADING }));
 		yield put(actions.setCommunity({ community: [] }));
 		const response = yield call(getCommunityByUserId, action.userId);
-		yield put(actions.setCommunity({ community: response }));
+		const fetchedUsers = yield all(response.map((user: { id: string }) => call(getUserById, user.id)));
+		const users = fetchedUsers.map((item: { user: any }) => item.user);
+		yield put(actions.setCommunity({ community: users }));
 	} catch (error) {
 		if (error instanceof Error) {
 			yield put(
