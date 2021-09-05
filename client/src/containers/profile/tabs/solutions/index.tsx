@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, ReactNode, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, ReactNode } from 'react';
 import { ProfileTabWithSidebar } from 'components';
 import { getUserSolutions } from 'services/solutions.service';
 import ProfileSkeletonList from 'components/pages/profile/profile-skeleton-list';
@@ -38,13 +38,13 @@ const solutionTabs: TSolutionTab[] = [
 ];
 
 export const ProfileSolutions: React.FC = () => {
-	useEffect(() => {
-		getUserSolutions({
-			skip: 0,
-			take: 10,
-			status: selectedValue,
-		}).then((res) => console.log(res));
-	}, []);
+	// useEffect(() => {
+	// 	getUserSolutions({
+	// 		skip: 0,
+	// 		take: 10,
+	// 		status: selectedValue,
+	// 	}).then((res) => console.log(res));
+	// }, []);
 	const [selectedValue, setSelectedValue] = useState<SolutionStatus>(SolutionStatus.COMPLETED);
 	const [tasks, setTasks] = useState<WebApi.Entities.ITask[]>([]);
 	const [solutionsCount, setSolutionsCount] = useState<{ [key in SolutionStatus]?: string }>({});
