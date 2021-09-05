@@ -56,13 +56,13 @@ export class AuthService {
 				user: await repository.getById(id),
 			};
 		} catch (error) {
-			const { name } = error;
+			const { name } = error as Error;
 			if (name && name === 'TokenExpiredError') {
 				throw new ValidationError(CODE_ERRORS.TOKEN_EXPIRED);
 			} else if (name && name === 'JsonWebTokenError') {
 				throw new ValidationError(CODE_ERRORS.TOKEN_INVALID);
 			}
-			throw new Error(error);
+			throw new Error((error as Error)?.message);
 		}
 	}
 

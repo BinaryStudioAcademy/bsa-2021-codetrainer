@@ -125,10 +125,16 @@ export class TaskService {
 		take: number;
 	}): Promise<{
 		tasks: Task[];
-		total: number;
+		count: { [key in SOLUTION_STATUS]?: string };
 	}> {
 		const repository = getCustomRepository(this.taskRepository);
-		const [tasks, total] = await repository
+		const solutionRepository = getCustomRepository(this.solutionRepository);
+		const solutionsCount: { [key in SOLUTION_STATUS]?: string } = (
+			await solutionRepository.getUserCountSolutionsByStatus(userId)
+		).reduce((prev, { status, count }) => {
+			return { ...prev, [status]: count };
+		}, {});
+		const tasks = await repository
 			.createQueryBuilder('task')
 			.innerJoinAndSelect(
 				'task.solutions',
@@ -142,8 +148,8 @@ export class TaskService {
 			.orderBy('solution.createdAt', 'DESC')
 			.skip(skip)
 			.take(take)
-			.getManyAndCount();
-		return { tasks, total };
+			.getMany();
+		return { tasks, count: solutionsCount };
 	}
 
 	async getNextTask(userId: string) {
