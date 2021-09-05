@@ -25,6 +25,8 @@ declare namespace WebApi.Entities {
 		};
 		githubId?: string;
 		profileUrl?: string;
+		avatar?: string;
+
 		position?: number;
 		following: any[];
 		followers: any[];
