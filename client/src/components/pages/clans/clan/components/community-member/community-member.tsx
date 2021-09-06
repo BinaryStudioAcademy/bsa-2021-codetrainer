@@ -9,7 +9,7 @@ import styles from './community-member.module.scss';
 interface ICommunityMemberProps {
 	user: WebApi.Entities.IUser;
 	fromUser: any;
-	handleInviteClick: (fromUser: any, toUser: any) => void;
+	handleInviteClick: (userId: WebApi.Entities.IUser) => void;
 }
 
 export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunityMemberProps) => {
@@ -24,7 +24,7 @@ export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunit
 				<Button
 					className={clsx(ButtonClasses.red, ButtonClasses.filled)}
 					onClick={() => {
-						handleInviteClick(fromUser, user);
+						handleInviteClick(user);
 						setInvited(true);
 					}}
 				>

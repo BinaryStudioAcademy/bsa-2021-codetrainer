@@ -9,4 +9,7 @@ export interface IMembersListProps {
 	setSort: (sort: ISortingStrategy<MembersSortStrategy>) => void;
 	filter?: IMembersFilter;
 	setFilter: (filter: Partial<IMembersFilter>) => void;
+	viewer: WebApi.Entities.IUser;
+	handleMakeAdmin: (id: string) => void;
+	handleDeleteMember: (id: string) => void;
 }

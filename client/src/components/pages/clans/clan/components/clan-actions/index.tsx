@@ -5,7 +5,14 @@ import { IClanActionsProps } from './types';
 import styles from './clan-actions.module.scss';
 import clsx from 'clsx';
 
-const ClanActions: FC<IClanActionsProps> = ({ visitor, handleJoin, handleLeave, handleInvitation, handleEdit }) => (
+const ClanActions: FC<IClanActionsProps> = ({
+	visitor,
+	handleJoin,
+	handleLeave,
+	handleInvitation,
+	handleEdit,
+	handleDelete,
+}) => (
 	<div className={styles.clanActions}>
 		{visitor.isMember ? (
 			<Button className={clsx(ButtonClasses.blue, ButtonClasses.filled)} onClick={handleInvitation}>
@@ -17,9 +24,11 @@ const ClanActions: FC<IClanActionsProps> = ({ visitor, handleJoin, handleLeave, 
 			</Button>
 		)}
 		{visitor.isAdmin && (
-			<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)} onClick={handleEdit}>
-				Edit
-			</Button>
+			<>
+				<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)} onClick={handleEdit}>
+					Edit
+				</Button>
+			</>
 		)}
 		{visitor.isMember && (
 			<Button className={clsx(ButtonClasses.red, styles.leave)} onClick={handleLeave}>

@@ -15,6 +15,11 @@ import { Order } from 'helpers/table-helper';
 import { membersSorts } from './logic/config';
 import styles from './clan.module.scss';
 import clsx from 'clsx';
+import { addNotification } from 'services/notifications/notifications.service';
+import { NotificationTypes } from 'typings/common/INotification';
+import { v4 as uuid } from 'uuid';
+import { setNotificationState } from 'containers/notification/logic/actions';
+import { NotificationType } from 'containers/notification/logic/models';
 
 const Clan: React.FC = () => {
 	const dispatch = useDispatch();
@@ -33,9 +38,12 @@ const Clan: React.FC = () => {
 	} = useClanSelector();
 	const user: WebApi.Entities.IUser = useUserSelector() as WebApi.Entities.IUser;
 
+	const communityWithoutClan: any[] = community.filter((user) => user.clan === null);
+
 	const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
 	const [isInvitationOpen, setIsInvitationOpen] = useState<boolean>(false);
 	const [isLeaveOpen, setIsLeaveOpen] = useState<boolean>(false);
+	const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (id) {
@@ -81,14 +89,55 @@ const Clan: React.FC = () => {
 	);
 
 	const onInvite = useCallback(
-		async (toUserId: string) => {
-			sendIntitationLetter({ id: user.id }, { id: toUserId });
+		async (toUser: WebApi.Entities.IUser) => {
+			if (!clan) {
+				return;
+			}
+			sendIntitationLetter(user, toUser);
+			addNotification(
+				{
+					id: uuid(),
+					date: new Date(),
+					type: NotificationTypes.InviteToClan,
+					body: {
+						clan: {
+							id: clan.id ?? '',
+							name: clan.name ?? '',
+							avatar:
+								clan.avatar ??
+								'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg',
+						} as WebApi.Entities.IClan,
+						inviter: {
+							username: user.username,
+						} as WebApi.Entities.IUser,
+					},
+					read: false,
+				},
+				toUser.id,
+			);
+			dispatch(
+				setNotificationState({
+					state: {
+						notificationType: NotificationType.Success,
+						message: 'Invitation was sent',
+						title: 'Success',
+					},
+				}),
+			);
 		},
 		[user],
 	);
 
 	const handleInviteClick = async () => {
 		dispatch(actions.fetchCommunity({ userId: user.id }));
+	};
+
+	const handleMakeAdmin = (userId: string) => {
+		dispatch(actions.makeAdmin({ userId }));
+	};
+
+	const handleDeleteMember = (userId: string) => {
+		dispatch(actions.deleteMember({ id: userId }));
 	};
 
 	switch (status) {
@@ -113,11 +162,14 @@ const Clan: React.FC = () => {
 								filter: membersFilter,
 								setSort: (sort) => dispatch(actions.setMembersSort({ sort })),
 								setFilter: (filter) => dispatch(actions.setMembersFilter({ filter })),
+								viewer: user,
+								handleMakeAdmin,
+								handleDeleteMember,
 							}}
 							invitation={{
 								onInvite,
 								handleInviteClick,
-								community,
+								community: communityWithoutClan,
 							}}
 							modals={{
 								isEditOpen,
@@ -128,6 +180,8 @@ const Clan: React.FC = () => {
 								setIsLeaveOpen,
 								isEditLoading: editStatus === ClanPageStatus.LOADING,
 								isInvitationLoading: invitationStatus === ClanPageStatus.LOADING,
+								isDeleteOpen,
+								setIsDeleteOpen,
 							}}
 						/>
 					) : (

@@ -8,7 +8,16 @@ import { Order } from 'helpers/table-helper';
 import { MembersSortStrategy } from 'containers/clans/clan/logic/types';
 import styles from './members-list.module.scss';
 
-const MemberList: React.FC<IMembersListProps> = ({ data, sort, filter, setSort, setFilter }) => {
+const MemberList: React.FC<IMembersListProps> = ({
+	data,
+	sort,
+	filter,
+	setSort,
+	setFilter,
+	viewer,
+	handleMakeAdmin,
+	handleDeleteMember,
+}) => {
 	return (
 		<div className={styles.members}>
 			<Table className={styles.membersTable}>
@@ -25,6 +34,7 @@ const MemberList: React.FC<IMembersListProps> = ({ data, sort, filter, setSort, 
 								Position
 							</SortLabel>
 						</TableCell>
+						{viewer.profileClan?.role === 'admin' ? <TableCell component="th">Role</TableCell> : null}
 						<TableCell component="th">
 							<SortLabel
 								current={sort}
@@ -59,11 +69,18 @@ const MemberList: React.FC<IMembersListProps> = ({ data, sort, filter, setSort, 
 								Honor
 							</SortLabel>
 						</TableCell>
+						{viewer.profileClan?.role === 'admin' ? <TableCell component="th">Delete</TableCell> : null}
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{data.map((member, index) => (
-						<MemberItem member={member} key={index} />
+						<MemberItem
+							member={member}
+							key={index}
+							viewer={viewer}
+							handleMakeAdmin={handleMakeAdmin}
+							handleDeleteMember={handleDeleteMember}
+						/>
 					))}
 				</TableBody>
 			</Table>
