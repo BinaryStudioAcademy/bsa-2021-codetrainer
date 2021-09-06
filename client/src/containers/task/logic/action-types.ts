@@ -16,6 +16,15 @@ export const UNLOCK_SOLUTION = 'CHALLENGE:UNLOCK_SOLUTION';
 export const SET_IS_LOADING = 'CHALLENGE:SET_IS_LOADING';
 export const GET_STATS = 'CHALLENGE:GET_STATS';
 export const SET_STATS = 'CHALLENGE:SET_STATS';
+export const SKIP_TASK = 'CHALLENGE:SKIP_TASK';
+
+export type TSkipTask = {
+	taskId: string;
+	code: string;
+	testCases: string;
+	status?: SolutionStatus;
+	solutionId?: string;
+};
 
 export type TGetStats = {
 	id?: string;
@@ -55,11 +64,11 @@ export type TSetFollowing = {
 };
 
 export type TGetNextTask = {
-	taskId: string;
-	code: string;
-	testCases: string;
-	status?: SolutionStatus;
-	solutionId?: string;
+	// taskId: string;
+	// code: string;
+	// testCases: string;
+	// status?: SolutionStatus;
+	// solutionId?: string;
 };
 
 export type TSetNextTask = {

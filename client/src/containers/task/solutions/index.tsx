@@ -59,7 +59,6 @@ export const Solutions = () => {
 	);
 
 	const unlockSolution = () => {
-		console.log('unlock');
 		if (!task) {
 			return;
 		}
@@ -72,7 +71,6 @@ export const Solutions = () => {
 		};
 
 		dispatch(actions.unlockSolution(data));
-		dispatch(actions.getUserSolution({ taskId: task.id }));
 	};
 
 	if (isLoading) {
@@ -87,8 +85,10 @@ export const Solutions = () => {
 				filterNewest={filterNewest}
 				filterOldest={filterOldest}
 				isLocked={
-					userSolution?.solution?.status !== SolutionStatus.COMPLETED &&
-					userSolution?.solution?.status !== SolutionStatus.UNLOCKED
+					(!userSolution.solution ||
+						userSolution?.solution?.status === SolutionStatus.SKIPPED ||
+						userSolution?.solution?.status === SolutionStatus.NOT_COMPLETED) &&
+					task.user?.username !== user.username
 				}
 				unlockSolutions={unlockSolution}
 				solutions={task.solutions.filter(

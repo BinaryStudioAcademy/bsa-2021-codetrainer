@@ -137,6 +137,7 @@ declare namespace WebApi.Entities {
 
 	export interface IStats {
 		totalSkips: number;
+		usersTrained: number;
 	}
 }
 

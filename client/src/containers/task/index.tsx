@@ -69,7 +69,13 @@ export const TaskPageContainer = () => {
 	}, [activeTabId]);
 
 	const handleSkipClick = () => {
-		if (task) {
+		if (
+			userSolution.solution?.status === SolutionStatus.COMPLETED ||
+			userSolution.solution?.status === SolutionStatus.UNLOCKED ||
+			task?.user?.username === user?.username
+		) {
+			dispatch(actions.getNextTask());
+		} else if (task) {
 			const data = {
 				code: task.initialSolution,
 				testCases: task.exampleTestCases,
@@ -77,7 +83,8 @@ export const TaskPageContainer = () => {
 				solutionId: userSolution.solution?.id,
 				status: SolutionStatus.SKIPPED,
 			};
-			dispatch(actions.getNextTask(data));
+			dispatch(actions.skipTask(data));
+			dispatch(actions.getNextTask());
 		}
 	};
 

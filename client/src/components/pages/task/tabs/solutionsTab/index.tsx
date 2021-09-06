@@ -45,6 +45,7 @@ export const SolutionsTab = ({
 	const [activeShowMe, setActiveShowMe] = useState(ShowMe.AllSolutions);
 	const [activeSortBy, setActiveSortBy] = useState(SortBy.Newest);
 	const [solutionsToShow, setSolutionsToShow] = useState(task.solutions);
+	const [isAuthorSolutionOpened, setIsAuthorSolutionOpened] = useState(false);
 
 	useEffect(() => {
 		setSolutionsToShow(filterNewest(solutions));
@@ -83,6 +84,17 @@ export const SolutionsTab = ({
 				<>
 					{solutionsToShow.length ? (
 						<>
+							<Button
+								onClick={() => setIsAuthorSolutionOpened(!isAuthorSolutionOpened)}
+								className={clsx(ButtonClasses.blue, styles.skipButton, styles.showAuthorSolutionBtn)}
+							>
+								Show author&apos;s solution
+							</Button>
+							{isAuthorSolutionOpened && (
+								<div className={styles.authorSolution}>
+									<code>{task.initialSolution ? task.initialSolution : 'No solution given'}</code>
+								</div>
+							)}
 							<div className={styles.filters}>
 								<div className={styles.showMe}>
 									<span className={styles.label}>Show me:</span>
@@ -153,21 +165,37 @@ export const SolutionsTab = ({
 							</div>
 						</>
 					) : (
-						<div className={styles.authorSolution}>
-							<h3>Author&apos;s solution</h3>
-							<code>{task.initialSolution}</code>
-						</div>
+						<>
+							<Button
+								onClick={() => setIsAuthorSolutionOpened(!isAuthorSolutionOpened)}
+								className={clsx(ButtonClasses.blue, styles.skipButton, styles.showAuthorSolutionBtn)}
+							>
+								Show author&apos;s solution
+							</Button>
+							{isAuthorSolutionOpened && (
+								<div className={styles.authorSolution}>
+									<code>{task.initialSolution ? task.initialSolution : 'No solution given'}</code>
+								</div>
+							)}
+						</>
 					)}
 				</>
 			) : (
-				<Button
-					onClick={() => {
-						unlockSolutions();
-					}}
-					className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.unlockSolutionBtn)}
-				>
-					Unlock Solutions
-				</Button>
+				<>
+					<div className={styles.lockedSolutionsText}>
+						Since you have not yet solved this challenge we have hidden the solutions from you. If you
+						choose to view the solutions you will forfeit your eligibility to earn honor/rank progress for
+						this challenge.
+					</div>
+					<Button
+						onClick={() => {
+							unlockSolutions();
+						}}
+						className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.unlockSolutionBtn)}
+					>
+						Unlock Solutions
+					</Button>
+				</>
 			)}
 		</div>
 	);

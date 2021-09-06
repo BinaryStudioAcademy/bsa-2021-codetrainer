@@ -52,20 +52,26 @@ export function* fetchTasksWatcher() {
 	yield takeEvery(actionTypes.GET_TASKS, fetchTasksWorker);
 }
 
+export function* skipTaskWorker(action: ReturnType<typeof actions.skipTask>): any {
+	if (action.solutionId) {
+		yield call(() => patchSolution(action));
+	} else {
+		const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
+		yield call(() =>
+			patchSolution({
+				...action,
+				solutionId: solution.id,
+			}),
+		);
+	}
+}
+
+export function* skipTaskWatcher() {
+	yield takeEvery(actionTypes.SKIP_TASK, skipTaskWorker);
+}
+
 export function* fetchNextTaskWorker(action: ReturnType<typeof actions.getNextTask>): any {
 	try {
-		if (action.solutionId) {
-			yield call(() => patchSolution(action));
-		} else {
-			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
-			yield call(() =>
-				patchSolution({
-					...action,
-					solutionId: solution.id,
-				}),
-			);
-			yield call(() => patchSolution(action));
-		}
 		const { nextTask } = yield call(fetchNextTask);
 		yield put(actions.setNextTask({ nextTaskId: nextTask.id }));
 	} catch (error) {
@@ -109,13 +115,14 @@ export function* fetchFollowingWatcher() {
 
 export function* fetchUserSolutionWorker(action: ReturnType<typeof actions.getUserSolution>): any {
 	try {
-		// yield put(actions.setIsLoading({ isLoading: true }));
+		yield put(actions.setIsLoading({ isLoading: true }));
 		const { taskId } = action;
 		if (taskId) {
 			const userSolution = yield call(() => fetchUserSolution(taskId));
+			console.log(userSolution);
 			yield put(actions.setUserSolution(userSolution));
 		}
-		// yield put(actions.setIsLoading({ isLoading: false }));
+		yield put(actions.setIsLoading({ isLoading: false }));
 	} catch (error) {
 		setNotificationState({
 			state: {
@@ -132,6 +139,7 @@ export function* fetchUserSolutionWatcher() {
 
 export function* unlockSolutionWorker(action: ReturnType<typeof actions.unlockSolution>): any {
 	try {
+		console.log('unlock solution worker');
 		if (!action.solutionId) {
 			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
 			yield call(() =>
@@ -143,6 +151,7 @@ export function* unlockSolutionWorker(action: ReturnType<typeof actions.unlockSo
 		} else {
 			yield call(() => patchSolution(action));
 		}
+		yield put(actions.getUserSolution({ taskId: action.taskId }));
 	} catch (error) {
 		setNotificationState({
 			state: {
@@ -187,5 +196,6 @@ export default function* taskInfoSaga() {
 		fetchUserSolutionWatcher(),
 		unlockSolutionWatcher(),
 		fetchStatsWatcher(),
+		skipTaskWatcher(),
 	]);
 }

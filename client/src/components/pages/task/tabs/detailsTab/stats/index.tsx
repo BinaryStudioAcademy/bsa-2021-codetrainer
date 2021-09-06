@@ -18,7 +18,7 @@ export const Stats = ({ task, stats }: IStatsProps) => {
 				<Item item="Total stars" value={task.stars} />
 				<Item item="Published" value={moment(task.published).format('MMM Do YY')} />
 				<Item item="% of votes with a positive feedback rating" value={task.positiveFeedback} />
-				<Item item="Users Trained" value={task.usersTrained} />
+				<Item item="Users Trained" value={stats.usersTrained} />
 				<Item item='Total "Very Satisfied" votes' value={task.verySatisfied} />
 				<Item item="Total skips" value={stats.totalSkips || 0} />
 				<Item item='Total "Somewhat Satisfied" votes' value={task.somewhatSatisfied} />

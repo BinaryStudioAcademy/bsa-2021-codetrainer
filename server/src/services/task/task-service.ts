@@ -164,16 +164,20 @@ export class TaskService {
 		const repository = getCustomRepository(this.taskRepository);
 		// const solutionRepository = getCustomRepository(this.solutionRepository);
 
+		const task = await repository.getById(taskId);
 		const skippedTask = await repository
 			.createQueryBuilder('task')
 			.innerJoinAndSelect('task.solutions', 'solution')
-			.where('task.id = :id', { taskId })
-			.where('solution.status = :status', { status: SOLUTION_STATUS.SKIPPED })
-			.getCount();
+			.select(['task', 'solution'])
+			// .addSelect('Count(solution)', 'count')
+			.where('task.id = :id', { id: taskId })
+			.andWhere('solution.status = :status', { status: SOLUTION_STATUS.SKIPPED })
+			.getOne();
 
 		return {
 			stats: {
-				totalSkips: skippedTask
+				totalSkips: skippedTask?.solutions.length,
+				usersTrained: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED || solution.status === SOLUTION_STATUS.NOT_COMPLETED).length
 			}
 		}
 	}
