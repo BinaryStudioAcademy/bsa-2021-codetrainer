@@ -42,7 +42,10 @@ export const Solution = ({ solution }: ISolutionProps) => {
 				</Link>
 			</div>
 			<div className={styles.code}>
-				<SyntaxHighlighter language="Javascript" style={theme === ThemeType.Light ? lightTheme : darkTheme}>
+				<SyntaxHighlighter
+					language={solution.language}
+					style={theme === ThemeType.Light ? lightTheme : darkTheme}
+				>
 					{solution.code}
 				</SyntaxHighlighter>
 			</div>
