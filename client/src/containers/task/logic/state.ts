@@ -6,6 +6,13 @@ export interface ITaskInfoState {
 	similarTasks: WebApi.Entities.IChallenge[] | null;
 	nextTaskId: string | null;
 	following: WebApi.Entities.IUser[] | null;
+	comments: {
+		items: WebApi.Entities.ICommentTask[] | null;
+		options: {
+			page: number;
+			itemsPerPage: number;
+		};
+	};
 }
 
 export const initialState: ITaskInfoState = {
@@ -14,4 +21,11 @@ export const initialState: ITaskInfoState = {
 	similarTasks: null,
 	nextTaskId: null,
 	following: null,
+	comments: {
+		items: null,
+		options: {
+			page: 0,
+			itemsPerPage: 10,
+		},
+	},
 };

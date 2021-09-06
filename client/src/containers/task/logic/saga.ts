@@ -1,4 +1,4 @@
-import { all, put, takeEvery, call } from 'redux-saga/effects';
+import { all, put, takeEvery, call, select } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
@@ -7,6 +7,7 @@ import { NotificationType } from 'containers/notification/logic/models';
 import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
+import { fetchComments, postComment, deleteComment, editComment } from 'services/comment-task.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
@@ -97,6 +98,78 @@ export function* fetchFollowingWatcher() {
 	yield takeEvery(actionTypes.GET_FOLLOWING, fetchFollowingWorker);
 }
 
+export function* fetchCommentsWorker(action: ReturnType<typeof actions.getComments>): any {
+	try {
+		yield put(actions.incrementCommentsPage());
+
+		const options = yield select((state) => state.taskInfo.comments.options);
+		const taskId = yield select((state) => state.taskInfo.task.id);
+		const comments = yield call(fetchComments, { taskId, ...options });
+
+		console.log(comments);
+
+		yield put(actions.setComments({ comments }));
+	} catch (error) {}
+}
+
+export function* fetchCommentsWatcher() {
+	yield takeEvery(actionTypes.GET_COMMENTS, fetchCommentsWorker);
+}
+
+export function* postCommentWorker({ body }: ReturnType<typeof actions.postComment>): any {
+	try {
+		const taskId = yield select((state) => state.taskInfo.task.id);
+		const comment = yield call(postComment, taskId, body);
+
+		yield put(actions.addComments({ comments: [comment], before: true }));
+	} catch (error) {}
+}
+
+export function* postCommentWatcher() {
+	yield takeEvery(actionTypes.POST_COMMENT, postCommentWorker);
+}
+
+export function* editCommentWorker({ id, body }: ReturnType<typeof actions.editComment>): any {
+	try {
+		const editedComment = yield call(editComment, id, body);
+
+		const comments: Array<WebApi.Entities.ICommentTask> = yield select((state) => state.taskInfo.comments.items) ||
+			[];
+		const updatedComments = comments.map((comment) => (comment.id === id ? editedComment : comment));
+
+		yield put(actions.setComments({ comments: updatedComments }));
+	} catch (error) {}
+}
+
+export function* editCommentWatcher() {
+	yield takeEvery(actionTypes.EDIT_COMMENT, editCommentWorker);
+}
+
+export function* deleteCommentWorker({ id }: ReturnType<typeof actions.deleteComment>): any {
+	try {
+		yield call(deleteComment, id);
+
+		const comments: Array<WebApi.Entities.ICommentTask> = yield select((state) => state.taskInfo.comments.items) ||
+			[];
+		const updatedComments = comments.filter((comment) => comment.id !== id);
+
+		yield put(actions.setComments({ comments: updatedComments }));
+	} catch (error) {}
+}
+
+export function* deleteCommentWatcher() {
+	yield takeEvery(actionTypes.DELETE_COMMENT, deleteCommentWorker);
+}
+
 export default function* taskInfoSaga() {
-	yield all([fetchTaskWatcher(), fetchTasksWatcher(), fetchNextTaskWatcher(), fetchFollowingWatcher()]);
+	yield all([
+		fetchTaskWatcher(),
+		fetchTasksWatcher(),
+		fetchNextTaskWatcher(),
+		fetchFollowingWatcher(),
+		fetchCommentsWatcher(),
+		postCommentWatcher(),
+		editCommentWatcher(),
+		deleteCommentWatcher(),
+	]);
 }
