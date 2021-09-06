@@ -162,14 +162,12 @@ export class TaskService {
 
 	async getStats(taskId: string) {
 		const repository = getCustomRepository(this.taskRepository);
-		// const solutionRepository = getCustomRepository(this.solutionRepository);
 
 		const task = await repository.getById(taskId);
 		const skippedTask = await repository
 			.createQueryBuilder('task')
 			.innerJoinAndSelect('task.solutions', 'solution')
 			.select(['task', 'solution'])
-			// .addSelect('Count(solution)', 'count')
 			.where('task.id = :id', { id: taskId })
 			.andWhere('solution.status = :status', { status: SOLUTION_STATUS.SKIPPED })
 			.getOne();
