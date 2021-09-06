@@ -348,6 +348,14 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 		}
 	};
 	const handleValidateSolution = async () => {
+		dispatch(
+			setNotificationState({
+				state: {
+					notificationType: NotificationType.Info,
+					message: 'Validation of task created is in development now.',
+				},
+			}),
+		);
 		return true;
 	};
 	const handlePublish = async () => {
