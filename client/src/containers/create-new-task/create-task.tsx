@@ -381,7 +381,7 @@ Remember! Your solution in "Complete solution" should pass all these tests too!`
 						}),
 					);
 				} else {
-					createErrorMessage('Can`t be published');
+					createErrorMessage('Can`rt be published');
 				}
 			} else {
 				createErrorMessage('Your solution doesn`t fit the tests.');
@@ -521,9 +521,6 @@ describe("twoOldestAges", function() {
 					/>
 					<CreateTabs {...tabsInstructions} />
 					<div className={styles.validationButtons}>
-						<Button className={clsx(ButtonClasses.blue)} onClick={handleValidateSolution}>
-							Validate Solution
-						</Button>
 						<Button className={clsx(ButtonClasses.blue)} onClick={handleInsertExample}>
 							Insert Example
 						</Button>
