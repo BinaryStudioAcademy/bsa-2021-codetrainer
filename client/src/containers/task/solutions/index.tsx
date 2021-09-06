@@ -87,9 +87,7 @@ export const Solutions = () => {
 					task.user?.username !== user.username
 				}
 				unlockSolutions={unlockSolution}
-				solutions={task.solutions.filter(
-					(item) => item.status === SolutionStatus.COMPLETED || item.status === SolutionStatus.NOT_COMPLETED,
-				)}
+				solutions={task.solutions.filter((item) => item.status === SolutionStatus.COMPLETED)}
 			/>
 		);
 	}
