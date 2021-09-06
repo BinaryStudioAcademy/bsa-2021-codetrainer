@@ -1,4 +1,4 @@
-import { Button } from 'components';
+import { Button, Modal } from 'components';
 import { ButtonClasses } from 'components/basic/button';
 import React from 'react';
 import styles from './solutions-tab.module.scss';
@@ -34,13 +34,61 @@ export const SolutionsTab = ({ task, filterSolutionsByFollowing, filterNewest, f
 	const [activeShowMe, setActiveShowMe] = useState(ShowMe.AllSolutions);
 	const [activeSortBy, setActiveSortBy] = useState(SortBy.Newest);
 	const [solutionsToShow, setSolutionsToShow] = useState(task.solutions);
-
+	const [showSolutionModal, setShowSolutionModal] = useState<boolean>(false);
+	const [displaySolutions, setDisplaySolutions] = useState<boolean>(false);
 	useEffect(() => {
 		setSolutionsToShow(filterNewest(task.solutions));
 	}, [task.solutions]);
 
+	const modalBody = () => {
+		return (
+			<>
+				<p>
+					{`If you submit this action you will be allowed to look through other users' solutions to this task.
+			`}
+				</p>
+				<br />
+				<span>{`However, you won't be able to get honor and up your rank if you complete this task in future.`}</span>
+				<br />
+			</>
+		);
+	};
+
+	const modalFooter = () => {
+		return (
+			<>
+				<div style={{ display: 'flex', gap: '20px' }}>
+					<Button
+						className={clsx(ButtonClasses.blue)}
+						onClick={() => {
+							setDisplaySolutions(true);
+							setShowSolutionModal(false);
+						}}
+					>
+						{' '}
+						Submit{' '}
+					</Button>
+					<Button className={clsx(ButtonClasses.red)} onClick={() => setShowSolutionModal(false)}>
+						{' '}
+						Cancel{' '}
+					</Button>
+				</div>
+			</>
+		);
+	};
+
 	return (
 		<div className={styles.container}>
+			<Modal
+				isOpen={showSolutionModal}
+				setIsOpen={setShowSolutionModal}
+				elements={{
+					title: 'Do you really want to see solutions to this task?    ',
+					showCloseButton: true,
+					body: modalBody(),
+					footer: modalFooter(),
+				}}
+			/>
 			<div className={styles.filters}>
 				<div className={styles.showMe}>
 					<span className={styles.label}>Show me:</span>
@@ -122,18 +170,25 @@ export const SolutionsTab = ({ task, filterSolutionsByFollowing, filterNewest, f
 					) : (
 						<div className={styles.noInfoProvided}>No examples provided</div>
 					))}
+				<Button
+					onClick={() => setShowSolutionModal(true)}
+					className={clsx(ButtonClasses.red, styles.skipButton)}
+				>
+					Show task solutions
+				</Button>
 			</div>
-
-			<div className={styles.solutions}>
-				{solutionsToShow.map((item) => {
-					return (
-						<>
-							<Solution solution={item} key={item.id} />
-							<Divider />
-						</>
-					);
-				})}
-			</div>
+			{displaySolutions ? (
+				<div className={styles.solutions}>
+					{solutionsToShow.map((item) => {
+						return (
+							<>
+								<Solution solution={item} key={item.id} />
+								<Divider />
+							</>
+						);
+					})}
+				</div>
+			) : null}
 		</div>
 	);
 };
