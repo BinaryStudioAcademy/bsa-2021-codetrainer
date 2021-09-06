@@ -37,6 +37,7 @@ declare namespace WebApi.Entities {
 		position?: number;
 		following: any[];
 		followers: any[];
+		imageSource: string;
 	}
 
 	export interface IMember extends IUser {

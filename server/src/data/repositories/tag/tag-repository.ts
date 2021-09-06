@@ -9,6 +9,7 @@ export class TagRepository extends AbstractRepository<Tag> {
 			.leftJoinAndSelect('tag.tasks', 'tasks')
 			.select(['tag.name AS name'])
 			.addSelect('Count(tasks)', 'numberOfTasks')
+			.orderBy('name', 'ASC')
 			.groupBy('tag.id')
 			.getRawMany();
 	}
