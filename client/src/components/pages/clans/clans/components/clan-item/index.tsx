@@ -50,7 +50,7 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 				<Rank rank={clan.rank ?? 0} />
 			</StyledTableCell>
 			<StyledTableCell>
-				<Avatar avatar={clan.avatar} size={40} />
+				<Avatar avatar={clan.avatar} size={50} />
 			</StyledTableCell>
 			<StyledTableCell>
 				<Link to={`${ROUTES.Clan}/${clan?.id}`}>{clan.name}</Link>

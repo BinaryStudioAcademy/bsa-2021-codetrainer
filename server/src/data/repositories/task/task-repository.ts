@@ -34,7 +34,7 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 				query.andWhere(`task.status = :status`, { status: value });
 				break;
 			case SEARCH_KEYS.Query:
-				query.andWhere('task.name LIKE :q', { q: `%${value}%` });
+				query.andWhere('task.name ILIKE :q', { q: `%${typeof value === 'string' ? value.toLowerCase() : value}%` });
 				break;
 			case SEARCH_KEYS.RANK:
 				query.andWhere('task.rank = :rank', { rank: value });

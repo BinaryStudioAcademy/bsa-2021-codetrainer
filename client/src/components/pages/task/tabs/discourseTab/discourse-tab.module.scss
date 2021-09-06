@@ -1,0 +1,30 @@
+@import 'styles/variables';
+
+.container {
+	background: var(--container-color);
+	padding: 20px;
+}
+
+.comments {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 35px;
+}
+
+.commentEditButtons {
+	justify-content: center;
+	display: flex;
+	gap: 10px;
+}
+
+.commentEditor {
+	text-align: center;
+	width: 100%;
+	margin-bottom: 40px;
+
+	textarea {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+}

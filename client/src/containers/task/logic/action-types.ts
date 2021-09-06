@@ -10,6 +10,41 @@ export const SET_NEXT_TASK = 'CHALLENGE:SET_NEXT_TASK';
 export const GET_FOLLOWING = 'CHALLENGE:GET_FOLLOWING';
 export const SET_FOLLOWING = 'CHALLENGE:SET_FOLLOWING';
 
+export const GET_COMMENTS = 'CHALLENGE:GET_COMMENTS';
+export const SET_COMMENTS = 'CHALLENGE:SET_COMMENTS';
+export const ADD_COMMENTS = 'CHALLENGE:ADD_COMMENTS';
+export const POST_COMMENT = 'CHALLENGE:POST_COMMENT';
+export const EDIT_COMMENT = 'CHALLENGE:EDIT_COMMENT';
+export const DELETE_COMMENT = 'CHALLENGE:DELETE_COMMENT';
+export const INCREMENT_COMMENTS_PAGE = 'CHALLENGE:INCREMENT_COMMENTS_PAGE';
+export const SET_COMMENTS_PAGE = 'CHALLENGE:SET_COMMENTS_PAGE';
+
+export type TSetComments = {
+	comments: Array<WebApi.Entities.ICommentTask>;
+};
+
+export type TAddComments = {
+	comments: Array<WebApi.Entities.ICommentTask>;
+	before?: boolean;
+};
+
+export type TPostComment = {
+	body: string;
+};
+
+export type TEditComment = {
+	id: string;
+	body: string;
+};
+
+export type TDeleteComment = {
+	id: string;
+};
+
+export type TSetCommentsPage = {
+	page: number;
+};
+
 export type TGetFollowing = {
 	id?: string;
 };
