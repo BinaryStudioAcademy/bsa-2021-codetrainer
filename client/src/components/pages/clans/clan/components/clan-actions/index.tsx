@@ -28,9 +28,6 @@ const ClanActions: FC<IClanActionsProps> = ({
 				<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)} onClick={handleEdit}>
 					Edit
 				</Button>
-				<Button className={clsx(ButtonClasses.red, ButtonClasses.filled)} onClick={handleDelete}>
-					Delete
-				</Button>
 			</>
 		)}
 		{visitor.isMember && (

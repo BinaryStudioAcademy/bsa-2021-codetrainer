@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ProfileClanApiPath } from '../../common/enum/api/profile-clan-api-path';
+import adminPermissionMiddleware from '../../middleware/check/clan/clan-permission/admin-permission-middleware';
 import { ProfileClanService } from '../../services';
 
 export const initProfileClan = (appRouter: typeof Router, services: { profileClan: ProfileClanService }) => {
@@ -7,10 +8,10 @@ export const initProfileClan = (appRouter: typeof Router, services: { profileCla
 
 	const router = appRouter();
 
-	router.put(ProfileClanApiPath.TO_ONE_BY_ID, async (req, res, next) => {
+	router.put(ProfileClanApiPath.TO_ONE_BY_ID, adminPermissionMiddleware, async (req, res, next) => {
 		profileClanService
-			.updateRole(req.params.id,req.body.role)
-			.then((data)=>res.send(data))
+			.updateRole(req.params.id, req.body.role)
+			.then((data) => res.send(data))
 			.catch(next);
 	});
 

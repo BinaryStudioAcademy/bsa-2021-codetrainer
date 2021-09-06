@@ -108,7 +108,7 @@ const Clan: React.FC = () => {
 								'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg',
 						} as WebApi.Entities.IClan,
 						inviter: {
-							username: 'Alex',
+							username: user.username,
 						} as WebApi.Entities.IUser,
 					},
 					read: false,
