@@ -22,3 +22,5 @@ export const createClan = createAction<actionTypes.ICreateClanArgs>(actionTypes.
 export const updateClan = createAction<actionTypes.IUpdateClanArgs>(actionTypes.UPDATE_CLAN);
 export const deleteClan = createAction<void>(actionTypes.DELETE_CLAN);
 export const toggleClanMember = createAction<void>(actionTypes.TOGGLE_CLAN_MEMBER);
+export const deleteMember = createAction<actionTypes.IDeleteMember>(actionTypes.DELETE_MEMBER);
+export const makeAdmin = createAction<actionTypes.IMakeAdmin>(actionTypes.MAKE_ADMIN);

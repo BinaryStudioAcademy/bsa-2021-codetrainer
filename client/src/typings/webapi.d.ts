@@ -37,6 +37,7 @@ declare namespace WebApi.Entities {
 		position?: number;
 		following: any[];
 		followers: any[];
+		imageSource: string;
 	}
 
 	export interface IMember extends IUser {
@@ -132,6 +133,22 @@ declare namespace WebApi.Entities {
 		isPublished: boolean;
 		solutions: ISolution[];
 		tags: Array<ITag>;
+		user: {
+			name: string;
+			surname: string;
+			username: string;
+		};
+		comments: Array<ICommentTask>;
+	}
+
+	export interface ICommentTask {
+		id: string;
+		task: ITask;
+		user: IUser;
+		body: string;
+		createdAt: Date;
+		updatedAt: Date;
+		isLike: boolean;
 		user: IUser;
 	}
 

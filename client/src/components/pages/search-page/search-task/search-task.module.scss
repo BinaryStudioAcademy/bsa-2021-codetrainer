@@ -1,4 +1,4 @@
-@import 'styles/variables';
+@import "styles/variables";
 
 .header {
 	padding-left: 15px;
@@ -18,6 +18,8 @@
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
+	max-height: 200px;
+	overflow-y: scroll;
 }
 
 h6 {

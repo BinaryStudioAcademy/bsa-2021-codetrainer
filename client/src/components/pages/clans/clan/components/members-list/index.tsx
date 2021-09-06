@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableRow,
-} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import MemberItem from '../member-item';
 import SortLabel from '../sort-label';
 import SearchLabel from '../search-label';
@@ -20,6 +14,9 @@ const MemberList: React.FC<IMembersListProps> = ({
 	filter,
 	setSort,
 	setFilter,
+	viewer,
+	handleMakeAdmin,
+	handleDeleteMember,
 }) => {
 	return (
 		<div className={styles.members}>
@@ -35,8 +32,9 @@ const MemberList: React.FC<IMembersListProps> = ({
 								className={styles.centered}
 							>
 								Position
-							</SortLabel>	
+							</SortLabel>
 						</TableCell>
+						{viewer.profileClan?.role === 'admin' ? <TableCell component="th">Role</TableCell> : null}
 						<TableCell component="th">
 							<SortLabel
 								current={sort}
@@ -45,10 +43,7 @@ const MemberList: React.FC<IMembersListProps> = ({
 								setSortingStrategy={setSort}
 								className={styles.name}
 							>
-								<SearchLabel
-									value={filter?.name}
-									onChange={(name) => setFilter({ name })}
-								>
+								<SearchLabel value={filter?.name} onChange={(name) => setFilter({ name })}>
 									User
 								</SearchLabel>
 							</SortLabel>
@@ -74,11 +69,18 @@ const MemberList: React.FC<IMembersListProps> = ({
 								Honor
 							</SortLabel>
 						</TableCell>
+						{viewer.profileClan?.role === 'admin' ? <TableCell component="th">Delete</TableCell> : null}
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{data.map((member, index) => (
-						<MemberItem member={member} key={index}/>
+						<MemberItem
+							member={member}
+							key={index}
+							viewer={viewer}
+							handleMakeAdmin={handleMakeAdmin}
+							handleDeleteMember={handleDeleteMember}
+						/>
 					))}
 				</TableBody>
 			</Table>

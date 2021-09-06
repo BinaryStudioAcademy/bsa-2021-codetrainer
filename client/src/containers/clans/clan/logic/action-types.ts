@@ -18,6 +18,16 @@ export const CREATE_CLAN = 'CLAN:CREATE_CLAN';
 export const UPDATE_CLAN = 'CLAN:UPDATE_CLAN';
 export const DELETE_CLAN = 'CLAN:DELETE_CLAN';
 export const TOGGLE_CLAN_MEMBER = 'CLAN:TOGGLE_CLAN_MEMBER';
+export const DELETE_MEMBER = 'CLAN:DELETE_MEMBER';
+export const MAKE_ADMIN = 'CLAN:MAKE_ADMIN';
+
+export interface IDeleteMember {
+	id: string;
+}
+
+export interface IMakeAdmin {
+	userId: string;
+}
 
 export interface IFetchClanArgs {
 	id: string;

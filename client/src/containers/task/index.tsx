@@ -11,6 +11,7 @@ import * as actions from './logic/actions';
 import historyHelper from 'helpers/history.helper';
 import { Solutions } from './solutions';
 import { SolutionStatus } from 'typings/common/solution';
+import Discourse from './discourse';
 
 export const Tabs: Record<string, { id: number; name: string }> = {
 	details: { id: 0, name: 'Details' },
@@ -63,7 +64,7 @@ export const TaskPageContainer = () => {
 				return <Solutions />;
 			}
 			default: {
-				return <div>{activeTabId}</div>;
+				return <Discourse />;
 			}
 		}
 	}, [activeTabId]);

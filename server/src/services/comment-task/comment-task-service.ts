@@ -20,15 +20,24 @@ export class CommentTaskService {
 		return commentTask;
 	}
 
-	async create(commentTask: CommentTask) {
+	async create(task: Task, user: User, commentTask: CommentTask) {
 		const repository = getCustomRepository(this.commentTaskRepository);
 
 		const newCommentTask = await repository.save({
 			...commentTask,
+			task,
+			user,
 		});
-		return {
-			commentTask: newCommentTask,
-		};
+
+		return newCommentTask;
+	}
+
+	async update(id: string, updates: Partial<CommentTask>) {
+		const repository = getCustomRepository(this.commentTaskRepository);
+
+		const updatedCommentTask = await repository.updateById(id, updates);
+
+		return updatedCommentTask;
 	}
 
 	async remove(id: string) {

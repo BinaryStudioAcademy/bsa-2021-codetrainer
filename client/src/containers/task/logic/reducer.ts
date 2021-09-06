@@ -55,4 +55,48 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			stats: action.stats,
 		};
 	},
+	[actionTypes.SET_COMMENTS](state, { comments }: actionTypes.TSetComments) {
+		return {
+			...state,
+			comments: {
+				...state.comments,
+				items: comments,
+			},
+		};
+	},
+	[actionTypes.ADD_COMMENTS](state, { comments, before }: actionTypes.TAddComments) {
+		return {
+			...state,
+			comments: {
+				...state.comments,
+				items: before
+					? [...comments, ...(state.comments.items || [])]
+					: [...(state.comments.items || []), ...comments],
+			},
+		};
+	},
+	[actionTypes.INCREMENT_COMMENTS_PAGE](state, action) {
+		return {
+			...state,
+			comments: {
+				...state.comments,
+				options: {
+					...state.comments.options,
+					page: state.comments.options.page + 1,
+				},
+			},
+		};
+	},
+	[actionTypes.SET_COMMENTS_PAGE](state, { page }: actionTypes.TSetCommentsPage) {
+		return {
+			...state,
+			comments: {
+				...state.comments,
+				options: {
+					...state.comments.options,
+					page,
+				},
+			},
+		};
+	},
 });

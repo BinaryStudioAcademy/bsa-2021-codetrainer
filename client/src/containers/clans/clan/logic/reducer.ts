@@ -49,6 +49,6 @@ export const clanReducer = createReducer<IClanState>(initialState, {
 		return {
 			...state,
 			membersFilter: { ...state.membersFilter, ...filter },
-		}
-	}
+		};
+	},
 });

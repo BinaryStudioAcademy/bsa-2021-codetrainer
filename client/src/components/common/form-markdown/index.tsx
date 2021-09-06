@@ -48,16 +48,16 @@ const FormMarkdown: FC<IFormMarkdownProps> = ({
 							},
 							type: TaskTabTypes.MARKDOWN,
 							markdownContent: value,
-						}
+						},
 					]}
 					selectedTab={tab}
-					onChange={value => setFieldValue(name, value)}
+					onChange={(value) => setFieldValue(name, value)}
 					onSelectTab={setTab}
 				/>
 			</div>
 			{isTouched && error && <div className={styles.error}>{error}</div>}
 		</div>
 	);
-}
+};
 
 export default FormMarkdown;

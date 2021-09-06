@@ -17,3 +17,14 @@ export const setIsLoading = createAction<actionTypes.TSetIsLoading>(actionTypes.
 export const getStats = createAction<actionTypes.TGetStats>(actionTypes.GET_STATS);
 export const setStats = createAction<actionTypes.TSetStats>(actionTypes.SET_STATS);
 export const skipTask = createAction<actionTypes.TSkipTask>(actionTypes.SKIP_TASK);
+
+export const getComments = createAction(actionTypes.GET_COMMENTS);
+export const setComments = createAction<actionTypes.TSetComments>(actionTypes.SET_COMMENTS);
+export const addComments = createAction<actionTypes.TAddComments>(actionTypes.ADD_COMMENTS);
+
+export const postComment = createAction<actionTypes.TPostComment>(actionTypes.POST_COMMENT);
+export const editComment = createAction<actionTypes.TEditComment>(actionTypes.EDIT_COMMENT);
+export const deleteComment = createAction<actionTypes.TDeleteComment>(actionTypes.DELETE_COMMENT);
+
+export const incrementCommentsPage = createAction(actionTypes.INCREMENT_COMMENTS_PAGE);
+export const setCommentsPage = createAction<actionTypes.TSetCommentsPage>(actionTypes.SET_COMMENTS_PAGE);

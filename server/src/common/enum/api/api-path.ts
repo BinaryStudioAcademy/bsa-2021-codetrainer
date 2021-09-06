@@ -12,4 +12,5 @@ export const ApiPath = {
 	COMMENT_TASK: '/comment-task',
 	MAILER: '/mailer',
 	COMMENT_SOLUTION: '/comment-solution',
+	PROFILE_CLAN: '/profile-clan',
 };

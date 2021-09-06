@@ -17,6 +17,14 @@ export const SET_IS_LOADING = 'CHALLENGE:SET_IS_LOADING';
 export const GET_STATS = 'CHALLENGE:GET_STATS';
 export const SET_STATS = 'CHALLENGE:SET_STATS';
 export const SKIP_TASK = 'CHALLENGE:SKIP_TASK';
+export const GET_COMMENTS = 'CHALLENGE:GET_COMMENTS';
+export const SET_COMMENTS = 'CHALLENGE:SET_COMMENTS';
+export const ADD_COMMENTS = 'CHALLENGE:ADD_COMMENTS';
+export const POST_COMMENT = 'CHALLENGE:POST_COMMENT';
+export const EDIT_COMMENT = 'CHALLENGE:EDIT_COMMENT';
+export const DELETE_COMMENT = 'CHALLENGE:DELETE_COMMENT';
+export const INCREMENT_COMMENTS_PAGE = 'CHALLENGE:INCREMENT_COMMENTS_PAGE';
+export const SET_COMMENTS_PAGE = 'CHALLENGE:SET_COMMENTS_PAGE';
 
 export type TSkipTask = {
 	taskId: string;
@@ -28,6 +36,32 @@ export type TSkipTask = {
 
 export type TGetStats = {
 	id?: string;
+};
+
+export type TSetComments = {
+	comments: Array<WebApi.Entities.ICommentTask>;
+};
+
+export type TAddComments = {
+	comments: Array<WebApi.Entities.ICommentTask>;
+	before?: boolean;
+};
+
+export type TPostComment = {
+	body: string;
+};
+
+export type TEditComment = {
+	id: string;
+	body: string;
+};
+
+export type TDeleteComment = {
+	id: string;
+};
+
+export type TSetCommentsPage = {
+	page: number;
 };
 
 export type TSetStats = {

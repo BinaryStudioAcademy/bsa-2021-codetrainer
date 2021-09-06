@@ -2,14 +2,20 @@ import { Router } from 'express';
 import { REQ_TYPE } from '../../common';
 import { CommentTaskService } from '../../services';
 import { CommentTaskApiPath } from '../../common/enum/api/comment-task-api-path';
-import { dataValidationMiddleware, SchemasDataValidation } from '../../middleware';
+import {
+	authorPermissionMiddleware,
+	checkCommentTaskIdMiddleware,
+	checkTaskIdMiddleware,
+	dataValidationMiddleware,
+	SchemasDataValidation,
+} from '../../middleware';
 
 export const initCommentTask = (appRouter: typeof Router, services: { commentTask: CommentTaskService }) => {
 	const { commentTask: commentTaskService } = services;
 	const router = appRouter();
 
 	router
-		.get(CommentTaskApiPath.ALL, (req, res, next) =>
+		.get(CommentTaskApiPath.ALL, checkTaskIdMiddleware, (req, res, next) =>
 			commentTaskService
 				.getCommentTasksByTaskId(req.params.id, req.body)
 				.then((data) => res.send(data))
@@ -22,19 +28,31 @@ export const initCommentTask = (appRouter: typeof Router, services: { commentTas
 				.catch(next),
 		)
 		.post(
-			CommentTaskApiPath.ROOT,
+			CommentTaskApiPath.ALL,
+			checkTaskIdMiddleware,
 			dataValidationMiddleware(SchemasDataValidation.commentTaskFieldsSchema, REQ_TYPE.BODY),
 			(req, res, next) =>
 				commentTaskService
-					.create(req.body)
+					.create(req.task, req.user, req.body)
 					.then((data) => res.send(data))
 					.catch(next),
 		)
-		.delete(CommentTaskApiPath.ONE, (req, res, next) =>
+		.delete(CommentTaskApiPath.ONE, checkCommentTaskIdMiddleware, authorPermissionMiddleware, (req, res, next) =>
 			commentTaskService
 				.remove(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
+		)
+		.put(
+			CommentTaskApiPath.ONE,
+			checkCommentTaskIdMiddleware,
+			authorPermissionMiddleware,
+			dataValidationMiddleware(SchemasDataValidation.commentTaskFieldsSchema, REQ_TYPE.BODY),
+			(req, res, next) =>
+				commentTaskService
+					.update(req.params.id, req.body)
+					.then((data) => res.send(data))
+					.catch(next),
 		);
 
 	return router;

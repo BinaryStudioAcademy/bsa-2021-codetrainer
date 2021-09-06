@@ -26,30 +26,35 @@ const FormImage: FC<IFormImageProps> = ({
 	const error = getIn(errors, name);
 	const isTouched = getIn(touched, name);
 
-	const changeImage = useCallback(async (blob?: Blob) => {
-		if (!blocked) {
-			try {
-				setIsLoading(true);
-				if (blob) {
-					const href = await uploadImage(blob);
-					setFieldValue(name, href);
-				} else {
-					setFieldValue(name, null);
+	const changeImage = useCallback(
+		async (blob?: Blob) => {
+			if (!blocked) {
+				try {
+					setIsLoading(true);
+					if (blob) {
+						const href = await uploadImage(blob);
+						setFieldValue(name, href);
+					} else {
+						setFieldValue(name, null);
+					}
+				} catch (error) {
+					if (error instanceof Error) {
+						dispatch(
+							setNotificationState({
+								state: {
+									notificationType: NotificationType.Error,
+									message: error.message,
+								},
+							}),
+						);
+					}
+				} finally {
+					setIsLoading(false);
 				}
-			} catch (error) {
-				if (error instanceof Error) {
-					dispatch(setNotificationState({
-						state: {
-							notificationType: NotificationType.Error,
-							message: error.message,
-						}
-					}));
-				}
-			} finally {
-				setIsLoading(false);
 			}
-		}
-	}, [setFieldValue, blocked, ]);
+		},
+		[setFieldValue, blocked],
+	);
 
 	const cancelId = `${id}-cancel`;
 
@@ -58,8 +63,8 @@ const FormImage: FC<IFormImageProps> = ({
 			<input
 				id={id}
 				name={name}
-				onChange={({ target : { files } }) => {
-					changeImage(files && files[0] || undefined);
+				onChange={({ target: { files } }) => {
+					changeImage((files && files[0]) || undefined);
 				}}
 				type="file"
 				accept="image/png, image/jpeg"
@@ -75,31 +80,28 @@ const FormImage: FC<IFormImageProps> = ({
 			/>
 			<div className={styles.imageWrapper}>
 				<label htmlFor={id}>
-					<Image {...imageProps} src={image}/>
+					<Image {...imageProps} src={image} />
 				</label>
 			</div>
 			<div className={styles.labelWrapper}>
 				<label htmlFor={id} className={styles.label}>
 					{title}
-					{
-						!isLoading ? image && (
-							<label
-								htmlFor={cancelId}
-								className={styles.cancel}
-							>
+					{!isLoading ? (
+						image && (
+							<label htmlFor={cancelId} className={styles.cancel}>
 								<FontAwesomeIcon icon={faTimes} size="lg" />
 							</label>
-						) : (
-							<div className={styles.cancel}>
-								<Spinner size="20px" />
-							</div>
 						)
-					}
+					) : (
+						<div className={styles.cancel}>
+							<Spinner size="20px" />
+						</div>
+					)}
 				</label>
 			</div>
 			{isTouched && error && <div className={styles.error}>{error}</div>}
 		</div>
 	);
-}
+};
 
 export default FormImage;
