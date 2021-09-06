@@ -102,13 +102,13 @@ export function* fetchCommentsWorker(action: ReturnType<typeof actions.getCommen
 	try {
 		yield put(actions.incrementCommentsPage());
 
-		const options = yield select((state) => state.taskInfo.comments.options);
+		const { page, itemsPerPage } = yield select((state) => state.taskInfo.comments.options);
 		const taskId = yield select((state) => state.taskInfo.task.id);
-		const comments = yield call(fetchComments, { taskId, ...options });
+		const { comments, numberOfComments } = yield call(fetchComments, { taskId, page, itemsPerPage });
 
-		console.log(comments);
-
-		yield put(actions.setComments({ comments }));
+		yield put(actions.addComments({ comments, unique: true }));
+		yield put(actions.setNumberOfComments({ numberOfComments }));
+		yield put(actions.updatePagination());
 	} catch (error) {}
 }
 

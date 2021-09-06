@@ -15,11 +15,15 @@ interface IDiscourseTabProps {
 	postCommentHandler: (body: string) => void;
 	saveCommentHandler: (body: string) => void;
 	cancelEditingHandler: () => void;
+	loadMoreHandler: () => void;
+	hasNextPage: boolean;
 }
 
 const DiscourseTab: React.FC<IDiscourseTabProps> = ({
 	comments,
 	currentUser,
+	hasNextPage,
+	loadMoreHandler,
 	currentComment,
 	editCommentHandler,
 	saveCommentHandler,
@@ -72,6 +76,7 @@ const DiscourseTab: React.FC<IDiscourseTabProps> = ({
 				) : (
 					<p>No comments</p>
 				)}
+				{hasNextPage && <Button onClick={loadMoreHandler}>Load more</Button>}
 			</div>
 		</div>
 	);

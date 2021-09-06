@@ -43,14 +43,21 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			},
 		};
 	},
-	[actionTypes.ADD_COMMENTS](state, { comments, before }: actionTypes.TAddComments) {
+	[actionTypes.ADD_COMMENTS](state, { comments, before, unique }: actionTypes.TAddComments) {
+		const items = unique
+			? comments.filter(
+					(comment) =>
+						!Boolean(state.comments.items?.find((existingComment) => comment.id === existingComment.id)),
+			  )
+			: comments;
+
 		return {
 			...state,
 			comments: {
 				...state.comments,
 				items: before
-					? [...comments, ...(state.comments.items || [])]
-					: [...(state.comments.items || []), ...comments],
+					? [...items, ...(state.comments.items || [])]
+					: [...(state.comments.items || []), ...items],
 			},
 		};
 	},
@@ -74,6 +81,27 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 				options: {
 					...state.comments.options,
 					page,
+				},
+			},
+		};
+	},
+	[actionTypes.SET_NUMBER_OF_COMMENTS](state, { numberOfComments }: actionTypes.TSetNumberOfComments) {
+		return {
+			...state,
+			comments: {
+				...state.comments,
+				numberOfComments,
+			},
+		};
+	},
+	[actionTypes.UPDATE_PAGINATION](state, action) {
+		return {
+			...state,
+			comments: {
+				...state.comments,
+				options: {
+					...state.comments.options,
+					hasNextPage: state.comments.numberOfComments > Number(state.comments.items?.length),
 				},
 			},
 		};

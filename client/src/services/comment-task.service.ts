@@ -13,14 +13,14 @@ export const fetchComments = async ({
 	page,
 	itemsPerPage,
 	taskId,
-}: IFetchCommentArgs): Promise<WebApi.Entities.ICommentTask | Error> => {
+}: IFetchCommentArgs): Promise<{ comments: WebApi.Entities.ICommentTask; numberOfComments: number } | Error> => {
 	try {
 		const response = await http.callWebApi({
 			method: HttpMethods.GET,
 			endpoint: `${CommentTaskApiPath.ROOT}${taskId}`,
 			query: {
 				take: itemsPerPage,
-				skip: page * itemsPerPage,
+				skip: (page - 1) * itemsPerPage,
 			},
 		});
 
