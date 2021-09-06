@@ -63,14 +63,6 @@ export type TSetFollowing = {
 	following: WebApi.Entities.IUser[];
 };
 
-export type TGetNextTask = {
-	// taskId: string;
-	// code: string;
-	// testCases: string;
-	// status?: SolutionStatus;
-	// solutionId?: string;
-};
-
 export type TSetNextTask = {
 	nextTaskId: string;
 };

@@ -21,10 +21,6 @@ export const Solutions = () => {
 		dispatch(actions.getFollowing({ id: user?.id }));
 	}, [task]);
 
-	// useEffect(() => {
-	// 	dispatch(actions.getUserSolution({ taskId: task?.id }));
-	// }, [task, user]);
-
 	const filterSolutionsByFollowing = useCallback(
 		(solutions): WebApi.Entities.ISolution[] => {
 			const result: WebApi.Entities.ISolution[] = [];
