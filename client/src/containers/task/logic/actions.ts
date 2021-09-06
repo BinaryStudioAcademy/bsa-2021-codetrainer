@@ -14,3 +14,5 @@ export const getUserSolution = createAction<actionTypes.TGetUserSolution>(action
 export const setUserSolution = createAction<actionTypes.TSetUserSolution>(actionTypes.SET_USER_SOLUTION);
 export const unlockSolution = createAction<actionTypes.TUnlockSolution>(actionTypes.UNLOCK_SOLUTION);
 export const setIsLoading = createAction<actionTypes.TSetIsLoading>(actionTypes.SET_IS_LOADING);
+export const getStats = createAction<actionTypes.TGetStats>(actionTypes.GET_STATS);
+export const setStats = createAction<actionTypes.TSetStats>(actionTypes.SET_STATS);

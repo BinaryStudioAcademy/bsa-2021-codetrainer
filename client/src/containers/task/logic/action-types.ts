@@ -14,6 +14,16 @@ export const GET_USER_SOLUTION = 'CHALLENGE:GET_USER_SOLUTION';
 export const SET_USER_SOLUTION = 'CHALLENGE:SET_USER_SOLUTION';
 export const UNLOCK_SOLUTION = 'CHALLENGE:UNLOCK_SOLUTION';
 export const SET_IS_LOADING = 'CHALLENGE:SET_IS_LOADING';
+export const GET_STATS = 'CHALLENGE:GET_STATS';
+export const SET_STATS = 'CHALLENGE:SET_STATS';
+
+export type TGetStats = {
+	id?: string;
+};
+
+export type TSetStats = {
+	stats: WebApi.Entities.IStats;
+};
 
 export type TSetIsLoading = {
 	isLoading: boolean;

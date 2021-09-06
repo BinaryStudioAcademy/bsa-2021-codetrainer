@@ -59,6 +59,7 @@ export const Solutions = () => {
 	);
 
 	const unlockSolution = () => {
+		console.log('unlock');
 		if (!task) {
 			return;
 		}
@@ -90,7 +91,9 @@ export const Solutions = () => {
 					userSolution?.solution?.status !== SolutionStatus.UNLOCKED
 				}
 				unlockSolutions={unlockSolution}
-				solutions={task.solutions.filter((item) => item.status === SolutionStatus.COMPLETED)}
+				solutions={task.solutions.filter(
+					(item) => item.status === SolutionStatus.COMPLETED || item.status === SolutionStatus.NOT_COMPLETED,
+				)}
 			/>
 		);
 	}

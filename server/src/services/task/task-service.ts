@@ -159,4 +159,22 @@ export class TaskService {
 		const nextTask = await repository.searchNotUseTask(useTasks);
 		return { nextTask: nextTask ?? null };
 	}
+
+	async getStats(taskId: string) {
+		const repository = getCustomRepository(this.taskRepository);
+		// const solutionRepository = getCustomRepository(this.solutionRepository);
+
+		const skippedTask = await repository
+			.createQueryBuilder('task')
+			.innerJoinAndSelect('task.solutions', 'solution')
+			.where('task.id = :id', { taskId })
+			.where('solution.status = :status', { status: SOLUTION_STATUS.SKIPPED })
+			.getCount();
+
+		return {
+			stats: {
+				totalSkips: skippedTask
+			}
+		}
+	}
 }

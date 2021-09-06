@@ -11,6 +11,7 @@ export interface ITaskInfoState {
 		solution?: WebApi.Entities.ISolution | null;
 	};
 	isLoading: boolean;
+	stats: WebApi.Entities.IStats | null;
 }
 
 export const initialState: ITaskInfoState = {
@@ -24,4 +25,5 @@ export const initialState: ITaskInfoState = {
 		solution: null,
 	},
 	isLoading: false,
+	stats: null,
 };

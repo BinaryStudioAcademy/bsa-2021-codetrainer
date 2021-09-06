@@ -49,4 +49,10 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			isLoading: action.isLoading,
 		};
 	},
+	[actionTypes.SET_STATS](state, action: actionTypes.TSetStats) {
+		return {
+			...state,
+			stats: action.stats,
+		};
+	},
 });

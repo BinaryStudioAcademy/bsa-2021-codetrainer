@@ -134,6 +134,10 @@ declare namespace WebApi.Entities {
 		tags: Array<ITag>;
 		user: IUser;
 	}
+
+	export interface IStats {
+		totalSkips: number;
+	}
 }
 
 declare namespace WebApi.Types {

@@ -21,6 +21,11 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 				.then((data) => res.send(data))
 				.catch(next),
 		)
+		.get(TaskApiPath.STATS, (req, res, next) =>
+			taskService
+				.getStats(req.params.id)
+				.then((data) => res.send(data))
+				.catch(next))
 		.get(TaskApiPath.SEARCH, validationMiddleware([taskSearchSchema]), (req, res, next) =>
 			taskService
 				.search(req.validData, req.user)

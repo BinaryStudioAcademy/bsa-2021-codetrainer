@@ -80,80 +80,85 @@ export const SolutionsTab = ({
 			</div>
 
 			{!isLocked ? (
-				solutionsToShow.length ? (
-					<>
-						<div className={styles.filters}>
-							<div className={styles.showMe}>
-								<span className={styles.label}>Show me:</span>
-								<button
-									onClick={() => {
-										setActiveShowMe(ShowMe.AllSolutions);
-										setSolutionsToShow(solutions);
-									}}
-									className={clsx(
-										activeShowMe === ShowMe.AllSolutions && styles.membersSortPanelButtonActive,
-										styles.membersSortPanelButton,
-									)}
-								>
-									{ShowMe.AllSolutions}
-								</button>
-								<button
-									onClick={() => {
-										setActiveShowMe(ShowMe.SolutionsOfFollowing);
-										setSolutionsToShow(filterSolutionsByFollowing(solutionsToShow));
-									}}
-									className={clsx(
-										activeShowMe === ShowMe.SolutionsOfFollowing &&
-											styles.membersSortPanelButtonActive,
-										styles.membersSortPanelButton,
-									)}
-								>
-									{ShowMe.SolutionsOfFollowing}
-								</button>
+				<>
+					{solutionsToShow.length ? (
+						<>
+							<div className={styles.filters}>
+								<div className={styles.showMe}>
+									<span className={styles.label}>Show me:</span>
+									<button
+										onClick={() => {
+											setActiveShowMe(ShowMe.AllSolutions);
+											setSolutionsToShow(solutions);
+										}}
+										className={clsx(
+											activeShowMe === ShowMe.AllSolutions && styles.membersSortPanelButtonActive,
+											styles.membersSortPanelButton,
+										)}
+									>
+										{ShowMe.AllSolutions}
+									</button>
+									<button
+										onClick={() => {
+											setActiveShowMe(ShowMe.SolutionsOfFollowing);
+											setSolutionsToShow(filterSolutionsByFollowing(solutionsToShow));
+										}}
+										className={clsx(
+											activeShowMe === ShowMe.SolutionsOfFollowing &&
+												styles.membersSortPanelButtonActive,
+											styles.membersSortPanelButton,
+										)}
+									>
+										{ShowMe.SolutionsOfFollowing}
+									</button>
+								</div>
+								<div className={styles.sortBy}>
+									<span className={styles.label}>Sort by:</span>
+									<button
+										onClick={() => {
+											setActiveSortBy(SortBy.Newest);
+											setSolutionsToShow(filterNewest(solutionsToShow));
+										}}
+										className={clsx(
+											activeSortBy === SortBy.Newest && styles.membersSortPanelButtonActive,
+											styles.membersSortPanelButton,
+										)}
+									>
+										{SortBy.Newest}
+									</button>
+									<button
+										onClick={() => {
+											setActiveSortBy(SortBy.Oldest);
+											setSolutionsToShow(filterOldest(solutionsToShow));
+										}}
+										className={clsx(
+											activeSortBy === SortBy.Oldest && styles.membersSortPanelButtonActive,
+											styles.membersSortPanelButton,
+										)}
+									>
+										{SortBy.Oldest}
+									</button>
+								</div>
 							</div>
-							<div className={styles.sortBy}>
-								<span className={styles.label}>Sort by:</span>
-								<button
-									onClick={() => {
-										setActiveSortBy(SortBy.Newest);
-										setSolutionsToShow(filterNewest(solutionsToShow));
-									}}
-									className={clsx(
-										activeSortBy === SortBy.Newest && styles.membersSortPanelButtonActive,
-										styles.membersSortPanelButton,
-									)}
-								>
-									{SortBy.Newest}
-								</button>
-								<button
-									onClick={() => {
-										setActiveSortBy(SortBy.Oldest);
-										setSolutionsToShow(filterOldest(solutionsToShow));
-									}}
-									className={clsx(
-										activeSortBy === SortBy.Oldest && styles.membersSortPanelButtonActive,
-										styles.membersSortPanelButton,
-									)}
-								>
-									{SortBy.Oldest}
-								</button>
-							</div>
-						</div>
 
-						<div className={styles.solutions}>
-							{solutionsToShow.map((item) => {
-								return (
-									<>
-										<Solution solution={item} key={item.id} />
-										<Divider />
-									</>
-								);
-							})}
+							<div className={styles.solutions}>
+								{solutionsToShow.map((item) => {
+									return (
+										<>
+											<Solution solution={item} key={item.id} />
+											<Divider />
+										</>
+									);
+								})}
+							</div>
+						</>
+					) : (
+						<div className={styles.authorSolution}>
+							<h3>Author&apos;s solution</h3>
+							<code>{task.initialSolution}</code>
 						</div>
-					</>
-				) : (
-					'There are no solutions yet'
-				)
+					)}
+				</>
 			) : (
 				<Button
 					onClick={() => {

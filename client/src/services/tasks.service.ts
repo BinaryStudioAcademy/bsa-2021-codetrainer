@@ -27,3 +27,16 @@ export const fetchNextTask = async (): Promise<{ nextTask: WebApi.Entities.ITask
 		return error;
 	}
 };
+
+export const fetchStats = async (id: string): Promise<WebApi.Entities.IStats | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.GET,
+			endpoint: `${ApiRoutes.TASKS}${id}/stats`,
+		});
+
+		return response;
+	} catch (error) {
+		return error;
+	}
+};

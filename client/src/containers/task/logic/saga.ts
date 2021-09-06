@@ -8,7 +8,7 @@ import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
 import { fetchUserSolution, patchSolution, submitSolution } from 'services/solutions.service';
-import { fetchNextTask } from 'services/tasks.service';
+import { fetchNextTask, fetchStats } from 'services/tasks.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
@@ -109,13 +109,13 @@ export function* fetchFollowingWatcher() {
 
 export function* fetchUserSolutionWorker(action: ReturnType<typeof actions.getUserSolution>): any {
 	try {
-		yield put(actions.setIsLoading({ isLoading: true }));
+		// yield put(actions.setIsLoading({ isLoading: true }));
 		const { taskId } = action;
 		if (taskId) {
 			const userSolution = yield call(() => fetchUserSolution(taskId));
 			yield put(actions.setUserSolution(userSolution));
 		}
-		yield put(actions.setIsLoading({ isLoading: false }));
+		// yield put(actions.setIsLoading({ isLoading: false }));
 	} catch (error) {
 		setNotificationState({
 			state: {
@@ -157,6 +157,27 @@ export function* unlockSolutionWatcher() {
 	yield takeEvery(actionTypes.UNLOCK_SOLUTION, unlockSolutionWorker);
 }
 
+export function* fetchStatsWorker(action: ReturnType<typeof actions.getStats>): any {
+	try {
+		const { id } = action;
+		if (id) {
+			const { stats } = yield call(() => fetchStats(id));
+			yield put(actions.setStats({ stats }));
+		}
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: 'Cannot get task stats',
+			},
+		});
+	}
+}
+
+export function* fetchStatsWatcher() {
+	yield takeEvery(actionTypes.GET_STATS, fetchStatsWorker);
+}
+
 export default function* taskInfoSaga() {
 	yield all([
 		fetchTaskWatcher(),
@@ -165,5 +186,6 @@ export default function* taskInfoSaga() {
 		fetchFollowingWatcher(),
 		fetchUserSolutionWatcher(),
 		unlockSolutionWatcher(),
+		fetchStatsWatcher(),
 	]);
 }
