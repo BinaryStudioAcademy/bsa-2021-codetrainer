@@ -10,14 +10,16 @@ export class CommentTaskService {
 
 	async getCommentTasksByTaskId(id: string, { skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.commentTaskRepository);
-		const commentTask = await repository.getAllByTaskId(id, skip, take);
-		return commentTask;
+		const [comments, numberOfComments] = await repository.getAllByTaskId(id, skip, take);
+
+		return { comments, numberOfComments };
 	}
 
 	async getAllCommentTasks({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.commentTaskRepository);
-		const commentTask = await repository.getAll(skip, take);
-		return commentTask;
+		const comments = await repository.getAll(skip, take);
+
+		return comments;
 	}
 
 	async create(task: Task, user: User, commentTask: CommentTask) {
