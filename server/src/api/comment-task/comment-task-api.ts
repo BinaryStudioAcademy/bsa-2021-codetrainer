@@ -17,13 +17,13 @@ export const initCommentTask = (appRouter: typeof Router, services: { commentTas
 	router
 		.get(CommentTaskApiPath.ALL, checkTaskIdMiddleware, (req, res, next) =>
 			commentTaskService
-				.getCommentTasksByTaskId(req.params.id, req.body)
+				.getCommentTasksByTaskId(req.params.id, req.query)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
 		.get(CommentTaskApiPath.ROOT, (req, res, next) =>
 			commentTaskService
-				.getAllCommentTasks(req.body)
+				.getAllCommentTasks(req.query)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
