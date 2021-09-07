@@ -156,6 +156,7 @@ declare namespace WebApi.Entities {
 		totalSkips: number;
 		usersTrained: number;
 		totalUnlocked: number;
+		usersCompleted: number;
 	}
 }
 

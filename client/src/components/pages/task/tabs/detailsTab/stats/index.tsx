@@ -15,17 +15,18 @@ export const Stats = ({ task, stats }: IStatsProps) => {
 			<h3>Stats</h3>
 			<div className={styles.data}>
 				<Item item="Created" value={moment(task.createdAt).format('MMM Do YY')} />
-				<Item item="Total stars" value={task.stars} />
-				<Item item="Published" value={moment(task.published).format('MMM Do YY')} />
-				<Item item="% of votes with a positive feedback rating" value={task.positiveFeedback} />
-				<Item item="Users Trained" value={stats.usersTrained} />
-				<Item item="Total unlocked" value={stats.totalUnlocked} />
-				<Item item='Total "Very Satisfied" votes' value={task.verySatisfied} />
+				{/* <Item item="Total stars" value={task.stars} /> */}
+				{/* <Item item="Published" value={moment(task.published).format('MMM Do YY')} /> */}
+				{/* <Item item="% of votes with a positive feedback rating" value={task.positiveFeedback} /> */}
+				<Item item="Users Trained" value={stats.usersTrained || 0} />
+				<Item item="Total unlocked" value={stats.totalUnlocked || 0} />
+				{/* <Item item='Total "Very Satisfied" votes' value={task.verySatisfied} /> */}
 				<Item item="Total skips" value={stats.totalSkips || 0} />
-				<Item item='Total "Somewhat Satisfied" votes' value={task.somewhatSatisfied} />
-				<Item item="Code submissions" value={task.codeSubmissions} />
-				<Item item='Total "Not Satisfied" votes' value={task.notSatisfied} />
-				<Item item="Total Times Completed" value={task.timesCompleted} />
+				{/* <Item item='Total "Somewhat Satisfied" votes' value={task.somewhatSatisfied} /> */}
+				<Item item="Users completed" value={stats.usersCompleted || 0} />
+				{/* <Item item="Code submissions" value={task.codeSubmissions} /> */}
+				{/* <Item item='Total "Not Satisfied" votes' value={task.notSatisfied} /> */}
+				{/* <Item item="Total Times Completed" value={task.timesCompleted} /> */}
 			</div>
 		</div>
 	);

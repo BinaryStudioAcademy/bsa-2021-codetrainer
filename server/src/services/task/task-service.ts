@@ -176,7 +176,8 @@ export class TaskService {
 			stats: {
 				totalSkips: skippedTask?.solutions.length,
 				usersTrained: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED || solution.status === SOLUTION_STATUS.NOT_COMPLETED).length,
-				totalUnlocked: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.UNLOCKED).length
+				totalUnlocked: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.UNLOCKED).length,
+				usersCompleted: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED).length
 			}
 		}
 	}
