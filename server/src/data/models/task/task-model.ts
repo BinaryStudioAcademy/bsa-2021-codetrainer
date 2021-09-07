@@ -41,6 +41,9 @@ export class Task extends AbstractEntity {
 	@Column({ type: 'boolean', default: false })
 	isPublished!: boolean;
 
+	@Column({ type: 'boolean', default: false })
+	validateSolution!: boolean;
+
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
 

@@ -11,5 +11,6 @@ export const WHITE_ROUTES = [
 	`${ApiPath.AUTH}${ApiPath.GITHUB}${GithubApiPath.CALLBACK}${GithubApiPath.REGISTER}`,
 	`${ApiPath.AUTH}${AuthApiPath.FORGOT_PASSWORD}`,
 	`${ApiPath.AUTH}${AuthApiPath.RESET_PASSWORD}`,
-	`${ApiPath.TESTS}${TestApiPath.RESULT}`,
+	`${ApiPath.TESTS}${TestApiPath.RESULT_TASK}`,
+	`${ApiPath.TESTS}${TestApiPath.RESULT_SOLUTION}`,
 ];

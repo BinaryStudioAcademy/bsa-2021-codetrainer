@@ -15,3 +15,13 @@ export interface ISendToRabbit {
 	solutionId: string;
 	status: SOLUTION_STATUS;
 }
+
+export interface ITestResult {
+	result: { success: boolean; response?: { failure: Array<unknown>; passes: Array<unknown> }; error?: Error };
+	status?: SOLUTION_STATUS;
+	token: string;
+	userId: string;
+	solutionId?: string;
+	taskId: string;
+	typeTest: TypeTest;
+}

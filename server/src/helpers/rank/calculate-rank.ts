@@ -6,6 +6,7 @@ import {
 	userRankScore,
 	countOfRanks,
 	SOLUTION_STATUS,
+	TASK_STATUS,
 } from '../../common';
 
 class CalculateRank {
@@ -39,7 +40,7 @@ class CalculateRank {
 	}
 
 	check({ user, task, status }: { user?: User; task?: Task; status: SOLUTION_STATUS }) {
-		if (!user || !task || status !== SOLUTION_STATUS.COMPLETED) {
+		if (!user || !task || status !== SOLUTION_STATUS.COMPLETED || task.status === TASK_STATUS.DRAFT) {
 			return {};
 		}
 		return this[task.status](user, task.rank);
