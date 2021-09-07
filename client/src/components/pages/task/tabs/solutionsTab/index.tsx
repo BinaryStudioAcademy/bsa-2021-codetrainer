@@ -82,7 +82,7 @@ export const SolutionsTab = ({
 
 			{!isLocked ? (
 				<>
-					{solutionsToShow.length ? (
+					{solutions.length ? (
 						<>
 							<Button
 								onClick={() => setIsAuthorSolutionOpened(!isAuthorSolutionOpened)}
