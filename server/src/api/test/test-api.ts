@@ -25,11 +25,10 @@ export const initTest = (appRouter: typeof Router, services: { solution: Solutio
 	router.post(TestApiPath.RESULT_TASK, (req, res, next) =>
 		taskService
 			.setValidation(req.body)
-			.then(async ({ result, task, user, userId }) => {
+			.then(async ({ result, task, userId }) => {
 				req.io.to(sockets.get(userId) || '').emit(SOCKET_EVENTS.TASK_RESULT, {
 					result,
 					task,
-					user,
 				});
 				res.send({ message: 'ok' });
 			})
