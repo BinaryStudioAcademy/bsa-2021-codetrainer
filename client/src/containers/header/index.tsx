@@ -11,7 +11,6 @@ import { app } from 'containers/app/app';
 const Header: React.FC = () => {
 	const dispatch = useDispatch();
 	const { user } = useAppSelector((state) => state.auth.userData);
-	console.log(user);
 
 	const firestore = getFirestore(app);
 	const q = query(collection(firestore, 'notifications'), where('userId', '==', user?.id ?? ''));

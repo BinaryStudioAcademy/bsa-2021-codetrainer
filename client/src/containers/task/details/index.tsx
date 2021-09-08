@@ -11,7 +11,6 @@ export const Details = () => {
 	const task = useSelector((state: IRootState) => state.taskInfo.task);
 	const dispatch = useDispatch();
 	const similarTasks = useSelector((state: IRootState) => state.taskInfo.similarTasks);
-
 	useEffect(() => {
 		if (task) {
 			dispatch(actions.getTasks({ rank: task.rank, id: task.id }));

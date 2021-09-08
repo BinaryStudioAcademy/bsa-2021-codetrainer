@@ -50,7 +50,6 @@ export function* submitSolutionWorker(data: ReturnType<typeof actions.submitSolu
 		yield put(actions.setErrors({ errors: response?.message || 'unknown error' }));
 	} else {
 		yield put(actions.setSolution({ solution: response }));
-		console.log(response);
 	}
 }
 
