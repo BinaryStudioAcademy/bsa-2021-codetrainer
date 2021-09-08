@@ -123,6 +123,7 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
+				'user.rank',
 				'user.honor',
 				'user.username',
 				'user.avatar',
