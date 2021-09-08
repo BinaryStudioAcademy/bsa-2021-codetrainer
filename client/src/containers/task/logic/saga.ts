@@ -32,11 +32,6 @@ export function* fetchTaskWatcher() {
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
 		const { id } = action;
-		// const tasks = yield call(fetchTasks);
-		// const filteredTasks = tasks
-		// 	.filter((item: WebApi.Entities.IChallenge) => item.rank === rank && item.id !== id)
-		// 	.sort(() => 0.5 - Math.random())
-		// 	.slice(0, 2);
 		const tasks = yield call(() => fetchSimilarTasks(id));
 
 		yield put(actions.setTasks({ similarTasks: tasks }));
@@ -139,7 +134,6 @@ export function* fetchUserSolutionWatcher() {
 
 export function* unlockSolutionWorker(action: ReturnType<typeof actions.unlockSolution>): any {
 	try {
-		console.log('unlock solution worker');
 		if (!action.solutionId) {
 			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
 			yield call(() =>
@@ -194,8 +188,6 @@ export function* fetchCommentsWorker(action: ReturnType<typeof actions.getCommen
 		const options = yield select((state) => state.taskInfo.comments.options);
 		const taskId = yield select((state) => state.taskInfo.task.id);
 		const comments = yield call(fetchComments, { taskId, ...options });
-
-		console.log(comments);
 
 		yield put(actions.setComments({ comments }));
 	} catch (error) {}
