@@ -6,7 +6,7 @@ export const userFieldsSchema = joi.object({
 	username: joi.string().optional(),
 	avatar: joi.string().optional(),
 	lastVisit: joi.string().optional(),
-	skills: joi.array().items(joi.string()).default([]),
+	skills: joi.array().items(joi.string()).optional(),
 	devLevel: joi.string().optional(),
 	social: joi.array().items(joi.string()).optional(),
 	email: joi.string().email().optional(),
