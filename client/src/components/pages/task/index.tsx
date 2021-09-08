@@ -9,12 +9,23 @@ export interface ITaskProps {
 	getTabContent: () => React.ReactNode;
 	tabsRouterProps: ITabsRouterProps;
 	handleSkipClick: () => void;
+	updateTaskFavoriteStatus: (id: string) => void;
 }
 
-export const Task = ({ task, tabsRouterProps, getTabContent, handleSkipClick }: ITaskProps) => {
+export const Task = ({
+	task,
+	tabsRouterProps,
+	getTabContent,
+	handleSkipClick,
+	updateTaskFavoriteStatus,
+}: ITaskProps) => {
 	return (
 		<div className={styles.container}>
-			<TaskInfo handleSkipClick={handleSkipClick} challengeProps={task} />
+			<TaskInfo
+				handleSkipClick={handleSkipClick}
+				challengeProps={task}
+				updateTaskFavoriteStatus={updateTaskFavoriteStatus}
+			/>
 			<TabsRouter {...tabsRouterProps} />
 			{getTabContent()}
 		</div>

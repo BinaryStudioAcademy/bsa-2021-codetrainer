@@ -3,6 +3,7 @@ import { ProfileTasks as Tasks, ProfileTabWithSidebar } from 'components';
 import { IChallenge } from 'components/common/challenge/types';
 
 interface IProfileTasks {
+	updateTaskFavoriteStatus: (id: string) => void;
 	profileTasks: {
 		title: string;
 		id: string;
@@ -11,7 +12,7 @@ interface IProfileTasks {
 	}[];
 }
 
-export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
+export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks, updateTaskFavoriteStatus }) => {
 	const [activeId, setActiveId] = useState<string>(profileTasks[0].id);
 	const sideBar = useMemo(
 		() => profileTasks.map(({ title, id, tasks }) => ({ id, title, count: tasks?.length })),
@@ -28,7 +29,7 @@ export const ProfileTasks: React.FC<IProfileTasks> = ({ profileTasks }) => {
 				onClick: (id: string) => setActiveId(id),
 			}}
 		>
-			<Tasks tasks={tasks} emptyTasks={empty} />
+			<Tasks tasks={tasks} emptyTasks={empty} updateTaskFavoriteStatus={updateTaskFavoriteStatus} />
 		</ProfileTabWithSidebar>
 	);
 };

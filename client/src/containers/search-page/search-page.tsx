@@ -66,6 +66,10 @@ export const SearchPage: React.FC = () => {
 	if (isLoading) {
 		return <FullscreenLoader />;
 	}
+
+	const handleUpdateTaskFavoriteStatus = (id: string) => {
+		console.log('TASK to update:', id);
+	};
 	return (
 		<>
 			<SearchPageComponent
@@ -74,6 +78,7 @@ export const SearchPage: React.FC = () => {
 				onChange={handleChange}
 				onSubmit={handleSubmit}
 				onChangePage={handleChangePage}
+				updateTaskFavoriteStatus={handleUpdateTaskFavoriteStatus}
 			/>
 		</>
 	);

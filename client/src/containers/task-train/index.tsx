@@ -120,6 +120,10 @@ const TaskTrain: React.FC = () => {
 		history.push(ROUTES.Home);
 	}
 
+	const handleUpdateTaskFavoriteStatus = (id: string) => {
+		console.log('TASK TO UPDATE:', id);
+	};
+
 	return (
 		task && (
 			<TaskTrainPage
@@ -131,6 +135,7 @@ const TaskTrain: React.FC = () => {
 				onSubmit={handleSubmit}
 				onReset={handleReset}
 				onPatch={handlePatch}
+				updateTaskFavoriteStatus={handleUpdateTaskFavoriteStatus}
 			/>
 		)
 	);

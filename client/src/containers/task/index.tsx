@@ -62,6 +62,10 @@ export const TaskPageContainer = () => {
 		}
 	}, [activeTabId]);
 
+	const handleUpdateTaskFavoriteStatus = (id: string) => {
+		console.log('TASK TO UPDATE:', id);
+	};
+
 	const handleSkipClick = () => {
 		dispatch(actions.getNextTask({ id: task?.id }));
 	};
@@ -74,6 +78,7 @@ export const TaskPageContainer = () => {
 		const taskProps = mapDataToChallenges(task);
 		return (
 			<Task
+				updateTaskFavoriteStatus={handleUpdateTaskFavoriteStatus}
 				handleSkipClick={handleSkipClick}
 				task={taskProps}
 				getTabContent={getTabContent}

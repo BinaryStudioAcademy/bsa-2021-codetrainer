@@ -9,14 +9,15 @@ import { CollectionModal } from 'components/modals';
 const Challenge: React.FC<
 	IChallenge & {
 		showAddToCollection?: boolean;
+		updateTaskFavoriteStatus: (id: string) => void;
 	}
-> = ({ linkToTask, author, stats, title, rank, tags, showAddToCollection = true }) => {
+> = ({ id, linkToTask, author, stats, title, rank, tags, showAddToCollection = true, updateTaskFavoriteStatus }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	return (
 		<div className={styles.challenge}>
 			<ChallengeHeader title={title} rank={rank} linkToTask={linkToTask} />
-			<ChallengeStats stats={{ ...stats, author }} />
+			<ChallengeStats stats={{ ...stats, author }} updateTaskFavoriteStatus={updateTaskFavoriteStatus} id={id} />
 			{tags && Boolean(tags.length) ? <ChallengeTagsList tags={tags} /> : null}
 			{isOpen ? <CollectionModal isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
 			{showAddToCollection && (

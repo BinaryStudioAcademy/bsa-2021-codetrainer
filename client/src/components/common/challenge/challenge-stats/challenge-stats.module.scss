@@ -9,7 +9,7 @@
 		padding: 0;
 		margin: 0;
 		color: #8c8e91;
-		font: 12px 'Montserrat';
+		font: 12px "Montserrat";
 	}
 
 	&Icon {
@@ -17,6 +17,7 @@
 		opacity: 0.5;
 		margin-right: 3px;
 		vertical-align: middle;
+		cursor: pointer;
 	}
 
 	&Link {
@@ -28,7 +29,7 @@
 		position: relative;
 
 		&::after {
-			content: '';
+			content: "";
 			position: absolute;
 			top: 0;
 			bottom: 0;

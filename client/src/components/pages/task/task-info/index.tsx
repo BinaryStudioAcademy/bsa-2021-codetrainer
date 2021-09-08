@@ -10,14 +10,19 @@ import { IChallenge } from 'components/common/challenge/types';
 export interface ITaskInfoProps {
 	challengeProps: IChallenge;
 	handleSkipClick: () => void;
+	updateTaskFavoriteStatus: (id: string) => void;
 }
 
-export const TaskInfo = ({ challengeProps, handleSkipClick }: ITaskInfoProps) => {
+export const TaskInfo = ({ challengeProps, handleSkipClick, updateTaskFavoriteStatus }: ITaskInfoProps) => {
 	const history = useHistory();
 
 	return (
 		<div className={styles.taskInfo}>
-			<Challenge {...challengeProps} showAddToCollection={false} />
+			<Challenge
+				{...challengeProps}
+				showAddToCollection={false}
+				updateTaskFavoriteStatus={updateTaskFavoriteStatus}
+			/>
 			<div className={styles.buttonsBlock}>
 				<Button
 					className={clsx(ButtonClasses.red, ButtonClasses.filled)}

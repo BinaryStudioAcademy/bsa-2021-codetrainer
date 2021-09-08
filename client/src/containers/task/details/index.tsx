@@ -37,8 +37,12 @@ export const Details = () => {
 		};
 	});
 
+	const handleUpdateTaskFavoriteStatus = (id: string) => {
+		console.log('TASK TO UPDATE:', id);
+	};
+
 	if (task) {
-		return <DetailsTab task={task} tasks={tasks} />;
+		return <DetailsTab task={task} tasks={tasks} updateTaskFavoriteStatus={handleUpdateTaskFavoriteStatus} />;
 	}
 
 	return <FullscreenLoader />;

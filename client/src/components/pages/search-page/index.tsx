@@ -20,10 +20,11 @@ export interface ISearchPageProps {
 	onChange: (filter: Record<string, any>) => void;
 	onSubmit: () => void;
 	onChangePage: (isChange: boolean) => void;
+	updateTaskFavoriteStatus: (id: string) => void;
 }
 
 const SearchPage: React.FC<ISearchPageProps> = (props) => {
-	const { data, filter, onChange, onSubmit, onChangePage } = props;
+	const { data, filter, onChange, onSubmit, onChangePage, updateTaskFavoriteStatus } = props;
 	return (
 		<div className={styles.container}>
 			<div className={styles.searchPanel}>
@@ -39,7 +40,11 @@ const SearchPage: React.FC<ISearchPageProps> = (props) => {
 				/>
 			</div>
 			<div className={styles.challengesList}>
-				<ChallengesList count={data.count} challenges={data.challenges} />
+				<ChallengesList
+					count={data.count}
+					challenges={data.challenges}
+					updateTaskFavoriteStatus={updateTaskFavoriteStatus}
+				/>
 				{Boolean(data.count) && data.challenges.length < data.count ? (
 					<InView onChange={onChangePage} className={styles.challengesLoading}>
 						Loading...

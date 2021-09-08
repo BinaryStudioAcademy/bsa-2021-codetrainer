@@ -1,10 +1,14 @@
 export interface IChallengeStats {
-	favoriteSaves: number;
-	positiveFeedback: number;
-	author: {
-		firstName: string;
-		lastName: string;
-		username: string;
+	updateTaskFavoriteStatus: (id: string) => void;
+	id: string;
+	stats: {
+		favoriteSaves: number;
+		positiveFeedback: number;
+		author: {
+			firstName: string;
+			lastName: string;
+			username: string;
+		};
 	};
 }
 

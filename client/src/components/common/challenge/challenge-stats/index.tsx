@@ -6,15 +6,14 @@ import { faStar, faChartBar, faUser } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ROUTES } from 'constants/routes';
 
-const ChallengeStats: React.FC<{ stats: IChallengeStats }> = ({
-	stats: { favoriteSaves, positiveFeedback, author },
-}) => {
+const ChallengeStats: React.FC<IChallengeStats> = ({ stats, updateTaskFavoriteStatus, id }) => {
+	const { favoriteSaves, positiveFeedback, author } = stats;
 	return (
 		<div className={styles.challengeStats}>
 			<div className={styles.challengeStatsItem}>
 				<div className={styles.challengeStatsItemText}>
 					{/* @ts-ignore */}
-					<div className={styles.challengeStatsItemIcon}>
+					<div className={styles.challengeStatsItemIcon} onClick={() => updateTaskFavoriteStatus(id)}>
 						<FontAwesomeIcon icon={faStar} size="lg" color="var(--text-color)" />
 					</div>
 					{favoriteSaves} saved to favorites

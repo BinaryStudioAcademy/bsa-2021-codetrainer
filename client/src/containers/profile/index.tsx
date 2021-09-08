@@ -164,13 +164,23 @@ export const Profile = (props: RouteComponentProps) => {
 		},
 	];
 
+	const handleUpdateTaskFavoriteStatus = (id: string) => {
+		debugger;
+		console.log('TASK TO UPDATE:', id);
+	};
+
 	const getTabContent = useCallback((): React.ReactNode => {
 		switch (activeTabId) {
 			case ActiveTabId.Stats: {
 				return <Stats statsInfo={statsProps} />;
 			}
 			case ActiveTabId.Challenge: {
-				return <ProfileTasks profileTasks={profileTasks} />;
+				return (
+					<ProfileTasks
+						profileTasks={profileTasks}
+						updateTaskFavoriteStatus={handleUpdateTaskFavoriteStatus}
+					/>
+				);
 			}
 			case ActiveTabId.Solution: {
 				return <ProfileSolutions />;

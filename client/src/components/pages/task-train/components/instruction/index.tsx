@@ -10,9 +10,16 @@ interface IInstructionProps {
 	result: JSX.Element;
 	activeTab: number;
 	onChangeTab: (tab: number) => void;
+	updateTaskFavoriteStatus: (id: string) => void;
 }
 
-export const Instruction: React.FC<IInstructionProps> = ({ task, result, activeTab, onChangeTab }) => {
+export const Instruction: React.FC<IInstructionProps> = ({
+	task,
+	result,
+	activeTab,
+	onChangeTab,
+	updateTaskFavoriteStatus,
+}) => {
 	return (
 		<div className={styles.taskInstructionsContainer}>
 			<div className={styles.taskInstructionsHeader}>
@@ -42,6 +49,7 @@ export const Instruction: React.FC<IInstructionProps> = ({ task, result, activeT
 				</div>
 				<TagList tags={task.tags.map((tag) => tag.name)} />
 				<TaskStatistic
+					id={task.id}
 					stats={{
 						favoriteSaves: task.savedToFavorites,
 						positiveFeedback: task.positiveFeedback,
@@ -51,6 +59,7 @@ export const Instruction: React.FC<IInstructionProps> = ({ task, result, activeT
 							username: task.user?.username || '',
 						},
 					}}
+					updateTaskFavoriteStatus={updateTaskFavoriteStatus}
 				/>
 			</div>
 		</div>

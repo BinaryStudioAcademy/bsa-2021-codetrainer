@@ -24,6 +24,7 @@ interface ITaskTrainPageProps {
 	onSubmit: (code: string, test: string, typeTest: TypeTest) => void;
 	onReset: (reset: boolean) => void;
 	onPatch: (code: string, testCases: string, status: SolutionStatus) => void;
+	updateTaskFavoriteStatus: (id: string) => void;
 }
 
 const TaskTrainPage: React.FC<ITaskTrainPageProps> = (props) => {
