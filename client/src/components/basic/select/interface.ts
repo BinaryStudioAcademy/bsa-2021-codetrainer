@@ -1,4 +1,4 @@
-import { TSvgFC } from 'containers/create-new-task/logic/models';
+import { TSvgFC } from 'containers/create-new-task/data';
 
 export interface ISelectValue {
 	id: string | null;

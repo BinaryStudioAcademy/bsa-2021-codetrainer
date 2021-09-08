@@ -5,6 +5,7 @@ import { ISearchPageProps } from 'components/pages/search-page';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
 import { mapFilterToSearch, mapSearchData } from './mapSearchData';
+import { filterInitialState } from './logic/state';
 
 export const SearchPage: React.FC = () => {
 	const { isLoading, search, filter, onSubmit, changePage } = useAppSelector((state) => state.search);
@@ -13,10 +14,12 @@ export const SearchPage: React.FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setFilterForChangePage(filter);
+		setFilterForChangePage(filterInitialState);
+		dispatch(actions.searchSetData({ data: null }));
+		dispatch(actions.searchSetFilter({ filter: filterInitialState }));
 		dispatch(
 			actions.searchFetchData({
-				partialFilter: mapFilterToSearch(filter),
+				partialFilter: mapFilterToSearch(filterInitialState),
 			}),
 		);
 	}, []);

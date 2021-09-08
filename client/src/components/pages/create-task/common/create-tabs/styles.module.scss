@@ -2,7 +2,6 @@
 
 :local(.root) {
 	background: var(--container-color);
-	width: 595px;
 	height: 385px;
 	display: flex;
 	flex-flow: column nowrap;
@@ -49,6 +48,7 @@
 	}
 	& > *:last-child {
 		position: relative;
+		overflow: hidden;
 		background-color: var(--container-color);
 	}
 }
