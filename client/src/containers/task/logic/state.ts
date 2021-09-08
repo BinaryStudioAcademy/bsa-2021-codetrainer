@@ -7,10 +7,12 @@ export interface ITaskInfoState {
 	nextTaskId: string | null;
 	following: WebApi.Entities.IUser[] | null;
 	comments: {
+		numberOfComments: number;
 		items: WebApi.Entities.ICommentTask[] | null;
 		options: {
 			page: number;
 			itemsPerPage: number;
+			hasNextPage: boolean;
 		};
 	};
 }
@@ -22,10 +24,12 @@ export const initialState: ITaskInfoState = {
 	nextTaskId: null,
 	following: null,
 	comments: {
+		numberOfComments: 0,
 		items: null,
 		options: {
 			page: 0,
 			itemsPerPage: 10,
+			hasNextPage: true,
 		},
 	},
 };

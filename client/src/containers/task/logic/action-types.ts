@@ -18,6 +18,12 @@ export const EDIT_COMMENT = 'CHALLENGE:EDIT_COMMENT';
 export const DELETE_COMMENT = 'CHALLENGE:DELETE_COMMENT';
 export const INCREMENT_COMMENTS_PAGE = 'CHALLENGE:INCREMENT_COMMENTS_PAGE';
 export const SET_COMMENTS_PAGE = 'CHALLENGE:SET_COMMENTS_PAGE';
+export const UPDATE_PAGINATION = 'CHALLENGE:UPDATE_PAGINATION';
+export const SET_NUMBER_OF_COMMENTS = 'CHALLENGE:SET_NUMBER_OF_COMMENTS';
+
+export type TSetNumberOfComments = {
+	numberOfComments: number;
+};
 
 export type TSetComments = {
 	comments: Array<WebApi.Entities.ICommentTask>;
@@ -26,6 +32,7 @@ export type TSetComments = {
 export type TAddComments = {
 	comments: Array<WebApi.Entities.ICommentTask>;
 	before?: boolean;
+	unique?: boolean;
 };
 
 export type TPostComment = {

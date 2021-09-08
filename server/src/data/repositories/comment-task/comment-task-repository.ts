@@ -46,7 +46,7 @@ export class CommentTaskRepository extends AbstractRepository<CommentTask> {
 			.orderBy('comment_task.createdAt', 'DESC')
 			.skip(skip)
 			.take(take)
-			.getMany();
+			.getManyAndCount();
 	}
 
 	getById(id: string) {

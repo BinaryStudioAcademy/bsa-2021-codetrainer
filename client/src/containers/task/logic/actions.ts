@@ -21,3 +21,6 @@ export const deleteComment = createAction<actionTypes.TDeleteComment>(actionType
 
 export const incrementCommentsPage = createAction(actionTypes.INCREMENT_COMMENTS_PAGE);
 export const setCommentsPage = createAction<actionTypes.TSetCommentsPage>(actionTypes.SET_COMMENTS_PAGE);
+
+export const setNumberOfComments = createAction<actionTypes.TSetNumberOfComments>(actionTypes.SET_NUMBER_OF_COMMENTS);
+export const updatePagination = createAction(actionTypes.UPDATE_PAGINATION);

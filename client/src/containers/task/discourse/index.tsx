@@ -9,6 +9,7 @@ const Discourse = () => {
 	const dispatch = useDispatch();
 	const [currentComment, setCurrentComment] = useState<WebApi.Entities.ICommentTask | null>(null);
 	const comments = useAppSelector((state) => state.taskInfo.comments.items);
+	const hasNextPage = useAppSelector((state) => state.taskInfo.comments.options.hasNextPage);
 	const currentUser = useAppSelector((state) => state.auth.userData.user);
 
 	useEffect(() => {
@@ -38,6 +39,10 @@ const Discourse = () => {
 		setCurrentComment(null);
 	};
 
+	const loadMoreHandler = () => {
+		dispatch(actions.getComments());
+	};
+
 	return (
 		<DiscourseTab
 			editCommentHandler={editCommentHandler}
@@ -46,7 +51,9 @@ const Discourse = () => {
 			cancelEditingHandler={cancelEditingHandler}
 			postCommentHandler={postCommentHandler}
 			currentUser={currentUser}
+			loadMoreHandler={loadMoreHandler}
 			currentComment={currentComment}
+			hasNextPage={hasNextPage}
 			comments={comments}
 		/>
 	);
