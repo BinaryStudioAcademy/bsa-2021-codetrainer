@@ -62,6 +62,8 @@ declare namespace WebApi.Entities {
 		initialSolution: string;
 		contributors: IUser[];
 		solutions: ISolution[];
+		savedToFavorites: number;
+		positiveFeedback: number;
 	}
 
 	export interface ISolution extends IBaseEntity {

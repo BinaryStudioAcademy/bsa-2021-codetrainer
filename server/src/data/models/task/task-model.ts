@@ -55,6 +55,12 @@ export class Task extends AbstractEntity {
 	@JoinTable()
 	tags!: Tag[];
 
+	@Column({ default: 0 })
+	savedToFavorites!: number;
+
+	@Column({ default: 100 })
+	positiveFeedback!: number;
+
 	@OneToMany(() => User, (user) => user.contributions)
 	@JoinColumn()
 	contributors!: User[];
