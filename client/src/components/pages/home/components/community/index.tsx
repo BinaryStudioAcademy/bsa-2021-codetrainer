@@ -12,6 +12,7 @@ const Community: React.FC<ICommunityProps> = ({ users, isInClan, onCreateClan, i
 	const openModal = () => {
 		setIsOpen(true);
 	};
+	console.log(users);
 
 	return (
 		<div className={styles.community}>
