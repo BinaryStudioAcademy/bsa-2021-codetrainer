@@ -44,10 +44,12 @@ const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan 
 		}),
 	)(TableRow);
 
+	console.log(clan.rank);
+
 	return (
 		<StyledTableRow className={styles.clanRow}>
 			<StyledTableCell>
-				<Rank rank={clan.rank ?? 0} />
+				<Rank rank={clan.rank || 0} />
 			</StyledTableCell>
 			<StyledTableCell>
 				<Avatar avatar={clan.avatar} size={50} />

@@ -1,5 +1,13 @@
 @import 'styles/variables';
 
+.columnName {
+	color: var(--text-color);
+
+	* {
+		color: var(--text-color);
+	}
+}
+
 .clansList {
 	padding: 10px;
 }

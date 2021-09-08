@@ -22,6 +22,7 @@ import { Search } from '@material-ui/icons';
 import { Order } from 'helpers/table-helper';
 import columns from './columns.json';
 import { Spinner } from 'components/common';
+import styles from './clans-list.module.scss';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -116,13 +117,14 @@ const ClansList: React.FC<IClansListProps> = ({
 							{columns.map(({ id, label, isSortable, style }) =>
 								!isSortable ? (
 									<TableCell component="th" key={id} style={style}>
-										<strong>{label}</strong>
+										<strong className={styles.columnName}>{label}</strong>
 									</TableCell>
 								) : (
 									<TableCell
 										component="th"
 										style={style}
 										key={id}
+										className={styles.columnName}
 										sortDirection={orderBy === id ? order : false}
 									>
 										{id === 'name' && (
@@ -142,6 +144,7 @@ const ClansList: React.FC<IClansListProps> = ({
 													<Search />
 													{isNameFieldOpen && (
 														<TextField
+															className={styles.columnName}
 															value={searchName}
 															onChange={handleNameSearchChange}
 															type="search"
