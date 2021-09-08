@@ -200,6 +200,7 @@ const ClansList: React.FC<IClansListProps> = ({
 			<TablePagination
 				rowsPerPageOptions={[5, 10, 25]}
 				component="div"
+				className={styles.pagesPanel}
 				count={count}
 				rowsPerPage={itemsPerPage}
 				page={page}
