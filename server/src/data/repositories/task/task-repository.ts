@@ -30,9 +30,6 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 	}
 	Object.entries(where).forEach(([key, value]) => {
 		switch (key) {
-			case SEARCH_KEYS.STATUS:
-				query.andWhere(`task.status = :status`, { status: value });
-				break;
 			case SEARCH_KEYS.Query:
 				query.andWhere('task.name ILIKE :q', {
 					q: `%${typeof value === 'string' ? value.toLowerCase() : value}%`,
