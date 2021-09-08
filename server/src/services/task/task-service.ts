@@ -18,7 +18,7 @@ interface ISearch {
 	status?: string;
 	progress?: string;
 	rank?: number;
-	tags?: string;
+	tags?: { name: string }[];
 	page: number;
 }
 
@@ -106,14 +106,17 @@ export class TaskService {
 	}
 
 	async search(queryFilter: ISearch, user: User) {
-		const { sort, page, ...where } = queryFilter;
+		const { sort, page, tags, ...where } = queryFilter;
 		const repository = getCustomRepository(this.taskRepository);
 		const tagRepository = getCustomRepository(this.tagRepository);
 		return {
 			tags: await tagRepository.getAll(),
 			ranks: await repository.getRanks(),
 			...(await repository.search({
-				where,
+				where: {
+					...where,
+					...(tags ? { tags: tags.map(({ name }) => name) } : {}),
+				},
 				sort,
 				skip: page * TASKS_ON_PAGE,
 				take: TASKS_ON_PAGE,
