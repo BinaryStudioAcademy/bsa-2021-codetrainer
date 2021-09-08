@@ -1,13 +1,5 @@
 import { User, Task } from '../../data';
-import {
-	betaTaskScore,
-	userRankToTaskRank,
-	taskScore,
-	userRankScore,
-	countOfRanks,
-	SOLUTION_STATUS,
-	TASK_STATUS,
-} from '../../common';
+import { userRankToTaskRank, taskScore, userRankScore, countOfRanks, SOLUTION_STATUS, TASK_STATUS } from '../../common';
 
 class CalculateRank {
 	private getExtraPercent(userRank: number, taskRank: number): number {
@@ -43,17 +35,18 @@ class CalculateRank {
 		if (!user || !task || status !== SOLUTION_STATUS.COMPLETED || task.status === TASK_STATUS.DRAFT) {
 			return {};
 		}
-		return this[task.status](user, task.rank);
+		return this.approved(user, task.rank);
 	}
 
 	private approved(user: User, taskRank: number): { rank: number; honor: number } {
 		const extraPercent = this.getExtraPercent(user.rank, taskRank);
+		console.log('asd => ', taskScore[taskRank]);
 		return this.getUserData(user, taskScore[taskRank], extraPercent / 100 + 1);
 	}
 
-	private beta(user: User): { rank: number; honor: number } {
-		return this.getUserData(user, betaTaskScore);
-	}
+	// private beta(user: User): { rank: number; honor: number } {
+	// 	return this.getUserData(user, betaTaskScore);
+	// }
 }
 
 export const calculateRank = new CalculateRank();
