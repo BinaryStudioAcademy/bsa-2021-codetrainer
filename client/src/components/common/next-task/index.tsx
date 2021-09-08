@@ -15,6 +15,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 	handleTrainClick,
 	handleSkipClick,
 }) => {
+	console.log(focusValues);
 	return (
 		<article className={styles.wrapper}>
 			<div className={styles.selectingContainer}>

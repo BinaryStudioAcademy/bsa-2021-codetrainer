@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { NextTask } from 'components/common';
 import { ISelectValue } from 'components/basic/select/interface';
-import fundamentalsIcon from './assets/fundamentalsIcon.svg';
-import rankUpIcon from './assets/rankUpIcon.svg';
-import practiceAndRepeatIcon from './assets/practiceAndRepeatIcon.svg';
-import betaIcon from './assets/betaIcon.svg';
-import randomIcon from './assets/randomIcon.svg';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import TuneIcon from '@material-ui/icons/Tune';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import BugReportIcon from '@material-ui/icons/BugReport';
 import { FocusKeys } from 'constants/FocusKeys';
 import { useDispatch } from 'react-redux';
 import { getTasks } from '../home-page/logic/actions';
@@ -13,12 +13,12 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import historyHelper from 'helpers/history.helper';
 import { ROUTES } from 'constants/routes';
 
-const icons = {
-	Fundamentals: fundamentalsIcon,
-	'Rank Up': rankUpIcon,
-	'Practice and Repeat': practiceAndRepeatIcon,
-	Beta: betaIcon,
-	Random: randomIcon,
+const icons: Record<string, React.ElementType> = {
+	FUNDAMENTALS: LibraryBooksIcon,
+	RANK_UP: ArrowUpwardIcon,
+	BUG_FIXES: BugReportIcon,
+	ALGORITHMS: TuneIcon,
+	RANDOM: ShuffleIcon,
 };
 
 const NextTaskContainer = () => {
@@ -33,11 +33,11 @@ const NextTaskContainer = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const focusValues = Object.values(FocusKeys);
-		const selectFocusValues = focusValues.map((value, index) => ({
+		const focusValues = Object.entries(FocusKeys);
+		const selectFocusValues = focusValues.map(([key, value], index) => ({
 			id: index.toString(),
 			title: value,
-			icon: icons[value],
+			iconM: icons[key],
 		}));
 
 		setActiveFocusValue(selectFocusValues[0]);
