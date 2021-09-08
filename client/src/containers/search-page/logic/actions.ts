@@ -12,3 +12,4 @@ export const searchChangePage = createAction(actionTypes.SEARCH_CHANGE_PAGE);
 export const searchError = createAction<actionTypes.TSearchError>(actionTypes.SEARCH_ERROR);
 export const searchBeforeFetch = createAction(actionTypes.SEARCH_BEFORE_FETCH);
 export const searchSuccess = createAction(actionTypes.SEARCH_SUCCESS);
+export const searchSetFilter = createAction<actionTypes.TSearchSetFilter>(actionTypes.SEARCH_SET_FILTER);

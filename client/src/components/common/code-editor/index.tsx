@@ -37,7 +37,7 @@ export const CodeEditor: React.FC<ICodeEditor> = ({ onChange, code, editable }) 
 		<AceEditor
 			onFocus={handleFocus}
 			style={{
-				height: '330px',
+				height: '100%',
 				width: '100%',
 				background: 'var(--secondary-container-color)',
 			}}

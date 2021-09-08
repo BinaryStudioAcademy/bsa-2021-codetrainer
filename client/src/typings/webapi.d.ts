@@ -1,6 +1,7 @@
 import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
 import { TaskStatus } from './common/task';
 import { SolutionStatus } from './common/solution';
+import { Discipline } from 'containers/create-new-task/data';
 
 declare namespace WebApi.Entities {
 	export interface IExample {
@@ -112,7 +113,7 @@ declare namespace WebApi.Entities {
 		createdAt: Date;
 		updatedAt: Date;
 		name: string;
-		discipline: string;
+		discipline: Discipline;
 		rank: number;
 		allowContributors: boolean;
 		description: string;
@@ -129,6 +130,7 @@ declare namespace WebApi.Entities {
 			surname: string;
 			username: string;
 		};
+		validateSolution: boolean;
 		comments: Array<ICommentTask>;
 	}
 

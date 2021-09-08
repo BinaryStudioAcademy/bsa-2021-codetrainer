@@ -10,22 +10,12 @@ import {
 	checkStatusSolution,
 } from '../../helpers';
 import { rabbitConnect } from '../../config';
-import { ISendToRabbit, TypeTest } from '../../types/sendToRabbit';
+import { ISendToRabbit, TypeTest, ITestResult } from '../../types/sendToRabbit';
 
 interface IConstructor {
 	task: TTaskRepository;
 	user: TUserRepository;
 	solution: TSolutionRepository;
-}
-
-export interface ISolutionResult {
-	result: { success: boolean; response?: { failure: Array<unknown>; passes: Array<unknown> }; error?: Error };
-	status: SOLUTION_STATUS;
-	token: string;
-	userId: string;
-	solutionId: string;
-	taskId: string;
-	typeTest: TypeTest;
 }
 
 interface ICreateSolution {
@@ -170,7 +160,7 @@ export class SolutionService {
 		return { solution, nextTaskId: nextTask?.id ?? null };
 	}
 
-	async setResult({ token, status, ...data }: ISolutionResult) {
+	async setResult({ token, status, solutionId, ...data }: ITestResult) {
 		const { id } = verifyToken(token, TokenTypes.ACCESS);
 		if (id !== ENV.TESTING.NAME) {
 			throw new ValidationError(CODE_ERRORS.TESTING_NAME_INCORRECT);
@@ -183,12 +173,12 @@ export class SolutionService {
 		if (status !== SOLUTION_STATUS.UNLOCKED && data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
 			const statusSolution = checkStatusSolution(data.result.response);
 			const userData = calculateRank.check({ user, task, status: statusSolution });
-			await repository.updateById(data.solutionId, { status: statusSolution });
+			await repository.updateById(solutionId as string, { status: statusSolution });
 			await userRepository.updateById(data.userId, userData);
 			user = await userRepository.getById(data.userId);
 		}
 
-		const solution = await repository.getByKey(data.solutionId, 'id');
+		const solution = await repository.getByKey(solutionId as string, 'id');
 		return { ...data, solution, user };
 	}
 }

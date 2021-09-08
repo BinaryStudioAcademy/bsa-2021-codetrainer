@@ -1,6 +1,6 @@
 import { EntityRepository, SelectQueryBuilder, ObjectLiteral, IsNull, getRepository } from 'typeorm';
 import { AbstractRepository } from '../abstract';
-import { Solution, Task } from '../../models';
+import { Task } from '../../models';
 import { TASK_ORDER_BY, SEARCH_KEYS } from '../../../common';
 
 type IWhere = {
@@ -34,7 +34,9 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 				query.andWhere(`task.status = :status`, { status: value });
 				break;
 			case SEARCH_KEYS.Query:
-				query.andWhere('task.name ILIKE :q', { q: `%${typeof value === 'string' ? value.toLowerCase() : value}%` });
+				query.andWhere('task.name ILIKE :q', {
+					q: `%${typeof value === 'string' ? value.toLowerCase() : value}%`,
+				});
 				break;
 			case SEARCH_KEYS.RANK:
 				query.andWhere('task.rank = :rank', { rank: value });
@@ -81,7 +83,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.leftJoinAndSelect('task.tags', 'tag')
 			.leftJoinAndSelect('task.user', 'user')
 			.leftJoinAndSelect('task.contributors', 'contributors')
-			.select(['task', 'solution', 'solution_user', 'tag.id', 'tag.name', 'user', 'contributors'])
+			.select(['task', 'solution', 'solution_user', 'tag.id', 'tag.name', 'user.id', 'contributors'])
 			.where('task.id = :id', { id })
 			.getOne();
 	}
@@ -111,13 +113,22 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.getOne();
 	}
 
+	searchUserTask(userId: string) {
+		return this.createQueryBuilder('task')
+			.innerJoin('task.user', 'author')
+			.select(['task'])
+			.where('author.id = :userId', { userId })
+			.getMany();
+	}
+
 	async search(query: { where?: IWhere; sort?: TASK_ORDER_BY; userId: string; skip: number; take: number }) {
 		const searchQuery = filterQuery(
 			this.createQueryBuilder('task')
 				.leftJoinAndSelect('task.tags', 'tag')
 				.leftJoinAndSelect('task.solutions', 'solution')
 				.leftJoinAndSelect('solution.user', 'user')
-				.leftJoinAndSelect('task.user', 'author'),
+				.leftJoinAndSelect('task.user', 'author')
+				.where('task.is_published = :published', { published: true }),
 			query.userId,
 			query.where,
 		);

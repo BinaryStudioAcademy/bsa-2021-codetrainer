@@ -19,3 +19,4 @@ export { Task } from './task';
 export { DetailsTab } from './task/tabs/detailsTab';
 export { default as TaskTrainPage } from './task-train';
 export { default as LeaderBoardPage } from './leaderboard';
+export { ResultTest } from './task-train/components/result';

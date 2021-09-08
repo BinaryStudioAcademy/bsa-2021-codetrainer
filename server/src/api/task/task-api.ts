@@ -8,8 +8,10 @@ import {
 	checkTaskIdMiddleware,
 	taskSearchSchema,
 	taskWithSolutionsSchema,
+	taskValidationSchema,
 } from '../../middleware';
 import { TaskService } from '../../services';
+import { TypeTest } from '../../types';
 
 export const initTask = (appRouter: typeof Router, services: { task: TaskService }) => {
 	const { task: taskService } = services;
@@ -52,6 +54,28 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 				})
 				.then((data) => res.send(data))
 				.catch(next),
+		)
+		.get(TaskApiPath.USER_TASKS, (req, res, next) =>
+			taskService
+				.getUserTasks(req.user.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.get(TaskApiPath.TASK_PUBLISH, validationMiddleware([idSchema]), checkTaskIdMiddleware, (req, res, next) =>
+			taskService
+				.setPublish(req.task)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.get(
+			TaskApiPath.VALIDATION,
+			validationMiddleware([taskValidationSchema]),
+			checkTaskIdMiddleware,
+			(req, res, next) =>
+				taskService
+					.validation(req.user.id, req.task, req.query.type as TypeTest)
+					.then((data) => res.send(data))
+					.catch(next),
 		)
 		.put(TaskApiPath.$ID, validationMiddleware([idSchema, taskSchema]), checkTaskIdMiddleware, (req, res, next) => {
 			const { tags, ...restData } = req.validData;

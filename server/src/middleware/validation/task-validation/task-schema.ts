@@ -18,14 +18,6 @@ export const taskSchema = checkSchema({
 		optional: true,
 		notEmpty: true,
 	},
-	// languageId:{
-	// 	in: 'body',
-	// 	errorMessage: 'Wrong languageId format',
-	// 	trim: true,
-	// 	isString: true,
-	// 	optional: true,
-	// 	notEmpty: true,
-	// },
 	rank: {
 		in: 'body',
 		errorMessage: 'Wrong rank format',
@@ -40,14 +32,6 @@ export const taskSchema = checkSchema({
 	allowContributors: {
 		in: 'body',
 		errorMessage: 'Wrong allowContributors format',
-		trim: true,
-		isBoolean: true,
-		optional: true,
-		notEmpty: true,
-	},
-	isPublished: {
-		in: 'body',
-		errorMessage: 'Wrong isPublished format',
 		trim: true,
 		isBoolean: true,
 		optional: true,

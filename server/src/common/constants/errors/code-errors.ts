@@ -12,6 +12,7 @@ export const CODE_ERRORS = {
 	TOKEN_EXPIRED: { message: 'Token expired', status: 401 },
 	TOKEN_INVALID: { message: 'Invalid token', status: 401 },
 	TASK_QUERY: (value: string) => ({ message: `Invalid ${value} format`, status: HttpCodes.BAD_REQUEST }),
+	TASK_TYPE_VALIDATION: { message: 'Invalid type format', status: HttpCodes.BAD_REQUEST },
 	TAG_NAME_EXIT: (name: string) => ({
 		message: `Tag name: ${name} is already taken.`,
 		status: HttpCodes.BAD_REQUEST,

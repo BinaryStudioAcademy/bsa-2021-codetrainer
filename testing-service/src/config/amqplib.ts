@@ -1,4 +1,5 @@
 import { Channel, connect, Connection, ConsumeMessage } from 'amqplib';
+import { TestApiPath } from '../common/api';
 import { TypeTest } from '../common/constants';
 import { ENV } from '../common/env-enum';
 import { sendTestResult } from '../helpers/call-api';
@@ -37,7 +38,7 @@ class RabbitConnect {
 			this.channel.consume(ENV.AMQP.QUEUE, this.consume.bind(this), { noAck: false });
 		} catch (error) {
 			console.error(error);
-			throw new Error(error);
+			throw new Error((error as Error)?.message ?? 'unknown error');
 		}
 	}
 
@@ -56,7 +57,10 @@ class RabbitConnect {
 		const result = await this.handler(parseMessage);
 
 		this.channel.ack(message);
-		sendTestResult({ ...parseMessage, result });
+		sendTestResult(
+			{ ...parseMessage, result },
+			parseMessage.typeTest === TypeTest.TEST_TASK ? TestApiPath.RESULT_TASK : TestApiPath.RESULT_SOLUTION,
+		);
 	}
 
 	private async handler({ code, test }: { code: string; test: string }) {
