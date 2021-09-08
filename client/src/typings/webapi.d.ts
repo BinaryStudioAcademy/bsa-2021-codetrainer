@@ -58,22 +58,13 @@ declare namespace WebApi.Entities {
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
-		savedToFavorites: number;
-		positiveFeedback: number;
 		user: IUser | null;
 		createdAt: Date;
-		published: Date;
-		usersTrained: number;
-		skips: number;
 		initialSolution: string;
-		codeSubmissions: number;
-		timesCompleted: number;
-		stars: number;
-		verySatisfied: number;
-		somewhatSatisfied: number;
-		notSatisfied: number;
 		contributors: IUser[];
 		solutions: ISolution[];
+		savedToFavorites: number;
+		positiveFeedback: number;
 	}
 
 	export interface ISolution extends IBaseEntity {
@@ -152,6 +143,13 @@ declare namespace WebApi.Entities {
 		updatedAt: Date;
 		isLike: boolean;
 		user: IUser;
+	}
+
+	export interface IStats {
+		totalSkips: number;
+		usersTrained: number;
+		totalUnlocked: number;
+		usersCompleted: number;
 	}
 }
 

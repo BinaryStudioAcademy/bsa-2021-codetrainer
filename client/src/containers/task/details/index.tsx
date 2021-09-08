@@ -11,10 +11,16 @@ export const Details = () => {
 	const task = useSelector((state: IRootState) => state.taskInfo.task);
 	const dispatch = useDispatch();
 	const similarTasks = useSelector((state: IRootState) => state.taskInfo.similarTasks);
+	const stats = useSelector((state: IRootState) => state.taskInfo.stats);
+
 	useEffect(() => {
 		if (task) {
-			dispatch(actions.getTasks({ rank: task.rank, id: task.id }));
+			dispatch(actions.getTasks({ id: task.id }));
 		}
+	}, [task]);
+
+	useEffect(() => {
+		dispatch(actions.getStats({ id: task?.id }));
 	}, [task]);
 
 	const tasks = similarTasks?.map((task) => {
@@ -36,8 +42,8 @@ export const Details = () => {
 		};
 	});
 
-	if (task) {
-		return <DetailsTab task={task} tasks={tasks} />;
+	if (task && stats) {
+		return <DetailsTab task={task} tasks={tasks} stats={stats} />;
 	}
 
 	return <FullscreenLoader />;

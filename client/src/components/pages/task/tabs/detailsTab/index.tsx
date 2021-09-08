@@ -11,9 +11,10 @@ import { SimilarTasks } from './similar-tasks';
 export interface IDetailsTabProps {
 	task: WebApi.Entities.IChallenge;
 	tasks?: IChallenge[] | null;
+	stats: WebApi.Entities.IStats | null;
 }
 
-export const DetailsTab = ({ task, tasks }: IDetailsTabProps) => {
+export const DetailsTab = ({ task, tasks, stats }: IDetailsTabProps) => {
 	const contributors = [...task.contributors];
 
 	if (task.user) {
@@ -25,7 +26,7 @@ export const DetailsTab = ({ task, tasks }: IDetailsTabProps) => {
 			<Description description={task.description} exampleTestCases={task.exampleTestCases} />
 			<Contributors contributors={contributors} />
 			<SimilarTasks tasks={tasks} />
-			<Stats task={task} />
+			{stats ? <Stats task={task} stats={stats} /> : 'No statistics provided'}
 		</div>
 	);
 };

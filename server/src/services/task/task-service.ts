@@ -169,6 +169,34 @@ export class TaskService {
 		return { nextTask: nextTask ?? null };
 	}
 
+	async getStats(taskId: string) {
+		const repository = getCustomRepository(this.taskRepository);
+
+		const task = await repository.getById(taskId);
+
+		const skipped = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.SKIPPED);
+		const unlocked = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.UNLOCKED);
+		const completed = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED);
+		const notCompleted = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.NOT_COMPLETED);
+
+		return {
+			stats: {
+				totalSkips: skipped?.length || 0,
+				usersTrained: (completed?.length || 0) + (notCompleted?.length || 0),
+				totalUnlocked: unlocked?.length || 0,
+				usersCompleted: completed?.length || 0
+			}
+		}
+	}
+
+	async getSimilarTasks(id: string) {
+		const repository = getCustomRepository(this.taskRepository);
+		const task = await repository.getById(id);
+		const similarTasks = await repository.getSimilarTasks(id, task?.rank);
+
+		return similarTasks;
+	}
+
 	async validation(userId: string, task: Task, typeTest: TypeTest) {
 		const dataForRabbit: Partial<ISendToRabbit> = {
 			test: task.testCases,

@@ -34,6 +34,27 @@ export const taskInfoReducer = createReducer<ITaskInfoState>(initialState, {
 			following: action.following,
 		};
 	},
+	[actionTypes.SET_USER_SOLUTION](state, action: actionTypes.TSetUserSolution) {
+		return {
+			...state,
+			userSolution: {
+				nextTaskId: action.nextTaskId,
+				solution: action.solution,
+			},
+		};
+	},
+	[actionTypes.SET_IS_LOADING](state, action: actionTypes.TSetIsLoading) {
+		return {
+			...state,
+			isLoading: action.isLoading,
+		};
+	},
+	[actionTypes.SET_STATS](state, action: actionTypes.TSetStats) {
+		return {
+			...state,
+			stats: action.stats,
+		};
+	},
 	[actionTypes.SET_COMMENTS](state, { comments }: actionTypes.TSetComments) {
 		return {
 			...state,

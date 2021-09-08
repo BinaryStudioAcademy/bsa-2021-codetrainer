@@ -101,6 +101,18 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task').select('rank').distinct(true).getRawMany();
 	}
 
+	async getSimilarTasks(id: string, rank?: number) {
+		return this.createQueryBuilder('task')
+			.leftJoinAndSelect('task.tags', 'tags')
+			.leftJoinAndSelect('task.user', 'user')
+			.select(['task', 'tags', 'user'])
+			.where('task.id != :id', { id })
+			.andWhere('task.rank = :rank', { rank })
+			.orderBy('RANDOM()')
+			.limit(2)
+			.getMany();
+	}
+
 	async searchNotUseTask(taskIds: Array<string>) {
 		return this.createQueryBuilder('task')
 			.select(['task'])

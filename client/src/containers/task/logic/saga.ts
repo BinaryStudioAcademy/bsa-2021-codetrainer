@@ -4,9 +4,10 @@ import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
-import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
+import { fetchUserSolution, patchSolution, submitSolution } from 'services/solutions.service';
+import { fetchNextTask, fetchSimilarTasks, fetchStats } from 'services/tasks.service';
 import { fetchComments, postComment, deleteComment, editComment } from 'services/comment-task.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
@@ -32,14 +33,10 @@ export function* fetchTaskWatcher() {
 
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
-		const { rank, id } = action;
-		const tasks = yield call(fetchTasks);
-		const filteredTasks = tasks
-			.filter((item: WebApi.Entities.IChallenge) => item.rank === rank && item.id !== id)
-			.sort(() => 0.5 - Math.random())
-			.slice(0, 2);
+		const { id } = action;
+		const tasks = yield call(() => fetchSimilarTasks(id));
 
-		yield put(actions.setTasks({ similarTasks: filteredTasks }));
+		yield put(actions.setTasks({ similarTasks: tasks }));
 	} catch (error) {
 		yield put(
 			setNotificationState({
@@ -53,14 +50,28 @@ export function* fetchTasksWatcher() {
 	yield takeEvery(actionTypes.GET_TASKS, fetchTasksWorker);
 }
 
+export function* skipTaskWorker(action: ReturnType<typeof actions.skipTask>): any {
+	if (action.solutionId) {
+		yield call(() => patchSolution(action));
+	} else {
+		const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
+		yield call(() =>
+			patchSolution({
+				...action,
+				solutionId: solution.id,
+			}),
+		);
+	}
+}
+
+export function* skipTaskWatcher() {
+	yield takeEvery(actionTypes.SKIP_TASK, skipTaskWorker);
+}
+
 export function* fetchNextTaskWorker(action: ReturnType<typeof actions.getNextTask>): any {
 	try {
-		const { id } = action;
-		const tasks = yield call(fetchTasks);
-		const filteredTasks = tasks.filter((item: WebApi.Entities.IChallenge) => item.id !== id);
-		yield put(
-			actions.setNextTask({ nextTaskId: filteredTasks[Math.floor(Math.random() * filteredTasks.length)].id }),
-		);
+		const { nextTask } = yield call(fetchNextTask);
+		yield put(actions.setNextTask({ nextTaskId: nextTask.id }));
 	} catch (error) {
 		yield put(
 			setNotificationState({
@@ -98,6 +109,78 @@ export function* fetchFollowingWorker(action: ReturnType<typeof actions.getFollo
 
 export function* fetchFollowingWatcher() {
 	yield takeEvery(actionTypes.GET_FOLLOWING, fetchFollowingWorker);
+}
+
+export function* fetchUserSolutionWorker(action: ReturnType<typeof actions.getUserSolution>): any {
+	try {
+		yield put(actions.setIsLoading({ isLoading: true }));
+		const { taskId } = action;
+		if (taskId) {
+			const userSolution = yield call(() => fetchUserSolution(taskId));
+			yield put(actions.setUserSolution(userSolution));
+		}
+		yield put(actions.setIsLoading({ isLoading: false }));
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: "Cannot find user's solution",
+			},
+		});
+	}
+}
+
+export function* fetchUserSolutionWatcher() {
+	yield takeEvery(actionTypes.GET_USER_SOLUTION, fetchUserSolutionWorker);
+}
+
+export function* unlockSolutionWorker(action: ReturnType<typeof actions.unlockSolution>): any {
+	try {
+		if (!action.solutionId) {
+			const solution = yield call({ context: submitSolution, fn: submitSolution }, action);
+			yield call(() =>
+				patchSolution({
+					...action,
+					solutionId: solution.id,
+				}),
+			);
+		} else {
+			yield call(() => patchSolution(action));
+		}
+		yield put(actions.getUserSolution({ taskId: action.taskId }));
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: 'Cannot unlock solution',
+			},
+		});
+	}
+}
+
+export function* unlockSolutionWatcher() {
+	yield takeEvery(actionTypes.UNLOCK_SOLUTION, unlockSolutionWorker);
+}
+
+export function* fetchStatsWorker(action: ReturnType<typeof actions.getStats>): any {
+	try {
+		const { id } = action;
+		if (id) {
+			const { stats } = yield call(() => fetchStats(id));
+			yield put(actions.setStats({ stats }));
+		}
+	} catch (error) {
+		setNotificationState({
+			state: {
+				notificationType: NotificationType.Error,
+				message: 'Cannot get task stats',
+			},
+		});
+	}
+}
+
+export function* fetchStatsWatcher() {
+	yield takeEvery(actionTypes.GET_STATS, fetchStatsWorker);
 }
 
 export function* fetchCommentsWorker(action: ReturnType<typeof actions.getComments>): any {
@@ -167,6 +250,10 @@ export default function* taskInfoSaga() {
 		fetchTasksWatcher(),
 		fetchNextTaskWatcher(),
 		fetchFollowingWatcher(),
+		fetchUserSolutionWatcher(),
+		unlockSolutionWatcher(),
+		fetchStatsWatcher(),
+		skipTaskWatcher(),
 		fetchCommentsWatcher(),
 		postCommentWatcher(),
 		editCommentWatcher(),
