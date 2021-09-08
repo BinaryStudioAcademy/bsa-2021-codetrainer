@@ -13,6 +13,12 @@ class CalculateRank {
 	}
 
 	private getUserData(user: User, taskPoint: number, extraPercent: number = 1) {
+		if (user.rank > countOfRanks || user.rank < 1) {
+			return {
+				honor: 0,
+				rank: countOfRanks,
+			};
+		}
 		const rankScore = Object.values(userRankScore).sort((a, b) => a - b);
 		const getUserPoint = Math.round(taskPoint * extraPercent);
 		const userTotalHonor =
@@ -40,7 +46,6 @@ class CalculateRank {
 
 	private approved(user: User, taskRank: number): { rank: number; honor: number } {
 		const extraPercent = this.getExtraPercent(user.rank, taskRank);
-		console.log('asd => ', taskScore[taskRank]);
 		return this.getUserData(user, taskScore[taskRank], extraPercent / 100 + 1);
 	}
 
