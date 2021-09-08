@@ -11,6 +11,7 @@ import { app } from 'containers/app/app';
 const Header: React.FC = () => {
 	const dispatch = useDispatch();
 	const { user } = useAppSelector((state) => state.auth.userData);
+
 	const firestore = getFirestore(app);
 	const q = query(collection(firestore, 'notifications'), where('userId', '==', user?.id ?? ''));
 	const { notifications: unorderedNotifications } = useHeaderSelector();
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
 
 	const headerProps: IHeaderProps = {
 		name: `${user?.name} ${user?.surname}`,
-		rank: user?.rank || 0,
+		rank: user?.rank || 9,
 		notifications: Array.from(unorderedNotifications?.values()).sort((a, b) => +b.date - +a.date),
 		honor: user?.honor ?? 0,
 		listItems: getListItems(),

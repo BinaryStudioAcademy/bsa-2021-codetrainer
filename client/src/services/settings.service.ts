@@ -22,7 +22,6 @@ export const deleteUser = async (id: string) => {
 
 export const updatePassword = async (body: any) => {
 	const { id, password, newPassword } = body;
-	console.log('body', body);
 	await http.callWebApi({
 		method: HttpMethods.PUT,
 		endpoint: `users/${id}/password`,
