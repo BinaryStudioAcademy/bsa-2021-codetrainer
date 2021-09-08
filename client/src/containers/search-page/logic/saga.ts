@@ -11,7 +11,8 @@ export function* fetchSearch({ partialFilter }: ReturnType<typeof actions.search
 		yield put(actions.searchSuccess());
 		yield put(actions.searchSetData({ data }));
 	} catch (error) {
-		yield put(actions.searchError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));
+		const err = error as Error;
+		yield put(actions.searchError({ payload: err?.message ?? 'unknown error' }));
 	}
 }
 
@@ -22,7 +23,8 @@ export function* fetchSearchNextPage({ partialFilter }: ReturnType<typeof action
 		yield put(actions.searchSuccess());
 		yield put(actions.searchAddDataNextPage({ data }));
 	} catch (error) {
-		yield put(actions.searchError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));
+		const err = error as Error;
+		yield put(actions.searchError({ payload: err?.message ?? 'unknown error' }));
 	}
 }
 
