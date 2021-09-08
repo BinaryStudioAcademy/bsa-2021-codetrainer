@@ -23,7 +23,6 @@ export const taskInitialState: Partial<WebApi.Entities.ITask> = {
 	name: '',
 	tags: [],
 	rank: NUMBER_OF_RANKS,
-	allowContributors: false,
 };
 
 export const initialState: ICreateTaskState = {
