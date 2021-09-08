@@ -4,11 +4,10 @@ import * as actions from './actions';
 import { getTaskById } from 'services/task/task.service';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
-import { fetchTasks } from 'services/home-page.service';
 import { WebApi } from 'typings/webapi';
 import { fetchFollowing } from 'services/followers.service';
 import { fetchUserSolution, patchSolution, submitSolution } from 'services/solutions.service';
-import { fetchNextTask, fetchStats } from 'services/tasks.service';
+import { fetchNextTask, fetchSimilarTasks, fetchStats } from 'services/tasks.service';
 import { fetchComments, postComment, deleteComment, editComment } from 'services/comment-task.service';
 
 export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): any {
@@ -32,14 +31,15 @@ export function* fetchTaskWatcher() {
 
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTask>): any {
 	try {
-		const { rank, id } = action;
-		const tasks = yield call(fetchTasks);
-		const filteredTasks = tasks
-			.filter((item: WebApi.Entities.IChallenge) => item.rank === rank && item.id !== id)
-			.sort(() => 0.5 - Math.random())
-			.slice(0, 2);
+		const { id } = action;
+		// const tasks = yield call(fetchTasks);
+		// const filteredTasks = tasks
+		// 	.filter((item: WebApi.Entities.IChallenge) => item.rank === rank && item.id !== id)
+		// 	.sort(() => 0.5 - Math.random())
+		// 	.slice(0, 2);
+		const tasks = yield call(() => fetchSimilarTasks(id));
 
-		yield put(actions.setTasks({ similarTasks: filteredTasks }));
+		yield put(actions.setTasks({ similarTasks: tasks }));
 	} catch (error) {
 		yield put(
 			setNotificationState({

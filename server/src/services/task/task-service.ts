@@ -164,21 +164,27 @@ export class TaskService {
 		const repository = getCustomRepository(this.taskRepository);
 
 		const task = await repository.getById(taskId);
-		const skippedTask = await repository
-			.createQueryBuilder('task')
-			.innerJoinAndSelect('task.solutions', 'solution')
-			.select(['task', 'solution'])
-			.where('task.id = :id', { id: taskId })
-			.andWhere('solution.status = :status', { status: SOLUTION_STATUS.SKIPPED })
-			.getOne();
+
+		const skipped = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.SKIPPED);
+		const unlocked = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.UNLOCKED);
+		const completed = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED);
+		const notCompleted = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.NOT_COMPLETED);
 
 		return {
 			stats: {
-				totalSkips: skippedTask?.solutions.length,
-				usersTrained: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED || solution.status === SOLUTION_STATUS.NOT_COMPLETED).length,
-				totalUnlocked: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.UNLOCKED).length,
-				usersCompleted: task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED).length
+				totalSkips: skipped?.length || 0,
+				usersTrained: (completed?.length || 0) + (notCompleted?.length || 0),
+				totalUnlocked: unlocked?.length || 0,
+				usersCompleted: completed?.length || 0
 			}
 		}
+	}
+
+	async getSimilarTasks(id: string) {
+		const repository = getCustomRepository(this.taskRepository);
+		const task = await repository.getById(id);
+		const similarTasks = await repository.getSimilarTasks(id, task?.rank);
+
+		return similarTasks;
 	}
 }

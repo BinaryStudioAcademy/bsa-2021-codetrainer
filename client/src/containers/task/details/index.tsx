@@ -15,7 +15,7 @@ export const Details = () => {
 
 	useEffect(() => {
 		if (task) {
-			dispatch(actions.getTasks({ rank: task.rank, id: task.id }));
+			dispatch(actions.getTasks({ id: task.id }));
 		}
 	}, [task]);
 

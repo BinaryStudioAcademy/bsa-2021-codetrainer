@@ -102,7 +102,6 @@ export type TSetNextTask = {
 };
 
 export type TGetTasks = {
-	rank: number;
 	id: string;
 };
 

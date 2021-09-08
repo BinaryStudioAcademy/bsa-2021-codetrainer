@@ -40,3 +40,16 @@ export const fetchStats = async (id: string): Promise<WebApi.Entities.IStats | E
 		return error;
 	}
 };
+
+export const fetchSimilarTasks = async (id: string): Promise<WebApi.Entities.IStats | Error> => {
+	try {
+		const response = await http.callWebApi({
+			method: HttpMethods.GET,
+			endpoint: `${ApiRoutes.TASKS}${id}/similar-tasks`,
+		});
+
+		return response;
+	} catch (error) {
+		return error;
+	}
+};

@@ -5,5 +5,6 @@ export const TaskApiPath = {
 	TRAIN: '/:id/train',
 	NEXT_TASK: '/next',
 	USER_SOLUTIONS: '/search/user-solutions',
-	STATS: '/:id/stats'
+	STATS: '/:id/stats',
+	SIMILAR_TASKS: '/:id/similar-tasks'
 };

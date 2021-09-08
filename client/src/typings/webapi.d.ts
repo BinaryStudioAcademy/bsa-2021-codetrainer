@@ -57,20 +57,9 @@ declare namespace WebApi.Entities {
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
-		savedToFavorites: number;
-		positiveFeedback: number;
 		user: IUser | null;
 		createdAt: Date;
-		published: Date;
-		usersTrained: number;
-		skips: number;
 		initialSolution: string;
-		codeSubmissions: number;
-		timesCompleted: number;
-		stars: number;
-		verySatisfied: number;
-		somewhatSatisfied: number;
-		notSatisfied: number;
 		contributors: IUser[];
 		solutions: ISolution[];
 	}

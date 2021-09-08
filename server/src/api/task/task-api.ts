@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { send } from 'process';
 import { SOLUTION_STATUS, TaskApiPath } from '../../common';
 import {
 	idSchema,
@@ -70,7 +71,12 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 				.delete(req.user, req.task)
 				.then((data) => res.send(data))
 				.catch(next),
-		);
+		)
+		.get(TaskApiPath.SIMILAR_TASKS, (req, res, next) =>
+			taskService
+				.getSimilarTasks(req.params.id)
+				.then(data => res.send(data))
+				.catch(next))
 
 	return router;
 };
