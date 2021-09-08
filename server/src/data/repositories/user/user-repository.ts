@@ -54,6 +54,7 @@ export class UserRepository extends AbstractRepository<User> {
 				...this.userFields,
 				'clan',
 				'solution.id',
+				'solution.status',
 				'profileClan',
 				'task.id',
 				'commentSolution.id',

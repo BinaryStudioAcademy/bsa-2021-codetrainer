@@ -1,5 +1,6 @@
 import { WebApi } from 'typings/webapi';
 import { IGithubProfile } from 'typings/common/IGithub';
+import { SolutionStatus } from './solution';
 
 export interface IUser extends WebApi.Entities.IUser {
 	lastVisit?: string;
@@ -8,7 +9,7 @@ export interface IUser extends WebApi.Entities.IUser {
 	social?: Array<string>;
 	github?: IGithubProfile;
 	tasks?: WebApi.Entities.ITask[];
-	solutions?: Array<any>;
+	solutions?: Array<{ id: string; status: SolutionStatus }>;
 	languages?: Array<{
 		id: string;
 		name: string;
