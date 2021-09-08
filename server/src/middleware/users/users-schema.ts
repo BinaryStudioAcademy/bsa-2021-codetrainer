@@ -1,15 +1,14 @@
 import joi from 'joi';
 
 export const userFieldsSchema = joi.object({
-	name: joi.string(),
-	surname: joi.string(),
-	username: joi.string(),
-	avatar: joi.string(),
-	createdAt: joi.string(), // Joi.date().format('YYYY-MM-DD').utc(); we need an exact understanding of what the date should be, or we just leave the string
-	lastVisit: joi.string(),
-	skills: joi.array().items(joi.string()),
-	devLevel: joi.string(),
-	social: joi.array().items(joi.string()),
-	email: joi.string().email(),
-	password: joi.string(),
+	name: joi.string().optional(),
+	surname: joi.string().optional(),
+	username: joi.string().optional(),
+	avatar: joi.string().optional(),
+	lastVisit: joi.string().optional(),
+	skills: joi.array().items(joi.string()).default([]),
+	devLevel: joi.string().optional(),
+	social: joi.array().items(joi.string()).optional(),
+	email: joi.string().email().optional(),
+	password: joi.string().optional(),
 });
