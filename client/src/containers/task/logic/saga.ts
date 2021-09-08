@@ -13,6 +13,8 @@ export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): an
 	try {
 		const { id } = action;
 		const task = yield call(getTaskById, id);
+		console.log(task);
+
 		yield put(actions.setTask({ task }));
 	} catch (error) {
 		yield put(
@@ -105,8 +107,6 @@ export function* fetchCommentsWorker(action: ReturnType<typeof actions.getCommen
 		const options = yield select((state) => state.taskInfo.comments.options);
 		const taskId = yield select((state) => state.taskInfo.task.id);
 		const comments = yield call(fetchComments, { taskId, ...options });
-
-		console.log(comments);
 
 		yield put(actions.setComments({ comments }));
 	} catch (error) {}
