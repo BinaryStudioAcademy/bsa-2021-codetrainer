@@ -38,6 +38,13 @@ const solutionTabs: TSolutionTab[] = [
 ];
 
 export const ProfileSolutions: React.FC = () => {
+	// useEffect(() => {
+	// 	getUserSolutions({
+	// 		skip: 0,
+	// 		take: 10,
+	// 		status: selectedValue,
+	// 	}).then((res) => console.log(res));
+	// }, []);
 	const [selectedValue, setSelectedValue] = useState<SolutionStatus>(SolutionStatus.COMPLETED);
 	const [tasks, setTasks] = useState<WebApi.Entities.ITask[]>([]);
 	const [solutionsCount, setSolutionsCount] = useState<{ [key in SolutionStatus]?: string }>({});
