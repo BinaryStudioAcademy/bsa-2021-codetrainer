@@ -27,7 +27,7 @@ interface ISearch {
 	status?: string;
 	progress?: string;
 	rank?: number;
-	tags?: string;
+	tags?: { name: string }[];
 	page: number;
 }
 
@@ -115,14 +115,17 @@ export class TaskService {
 	}
 
 	async search(queryFilter: ISearch, user: User) {
-		const { sort, page, ...where } = queryFilter;
+		const { sort, page, tags, ...where } = queryFilter;
 		const repository = getCustomRepository(this.taskRepository);
 		const tagRepository = getCustomRepository(this.tagRepository);
 		return {
 			tags: await tagRepository.getAll(),
 			ranks: await repository.getRanks(),
 			...(await repository.search({
-				where,
+				where: {
+					...where,
+					...(tags ? { tags: tags.map(({ name }) => name) } : {}),
+				},
 				sort,
 				skip: page * TASKS_ON_PAGE,
 				take: TASKS_ON_PAGE,
@@ -176,6 +179,34 @@ export class TaskService {
 		const useTasks = await solutionRepository.getTasksByUser(userId);
 		const nextTask = await repository.searchNotUseTask(useTasks);
 		return { nextTask: nextTask ?? null };
+	}
+
+	async getStats(taskId: string) {
+		const repository = getCustomRepository(this.taskRepository);
+
+		const task = await repository.getById(taskId);
+
+		const skipped = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.SKIPPED);
+		const unlocked = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.UNLOCKED);
+		const completed = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.COMPLETED);
+		const notCompleted = task?.solutions.filter(solution => solution.status === SOLUTION_STATUS.NOT_COMPLETED);
+
+		return {
+			stats: {
+				totalSkips: skipped?.length || 0,
+				usersTrained: (completed?.length || 0) + (notCompleted?.length || 0),
+				totalUnlocked: unlocked?.length || 0,
+				usersCompleted: completed?.length || 0
+			}
+		}
+	}
+
+	async getSimilarTasks(id: string) {
+		const repository = getCustomRepository(this.taskRepository);
+		const task = await repository.getById(id);
+		const similarTasks = await repository.getSimilarTasks(id, task?.rank);
+
+		return similarTasks;
 	}
 
 	async validation(userId: string, task: Task, typeTest: TypeTest) {

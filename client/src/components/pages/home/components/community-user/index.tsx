@@ -18,7 +18,7 @@ const CommunityMember: React.FC<ICommunityUserProps> = ({ user }) => {
 				<Rank rank={user.rank} />
 			</td>
 			<td>
-				<Avatar avatar={user.imageSource} size={50} />
+				<Avatar avatar={user.avatar} size={50} />
 			</td>
 			<td>
 				<Link to={`${ROUTES.Users}/${user?.username}`}> {`${user.name} ${user?.surname}`}</Link>

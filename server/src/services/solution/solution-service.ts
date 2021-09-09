@@ -170,7 +170,8 @@ export class SolutionService {
 		const taskRepository = getCustomRepository(this.taskRepository);
 		const task = await taskRepository.getById(data.taskId);
 		let user = await userRepository.getById(data.userId);
-		if (status !== SOLUTION_STATUS.UNLOCKED && data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
+		const checkStatus = status !== SOLUTION_STATUS.COMPLETED && status !== SOLUTION_STATUS.UNLOCKED;
+		if (checkStatus && data.typeTest === TypeTest.TEST_SOLUTION_ATTEMPT) {
 			const statusSolution = checkStatusSolution(data.result.response);
 			const userData = calculateRank.check({ user, task, status: statusSolution });
 			await repository.updateById(solutionId as string, { status: statusSolution });

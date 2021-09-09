@@ -6,7 +6,7 @@ export interface IUser {
 	id: string;
 	username: string;
 	rank: number;
-	imageSource?: string;
+	avatar?: string;
 	name: string;
 	surname?: string;
 	clan?: IClan | null;

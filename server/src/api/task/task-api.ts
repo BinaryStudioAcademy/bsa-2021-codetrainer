@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SEARCH_FOCUS, SOLUTION_STATUS, TaskApiPath } from '../../common';
+import { SEARCH_FOCUS_KEYS, SOLUTION_STATUS, TaskApiPath } from '../../common';
 import {
 	idSchema,
 	taskSchema,
@@ -21,6 +21,12 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 		.get(TaskApiPath.NEXT_TASK, (req, res, next) =>
 			taskService
 				.getNextTask(req.user.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.get(TaskApiPath.STATS, (req, res, next) =>
+			taskService
+				.getStats(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
@@ -58,7 +64,7 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 		)
 		.get(TaskApiPath.FOCUS, validationMiddleware([taskSearchFocusSchema]), (req, res, next) =>
 			taskService
-				.searchFocus(req.user, req.query.focus as SEARCH_FOCUS)
+				.searchFocus(req.user, req.query.focus as SEARCH_FOCUS_KEYS)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
@@ -94,6 +100,12 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 		.delete(TaskApiPath.$ID, validationMiddleware([idSchema]), checkTaskIdMiddleware, (req, res, next) =>
 			taskService
 				.delete(req.user, req.task)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.get(TaskApiPath.SIMILAR_TASKS, (req, res, next) =>
+			taskService
+				.getSimilarTasks(req.params.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		);
