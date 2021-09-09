@@ -9,6 +9,7 @@ const CollaborationsSection = () => {
 	return (
 		<section className={clsx(common.section)}>
 			<Container className={common.sectionContainer}>
+				<ImageBlock src="" className={styles.collaborationsSectionLogo} />
 				<div className={styles.collaborationsSectionDescription}>
 					<h2 className={common.sectionTitle}>Gain collaborative wisdom</h2>
 					<div className={common.sectionText}>
@@ -16,7 +17,6 @@ const CollaborationsSection = () => {
 						<p>Discuss the challenge, best practices, and innovative techniques with the community.</p>
 					</div>
 				</div>
-				<ImageBlock src="" className={styles.collaborationsSectionLogo} />
 			</Container>
 		</section>
 	);

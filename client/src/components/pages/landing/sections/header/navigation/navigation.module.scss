@@ -1,10 +1,11 @@
 @import 'styles/variables';
 
 .navigation {
-	padding: 55px;
+	padding: 20px 50px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	background: var(--purple);
 
 	&Links {
 		font: $button-font;
@@ -27,7 +28,8 @@
 		height: 50px;
 
 		img {
-			height: 100%;
+			height: 70%;
+			margin-top: 5px;
 		}
 	}
 }
