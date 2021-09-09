@@ -43,7 +43,7 @@ export const fetchUserLeaders = async ({
 
 		return response;
 	} catch (error) {
-		return error;
+		return error as Error;
 	}
 };
 
