@@ -1,0 +1,22 @@
+@import "styles/variables";
+
+.userItem {
+	.position,
+	.honor {
+		text-align: center;
+	}
+
+	.honor {
+		font: $sixth-title-font;
+	}
+
+	.user {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.clan {
+		font: $minor-font;
+	}
+}

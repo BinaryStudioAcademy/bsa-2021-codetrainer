@@ -11,9 +11,26 @@ const LeaderBoard: React.FC = () => {
 	const { nameQuery, page, itemsPerPage } = useSelector((state: IRootState) => state.leaderBoard.options);
 
 	useEffect(() => {
+		return () => {
+			dispatch(actions.clearAllLeadersData());
+		};
+	}, []);
+
+	useEffect(() => {
 		dispatch(actions.clearData());
 		dispatch(actions.fetchUsers());
-	}, [nameQuery, page, itemsPerPage]);
+	}, [nameQuery]);
+
+	useEffect(() => {
+		if (page) {
+			dispatch(actions.fetchUsers());
+		}
+	}, [page]);
+
+	// useEffect(() => {
+	// 	dispatch(actions.clearData());
+	// 	dispatch(actions.fetchUsers());
+	// }, [nameQuery, page, itemsPerPage]);
 
 	const setNameQuery = (nameQuery: string) => {
 		dispatch(actions.setNameQuery({ nameQuery }));
@@ -23,10 +40,6 @@ const LeaderBoard: React.FC = () => {
 		dispatch(actions.setPage({ page }));
 	};
 
-	const setItemsPerPage = (itemsPerPage: number) => {
-		dispatch(actions.setItemsPerPage({ itemsPerPage }));
-	};
-
 	return (
 		<div>
 			<LeaderBoardPage
@@ -34,7 +47,6 @@ const LeaderBoard: React.FC = () => {
 				page={page}
 				setPage={setPage}
 				itemsPerPage={itemsPerPage}
-				setItemsPerPage={setItemsPerPage}
 				count={count}
 				nameQuery={nameQuery}
 				setNameQuery={setNameQuery}
