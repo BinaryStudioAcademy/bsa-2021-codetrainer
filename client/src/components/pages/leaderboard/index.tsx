@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ILeaderBoardProps } from './types';
-import styles from './clans.module.scss';
 import UserItem from './components/user-item';
 import { WebApi } from 'typings/webapi';
 import {
@@ -21,6 +20,7 @@ import {
 import { Search } from '@material-ui/icons';
 import columns from './columns.json';
 import { Spinner } from 'components/common';
+import styles from './leaderboard.module.scss';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -129,11 +129,13 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 														)}
 													</IconButton>
 												</ClickAwayListener>
-												{!isNameFieldOpen && <strong>{label}</strong>}
+												{!isNameFieldOpen && (
+													<strong className={styles.columnName}>{label}</strong>
+												)}
 											</TableCell>
 										) : (
 											<TableCell component="th" key={id} style={style}>
-												<strong>{label}</strong>
+												<strong className={styles.columnName}>{label}</strong>
 											</TableCell>
 										),
 									)}
@@ -160,6 +162,7 @@ const LeaderBoardPage: React.FC<ILeaderBoardProps> = ({
 					</TableContainer>
 					<TablePagination
 						rowsPerPageOptions={[5, 10, 25]}
+						className={styles.pagesPanel}
 						component="div"
 						count={count}
 						rowsPerPage={itemsPerPage}

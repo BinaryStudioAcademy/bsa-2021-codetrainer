@@ -1,8 +1,8 @@
 @import 'styles/variables';
 
 .container {
-    background-color: $zircon;
-    padding: 20px;
+	background-color: var(--container-color);
+	padding: 20px;
 	margin-bottom: 30px;
 }
 
@@ -11,12 +11,12 @@
 }
 
 .toggleBtns {
-    display: flex;
-    flex-direction: column;
-    > * {
-        width: 100%;
-        margin: 0 auto 20px;
-    }
+	display: flex;
+	flex-direction: column;
+	> * {
+		width: 100%;
+		margin: 0 auto 20px;
+	}
 }
 .filters {
 	> * {
@@ -27,9 +27,9 @@
 			padding-bottom: 5px;
 		}
 	}
-    .sortBy {
-        margin-left: 15px;
-    }
+	.sortBy {
+		margin-left: 15px;
+	}
 }
 
 .membersSortPanel {
@@ -45,7 +45,7 @@
 
 		&Active {
 			color: $cornflower-blue;
-            border-bottom: $cornflower-blue 2px solid;
+			border-bottom: $cornflower-blue 2px solid;
 		}
 	}
 
@@ -72,6 +72,3 @@
 	width: 100%;
 	margin: 0 auto 20px;
 }
-
-
-
