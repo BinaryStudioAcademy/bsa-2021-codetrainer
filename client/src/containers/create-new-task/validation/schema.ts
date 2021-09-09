@@ -10,7 +10,6 @@ export const validationSchema = Yup.object().shape({
 		.min(1, 'Rank must be a number from 1 to 9.')
 		.max(9, 'Rank must be a number from 1 to 9.')
 		.required('Rank must be a number from 1 to 9.'),
-	allowContributors: Yup.boolean().required('allowContributors name can`t be empty.'),
 	tags: Yup.array(),
 	description: Yup.string().min(1, 'description can`t be empty.').required('Task name can`t be empty.'),
 	completeSolution: Yup.string().min(1, 'completeSolution can`t be empty.').required('Task name can`t be empty.'),
