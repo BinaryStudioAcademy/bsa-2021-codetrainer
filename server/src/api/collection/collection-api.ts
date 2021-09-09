@@ -45,12 +45,12 @@ export const initCollection = (appRouter: typeof Router, services: { collection:
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.patch(CollectionsApiPath.ID, (req, res, next) =>
+		.patch(CollectionsApiPath.ID, (req, res, next) => {
 			collectionService
-				.manageTaskInsideCollection(req.params.id, JSON.parse(req.body).id)
+				.manageTaskInsideCollection(req.params.id, req.body.id)
 				.then((data) => res.send(data))
-				.catch(next),
-		)
+				.catch(next);
+		})
 		.delete(CollectionsApiPath.ID, (req, res, next) =>
 			collectionService
 				.deleteCollection(req.params.id)

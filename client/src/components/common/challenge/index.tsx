@@ -9,8 +9,21 @@ import { CollectionModal } from 'components/modals';
 const Challenge: React.FC<
 	IChallenge & {
 		showAddToCollection?: boolean;
+		handleFetchCollections: () => void;
+		handleChallengeClick: (id: string) => void;
 	}
-> = ({ linkToTask, author, stats, title, rank, tags, showAddToCollection = true }) => {
+> = ({
+	id,
+	linkToTask,
+	author,
+	stats,
+	title,
+	rank,
+	tags,
+	showAddToCollection = true,
+	handleFetchCollections,
+	handleChallengeClick,
+}) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	return (
@@ -18,9 +31,21 @@ const Challenge: React.FC<
 			<ChallengeHeader title={title} rank={rank} linkToTask={linkToTask} />
 			<ChallengeStats stats={{ ...stats, author }} />
 			{tags && Boolean(tags.length) ? <ChallengeTagsList tags={tags} /> : null}
-			{isOpen ? <CollectionModal isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
+			{isOpen ? (
+				<CollectionModal
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					handleFetchCollections={handleFetchCollections}
+				/>
+			) : null}
 			{showAddToCollection && (
-				<a className={styles.modal} onClick={() => setIsOpen(true)}>
+				<a
+					className={styles.modal}
+					onClick={() => {
+						setIsOpen(true);
+						handleChallengeClick(id);
+					}}
+				>
 					Add to collection
 				</a>
 			)}

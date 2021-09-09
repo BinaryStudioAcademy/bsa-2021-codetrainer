@@ -24,9 +24,14 @@ const avatarProps = {
 };
 
 const Collection: FC<ICollectionProps> = ({ collection }) => {
-	const averageRank = Math.round(
-		mean(collection.tasks.filter((task) => task.status === TaskStatus.APPROVED).map((task) => task.rank)),
-	);
+	const averageRank =
+		collection.tasks.length >= 1
+			? Math.round(
+					mean(
+						collection.tasks.filter((task) => task.status === TaskStatus.APPROVED).map((task) => task.rank),
+					),
+			  )
+			: 9;
 
 	return (
 		<div className={styles.collection}>
@@ -36,7 +41,7 @@ const Collection: FC<ICollectionProps> = ({ collection }) => {
 				<DefaultCollectionIcon {...avatarProps} />
 			)}
 			<div className={styles.name}>
-				{averageRank ? <Rank rank={averageRank} /> : null}
+				<Rank rank={averageRank} />
 				<Link to={`${ROUTES.Collections}/${collection.id}`}>{collection.name}</Link>
 			</div>
 			<div className={styles.minor}>

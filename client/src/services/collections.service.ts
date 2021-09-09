@@ -35,3 +35,37 @@ export const getFollowedCollections: TUserCollectionsLoader = async ({ userId: f
 			take,
 		},
 	});
+
+export const createCollection = async (name: string, taskId: string | null) => {
+	const body = {
+		name: name,
+	};
+	try {
+		const data = await http.callWebApi({
+			method: 'POST',
+			endpoint: 'collections',
+			body: body,
+		});
+		if (taskId) {
+			addTaskToCollection(data.id, taskId);
+		}
+		return data;
+	} catch (error) {
+		return error;
+	}
+};
+
+export const addTaskToCollection = async (collectionId: string, taskId: string) => {
+	try {
+		await http.callWebApi({
+			method: HttpMethods.PATCH,
+			endpoint: 'collections/' + collectionId,
+			skipAuthorization: false,
+			body: {
+				id: taskId,
+			},
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};

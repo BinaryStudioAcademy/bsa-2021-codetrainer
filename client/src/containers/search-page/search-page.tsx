@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FullscreenLoader, SearchPage as SearchPageComponent } from 'components';
 import { ISearchPageProps } from 'components/pages/search-page';
-import { useAppSelector } from 'hooks/useAppSelector';
+import { useAppSelector, useUserSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
 import { mapFilterToSearch, mapSearchData } from './mapSearchData';
 import { filterInitialState } from './logic/state';
+import * as collectionsActions from '../collections/logic/actions';
 
 export const SearchPage: React.FC = () => {
 	const { isLoading, search, filter, onSubmit, changePage } = useAppSelector((state) => state.search);
@@ -65,7 +66,15 @@ export const SearchPage: React.FC = () => {
 	const handleSubmit = () => {
 		dispatch(actions.searchOnSubmit());
 	};
-
+	const user = useUserSelector();
+	const handleFetchCollections = () => {
+		if (user && user.id) {
+			dispatch(collectionsActions.fetchCollections({ userId: user.id }));
+		}
+	};
+	const handleChallengeClick = (id: string) => {
+		dispatch(collectionsActions.setSelectedTask({ taskId: id }));
+	};
 	if (isLoading) {
 		return <FullscreenLoader />;
 	}
@@ -77,6 +86,8 @@ export const SearchPage: React.FC = () => {
 				onChange={handleChange}
 				onSubmit={handleSubmit}
 				onChangePage={handleChangePage}
+				handleFetchCollections={handleFetchCollections}
+				handleChallengeClick={handleChallengeClick}
 			/>
 		</>
 	);

@@ -4,6 +4,14 @@ import { AbstractRepository } from '../abstract';
 
 @EntityRepository(Collection)
 export class CollectionRepository extends AbstractRepository<Collection> {
+	collectionFields = [
+		'collection.id',
+		'collection.name',
+		'collection.author',
+		'collection.followers',
+		'collection.avatar',
+	];
+
 	getAll() {
 		return this.createQueryBuilder('collection').getMany();
 	}
