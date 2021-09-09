@@ -1,3 +1,22 @@
-.clanRow {
-	cursor: pointer;
+@import 'styles/variables';
+
+.clanItem {
+	.honor,
+	.members {
+		text-align: center;
+	}
+
+	.honor {
+		font: $sixth-title-font;
+	}
+
+	.user {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.created {
+		font: $minor-font;
+	}
 }

@@ -7,8 +7,6 @@ export interface IClansListProps {
 	count: number;
 	isLoading: boolean;
 	userId: string;
-	joinClan: (clanId: string) => void;
-	leaveClan: (clanId: string) => void;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
 	setOrder: (order: Order) => void;
 	setNameQuery: (nameQuery: string) => void;

@@ -2,21 +2,38 @@
 
 .clansList {
 	padding: 10px;
-}
+	border-radius: 15px;
+	background: var(--container-color);
 
-.clansListTable {
-	text-align: center;
-	width: 100%;
-	table-layout: fixed;
-	border-collapse: collapse;
+	.table {
+		border-collapse: collapse;
+		width: 800px;
+		background: var(--container-color);
 
-	tr:not(:last-of-type) {
-		border-bottom: 1px solid $nobel;
-	}
+		td,
+		th {
+			font: $base-font;
+			color: var(--text-color);
+			border-color: var(--minor-text);
+		}
 
-	td:not(:first-child) {
-		padding-top: 5px;
-		padding-bottom: 5px;
-		padding-right: 5px;
+		th {
+			font: $sixth-title-font;
+		}
+
+		.centered {
+			justify-content: center;
+		}
+		.name {
+			justify-content: space-between;
+
+			input {
+				width: 150px;
+			}
+		}
+
+		tr:last-of-type td {
+			border: none;
+		}
 	}
 }

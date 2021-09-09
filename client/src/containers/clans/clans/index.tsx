@@ -42,13 +42,6 @@ const Clans: React.FC = () => {
 		dispatch(actions.setItemsPerPage({ itemsPerPage }));
 	};
 
-	const joinClan = (id: string) => {
-		dispatch(actions.joinClan({ id }));
-	};
-
-	const leaveClan = (id: string) => {
-		dispatch(actions.leaveClan({ id }));
-	};
 	const handleGoToClan = () => {
 		if (user?.clan !== null) {
 			historyHelper.push(`${ROUTES.Clan}/${user?.clan?.id}`);
@@ -72,8 +65,6 @@ const Clans: React.FC = () => {
 				setOrder={setOrder}
 				setNameQuery={setNameQuery}
 				currentSort={order}
-				joinClan={joinClan}
-				leaveClan={leaveClan}
 				handleGoToClan={handleGoToClan}
 				page={page}
 				setPage={setPage}

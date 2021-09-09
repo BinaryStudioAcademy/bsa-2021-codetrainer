@@ -1,55 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ClanItem from '../clan-item';
 import { IClansListProps } from './types';
 import { WebApi } from 'typings/webapi';
-import {
-	ClickAwayListener,
-	createStyles,
-	IconButton,
-	makeStyles,
-	Paper,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TablePagination,
-	TableRow,
-	TableSortLabel,
-	TextField,
-} from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { Order } from 'helpers/table-helper';
-import columns from './columns.json';
 import { Spinner } from 'components/common';
-
-const useStyles = makeStyles(() =>
-	createStyles({
-		root: {
-			width: '100%',
-		},
-		paper: {
-			width: '100%',
-			background: 'var(--container-color)',
-			marginBottom: '20px',
-		},
-		table: {
-			width: 800,
-			color: 'red',
-		},
-		visuallyHidden: {
-			border: 0,
-			clip: 'rect(0 0 0 0)',
-			height: 1,
-			margin: -1,
-			overflow: 'hidden',
-			padding: 0,
-			position: 'absolute',
-			top: 20,
-			width: 1,
-		},
-	}),
-);
+import SortLabel from 'components/common/sort-label';
+import styles from './clans-list.module.scss';
 
 const ClansList: React.FC<IClansListProps> = ({
 	clans,
@@ -63,18 +20,15 @@ const ClansList: React.FC<IClansListProps> = ({
 	itemsPerPage,
 	setPage,
 	setItemsPerPage,
-	joinClan,
-	leaveClan,
 	setOrderBy,
 	setOrder,
 	setNameQuery,
 }) => {
-	const [isNameFieldOpen, setNameFieldOpen] = useState(false);
-	const [searchName, setSearchName] = useState(nameQuery);
-	const [typingTimeout, setTypingTimeout] = useState<null | ReturnType<typeof setTimeout>>(null);
+	//const [isNameFieldOpen, setNameFieldOpen] = useState(false);
+	//const [searchName, setSearchName] = useState(nameQuery);
+	// const [typingTimeout, setTypingTimeout] = useState<null | ReturnType<typeof setTimeout>>(null);
 
-	const classes = useStyles();
-
+	/*
 	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
 	};
@@ -83,6 +37,7 @@ const ClansList: React.FC<IClansListProps> = ({
 		setItemsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
+	*/
 
 	const handleRequestSort = (property: any): void => {
 		const isAsc = orderBy === property && order === Order.ASC;
@@ -90,9 +45,10 @@ const ClansList: React.FC<IClansListProps> = ({
 		setOrderBy(property);
 	};
 
+	/*
 	const handleNameSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const query = e.target.value;
-		setSearchName(query);
+		// setSearchName(query);
 
 		setPage(0);
 
@@ -106,71 +62,42 @@ const ClansList: React.FC<IClansListProps> = ({
 			}, 500),
 		);
 	};
+	*/
 
 	return (
-		<Paper className={classes.paper}>
+		<div className={styles.clansList}>
 			<TableContainer>
-				<Table className={classes.table}>
+				<Table className={styles.table}>
 					<TableHead>
 						<TableRow>
-							{columns.map(({ id, label, isSortable, style }) =>
-								!isSortable ? (
-									<TableCell component="th" key={id} style={style}>
-										<strong>{label}</strong>
-									</TableCell>
-								) : (
-									<TableCell
-										component="th"
-										style={style}
-										key={id}
-										sortDirection={orderBy === id ? order : false}
-									>
-										{id === 'name' && (
-											<ClickAwayListener
-												onClickAway={(): void => {
-													setNameFieldOpen(false);
-												}}
-											>
-												<IconButton
-													onClick={(): void => {
-														setNameFieldOpen(true);
-													}}
-													style={{ backgroundColor: 'transparent' }}
-													disableRipple
-													size="small"
-												>
-													<Search />
-													{isNameFieldOpen && (
-														<TextField
-															value={searchName}
-															onChange={handleNameSearchChange}
-															type="search"
-														/>
-													)}
-												</IconButton>
-											</ClickAwayListener>
-										)}
-										{id === 'name' && isNameFieldOpen ? null : (
-											<TableSortLabel
-												active={orderBy === id}
-												direction={orderBy === id ? order : Order.ASC}
-												onClick={(): void => {
-													handleRequestSort(id);
-												}}
-											>
-												{id === 'name' && isNameFieldOpen ? null : <strong>{label}</strong>}
-												{orderBy === id ? (
-													<span className={classes.visuallyHidden}>
-														{order === Order.DESC
-															? 'sorted descending'
-															: 'sorted ascending'}
-													</span>
-												) : null}
-											</TableSortLabel>
-										)}
-									</TableCell>
-								),
-							)}
+							<TableCell component="th">
+								<SortLabel
+									strategy={orderBy}
+									setSortingStrategy={handleRequestSort}
+									className={styles.centered}
+								>
+									Honor
+								</SortLabel>
+							</TableCell>
+							<TableCell component="th">
+								<SortLabel strategy={orderBy} setSortingStrategy={handleRequestSort}>
+									Name
+								</SortLabel>
+							</TableCell>
+							<TableCell component="th">
+								<SortLabel
+									strategy={orderBy}
+									setSortingStrategy={handleRequestSort}
+									className={styles.centered}
+								>
+									Members
+								</SortLabel>
+							</TableCell>
+							<TableCell component="th">
+								<SortLabel strategy={orderBy} setSortingStrategy={handleRequestSort}>
+									Created
+								</SortLabel>
+							</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -181,29 +108,12 @@ const ClansList: React.FC<IClansListProps> = ({
 								</TableCell>
 							</TableRow>
 						) : (
-							clans.map((clan: WebApi.Entities.IClan) => (
-								<ClanItem
-									joinClan={joinClan}
-									leaveClan={leaveClan}
-									clan={clan}
-									key={clan.id}
-									userId={userId}
-								/>
-							))
+							clans.map((clan: WebApi.Entities.IClan) => <ClanItem clan={clan} key={clan.id} />)
 						)}
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[5, 10, 25]}
-				component="div"
-				count={count}
-				rowsPerPage={itemsPerPage}
-				page={page}
-				onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
-			/>
-		</Paper>
+		</div>
 	);
 };
 

@@ -8,8 +8,6 @@ export const endLoading = createAction<void>(actionTypes.END_LOADING);
 export const clearClans = createAction<void>(actionTypes.CLEAR_CLANS);
 export const addClans = createAction<actionTypes.IAddClansArgs>(actionTypes.ADD_CLANS);
 export const addError = createAction<actionTypes.IAddErrorArgs>(actionTypes.ADD_ERROR);
-export const joinClan = createAction<actionTypes.IJoinClanArgs>(actionTypes.JOIN_CLAN);
-export const leaveClan = createAction<actionTypes.ILeaveClanArgs>(actionTypes.LEAVE_CLAN);
 export const updateClan = createAction<actionTypes.IUpdateClanArgs>(actionTypes.UPDATE_CLAN);
 
 export const setOrderBy = createAction<actionTypes.ISetOrderByArgs>(actionTypes.SET_ORDER_BY);

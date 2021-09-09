@@ -10,8 +10,6 @@ const ClansPage: React.FC<IClansProps> = ({
 	isLoading,
 	user,
 	clans,
-	joinClan,
-	leaveClan,
 	setOrderBy,
 	setOrder,
 	handleGoToClan,
@@ -35,9 +33,7 @@ const ClansPage: React.FC<IClansProps> = ({
 					</Button>
 				</div>
 				<ClansList
-					joinClan={joinClan}
 					isLoading={isLoading}
-					leaveClan={leaveClan}
 					clans={clans}
 					userId={user.id}
 					setOrderBy={setOrderBy}

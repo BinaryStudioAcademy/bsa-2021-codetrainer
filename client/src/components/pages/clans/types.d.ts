@@ -15,8 +15,6 @@ export interface IClansProps {
 	setOrder: (order: Order) => void;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
 	setNameQuery: (nameQuery: string) => void;
-	joinClan: (id: string) => void;
-	leaveClan: (id: string) => void;
 	currentSort: ClansSortOptions;
 	handleGoToClan: () => void;
 	order: Order;

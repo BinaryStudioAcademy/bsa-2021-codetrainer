@@ -1,82 +1,32 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { TableCell, TableRow } from '@material-ui/core';
 import { Rank } from 'components';
 import { IClanItemProps } from './types';
-import { Avatar, Button } from 'components/basic';
-import { ButtonClasses } from 'components/basic/button';
+import { Avatar } from 'components/basic';
 import { ROUTES } from 'constants/routes';
-import { WebApi } from 'typings/webapi';
-import styles from './clan-item.module.scss';
-import { TableCell, TableRow } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { getFullDate } from 'helpers/date.helper';
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import styles from './clan-item.module.scss';
 
-const ClanItem: React.FC<IClanItemProps> = ({ clan, userId, joinClan, leaveClan }) => {
-	const currentUserMember = clan.members.find((member: WebApi.Entities.IMember) => member.id === userId);
-
-	const leaveClanHandler = (event: MouseEvent<HTMLElement>) => {
-		event.stopPropagation();
-		leaveClan(clan.id);
-	};
-
-	const joinClanHandler = (event: MouseEvent<HTMLElement>) => {
-		event.stopPropagation();
-		joinClan(clan.id);
-	};
-
-	const StyledTableCell = withStyles(() =>
-		createStyles({
-			head: {
-				backgroundColor: 'var(--pink)',
-			},
-			body: {
-				color: 'var(--text-color)',
-				fontSize: 14,
-			},
-		}),
-	)(TableCell);
-
-	const StyledTableRow = withStyles(() =>
-		createStyles({
-			root: {
-				backgroundColor: 'var(--container-color)',
-			},
-		}),
-	)(TableRow);
-
-	return (
-		<StyledTableRow className={styles.clanRow}>
-			<StyledTableCell>
-				<Rank rank={clan.rank ?? 0} />
-			</StyledTableCell>
-			<StyledTableCell>
+const ClanItem: React.FC<IClanItemProps> = ({ clan }) => (
+	<TableRow className={styles.clanItem}>
+		<TableCell className={styles.honor}>{clan.honor}</TableCell>
+		<TableCell>
+			<Link to={`${ROUTES.Clan}/${clan?.id}`} className={styles.user}>
 				<Avatar avatar={clan.avatar} size={50} />
-			</StyledTableCell>
-			<StyledTableCell>
-				<Link to={`${ROUTES.Clan}/${clan?.id}`}>{clan.name}</Link>
-			</StyledTableCell>
-			<StyledTableCell>
-				<span>{clan.numberOfMembers}</span>
-			</StyledTableCell>
-			<StyledTableCell>
-				<span>{getFullDate(new Date(clan.createdAt))}</span>
-			</StyledTableCell>
-			<StyledTableCell>
-				<span>{clan.honor}</span>
-			</StyledTableCell>
-			<StyledTableCell>
-				{currentUserMember ? (
-					<Button className={ButtonClasses.red} onClick={leaveClanHandler}>
-						Leave
-					</Button>
-				) : (
-					<Button className={ButtonClasses.blue} onClick={joinClanHandler}>
-						Join
-					</Button>
-				)}
-			</StyledTableCell>
-		</StyledTableRow>
-	);
-};
+				{clan.name}
+				{clan.rank && <Rank rank={clan.rank} />}
+			</Link>
+		</TableCell>
+		<TableCell className={styles.members}>
+			<span>
+				{clan.numberOfMembers} / {clan.maxMembers}
+			</span>
+		</TableCell>
+		<TableCell className={styles.created}>
+			<span>{getFullDate(new Date(clan.createdAt))}</span>
+		</TableCell>
+	</TableRow>
+);
 
 export default ClanItem;
