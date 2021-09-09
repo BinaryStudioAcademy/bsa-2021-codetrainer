@@ -43,9 +43,8 @@ export const Profile = (props: RouteComponentProps) => {
 	const mockPointsProps = {
 		rank: userData?.rank ?? 9,
 		honor: userData?.honor ?? 0,
-		completedChallenge: (userData?.solutions || []).filter(
-			(solution) => solution.status === SolutionStatus.COMPLETED,
-		).length,
+		completedChallenge: (user?.solutions || []).filter((solution) => solution.status === SolutionStatus.COMPLETED)
+			.length,
 	};
 
 	const mockLanguagesProps = {
@@ -68,28 +67,24 @@ export const Profile = (props: RouteComponentProps) => {
 		}
 	};
 	const mockHonorBreakdownProps = {
-		completedChallengeDone: userData
-			? userData.solutions
-				? userData.solutions.filter((solution) => solution.status === SolutionStatus.COMPLETED).length
-				: 0
-			: 0,
-		completedChallengeTotal: userData?.solutions?.length ?? 0,
-		authoredChallengeDone: userData?.tasks?.length ?? 0,
-		authoredChallengeTotal: getMaxTotal(userData?.tasks?.length ?? 0),
-		commentsDone: userData?.comments?.length ?? 0,
-		commentsTotal: getMaxTotal(userData?.comments?.length ?? 0),
+		completedChallengeDone: (user?.solutions || []).filter(
+			(solution) => solution.status === SolutionStatus.COMPLETED,
+		).length,
+		completedChallengeTotal: user?.solutions?.length ?? 0,
+		authoredChallengeDone: user?.tasks?.length ?? 0,
+		authoredChallengeTotal: getMaxTotal(user?.tasks?.length ?? 0),
+		commentsDone: user?.comments?.length ?? 0,
+		commentsTotal: getMaxTotal(user?.comments?.length ?? 0),
 	};
 
 	const mockRankBreakDownProps = {
-		rankProgress: Number(
-			(((userData?.honor ?? 0) * 100) / NextRankHonor[getNextRank(userData?.rank ?? 9)]).toFixed(1),
-		),
-		rank: userData?.rank ?? 9,
+		rankProgress: Number((((user?.honor ?? 0) * 100) / NextRankHonor[getNextRank(user?.rank ?? 9)]).toFixed(1)),
+		rank: user?.rank ?? 9,
 	};
 
 	const mockCommunityProps = {
-		comments: userData?.comments?.length ?? 0,
-		collections: userData?.collections?.length ?? 0,
+		comments: user?.comments?.length ?? 0,
+		collections: user?.collections?.length ?? 0,
 	};
 
 	const statsProps = {

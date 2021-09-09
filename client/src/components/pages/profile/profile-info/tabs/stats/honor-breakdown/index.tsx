@@ -22,7 +22,6 @@ const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 		commentsDone,
 		commentsTotal,
 	} = props;
-
 	return (
 		<StatsBlock icon={honorBreakdownIcon} title="Honor Breakdown" elementClass={styles.HonorBreakdown}>
 			<div className={styles.progressBars}>
