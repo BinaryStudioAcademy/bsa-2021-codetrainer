@@ -7,7 +7,7 @@ import styles from './ranks.module.scss';
 
 const RanksSection = () => {
 	return (
-		<section className={clsx(common.section, common.sectionFilled)}>
+		<section className={clsx(common.section, styles.ranksContainer, common.sectionFilled)}>
 			<Container>
 				<div className={styles.ranksSectionDescription}>
 					<h2 className={common.sectionTitle}>Earn ranks and honors</h2>

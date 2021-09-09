@@ -1,6 +1,6 @@
-.creationsSection {
+.creationsSection {	
 	&Description {
-		flex-basis: 50%;
+		width: 400px;
 	}
 
 	&Logo {
@@ -12,4 +12,10 @@
 			object-fit: cover;
 		}
 	}
+}
+
+.skillsSection{
+    background-image: url('/assets/images/landing/landing3.svg');
+    background-position: center right;
+    background-repeat: no-repeat;
 }
