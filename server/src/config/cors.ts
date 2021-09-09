@@ -1,11 +1,11 @@
 import { CorsOptions } from 'cors';
-import { CORS_ORIGIN_URLS, STAGING_URL, CORS_METHODS, CORS_CREDENTIALS } from '../common';
+import { CORS_ORIGIN_URLS, STAGING_URL, CORS_METHODS, CORS_CREDENTIALS, PROD_URL } from '../common';
 import { cookieConfig } from './cookie-session/cookie-config';
 
 export const corsConfig: CorsOptions = {
 	origin: (origin, callback) => {
 		if (CORS_ORIGIN_URLS.includes(origin as string) || !origin) {
-			if (origin !== STAGING_URL) {
+			if (![STAGING_URL, PROD_URL].includes(origin as string)) {
 				delete cookieConfig.sameSite;
 				delete cookieConfig.secure;
 			}

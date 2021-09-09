@@ -3,16 +3,11 @@ export enum TASK_STATUS {
 	BETA = 'beta',
 	DRAFT = 'draft',
 }
-export enum TASK_DISCIPLINE {
-	FUNDAMENTALS = 'Fundamentals',
-	ALGORITHMS = 'Algorithms',
-	BUG_FIXES = 'Bug-fixes',
-}
 
 export enum TASK_DISCIPLINE {
-	FUNDAMENTALS = 'Fundamentals',
-	ALGORITHMS = 'Algorithms',
-	BUG_FIXES = 'Bug-fixes',
+	FUNDAMENTALS = 'fundamentals',
+	ALGORITHMS = 'algorithms',
+	BUG_FIXES = 'bug-fixes',
 }
 
 export const TASK_DIFFICULTY_DEFAULT = 1;

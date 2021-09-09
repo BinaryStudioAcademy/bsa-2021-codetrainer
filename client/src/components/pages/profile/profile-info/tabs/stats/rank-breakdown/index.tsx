@@ -13,25 +13,25 @@ export interface IRankBreakdownProps {
 
 const RankBreakdown: React.FC<IRankBreakdownProps> = (props) => {
 	const { rankProgress, rank } = props;
-
+	const isNextRank = rank - 1 > 0;
 	return (
 		<StatsBlock icon={rankBreakdownIcon} title="Rank Breakdown" elementClass={styles.rankBreakdown}>
 			<div className={styles.rankBreakdownBody}>
 				<div style={{ width: '150px' }}>
 					<CircularProgressbarWithChildren
 						className={styles.circularProgressbar}
-						value={rankProgress}
+						value={isNextRank ? rankProgress : 100}
 						strokeWidth={5}
 						styles={buildStyles(circularProgressBarStyles)}
 					>
-						<span className={styles.nextRankLabel}>Next Rank</span>
-						<Label label={rank - 1 + ' rank'} color="#EC4179" />
+						<span className={styles.nextRankLabel}>{isNextRank ? 'Next Rank' : 'Your rank'}</span>
+						<Label label={`${isNextRank ? rank - 1 : rank}  rank`} color="#EC4179" />
 					</CircularProgressbarWithChildren>
 				</div>
 				<div className={styles.progressCircleInfo}>
 					<span className={styles.overallLabel}>Overall: </span>
 					<span>
-						{rank} rank/ {rankProgress}
+						{rank} rank/ {isNextRank ? rankProgress : 100}
 					</span>
 					%
 				</div>

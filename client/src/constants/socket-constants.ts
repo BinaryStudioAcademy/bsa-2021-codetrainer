@@ -1,5 +1,5 @@
 export const SOCKET_URL = {
-	STAGING: 'https://staging-api.codetrain.xyz/',
+	STAGING: process.env.REACT_APP_API_BASE_URL as string,
 	LOCAL: '/',
 };
 

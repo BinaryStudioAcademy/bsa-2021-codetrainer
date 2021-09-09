@@ -1,5 +1,14 @@
 @import "styles/variables";
 
+.columnName,
+.pagesPanel {
+	color: var(--text-color);
+
+	* {
+		color: var(--text-color);
+	}
+}
+
 .clansList {
 	padding: 10px;
 	border-radius: 15px;

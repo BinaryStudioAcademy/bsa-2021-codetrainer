@@ -4,6 +4,9 @@ import Navigation from './navigation';
 import styles from './header.module.scss';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
+import { Button } from 'components';
+import clsx from 'clsx';
+import { ButtonClasses } from 'components/basic/button';
 
 const Header = () => {
 	const history = useHistory();
@@ -18,9 +21,12 @@ const Header = () => {
 					<p className={styles.headerText}>
 						Improve your skills by training with others on real code challenges
 					</p>
-					<button className={styles.headerButton} onClick={() => history.push(ROUTES.SignUp)}>
-						Sign up
-					</button>
+					<Button
+						className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.headerButton)}
+						onClick={() => history.push(ROUTES.SignUp)}
+					>
+						Let&apos;s start!
+					</Button>
 				</div>
 			</Container>
 		</header>

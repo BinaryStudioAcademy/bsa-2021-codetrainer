@@ -6,7 +6,7 @@ import { CommentTask } from '../../models';
 export class CommentTaskRepository extends AbstractRepository<CommentTask> {
 	taskFields = ['task.id', 'task.name'];
 
-	userFields = ['user.id', 'user.name', 'user.surname'];
+	userFields = ['user.id', 'user.name', 'user.surname', 'user.avatar'];
 
 	getAll(skip: number, take: number) {
 		return this.createQueryBuilder('comment_task')
@@ -25,7 +25,7 @@ export class CommentTaskRepository extends AbstractRepository<CommentTask> {
 			.orderBy('comment_task.createdAt', 'DESC')
 			.skip(skip)
 			.take(take)
-			.getMany();
+			.getManyAndCount();
 	}
 
 	getAllByTaskId(id: string, skip: number, take: number) {

@@ -2,13 +2,13 @@
 
 .ranksSection {
 	&Text {
-		margin-top: 100px;
+		margin-top: 40px;
 	}
 
 	&Description {
-		margin: 0 auto;
-		text-align: center;
-		width: 700px;
+		// margin: 0 auto;
+		// text-align: center;
+		width: 500px;
 	}
 }
 
@@ -29,10 +29,18 @@
 			font-size: 22px;
 			line-height: 40px;
 			transition: $base-animation-time;
+			cursor: pointer;
 
 			&:hover {
 				transform: scale(1.1);
 			}
 		}
 	}
+}
+
+.ranksContainer {
+	background-image: url('/assets/images/landing/ranks.svg');
+	background-position: center right;
+	background-repeat: no-repeat;
+
 }

@@ -68,11 +68,9 @@ export const Profile = (props: RouteComponentProps) => {
 		}
 	};
 	const mockHonorBreakdownProps = {
-		completedChallengeDone: userData
-			? userData.solutions
-				? userData.solutions.filter((solution) => solution.status === SolutionStatus.COMPLETED).length
-				: 0
-			: 0,
+		completedChallengeDone: (userData?.solutions || []).filter(
+			(solution) => solution.status === SolutionStatus.COMPLETED,
+		).length,
 		completedChallengeTotal: userData?.solutions?.length ?? 0,
 		authoredChallengeDone: userData?.tasks?.length ?? 0,
 		authoredChallengeTotal: getMaxTotal(userData?.tasks?.length ?? 0),
@@ -84,7 +82,7 @@ export const Profile = (props: RouteComponentProps) => {
 		rankProgress: Number(
 			(((userData?.honor ?? 0) * 100) / NextRankHonor[getNextRank(userData?.rank ?? 9)]).toFixed(1),
 		),
-		rank: userData?.rank ?? 9,
+		rank: user?.rank ?? 9,
 	};
 
 	const mockCommunityProps = {

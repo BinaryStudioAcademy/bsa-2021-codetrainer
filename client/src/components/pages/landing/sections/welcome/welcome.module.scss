@@ -1,7 +1,7 @@
 @import 'styles/variables';
 
 .welcomeSection {
-	padding: 45px 0;
+	padding: 150px 0;
 
 	&Description {
 		text-align: center;
@@ -18,5 +18,8 @@
 		fill: $cornflower-blue;
 		height: 60px;
 		width: 60px;
+	}
+	.btn {
+		margin-top: 20px;
 	}
 }
