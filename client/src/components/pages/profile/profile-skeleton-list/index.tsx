@@ -27,7 +27,7 @@ export default function ProfileSkeletonList<I>({
 						<Item item={item} key={index} />
 					))}
 					{hasMore
-						? Array(5)
+						? Array(1)
 								.fill(null)
 								.map((_, index) =>
 									index === 0 ? (
