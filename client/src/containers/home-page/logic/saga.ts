@@ -5,6 +5,7 @@ import { fetchFocusTask, fetchTaskComments, fetchTasks } from '../../../services
 import { ITask } from '../../../components/common/next-task/interface';
 import { fetchCommunity } from '../../../services/followers.service';
 import { WebApi } from 'typings/webapi';
+import { IMessage } from '../types';
 
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTasks>): any {
 	const { discipline, currentTask } = action;
@@ -32,9 +33,12 @@ export function* fetchFocusTaskWatcher() {
 	yield takeEvery(actionTypes.GET_FOCUS_TASK, fetchFocusTasksWorker);
 }
 
-export function* fetchMessagesWorker(action: ReturnType<typeof actions.getMessages>): any {
-	const messages = yield call(fetchTaskComments);
-	yield put(actions.setMessages({ messages }));
+export function* fetchMessagesWorker({ skip, take, isLoadPage }: ReturnType<typeof actions.getMessages>): any {
+	if (isLoadPage) {
+		yield put(actions.setDataBeforeLoad());
+	}
+	const { comment, count }: { comment: IMessage[]; count: number } = yield call(fetchTaskComments, { skip, take });
+	yield put(actions.setMessages({ messages: comment, messagesCount: count }));
 }
 
 export function* fetchMessagesWatcher() {

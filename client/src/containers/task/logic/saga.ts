@@ -14,7 +14,6 @@ export function* fetchTaskWorker(action: ReturnType<typeof actions.getTask>): an
 	try {
 		const { id } = action;
 		const task = yield call(getTaskById, id);
-		console.log(task);
 
 		yield put(actions.setTask({ task }));
 	} catch (error) {

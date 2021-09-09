@@ -12,10 +12,11 @@ export const fetchTasks = async () => {
 	return res;
 };
 
-export const fetchTaskComments = async () => {
+export const fetchTaskComments = async ({ skip, take }: { skip: number; take: number }) => {
 	const res = await http.callWebApi({
 		method: 'GET',
 		endpoint: 'comment-task',
+		query: { skip, take },
 	});
 
 	return res;

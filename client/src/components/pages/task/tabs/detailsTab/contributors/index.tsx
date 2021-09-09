@@ -16,9 +16,9 @@ export const Contributors = ({ contributors }: IContributorsProps) => {
 				<>
 					<p>These users have contributed to this task:</p>
 					<div className={styles.users}>
-						{contributors.map((item) => {
+						{contributors.map((item, index) => {
 							return (
-								<Link to={`${ROUTES.Users}/${item.username}`} key={item.username}>
+								<Link to={`${ROUTES.Users}/${item.username}`} key={index.toString()}>
 									<Avatar size={60} avatar={item.avatar} key={item.username} />
 								</Link>
 							);

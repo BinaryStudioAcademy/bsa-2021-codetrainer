@@ -12,7 +12,10 @@ export interface IHomeState {
 			tags: ITag[];
 		} | null;
 		community: WebApi.Entities.IUser[] | null;
-		messages: IMessage[] | null;
+		messages: IMessage[];
+		messagesCount: number;
+		messagesOnPage: number;
+		page: number;
 	};
 	errors: string | null;
 }
@@ -21,7 +24,10 @@ export const initialState: IHomeState = {
 	state: {
 		nextTask: null,
 		community: null,
-		messages: null,
+		messages: [],
+		messagesCount: 0,
+		messagesOnPage: 10,
+		page: 1,
 	},
 	errors: null,
 };
