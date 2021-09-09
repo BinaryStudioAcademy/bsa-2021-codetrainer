@@ -9,7 +9,6 @@ import { IClanModalForm } from './../../modals/clan-modal/index';
 type TSortCallback = () => void;
 
 export interface IClansProps {
-	user: IUser;
 	isLoading: boolean;
 	clans: WebApi.Entities.IClan[];
 	setOrder: (order: Order) => void;
@@ -24,7 +23,6 @@ export interface IClansProps {
 	itemsPerPage: number;
 	count: number;
 	setPage: (page: number) => void;
-	setItemsPerPage: (itemsPerPage: number) => void;
 }
 
 export interface IClanProps {

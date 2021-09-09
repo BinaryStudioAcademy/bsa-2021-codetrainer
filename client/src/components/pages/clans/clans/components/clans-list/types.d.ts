@@ -6,7 +6,6 @@ export interface IClansListProps {
 	clans: WebApi.Entities.TClans;
 	count: number;
 	isLoading: boolean;
-	userId: string;
 	setOrderBy: (orderBy: ClansOrderByOptions) => void;
 	setOrder: (order: Order) => void;
 	setNameQuery: (nameQuery: string) => void;
@@ -16,5 +15,4 @@ export interface IClansListProps {
 	page: number;
 	itemsPerPage: number;
 	setPage: (page: number) => void;
-	setItemsPerPage: (itemsPerPage: number) => void;
 }

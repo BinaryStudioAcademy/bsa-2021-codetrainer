@@ -1,4 +1,4 @@
-@import 'styles/variables';
+@import "styles/variables";
 
 .clansList {
 	padding: 10px;
@@ -36,4 +36,12 @@
 			border: none;
 		}
 	}
+
+	margin-bottom: 30px;
+}
+
+.buttonWrapper {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
 }
