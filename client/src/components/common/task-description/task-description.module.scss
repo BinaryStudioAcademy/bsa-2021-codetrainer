@@ -3,6 +3,7 @@
 .taskTitleWrapper {
 	display: flex;
 	align-items: center;
+	margin-bottom: 10px;
 }
 
 .taskTitle {
@@ -16,6 +17,11 @@
 		color: $cornflower-blue;
 		text-decoration: underline;
 	}
+}
+
+.taskContainer {
+	height: 180px;
+	overflow: auto;
 }
 
 .iframe {

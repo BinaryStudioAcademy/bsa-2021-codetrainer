@@ -1,7 +1,7 @@
 export enum FocusKeys {
-	FUNDAMENTALS = 'Fundamentals',
-	RANK_UP = 'Rank Up',
-	BUG_FIXES = 'Bug fixes',
-	ALGORITHMS = 'Algorithms',
-	RANDOM = 'Random',
+	FUNDAMENTALS = 'fundamentals',
+	RANK_UP = 'rankUp',
+	BUG_FIXES = 'bugfixes',
+	ALGORITHMS = 'algorithms',
+	RANDOM = 'random',
 }

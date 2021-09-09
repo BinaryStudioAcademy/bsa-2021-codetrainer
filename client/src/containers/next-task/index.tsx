@@ -8,50 +8,43 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import { FocusKeys } from 'constants/FocusKeys';
 import { useDispatch } from 'react-redux';
-import { getTasks } from '../home-page/logic/actions';
+import { getFocusTask } from '../home-page/logic/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import historyHelper from 'helpers/history.helper';
 import { ROUTES } from 'constants/routes';
 
-const icons: Record<string, React.ElementType> = {
-	FUNDAMENTALS: LibraryBooksIcon,
-	RANK_UP: ArrowUpwardIcon,
-	BUG_FIXES: BugReportIcon,
-	ALGORITHMS: TuneIcon,
-	RANDOM: ShuffleIcon,
-};
+const focusSelect: Array<{ iconM: React.ElementType; title: string; value: FocusKeys }> = [
+	{ iconM: LibraryBooksIcon, title: 'Fundamentals', value: FocusKeys.FUNDAMENTALS },
+	{ iconM: ArrowUpwardIcon, title: 'Rank Up', value: FocusKeys.RANK_UP },
+	{ iconM: BugReportIcon, title: 'Bug fixes', value: FocusKeys.BUG_FIXES },
+	{ iconM: TuneIcon, title: 'Algorithms', value: FocusKeys.ALGORITHMS },
+	{ iconM: ShuffleIcon, title: 'Random', value: FocusKeys.RANDOM },
+];
 
 const NextTaskContainer = () => {
-	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({
-		id: '0',
-		title: 'Fundamentals',
-		icon: '',
-	});
+	const [activeFocus, setActiveFocus] = useState<number>(0);
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
 	const task = useAppSelector((rootState) => rootState.home.state?.nextTask);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const focusValues = Object.entries(FocusKeys);
-		const selectFocusValues = focusValues.map(([key, value], index) => ({
+		const selectFocusValues = focusSelect.map(({ iconM, title }, index) => ({
 			id: index.toString(),
-			title: value,
-			iconM: icons[key],
+			title,
+			iconM,
 		}));
 
-		setActiveFocusValue(selectFocusValues[0]);
 		setFocusValues(selectFocusValues);
 	}, []);
 
 	useEffect(() => {
 		dispatch(
-			getTasks({
-				discipline: activeFocusValue.title,
-				currentTask: task?.id,
+			getFocusTask({
+				discipline: focusSelect[activeFocus].value,
 			}),
 		);
-	}, [activeFocusValue.title]);
+	}, [activeFocus]);
 
 	const handleTrainClick = () => {
 		if (task) {
@@ -62,9 +55,8 @@ const NextTaskContainer = () => {
 
 	const handleSkipClick = () => {
 		dispatch(
-			getTasks({
-				discipline: activeFocusValue.title,
-				currentTask: task?.id,
+			getFocusTask({
+				discipline: focusSelect[activeFocus].value,
 			}),
 		);
 	};
@@ -74,10 +66,10 @@ const NextTaskContainer = () => {
 			<NextTask
 				task={task}
 				focusValues={focusValues}
-				activeFocusValue={activeFocusValue}
-				setActiveFocusValue={setActiveFocusValue}
+				activeFocusValue={focusValues[activeFocus]}
 				handleTrainClick={handleTrainClick}
 				handleSkipClick={handleSkipClick}
+				onChangeSelect={setActiveFocus}
 			/>
 		</>
 	);

@@ -1,27 +1,13 @@
 import React from 'react';
-import styles from './task-description.module.scss';
-import { Rank, TagList } from 'components/basic';
-import { ITaskDescriptionProps } from './interface';
 import { Link } from 'react-router-dom';
-import { insertStylesInIframe } from '../../../helpers/iframe.helper';
+import { Rank, TagList } from 'components/basic';
+import { Markdown } from 'components';
 import { ROUTES } from 'constants/routes';
+import { ITaskDescriptionProps } from './interface';
+
+import styles from './task-description.module.scss';
 
 const TaskDescription: React.FC<ITaskDescriptionProps> = ({ id, rank, name, description, examples, tags }) => {
-	const codeExamples = examples
-		? `<h6>Examples:</h6>
-		<div>
-			<code>
-			${examples}
-			</code>
-		</div>`
-		: '';
-
-	const content = `
-	<div>
-		<p>${description}</p>
-		${codeExamples}
-	</div>`;
-
 	return (
 		<>
 			<span className={styles.taskTitleWrapper}>
@@ -30,14 +16,8 @@ const TaskDescription: React.FC<ITaskDescriptionProps> = ({ id, rank, name, desc
 					{name}
 				</Link>
 			</span>
-			<div>
-				{/* // TODO: replace with markdown */}
-				<iframe
-					id="taskDescriptionFrame"
-					className={styles.iframe}
-					srcDoc={content}
-					onLoad={() => insertStylesInIframe('taskDescriptionFrame')}
-				/>
+			<div className={styles.taskContainer}>
+				<Markdown text={typeof description === 'string' ? description : ''} />
 			</div>
 			{tags && <TagList tags={tags} />}
 		</>

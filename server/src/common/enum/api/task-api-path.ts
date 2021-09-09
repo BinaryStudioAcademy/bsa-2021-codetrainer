@@ -8,4 +8,5 @@ export const TaskApiPath = {
 	USER_SOLUTIONS: '/search/user-solutions',
 	USER_TASKS: '/search/user-tasks',
 	TASK_PUBLISH: '/:id/publish',
+	FOCUS: '/search/focus',
 };

@@ -1,11 +1,18 @@
-import { EntityRepository, SelectQueryBuilder, ObjectLiteral, IsNull, getRepository } from 'typeorm';
+import { EntityRepository, SelectQueryBuilder } from 'typeorm';
 import { AbstractRepository } from '../abstract';
 import { Task } from '../../models';
-import { TASK_ORDER_BY, SEARCH_KEYS } from '../../../common';
+import { TASK_ORDER_BY, SEARCH_KEYS, SEARCH_FOCUS_KEYS } from '../../../common';
 
 type IWhere = {
 	[K in SEARCH_KEYS]?: number | string | string[];
 };
+
+interface ISeachFocus {
+	taskIds: Array<string>;
+	focus?: SEARCH_FOCUS_KEYS;
+	fromRank?: number;
+	toRank?: number;
+}
 
 const sortQuery = <T>(query: SelectQueryBuilder<T>, sorts?: TASK_ORDER_BY): SelectQueryBuilder<T> => {
 	switch (sorts) {
@@ -96,6 +103,7 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task')
 			.select(['task'])
 			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.andWhere('task.is_published = :published', { published: true })
 			.orderBy('RANDOM()')
 			.limit(1)
 			.getOne();
@@ -128,5 +136,19 @@ export class TaskRepository extends AbstractRepository<Task> {
 				.take(query.take)
 				.getMany(),
 		};
+	}
+
+	async searchFocus({ taskIds, focus, fromRank, toRank }: ISeachFocus) {
+		const qb = this.createQueryBuilder('task')
+			.select(['task'])
+			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.andWhere('task.is_published = :published', { published: true });
+		if (focus) {
+			qb.andWhere('task.discipline = :focus', { focus });
+		}
+		if (fromRank) {
+			qb.andWhere('task.rank > :fromRank AND task.rank < :toRank', { fromRank, toRank });
+		}
+		return qb.orderBy('RANDOM()').limit(1).getOne();
 	}
 }

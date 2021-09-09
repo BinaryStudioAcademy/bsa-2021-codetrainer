@@ -4,6 +4,7 @@ import { Select, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import { TaskDescription } from 'components/common';
 import { INextTaskProps } from './interface';
+import { ISelectValue } from 'components/basic/select/interface';
 
 import styles from './nextTask.module.scss';
 
@@ -11,11 +12,13 @@ const NextTask: React.FC<INextTaskProps> = ({
 	task,
 	focusValues,
 	activeFocusValue,
-	setActiveFocusValue,
 	handleTrainClick,
 	handleSkipClick,
+	onChangeSelect,
 }) => {
-	console.log(focusValues);
+	const handleChangeSelect = (value: ISelectValue) => {
+		onChangeSelect(Number(value.id));
+	};
 	return (
 		<article className={styles.wrapper}>
 			<div className={styles.selectingContainer}>
@@ -26,7 +29,7 @@ const NextTask: React.FC<INextTaskProps> = ({
 					<Select
 						values={focusValues}
 						activeValue={activeFocusValue}
-						onChange={setActiveFocusValue}
+						onChange={handleChangeSelect}
 						className={styles.focusSelect}
 					/>
 				</div>

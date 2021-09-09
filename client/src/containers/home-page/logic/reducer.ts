@@ -23,6 +23,13 @@ export const homeReducer = createReducer<IHomeState>(initialState, {
 		};
 	},
 
+	[actionTypes.SET_ERRORS](state, { errors }: actionTypes.TSetErrors) {
+		return {
+			...state,
+			errors,
+		};
+	},
+
 	[actionTypes.SET_COMMUNITY](state, action: actionTypes.TSetCommunity) {
 		return {
 			...state,

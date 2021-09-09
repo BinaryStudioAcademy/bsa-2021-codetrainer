@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SOLUTION_STATUS, TaskApiPath } from '../../common';
+import { SEARCH_FOCUS, SOLUTION_STATUS, TaskApiPath } from '../../common';
 import {
 	idSchema,
 	taskSchema,
@@ -8,6 +8,7 @@ import {
 	taskSearchSchema,
 	taskWithSolutionsSchema,
 	taskValidationSchema,
+	taskSearchFocusSchema,
 } from '../../middleware';
 import { TaskService } from '../../services';
 import { TypeTest } from '../../types';
@@ -52,6 +53,12 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 		.get(TaskApiPath.USER_TASKS, (req, res, next) =>
 			taskService
 				.getUserTasks(req.user.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.get(TaskApiPath.FOCUS, validationMiddleware([taskSearchFocusSchema]), (req, res, next) =>
+			taskService
+				.searchFocus(req.user, req.query.focus as SEARCH_FOCUS)
 				.then((data) => res.send(data))
 				.catch(next),
 		)
