@@ -1,6 +1,10 @@
 @import 'styles/variables';
 
-.detailsTab > div {
+.detailsTab {
 	background-color: var(--container-color);
-	margin: 0 0 50px 0;
+
+	& > div {
+		background-color: var(--container-color);
+		margin: 0 0 50px 0;
+	}
 }
