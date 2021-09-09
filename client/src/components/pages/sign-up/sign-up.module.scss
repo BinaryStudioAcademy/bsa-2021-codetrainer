@@ -1,0 +1,58 @@
+@import 'styles/variables';
+
+h4 {
+	font: $fourth-title-font;
+	margin-bottom: 10px;
+}
+
+.header {
+	margin-top: 0px;
+}
+
+.error {
+	color: $french-rose;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+.light {
+	color: $nobel;
+}
+
+.info {
+	margin-bottom: 10px;
+}
+
+a {
+	font-family: $base-font;
+	font-size: 14px;
+	color: #705ff5;
+	text-decoration: underline;
+}
+
+.form {
+	& > button {
+		width: 100%;
+	}
+	.cancel {
+		float: right;
+	}
+}
+
+.footer {
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	text-align: center;
+	font: $base-font;
+	line-height: 17px;
+	color: $nobel;
+}
+
+.form,
+.footer {
+	a {
+		color: $cornflower-blue;
+		text-decoration: underline;
+	}
+}

@@ -1,0 +1,10 @@
+@import 'styles/variables';
+
+.challengesAmount {
+	padding-top: 10px;
+	padding-left: 25px;
+	font: $fifth-title-font;
+	color: var(--text-color);
+	background: var(--container-color);
+	opacity: 0.5;
+}

@@ -1,0 +1,18 @@
+@import 'styles/variables';
+
+.challenge {
+	padding: 25px;
+	background-color: var(--secondary-container-color);
+	border-radius: 6px;
+	margin-bottom: 20px;
+}
+
+.modal {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.modal:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}

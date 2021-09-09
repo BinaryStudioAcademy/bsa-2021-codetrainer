@@ -1,0 +1,47 @@
+@use 'styles/variables.scss' as var;
+
+.container {
+	width: 916px;
+	margin-top: 42px;
+	font-family: var.$base-font-family;
+	color: var(--text-color);
+	display: grid;
+	grid-auto-flow: row;
+	grid-gap: 20px;
+
+	> *:not(.gridContainer) {
+		background: var(--container-color);
+		padding: 30px 22px;
+		border-radius: 7px;
+	}
+}
+
+.submitBtn {
+	width: 100%;
+	background: var(--pink);
+	border-radius: 7px;
+	border: 0;
+	font: var.$button-font;
+	line-height: 20px;
+	text-align: center;
+	color: #ffffff;
+	cursor: pointer;
+	padding: 12px 20px;
+	margin-top: 20px;
+}
+
+.form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 70px);
+	grid-gap: 20px;
+}
+
+.gridContainer {
+	display: grid;
+	grid-template-columns: 480px 1fr;
+	grid-gap: 20px;
+	> * {
+		background: var(--container-color);
+	}
+}

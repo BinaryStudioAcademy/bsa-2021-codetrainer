@@ -1,0 +1,84 @@
+.selectWrapper {
+	position: relative;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	h5 {
+		padding-right: 45px;
+	}
+}
+
+.select {
+	box-sizing: border-box;
+
+	display: flex;
+	align-items: center;
+	height: 45px;
+	margin: 0;
+	padding: 14px 20px;
+
+	font-size: 14px;
+	font-weight: 500;
+	border: none;
+	border-radius: 10px;
+
+	background: var(--secondary-container-color);
+	background-image: url('./assets/arrow.svg');
+	background-repeat: no-repeat;
+	background-position: calc(100% - 20px) 50%;
+
+	cursor: pointer;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	span {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.icon {
+		margin-right: 15px;
+		color: var(--purple);
+		font-style: 16px;
+	}
+}
+
+.select img {
+	margin-right: 15px;
+}
+
+.select::selection,
+.select img::selection {
+	background: none;
+}
+
+.optionsList {
+	position: absolute;
+	z-index: 1;
+	top: 52px;
+
+	box-sizing: border-box;
+
+	display: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+
+	border-radius: 5px;
+
+	background: var(--container-color);
+	box-shadow: 0px 4px 6px rgba(189, 189, 189, 0.25);
+
+	list-style-type: none;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.optionsActive {
+	display: block;
+	z-index: 5;
+	margin-bottom: 50px;
+}
+
+.buttonBlock {
+	margin-top: 0;
+}

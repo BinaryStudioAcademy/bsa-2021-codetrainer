@@ -1,0 +1,35 @@
+@import 'styles/variables';
+
+.navigation {
+	padding: 20px 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--purple);
+
+	&Links {
+		font: $button-font;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	&Link {
+		color: #fff;
+
+		&Logo {
+			vertical-align: middle;
+			filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(344deg) brightness(101%) contrast(101%);
+			margin-right: 10px;
+		}
+	}
+
+	&Logo {
+		height: 50px;
+
+		img {
+			height: 70%;
+			margin-top: 5px;
+		}
+	}
+}

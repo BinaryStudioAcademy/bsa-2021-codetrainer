@@ -1,0 +1,55 @@
+@import 'styles/variables';
+
+.tabsNavigation {
+	padding: 26px 24px;
+	border-radius: 15px 15px 0 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 42px;
+	background: var(--container-color);
+
+	&Item {
+		font: $tub-font;
+		cursor: pointer;
+
+		&Active {
+			text-decoration: underline;
+			color: $cornflower-blue;
+		}
+	}
+
+	border-bottom: 1.5px solid #eaecf1;
+}
+
+.tabsContent {
+	border-radius: 0 0 15px 15px;
+	padding: 26px 24px;
+	background: var(--container-color);
+
+	div p,
+	p {
+		font: $base-font;
+		margin-top: 0;
+		margin-bottom: 25px;
+	}
+
+	ul {
+		list-style-type: none;
+		padding-left: 15px;
+
+		li {
+			position: relative;
+
+			&::before {
+				position: absolute;
+				content: '';
+				background-color: $french-rose;
+				border-radius: 50%;
+				height: 6px;
+				width: 6px;
+				left: -10px;
+				bottom: 4px;
+			}
+		}
+	}
+}

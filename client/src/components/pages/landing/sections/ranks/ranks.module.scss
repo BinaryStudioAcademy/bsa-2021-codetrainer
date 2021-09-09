@@ -1,0 +1,46 @@
+@import 'styles/variables';
+
+.ranksSection {
+	&Text {
+		margin-top: 40px;
+	}
+
+	&Description {
+		// margin: 0 auto;
+		// text-align: center;
+		width: 500px;
+	}
+}
+
+.ranks {
+	width: 100%;
+	margin-top: 100px;
+	display: flex;
+	justify-content: space-between;
+
+	&Section {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+
+		& > div {
+			width: 94px;
+			height: 50px;
+			font-size: 22px;
+			line-height: 40px;
+			transition: $base-animation-time;
+			cursor: pointer;
+
+			&:hover {
+				transform: scale(1.1);
+			}
+		}
+	}
+}
+
+.ranksContainer {
+	background-image: url('/assets/images/landing/ranks.svg');
+	background-position: center right;
+	background-repeat: no-repeat;
+
+}

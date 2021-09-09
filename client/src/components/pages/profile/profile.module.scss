@@ -1,0 +1,16 @@
+@import 'styles/variables';
+
+.profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 1000px;
+	width: 1000px;
+	border-radius: 15px;
+}
+
+.error {
+	color: $french-rose;
+	margin-top: 30px;
+	font: $fourth-title-font;
+}

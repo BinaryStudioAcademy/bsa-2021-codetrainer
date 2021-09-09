@@ -1,0 +1,43 @@
+@import 'styles/variables';
+
+.taskContainer {
+	width: calc(100vw - 255px);
+	height: calc(100vh - 91px);
+	padding: 42px 40px;
+	display: flex;
+}
+
+.taskWorkspace {
+	&Container {
+		width: 62%;
+		padding-left: 40px;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.taskPanel {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+
+	&Left,
+	&Right {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 10px;
+	}
+}
+
+.taskLanguageSelect {
+	margin-top: 10px;
+	width: 300px;
+
+	h5,
+	ul li span {
+		color: #000;
+	}
+}

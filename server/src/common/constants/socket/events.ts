@@ -1,0 +1,6 @@
+export const SOCKET_EVENTS = {
+	SOLUTION_RESULT: 'SOLUTION:RESULT',
+	TASK_RESULT: 'TASK:RESULT',
+	DISCONNECTING: 'disconnecting',
+	CONNECTION: 'connection',
+};

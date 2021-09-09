@@ -1,0 +1,108 @@
+@import 'styles/variables';
+
+.socialContainer {
+	padding: 25px;
+	.header {
+		margin: 0 0 10px;
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	ul {
+		padding: 0;
+	}
+
+	.socialItem {
+		font: $base-font;
+		color: var(--text-color);
+		background-color: var(--secondary-container-color);
+		border-radius: 7px;
+		margin-bottom: 10px;
+		padding: 5px 10px;
+		min-width: 400px;
+		height: 28px;
+		list-style: none;
+		position: relative;
+
+		&:hover {
+			background-color: var(--white);
+			.inputField {
+				background-color: var(--white);
+			}
+		}
+
+		.inputField {
+			font: $base-font;
+			outline: none;
+			border: none;
+			background-color: var(--secondary-container-color);
+			color: var(--text-color);
+			width: calc(100% - 32px);
+			height: 28px;
+			position: absolute;
+			top: 0;
+			border-radius: 4px;
+		}
+	}
+
+	.socialButton {
+		list-style: none;
+		margin-bottom: 10px;
+
+		button {
+			font: $base-font;
+			min-width: 300px;
+			padding: 5px 10px;
+			outline: none;
+			border: none;
+			border-radius: 7px;
+			cursor: pointer;
+			background-color: var(--white);
+
+			&:hover {
+				background-color: $white-lilac;
+			}
+		}
+	}
+	.socialIcon {
+		margin-right: 7px;
+	}
+
+	.github {
+		display: flex;
+		* {
+			margin-bottom: 0;
+		}
+		gap: 10px;
+		align-items: center;
+		.socialItem {
+			min-width: 0;
+			flex-basis: 100%;
+			flex-shrink: 1;
+		}
+		.unlink {
+			min-width: 0;
+			flex-shrink: 0;
+		}
+		a {
+			color: $cornflower-blue;
+		}
+	}
+
+	.submitBtn {
+		width: 100%;
+		background: #ec4179;
+		border-radius: 7px;
+		border: 0;
+		font-family: 'Montserrat', sans-serif;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+		color: #ffffff;
+		cursor: pointer;
+		padding: 12px 20px;
+		margin-top: 10px;
+	}
+}

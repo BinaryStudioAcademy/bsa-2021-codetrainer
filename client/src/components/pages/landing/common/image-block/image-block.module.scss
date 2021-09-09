@@ -1,0 +1,19 @@
+@import 'styles/variables';
+
+.imageBlock {
+	height: 600px;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.105);
+	overflow: hidden;
+	transition: $base-animation-time;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}

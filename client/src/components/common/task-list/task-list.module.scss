@@ -1,0 +1,9 @@
+@import 'styles/index.scss';
+
+.containerBlock {
+	background: var(--container-color);
+	.title {
+		font: $fourth-title-font;
+		padding-left: 10px;
+	}
+}

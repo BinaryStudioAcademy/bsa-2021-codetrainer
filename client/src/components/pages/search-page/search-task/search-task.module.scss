@@ -1,0 +1,42 @@
+@import "styles/variables";
+
+.header {
+	padding-left: 15px;
+}
+
+.rankContainer {
+	padding-left: 15px;
+	display: flex;
+	grid-gap: 15px;
+	gap: 15px;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.checkboxContainer {
+	padding-left: 15px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	max-height: 200px;
+	overflow-y: scroll;
+}
+
+h6 {
+	margin: 20px 0px 10px;
+	font: $tub-font;
+}
+
+.input {
+	margin-top: 10px;
+	background-color: red;
+}
+
+.label {
+	display: inline-block;
+	margin: 12px 15px 10px;
+}
+
+.submitBtn {
+	width: 100%;
+}

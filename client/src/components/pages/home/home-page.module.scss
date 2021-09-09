@@ -1,0 +1,21 @@
+@import 'styles/variables';
+
+.container {
+	background-color: var(--background-color);
+	width: 916px;
+	font-family: $base-font-family;
+	color: var(--text-color);
+}
+
+.userGreeting {
+	margin: 40px 0 25px;
+
+	font-weight: 500;
+	font-size: 36px;
+}
+
+.nextTaskWrapper,
+.communityWrapper,
+.feedWrapper {
+	margin-bottom: 41px;
+}

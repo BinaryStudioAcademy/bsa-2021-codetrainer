@@ -1,0 +1,7 @@
+{
+  "diff": true,
+  "timeout": "60000",
+  "spec": ["./specs/**/*.spec.js"],
+  "reporter": "spec",
+  "require":["dotenv/config"]
+}

@@ -1,0 +1,49 @@
+.feed {
+	padding: 24px;
+
+	background: var(--container-color);
+	border-radius: 15px;
+}
+
+.feedHeader {
+	margin-bottom: 31px;
+}
+
+.feed .title {
+	margin-right: 24px;
+
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.separator {
+	margin-right: 24px;
+
+	border: 1px solid #e5e5e5;
+}
+
+.feed h4 {
+	display: inline-block;
+	margin: 0;
+}
+
+.feed .feedCategory {
+	margin-right: 24px;
+
+	font-size: 16px;
+	font-weight: 600;
+
+	cursor: pointer;
+}
+
+.feedCategory.active {
+	color: var(--purple);
+
+	border-bottom: 1.5px solid var(--purple);
+}
+
+.loadMoreButton {
+	width: 156px;
+	height: 44px;
+	margin: 5px 0 10px;
+}

@@ -1,0 +1,25 @@
+@import 'styles/variables';
+
+.welcomeSection {
+	padding: 150px 0;
+
+	&Description {
+		text-align: center;
+		margin: 0 auto;
+		width: 500px;
+	}
+
+	&Text {
+		color: #000;
+		font: 500 24px $base-font-family;
+	}
+
+	&Logo {
+		fill: $cornflower-blue;
+		height: 60px;
+		width: 60px;
+	}
+	.btn {
+		margin-top: 20px;
+	}
+}

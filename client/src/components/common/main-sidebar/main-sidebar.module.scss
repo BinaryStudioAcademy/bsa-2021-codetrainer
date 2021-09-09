@@ -1,0 +1,65 @@
+@import "styles/variables";
+
+.mainSidebar {
+	padding: 38px 40px;
+	background: var(--sidebar);
+	width: 245px;
+	min-height: 100vh;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 10;
+	justify-self: flex-start;
+	box-sizing: border-box;
+}
+
+.logotype {
+	&Image {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+.navigation {
+	margin-top: 168px;
+	display: flex;
+	flex-direction: column;
+
+	&List {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	&Icon {
+		transition: 0.3s;
+		vertical-align: middle;
+		font-size: 28px;
+		margin-right: 12px;
+	}
+
+	&Link {
+		line-height: 30px;
+		color: #fff;
+		border-radius: 12px;
+		padding: 18px 5px 18px 20px;
+		display: block;
+		font: $menu-font;
+		position: relative;
+		text-decoration: none;
+
+		&Active {
+			background: rgba(#fff, 0.3);
+			text-decoration: underline;
+		}
+
+		&:hover {
+			background: rgba(#fff, 0.3);
+
+			.navigationIcon {
+				transform: scale(1.1);
+			}
+		}
+	}
+}

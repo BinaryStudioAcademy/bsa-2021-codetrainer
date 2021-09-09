@@ -1,0 +1,57 @@
+@use 'styles/variables.scss' as var;
+
+.taskContainer {
+	font: var.$sixth-title-font;
+	margin-bottom: 40px;
+}
+
+.taskContainer a {
+	cursor: pointer;
+}
+
+.header {
+	display: flex;
+	padding: 20px 0;
+}
+
+.taskContainer h2 {
+	margin: 0 0 0 10px;
+	font-size: 18px;
+}
+
+.task {
+	border-radius: 15px;
+	background: var(--container-color);
+	padding: 20px 20px;
+}
+
+.taskContainer hr {
+	margin: 20px -20px;
+	border: 1px solid var(--divider);
+}
+
+.switch {
+	display: flex;
+}
+
+.switch button {
+	margin-right: 20px;
+	font-weight: 600;
+	font-size: 16px;
+	padding: 3px;
+	border: none;
+	outline: none;
+	background: var(--container-color);
+	color: var(--text-color);
+	cursor: pointer;
+}
+
+.switch .active {
+	color: var(--purple);
+	border-bottom: var(--purple) 2px solid;
+}
+
+.infoContainer {
+	display: flex;
+	margin-top: 10px;
+}

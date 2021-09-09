@@ -1,0 +1,142 @@
+:local(.container) {
+	background: var(--background-color);
+	color: var(--text-color);
+	width: 700px;
+}
+
+:local(.container a) {
+	cursor: pointer;
+}
+
+:local(.title) {
+	margin: 0;
+	font-size: 20px;
+}
+
+:local(.close) {
+	margin-left: auto;
+	text-decoration: none;
+	color: #ec4179;
+	font-weight: 600;
+	font-size: 20px;
+}
+
+:local(.close:hover) {
+	text-decoration: none;
+	color: #ec4179;
+}
+
+:local(.formInput) {
+	height: 60px;
+}
+
+:local(.form button) {
+	margin-top: 5px;
+	border: #705ff5 2px solid;
+	background: var(--purple);
+	color: #fff;
+}
+
+:local(.form span) {
+	color: #ec4179;
+}
+
+:local(.prompt button) {
+	margin-right: 10px;
+}
+
+:local(.prompt p) {
+	margin: auto 0;
+	font-size: larger;
+}
+
+:local(.collections) {
+	padding: 10px 0;
+}
+
+:local(.collection) {
+	display: flex;
+	margin-bottom: 20px;
+	&:last-child {
+		margin: 0;
+	}
+}
+
+:local(.collection):hover {
+	background: var(--secondary-container-color);
+	border-radius: 15px;
+}
+
+:local(.collection img) {
+	width: 70px;
+	border-radius: 15px;
+}
+
+:local(.collection img):hover {
+	cursor: pointer;
+}
+
+:local(.collection p) {
+	margin: 0;
+	display: block;
+}
+
+:local(.collection p span):hover {
+	color: var(--purple);
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+:local(.collection h5) {
+	margin: auto auto auto 0;
+	font-size: 16px;
+}
+
+:local(.collection h5):hover {
+	color: var(--purple);
+	cursor: pointer;
+}
+
+:local(.collectionInfo) {
+	display: flex;
+	flex-direction: column;
+	margin: auto 0 auto 20px;
+	width: 100%;
+	padding-right: 10px;
+}
+
+:local(.collectionHeader) {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 10px;
+}
+
+:local(.addButton) {
+	width: 70px;
+	height: 70px;
+	border-radius: 15px;
+}
+
+:local(.addButton):hover {
+	background: var(--white);
+	color: var(--black);
+	cursor: pointer;
+}
+
+:local(.newCollection):hover {
+	background: var(--secondary-container-color);
+	border-radius: 15px;
+}
+
+:local(.newCollection) {
+	display: flex;
+	flex-direction: row;
+}
+
+:local(.addButton svg) {
+	margin: 25px;
+}
+
+:local(.newCollection p) {
+	margin: auto 0 auto 20px;
+}

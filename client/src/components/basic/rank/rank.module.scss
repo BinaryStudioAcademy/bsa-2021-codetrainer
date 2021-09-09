@@ -1,0 +1,73 @@
+@import 'styles/variables';
+
+$easy: var(--rank-easy);
+$medium: var(--rank-medium);
+$hard: var(--rank-hard);
+$beta: var(--rank-beta);
+
+@mixin rank-color($color) {
+	border-color: $color;
+	color: $color;
+}
+
+@mixin active-rank-color($color) {
+	border-color: $color;
+	color: var(--white);
+	background-color: $color;
+}
+
+.rank {
+	background: var(--rank-color);
+	display: inline-block;
+	box-sizing: border-box;
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 4px 5px;
+	font: $rank-font;
+	letter-spacing: 0;
+	text-align: center;
+	user-select: none;
+
+	&.easy,
+	&.honor {
+		@include rank-color($easy);
+	}
+
+	&.medium {
+		@include rank-color($medium);
+	}
+
+	&.hard {
+		@include rank-color($hard);
+	}
+
+	&.honor {
+		width: auto;
+		padding: 0 5px;
+		font: $honor-font;
+		line-height: 23px;
+	}
+	&.beta {
+		@include active-rank-color(($beta));
+	}
+
+	&.active_easy {
+		@include active-rank-color(($easy));
+	}
+
+	&.active_medium {
+		@include active-rank-color(($medium));
+	}
+
+	&.active_hard {
+		@include active-rank-color(($hard));
+	}
+}
+
+.rank__clickable {
+	cursor: pointer;
+}
+
+label:checked .rank {
+	display: none;
+}

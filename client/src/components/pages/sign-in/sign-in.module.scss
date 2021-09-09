@@ -1,0 +1,59 @@
+@import 'styles/variables';
+
+h4 {
+	font: $fourth-title-font;
+}
+
+body {
+	background: var(--background-color);
+	color: var(--text-color);
+}
+
+.error {
+	color: $french-rose;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+a {
+	font-family: $base-font;
+	font-size: 14px;
+	color: #705ff5;
+	text-decoration: underline;
+}
+
+.signIn {
+	position: relative;
+
+	.form {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 300px;
+		max-width: 80%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		& > button {
+			height: 50px;
+		}
+		.light {
+			color: #e5e5e5;
+		}
+	}
+
+	footer {
+		font-family: $base-font-family;
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translate(-50%);
+		font-size: 14px;
+		color: rgba(40, 40, 40, 0.5);
+		.link {
+			text-decoration: underline;
+		}
+	}
+}

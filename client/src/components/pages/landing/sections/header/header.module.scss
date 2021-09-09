@@ -1,0 +1,52 @@
+@import 'styles/variables';
+
+.header {
+	height: 900px;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 100px;
+
+	&Container {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		background-color: #fff;
+		background-image: url('/assets/images/landing/neon1.svg');
+		background-position: center right;
+		background-repeat: no-repeat;
+	}
+
+	&Description {
+		width: 450px;
+		margin: 50px 100px 100px;
+	}
+
+	&Title {
+		margin: 0;
+		color: var(--text-color);
+		font: 700 36px $base-font-family;
+	}
+
+	&Button {
+		cursor: pointer;
+		background-color: var(--white);
+		color: var(--pink);
+		font: $button-font;
+		border: none;
+		border-radius: 5px;
+		padding: 10px 20px;
+		transition: $base-animation-time;
+
+		&:hover {
+			background-color: darken(#fff, 10%);
+		}
+	}
+
+	&Text {
+		margin: 20px 0;
+		color: var(--text-color);
+		font: 500 16px $base-font-family;
+	}
+}

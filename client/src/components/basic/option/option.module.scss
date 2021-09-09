@@ -1,0 +1,36 @@
+@import 'styles/index.scss';
+
+.wrapper {
+	display: flex;
+	align-items: center;
+	height: 15px;
+	padding: 21px 19px;
+
+	font-size: 14px;
+	font-weight: 500;
+	span {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.icon {
+		margin-right: 15px;
+		font-style: 16px;
+		color: var(--purple) !important;
+	}
+}
+
+.wrapper.activeOption {
+	color: var(--purple) !important;
+}
+
+.wrapper:hover {
+	background: var(--secondary-container-color);
+
+	cursor: pointer;
+}
+
+.wrapper img {
+	margin-right: 15px;
+}

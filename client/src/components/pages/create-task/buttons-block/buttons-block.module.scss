@@ -1,0 +1,22 @@
+.buttonsBlock {
+	display: flex;
+	gap: 25px;
+	width: 100%;
+	align-items: center;
+	margin-top: 35px;
+	label {
+		display: inline-block;
+		margin-bottom: 5px;
+	}
+	label.noMargin {
+		margin-bottom: 0 !important;
+	}
+}
+
+.button {
+	height: 45px;
+	margin-top: 8px;
+}
+.buttonBlockSelect {
+	margin-top: 0;
+}

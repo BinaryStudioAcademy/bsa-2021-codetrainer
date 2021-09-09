@@ -1,0 +1,35 @@
+@use 'styles/variables.scss' as var;
+
+.progressBarBlock {
+	.progressBarInfo {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		height: 18px;
+
+		.progressName {
+			margin-bottom: 0;
+			font: var.$progress-bar-font;
+		}
+		.progressInfoDone {
+			margin-bottom: 0;
+			.progressDone {
+				color: var(--pink);
+				font: var.$base-font;
+				font-weight: 500;
+				font-size: 16px;
+			}
+			.progressOfSymbol {
+				color: var(--text-color);
+				opacity: 0.5;
+			}
+			.progressLeft {
+				color: var(--text-color);
+				opacity: 0.5;
+			}
+		}
+	}
+	&:first-child {
+		margin-top: 0;
+	}
+}

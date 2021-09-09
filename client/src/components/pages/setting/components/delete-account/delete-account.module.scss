@@ -1,0 +1,40 @@
+@use 'styles/variables.scss' as var;
+
+.deleteContainer {
+	margin-bottom: 30px;
+}
+
+.header {
+	margin: 0 0 10px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.buttonWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	.submitBtn {
+		border: 2px solid var.$french-rose;
+	}
+}
+
+.confirmWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	span {
+		font: var.$fifth-title-font;
+		font-weight: 600;
+	}
+
+	.confirmButtonWrapper {
+		margin-top: 10px;
+		display: flex;
+		width: 100%;
+		justify-content: space-around;
+	}
+}

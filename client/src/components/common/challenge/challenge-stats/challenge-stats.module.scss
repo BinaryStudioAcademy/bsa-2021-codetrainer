@@ -1,0 +1,40 @@
+.challengeStats {
+	display: flex;
+	margin: 20px 0;
+	gap: 42px;
+}
+
+.challengeStatsItem {
+	&Text {
+		padding: 0;
+		margin: 0;
+		color: #8c8e91;
+		font: 12px 'Montserrat';
+	}
+
+	&Icon {
+		display: inline;
+		opacity: 0.5;
+		margin-right: 3px;
+		vertical-align: middle;
+	}
+
+	&Link {
+		color: #705ff5;
+		text-decoration: underline;
+	}
+
+	&:not(:last-of-type) {
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: -21px;
+			width: 1px;
+			background: #e5e5e5;
+		}
+	}
+}

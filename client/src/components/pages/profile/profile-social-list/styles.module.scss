@@ -1,0 +1,58 @@
+@import 'styles/variables.scss';
+@import 'styles/index.scss';
+
+.socialTableWrapper {
+	table {
+		display: grid;
+		border-collapse: collapse;
+		grid-template-columns:
+			minmax(100px, 1fr)
+			minmax(100px, 2fr)
+			minmax(100px, 2fr)
+			minmax(100px, 2fr)
+			minmax(100px, 1fr);
+		border-left: 3px solid #f0f1f6;
+	}
+
+	thead,
+	tbody,
+	tr {
+		display: contents;
+	}
+
+	th,
+	td {
+		padding: 15px;
+		height: 67px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-align: center;
+		border-bottom: 3px solid #f0f1f6;
+	}
+
+	th {
+		position: sticky;
+		top: 0;
+		background: #6c7ae0;
+		text-align: center;
+		font-weight: normal;
+		font-size: 1.1rem;
+		color: white;
+		position: relative;
+	}
+
+	td {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.empty {
+	padding: 15px;
+	font: $fourth-title-font;
+	color: var(--text-color);
+	text-align: center;
+	width: 726px;
+}

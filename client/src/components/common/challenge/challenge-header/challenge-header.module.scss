@@ -1,0 +1,15 @@
+.challengeHeader {
+	display: flex;
+	align-items: center;
+	&Title {
+		margin-left: 10px;
+		font: 600 18px 'Montserrat';
+		color: var(--text-color);
+	}
+	&Title:hover {
+		color: var(--purple);
+		text-decoration: underline;
+		text-decoration-color: var(--purple);
+		text-underline-offset: 1px;
+	}
+}

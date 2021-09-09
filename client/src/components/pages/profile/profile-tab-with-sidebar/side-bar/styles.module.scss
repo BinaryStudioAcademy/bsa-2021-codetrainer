@@ -1,0 +1,27 @@
+.profile__tasks__root {
+	padding-top: 20px;
+	width: 190px;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	flex-grow: 0;
+	flex-shrink: 0;
+	font-weight: 600;
+	font-size: 16px;
+	.item {
+		margin-bottom: 15px;
+		border-bottom: 1px solid transparent;
+		background-color: inherit;
+	}
+	.active {
+		cursor: default;
+	}
+	.active,
+	.item:hover {
+		color: #705ff5;
+		border-bottom-color: #705ff5;
+	}
+	.item:hover:not(.active) {
+		cursor: pointer;
+	}
+}

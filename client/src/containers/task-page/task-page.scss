@@ -1,0 +1,12 @@
+.taskBlock {
+	display: flex;
+	gap: 20px;
+	padding-top: 20px;
+	.taskDescription {
+		max-width: 580px;
+	}
+	.taskSolution {
+		min-width: 600px;
+		border: 1px solid black;
+	}
+}

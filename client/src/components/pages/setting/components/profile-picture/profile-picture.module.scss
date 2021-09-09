@@ -1,0 +1,50 @@
+@use 'styles/variables.scss' as var;
+
+.header {
+	margin: 0 0 10px;
+	font-family: var.$base-font-family;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.avatarContainer {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	justify-content: center;
+}
+
+.link {
+	margin-top: 10px;
+	font-size: 16px;
+	color: var.$cornflower-blue;
+}
+
+.inputFileWrapper {
+	position: relative;
+	margin-top: 10px;
+}
+
+.input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+
+	+ .label {
+		margin-top: 10px;
+		font-size: 16px;
+		color: var(--purple);
+
+		&:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+}

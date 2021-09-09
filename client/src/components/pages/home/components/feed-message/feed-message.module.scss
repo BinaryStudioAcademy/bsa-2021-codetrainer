@@ -1,0 +1,45 @@
+.messageUser {
+	display: flex;
+	margin-bottom: 25px;
+	:first-child {
+		margin: 6px 3px 5px;
+	}
+}
+
+.messageDataWrapper {
+	margin-bottom: 10px;
+}
+
+.messageData {
+	margin: 0 10px;
+
+	color: var(--text-color);
+	font-size: 14px;
+	font-weight: 400;
+
+	opacity: 0.5;
+}
+
+.messageData:first-of-type {
+	margin-left: 0;
+}
+
+.messageUserImage {
+	height: 25px;
+	width: 25px;
+	margin-right: 14px;
+
+	border: 1px solid var(--pink);
+	border-radius: 50%;
+}
+
+.messageText {
+	margin: 0 4px;
+
+	color: var(--text-color);
+	font-size: 14px;
+}
+
+.separator {
+	border-right: 1px solid #e5e5e5;
+}

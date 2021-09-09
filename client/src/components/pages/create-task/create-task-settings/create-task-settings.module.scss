@@ -1,0 +1,47 @@
+@import 'styles/variables.scss';
+
+.createTaskSettings {
+	padding: 20px;
+	color: var(--text-color);
+	.disciplineItems {
+		display: flex;
+		margin-bottom: 20px;
+	}
+	form {
+		.disciplinesHeading {
+			font: $tub-font;
+		}
+		.group {
+			margin-bottom: 15px;
+		}
+		input {
+			width: 100%;
+			background: var(--secondary-container-color);
+			border: none;
+			border-radius: 7px;
+			padding: 0 20px;
+			margin-bottom: 10px;
+			box-shadow: none;
+			height: 45px;
+			&::placeholder {
+				font: $progress-bar-font;
+				font-size: 14px;
+			}
+			&:focus {
+				outline: none;
+				color: var(--text-color);
+			}
+		}
+	}
+}
+.heading {
+	font: $fourth-title-font;
+	font-weight: 600;
+}
+.label {
+	font: $menu-font;
+	font-size: 14px;
+	display: flex;
+	align-items: flex-end;
+	margin-bottom: 10px;
+}

@@ -1,0 +1,12 @@
+@import 'styles/variables.scss';
+@import 'styles/index.scss';
+
+.selectWrapper {
+	color: var(--text-color);
+
+	.label {
+		display: block;
+		font: $minor-font;
+		margin-bottom: 5px;
+	}
+}

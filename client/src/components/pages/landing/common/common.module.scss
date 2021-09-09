@@ -1,0 +1,32 @@
+@import 'styles/variables';
+
+.section {
+	padding: 190px 0;
+
+	&Container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&Title {
+		color: var(--purple);
+		font: 700 24px $base-font-family;
+	}
+
+	&Text {
+		font: 500 16px $base-font-family;
+
+		p {
+			margin-top: 0;
+
+			&:not(:last-of-type) {
+				margin-bottom: 20px;
+			}
+		}
+	}
+
+	&Filled {
+		background-color: #FAFBFF;
+	}
+}

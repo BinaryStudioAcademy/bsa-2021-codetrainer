@@ -1,0 +1,37 @@
+@import 'styles/variables';
+
+.members {
+	padding: 10px;
+	border-radius: 15px;
+	background: var(--container-color);
+
+	&Table {
+		border-collapse: collapse;
+
+		td,
+		th {
+			font: $base-font;
+			color: var(--text-color);
+			border-color: var(--minor-text);
+		}
+
+		th {
+			font: $sixth-title-font;
+		}
+
+		.centered {
+			justify-content: center;
+		}
+		.name {
+			justify-content: space-between;
+
+			input {
+				width: 150px;
+			}
+		}
+
+		tr:last-of-type td {
+			border: none;
+		}
+	}
+}

@@ -1,0 +1,24 @@
+.container {
+	display: flex;
+	width: calc(100vw - 255px);
+}
+
+.searchPanel {
+	grid-area: searchPanel;
+	padding: 20px 40px;
+	width: 400px;
+}
+
+.challengesList {
+	grid-area: challengesList;
+	padding: 20px 40px;
+	width: calc(100% - 400px);
+	background-color: var(--container-color);
+}
+
+.challengesLoading {
+	display: flex;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 10px;
+}

@@ -1,0 +1,100 @@
+@import 'styles/variables';
+
+.community {
+	border-radius: 10px;
+	margin-bottom: 40px;
+	background-color: var(--container-color);
+	padding: 24px;
+}
+
+.bp3-card {
+	background-color: #f0f3f9;
+	padding: 20px;
+}
+
+.bp3-tag {
+	border: 3px solid var(--pink);
+	border-radius: 8px;
+	padding: 5px;
+	color: var(--pink);
+}
+
+.communityHeader {
+	margin: 0 0 10px;
+
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.communityDescription {
+	margin: 0 0 14px;
+
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.communityUsers {
+	width: 100%;
+}
+
+.community {
+	&Clan {
+		width: 30%;
+	}
+
+	&Honor {
+		width: 30%;
+	}
+}
+
+.communityColumnTitle {
+	font: 500 16px $base-font-family;
+}
+
+.userRow {
+	margin-bottom: 10px;
+}
+
+.userImage {
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	margin: 0 10px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.buttonsContainer {
+	display: flex;
+	flex-direction: column;
+	width: 207px;
+}
+
+.addButton,
+.createButton {
+	height: 44px;
+}
+
+.addButton {
+	margin-bottom: 15px;
+}
+
+.bp3-button {
+	display: block;
+	background-color: #fff;
+	color: #ec4179;
+	border: 3px solid #ec4179;
+	border-radius: 8px;
+	padding: 8px;
+	width: 220px;
+	cursor: pointer;
+}
+
+.bp3-button.primary {
+	background-color: #ec4179;
+	color: #fff;
+	margin-bottom: 10px;
+}
