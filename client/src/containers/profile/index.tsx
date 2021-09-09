@@ -10,6 +10,11 @@ import { RouteComponentProps, useParams } from 'react-router-dom';
 import { getNextRank, NextRankHonor } from 'enum/ranks';
 import { useAppSelector, useUserSelector } from 'hooks/useAppSelector';
 import { ProfileSolutions } from './tabs/solutions';
+import { addNotification } from 'services/notifications/notifications.service';
+import { v4 as uuid } from 'uuid';
+import { NotificationTypes } from 'typings/common/INotification';
+import { WebApi } from 'typings/webapi';
+import { SolutionStatus } from 'typings/common/solution';
 
 export const Profile = (props: RouteComponentProps) => {
 	const { activeTab: activeTabId } = useSelector((state: IRootState) => state.profile);
@@ -38,12 +43,11 @@ export const Profile = (props: RouteComponentProps) => {
 	const mockPointsProps = {
 		rank: userData?.rank ?? 9,
 		honor: userData?.honor ?? 0,
-		completedChallenge: userData?.solutions?.length ?? 0,
+		completedChallenge: (user?.solutions || []).filter((solution) => solution.status === SolutionStatus.COMPLETED)
+			.length,
 	};
 
 	const mockLanguagesProps = {
-		languagesTrained: userData?.languages?.length ?? 0,
-		highestTrained: userData ? (userData.languages ? userData.languages[0].name : 'JS') : 'JS',
 		mostRecent: userData ? (userData.languages ? userData.languages[0].name : 'JS') : 'JS',
 	};
 	const getMaxTotal = (value: number) => {
@@ -63,51 +67,24 @@ export const Profile = (props: RouteComponentProps) => {
 		}
 	};
 	const mockHonorBreakdownProps = {
-		completedChallengeDone: userData
-			? userData.solutions
-				? userData.solutions.filter((solution) => solution.completed === true).length
-				: 0
-			: 0,
-		completedChallengeTotal: userData?.solutions?.length ?? 0,
-		authoredChallengeDone: userData?.tasks?.length ?? 0,
-		authoredChallengeTotal: getMaxTotal(userData?.tasks?.length ?? 0),
-		commentsDone: userData?.comments?.length ?? 0,
-		commentsTotal: getMaxTotal(userData?.comments?.length ?? 0),
-		referralsDone: userData?.referrals?.length ?? 0,
-		referralsTotal: getMaxTotal(userData?.referrals?.length ?? 0),
-		achievementsDone: userData?.achivements?.length ?? 0,
-		achievementsTotal: getMaxTotal(userData?.achivements?.length ?? 0),
+		completedChallengeDone: (user?.solutions || []).filter(
+			(solution) => solution.status === SolutionStatus.COMPLETED,
+		).length,
+		completedChallengeTotal: user?.solutions?.length ?? 0,
+		authoredChallengeDone: user?.tasks?.length ?? 0,
+		authoredChallengeTotal: getMaxTotal(user?.tasks?.length ?? 0),
+		commentsDone: user?.comments?.length ?? 0,
+		commentsTotal: getMaxTotal(user?.comments?.length ?? 0),
 	};
 
 	const mockRankBreakDownProps = {
-		rankProgress: ((userData?.honor ?? 0) * 100) / NextRankHonor[getNextRank(userData?.rank ?? 9)],
-		rank: userData?.rank ?? 9,
+		rankProgress: Number((((user?.honor ?? 0) * 100) / NextRankHonor[getNextRank(user?.rank ?? 9)]).toFixed(1)),
+		rank: user?.rank ?? 9,
 	};
 
-	const getNumberOfReplies = (
-		comments: Array<{
-			replies: Array<any>;
-		}>,
-	) => {
-		let result = 0;
-		comments.forEach((comment) => {
-			result += comment.replies.length;
-		});
-		return result;
-	};
-	const getApproved = (translations: Array<{ approved: boolean }>) => {
-		let result = 0;
-		translations.forEach((translation) => {
-			result += translation.approved ? 1 : 0;
-		});
-		return result;
-	};
 	const mockCommunityProps = {
-		comments: userData?.comments?.length ?? 0,
-		replies: getNumberOfReplies(userData?.comments ?? [{ replies: [] }]),
-		collections: userData?.collections?.length ?? 0,
-		translations: userData?.translations?.length ?? 0,
-		approved: getApproved(userData?.translations ?? [{ approved: false }]),
+		comments: user?.comments?.length ?? 0,
+		collections: user?.collections?.length ?? 0,
 	};
 
 	const statsProps = {
@@ -117,6 +94,7 @@ export const Profile = (props: RouteComponentProps) => {
 		rankBreakdown: mockRankBreakDownProps,
 		community: mockCommunityProps,
 	};
+
 	const publishedTasks = userData?.publishedTasks;
 	const unpublishedTasks = userData?.unpublishedTasks;
 
@@ -199,6 +177,29 @@ export const Profile = (props: RouteComponentProps) => {
 
 	const followHandler = (id: string) => {
 		dispatch(actions.followUser({ id }));
+		if (!user || !userData) {
+			return;
+		}
+		const avatar =
+			user.avatar?.length === 0
+				? 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg'
+				: user.avatar;
+		addNotification(
+			{
+				id: uuid(),
+				read: false,
+				type: NotificationTypes.Follower,
+				date: new Date(),
+				body: {
+					follower: {
+						id: user?.id,
+						username: user.username ?? '',
+						profileUrl: avatar,
+					} as unknown as WebApi.Entities.IUser,
+				},
+			},
+			userData.id,
+		);
 	};
 
 	const unfollowHandler = (id: string) => {

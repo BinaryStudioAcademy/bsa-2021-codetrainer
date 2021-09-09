@@ -32,7 +32,24 @@ export class ClanService {
 		this.profileClanRepository = profileClan;
 	}
 
-	async create(user: User, { name, isPublic = CLAN_IS_PUBLIC }: { name: string; isPublic: boolean }) {
+	async create(
+		user: User,
+		{
+			name,
+			description,
+			isPublic = CLAN_IS_PUBLIC,
+			avatar,
+			cover,
+			maxMembers,
+		}: {
+			name: string;
+			description?: string;
+			isPublic: boolean;
+			avatar?: string;
+			cover?: string;
+			maxMembers: number;
+		},
+	) {
 		if (user.profileClan) {
 			throw new ValidationError(CODE_ERRORS.IN_CLAN);
 		}
@@ -48,9 +65,12 @@ export class ClanService {
 
 		const newClan = await repository.save({
 			name,
+			description,
 			isPublic,
+			avatar,
+			cover,
 			members: [user],
-			maxMembers: CLAN_MAX_MEMBERS,
+			maxMembers,
 			numberOfMembers: 1,
 		});
 
@@ -59,8 +79,12 @@ export class ClanService {
 			status: CLAN_MEMBER_STATUS.APPROVED,
 		});
 		await userRepository.updateById(user.id, { profileClan });
+		const newUser = await userRepository.getById(user.id);
 
-		return newClan;
+		return {
+			clan: newClan,
+			user: newUser,
+		};
 	}
 
 	async delete(clan: Clan) {
@@ -78,10 +102,10 @@ export class ClanService {
 		};
 	}
 
-	async update(clan: Clan, data: Clan) {
+	async update(id: string, data: Clan) {
 		const repository = getCustomRepository(this.clanRepository);
-		await repository.updateById(clan.id, data);
-		const newClan = await repository.getById(clan.id);
+		await repository.updateById(id, data);
+		const newClan = await this.getClan(id);
 		return newClan;
 	}
 
@@ -174,6 +198,10 @@ export class ClanService {
 		await repository.updateById(id, {
 			numberOfMembers: clan.numberOfMembers - 1,
 		});
+		const updatedClan = await this.getClan(id);
+		return {
+			clan: updatedClan,
+		};
 	}
 
 	async toggleMember(user: User, id: string) {

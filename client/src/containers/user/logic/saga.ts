@@ -1,3 +1,5 @@
+import { mapUserResponseToUser } from 'helpers/user.helper';
+import { WebApi } from 'typings/webapi';
 import { authServices } from 'services';
 import { updateUser, deleteUser } from 'services/settings.service';
 import { setNotificationState } from 'containers/notification/logic/actions';
@@ -28,8 +30,9 @@ function* fetchUserLogout() {
 function* fetchUserUpdate(action: ReturnType<typeof actions.updateUser>): any {
 	try {
 		const { user } = action;
-		const newUser: IUser = yield call(updateUser, user);
-		yield put(actions.setUser({ user: newUser }));
+		const newUser: WebApi.Entities.IUser = yield call(updateUser, user);
+		const userProfile: IUser = yield call(mapUserResponseToUser, newUser);
+		yield put(actions.setUser({ user: userProfile }));
 		yield put(
 			setNotificationState({
 				state: {

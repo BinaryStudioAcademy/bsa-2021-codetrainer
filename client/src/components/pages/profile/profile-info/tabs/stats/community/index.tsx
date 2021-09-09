@@ -5,18 +5,14 @@ import { StatsBlock } from '../stats-block';
 
 export interface ICommunityProps {
 	comments: number;
-	replies: number;
 	collections: number;
-	translations: number;
-	approved: number;
 }
 
 const Community: React.FC<ICommunityProps> = (props) => {
-	const { comments, collections, translations, replies, approved } = props;
+	const { comments, collections } = props;
 	const items = [
-		{ name: 'Comments', value: `${comments} (${replies} replies)` },
+		{ name: 'Comments', value: `${comments}` },
 		{ name: 'Collections', value: collections },
-		{ name: 'Translations', value: `${translations} (${approved} replies)` },
 	];
 
 	return (

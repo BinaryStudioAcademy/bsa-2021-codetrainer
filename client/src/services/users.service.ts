@@ -43,7 +43,7 @@ export const fetchUserLeaders = async ({
 
 		return response;
 	} catch (error) {
-		return error;
+		return error as Error;
 	}
 };
 
@@ -52,6 +52,23 @@ export const getUserById = async (id: string) => {
 		endpoint: 'users/' + id,
 		method: 'GET',
 		skipAuthorization: false,
+	});
+	return result;
+};
+
+export const makeUserAdmin = async (id: string) => {
+	const { user } = await http.callWebApi({
+		endpoint: 'users/' + id,
+		method: HttpMethods.GET,
+		skipAuthorization: false,
+	});
+	const result = await http.callWebApi({
+		endpoint: 'profile-clan/' + user.profileClan.id,
+		method: HttpMethods.PUT,
+		skipAuthorization: false,
+		body: {
+			role: 'admin',
+		},
 	});
 	return result;
 };

@@ -1,3 +1,21 @@
 .ace_editor {
 	height: 100% !important;
 }
+
+.ace_gutter-layer {
+	background-color: var(--border);
+	opacity: 0.9;
+	.ace_gutter-cell {
+		background-color: var(--border);
+		color: var(----text-color);
+	}
+}
+
+.ace_active-line {
+	background-color: var(--secondary-container-color) !important;
+	opacity: 0.95;
+}
+
+.ace_placeholder {
+	color: var(--placeholder) !important;
+}

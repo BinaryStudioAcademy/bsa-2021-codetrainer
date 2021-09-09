@@ -39,9 +39,9 @@ export const callApi = async (args: Record<string, any>) => {
 	}
 };
 
-export const sendTestResult = async (result: Record<string, unknown>) => {
+export const sendTestResult = async (result: Record<string, unknown>, path: string) => {
 	callApi({
-		endPoint: `${ApiPath.TESTS}${TestApiPath.RESULT}`,
+		endPoint: `${ApiPath.TESTS}${path}`,
 		method: HttpMethods.POST,
 		body: result,
 	});

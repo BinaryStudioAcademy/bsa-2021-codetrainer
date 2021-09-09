@@ -3,17 +3,13 @@ import { Avatar, Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import React from 'react';
 import { useState } from 'react';
+import { WebApi } from 'typings/webapi';
 import styles from './community-member.module.scss';
 
 interface ICommunityMemberProps {
-	user: {
-		avatar: string;
-		name: string;
-		surname: string;
-		username: string;
-	};
+	user: WebApi.Entities.IUser;
 	fromUser: any;
-	handleInviteClick: (fromUser: any, toUser: any) => void;
+	handleInviteClick: (userId: WebApi.Entities.IUser) => void;
 }
 
 export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunityMemberProps) => {
@@ -21,14 +17,14 @@ export const CommunityMember = ({ user, handleInviteClick, fromUser }: ICommunit
 	const [invited, setInvited] = useState(false);
 	return (
 		<div className={styles.communityMember}>
-			<Avatar size={20} avatar={avatar ? avatar : undefined} />
+			<Avatar size={40} avatar={avatar} />
 			<p>{name + ' ' + surname}</p>
 			<p>{username ? username : 'No username'}</p>
 			{!invited ? (
 				<Button
 					className={clsx(ButtonClasses.red, ButtonClasses.filled)}
 					onClick={() => {
-						handleInviteClick(fromUser, user);
+						handleInviteClick(user);
 						setInvited(true);
 					}}
 				>

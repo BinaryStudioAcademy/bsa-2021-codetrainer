@@ -3,10 +3,9 @@ import ReactModal from 'react-modal';
 import { modalStyles } from './config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
-
 import styles from './modal.module.scss';
 
-interface IModalProps {
+export interface IModalProps {
 	isOpen: boolean;
 	setIsOpen: (isOpen: boolean) => void;
 	elements: {

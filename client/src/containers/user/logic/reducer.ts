@@ -15,6 +15,7 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			...state.user!,
 			clan: action.clan,
+			profileClan: action.clan ? state.user?.profileClan : undefined,
 		};
 		const newState: IUserDataState = {
 			...state,
@@ -29,17 +30,16 @@ const routingReducer = createReducer<IUserDataState>(initialState, {
 		};
 	},
 	[actionTypes.ADD_TASK](state, action: actionTypes.TUserAddTask) {
-		const userBody: IUser | null = state.user
-			? {
-					...state.user,
-					tasks: state.user?.tasks?.concat([action.task]),
-			  }
-			: null;
-		const newState: IUserDataState = {
-			accessToken: state.accessToken,
-			user: userBody,
-		};
-		return newState;
+		const isInState = (state?.user?.tasks || []).find((task) => task.id === action.task.id);
+		return !state.user || Boolean(isInState)
+			? state
+			: {
+					...state,
+					user: {
+						...state.user,
+						tasks: (state.user?.tasks || []).concat([action.task]),
+					},
+			  };
 	},
 	[actionTypes.DELETE_TASK](state, action: actionTypes.TUserDeleteTask) {
 		const newTasks = state.user?.tasks?.filter((item) => item.id !== action.taskId);

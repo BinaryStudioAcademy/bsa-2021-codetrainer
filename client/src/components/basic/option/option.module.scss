@@ -14,6 +14,11 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	.icon {
+		margin-right: 15px;
+		font-style: 16px;
+		color: var(--purple) !important;
+	}
 }
 
 .wrapper.activeOption {

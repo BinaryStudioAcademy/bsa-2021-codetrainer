@@ -4,18 +4,12 @@ import { List } from 'components/basic';
 import { StatsBlock } from '../stats-block';
 
 export interface ILanguagesProps {
-	languagesTrained: number;
-	highestTrained: string;
 	mostRecent: string;
 }
 
 const Languages: React.FC<ILanguagesProps> = (props) => {
-	const { languagesTrained, highestTrained, mostRecent } = props;
-	const items = [
-		{ name: 'Total Languages Trained', value: languagesTrained },
-		{ name: 'Highest Trained', value: highestTrained },
-		{ name: 'Most Recent', value: mostRecent },
-	];
+	const { mostRecent } = props;
+	const items = [{ name: 'Most Recent', value: mostRecent }];
 
 	return (
 		<StatsBlock icon={languagesIcon} title="Languages">

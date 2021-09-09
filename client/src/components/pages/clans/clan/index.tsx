@@ -1,116 +1,125 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { IClanProps } from '../types';
 import ClanInfo from './components/clan-info';
 import MembersList from './components/members-list';
-import MembersSortPanel from './components/members-sort-panel';
 import styles from './clan.module.scss';
-import { Button, Spinner } from 'components';
-import clsx from 'clsx';
-import { ButtonClasses } from 'components/basic/button';
-import { Modal } from 'components/modals';
+import { Spinner } from 'components';
+import { ClanModal, ConfirmModal, Modal } from 'components/modals';
 import { CommunityMember } from './components/community-member';
+import ClanActions from './components/clan-actions';
+import { TVisitor } from './types';
+import { MemberRoles } from 'common/enum/app/clans';
+import { ClanModalType } from 'components/modals/clan-modal/types';
+import { WebApi } from 'typings/webapi';
 
-const ClanPage: React.FC<IClanProps> = ({
-	isOwnClan,
-	modalShown,
-	setModalShown,
-	clan,
-	sortByRank,
-	sortByTime,
-	joinClan,
-	leaveClan,
-	currentSort,
-	handleInviteClick,
-	user,
-	handleDeleteClan,
-	modalLoading,
-	community,
-	handleInvitationSend,
-	isInvitationOpen,
-	setIsInvitationOpen,
-}) => {
-	const inviteModalElements = (
-		<div>
-			{modalLoading ? (
-				<Spinner />
-			) : (
-				community.map((toUser: any) => {
-					return (
+const ClanPage: React.FC<IClanProps> = ({ clan, visitor: user, clanActions, members, invitation, modals }) => {
+	const visitor: TVisitor = useMemo(() => {
+		const isMember = Boolean(user?.clan) && user?.clan?.id === clan?.id;
+		return {
+			isMember,
+			isAdmin: isMember && user?.profileClan?.role === MemberRoles.ADMIN,
+		};
+	}, [clan, user]);
+
+	const inviteModalElements = useMemo(
+		() => (
+			<div>
+				{modals.isInvitationLoading ? (
+					<Spinner />
+				) : (
+					invitation.community.map((toUser: WebApi.Entities.IUser) => (
 						<CommunityMember
 							key={toUser.id}
 							user={toUser}
 							fromUser={user}
-							handleInviteClick={handleInvitationSend}
+							handleInviteClick={invitation.onInvite}
 						/>
-					);
-				})
-			)}
-		</div>
-	);
-	const deleteModalElements = (
-		<div style={{ display: 'flex', flexDirection: 'column', height: '260px', justifyContent: 'space-between' }}>
-			<p>
-				It will be impossible to undo deletion of the clan. <b>Still delete it?</b>
-			</p>
-			<div style={{ display: 'flex', width: '50%', justifyContent: 'space-around', bottom: 0 }}>
-				<Button
-					className={clsx(ButtonClasses.red, ButtonClasses.filled)}
-					onClick={() => {
-						setModalShown(false);
-						handleDeleteClan();
-					}}
-				>
-					Delete
-				</Button>
-				<Button className={ButtonClasses.red} onClick={() => setModalShown(false)}>
-					Cancel
-				</Button>
+					))
+				)}
 			</div>
-		</div>
+		),
+		[invitation],
 	);
+
+	const initial = useMemo(() => {
+		const { name, description, isPublic, avatar, cover, maxMembers } = clan;
+		return {
+			name,
+			description,
+			isPublic,
+			avatar,
+			cover,
+			maxMembers,
+		};
+	}, [clan]);
+
 	return (
 		<>
 			<Modal
-				isOpen={modalShown}
-				setIsOpen={setModalShown}
-				elements={{ title: 'Do you really want to delete this clan?', body: deleteModalElements }}
-			/>
-			<Modal
-				isOpen={isInvitationOpen}
-				setIsOpen={setIsInvitationOpen}
+				isOpen={modals.isInvitationOpen}
+				setIsOpen={modals.setIsInvitationOpen}
 				elements={{
 					title: `Invite Friends To ${clan?.name}`,
 					body: inviteModalElements,
 					showCloseButton: true,
 				}}
 			/>
+			<ClanModal
+				isOpen={modals.isEditOpen}
+				setIsOpen={modals.setIsEditOpen}
+				isLoading={modals.isEditLoading}
+				type={ClanModalType.EDIT}
+				initial={initial}
+				onSubmit={clanActions.onEdit}
+				onDelete={clanActions.onDelete}
+			/>
+			<ConfirmModal
+				isOpen={modals.isLeaveOpen}
+				setIsOpen={modals.setIsLeaveOpen}
+				onConfirm={(confirm) => {
+					modals.setIsLeaveOpen(false);
+					if (confirm) {
+						clanActions.onLeave();
+					}
+				}}
+				confirm="Leave"
+				elements={{
+					title: `Leave the ${clan.name}`,
+					body: `Do you realy want to leave the ${clan.name}?`,
+				}}
+			/>
+			<ConfirmModal
+				isOpen={modals.isDeleteOpen}
+				setIsOpen={modals.setIsDeleteOpen}
+				onConfirm={(confirm) => {
+					modals.setIsDeleteOpen(false);
+					if (confirm) {
+						clanActions.onDelete();
+					}
+				}}
+				confirm="Delete"
+				elements={{
+					title: `Delete the ${clan.name}`,
+					body: `Do you realy want to delete the ${clan.name}?`,
+				}}
+			/>
 			<div className={styles.container}>
-				<h4>Clan Information</h4>
-				<ClanInfo
-					clan={clan}
-					leaveClan={leaveClan}
-					handleInviteClick={handleInviteClick}
-					isOwnClan={isOwnClan}
-					joinClan={joinClan}
+				<ClanInfo clan={clan} />
+				<ClanActions
+					visitor={visitor}
+					handleJoin={clanActions.onJoin}
+					handleLeave={() => modals.setIsLeaveOpen(true)}
+					handleEdit={() => modals.setIsEditOpen(true)}
+					handleInvitation={() => {
+						invitation.handleInviteClick();
+						modals.setIsInvitationOpen(true);
+					}}
+					handleDelete={() => {
+						modals.setIsDeleteOpen(true);
+					}}
 				/>
-				<h4>Clan Members</h4>
-				{clan.members.length ? (
-					<section className={styles.membersSection}>
-						<MembersSortPanel sortByRank={sortByRank} sortByTime={sortByTime} currentSort={currentSort} />
-						<MembersList members={clan.members} />
-					</section>
-				) : (
-					<div>This Clan has no members</div>
-				)}
+				{clan.members.length ? <MembersList {...members} /> : <div>This Clan has no members</div>}
 			</div>
-			{user?.profileClan?.role === 'admin' && isOwnClan ? (
-				<Button
-					className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.delete)}
-					onClick={() => setModalShown(true)}
-				>
-					Delete clan
-				</Button>
-			) : null}
 		</>
 	);
 };

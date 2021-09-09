@@ -1,18 +1,10 @@
 @import 'styles/variables';
 
 .container {
-	width: 90%;
-	margin: 0 auto;
-}
-
-.membersSection {
-	display: grid;
-	grid-template-columns: 2fr 5fr;
+	display: flex;
+	flex-direction: column;
 	gap: 20px;
-}
-
-.delete {
-	float: right;
-	margin-right: 60px;
-	margin-top: 30px;
+	max-width: 916px;
+	margin: 0 auto;
+	padding: 40px 0;
 }

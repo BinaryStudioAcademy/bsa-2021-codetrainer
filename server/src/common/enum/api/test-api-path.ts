@@ -1,3 +1,4 @@
 export const TestApiPath = {
-	RESULT: '/result',
+	RESULT_SOLUTION: '/result-solution',
+	RESULT_TASK: '/result-task',
 };

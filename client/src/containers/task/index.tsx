@@ -10,6 +10,8 @@ import { Details } from './details';
 import * as actions from './logic/actions';
 import historyHelper from 'helpers/history.helper';
 import { Solutions } from './solutions';
+import { SolutionStatus } from 'typings/common/solution';
+import Discourse from './discourse';
 
 export const Tabs: Record<string, { id: number; name: string }> = {
 	details: { id: 0, name: 'Details' },
@@ -20,6 +22,8 @@ export const Tabs: Record<string, { id: number; name: string }> = {
 export const TaskPageContainer = () => {
 	const params = useParams<{ id: string; tab: string }>();
 	const { notFound, task, nextTaskId } = useSelector((state: IRootState) => state.taskInfo);
+	const user = useSelector((state: IRootState) => state.auth.userData.user);
+	const userSolution = useSelector((state: IRootState) => state.taskInfo.userSolution);
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -34,6 +38,10 @@ export const TaskPageContainer = () => {
 	useEffect(() => {
 		dispatch(actions.getTask({ id: params.id }));
 	}, [params.id]);
+
+	useEffect(() => {
+		dispatch(actions.getUserSolution({ taskId: task?.id }));
+	}, [task, user]);
 
 	const handleTabChange = useCallback(
 		(tabId: number) => {
@@ -56,13 +64,29 @@ export const TaskPageContainer = () => {
 				return <Solutions />;
 			}
 			default: {
-				return <div>{activeTabId}</div>;
+				return <Discourse />;
 			}
 		}
 	}, [activeTabId]);
 
 	const handleSkipClick = () => {
-		dispatch(actions.getNextTask({ id: task?.id }));
+		if (
+			userSolution.solution?.status === SolutionStatus.COMPLETED ||
+			userSolution.solution?.status === SolutionStatus.UNLOCKED ||
+			task?.user?.username === user?.username
+		) {
+			dispatch(actions.getNextTask());
+		} else if (task) {
+			const data = {
+				code: task.initialSolution,
+				testCases: task.exampleTestCases,
+				taskId: task.id,
+				solutionId: userSolution.solution?.id,
+				status: SolutionStatus.SKIPPED,
+			};
+			dispatch(actions.skipTask(data));
+			dispatch(actions.getNextTask());
+		}
 	};
 
 	if (notFound) {

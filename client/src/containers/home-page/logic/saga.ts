@@ -1,9 +1,10 @@
 import { all, put, takeEvery, call } from 'redux-saga/effects';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
-import { fetchTaskComments, fetchTasks } from '../../../services/home-page.service';
+import { fetchFocusTask, fetchTaskComments, fetchTasks } from '../../../services/home-page.service';
 import { ITask } from '../../../components/common/next-task/interface';
 import { fetchCommunity } from '../../../services/followers.service';
+import { WebApi } from 'typings/webapi';
 
 export function* fetchTasksWorker(action: ReturnType<typeof actions.getTasks>): any {
 	const { discipline, currentTask } = action;
@@ -16,6 +17,19 @@ export function* fetchTasksWorker(action: ReturnType<typeof actions.getTasks>): 
 
 export function* fetchTaskWatcher() {
 	yield takeEvery(actionTypes.GET_TASKS, fetchTasksWorker);
+}
+
+export function* fetchFocusTasksWorker({ discipline }: ReturnType<typeof actions.getFocusTask>) {
+	try {
+		const { nextTask }: { nextTask: WebApi.Entities.ITask | null } = yield call(fetchFocusTask, discipline);
+		yield put(actions.setTask({ task: nextTask }));
+	} catch (error) {
+		yield put(actions.setErrors({ errors: (error as Error)?.message ?? 'unknown error' }));
+	}
+}
+
+export function* fetchFocusTaskWatcher() {
+	yield takeEvery(actionTypes.GET_FOCUS_TASK, fetchFocusTasksWorker);
 }
 
 export function* fetchMessagesWorker(action: ReturnType<typeof actions.getMessages>): any {
@@ -38,5 +52,5 @@ export function* fetchCommunityWatcher() {
 }
 
 export default function* homeSaga() {
-	yield all([fetchTaskWatcher(), fetchMessagesWatcher(), fetchCommunityWatcher()]);
+	yield all([fetchTaskWatcher(), fetchMessagesWatcher(), fetchCommunityWatcher(), fetchFocusTaskWatcher()]);
 }

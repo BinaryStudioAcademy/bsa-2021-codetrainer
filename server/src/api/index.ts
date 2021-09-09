@@ -11,6 +11,7 @@ import { initCollection } from './collection';
 import { initTest } from './test/test-api';
 import { initCommentTask } from './comment-task';
 import { initCommentSolution } from './comment-solution';
+import { initProfileClan } from './profile-clan';
 import {
 	authService,
 	clanService,
@@ -22,6 +23,8 @@ import {
 	commentTaskService,
 	solutionService,
 	commentSolutionService,
+	profileClanService,
+	taskService,
 } from '../services';
 import { initMailerApi } from './mailer';
 
@@ -72,10 +75,10 @@ export function initApi(): Router {
 			githubService,
 		}),
 	);
-
+	apiRouter.use(ApiPath.PROFILE_CLAN, initProfileClan(Router, { profileClan: profileClanService }));
 	apiRouter.use(ApiPath.TASK, initTaskApi());
 
-	apiRouter.use(ApiPath.TESTS, initTest(Router, { solution: solutionService }));
+	apiRouter.use(ApiPath.TESTS, initTest(Router, { solution: solutionService, task: taskService }));
 
 	apiRouter.use(ApiPath.COMMENT_TASK, initCommentTask(Router, { commentTask: commentTaskService }));
 

@@ -1,4 +1,6 @@
 import { checkSchema } from 'express-validator';
+import { CODE_ERRORS, TASK_DISCIPLINE } from '../../../common';
+import { ValidationError } from '../../../helpers';
 import { tagsValidation } from './task-tags-validation';
 
 export const taskSchema = checkSchema({
@@ -13,19 +15,20 @@ export const taskSchema = checkSchema({
 	discipline: {
 		in: 'body',
 		errorMessage: 'Wrong discipline format',
+		custom: {
+			options: (discipline: string) => {
+				const order = Object.entries(TASK_DISCIPLINE).find(([_key, value]) => value === discipline);
+				if (!order) {
+					throw new ValidationError(CODE_ERRORS.TASK_QUERY('discipline'));
+				}
+				return true;
+			},
+		},
 		trim: true,
 		isString: true,
 		optional: true,
 		notEmpty: true,
 	},
-	// languageId:{
-	// 	in: 'body',
-	// 	errorMessage: 'Wrong languageId format',
-	// 	trim: true,
-	// 	isString: true,
-	// 	optional: true,
-	// 	notEmpty: true,
-	// },
 	rank: {
 		in: 'body',
 		errorMessage: 'Wrong rank format',
@@ -40,14 +43,6 @@ export const taskSchema = checkSchema({
 	allowContributors: {
 		in: 'body',
 		errorMessage: 'Wrong allowContributors format',
-		trim: true,
-		isBoolean: true,
-		optional: true,
-		notEmpty: true,
-	},
-	isPublished: {
-		in: 'body',
-		errorMessage: 'Wrong isPublished format',
 		trim: true,
 		isBoolean: true,
 		optional: true,

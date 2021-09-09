@@ -1,0 +1,113 @@
+@use 'styles/variables.scss' as var;
+
+@mixin numberWithPlaceholder($color, $background, $placeholder) {
+	.numberField {
+		transition: var.$base-animation-time;
+		background-color: $background;
+		color: $color;
+		&::placeholder {
+			opacity: 0.5;
+			color: $placeholder;
+		}
+	}
+	.stepDown,
+	.stepUp {
+		&::after {
+			transition: var.$base-animation-time;
+			border-bottom-color: $color;
+		}
+	}
+}
+
+.container {
+	position: relative;
+	width: 100px;
+	height: 88px;
+
+	.numberField {
+		box-sizing: border-box;
+		border-radius: 7px;
+		border: 0;
+		width: 100%;
+		font: var.$base-font;
+		line-height: 17px;
+		padding: 15px 20px;
+		outline: none;
+
+		-webkit-appearance: textfield;
+		-moz-appearance: textfield;
+		appearance: textfield;
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+		}
+	}
+
+	.stepUp,
+	.stepDown {
+		all: unset;
+		cursor: pointer;
+		background: transparent;
+		outline: none;
+
+		&::after {
+			$size: 5px;
+			content: '';
+			display: block;
+			width: $size;
+			height: $size;
+			border-left: $size solid transparent;
+			border-right: $size solid transparent;
+			border-bottom: $size solid;
+		}
+	}
+
+	.stepDown::after {
+		transform: rotateZ(180deg);
+	}
+
+	.error {
+		text-align: right;
+		margin-top: 2px;
+		height: 12px;
+		font-size: 12px;
+		color: var(--pink);
+	}
+
+	.numberWrapper {
+		position: relative;
+		@include numberWithPlaceholder(var(--text-color), var(--secondary-container-color), var(--placeholder));
+
+		&:hover {
+			@include numberWithPlaceholder(var(--black), var(--white), var(--black));
+		}
+		&:focus-within {
+			@include numberWithPlaceholder(var(--black), var(--white), var(--black));
+		}
+	}
+
+	.stepWrapper {
+		position: absolute;
+		top: 0;
+		right: 10px;
+		width: min-content;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 7px;
+	}
+
+	.labelWrapper {
+		display: flex;
+		justify-content: space-between;
+
+		.label {
+			display: block;
+			font: var.$progress-bar-font;
+			line-height: 15px;
+			color: var(--text-color);
+			margin-bottom: 5px;
+		}
+	}
+}

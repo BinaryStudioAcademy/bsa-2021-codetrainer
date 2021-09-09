@@ -1,0 +1,50 @@
+.comment {
+	max-width: 60%;
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	overflow: hidden;
+
+	&ButtonsBlock {
+		display: flex;
+		gap: 5px;
+	}
+
+	&Button {
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		font-weight: 700;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&Own {
+		align-self: flex-end;
+	}
+
+	&Text {
+		word-break: break-all;
+
+		p {
+			margin: 0;
+		}
+	}
+
+	&UserInfo {
+		display: flex;
+		gap: 10px;
+		margin-bottom: 10px;
+
+		span {
+			overflow: hidden;
+			max-width: 150px;
+			display: block;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}

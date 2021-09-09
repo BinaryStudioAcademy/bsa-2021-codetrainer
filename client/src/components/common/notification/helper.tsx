@@ -1,7 +1,7 @@
 import React from 'react';
 import { ROUTES } from 'constants/routes';
 import { NotificationTypes, TNotification } from 'typings/common/INotification';
-import { Rank } from 'components/basic';
+import { Avatar, Rank } from 'components/basic';
 import { INotificationProps } from './';
 
 export function mapNotificationToProps(notification: TNotification): INotificationProps {
@@ -37,11 +37,32 @@ export function mapNotificationToProps(notification: TNotification): INotificati
 			};
 		}
 		case NotificationTypes.Follower: {
-			const { username, profileUrl } = notification.body.follower;
+			const { username, avatar } = notification.body.follower;
 			return {
 				children: `${username} follows you!`,
-				icon: <img src={profileUrl} width={50} height={50} />,
+				icon: <Avatar avatar={avatar} size={50} />,
 				link: ROUTES.Users + `/${username}`,
+				date,
+				read,
+			};
+		}
+		case NotificationTypes.LeaveClan: {
+			const { name, avatar } = notification.body.clan;
+			return {
+				children: `You left ${name}! Find new friends!`,
+				icon: <img src={avatar} width={50} height={50} />,
+				link: ROUTES.Clans,
+				date,
+				read,
+			};
+		}
+		case NotificationTypes.InviteToClan: {
+			const { id, name, avatar } = notification.body.clan;
+			const { username } = notification.body.inviter;
+			return {
+				children: `You were invited to ${name} by your friend ${username}`,
+				icon: <img src={avatar} width={50} height={50} />,
+				link: ROUTES.Clan + `/${id}`,
 				date,
 				read,
 			};

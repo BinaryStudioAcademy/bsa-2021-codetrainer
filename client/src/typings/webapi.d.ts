@@ -1,6 +1,7 @@
 import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
 import { TaskStatus } from './common/task';
 import { SolutionStatus } from './common/solution';
+import { Discipline } from 'containers/create-new-task/data';
 
 declare namespace WebApi.Entities {
 	export interface IExample {
@@ -9,8 +10,21 @@ declare namespace WebApi.Entities {
 		email?: string;
 	}
 
-	export interface IUser {
+	interface IBaseEntity {
 		id: string;
+		createdAt: Date;
+		updatedAt?: Date;
+	}
+
+	export interface IClanProfile {
+		id: string;
+		role: string;
+		status: string;
+		user: IMember;
+		joinedAt: Date;
+	}
+
+	export interface IUser extends IBaseEntity {
 		username: string;
 		name: string;
 		surname: string;
@@ -18,22 +32,20 @@ declare namespace WebApi.Entities {
 		clan?: IClan | null;
 		rank: number;
 		honor: number;
-		profileClan?: {
-			id: string;
-			role: string;
-			status: string;
-		};
+		profileClan?: IClanProfile;
 		githubId?: string;
-		profileUrl?: string;
 		avatar?: string;
-
 		position?: number;
 		following: any[];
 		followers: any[];
+		imageSource: string;
 	}
 
-	export interface ITag {
-		id: string;
+	export interface IMember extends IUser {
+		profileClan: IClanProfile;
+	}
+
+	export interface ITag extends IBaseEntity {
 		name: string;
 	}
 
@@ -46,75 +58,44 @@ declare namespace WebApi.Entities {
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
-		savedToFavorites: number;
-		positiveFeedback: number;
 		user: IUser | null;
 		createdAt: Date;
-		published: Date;
-		usersTrained: number;
-		skips: number;
 		initialSolution: string;
-		codeSubmissions: number;
-		timesCompleted: number;
-		stars: number;
-		verySatisfied: number;
-		somewhatSatisfied: number;
-		notSatisfied: number;
 		contributors: IUser[];
 		solutions: ISolution[];
+		savedToFavorites: number;
+		positiveFeedback: number;
 	}
 
-	export interface ISolution {
-		id: string;
+	export interface ISolution extends IBaseEntity {
 		status: SolutionStatus;
 		code: string;
 		language: string;
 		user: IUser;
 		task: Partial<ITask>;
-		createdAt: Date;
-		updatedAt?: Date;
 		testCases?: string;
 	}
 
-	export interface IMember {
-		id: string;
-		username: string;
-		rank: number;
-		username: string;
-		avatar: string;
+	export interface IClan extends IBaseEntity {
 		name: string;
-		surname: string;
-		honor: number;
-		profileClan: {
-			role: MemberRoles;
-			status: MemberStatus;
-		};
-		createdAt: Date;
-	}
-
-	export interface IClan {
-		id: string;
-		name: string;
+		description?: string;
 		rank: number;
-		avatar: string;
+		avatar?: string;
+		cover?: string;
 		honor: number;
 		isPublic: boolean;
 		maxMembers: number;
 		numberOfMembers: number;
-		createdAt: Date;
 		members: Array<IMember>;
 	}
 
-	export interface ICollection {
-		id: string;
+	export interface ICollection extends IBaseEntity {
 		name: string;
 		tasks: Partial<ITask>[];
 		description?: string;
 		avatar?: string;
 		author: IUser;
 		followers: IUser[];
-		createdAt: Date;
-		updatedAt?: Date;
 	}
 
 	export type TClans = Array<IClan>;
@@ -132,7 +113,7 @@ declare namespace WebApi.Entities {
 		createdAt: Date;
 		updatedAt: Date;
 		name: string;
-		discipline: string;
+		discipline: Discipline;
 		rank: number;
 		allowContributors: boolean;
 		description: string;
@@ -142,13 +123,33 @@ declare namespace WebApi.Entities {
 		exampleTestCases: string;
 		status: TaskStatus;
 		isPublished: boolean;
-		solutions: WebApi.Entities.ISolution[];
+		solutions: ISolution[];
 		tags: Array<ITag>;
 		user: {
 			name: string;
 			surname: string;
 			username: string;
 		};
+		validateSolution: boolean;
+		comments: Array<ICommentTask>;
+	}
+
+	export interface ICommentTask {
+		id: string;
+		task: ITask;
+		user: IUser;
+		body: string;
+		createdAt: Date;
+		updatedAt: Date;
+		isLike: boolean;
+		user: IUser;
+	}
+
+	export interface IStats {
+		totalSkips: number;
+		usersTrained: number;
+		totalUnlocked: number;
+		usersCompleted: number;
 	}
 }
 
