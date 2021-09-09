@@ -9,7 +9,7 @@ const TrainingSection = () => {
 	return (
 		<section className={clsx(common.section)}>
 			<Container className={common.sectionContainer}>
-				<ImageBlock src="/assets/images/landing/Rectangle39.png" className={styles.trainingSectionLogo} />
+				<ImageBlock src="" className={styles.trainingSectionLogo} />
 				<div className={styles.trainingSectionDescription}>
 					<h2 className={common.sectionTitle}>Train on challenges</h2>
 					<div className={common.sectionText}>

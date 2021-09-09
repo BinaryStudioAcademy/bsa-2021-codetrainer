@@ -17,7 +17,7 @@ const Header = () => {
 
 			<Container className={styles.headerContainer}>
 				<div className={styles.headerDescription}>
-					<h1 className={styles.headerTitle}>Achieve mastery through challenge</h1>
+					<h1 className={styles.headerTitle}>Achive mastery through challenge</h1>
 					<p className={styles.headerText}>
 						Improve your skills by training with others on real code challenges
 					</p>
