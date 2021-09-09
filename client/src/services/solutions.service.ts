@@ -19,7 +19,7 @@ interface IPatchSolution extends IEditSolution {
 	status?: string;
 }
 
-const callApi = async (method: HttpMethods, endpoint: string, body?: Record<string, unknown>): Promise<any> => {
+export const callApi = async (method: HttpMethods, endpoint: string, body?: Record<string, unknown>): Promise<any> => {
 	try {
 		const response = await http.callWebApi({
 			method,

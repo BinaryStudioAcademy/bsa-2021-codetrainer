@@ -47,6 +47,14 @@ export const initTask = (appRouter: typeof Router, services: { task: TaskService
 				.then((data) => res.send(data))
 				.catch(next),
 		)
+		.put(TaskApiPath.LIKE, (req, res, next) => {
+			console.log("REQ:", req);
+			return taskService
+				//@ts-ignore
+				.updateFavorite(req.id, req.isLiked)
+				.then((data) => res.send(data))
+				.catch(next);
+		})
 		.put(TaskApiPath.$ID, validationMiddleware([idSchema, taskSchema]), checkTaskIdMiddleware, (req, res, next) => {
 			const { tags, ...restData } = req.validData;
 			return taskService

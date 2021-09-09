@@ -36,7 +36,7 @@ export class Task extends AbstractEntity {
 	exampleTestCases?: string;
 
 	@Column({ type: 'enum', enum: TASK_STATUS })
-	status!: TASK_STATUS;
+	status?: TASK_STATUS;
 
 	@Column({ type: 'boolean', default: false })
 	isPublished!: boolean;

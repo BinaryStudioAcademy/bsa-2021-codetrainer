@@ -1,3 +1,4 @@
+import { IChallenge } from 'components/common/challenge/types';
 import { ISearchState } from './state';
 
 export const SEARCH_CHANGE_FILTER = 'SEARCH:CHANGE_FILTER';
@@ -11,6 +12,12 @@ export const SEARCH_BEFORE_FETCH_NEXT_PAGE = 'SEARCH:BEFORE_FETCH_NEXT_PAGE';
 export const SEARCH_FETCH_NEXT_PAGE = 'SEARCH:NEXT_PAGE';
 export const SEARCH_ADD_DATA_NEXT_PAGE = 'SEARCH:ADD_DATA_NEXT_PAGE';
 export const SEARCH_CHANGE_PAGE = 'SEARCH:CHANGE_PAGE';
+
+export const UPDATE_TASK_FAVORITE_STATUS = 'SEARCH:UPDATE_TASK_FAVORITE_STATUS';
+
+export type TUpdateTaskFavoriteStatus = {
+	task: IChallenge;
+};
 
 export type TSearchSetBooleanData = {
 	payload: boolean;

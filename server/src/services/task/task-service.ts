@@ -90,6 +90,15 @@ export class TaskService {
 		return updatedTask;
 	}
 
+	async updateFavorite(id: string, isLiked: boolean) {
+		console.log("IS LIKED PROCESS");
+		const repository = getCustomRepository(this.taskRepository);
+		const task = await repository.getById(id);
+		await repository.save({ ...task, savedToFavorites: isLiked ? (task?.savedToFavorites ?? 0) + 1 : (task?.savedToFavorites ?? 0) - 1 });
+		const updatedTask = await repository.getById(id);
+		return updatedTask;
+	}
+
 	async getTasks({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.taskRepository);
 		const tasks = await repository.getAll(skip, take);

@@ -5,6 +5,7 @@ import { ISearchPageProps } from 'components/pages/search-page';
 import { useAppSelector } from 'hooks/useAppSelector';
 import * as actions from './logic/actions';
 import { mapFilterToSearch, mapSearchData } from './mapSearchData';
+import { IChallenge } from 'components/common/challenge/types';
 
 export const SearchPage: React.FC = () => {
 	const { isLoading, search, filter, onSubmit, changePage } = useAppSelector((state) => state.search);
@@ -69,7 +70,10 @@ export const SearchPage: React.FC = () => {
 
 	const handleUpdateTaskFavoriteStatus = (id: string) => {
 		console.log('TASK to update:', id);
+		const taskToUpdate = searchData.challenges.find((task) => task.id === id);
+		dispatch(actions.updateTaskFavoriteStatus({ task: taskToUpdate as IChallenge }));
 	};
+
 	return (
 		<>
 			<SearchPageComponent
