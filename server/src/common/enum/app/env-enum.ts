@@ -8,6 +8,7 @@ const ENV = {
 		PORT: getEnv('PORT'),
 		API_PATH: '/api',
 		URL: variables?.NODE_ENV === 'development' ? 'http://localhost:3000' : getEnv('APP_URL'),
+		CLIENT_URL: getEnv('CLIENT_URL'),
 	},
 	TESTING: {
 		NAME: 'testing',
