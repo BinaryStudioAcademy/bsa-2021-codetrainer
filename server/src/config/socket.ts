@@ -1,9 +1,9 @@
 import { ServerOptions } from 'socket.io';
-import { ENV, LOCAL_HOST_URL, STAGING_URL } from '../common';
+import { ENV, LOCAL_HOST_URL } from '../common';
 
 export const socketOptions: Partial<ServerOptions> = {
 	cors: {
-		origin: ENV.DEVELOPMENT ? LOCAL_HOST_URL : STAGING_URL,
+		origin: ENV.DEVELOPMENT ? LOCAL_HOST_URL : ENV.APP.CLIENT_URL,
 		methods: ['GET', 'POST'],
 		credentials: true,
 	},
