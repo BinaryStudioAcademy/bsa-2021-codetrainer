@@ -64,6 +64,7 @@ const getISocialUsers = (users: IUser[]) => {
 				id: user.clan?.id ?? null,
 			} as WebApi.Entities.IClan,
 			honor: user.honor,
+			avatar: user.avatar,
 		};
 	});
 };
@@ -129,7 +130,7 @@ export function* fetchUserSearch({ query }: ReturnType<typeof actions.searchUser
 		};
 		yield put(actions.searchUserSuccess({ user: userDataAllFields }));
 	} catch (error) {
-		yield put(actions.searchUserError({ payload: error?.errors ?? error?.message ?? 'unknown error' }));
+		yield put(actions.searchUserError({ payload: (error as Error)?.message ?? 'unknown error' }));
 	}
 }
 
