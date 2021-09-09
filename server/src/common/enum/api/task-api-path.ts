@@ -10,4 +10,5 @@ export const TaskApiPath = {
 	SIMILAR_TASKS: '/:id/similar-tasks',
 	USER_TASKS: '/search/user-tasks',
 	TASK_PUBLISH: '/:id/publish',
+	FOCUS: '/search/focus',
 };

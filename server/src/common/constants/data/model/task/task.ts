@@ -9,4 +9,10 @@ export enum TASK_DISCIPLINE {
 	BUG_FIXES = 'Bug-fixes',
 }
 
+export enum TASK_DISCIPLINE {
+	FUNDAMENTALS = 'Fundamentals',
+	ALGORITHMS = 'Algorithms',
+	BUG_FIXES = 'Bug-fixes',
+}
+
 export const TASK_DIFFICULTY_DEFAULT = 1;

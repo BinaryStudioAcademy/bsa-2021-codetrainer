@@ -1,7 +1,16 @@
 import { getCustomRepository } from 'typeorm';
-import { CODE_ERRORS, ENV, SOLUTION_STATUS, TASKS_ON_PAGE, TASK_ORDER_BY, TASK_STATUS } from '../../common';
+import {
+	CODE_ERRORS,
+	ENV,
+	SOLUTION_STATUS,
+	TASKS_ON_PAGE,
+	TASK_ORDER_BY,
+	TASK_STATUS,
+	FocusRankUp,
+	SEARCH_FOCUS_KEYS,
+} from '../../common';
 import { rabbitConnect } from '../../config';
-import { Task, User, TTaskRepository, TUserRepository, TTagRepository, Tag, TSolutionRepository } from '../../data';
+import { Task, User, TTaskRepository, TUserRepository, TTagRepository, TSolutionRepository } from '../../data';
 import { TokenTypes, ValidationError, verifyToken } from '../../helpers';
 import { ISendToRabbit, ITestResult, TypeTest } from '../../types';
 
@@ -240,5 +249,21 @@ export class TaskService {
 		}
 		const updatedTask = await repository.getById(task.id);
 		return updatedTask;
+	}
+
+	async searchFocus(user: User, where: SEARCH_FOCUS_KEYS) {
+		const repository = getCustomRepository(this.taskRepository);
+		const solutionRepository = getCustomRepository(this.solutionRepository);
+		const useTasks = await solutionRepository.getTasksByUser(user.id);
+		let focus = {};
+		if (where !== SEARCH_FOCUS_KEYS.RANDOM) {
+			focus = {
+				focus: where !== SEARCH_FOCUS_KEYS.RANK_UP ? where : undefined,
+				fromRank: where === SEARCH_FOCUS_KEYS.RANK_UP ? user.rank - FocusRankUp : user.rank,
+				toRank: where === SEARCH_FOCUS_KEYS.RANK_UP ? user.rank : user.rank + FocusRankUp,
+			};
+		}
+		const nextTask = await repository.searchFocus({ taskIds: useTasks, ...focus });
+		return { nextTask: nextTask ?? null };
 	}
 }
