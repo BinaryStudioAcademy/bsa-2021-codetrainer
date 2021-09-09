@@ -1,13 +1,15 @@
 import React from 'react';
-import styles from './feed.module.scss';
-import FeedMessage from '../feed-message';
-import { Button } from 'components/basic';
-import { IFeedProps } from './interface';
 import clsx from 'clsx';
+import { Button } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
+import { IFeedProps } from './interface';
+import FeedMessage from '../feed-message';
 
-const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFeedCategory, isLastPage }) => {
-	const feedCategories = ['All', 'Questions'];
+import styles from './feed.module.scss';
+
+const Feed: React.FC<IFeedProps> = (props) => {
+	const { onClick, messages, selectedFeedCategory, onSelectFeedCategory, isLastPage } = props;
+	const feedCategories = ['All'];
 
 	const feedCategoriesJSX = feedCategories.map((category) => {
 		const className = clsx({ [styles.feedCategory]: true }, { [styles.active]: category === selectedFeedCategory });
@@ -33,8 +35,6 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 			break;
 	}
 
-	const loadMoreButton = <Button className={clsx(ButtonClasses.red, styles.loadMoreButton)}>Load more</Button>;
-
 	return (
 		<div className={styles.feed}>
 			<div>
@@ -45,7 +45,13 @@ const Feed: React.FC<IFeedProps> = ({ messages, selectedFeedCategory, onSelectFe
 				</div>
 				{messages ? feedContentJSX : 'No messages yet'}
 			</div>
-			{!isLastPage ? loadMoreButton : null}
+			{!isLastPage ? (
+				<div className={styles.wrapperButton}>
+					<Button className={clsx(ButtonClasses.red, styles.loadMoreButton)} onClick={onClick}>
+						Load more
+					</Button>
+				</div>
+			) : null}
 		</div>
 	);
 };

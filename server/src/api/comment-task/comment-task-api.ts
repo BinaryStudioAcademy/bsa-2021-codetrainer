@@ -21,11 +21,14 @@ export const initCommentTask = (appRouter: typeof Router, services: { commentTas
 				.then((data) => res.send(data))
 				.catch(next),
 		)
-		.get(CommentTaskApiPath.ROOT, (req, res, next) =>
-			commentTaskService
-				.getAllCommentTasks(req.body)
-				.then((data) => res.send(data))
-				.catch(next),
+		.get(
+			CommentTaskApiPath.ROOT,
+			dataValidationMiddleware(SchemasDataValidation.commentTaskGetAllSchema, REQ_TYPE.QUERY),
+			(req, res, next) =>
+				commentTaskService
+					.getAllCommentTasks(req.query)
+					.then((data) => res.send(data))
+					.catch(next),
 		)
 		.post(
 			CommentTaskApiPath.ALL,

@@ -13,12 +13,34 @@ export const homeReducer = createReducer<IHomeState>(initialState, {
 		};
 	},
 
-	[actionTypes.SET_MESSAGES](state, action: actionTypes.TSetMessages) {
+	[actionTypes.SET_MESSAGES](state, { messages, messagesCount }: actionTypes.TSetMessages) {
 		return {
 			...state,
 			state: {
 				...state.state,
-				messages: action.messages,
+				messages: [...state.state.messages, ...messages],
+				messagesCount,
+			},
+		};
+	},
+	[actionTypes.SET_DATA_BEFORE_LOAD](state) {
+		return {
+			...state,
+			state: {
+				...state.state,
+				messages: [],
+				messagesCount: 0,
+				page: 1,
+			},
+		};
+	},
+
+	[actionTypes.SET_PAGE](state, { page }: actionTypes.TSetPage) {
+		return {
+			...state,
+			state: {
+				...state.state,
+				page,
 			},
 		};
 	},
