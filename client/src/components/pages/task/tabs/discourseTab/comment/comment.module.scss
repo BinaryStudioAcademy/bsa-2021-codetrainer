@@ -38,5 +38,13 @@
 		display: flex;
 		gap: 10px;
 		margin-bottom: 10px;
+
+		span {
+			overflow: hidden;
+			max-width: 150px;
+			display: block;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
 	}
 }
