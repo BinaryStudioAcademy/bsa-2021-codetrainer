@@ -1,5 +1,5 @@
 export const SOCKET_URL = {
-	STAGING: process.env.REACT_APP_API_BASE_URL,
+	STAGING: process.env.REACT_APP_API_BASE_URL as string,
 	LOCAL: '/',
 };
 

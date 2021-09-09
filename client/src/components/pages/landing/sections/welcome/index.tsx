@@ -14,9 +14,7 @@ const WelcomeSection = () => {
 		<section className={styles.welcomeSection}>
 			<Container>
 				<div className={styles.welcomeSectionDescription}>
-					<p className={styles.welcomeSectionText}>
-						Let us begin our trip!
-					</p>
+					<p className={styles.welcomeSectionText}>Let us begin our trip!</p>
 					<Button
 						className={clsx(ButtonClasses.red, ButtonClasses.filled, styles.btn)}
 						onClick={() => history.push(ROUTES.SignUp)}

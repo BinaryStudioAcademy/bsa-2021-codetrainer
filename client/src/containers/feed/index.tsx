@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Feed from '../../components/pages/home/components/feed';
-import { getMessages } from '../home-page/logic/actions';
+import { getMessages, setPage } from '../home-page/logic/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../typings/root-state';
 import moment from 'moment';
 
 export const FeedContainer = () => {
 	const dispatch = useDispatch();
-	const messages = useSelector((rootState: IRootState) => rootState.home.state.messages);
+	const { messages, page, messagesCount, messagesOnPage } = useSelector(({ home }: IRootState) => home.state);
 	const [selectedFeedCategory, setSelectedFeedCategory] = useState('All');
 
 	const handleSelectFeedCategory = (category: string) => {
@@ -15,8 +15,16 @@ export const FeedContainer = () => {
 	};
 
 	useEffect(() => {
-		dispatch(getMessages());
+		dispatch(getMessages({ skip: 0, take: messagesOnPage, isLoadPage: true }));
 	}, []);
+
+	const handleClickMoreMessages = useCallback(() => {
+		if (page * messagesOnPage >= messagesCount) {
+			return;
+		}
+		dispatch(setPage({ page: page + 1 }));
+		dispatch(getMessages({ skip: page * messagesOnPage, take: messagesOnPage }));
+	}, [page, messagesCount, messagesOnPage]);
 
 	return (
 		<>
@@ -33,7 +41,8 @@ export const FeedContainer = () => {
 				}
 				selectedFeedCategory={selectedFeedCategory}
 				onSelectFeedCategory={handleSelectFeedCategory}
-				isLastPage={false}
+				isLastPage={page * messagesOnPage >= messagesCount}
+				onClick={handleClickMoreMessages}
 			/>
 		</>
 	);

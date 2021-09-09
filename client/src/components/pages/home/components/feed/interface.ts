@@ -23,4 +23,5 @@ export interface IFeedProps {
 	selectedFeedCategory: string;
 	onSelectFeedCategory: (category: string) => void;
 	isLastPage: boolean;
+	onClick: () => void;
 }

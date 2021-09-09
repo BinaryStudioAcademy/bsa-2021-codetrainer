@@ -16,8 +16,8 @@ export class CommentTaskService {
 
 	async getAllCommentTasks({ skip = 0, take = 10 }) {
 		const repository = getCustomRepository(this.commentTaskRepository);
-		const commentTask = await repository.getAll(skip, take);
-		return commentTask;
+		const [commentTasks, count] = await repository.getAll(skip, take);
+		return { comment: commentTasks, count };
 	}
 
 	async create(task: Task, user: User, commentTask: CommentTask) {
