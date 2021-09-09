@@ -20,14 +20,14 @@
 		margin-bottom: 10px;
 		padding: 5px 10px;
 		min-width: 400px;
-		height: 20px;
+		height: 28px;
 		list-style: none;
 		position: relative;
 
 		&:hover {
-			background-color: rgb(228, 228, 228);
+			background-color: var(--white);
 			.inputField {
-				background-color: rgb(228, 228, 228);
+				background-color: var(--white);
 			}
 		}
 
@@ -57,10 +57,10 @@
 			border: none;
 			border-radius: 7px;
 			cursor: pointer;
-			background-color: rgb(255, 255, 255);
+			background-color: var(--white);
 
 			&:hover {
-				background-color: rgb(228, 228, 228);
+				background-color: $white-lilac;
 			}
 		}
 	}
@@ -69,19 +69,20 @@
 	}
 
 	.github {
+		display: flex;
 		* {
 			margin-bottom: 0;
 		}
+		gap: 10px;
+		align-items: center;
 		.socialItem {
-			display: inline-block;
-			width: 100%;
 			min-width: 0;
+			flex-basis: 100%;
+			flex-shrink: 1;
 		}
 		.unlink {
-			margin-left: 10px;
-			vertical-align: baseline;
-			width: min-content;
-			min-width: 0 !important;
+			min-width: 0;
+			flex-shrink: 0;
 		}
 		a {
 			color: $cornflower-blue;

@@ -54,9 +54,6 @@ const SettingPageContainer: React.FC = () => {
 				id: user?.id,
 				user: {
 					id: user?.id,
-					name: user?.name,
-					surname: user?.surname,
-					avatar: user?.avatar,
 					...values,
 				},
 			};
@@ -158,13 +155,7 @@ const SettingPageContainer: React.FC = () => {
 		items: radioListItems,
 	};
 
-	let twitterUrl, linkedinUrl, stackUrl;
-
-	if (user?.social) {
-		twitterUrl = user.social[0] ? user.social[0].trim() : '';
-		linkedinUrl = user.social[1] ? user.social[1].trim() : '';
-		stackUrl = user.social[2] ? user.social[2].trim() : '';
-	}
+	const [twitterUrl, linkedinUrl, stackUrl] = (user?.social || []).map((social) => social.trim());
 
 	const socialLinks = {
 		twitterUrl,
