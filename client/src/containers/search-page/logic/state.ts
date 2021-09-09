@@ -1,7 +1,6 @@
 import { WebApi } from 'typings/webapi';
 
 export interface IFilter {
-	status: string;
 	progress: string;
 	query: string;
 	rank: number | null;
@@ -31,7 +30,6 @@ export interface ISearchState {
 }
 
 export const filterInitialState: IFilter = {
-	status: 'beta',
 	progress: 'all',
 	query: '',
 	sort: 'newest',
