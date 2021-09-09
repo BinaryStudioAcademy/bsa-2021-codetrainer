@@ -18,6 +18,12 @@ export const searchReducer = createReducer<ISearchState>(initialState, {
 			errors: null,
 		};
 	},
+	[actionTypes.SEARCH_SET_FILTER](state, { filter }: actionTypes.TSearchSetFilter) {
+		return {
+			...state,
+			filter,
+		};
+	},
 	[actionTypes.SEARCH_CHANGE_PAGE](state) {
 		return {
 			...state,

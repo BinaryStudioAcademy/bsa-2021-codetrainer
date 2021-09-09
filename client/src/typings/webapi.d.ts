@@ -1,6 +1,7 @@
 import { MemberRoles, MemberStatus } from 'common/enum/app/clans';
 import { TaskStatus } from './common/task';
 import { SolutionStatus } from './common/solution';
+import { Discipline } from 'containers/create-new-task/data';
 
 declare namespace WebApi.Entities {
 	export interface IExample {
@@ -57,22 +58,13 @@ declare namespace WebApi.Entities {
 		rank: number;
 		tags: ITag[];
 		status?: TaskStatus;
-		savedToFavorites: number;
-		positiveFeedback: number;
 		user: IUser | null;
 		createdAt: Date;
-		published: Date;
-		usersTrained: number;
-		skips: number;
 		initialSolution: string;
-		codeSubmissions: number;
-		timesCompleted: number;
-		stars: number;
-		verySatisfied: number;
-		somewhatSatisfied: number;
-		notSatisfied: number;
 		contributors: IUser[];
 		solutions: ISolution[];
+		savedToFavorites: number;
+		positiveFeedback: number;
 	}
 
 	export interface ISolution extends IBaseEntity {
@@ -121,7 +113,7 @@ declare namespace WebApi.Entities {
 		createdAt: Date;
 		updatedAt: Date;
 		name: string;
-		discipline: string;
+		discipline: Discipline;
 		rank: number;
 		allowContributors: boolean;
 		description: string;
@@ -138,6 +130,7 @@ declare namespace WebApi.Entities {
 			surname: string;
 			username: string;
 		};
+		validateSolution: boolean;
 		comments: Array<ICommentTask>;
 	}
 
@@ -150,6 +143,13 @@ declare namespace WebApi.Entities {
 		updatedAt: Date;
 		isLike: boolean;
 		user: IUser;
+	}
+
+	export interface IStats {
+		totalSkips: number;
+		usersTrained: number;
+		totalUnlocked: number;
+		usersCompleted: number;
 	}
 }
 

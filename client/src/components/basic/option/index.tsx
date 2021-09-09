@@ -4,12 +4,14 @@ import { IOptionProps } from './interface';
 import clsx from 'clsx';
 
 const Option: React.FC<IOptionProps> = ({ value, isActive, onChange }) => {
+	const Icon = value.iconM;
 	const [isLoaded, setIsLoaded] = useState(false);
 	const optionStyles = clsx(styles.wrapper, { [styles.doNotShow]: !isLoaded, [styles.activeOption]: isActive });
 
 	return (
 		<li className={optionStyles} onClick={() => onChange(value)}>
 			{value.icon && <img src={value.icon} alt="icon" onLoad={() => setIsLoaded(true)} />}
+			{Icon && <Icon className={styles.icon} />}
 			<span>{value.title}</span>
 		</li>
 	);

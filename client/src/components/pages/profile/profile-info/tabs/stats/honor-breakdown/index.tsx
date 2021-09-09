@@ -11,10 +11,6 @@ export interface IHonorBreakdownProps {
 	authoredChallengeTotal: number;
 	commentsDone: number | null;
 	commentsTotal: number;
-	referralsDone: number | null;
-	referralsTotal: number;
-	achievementsDone: number | null;
-	achievementsTotal: number;
 }
 
 const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
@@ -25,10 +21,6 @@ const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 		authoredChallengeTotal,
 		commentsDone,
 		commentsTotal,
-		referralsDone,
-		referralsTotal,
-		achievementsDone,
-		achievementsTotal,
 	} = props;
 
 	return (
@@ -40,13 +32,11 @@ const HonorBreakdown: React.FC<IHonorBreakdownProps> = (props) => {
 					left={completedChallengeTotal}
 				/>
 				<ProgressBarBlock
-					name="Authored Challenge & Translation"
+					name="Authored Challenge"
 					done={authoredChallengeDone}
 					left={authoredChallengeTotal}
 				/>
 				<ProgressBarBlock name="Comments" done={commentsDone} left={commentsTotal} />
-				<ProgressBarBlock name="Referrals" done={referralsDone} left={referralsTotal} />
-				<ProgressBarBlock name="Achievements" done={achievementsDone} left={achievementsTotal} />
 			</div>
 		</StatsBlock>
 	);

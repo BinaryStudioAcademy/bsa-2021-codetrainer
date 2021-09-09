@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { FormInput, FormSelect } from 'components';
 import { ClickableRank } from 'components/basic/rank/clickable-rank';
 import styles from './search-task.module.scss';
-import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS, TASK_STATUS_OPTIONS } from 'constants/task/task-filter';
+import { TASK_PROGRESS_OPTIONS, TASK_SORT_BY_OPTIONS } from 'constants/task/task-filter';
 import { Button, Checkbox } from 'components/basic';
 import { ButtonClasses } from 'components/basic/button';
 import clsx from 'clsx';
@@ -43,7 +43,6 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 			</Box>
 			<Formik
 				initialValues={{
-					status: filter.status,
 					progress: filter.progress,
 					sort: filter.sort,
 					query: filter.query,
@@ -67,16 +66,6 @@ export const SearchTask: React.FC<ISearchTask> = ({ tags, ranks, onChange, onSub
 						id="sortBy"
 						name="sort"
 						options={TASK_SORT_BY_OPTIONS}
-						component={FormSelect}
-					/>
-					<label className={styles.label} htmlFor="status">
-						Status
-					</label>
-					<Field
-						classname={styles.input}
-						id="status"
-						name="status"
-						options={TASK_STATUS_OPTIONS}
 						component={FormSelect}
 					/>
 					<label className={styles.label} htmlFor="progress">

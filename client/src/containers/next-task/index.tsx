@@ -1,57 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { NextTask } from 'components/common';
 import { ISelectValue } from 'components/basic/select/interface';
-import fundamentalsIcon from './assets/fundamentalsIcon.svg';
-import rankUpIcon from './assets/rankUpIcon.svg';
-import practiceAndRepeatIcon from './assets/practiceAndRepeatIcon.svg';
-import betaIcon from './assets/betaIcon.svg';
-import randomIcon from './assets/randomIcon.svg';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import TuneIcon from '@material-ui/icons/Tune';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import BugReportIcon from '@material-ui/icons/BugReport';
 import { FocusKeys } from 'constants/FocusKeys';
 import { useDispatch } from 'react-redux';
-import { getTasks } from '../home-page/logic/actions';
+import { getFocusTask } from '../home-page/logic/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import historyHelper from 'helpers/history.helper';
 import { ROUTES } from 'constants/routes';
 
-const icons = {
-	Fundamentals: fundamentalsIcon,
-	'Rank Up': rankUpIcon,
-	'Practice and Repeat': practiceAndRepeatIcon,
-	Beta: betaIcon,
-	Random: randomIcon,
-};
+const focusSelect: Array<{ iconM: React.ElementType; title: string; value: FocusKeys }> = [
+	{ iconM: LibraryBooksIcon, title: 'Fundamentals', value: FocusKeys.FUNDAMENTALS },
+	{ iconM: ArrowUpwardIcon, title: 'Rank Up', value: FocusKeys.RANK_UP },
+	{ iconM: BugReportIcon, title: 'Bug fixes', value: FocusKeys.BUG_FIXES },
+	{ iconM: TuneIcon, title: 'Algorithms', value: FocusKeys.ALGORITHMS },
+	{ iconM: ShuffleIcon, title: 'Random', value: FocusKeys.RANDOM },
+];
 
 const NextTaskContainer = () => {
-	const [activeFocusValue, setActiveFocusValue] = useState<ISelectValue>({
-		id: '0',
-		title: 'Fundamentals',
-		icon: '',
-	});
+	const [activeFocus, setActiveFocus] = useState<number>(0);
 	const [focusValues, setFocusValues] = useState<ISelectValue[]>([]);
 	const task = useAppSelector((rootState) => rootState.home.state?.nextTask);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const focusValues = Object.values(FocusKeys);
-		const selectFocusValues = focusValues.map((value, index) => ({
+		const selectFocusValues = focusSelect.map(({ iconM, title }, index) => ({
 			id: index.toString(),
-			title: value,
-			icon: icons[value],
+			title,
+			iconM,
 		}));
 
-		setActiveFocusValue(selectFocusValues[0]);
 		setFocusValues(selectFocusValues);
 	}, []);
 
 	useEffect(() => {
 		dispatch(
-			getTasks({
-				discipline: activeFocusValue.title,
-				currentTask: task?.id,
+			getFocusTask({
+				discipline: focusSelect[activeFocus].value,
 			}),
 		);
-	}, [activeFocusValue.title]);
+	}, [activeFocus]);
 
 	const handleTrainClick = () => {
 		if (task) {
@@ -62,9 +55,8 @@ const NextTaskContainer = () => {
 
 	const handleSkipClick = () => {
 		dispatch(
-			getTasks({
-				discipline: activeFocusValue.title,
-				currentTask: task?.id,
+			getFocusTask({
+				discipline: focusSelect[activeFocus].value,
 			}),
 		);
 	};
@@ -74,10 +66,10 @@ const NextTaskContainer = () => {
 			<NextTask
 				task={task}
 				focusValues={focusValues}
-				activeFocusValue={activeFocusValue}
-				setActiveFocusValue={setActiveFocusValue}
+				activeFocusValue={focusValues[activeFocus]}
 				handleTrainClick={handleTrainClick}
 				handleSkipClick={handleSkipClick}
+				onChangeSelect={setActiveFocus}
 			/>
 		</>
 	);

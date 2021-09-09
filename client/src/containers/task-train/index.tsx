@@ -29,7 +29,7 @@ const TaskTrain: React.FC = () => {
 	useEffect(() => {
 		dispatch(actions.fetchTask({ id: taskId }));
 		socket.on(
-			SOCKET_EVENTS.RESULT_TEST_TO_CLIENT,
+			SOCKET_EVENTS.SOLUTION_RESULT,
 			({
 				solution,
 				user,

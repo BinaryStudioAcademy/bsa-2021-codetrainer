@@ -11,13 +11,15 @@
 		.disciplinesHeading {
 			font: $tub-font;
 		}
+		.group {
+			margin-bottom: 15px;
+		}
 		input {
 			width: 100%;
 			background: var(--secondary-container-color);
 			border: none;
 			border-radius: 7px;
 			padding: 0 20px;
-			margin-top: 10px;
 			margin-bottom: 10px;
 			box-shadow: none;
 			height: 45px;
@@ -31,13 +33,6 @@
 			}
 		}
 	}
-
-	.languageVersionSelect {
-		ul li span,
-		h5 {
-			color: #000;
-		}
-	}
 }
 .heading {
 	font: $fourth-title-font;
@@ -48,4 +43,5 @@
 	font-size: 14px;
 	display: flex;
 	align-items: flex-end;
+	margin-bottom: 10px;
 }

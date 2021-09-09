@@ -1,11 +1,18 @@
-import { EntityRepository, SelectQueryBuilder, ObjectLiteral, IsNull, getRepository } from 'typeorm';
+import { EntityRepository, SelectQueryBuilder } from 'typeorm';
 import { AbstractRepository } from '../abstract';
-import { Solution, Task } from '../../models';
-import { TASK_ORDER_BY, SEARCH_KEYS } from '../../../common';
+import { Task } from '../../models';
+import { TASK_ORDER_BY, SEARCH_KEYS, SEARCH_FOCUS_KEYS } from '../../../common';
 
 type IWhere = {
 	[K in SEARCH_KEYS]?: number | string | string[];
 };
+
+interface ISeachFocus {
+	taskIds: Array<string>;
+	focus?: SEARCH_FOCUS_KEYS;
+	fromRank?: number;
+	toRank?: number;
+}
 
 const sortQuery = <T>(query: SelectQueryBuilder<T>, sorts?: TASK_ORDER_BY): SelectQueryBuilder<T> => {
 	switch (sorts) {
@@ -30,11 +37,10 @@ const filterQuery = <T>(query: SelectQueryBuilder<T>, userId: string, where?: IW
 	}
 	Object.entries(where).forEach(([key, value]) => {
 		switch (key) {
-			case SEARCH_KEYS.STATUS:
-				query.andWhere(`task.status = :status`, { status: value });
-				break;
 			case SEARCH_KEYS.Query:
-				query.andWhere('task.name ILIKE :q', { q: `%${typeof value === 'string' ? value.toLowerCase() : value}%` });
+				query.andWhere('task.name ILIKE :q', {
+					q: `%${typeof value === 'string' ? value.toLowerCase() : value}%`,
+				});
 				break;
 			case SEARCH_KEYS.RANK:
 				query.andWhere('task.rank = :rank', { rank: value });
@@ -81,7 +87,16 @@ export class TaskRepository extends AbstractRepository<Task> {
 			.leftJoinAndSelect('task.tags', 'tag')
 			.leftJoinAndSelect('task.user', 'user')
 			.leftJoinAndSelect('task.contributors', 'contributors')
-			.select(['task', 'solution', 'solution_user', 'tag.id', 'tag.name', 'user', 'contributors'])
+			.select([
+				'task',
+				'solution',
+				'solution_user',
+				'tag.id',
+				'tag.name',
+				'user.id',
+				'user.avatar',
+				'contributors',
+			])
 			.where('task.id = :id', { id })
 			.getOne();
 	}
@@ -90,13 +105,34 @@ export class TaskRepository extends AbstractRepository<Task> {
 		return this.createQueryBuilder('task').select('rank').distinct(true).getRawMany();
 	}
 
+	async getSimilarTasks(id: string, rank?: number) {
+		return this.createQueryBuilder('task')
+			.leftJoinAndSelect('task.tags', 'tags')
+			.leftJoinAndSelect('task.user', 'user')
+			.select(['task', 'tags', 'user'])
+			.where('task.id != :id', { id })
+			.andWhere('task.rank = :rank', { rank })
+			.orderBy('RANDOM()')
+			.limit(2)
+			.getMany();
+	}
+
 	async searchNotUseTask(taskIds: Array<string>) {
 		return this.createQueryBuilder('task')
 			.select(['task'])
 			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.andWhere('task.is_published = :published', { published: true })
 			.orderBy('RANDOM()')
 			.limit(1)
 			.getOne();
+	}
+
+	searchUserTask(userId: string) {
+		return this.createQueryBuilder('task')
+			.innerJoin('task.user', 'author')
+			.select(['task'])
+			.where('author.id = :userId', { userId })
+			.getMany();
 	}
 
 	async search(query: { where?: IWhere; sort?: TASK_ORDER_BY; userId: string; skip: number; take: number }) {
@@ -105,7 +141,8 @@ export class TaskRepository extends AbstractRepository<Task> {
 				.leftJoinAndSelect('task.tags', 'tag')
 				.leftJoinAndSelect('task.solutions', 'solution')
 				.leftJoinAndSelect('solution.user', 'user')
-				.leftJoinAndSelect('task.user', 'author'),
+				.leftJoinAndSelect('task.user', 'author')
+				.where('task.is_published = :published', { published: true }),
 			query.userId,
 			query.where,
 		);
@@ -117,5 +154,19 @@ export class TaskRepository extends AbstractRepository<Task> {
 				.take(query.take)
 				.getMany(),
 		};
+	}
+
+	async searchFocus({ taskIds, focus, fromRank, toRank }: ISeachFocus) {
+		const qb = this.createQueryBuilder('task')
+			.select(['task'])
+			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.andWhere('task.is_published = :published', { published: true });
+		if (focus) {
+			qb.andWhere('task.discipline = :focus', { focus });
+		}
+		if (fromRank) {
+			qb.andWhere('task.rank > :fromRank AND task.rank < :toRank', { fromRank, toRank });
+		}
+		return qb.orderBy('RANDOM()').limit(1).getOne();
 	}
 }

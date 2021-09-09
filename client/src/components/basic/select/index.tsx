@@ -5,7 +5,7 @@ import { Option } from '..';
 import { ISelectProps, ISelectValue } from './interface';
 import clsx from 'clsx';
 
-const Select = ({ values, activeValue, onChange, isButtonBlockSelect, className }: ISelectProps) => {
+const Select = ({ values, activeValue, onChange, className }: ISelectProps) => {
 	const [optionsListActive, setOptionsListActive] = useState(false);
 	const listStyles = clsx(styles.optionsList, { [styles.optionsActive]: optionsListActive });
 	const handleChange = (value: ISelectValue) => {
@@ -14,6 +14,7 @@ const Select = ({ values, activeValue, onChange, isButtonBlockSelect, className 
 			onChange(value);
 		}
 	};
+	const Icon = activeValue?.iconM;
 	const wrapperClass = clsx(styles.selectWrapper, styles.buttonBlock);
 
 	return (
@@ -21,6 +22,7 @@ const Select = ({ values, activeValue, onChange, isButtonBlockSelect, className 
 			<div className={clsx(wrapperClass, className)}>
 				<h5 className={styles.select} onClick={() => setOptionsListActive(!optionsListActive)}>
 					{activeValue?.icon && <img src={activeValue?.icon} alt="icon" />}
+					{Icon && <Icon className={styles.icon} />}
 					<span>{activeValue?.title}</span>
 				</h5>
 				<ul className={listStyles}>

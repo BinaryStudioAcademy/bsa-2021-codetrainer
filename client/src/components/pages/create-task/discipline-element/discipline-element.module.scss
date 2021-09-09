@@ -14,7 +14,10 @@
 	cursor: pointer;
 	@include element-color(var(--text-color));
 	&:not(:last-child) {
-		margin-right: 40px;
+		margin-right: 20px;
+	}
+	.icon {
+		font-size: 35px;
 	}
 	.text {
 		font: $menu-font;

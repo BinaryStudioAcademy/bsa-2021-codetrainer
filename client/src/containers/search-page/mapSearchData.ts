@@ -19,6 +19,6 @@ export const mapFilterToSearch = (filter: ISearchState['filter']): Record<string
 	);
 	return {
 		...filterMod,
-		...(Boolean(filter.tags.size) ? { tags: Array.from(filter.tags).join(',') } : {}),
+		...(Boolean(filter.tags.size) ? { tags: Array.from(filter.tags).map((tag) => ({ name: tag })) } : {}),
 	};
 };

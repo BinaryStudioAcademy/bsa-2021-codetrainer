@@ -1,12 +1,12 @@
 export const NextRankHonor = {
-	TO_EIGHT: 50,
-	TO_SEVEN: 100,
-	TO_SIX: 200,
-	TO_FIVE: 300,
-	TO_FOUR: 500,
-	TO_THREE: 750,
-	TO_TWO: 1000,
-	TO_ONE: 1250,
+	TO_EIGHT: 20,
+	TO_SEVEN: 75,
+	TO_SIX: 230,
+	TO_FIVE: 645,
+	TO_FOUR: 1770,
+	TO_THREE: 4830,
+	TO_TWO: 13150,
+	TO_ONE: 35760,
 	TO_INFINITY: Infinity,
 };
 

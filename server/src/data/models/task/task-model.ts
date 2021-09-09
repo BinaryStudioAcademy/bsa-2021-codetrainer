@@ -41,6 +41,9 @@ export class Task extends AbstractEntity {
 	@Column({ type: 'boolean', default: false })
 	isPublished!: boolean;
 
+	@Column({ type: 'boolean', default: false })
+	validateSolution!: boolean;
+
 	@ManyToOne(() => User, (user) => user.tasks, { onUpdate: 'CASCADE' })
 	user!: User;
 
@@ -60,33 +63,6 @@ export class Task extends AbstractEntity {
 
 	@Column({ default: 100 })
 	positiveFeedback!: number;
-
-	@CreateDateColumn()
-	published!: Date;
-
-	@Column({ default: 0 })
-	usersTrained!: number;
-
-	@Column({ default: 0 })
-	skips!: number;
-
-	@Column({ default: 0 })
-	codeSubmissions!: number;
-
-	@Column({ default: 0 })
-	timesCompleted!: number;
-
-	@Column({ default: 0 })
-	stars!: number;
-
-	@Column({ default: 0 })
-	verySatisfied!: number;
-
-	@Column({ default: 0 })
-	somewhatSatisfied!: number;
-
-	@Column({ default: 0 })
-	notSatisfied!: number;
 
 	@OneToMany(() => User, (user) => user.contributions)
 	@JoinColumn()

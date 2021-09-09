@@ -14,6 +14,7 @@ export interface IHomeState {
 		community: WebApi.Entities.IUser[] | null;
 		messages: IMessage[] | null;
 	};
+	errors: string | null;
 }
 
 export const initialState: IHomeState = {
@@ -22,4 +23,5 @@ export const initialState: IHomeState = {
 		community: null,
 		messages: null,
 	},
+	errors: null,
 };

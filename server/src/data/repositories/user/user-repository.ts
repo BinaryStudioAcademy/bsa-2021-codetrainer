@@ -54,6 +54,7 @@ export class UserRepository extends AbstractRepository<User> {
 				...this.userFields,
 				'clan',
 				'solution.id',
+				'solution.status',
 				'profileClan',
 				'task.id',
 				'commentSolution.id',
@@ -123,8 +124,10 @@ export class UserRepository extends AbstractRepository<User> {
 			.leftJoinAndSelect('user.solutions', 'solution')
 			.select([
 				'user.id',
+				'user.rank',
 				'user.honor',
 				'user.username',
+				'user.avatar',
 				'user.name',
 				'user.surname',
 				'user.email',
