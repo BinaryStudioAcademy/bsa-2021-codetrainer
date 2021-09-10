@@ -10,6 +10,7 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Blake',
 				email: 'test@test.com',
 				password: await encrypt('123456789'),
+				avatar: 'https://codetrainer-images.s3.amazonaws.com/95a327b2-678e-46b3-85b0-8c4245b53223.png',
 			},
 			{
 				username: 'ScottKelly',
@@ -108,6 +109,30 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Gordon',
 				email: 'evol@test.com',
 				password: await encrypt('daydreamnation'),
+			},
+			{
+				username: 'taras-dubyk',
+				name: 'Taras',
+				surname: 'Dubyk',
+				email: 'taras@test.com',
+				password: await encrypt('12345678'),
+				avatar: 'https://codetrainer-images.s3.amazonaws.com/d99013c8-720c-470b-a9c6-7f95806b1e7e.jpg',
+			},
+			{
+				username: 'kyrylo-burmelov',
+				name: 'Kyrylo',
+				surname: 'Burmelov',
+				email: 'kyrylo@test.com',
+				password: await encrypt('12345678'),
+				avatar: 'https://codetrainer-images.s3.amazonaws.com/217621a1-8020-4998-8f66-298d0143eaa1.jpeg',
+			},
+			{
+				username: 'myroslav',
+				name: 'Myroslav',
+				surname: 'Druchkiv',
+				email: 'myroslav@test.com',
+				password: await encrypt('12345678'),
+				avatar: 'https://codetrainer-images.s3.amazonaws.com/4c48d8e8-8406-4ab2-ba81-5a902547cc60.png',
 			},
 		];
 
