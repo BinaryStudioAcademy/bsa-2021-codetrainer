@@ -4,12 +4,13 @@ import Container from '../../common/container';
 import ImageBlock from '../../common/image-block';
 import common from '../../common/common.module.scss';
 import styles from './training.module.scss';
+import trainImage from '../../../../../assets/images/landing/landing-train.png';
 
 const TrainingSection = () => {
 	return (
 		<section className={clsx(common.section)}>
 			<Container className={common.sectionContainer}>
-				<ImageBlock src="" className={styles.trainingSectionLogo} />
+				<ImageBlock src={trainImage} alt="Train" className={styles.trainingSectionLogo} />
 				<div className={styles.trainingSectionDescription}>
 					<h2 className={common.sectionTitle}>Train on challenges</h2>
 					<div className={common.sectionText}>
