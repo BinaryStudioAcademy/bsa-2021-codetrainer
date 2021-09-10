@@ -174,7 +174,7 @@ export const SolutionsTab = ({
 							</Button>
 							{isAuthorSolutionOpened && (
 								<div className={styles.authorSolution}>
-									<code>{task.initialSolution ? task.initialSolution : 'No solution given'}</code>
+									<code>{task.completeSolution ? task.completeSolution : 'No solution given'}</code>
 								</div>
 							)}
 						</>

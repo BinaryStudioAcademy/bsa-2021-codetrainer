@@ -61,6 +61,7 @@ declare namespace WebApi.Entities {
 		user: IUser | null;
 		createdAt: Date;
 		initialSolution: string;
+		completeSolution: string;
 		contributors: IUser[];
 		solutions: ISolution[];
 		savedToFavorites: number;

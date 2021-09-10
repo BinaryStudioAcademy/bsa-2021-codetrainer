@@ -20,7 +20,7 @@ export const Solution = ({ solution }: ISolutionProps) => {
 		<div className={styles.solution}>
 			<div className={styles.header}>
 				<PeopleIcon />
-				<Link to={`${ROUTES.Users}/${solution.user.username}`}>
+				<Link to={`${ROUTES.Users}/${solution?.user?.username}`}>
 					<h3>
 						{solution.user.name} {solution.user.surname}
 					</h3>
