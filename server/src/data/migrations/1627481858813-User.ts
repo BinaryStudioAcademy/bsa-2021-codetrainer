@@ -11,6 +11,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'test@test.com',
 				password: await encrypt('123456789'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/95a327b2-678e-46b3-85b0-8c4245b53223.png',
+				rank: 5,
+				honor: 1027,
 			},
 			{
 				username: 'ScottKelly',
@@ -18,6 +20,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Kelly',
 				email: 'timesofgrace@test.com',
 				password: await encrypt('soulsat0'),
+				avatar: 'https://robohash.org/honey?set=set1',
+				rank: 7,
+				honor: 125,
 			},
 			{
 				username: 'AaronTurner',
@@ -25,6 +30,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Turner',
 				email: 'panopticon@test.com',
 				password: await encrypt('1000shards'),
+				avatar: 'https://robohash.org/honey?set=set2',
+				rank: 8,
+				honor: 73,
 			},
 			{
 				username: 'GilesCorey',
@@ -32,6 +40,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Corey',
 				email: 'haveanicelife@test.com',
 				password: await encrypt('hfs40000'),
+				avatar: 'https://robohash.org/honey?set=set3',
+				rank: 8,
+				honor: 72,
 			},
 			{
 				username: 'JaneDoe',
@@ -39,6 +50,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Doe',
 				email: 'converge@test.com',
 				password: await encrypt('01colon20'),
+				avatar: 'https://robohash.org/honey?set=set4',
+				rank: 8,
+				honor: 70,
 			},
 			{
 				username: 'JohnDoe',
@@ -46,6 +60,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Doe',
 				email: 'notconverge@test.com',
 				password: await encrypt('12345qwert'),
+				avatar: 'https://robohash.org/honey?set=set5',
+				rank: 8,
+				honor: 85,
 			},
 			{
 				username: 'ThomYorke',
@@ -53,6 +70,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Yorke',
 				email: 'anima@test.com',
 				password: await encrypt('how2disappear'),
+				avatar: 'https://robohash.org/honey?set=set6',
+				rank: 8,
+				honor: 60,
 			},
 			{
 				username: 'StevenWilson',
@@ -60,6 +80,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Wilson',
 				email: 'spikytree@test.com',
 				password: await encrypt('fearof098'),
+				avatar: 'https://robohash.org/honey?set=set7',
+				rank: 8,
+				honor: 55,
 			},
 			{
 				username: 'SteveAlbini',
@@ -67,6 +90,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Albini',
 				email: 'shellac@test.com',
 				password: await encrypt('the1000hz'),
+				avatar: 'https://robohash.org/honey?set=set8',
+				rank: 8,
+				honor: 60,
 			},
 			{
 				username: 'JustinBroadrick',
@@ -74,6 +100,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Broadrick',
 				email: 'thejesu@test.com',
 				password: await encrypt('1991street'),
+				avatar: 'https://robohash.org/honey?set=set9',
+				rank: 8,
+				honor: 45,
 			},
 			{
 				username: 'MaynardKeenan',
@@ -81,6 +110,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Keenan',
 				email: 'perfectcircle@test.com',
 				password: await encrypt('fortysixn2'),
+				avatar: 'https://robohash.org/honey?set=set10',
+				rank: 8,
+				honor: 80,
 			},
 			{
 				username: 'GlennBranca',
@@ -88,6 +120,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Branca',
 				email: 'ascensionpt2@test.com',
 				password: await encrypt('no1lesson'),
+				avatar: 'https://robohash.org/honey?set=set11',
+				rank: 8,
+				honor: 89,
 			},
 			{
 				username: 'DavidYow',
@@ -95,6 +130,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Yow',
 				email: 'mouthbreather@test.com',
 				password: await encrypt('goatof1991'),
+				avatar: 'https://robohash.org/honey?set=set12',
+				rank: 8,
+				honor: 78,
 			},
 			{
 				username: 'MichaelGira',
@@ -102,6 +140,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Gira',
 				email: 'pcisagoodidea@test.com',
 				password: await encrypt('93aveblue'),
+				avatar: 'https://robohash.org/honey?set=set13',
+				rank: 7,
+				honor: 325,
 			},
 			{
 				username: 'KimGordon',
@@ -109,6 +150,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Gordon',
 				email: 'evol@test.com',
 				password: await encrypt('daydreamnation'),
+				avatar: 'https://robohash.org/honey?set=set14',
+				rank: 8,
+				honor: 70,
 			},
 			{
 				username: 'taras-dubyk',
@@ -117,6 +161,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'taras@test.com',
 				password: await encrypt('12345678'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/d99013c8-720c-470b-a9c6-7f95806b1e7e.jpg',
+				rank: 5,
+				honor: 1073,
 			},
 			{
 				username: 'kyrylo-burmelov',
@@ -125,6 +171,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'kyrylo@test.com',
 				password: await encrypt('12345678'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/217621a1-8020-4998-8f66-298d0143eaa1.jpeg',
+				rank: 5,
+				honor: 1124,
 			},
 			{
 				username: 'myroslav',
@@ -133,6 +181,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'myroslav@test.com',
 				password: await encrypt('12345678'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/4c48d8e8-8406-4ab2-ba81-5a902547cc60.png',
+				rank: 3,
+				honor: 2568,
 			},
 		];
 
