@@ -2,6 +2,7 @@
 	background: var(--background-color);
 	color: var(--text-color);
 	width: 700px;
+	max-height: 500px;
 }
 
 :local(.container a) {
@@ -131,6 +132,7 @@
 :local(.newCollection) {
 	display: flex;
 	flex-direction: row;
+	cursor: pointer;
 }
 
 :local(.addButton svg) {

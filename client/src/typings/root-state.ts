@@ -14,6 +14,7 @@ import { IHeaderState } from 'containers/header/logic/state';
 import { ITaskInfoState } from 'containers/task/logic/state';
 import { ILeaderBoardState } from 'containers/leaderboard/logic/state';
 import { ISidebarState } from 'containers/private-route/logic/state';
+import { ICollectionsState } from 'containers/collections/logic/state';
 
 export interface IRootState {
 	notification: INotificationState;
@@ -32,4 +33,5 @@ export interface IRootState {
 	theme: IThemeState;
 	taskInfo: ITaskInfoState;
 	sidebar: ISidebarState;
+	collections: ICollectionsState;
 }

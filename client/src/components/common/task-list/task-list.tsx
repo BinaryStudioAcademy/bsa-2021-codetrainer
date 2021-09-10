@@ -7,14 +7,18 @@ interface ITaskListProps {
 	tasks: IChallenge[];
 	title?: string;
 	userCanAddTaskToCollection?: boolean;
+	deleteTask?: {
+		showDelete: boolean;
+		handleDelete: (id: string) => void;
+	};
 }
 
-export const TaskList = ({ tasks, title, userCanAddTaskToCollection = false }: ITaskListProps) => {
+export const TaskList = ({ tasks, title, userCanAddTaskToCollection = false, deleteTask }: ITaskListProps) => {
 	return (
 		<div className={styles.containerBlock}>
 			<p className={styles.title}>{title}</p>
 			<div>
-				<Tasks tasks={tasks} showAddToCollection={userCanAddTaskToCollection} />
+				<Tasks tasks={tasks} showAddToCollection={userCanAddTaskToCollection} deleteTask={deleteTask} />
 			</div>
 		</div>
 	);
