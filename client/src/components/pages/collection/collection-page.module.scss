@@ -1,0 +1,30 @@
+.collection {
+	min-width: 1000px;
+	.collectionInfo {
+		background-color: var(--container-color);
+		margin-bottom: 20px;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		img,
+		svg {
+			width: 70px;
+		}
+	}
+}
+
+.createdAt {
+	padding-left: 20px;
+}
+.infoBlock {
+	margin-left: 20px;
+}
+.collectionInfoBlock {
+	display: flex;
+}
+
+svg:hover {
+	cursor: pointer;
+}

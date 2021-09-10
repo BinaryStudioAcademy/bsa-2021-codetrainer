@@ -47,13 +47,19 @@ export const initCollection = (appRouter: typeof Router, services: { collection:
 		)
 		.patch(CollectionsApiPath.ID, (req, res, next) => {
 			collectionService
-				.manageTaskInsideCollection(req.params.id, req.body.id)
+				.addTaskToCollection(req.params.id, req.body.id)
 				.then((data) => res.send(data))
 				.catch(next);
 		})
 		.delete(CollectionsApiPath.ID, (req, res, next) =>
 			collectionService
 				.deleteCollection(req.params.id)
+				.then((data) => res.send(data))
+				.catch(next),
+		)
+		.delete(`${CollectionsApiPath.ID}${'/task'}`, (req, res, next) =>
+			collectionService
+				.removeTaskFromCollection(req.params.id, req.body.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		);

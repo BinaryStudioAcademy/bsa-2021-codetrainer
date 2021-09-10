@@ -75,6 +75,7 @@ export const SearchPage: React.FC = () => {
 	const handleChallengeClick = (id: string) => {
 		dispatch(collectionsActions.setSelectedTask({ taskId: id }));
 	};
+
 	if (isLoading) {
 		return <FullscreenLoader />;
 	}

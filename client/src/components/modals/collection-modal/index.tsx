@@ -18,6 +18,7 @@ interface ICollectionModalProps {
 	isOpen: boolean;
 	setIsOpen: (isOpen: boolean) => void;
 	handleFetchCollections: () => void;
+	handleClickCollection: (id: string) => void;
 }
 
 // const mockData = [
@@ -80,7 +81,12 @@ const CreateCollectionSchema = Yup.object().shape({
 		.max(30, 'Your input is too long')
 		.required("Input field can't be empty"),
 });
-export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIsOpen, handleFetchCollections }) => {
+export const CollectionModal: React.FC<ICollectionModalProps> = ({
+	isOpen,
+	setIsOpen,
+	handleFetchCollections,
+	handleClickCollection,
+}) => {
 	const [isPrompt, setIsPrompt] = React.useState(false);
 	const [isNewCollection, setIsNewCollection] = React.useState(false);
 	const dispatch = useDispatch();
@@ -88,7 +94,6 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 	const {
 		collections: userCollections,
 		isLoading,
-		errors,
 		selectedTask,
 	} = useSelector((store: IRootState) => store.collections);
 	useEffect(() => {
@@ -133,7 +138,11 @@ export const CollectionModal: React.FC<ICollectionModalProps> = ({ isOpen, setIs
 							sumOfRanks += item.tasks[i].rank ?? 9;
 						}
 						return (
-							<div key={item.id} className={styles.collection}>
+							<div
+								key={item.id}
+								className={styles.collection}
+								onClick={() => handleClickCollection(item.id)}
+							>
 								<img
 									src={
 										item.avatar ??

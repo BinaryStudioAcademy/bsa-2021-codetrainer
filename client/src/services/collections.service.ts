@@ -69,3 +69,29 @@ export const addTaskToCollection = async (collectionId: string, taskId: string) 
 		console.log(e);
 	}
 };
+
+export const deleteFromCollection = async (collectionId: string, taskId: string) => {
+	try {
+		await http.callWebApi({
+			method: HttpMethods.DELETE,
+			endpoint: 'collections/' + collectionId + '/task',
+			skipAuthorization: false,
+			body: {
+				id: taskId,
+			},
+		});
+	} catch (e) {}
+	return {
+		success: true,
+	};
+};
+
+export const deleteCollection = async (id: string) => {
+	try {
+		await http.callWebApi({
+			method: HttpMethods.DELETE,
+			endpoint: 'collections/' + id,
+			skipAuthorization: false,
+		});
+	} catch (e) {}
+};
