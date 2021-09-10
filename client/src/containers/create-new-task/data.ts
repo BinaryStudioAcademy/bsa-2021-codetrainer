@@ -70,9 +70,9 @@ export interface IDisciplineItem {
 }
 
 export enum Discipline {
-	FUNDAMENTALS = 'Fundamentals',
-	ALGORITHMS = 'Algorithms',
-	BUG_FIXES = 'Bug-fixes',
+	FUNDAMENTALS = 'fundamentals',
+	ALGORITHMS = 'algorithms',
+	BUG_FIXES = 'bug-fixes',
 }
 
 export type TSvgFC = FC<SVGProps<SVGSVGElement>>;
