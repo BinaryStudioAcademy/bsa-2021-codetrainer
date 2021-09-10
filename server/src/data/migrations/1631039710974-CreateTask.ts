@@ -315,5 +315,5 @@ export class CreateTask1631039710974 implements MigrationInterface {
 		await getRepository('task').save(exampleData);
 	}
 
-	public async down(queryRunner: QueryRunner): Promise<void> {}
+	public async down(queryRunner: QueryRunner): Promise<void> { }
 }
