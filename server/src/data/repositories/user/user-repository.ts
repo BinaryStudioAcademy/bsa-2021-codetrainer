@@ -120,7 +120,7 @@ export class UserRepository extends AbstractRepository<User> {
 
 	async getLeaders(query: { skip: number; take: number; nameQuery?: string }) {
 		const { nameQuery = '', take, skip } = query;
-		const searchQuery = this.createQueryBuilder('user')
+		const [data, count] = await this.createQueryBuilder('user')
 			.leftJoinAndSelect('user.profileClan', 'profileClan')
 			.leftJoinAndSelect('user.clan', 'clan')
 			.leftJoinAndSelect('user.tasks', 'task')
@@ -142,11 +142,14 @@ export class UserRepository extends AbstractRepository<User> {
 			])
 			.orderBy('user.honor', 'DESC')
 			.where('user.name ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` })
-			.orWhere('user.surname ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` });
+			.orWhere('user.surname ILIKE :q', { q: `%${nameQuery.toLowerCase()}%` })
+			.skip(skip)
+			.take(take)
+			.getManyAndCount();
 
 		return {
-			count: await searchQuery.getCount(),
-			data: await searchQuery.skip(skip).take(take).getMany(),
+			count,
+			data,
 		};
 	}
 }

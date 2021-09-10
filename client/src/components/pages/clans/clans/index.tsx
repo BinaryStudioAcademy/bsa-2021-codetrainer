@@ -8,10 +8,7 @@ import { ButtonClasses } from 'components/basic/button';
 
 const ClansPage: React.FC<IClansProps> = ({
 	isLoading,
-	user,
 	clans,
-	joinClan,
-	leaveClan,
 	setOrderBy,
 	setOrder,
 	handleGoToClan,
@@ -23,7 +20,6 @@ const ClansPage: React.FC<IClansProps> = ({
 	setPage,
 	count,
 	itemsPerPage,
-	setItemsPerPage,
 }) => {
 	return (
 		<>
@@ -35,11 +31,8 @@ const ClansPage: React.FC<IClansProps> = ({
 					</Button>
 				</div>
 				<ClansList
-					joinClan={joinClan}
 					isLoading={isLoading}
-					leaveClan={leaveClan}
 					clans={clans}
-					userId={user.id}
 					setOrderBy={setOrderBy}
 					setOrder={setOrder}
 					setNameQuery={setNameQuery}
@@ -50,7 +43,6 @@ const ClansPage: React.FC<IClansProps> = ({
 					count={count}
 					itemsPerPage={itemsPerPage}
 					setPage={setPage}
-					setItemsPerPage={setItemsPerPage}
 				/>
 			</div>
 		</>

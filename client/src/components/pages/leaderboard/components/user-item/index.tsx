@@ -4,49 +4,27 @@ import { IUserItemProps } from './types';
 import { ROUTES } from 'constants/routes';
 import { TableCell, TableRow } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import styles from './user-item.module.scss';
 import { Avatar } from 'components/basic';
 
 const UserItem: React.FC<IUserItemProps> = ({ user, position }) => {
-	const StyledTableCell = withStyles(() =>
-		createStyles({
-			head: {
-				backgroundColor: 'var(--pink)',
-			},
-			body: {
-				color: 'var(--text-color)',
-				fontSize: 14,
-			},
-		}),
-	)(TableCell);
-
-	const StyledTableRow = withStyles(() =>
-		createStyles({
-			root: {
-				backgroundColor: 'var(--container-color)',
-			},
-		}),
-	)(TableRow);
-
 	return (
-		<StyledTableRow>
-			<StyledTableCell>{position}</StyledTableCell>
-			<StyledTableCell>
-				<Rank rank={user.rank ?? 0} />
-			</StyledTableCell>
-			<StyledTableCell>
-				<Avatar avatar={user.avatar} size={50} />
-			</StyledTableCell>
-			<StyledTableCell>
-				<Link to={`${ROUTES.Users}/${user.username}`}>{`${user.name} ${user.surname}`}</Link>
-			</StyledTableCell>
-			<StyledTableCell>
+		<TableRow className={styles.userItem}>
+			<TableCell className={styles.position}>{position > 0 ? position : ''}</TableCell>
+			<TableCell>
+				<Link to={`${ROUTES.Users}/${user.username}`} className={styles.user}>
+					<Avatar avatar={user.avatar} size={50} />
+					{`${user.name} ${user.surname}`}
+					{user.rank && <Rank rank={user.rank} />}
+				</Link>
+			</TableCell>
+			<TableCell className={styles.clan}>
 				<Link to={`${ROUTES.Clan}/${user?.clan?.id}`}>{user?.clan?.name}</Link>
-			</StyledTableCell>
-			<StyledTableCell>
+			</TableCell>
+			<TableCell className={styles.honor}>
 				<span>{user.honor}</span>
-			</StyledTableCell>
-		</StyledTableRow>
+			</TableCell>
+		</TableRow>
 	);
 };
 

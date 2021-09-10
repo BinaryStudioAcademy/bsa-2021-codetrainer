@@ -1,213 +1,124 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import ClanItem from '../clan-item';
 import { IClansListProps } from './types';
 import { WebApi } from 'typings/webapi';
-import {
-	ClickAwayListener,
-	createStyles,
-	IconButton,
-	makeStyles,
-	Paper,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TablePagination,
-	TableRow,
-	TableSortLabel,
-	TextField,
-} from '@material-ui/core';
-import { Search } from '@material-ui/icons';
-import { Order } from 'helpers/table-helper';
-import columns from './columns.json';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { Spinner } from 'components/common';
+import SortLabel from 'components/common/sort-label';
 import styles from './clans-list.module.scss';
-
-const useStyles = makeStyles(() =>
-	createStyles({
-		root: {
-			width: '100%',
-		},
-		paper: {
-			width: '100%',
-			background: 'var(--container-color)',
-			marginBottom: '20px',
-		},
-		table: {
-			width: 800,
-			color: 'red',
-		},
-		visuallyHidden: {
-			border: 0,
-			clip: 'rect(0 0 0 0)',
-			height: 1,
-			margin: -1,
-			overflow: 'hidden',
-			padding: 0,
-			position: 'absolute',
-			top: 20,
-			width: 1,
-		},
-	}),
-);
+import { ClansOrderByOptions } from 'containers/clans/clans/logic/state';
+import { ButtonClasses } from 'components/basic/button';
+import { Button } from 'components';
+import SearchLabel from 'components/common/search-label';
 
 const ClansList: React.FC<IClansListProps> = ({
 	clans,
 	count,
 	isLoading,
-	userId,
 	order,
 	orderBy,
 	nameQuery,
 	page,
 	itemsPerPage,
 	setPage,
-	setItemsPerPage,
-	joinClan,
-	leaveClan,
 	setOrderBy,
 	setOrder,
 	setNameQuery,
 }) => {
-	const [isNameFieldOpen, setNameFieldOpen] = useState(false);
-	const [searchName, setSearchName] = useState(nameQuery);
-	const [typingTimeout, setTypingTimeout] = useState<null | ReturnType<typeof setTimeout>>(null);
-
-	const classes = useStyles();
-
-	const handleChangePage = (event: unknown, newPage: number) => {
-		setPage(newPage);
+	const handleRequestSort = ({ order, strategy }: any): void => {
+		setOrder(order);
+		setOrderBy(strategy);
 	};
 
-	const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setItemsPerPage(parseInt(event.target.value, 10));
-		setPage(0);
-	};
-
-	const handleRequestSort = (property: any): void => {
-		const isAsc = orderBy === property && order === Order.ASC;
-		setOrder(isAsc ? Order.DESC : Order.ASC);
-		setOrderBy(property);
-	};
-
-	const handleNameSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const query = e.target.value;
-		setSearchName(query);
-
-		setPage(0);
-
-		if (typingTimeout) {
-			clearTimeout(typingTimeout);
-		}
-
-		setTypingTimeout(
-			setTimeout(() => {
-				setNameQuery(query);
-			}, 500),
-		);
-	};
+	const showMore = useMemo(() => {
+		const itemsLeft = count - (page + 1) * itemsPerPage;
+		return itemsLeft > 0;
+	}, [page, itemsPerPage, count]);
 
 	return (
-		<Paper className={classes.paper}>
-			<TableContainer>
-				<Table className={classes.table}>
-					<TableHead>
-						<TableRow>
-							{columns.map(({ id, label, isSortable, style }) =>
-								!isSortable ? (
-									<TableCell component="th" key={id} style={style}>
-										<strong className={styles.columnName}>{label}</strong>
-									</TableCell>
-								) : (
-									<TableCell
-										component="th"
-										style={style}
-										key={id}
-										className={styles.columnName}
-										sortDirection={orderBy === id ? order : false}
-									>
-										{id === 'name' && (
-											<ClickAwayListener
-												onClickAway={(): void => {
-													setNameFieldOpen(false);
-												}}
-											>
-												<IconButton
-													onClick={(): void => {
-														setNameFieldOpen(true);
-													}}
-													style={{ backgroundColor: 'transparent' }}
-													disableRipple
-													size="small"
-												>
-													<Search />
-													{isNameFieldOpen && (
-														<TextField
-															className={styles.columnName}
-															value={searchName}
-															onChange={handleNameSearchChange}
-															type="search"
-														/>
-													)}
-												</IconButton>
-											</ClickAwayListener>
-										)}
-										{id === 'name' && isNameFieldOpen ? null : (
-											<TableSortLabel
-												active={orderBy === id}
-												direction={orderBy === id ? order : Order.ASC}
-												onClick={(): void => {
-													handleRequestSort(id);
-												}}
-											>
-												{id === 'name' && isNameFieldOpen ? null : <strong>{label}</strong>}
-												{orderBy === id ? (
-													<span className={classes.visuallyHidden}>
-														{order === Order.DESC
-															? 'sorted descending'
-															: 'sorted ascending'}
-													</span>
-												) : null}
-											</TableSortLabel>
-										)}
-									</TableCell>
-								),
-							)}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{isLoading ? (
+		<>
+			<div className={styles.clansList}>
+				<TableContainer>
+					<Table className={styles.table}>
+						<TableHead>
 							<TableRow>
-								<TableCell colSpan={7}>
-									<Spinner />
+								<TableCell component="th">
+									<SortLabel
+										strategy={ClansOrderByOptions.BY_HONOR}
+										setSortingStrategy={handleRequestSort}
+										className={styles.centered}
+										current={{
+											order,
+											strategy: orderBy,
+										}}
+									>
+										Honor
+									</SortLabel>
+								</TableCell>
+								<TableCell component="th">
+									<SortLabel
+										strategy={ClansOrderByOptions.BY_NAME}
+										setSortingStrategy={handleRequestSort}
+										current={{
+											order,
+											strategy: orderBy,
+										}}
+									>
+										<SearchLabel value={nameQuery} onChange={(name) => setNameQuery(name)}>
+											Name
+										</SearchLabel>
+									</SortLabel>
+								</TableCell>
+								<TableCell component="th">
+									<SortLabel
+										strategy={ClansOrderByOptions.BY_SIZE}
+										setSortingStrategy={handleRequestSort}
+										className={styles.centered}
+										current={{
+											order,
+											strategy: orderBy,
+										}}
+									>
+										Members
+									</SortLabel>
+								</TableCell>
+								<TableCell component="th">
+									<SortLabel
+										strategy={ClansOrderByOptions.BY_TIME}
+										current={{
+											order,
+											strategy: orderBy,
+										}}
+										setSortingStrategy={handleRequestSort}
+									>
+										Created
+									</SortLabel>
 								</TableCell>
 							</TableRow>
-						) : (
-							clans.map((clan: WebApi.Entities.IClan) => (
-								<ClanItem
-									joinClan={joinClan}
-									leaveClan={leaveClan}
-									clan={clan}
-									key={clan.id}
-									userId={userId}
-								/>
-							))
-						)}
-					</TableBody>
-				</Table>
-			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[5, 10, 25]}
-				component="div"
-				className={styles.pagesPanel}
-				count={count}
-				rowsPerPage={itemsPerPage}
-				page={page}
-				onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
-			/>
-		</Paper>
+						</TableHead>
+						<TableBody>
+							{clans.map((clan: WebApi.Entities.IClan) => (
+								<ClanItem clan={clan} key={clan.id} />
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</div>
+			{isLoading && <Spinner />}
+			{!isLoading && showMore && (
+				<div className={styles.buttonWrapper}>
+					<Button
+						className={ButtonClasses.red}
+						onClick={() => {
+							setPage(page + 1);
+						}}
+						disabled={isLoading}
+					>
+						Load More
+					</Button>
+				</div>
+			)}
+		</>
 	);
 };
 

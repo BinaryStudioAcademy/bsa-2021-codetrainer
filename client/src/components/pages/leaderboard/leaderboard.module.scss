@@ -1,4 +1,4 @@
-@import 'styles/variables';
+@import "styles/variables";
 
 .container {
 	width: 100%;
@@ -18,4 +18,53 @@
 	* {
 		color: var(--text-color);
 	}
+}
+
+.leadersList {
+	padding: 10px;
+	border-radius: 15px;
+	background: var(--container-color);
+
+	.table {
+		border-collapse: collapse;
+		width: 800px;
+		background: var(--container-color);
+
+		td,
+		th {
+			font: $base-font;
+			color: var(--text-color);
+			border-color: var(--minor-text);
+		}
+
+		th {
+			font: $sixth-title-font;
+			svg {
+				fill: var(--text-color) !important;
+			}
+		}
+
+		.centered {
+			text-align: center;
+		}
+		.name {
+			justify-content: space-between;
+
+			input {
+				width: 150px;
+			}
+		}
+
+		tr:last-of-type td {
+			border: none;
+		}
+	}
+
+	margin-bottom: 30px;
+}
+
+.buttonWrapper {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
 }

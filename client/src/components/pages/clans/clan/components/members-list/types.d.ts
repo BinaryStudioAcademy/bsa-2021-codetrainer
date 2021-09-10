@@ -1,6 +1,6 @@
 import { IMembersFilter } from 'containers/clans/clan/logic/types';
 import { WebApi } from 'typings/webapi';
-import { ISortingStrategy } from './../sort-label/types';
+import { ISortingStrategy } from 'containers/common/sort-label/types';
 import { MembersSortStrategy } from 'containers/clans/clan/logic/types';
 
 export interface IMembersListProps {

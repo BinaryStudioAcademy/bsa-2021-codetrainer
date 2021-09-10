@@ -1,8 +1,8 @@
-@import 'styles/variables';
+@import "styles/variables";
 
-.clanItem {
-	.honor,
-	.members {
+.userItem {
+	.position,
+	.honor {
 		text-align: center;
 	}
 
@@ -16,7 +16,7 @@
 		gap: 10px;
 	}
 
-	.created {
+	.clan {
 		font: $minor-font;
 	}
 }

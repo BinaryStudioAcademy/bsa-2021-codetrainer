@@ -1,5 +1,5 @@
 import { IClanForm } from 'components/modals/clan-modal/types';
-import { ISortingStrategy } from 'components/pages/clans/clan/components/sort-label/types';
+import { ISortingStrategy } from 'components/common/sort-label/types';
 import { MembersSortStrategy, ClanPageStatus, IMembersFilter } from './types';
 import { WebApi } from 'typings/webapi';
 

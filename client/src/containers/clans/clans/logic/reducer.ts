@@ -19,6 +19,10 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 	[actionTypes.CLEAR_CLANS](state, action) {
 		return {
 			...state,
+			options: {
+				...state.options,
+				page: 0,
+			},
 			data: [],
 		};
 	},
@@ -85,5 +89,8 @@ export const clansReducer = createReducer<IClansState>(initialState, {
 				itemsPerPage: action.itemsPerPage,
 			},
 		};
+	},
+	[actionTypes.CLEAR_ALL_CLANS_DATA](state, action) {
+		return initialState;
 	},
 });

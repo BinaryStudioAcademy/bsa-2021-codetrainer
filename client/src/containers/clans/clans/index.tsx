@@ -18,9 +18,21 @@ const Clans: React.FC = () => {
 	const user = useSelector((state: IRootState) => state.auth.userData.user);
 
 	useEffect(() => {
+		return () => {
+			dispatch(actions.clearAllClansData());
+		};
+	}, []);
+
+	useEffect(() => {
 		dispatch(actions.clearClans());
 		dispatch(actions.fetchClans());
-	}, [orderBy, order, nameQuery, page, itemsPerPage]);
+	}, [orderBy, order, nameQuery]);
+
+	useEffect(() => {
+		if (page) {
+			dispatch(actions.fetchClans());
+		}
+	}, [page]);
 
 	const setOrderBy = (orderBy: ClansOrderByOptions) => {
 		dispatch(actions.setOrderBy({ orderBy }));
@@ -38,17 +50,6 @@ const Clans: React.FC = () => {
 		dispatch(actions.setPage({ page }));
 	};
 
-	const setItemsPerPage = (itemsPerPage: number) => {
-		dispatch(actions.setItemsPerPage({ itemsPerPage }));
-	};
-
-	const joinClan = (id: string) => {
-		dispatch(actions.joinClan({ id }));
-	};
-
-	const leaveClan = (id: string) => {
-		dispatch(actions.leaveClan({ id }));
-	};
 	const handleGoToClan = () => {
 		if (user?.clan !== null) {
 			historyHelper.push(`${ROUTES.Clan}/${user?.clan?.id}`);
@@ -67,18 +68,14 @@ const Clans: React.FC = () => {
 		<div>
 			<ClansPage
 				clans={clans}
-				user={user}
 				setOrderBy={setOrderBy}
 				setOrder={setOrder}
 				setNameQuery={setNameQuery}
 				currentSort={order}
-				joinClan={joinClan}
-				leaveClan={leaveClan}
 				handleGoToClan={handleGoToClan}
 				page={page}
 				setPage={setPage}
 				itemsPerPage={itemsPerPage}
-				setItemsPerPage={setItemsPerPage}
 				order={order}
 				orderBy={orderBy}
 				count={count}
