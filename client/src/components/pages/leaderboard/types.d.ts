@@ -9,5 +9,4 @@ export interface ILeaderBoardProps {
 	itemsPerPage: number;
 	count: number;
 	setPage: (page: number) => void;
-	setItemsPerPage: (itemsPerPage: number) => void;
 }

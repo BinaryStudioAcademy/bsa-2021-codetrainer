@@ -18,13 +18,17 @@ export const leaderBoardReducer = createReducer<ILeaderBoardState>(initialState,
 	[actionTypes.CLEAR_DATA](state, action) {
 		return {
 			...state,
+			options: {
+				...state.options,
+				page: 0,
+			},
 			data: [],
 		};
 	},
 	[actionTypes.ADD_USERS](state, { users, count }: actionTypes.IAddUsersArgs) {
 		return {
 			...state,
-			data: users,
+			data: [...state.data, ...users],
 			count,
 		};
 	},
@@ -61,5 +65,8 @@ export const leaderBoardReducer = createReducer<ILeaderBoardState>(initialState,
 				itemsPerPage: action.itemsPerPage,
 			},
 		};
+	},
+	[actionTypes.CLEAR_ALL_LEADERS_DATA](state, action) {
+		return initialState;
 	},
 });

@@ -6,10 +6,9 @@ export const FETCH_CLANS = 'CLANS:FETCH_CLANS';
 export const FETCH_CLAN = 'CLANS:FETCH_CLAN';
 export const END_LOADING = 'CLANS:END_LOADING';
 export const CLEAR_CLANS = 'CLANS:CLEAR_CLANS';
+export const CLEAR_ALL_CLANS_DATA = 'CLANS: CLEAR_ALL_CLANS_DATA';
 export const ADD_CLANS = 'CLANS:ADD_CLANS';
 export const ADD_ERROR = 'CLANS:ADD_ERROR';
-export const JOIN_CLAN = 'CLANS:JOIN_CLAN';
-export const LEAVE_CLAN = 'CLANS:LEAVE_CLAN';
 export const UPDATE_CLAN = 'CLANS:UPDATE_CLAN';
 
 export const SET_ORDER_BY = 'CLANS:SET_ORDER_BY';
@@ -29,14 +28,6 @@ export interface IUpdateClanArgs {
 }
 
 export interface IFetchClanArgs {
-	id: string;
-}
-
-export interface IJoinClanArgs {
-	id: string;
-}
-
-export interface ILeaveClanArgs {
 	id: string;
 }
 

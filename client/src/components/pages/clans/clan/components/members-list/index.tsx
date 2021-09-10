@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import MemberItem from '../member-item';
-import SortLabel from '../sort-label';
-import SearchLabel from '../search-label';
+import SortLabel from 'components/common/sort-label';
+import SearchLabel from 'components/common/search-label';
 import { IMembersListProps } from './types';
 import { Order } from 'helpers/table-helper';
 import { MembersSortStrategy } from 'containers/clans/clan/logic/types';
