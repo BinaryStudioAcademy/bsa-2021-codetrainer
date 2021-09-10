@@ -13,6 +13,10 @@ import * as userActions from 'containers/user/logic/actions';
 import { IRootState } from 'typings/root-state';
 import { setNotificationState } from 'containers/notification/logic/actions';
 import { NotificationType } from 'containers/notification/logic/models';
+import { addNotification } from 'services/notifications/notifications.service';
+import { v4 as uuid } from 'uuid';
+import { NotificationTypes } from 'typings/common/INotification';
+import { WebApi } from 'typings/webapi';
 
 export function* fetchClanWorker({ id }: ReturnType<typeof actions.fetchClan>): any {
 	yield put(actions.loadingStatus());
@@ -105,7 +109,45 @@ export function* toggleClanWorker(_action: ReturnType<typeof actions.toggleClanM
 		yield put(actions.setClan({ clan: response.clan }));
 		yield put(userActions.setUser({ user }));
 		if (hasClan) {
+			//left clan
+			addNotification(
+				{
+					id: uuid(),
+					date: new Date(),
+					type: NotificationTypes.LeaveClan,
+					body: {
+						clan: {
+							id: response.clan.id ?? '',
+							name: response.clan.name ?? '',
+							avatar:
+								response.clan.avatar ??
+								'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg',
+						} as WebApi.Entities.IClan,
+					},
+					read: false,
+				},
+				user.id,
+			);
 			historyHelper.push(ROUTES.Clans);
+		} else {
+			addNotification(
+				{
+					id: uuid(),
+					date: new Date(),
+					type: NotificationTypes.JoinClan,
+					body: {
+						clan: {
+							id: response.clan.id ?? '',
+							name: response.clan.name ?? '',
+							avatar:
+								response.clan.avatar ??
+								'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg',
+						} as WebApi.Entities.IClan,
+					},
+					read: false,
+				},
+				user.id,
+			);
 		}
 	}
 
