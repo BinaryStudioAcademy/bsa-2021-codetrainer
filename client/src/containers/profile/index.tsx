@@ -197,7 +197,7 @@ export const Profile = (props: RouteComponentProps) => {
 					follower: {
 						id: user?.id,
 						username: user.username ?? '',
-						profileUrl: avatar,
+						avatar,
 					} as unknown as WebApi.Entities.IUser,
 				},
 			},
