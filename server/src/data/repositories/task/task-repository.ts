@@ -77,7 +77,11 @@ export class TaskRepository extends AbstractRepository<Task> {
 	}
 
 	updateById(id: string, data: Partial<Task>) {
-		return this.createQueryBuilder().update().set(data).where('id = :id', { id }).execute();
+		return this.createQueryBuilder()
+			.update()
+			.set(data)
+			.where('id = :id', { id })
+			.execute();
 	}
 
 	getById(id: string) {
@@ -102,7 +106,10 @@ export class TaskRepository extends AbstractRepository<Task> {
 	}
 
 	getRanks() {
-		return this.createQueryBuilder('task').select('rank').distinct(true).getRawMany();
+		return this.createQueryBuilder('task')
+			.select('rank')
+			.distinct(true)
+			.getRawMany();
 	}
 
 	async getSimilarTasks(id: string, rank?: number) {
@@ -118,9 +125,10 @@ export class TaskRepository extends AbstractRepository<Task> {
 	}
 
 	async searchNotUseTask(taskIds: Array<string>) {
+		const ids = [null, ...taskIds];
 		return this.createQueryBuilder('task')
 			.select(['task'])
-			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.where('task.id NOT IN (:...ids)', { ids })
 			.andWhere('task.is_published = :published', { published: true })
 			.orderBy('RANDOM()')
 			.limit(1)
@@ -157,9 +165,10 @@ export class TaskRepository extends AbstractRepository<Task> {
 	}
 
 	async searchFocus({ taskIds, focus, fromRank, toRank }: ISeachFocus) {
+		const ids = [null, ...taskIds];
 		const qb = this.createQueryBuilder('task')
 			.select(['task'])
-			.where('task.id NOT IN (:...ids)', { ids: taskIds })
+			.where('task.id NOT IN (:...ids)', { ids })
 			.andWhere('task.is_published = :published', { published: true });
 		if (focus) {
 			qb.andWhere('task.discipline = :focus', { focus });
@@ -167,6 +176,9 @@ export class TaskRepository extends AbstractRepository<Task> {
 		if (fromRank) {
 			qb.andWhere('task.rank > :fromRank AND task.rank < :toRank', { fromRank, toRank });
 		}
-		return qb.orderBy('RANDOM()').limit(1).getOne();
+		return qb
+			.orderBy('RANDOM()')
+			.limit(1)
+			.getOne();
 	}
 }
