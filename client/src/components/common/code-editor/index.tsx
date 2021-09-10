@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Ace, config } from 'ace-builds';
 import AceEditor from 'react-ace';
-import { CreateCodeData } from 'common';
+import { codeEditorThemes, CreateCodeData } from 'common';
 
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-tomorrow';
+import 'ace-builds/src-noconflict/theme-dracula';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
+import { useThemeSelector } from 'hooks/useAppSelector';
 
 config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/');
 
@@ -18,6 +20,8 @@ export interface ICodeEditor {
 
 export const CodeEditor: React.FC<ICodeEditor> = ({ onChange, code, editable }) => {
 	const [editor, setEditor] = useState<Ace.Editor | null>(null);
+	const { theme } = useThemeSelector();
+
 	const handleChange = (newValue: string) => {
 		onChange(newValue);
 	};
@@ -45,7 +49,7 @@ export const CodeEditor: React.FC<ICodeEditor> = ({ onChange, code, editable }) 
 			onLoad={handleLoadEditor}
 			placeholder={CreateCodeData.PLACE_HOLDER}
 			mode={CreateCodeData.MODE}
-			theme={CreateCodeData.THEME}
+			theme={codeEditorThemes[theme]}
 			name={CreateCodeData.NAME}
 			onChange={handleChange}
 			fontSize={CreateCodeData.FONT_SIZE}

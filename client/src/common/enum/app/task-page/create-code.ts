@@ -1,7 +1,8 @@
+import { ThemeType } from 'containers/theme-switcher/logic/models';
+
 export const CreateCodeData = {
 	MODE: 'javascript',
 	PLACE_HOLDER: 'Start Coding',
-	THEME: 'tomorrow',
 	NAME: 'code-editor',
 	FONT_SIZE: 18,
 	SHOW_PRINT_MARGIN: true,
@@ -15,4 +16,9 @@ export const CreateCodeData = {
 	SHOW_LINE_NUMBER: true,
 	USE_WORKER: false,
 	TAB_SIZE: 2,
+};
+
+export const codeEditorThemes: Record<ThemeType, string> = {
+	[ThemeType.Light]: 'tomorrow',
+	[ThemeType.Dark]: 'dracula',
 };
