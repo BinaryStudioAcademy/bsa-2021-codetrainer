@@ -59,7 +59,7 @@ export const initCollection = (appRouter: typeof Router, services: { collection:
 		)
 		.delete(`${CollectionsApiPath.ID}${'/task'}`, (req, res, next) =>
 			collectionService
-				.removeTaskFromCollection(req.params.id, req.body.id)
+				.removeTaskFromCollection((req.params as any).id, req.body.id)
 				.then((data) => res.send(data))
 				.catch(next),
 		);
