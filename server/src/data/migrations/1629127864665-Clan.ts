@@ -8,15 +8,15 @@ export class Clan1629127864665 implements MigrationInterface {
 				name: 'PostTimeClan',
 				members: [
 					{
-						...getCustomRepository(UserRepository).getByEmail('test@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('test@test.com'),
 						profileClan: { role: 'admin' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('timesofgrace@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('timesofgrace@test.com'),
 						profileClan: { role: 'member' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('panopticon@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('panopticon@test.com'),
 						profileClan: { role: 'member' },
 					},
 				],
@@ -27,15 +27,15 @@ export class Clan1629127864665 implements MigrationInterface {
 				name: 'TheEndOfMathNow',
 				members: [
 					{
-						...getCustomRepository(UserRepository).getByEmail('converge@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('converge@test.com'),
 						profileClan: { role: 'admin' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('haveanicelife@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('haveanicelife@test.com'),
 						profileClan: { role: 'member' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('notconverge@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('notconverge@test.com'),
 						profileClan: { role: 'member' },
 					},
 				],
@@ -46,15 +46,15 @@ export class Clan1629127864665 implements MigrationInterface {
 				name: 'RoundaboutClan',
 				members: [
 					{
-						...getCustomRepository(UserRepository).getByEmail('anima@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('anima@test.com'),
 						profileClan: { role: 'admin' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('spikytree@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('spikytree@test.com'),
 						profileClan: { role: 'member' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('shellac@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('shellac@test.com'),
 						profileClan: { role: 'member' },
 					},
 				],
@@ -65,15 +65,15 @@ export class Clan1629127864665 implements MigrationInterface {
 				name: 'StreetClan',
 				members: [
 					{
-						...getCustomRepository(UserRepository).getByEmail('thejesu@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('thejesu@test.com'),
 						profileClan: { role: 'admin' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('perfectcircle@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('perfectcircle@test.com'),
 						profileClan: { role: 'member' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('ascensionpt2@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('ascensionpt2@test.com'),
 						profileClan: { role: 'member' },
 					},
 				],
@@ -84,15 +84,15 @@ export class Clan1629127864665 implements MigrationInterface {
 				name: 'ExNoiAfter',
 				members: [
 					{
-						...getCustomRepository(UserRepository).getByEmail('pcisagoodidea@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('pcisagoodidea@test.com'),
 						profileClan: { role: 'admin' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('mouthbreather@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('mouthbreather@test.com'),
 						profileClan: { role: 'member' },
 					},
 					{
-						...getCustomRepository(UserRepository).getByEmail('evol@test.com'),
+						... await getCustomRepository(UserRepository).getByEmail('evol@test.com'),
 						profileClan: { role: 'member' },
 					},
 				],
@@ -102,6 +102,12 @@ export class Clan1629127864665 implements MigrationInterface {
 		];
 
 		await getRepository('Clan').save(exampleData);
+		
+		const usersWithClanProfiles = exampleData
+			.map(clan => clan.members)
+			.reduce((cur, acc) => acc.concat(cur), []);
+
+		await getRepository('User').save(usersWithClanProfiles);
 	}
 
 	public async down(queryRunner: QueryRunner): Promise<void> {}

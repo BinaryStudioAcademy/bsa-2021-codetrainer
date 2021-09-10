@@ -11,6 +11,10 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'test@test.com',
 				password: await encrypt('123456789'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/95a327b2-678e-46b3-85b0-8c4245b53223.png',
+				rank: 5,
+				honor: 914,
+				skills: ['Software development', 'Networking and wireless', 'Python', 'Java', 'C++'],
+				devLevel: 'middle',
 			},
 			{
 				username: 'ScottKelly',
@@ -18,6 +22,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Kelly',
 				email: 'timesofgrace@test.com',
 				password: await encrypt('soulsat0'),
+				rank: 2,
+				honor: 23738,
+				skills: ['Networking and wireless', 'Cloud computing', 'Java', 'Kotlin', 'JavaScript'],
+				devLevel: 'middle',
 			},
 			{
 				username: 'AaronTurner',
@@ -25,6 +33,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Turner',
 				email: 'panopticon@test.com',
 				password: await encrypt('1000shards'),
+				rank: 3,
+				honor: 7442,
+				skills: ['IT service management', 'Cybersecurity', 'Scala', 'Swift'],
+				devLevel: 'senior',
 			},
 			{
 				username: 'GilesCorey',
@@ -32,6 +44,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Corey',
 				email: 'haveanicelife@test.com',
 				password: await encrypt('hfs40000'),
+				rank: 7,
+				honor: 136,
+				skills: ['Programming', 'C#', 'Ruby'],
+				devLevel: 'junior',
 			},
 			{
 				username: 'JaneDoe',
@@ -39,6 +55,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Doe',
 				email: 'converge@test.com',
 				password: await encrypt('01colon20'),
+				honor: 37462,
+				rank: 1,
+				skills: ['Game development', 'Virtualization', 'C#', 'C++', 'Kotlin', 'Objective-C', 'TypeScript'],
+				devLevel: 'middle',
 			},
 			{
 				username: 'JohnDoe',
@@ -46,6 +66,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Doe',
 				email: 'notconverge@test.com',
 				password: await encrypt('12345qwert'),
+				honor: 38405,
+				rank: 1,
+				skills: ['Mobile development', 'Kotlin', 'Swift', 'JavaScript'],
+				devLevel: 'senior'
 			},
 			{
 				username: 'ThomYorke',
@@ -53,6 +77,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Yorke',
 				email: 'anima@test.com',
 				password: await encrypt('how2disappear'),
+				rank: 4,
+				honor: 2873,
+				skills: ['Programming', 'Cloud computing', 'PHP', 'C', 'Java', 'Kotlin', 'SQL'],
+				devLevel: 'junior',
 			},
 			{
 				username: 'StevenWilson',
@@ -60,6 +88,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Wilson',
 				email: 'spikytree@test.com',
 				password: await encrypt('fearof098'),
+				rank: 6,
+				honor: 458,
+				skills: ['Programming', 'SQL', 'PHP', 'Scala'],
+				devLevel: 'junior',
 			},
 			{
 				username: 'SteveAlbini',
@@ -67,6 +99,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Albini',
 				email: 'shellac@test.com',
 				password: await encrypt('the1000hz'),
+				rank: 8,
+				honor: 56,
+				skills: ['Programming', 'JavaScrip'],
+				devLevel: 'trainee'
 			},
 			{
 				username: 'JustinBroadrick',
@@ -74,6 +110,9 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Broadrick',
 				email: 'thejesu@test.com',
 				password: await encrypt('1991street'),
+				rank: 9,
+				honor: 4,
+				devLevel: 'trainee',
 			},
 			{
 				username: 'MaynardKeenan',
@@ -81,6 +120,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Keenan',
 				email: 'perfectcircle@test.com',
 				password: await encrypt('fortysixn2'),
+				rank: 4,
+				honor: 3114,
+				skills: ['Cloud computing', 'Programming', 'Ruby', 'JavaScript'],
+				devLevel: 'middle',
 			},
 			{
 				username: 'GlennBranca',
@@ -88,6 +131,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Branca',
 				email: 'ascensionpt2@test.com',
 				password: await encrypt('no1lesson'),
+				rank: 6,
+				honor: 592,
+				skills: ['Cloud computing', 'SQL', 'C++', 'Scala', 'Kotlin', 'Java'],
+				devLevel: 'junior',
 			},
 			{
 				username: 'DavidYow',
@@ -95,6 +142,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Yow',
 				email: 'mouthbreather@test.com',
 				password: await encrypt('goatof1991'),
+				rank: 2,
+				honor: 22214,
+				skills: ['Programming', 'Networking and wireless', 'Java', 'Objective-C', 'Swift', 'C#'],
+				devLevel: 'senior',
 			},
 			{
 				username: 'MichaelGira',
@@ -102,6 +153,10 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Gira',
 				email: 'pcisagoodidea@test.com',
 				password: await encrypt('93aveblue'),
+				rank: 3,
+				honor: 9306,
+				skills: ['AI and machine learning', 'Python', 'Java', 'C#', 'TypeScript'],
+				devLevel: 'middle'
 			},
 			{
 				username: 'KimGordon',
@@ -109,6 +164,8 @@ export class User1627481858813 implements MigrationInterface {
 				surname: 'Gordon',
 				email: 'evol@test.com',
 				password: await encrypt('daydreamnation'),
+				rank: 9,
+				honor: 18,
 			},
 			{
 				username: 'taras-dubyk',
