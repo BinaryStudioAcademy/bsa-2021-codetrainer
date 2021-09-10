@@ -14,8 +14,8 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 const Challenge: React.FC<
 	IChallenge & {
 		showAddToCollection?: boolean;
-		handleFetchCollections: () => void;
-		handleChallengeClick: (id: string) => void;
+		handleFetchCollections?: () => void;
+		handleChallengeClick?: (id: string) => void;
 		deleteTask?: {
 			showDelete: boolean;
 			handleDelete: (id: string) => void;
@@ -52,7 +52,7 @@ const Challenge: React.FC<
 			<ChallengeHeader title={title} rank={rank} linkToTask={linkToTask} />
 			<ChallengeStats stats={{ ...stats, author }} />
 			{tags && Boolean(tags.length) ? <ChallengeTagsList tags={tags} /> : null}
-			{isOpen ? (
+			{isOpen && typeof handleFetchCollections === 'function' ? (
 				<CollectionModal
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
@@ -64,8 +64,10 @@ const Challenge: React.FC<
 				<a
 					className={styles.modal}
 					onClick={() => {
-						setIsOpen(true);
-						handleChallengeClick(id);
+						if (typeof handleChallengeClick === 'function') {
+							setIsOpen(true);
+							handleChallengeClick(id);
+						}
 					}}
 				>
 					Add to collection
