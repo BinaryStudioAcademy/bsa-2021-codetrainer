@@ -15,7 +15,7 @@ interface ICommentProps {
 const Comment: React.FC<ICommentProps> = ({ comment, currentUser, editHandler, deleteHandler }) => {
 	return (
 		<div className={clsx(styles.comment, comment.user.id === currentUser?.id && styles.commentOwn)}>
-			<Avatar size={50} />
+			<Avatar size={50} avatar={comment.user.avatar} />
 			<div className={styles.commentContent}>
 				<div className={styles.commentUserInfo}>
 					<span>

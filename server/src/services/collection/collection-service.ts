@@ -94,7 +94,10 @@ export class CollectionService {
 	}
 
 	async manageTaskInsideCollection(id: string, taskId: string) {
+		console.log(id, ' AND ', taskId);
+
 		const collection = await this.getCollectionById(id);
+		console.log(collection);
 
 		if (!collection) {
 			throw new ValidationError(CODE_ERRORS.CLAN_NOT_EXIST(id));

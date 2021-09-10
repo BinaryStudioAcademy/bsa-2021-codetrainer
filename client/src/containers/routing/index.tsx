@@ -23,6 +23,7 @@ import Github from 'containers/github';
 import { Redirect, Route } from 'react-router-dom';
 import { TaskRouting } from 'containers/task-route';
 import LeaderBoard from 'containers/leaderboard';
+import { CollectionContainer } from 'containers/collections';
 
 interface IRoutingProps {}
 
@@ -112,6 +113,13 @@ const Routing: React.FC<IRoutingProps> = () => {
 				strict
 				path={ROUTES.TaskInfo + '/:id'}
 				component={TaskRouting}
+				needHeader={true}
+				needSideBar={true}
+			/>
+			<PrivateRoute
+				strict
+				path={ROUTES.Collections + '/:id'}
+				component={CollectionContainer}
 				needHeader={true}
 				needSideBar={true}
 			/>

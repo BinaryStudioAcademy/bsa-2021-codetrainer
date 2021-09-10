@@ -94,6 +94,7 @@ const Clan: React.FC = () => {
 				return;
 			}
 			sendIntitationLetter(user, toUser);
+
 			addNotification(
 				{
 					id: uuid(),

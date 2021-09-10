@@ -13,6 +13,7 @@ import taskInfoSaga from 'containers/task/logic/saga';
 import leaderBoardSaga from 'containers/leaderboard/logic/saga';
 import sidebarSaga from 'containers/private-route/logic/saga';
 import createTaskSage from 'containers/create-new-task/logic/saga';
+import CollectionsSaga from 'containers/collections/logic/saga';
 
 export default function* rootSaga() {
 	yield all([
@@ -30,5 +31,6 @@ export default function* rootSaga() {
 		taskInfoSaga(),
 		sidebarSaga(),
 		createTaskSage(),
+		CollectionsSaga(),
 	]);
 }

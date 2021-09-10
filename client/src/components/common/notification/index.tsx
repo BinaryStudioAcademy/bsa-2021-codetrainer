@@ -7,6 +7,8 @@ import { mapNotificationToProps } from './helper';
 import styles from './notification.module.scss';
 
 const Notification: React.FC<INotificationProps> = ({ onRead = () => {}, ...props }) => {
+	console.log(props);
+
 	const notificationContent = (
 		<>
 			{props.icon ? <div className={styles.icon}>{props.icon}</div> : null}

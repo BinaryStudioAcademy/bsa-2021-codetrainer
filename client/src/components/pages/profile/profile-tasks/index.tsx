@@ -12,13 +12,22 @@ interface IProfileTasks {
 	tasks: IChallenge[];
 	showAddToCollection?: boolean;
 	emptyTasks?: string;
+	deleteTask?: {
+		showDelete: boolean;
+		handleDelete: (id: string) => void;
+	};
 }
 
-export const Tasks: React.FC<IProfileTasks> = ({ tasks, showAddToCollection, emptyTasks }) => (
+export const Tasks: React.FC<IProfileTasks> = ({ tasks, showAddToCollection, emptyTasks, deleteTask }) => (
 	<div className={styles.root}>
 		{tasks.length > 0 ? (
 			tasks.map((task, index) => (
-				<Challenge {...task} showAddToCollection={showAddToCollection} key={index.toString()} />
+				<Challenge
+					{...task}
+					showAddToCollection={showAddToCollection}
+					key={index.toString()}
+					deleteTask={deleteTask}
+				/>
 			))
 		) : (
 			<>
