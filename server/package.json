@@ -86,7 +86,7 @@
 	},
 	"lint-staged": {
 		"**/*.ts": [
-			"eslint --cache --fix",
+			"eslint --cache --fix --ignore-pattern src/data/migrations",
 			"prettier --write"
 		]
 	}
