@@ -12,9 +12,7 @@ export class User1627481858813 implements MigrationInterface {
 				password: await encrypt('123456789'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/95a327b2-678e-46b3-85b0-8c4245b53223.png',
 				rank: 5,
-				honor: 914,
-				skills: ['Software development', 'Networking and wireless', 'Python', 'Java', 'C++'],
-				devLevel: 'middle',
+				honor: 1027,
 			},
 			{
 				username: 'ScottKelly',
@@ -26,6 +24,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 23738,
 				skills: ['Networking and wireless', 'Cloud computing', 'Java', 'Kotlin', 'JavaScript'],
 				devLevel: 'middle',
+				avatar: 'https://robohash.org/honey?set=set1',
 			},
 			{
 				username: 'AaronTurner',
@@ -37,6 +36,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 7442,
 				skills: ['IT service management', 'Cybersecurity', 'Scala', 'Swift'],
 				devLevel: 'senior',
+				avatar: 'https://robohash.org/honey?set=set2',
 			},
 			{
 				username: 'GilesCorey',
@@ -48,6 +48,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 136,
 				skills: ['Programming', 'C#', 'Ruby'],
 				devLevel: 'junior',
+				avatar: 'https://robohash.org/honey?set=set3',
 			},
 			{
 				username: 'JaneDoe',
@@ -59,6 +60,7 @@ export class User1627481858813 implements MigrationInterface {
 				rank: 1,
 				skills: ['Game development', 'Virtualization', 'C#', 'C++', 'Kotlin', 'Objective-C', 'TypeScript'],
 				devLevel: 'middle',
+				avatar: 'https://robohash.org/honey?set=set4',
 			},
 			{
 				username: 'JohnDoe',
@@ -69,7 +71,8 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 38405,
 				rank: 1,
 				skills: ['Mobile development', 'Kotlin', 'Swift', 'JavaScript'],
-				devLevel: 'senior'
+				devLevel: 'senior',
+				avatar: 'https://robohash.org/honey?set=set5',
 			},
 			{
 				username: 'ThomYorke',
@@ -81,6 +84,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 2873,
 				skills: ['Programming', 'Cloud computing', 'PHP', 'C', 'Java', 'Kotlin', 'SQL'],
 				devLevel: 'junior',
+				avatar: 'https://robohash.org/honey?set=set6',
 			},
 			{
 				username: 'StevenWilson',
@@ -92,6 +96,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 458,
 				skills: ['Programming', 'SQL', 'PHP', 'Scala'],
 				devLevel: 'junior',
+				avatar: 'https://robohash.org/honey?set=set2',
 			},
 			{
 				username: 'SteveAlbini',
@@ -102,7 +107,8 @@ export class User1627481858813 implements MigrationInterface {
 				rank: 8,
 				honor: 56,
 				skills: ['Programming', 'JavaScrip'],
-				devLevel: 'trainee'
+				devLevel: 'trainee',
+				avatar: 'https://robohash.org/honey?set=set3',
 			},
 			{
 				username: 'JustinBroadrick',
@@ -113,6 +119,7 @@ export class User1627481858813 implements MigrationInterface {
 				rank: 9,
 				honor: 4,
 				devLevel: 'trainee',
+				avatar: 'https://robohash.org/honey?set=set4',
 			},
 			{
 				username: 'MaynardKeenan',
@@ -124,6 +131,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 3114,
 				skills: ['Cloud computing', 'Programming', 'Ruby', 'JavaScript'],
 				devLevel: 'middle',
+				avatar: 'https://robohash.org/honey?set=set5',
 			},
 			{
 				username: 'GlennBranca',
@@ -135,6 +143,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 592,
 				skills: ['Cloud computing', 'SQL', 'C++', 'Scala', 'Kotlin', 'Java'],
 				devLevel: 'junior',
+				avatar: 'https://robohash.org/honey?set=set11',
 			},
 			{
 				username: 'DavidYow',
@@ -146,6 +155,7 @@ export class User1627481858813 implements MigrationInterface {
 				honor: 22214,
 				skills: ['Programming', 'Networking and wireless', 'Java', 'Objective-C', 'Swift', 'C#'],
 				devLevel: 'senior',
+				avatar: 'https://robohash.org/honey?set=set12',
 			},
 			{
 				username: 'MichaelGira',
@@ -156,7 +166,8 @@ export class User1627481858813 implements MigrationInterface {
 				rank: 3,
 				honor: 9306,
 				skills: ['AI and machine learning', 'Python', 'Java', 'C#', 'TypeScript'],
-				devLevel: 'middle'
+				devLevel: 'middle',
+				avatar: 'https://robohash.org/honey?set=set13',
 			},
 			{
 				username: 'KimGordon',
@@ -166,6 +177,7 @@ export class User1627481858813 implements MigrationInterface {
 				password: await encrypt('daydreamnation'),
 				rank: 9,
 				honor: 18,
+				avatar: 'https://robohash.org/honey?set=set14',
 			},
 			{
 				username: 'taras-dubyk',
@@ -174,6 +186,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'taras@test.com',
 				password: await encrypt('12345678'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/d99013c8-720c-470b-a9c6-7f95806b1e7e.jpg',
+				rank: 5,
+				honor: 1073,
 			},
 			{
 				username: 'kyrylo-burmelov',
@@ -182,6 +196,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'kyrylo@test.com',
 				password: await encrypt('12345678'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/217621a1-8020-4998-8f66-298d0143eaa1.jpeg',
+				rank: 5,
+				honor: 1124,
 			},
 			{
 				username: 'myroslav',
@@ -190,6 +206,8 @@ export class User1627481858813 implements MigrationInterface {
 				email: 'myroslav@test.com',
 				password: await encrypt('12345678'),
 				avatar: 'https://codetrainer-images.s3.amazonaws.com/4c48d8e8-8406-4ab2-ba81-5a902547cc60.png',
+				rank: 3,
+				honor: 2568,
 			},
 		];
 
